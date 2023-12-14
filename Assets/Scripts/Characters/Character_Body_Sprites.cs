@@ -25,6 +25,22 @@ public class Character_Body_Sprites : MonoBehaviour
     private void ResetAllPositionTransformPart()
     {
     }
+    /// <summary>
+    /// This method is used to change the sprite of a body part 
+    /// </summary>
+    /// <param name="spritePartName">Which body part you want to change</param>
+    /// <param name="newSprite">Sprite you want to set</param>
+    /// <returns>return boolen to know sprite is set yet</returns>
+    [Button(ButtonSizes.Medium)]
+    public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
+    {
+        if (keyValuePairs.ContainsKey(spritePartName))
+        {
+            keyValuePairs[spritePartName].sprite = newSprite;
+            return true;
+        }
+        return false;
+    }
     [Button(ButtonSizes.Medium)]
     private void LoadNewSpritePartList()
     {
@@ -44,22 +60,7 @@ public class Character_Body_Sprites : MonoBehaviour
         }
         Debug.Log(stringBuilder.ToString());
     }
-    /// <summary>
-    /// This method is used to change the sprite of a body part 
-    /// </summary>
-    /// <param name="spritePartName">Which body part you want to change</param>
-    /// <param name="newSprite">Sprite you want to set</param>
-    /// <returns>return boolen to know sprite is set yet</returns>
-    [Button(ButtonSizes.Medium)]
-    public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
-    {
-        if(keyValuePairs.ContainsKey(spritePartName))
-        {
-            keyValuePairs[spritePartName].sprite = newSprite;
-            return true;
-        }
-        return false;
-    }
+
     private SpritePartBody GetSpriteBodyPartByName(string name)
     {
         switch (name)
