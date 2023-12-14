@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class Character_BodySprites : MonoBehaviour
 {
-    [SerializeField]
+    [ShowInInspector]
     private List<SpritePart> SpritePartList = new List<SpritePart>();
-
     private struct SpritePart
     {
-        public SpritePart(string _name, SpriteRenderer _spriteRenderer)
+        public SpritePart(SpritePartBody spritePart, SpriteRenderer _spriteRenderer)
         {
-            name = _name;
+            part = spritePart;
             spriteRenderer = _spriteRenderer;
         }
-
-        public string name;
+        public SpritePartBody part;
         public SpriteRenderer spriteRenderer;
     }
 
-    public enum SpritePartName
+    public enum SpritePartBody
     {
+        null_part,
         head,
         body,
         left_arm,
@@ -28,90 +27,85 @@ public class Character_BodySprites : MonoBehaviour
         left_hand,
         right_hand,
         left_leg,
-        right_leg
+        right_leg,
+        item_sword,
+        item_shield,
     }
+    private void ResetAllPositionTransformPart()
+    {
 
-    private string spriteHeadName = "s_head";
-    private string spriteBodyName = "s_body";
-    private string spriteLeftArmName = "s_left_arm";
-    private string spriteRightArmName = "s_right_arm";
-    private string spriteLeftHandName = "s_left_hand";
-    private string spriteRightHandName = "s_right_hand";
-    private string spriteLeftLegName = "s_left_leg";
-    private string spriteRightLegName = "s_right_leg";
-
+    }
     [Button(ButtonSizes.Medium)]
-    private void LoadNewSpritePartDict()
+    private void LoadNewSpritePartList()
     {
         if (SpritePartList.Count > 0)
         {
             SpritePartList.Clear();
         }
+
         var spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
         if (spriteRendererList.Length == 0)
         {
             Debug.LogError("No SpriteRenderer found in children");
             return;
         }
+
         foreach (var _spritePart in spriteRendererList)
         {
-            var newSpritePart = new SpritePart(_spritePart.name, _spritePart);
+            var _spritePartName = GetSpriteBodyPartByName(_spritePart.name);
+
+            var newSpritePart = new SpritePart(_spritePartName, _spritePart);
+
             SpritePartList.Add(newSpritePart);
         }
         Debug.Log("SpritePartDict loaded");
     }
-
+    /// <summary>
+    /// This method is used to change the sprite of a body part 
+    /// </summary>
+    /// <param name="spritePartName">Which body part you want to change</param>
+    /// <param name="newSprite">Sprite you want to set</param>
+    /// <returns>return boolen to know sprite is set yet</returns>
     [Button(ButtonSizes.Medium)]
-    private SpriteRenderer GetSprite(SpritePartName spritePartName)
+    public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
     {
-        var partName = GetSpritePartName(spritePartName);
-        if (partName == null)
-        {
-            Debug.LogError("Sprite Part Name not found");
-            return null;
-        }
         foreach (var _spritePart in SpritePartList)
         {
-            if (_spritePart.name == partName)
+            if (_spritePart.part.Equals(spritePartName))
             {
                 Debug.Log("Sprite Part found");
-                return _spritePart.spriteRenderer;
+                _spritePart.spriteRenderer.sprite = newSprite;
+                return true;
             }
         }
-        return null;
+        return false;
     }
-
-    private string GetSpritePartName(SpritePartName spritePartName)
+    private SpritePartBody GetSpriteBodyPartByName(string name)
     {
-        switch (spritePartName)
+        switch (name)
         {
-            case SpritePartName.head:
-                return spriteHeadName;
-
-            case SpritePartName.body:
-                return spriteBodyName;
-
-            case SpritePartName.left_arm:
-                return spriteLeftArmName;
-
-            case SpritePartName.right_arm:
-                return spriteRightArmName;
-
-            case SpritePartName.left_hand:
-                return spriteLeftHandName;
-
-            case SpritePartName.right_hand:
-                return spriteRightHandName;
-
-            case SpritePartName.left_leg:
-                return spriteLeftLegName;
-
-            case SpritePartName.right_leg:
-                return spriteRightLegName;
-
+            case "s_head":
+                return SpritePartBody.head;
+            case "s_body":
+                return SpritePartBody.body;
+            case "s_left_arm":
+                return SpritePartBody.left_arm;
+            case "s_right_arm":
+                return SpritePartBody.right_arm;
+            case "s_left_hand":
+                return SpritePartBody.left_hand;
+            case "s_right_hand":
+                return SpritePartBody.right_hand;
+            case "s_left_leg":
+                return SpritePartBody.left_leg;
+            case "s_right_leg":
+                return SpritePartBody.right_leg;
+            case "s_item_sword":
+                return SpritePartBody.item_sword;
+            case "s_item_shield":
+                return SpritePartBody.item_shield;
             default:
-                break;
+                return SpritePartBody.null_part;
         }
-        return null;
     }
 }
