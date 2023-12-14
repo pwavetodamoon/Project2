@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using DG.Tweening;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -21,6 +22,13 @@ public class Character_Body_Sprites : MonoBehaviour
         right_leg,
         item_sword,
         item_shield,
+    }
+    private void Start()
+    {
+        //transform.DOMove(Vector2.zero, 1f).SetEase(Ease.InOutSine).OnComplete(() =>
+        //{
+        //    transform.DOMove()
+        //});
     }
     private void ResetAllPositionTransformPart()
     {
