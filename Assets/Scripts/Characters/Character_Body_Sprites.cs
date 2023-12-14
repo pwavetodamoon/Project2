@@ -11,8 +11,8 @@ public class Character_Body_Sprites : MonoBehaviour
 
     public enum SpritePartBody
     {
-        null_part,
         head,
+        eye,
         body,
         left_arm,
         right_arm,
@@ -39,9 +39,13 @@ public class Character_Body_Sprites : MonoBehaviour
     /// <param name="spritePartName">Which body part you want to change</param>
     /// <param name="newSprite">Sprite you want to set</param>
     /// <returns>return boolen to know sprite is set yet</returns>
-    [Button(ButtonSizes.Medium)]
+    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton, Expanded = true)]
     public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
     {
+        if (newSprite == null)
+        {
+            Debug.Log("Set Null Sprite Part: " + spritePartName);
+        }
         if (keyValuePairs.ContainsKey(spritePartName))
         {
             keyValuePairs[spritePartName].sprite = newSprite;
@@ -64,7 +68,7 @@ public class Character_Body_Sprites : MonoBehaviour
             var _spritePartName = GetSpriteBodyPartByName(_spritePart.name);
 
             keyValuePairs.Add(_spritePartName, _spritePart);
-            stringBuilder.AppendLine(_spritePart.name +" ");
+            stringBuilder.AppendLine(_spritePart.name + " ");
         }
         Debug.Log(stringBuilder.ToString());
     }
@@ -75,6 +79,8 @@ public class Character_Body_Sprites : MonoBehaviour
         {
             case "s_head":
                 return SpritePartBody.head;
+            case "s_eye":
+                return SpritePartBody.eye;
             case "s_body":
                 return SpritePartBody.body;
             case "s_left_arm":
@@ -94,7 +100,8 @@ public class Character_Body_Sprites : MonoBehaviour
             case "s_item_shield":
                 return SpritePartBody.item_shield;
             default:
-                return SpritePartBody.null_part;
+                break;
         }
+        return new SpritePartBody();
     }
 }
