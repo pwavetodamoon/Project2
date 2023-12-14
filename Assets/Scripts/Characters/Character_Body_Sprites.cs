@@ -1,21 +1,12 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public class Character_BodySprites : MonoBehaviour
+public class Character_Body_Sprites : MonoBehaviour
 {
     [ShowInInspector]
-    private List<SpritePart> SpritePartList = new List<SpritePart>();
-    private struct SpritePart
-    {
-        public SpritePart(SpritePartBody spritePart, SpriteRenderer _spriteRenderer)
-        {
-            part = spritePart;
-            spriteRenderer = _spriteRenderer;
-        }
-        public SpritePartBody part;
-        public SpriteRenderer spriteRenderer;
-    }
+    public Dictionary<SpritePartBody, SpriteRenderer> keyValuePairs = new Dictionary<SpritePartBody, SpriteRenderer>();
 
     public enum SpritePartBody
     {
@@ -33,32 +24,25 @@ public class Character_BodySprites : MonoBehaviour
     }
     private void ResetAllPositionTransformPart()
     {
-
     }
     [Button(ButtonSizes.Medium)]
     private void LoadNewSpritePartList()
     {
-        if (SpritePartList.Count > 0)
+        if (keyValuePairs.Count > 0)
         {
-            SpritePartList.Clear();
+            keyValuePairs.Clear();
         }
 
         var spriteRendererList = GetComponentsInChildren<SpriteRenderer>();
-        if (spriteRendererList.Length == 0)
-        {
-            Debug.LogError("No SpriteRenderer found in children");
-            return;
-        }
-
+        StringBuilder stringBuilder = new StringBuilder("All part loaded: ");
         foreach (var _spritePart in spriteRendererList)
         {
             var _spritePartName = GetSpriteBodyPartByName(_spritePart.name);
 
-            var newSpritePart = new SpritePart(_spritePartName, _spritePart);
-
-            SpritePartList.Add(newSpritePart);
+            keyValuePairs.Add(_spritePartName, _spritePart);
+            stringBuilder.AppendLine(_spritePart.name +" ");
         }
-        Debug.Log("SpritePartDict loaded");
+        Debug.Log(stringBuilder.ToString());
     }
     /// <summary>
     /// This method is used to change the sprite of a body part 
@@ -69,14 +53,10 @@ public class Character_BodySprites : MonoBehaviour
     [Button(ButtonSizes.Medium)]
     public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
     {
-        foreach (var _spritePart in SpritePartList)
+        if(keyValuePairs.ContainsKey(spritePartName))
         {
-            if (_spritePart.part.Equals(spritePartName))
-            {
-                Debug.Log("Sprite Part found");
-                _spritePart.spriteRenderer.sprite = newSprite;
-                return true;
-            }
+            keyValuePairs[spritePartName].sprite = newSprite;
+            return true;
         }
         return false;
     }
