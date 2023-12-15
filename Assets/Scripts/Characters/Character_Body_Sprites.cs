@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class Character_Body_Sprites : MonoBehaviour
+public class Character_Body_Sprites : SerializedMonoBehaviour
 {
     [ShowInInspector]
     public Dictionary<SpritePartBody, SpriteRenderer> keyValuePairs = new Dictionary<SpritePartBody, SpriteRenderer>();
@@ -39,7 +39,7 @@ public class Character_Body_Sprites : MonoBehaviour
     /// <param name="spritePartName">Which body part you want to change</param>
     /// <param name="newSprite">Sprite you want to set</param>
     /// <returns>return boolen to know sprite is set yet</returns>
-    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton, Expanded = true)]
+    [Button(ButtonSizes.Medium, ButtonStyle.CompactBox, Expanded = true)]
     public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
     {
         if (newSprite == null)
