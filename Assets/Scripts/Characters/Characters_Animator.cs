@@ -13,7 +13,7 @@ public class Characters_Animator : MonoBehaviour
         Hurt,
     }
     [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    void PlayAnimation(AnimationType type)
+    public void PlayAnimation(AnimationType type)
     {
         if(animator != null)
         {

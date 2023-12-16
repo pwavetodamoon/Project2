@@ -23,22 +23,6 @@ public class Character_Body_Sprites : SerializedMonoBehaviour
         item_sword,
         item_shield,
     }
-    private void Start()
-    {
-        //transform.DOMove(Vector2.zero, 1f).SetEase(Ease.InOutSine).OnComplete(() =>
-        //{
-        //    transform.DOMove()
-        //});
-    }
-    private void ResetAllPositionTransformPart()
-    {
-    }
-    /// <summary>
-    /// This method is used to change the sprite of a body part 
-    /// </summary>
-    /// <param name="spritePartName">Which body part you want to change</param>
-    /// <param name="newSprite">Sprite you want to set</param>
-    /// <returns>return boolen to know sprite is set yet</returns>
     [Button(ButtonSizes.Medium, ButtonStyle.CompactBox, Expanded = true)]
     public bool SetSpriteBodyPart(SpritePartBody spritePartName, Sprite newSprite)
     {
