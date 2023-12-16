@@ -9,6 +9,7 @@ public class Monster_Animator : MonoBehaviour
     {
         Idle,
         Hurt,
+        Attack
     }
     public void Idle()
     {
@@ -18,6 +19,11 @@ public class Monster_Animator : MonoBehaviour
     {
         PlayAnimation(AnimationType.Hurt);
     }
+    public void Attack()
+    {
+        PlayAnimation(AnimationType.Attack);
+    }
+    [DisableInEditorMode]
     [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
     private void PlayAnimation(AnimationType type)
     {
@@ -36,6 +42,8 @@ public class Monster_Animator : MonoBehaviour
                 return "idle_1";
             case AnimationType.Hurt:
                 return "hurt_1";
+            case AnimationType.Attack:
+                return "attack_1";
             default:
                 return "";
         }

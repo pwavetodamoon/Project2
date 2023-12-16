@@ -30,6 +30,7 @@ public class Human_Animator : MonoBehaviour
     {
         PlayAnimation(AnimationType.Hurt);
     }
+    [DisableInEditorMode]
     [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
     private void PlayAnimation(AnimationType type)
     {

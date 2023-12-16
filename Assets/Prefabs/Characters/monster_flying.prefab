@@ -281,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6751913093140896724}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
@@ -488,6 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4998867696950289814}
   - component: {fileID: 4537205800734839932}
+  - component: {fileID: 3176567593639756565}
   m_Layer: 0
   m_Name: monster_flying
   m_TagString: Untagged
@@ -528,3 +529,16 @@ MonoBehaviour:
   close_eye: {fileID: 6661107782056863497}
   left_Wing: {fileID: 6095602487636067891}
   right_Wing: {fileID: 1486495708503569416}
+--- !u!114 &3176567593639756565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379040636906919384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8a3536e50a41347a6243f0951d66ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6942099607709621098}
