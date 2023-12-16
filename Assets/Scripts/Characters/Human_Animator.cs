@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Characters_Animator : MonoBehaviour
+public class Human_Animator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     public enum AnimationType
@@ -12,10 +13,27 @@ public class Characters_Animator : MonoBehaviour
         Slash,
         Hurt,
     }
-    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    public void PlayAnimation(AnimationType type)
+
+    public void Slashing()
     {
-        if(animator != null)
+        PlayAnimation(AnimationType.Slash);
+    }
+    public void Idle()
+    {
+        PlayAnimation(AnimationType.Idle);
+    }
+    public void Walking()
+    {
+        PlayAnimation(AnimationType.Walk);
+    }
+    public void Hurt()
+    {
+        PlayAnimation(AnimationType.Hurt);
+    }
+    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
+    private void PlayAnimation(AnimationType type)
+    {
+        if (animator != null)
         {
             Debug.LogError("Animator is null");
         }
