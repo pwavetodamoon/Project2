@@ -17,8 +17,9 @@ public class Character_Body_Sprites : MonoBehaviour
     public SpriteRenderer right_leg;
     public SpriteRenderer item_sword;
     public SpriteRenderer item_shield;
+
     [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    void LoadSpritePart()
+    private void LoadSpritePart()
     {
         var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         foreach (var spriteRenderer in allSpriteRenderers)
@@ -41,43 +42,55 @@ public class Character_Body_Sprites : MonoBehaviour
         item_sword,
         item_shield,
     }
-    private void SetSingleSpritePart(SpritePartEnum spritePartEnum , SpriteRenderer sprite)
+
+    private void SetSingleSpritePart(SpritePartEnum spritePartEnum, SpriteRenderer sprite)
     {
         switch (spritePartEnum)
         {
             case SpritePartEnum.head:
                 head = sprite;
                 break;
+
             case SpritePartEnum.eye:
                 eye = sprite;
                 break;
+
             case SpritePartEnum.body:
                 body = sprite;
                 break;
+
             case SpritePartEnum.left_arm:
                 left_arm = sprite;
                 break;
+
             case SpritePartEnum.right_arm:
                 right_arm = sprite;
                 break;
+
             case SpritePartEnum.left_hand:
                 left_hand = sprite;
                 break;
+
             case SpritePartEnum.right_hand:
                 right_hand = sprite;
                 break;
+
             case SpritePartEnum.left_leg:
                 left_leg = sprite;
                 break;
+
             case SpritePartEnum.right_leg:
                 right_leg = sprite;
                 break;
+
             case SpritePartEnum.item_sword:
                 item_sword = sprite;
                 break;
+
             case SpritePartEnum.item_shield:
                 item_shield = sprite;
                 break;
+
             default:
                 break;
         }

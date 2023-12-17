@@ -527,8 +527,13 @@ MonoBehaviour:
   head: {fileID: 6776566405530131291}
   open_eye: {fileID: 1779337445014712038}
   close_eye: {fileID: 6661107782056863497}
-  left_Wing: {fileID: 6095602487636067891}
-  right_Wing: {fileID: 1486495708503569416}
+  left_wing: {fileID: 0}
+  right_wing: {fileID: 0}
+  left_hand: {fileID: 0}
+  right_hand: {fileID: 0}
+  left_leg: {fileID: 0}
+  right_leg: {fileID: 0}
+  monsterType: 1
 --- !u!114 &3176567593639756565
 MonoBehaviour:
   m_ObjectHideFlags: 0
