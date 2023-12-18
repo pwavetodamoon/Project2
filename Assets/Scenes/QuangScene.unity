@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!212 &453603690 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6095602487636067891, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-  m_PrefabInstance: {fileID: 8062417357001302704}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &608663759
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,11 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &820636370 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1486495708503569416, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-  m_PrefabInstance: {fileID: 8062417357001302704}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &7821182764382466115 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7965001641087124102, guid: 5e14becbc28b7544086039fb4a2fb910, type: 3}
@@ -238,26 +228,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1486495708503569416, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1486495708503569416, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1779337445014712038, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: fc08116d282975e4f8ac48e3f0c60608, type: 3}
-    - target: {fileID: 4537205800734839932, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: left_wing
-      value: 
-      objectReference: {fileID: 453603690}
-    - target: {fileID: 4537205800734839932, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: right_wing
-      value: 
-      objectReference: {fileID: 820636370}
     - target: {fileID: 4998867696950289814, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.25
@@ -298,26 +268,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6095602487636067891, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6095602487636067891, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6661107782056863497, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f315684ce5986c0458f7910549bebe63, type: 3}
-    - target: {fileID: 6740949445930270006, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776566405530131291, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 97e1dbd285351544ea80fc032a89200b, type: 3}
     - target: {fileID: 8379040636906919384, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
       propertyPath: m_Name
       value: monster_flying
