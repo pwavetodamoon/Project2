@@ -31,8 +31,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3374711776011509947}
-  - {fileID: 7441765696645845464}
   - {fileID: 8214649820326820191}
+  - {fileID: 7441765696645845464}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5584744959903285923
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0372b010f87810b48bbe0a8c19fb7af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plane: {fileID: 5330020663652832177}
-  subBg: {fileID: 2221911627570894558}
-  bg: {fileID: 2620073971367348135}
+  speed: 0.5
+  offset: 0
+  materialList: []
   mapBackgroundSO: {fileID: 11400000, guid: 14adb830591a46c42bbd4497d487b82e, type: 2}
 --- !u!1 &4221307283258498339
 GameObject:
@@ -61,10 +61,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7441765696645845464}
   - component: {fileID: 36242976048749245}
-  - component: {fileID: 2620073971367348135}
   - component: {fileID: 3064996849199464827}
   m_Layer: 0
-  m_Name: Sub Background 1
+  m_Name: BG 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,22 +92,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4221307283258498339}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2620073971367348135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4221307283258498339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4337e379c2ad8364f83c835ac0b1f29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
-  offset: 0
-  isPaused: 0
-  sortingOrder: 3
 --- !u!23 &3064996849199464827
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -161,7 +144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3374711776011509947}
   - component: {fileID: 1373360878455059666}
-  - component: {fileID: 5330020663652832177}
   - component: {fileID: 2639714869806942994}
   m_Layer: 0
   m_Name: Plane
@@ -193,22 +175,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8129815936887688567}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5330020663652832177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8129815936887688567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4337e379c2ad8364f83c835ac0b1f29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
-  offset: 0
-  isPaused: 0
-  sortingOrder: 0
 --- !u!23 &2639714869806942994
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -261,10 +227,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8214649820326820191}
   - component: {fileID: 4187220447580261067}
-  - component: {fileID: 2221911627570894558}
   - component: {fileID: 478562308623852463}
   m_Layer: 0
-  m_Name: Sub Background 2
+  m_Name: BG 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,22 +258,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8383476192956158525}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2221911627570894558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383476192956158525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4337e379c2ad8364f83c835ac0b1f29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.5
-  offset: 0
-  isPaused: 0
-  sortingOrder: 2
 --- !u!23 &478562308623852463
 MeshRenderer:
   m_ObjectHideFlags: 0
