@@ -11,13 +11,13 @@ public class MapBackgroundSO : SerializedScriptableObject
      *  KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW
      *  WE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP
      */
-    //[SerializeField] List<SpriteBackground> spriteBackgrounds = new List<SpriteBackground>();
+    //[SerializeField] List<SpriteBackground> ScrollingBackgroundArray = new List<SpriteBackground>();
     [InfoBox("KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!")]
 
     static string messenge = "KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!";
 
 
-    [SerializeField] Dictionary<string,SpriteBackground> keyValuePairs = new Dictionary<string,SpriteBackground>();
+    [SerializeField] Dictionary<string, SpriteBackground> keyValuePairs = new Dictionary<string, SpriteBackground>();
     string[] mapsName = { "Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6", "Map 7", "Map 8", "Map 9" };
     [SerializeField] string plane;
     [SerializeField] string frontWall;
@@ -33,8 +33,8 @@ public class MapBackgroundSO : SerializedScriptableObject
     [Button]
     void LoadAllSpriteForBackground()
     {
-        
-        for(int i = 0; i < mapsName.Length; i++)
+
+        for (int i = 0; i < mapsName.Length; i++)
         {
             LoadSpriteBackgroundList(mapsName[i]);
         }
@@ -44,41 +44,49 @@ public class MapBackgroundSO : SerializedScriptableObject
         //Debug.LogWarning(messenge);
     }
     [Button]
-    void LoadSpriteBackgroundList(string mapName)
+    void LoadSpriteBackgroundList(string mapKey)
     {
-        StringBuilder sb = new StringBuilder("Background/");
-        sb.Append(mapName);
-        ListOfFiles = Resources.LoadAll<Texture2D>(sb.ToString());
+        // Load String Path
+        StringBuilder BackgroundFilePath = new StringBuilder("Background/");
+        BackgroundFilePath.Append(mapKey);
+        // Load All Texture2D of Map folder
+        ListOfFiles = Resources.LoadAll<Texture2D>(BackgroundFilePath.ToString());
         if (ListOfFiles == null || ListOfFiles.Length == 0)
             return;
+        // create new SpriteBackground
+        var newSpriteBackground = InitSpriteBackground();
+
+        // Add to dictionary
+        keyValuePairs.Add(mapKey, newSpriteBackground);
+    }
+    SpriteBackground InitSpriteBackground()
+    {
         var newSpriteBackground = new SpriteBackground();
-        foreach(Texture2D background in ListOfFiles)
+        foreach (Texture2D background in ListOfFiles)
         {
-            if(background.name ==  plane)
+            if (background.name == plane)
             {
                 newSpriteBackground.plane = background;
             }
-            else if(background.name == frontWall)
+            else if (background.name == frontWall)
             {
                 newSpriteBackground.frontWall = background;
             }
-            else if(background.name == backWall)
+            else if (background.name == backWall)
             {
                 newSpriteBackground.backWall = background;
             }
-            else if(background.name == groundDecor)
+            else if (background.name == groundDecor)
             {
                 newSpriteBackground.groundDecor = background;
             }
         }
-        keyValuePairs.Add(mapName,newSpriteBackground);
+        return newSpriteBackground;
     }
     public SpriteBackground GetSpriteBackground(string mapName)
     {
         return keyValuePairs[mapName];
     }
-    
-
 }
 [System.Serializable]
 public struct SpriteBackground

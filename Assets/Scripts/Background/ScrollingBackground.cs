@@ -10,15 +10,21 @@ public class ScrollingBackground : MonoBehaviour
 
     [SerializeField] private float offset;
     private Material material;
-    [SerializeField] private bool isPaused = false;
+    [SerializeField] private bool isPaused = true;
     [SerializeField] private int sortingOrder = 0;
+    Renderer tr;
+
     private void Awake()
     {
         material = GetComponent<Renderer>().material;
-        var tr = GetComponent<Renderer>();
         //tr.sortingLayerName = "SubBackground";
-        tr.sortingOrder = sortingOrder;
         //Debug.Log(tr.sortingLayerName);
+    }
+    [Button]
+    public void UpdateSortingOrder(int order)
+    {
+        tr = GetComponent<Renderer>();
+        tr.sortingOrder = sortingOrder;
     }
     [Button]
     public void UpdateCurrentTexture(Texture2D texture)
@@ -45,23 +51,18 @@ public class ScrollingBackground : MonoBehaviour
     }
     private void Update()
     {
+        ScrollHorizontal();
+    }
+    public void ScrollHorizontal()
+    {
         if (isPaused)
         {
             return;
-        }
-        if (material == null)
-        {
-            material = GetComponent<Renderer>().material;
         }
         if (offset >= float.MaxValue)
         {
             offset = 0;
         }
-        ScrollHorizontal();
-    }
-
-    private void ScrollHorizontal()
-    {
         offset += (Time.deltaTime * speed) / 10f;
         material.SetTextureOffset("_MainTex", new Vector2(offset, 0));
     }
