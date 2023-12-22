@@ -43,6 +43,7 @@ public class MapBackgroundSO : SerializedScriptableObject
 
         //Debug.LogWarning(messenge);
     }
+    [InfoBox("This button just use for testing, not use in outside")]
     [Button]
     void LoadSpriteBackgroundList(string mapKey)
     {
