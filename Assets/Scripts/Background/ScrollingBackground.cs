@@ -1,18 +1,15 @@
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrollingBackground : MonoBehaviour
 {
-    public float speed = 0.5f;
+    [SerializeField] private float speed = 0.5f;
 
     [SerializeField] private float offset;
     private Material material;
     [SerializeField] private bool isPaused = true;
     [SerializeField] private int sortingOrder = 0;
-    Renderer tr;
+    private Renderer tr;
 
     private void Awake()
     {
@@ -20,12 +17,14 @@ public class ScrollingBackground : MonoBehaviour
         //tr.sortingLayerName = "SubBackground";
         //Debug.Log(tr.sortingLayerName);
     }
+
     [Button]
     public void UpdateSortingOrder(int order)
     {
         tr = GetComponent<Renderer>();
         tr.sortingOrder = sortingOrder;
     }
+
     [Button]
     public void UpdateCurrentTexture(Texture2D texture)
     {
@@ -49,10 +48,12 @@ public class ScrollingBackground : MonoBehaviour
     {
         speed = newSpeed;
     }
+
     private void Update()
     {
         ScrollHorizontal();
     }
+
     public void ScrollHorizontal()
     {
         if (isPaused)

@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -11,29 +10,29 @@ public class MapBackgroundSO : SerializedScriptableObject
      *  KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW
      *  WE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP
      */
+
     //[SerializeField] List<SpriteBackground> ScrollingBackgroundArray = new List<SpriteBackground>();
     [InfoBox("KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!")]
+    private static string messenge = "KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!";
 
-    static string messenge = "KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!";
+    [SerializeField] private Dictionary<string, SpriteBackground> keyValuePairs = new Dictionary<string, SpriteBackground>();
+    private string[] mapsName = { "Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6", "Map 7", "Map 8", "Map 9" };
+    [SerializeField] private string plane;
+    [SerializeField] private string frontWall;
+    [SerializeField] private string backWall;
+    [SerializeField] private string groundDecor;
 
+    [SerializeField] private Texture2D[] ListOfFiles;
 
-    [SerializeField] Dictionary<string, SpriteBackground> keyValuePairs = new Dictionary<string, SpriteBackground>();
-    string[] mapsName = { "Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6", "Map 7", "Map 8", "Map 9" };
-    [SerializeField] string plane;
-    [SerializeField] string frontWall;
-    [SerializeField] string backWall;
-    [SerializeField] string groundDecor;
-
-    [SerializeField] Texture2D[] ListOfFiles;
     [Button]
-    void Clear()
+    private void Clear()
     {
         keyValuePairs.Clear();
     }
-    [Button]
-    void LoadAllSpriteForBackground()
-    {
 
+    [Button]
+    private void LoadAllSpriteForBackground()
+    {
         for (int i = 0; i < mapsName.Length; i++)
         {
             LoadSpriteBackgroundList(mapsName[i]);
@@ -43,9 +42,10 @@ public class MapBackgroundSO : SerializedScriptableObject
 
         //Debug.LogWarning(messenge);
     }
+
     [InfoBox("This button just use for testing, not use in outside")]
     [Button]
-    void LoadSpriteBackgroundList(string mapKey)
+    private void LoadSpriteBackgroundList(string mapKey)
     {
         // Load String Path
         StringBuilder BackgroundFilePath = new StringBuilder("Background/");
@@ -60,7 +60,8 @@ public class MapBackgroundSO : SerializedScriptableObject
         // Add to dictionary
         keyValuePairs.Add(mapKey, newSpriteBackground);
     }
-    SpriteBackground InitSpriteBackground()
+
+    private SpriteBackground InitSpriteBackground()
     {
         var newSpriteBackground = new SpriteBackground();
         foreach (Texture2D background in ListOfFiles)
@@ -84,11 +85,13 @@ public class MapBackgroundSO : SerializedScriptableObject
         }
         return newSpriteBackground;
     }
+
     public SpriteBackground GetSpriteBackground(string mapName)
     {
         return keyValuePairs[mapName];
     }
 }
+
 [System.Serializable]
 public struct SpriteBackground
 {

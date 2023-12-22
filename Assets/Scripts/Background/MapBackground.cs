@@ -33,7 +33,6 @@ public class MapBackground : MonoBehaviour
         //GroundDecor = transform.Find("GroundDecor").GetComponent<ScrollingBackground>();
     }
 
-
     [Button]
     [DisableInEditorMode]
     public void LoadTexture()
