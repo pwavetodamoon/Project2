@@ -6,12 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MapBackgroundSO", menuName = "ScriptableObjects/MapBackgroundSO", order = 1)]
 public class MapBackgroundSO : SerializedScriptableObject
 {
-    /*
-     *  KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW
-     *  WE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP
-     */
+    // TODO:'KEY' OF DICTIONARY JUST TEMPORARY RIGHT NOW
 
-    //[SerializeField] List<SpriteBackground> ScrollingBackgroundArray = new List<SpriteBackground>();
+
     [InfoBox("KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!")]
     private static string messenge = "KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!";
 
@@ -30,22 +27,28 @@ public class MapBackgroundSO : SerializedScriptableObject
         keyValuePairs.Clear();
     }
 
+    /// <summary>
+    /// Loads all the sprites for the background.
+    /// </summary>
     [Button]
     private void LoadAllSpriteForBackground()
     {
         for (int i = 0; i < mapsName.Length; i++)
         {
-            LoadSpriteBackgroundList(mapsName[i]);
+            LoadSpriteBackground(mapsName[i]);
         }
         // Debug log warning with rich text format
         Debug.LogWarning("<color=red>" + messenge + "</color>");
 
         //Debug.LogWarning(messenge);
     }
-
+    /// <summary>
+    /// Loads the sprites for all backgrounds
+    /// </summary>
+    /// <param name="mapKey"></param>
     [InfoBox("This button just use for testing, not use in outside")]
     [Button]
-    private void LoadSpriteBackgroundList(string mapKey)
+    private void LoadSpriteBackground(string mapKey)
     {
         // Load String Path
         StringBuilder BackgroundFilePath = new StringBuilder("Background/");
@@ -54,13 +57,16 @@ public class MapBackgroundSO : SerializedScriptableObject
         ListOfFiles = Resources.LoadAll<Texture2D>(BackgroundFilePath.ToString());
         if (ListOfFiles == null || ListOfFiles.Length == 0)
             return;
-        // create new SpriteBackground
+        // init new SpriteBackground
         var newSpriteBackground = InitSpriteBackground();
 
         // Add to dictionary
         keyValuePairs.Add(mapKey, newSpriteBackground);
     }
-
+    /// <summary>
+    /// Init SpriteBackground
+    /// </summary>
+    /// <returns></returns>
     private SpriteBackground InitSpriteBackground()
     {
         var newSpriteBackground = new SpriteBackground();
@@ -85,7 +91,11 @@ public class MapBackgroundSO : SerializedScriptableObject
         }
         return newSpriteBackground;
     }
-
+    /// <summary>
+    /// Get SpriteBackground by map name
+    /// </summary>
+    /// <param name="mapName"></param>
+    /// <returns>Return a SpriteBackground type</returns>
     public SpriteBackground GetSpriteBackground(string mapName)
     {
         return keyValuePairs[mapName];

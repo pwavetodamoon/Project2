@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+/// <summary>
+/// Represents the map background in the game.
+/// </summary>
 public class MapBackground : MonoBehaviour
 {
     [SerializeField] private MapBackgroundSO mapBackgroundSO;
@@ -22,6 +25,9 @@ public class MapBackground : MonoBehaviour
         StartScrolling();
     }
 
+    /// <summary>
+    /// Loads the field by getting the components of ScrollingBackground in the children objects.
+    /// </summary>
     [Button]
     private void LoadField()
     {
@@ -33,6 +39,9 @@ public class MapBackground : MonoBehaviour
         //GroundDecor = transform.Find("GroundDecor").GetComponent<ScrollingBackground>();
     }
 
+    /// <summary>
+    /// Loads the textures for the map background.
+    /// </summary>
     [Button]
     [DisableInEditorMode]
     public void LoadTexture()
@@ -66,6 +75,10 @@ public class MapBackground : MonoBehaviour
         //GroundDecor.UpdateCurrentTexture(spriteBackground.groundDecor);
     }
 
+    /// <summary>
+    /// Adjusts the scrolling speed of the background.
+    /// </summary>
+    /// <param name="speed">The speed value to adjust the scrolling speed.</param>
     [Button]
     public void AdjustSpeed(float speed = .5f)
     {
@@ -75,6 +88,9 @@ public class MapBackground : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts scrolling the background.
+    /// </summary>
     [Button]
     public void StartScrolling()
     {
@@ -84,6 +100,9 @@ public class MapBackground : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops scrolling the background.
+    /// </summary>
     [Button]
     public void StopScrolling()
     {

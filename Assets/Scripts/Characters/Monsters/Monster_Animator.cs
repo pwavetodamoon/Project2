@@ -14,30 +14,14 @@ public class Monster_Animator : MonoBehaviour
         Attack
     }
 
-    public void Walk()
+    private void Awake()
     {
-        PlayAnimation(AnimationType.Walk);
+        animator = GetComponentInChildren<Animator>();
     }
 
-    public void Hurt()
+    public void PlayAnimation(AnimationType type)
     {
-        PlayAnimation(AnimationType.Hurt);
-    }
-
-    public void Attack()
-    {
-        PlayAnimation(AnimationType.Attack);
-    }
-
-    [DisableInEditorMode]
-    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    private void PlayAnimation(AnimationType type)
-    {
-        var animationName = GetAnimationName(type);
-        if (animator == null)
-        {
-            animator = GetComponentInChildren<Animator>();
-        }
+        string animationName = GetAnimationName(type);
         animator.Play(animationName);
     }
 

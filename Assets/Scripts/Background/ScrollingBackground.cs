@@ -1,10 +1,12 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+/// <summary>
+/// Controls the scrolling behavior of a background object.
+/// </summary>
 public class ScrollingBackground : MonoBehaviour
 {
     [SerializeField] private float speed = 0.5f;
-
     [SerializeField] private float offset;
     private Material material;
     [SerializeField] private bool isPaused = true;
@@ -14,10 +16,12 @@ public class ScrollingBackground : MonoBehaviour
     private void Awake()
     {
         material = GetComponent<Renderer>().material;
-        //tr.sortingLayerName = "SubBackground";
-        //Debug.Log(tr.sortingLayerName);
     }
 
+    /// <summary>
+    /// Updates the sorting order of the background object.
+    /// </summary>
+    /// <param name="order">The new sorting order.</param>
     [Button]
     public void UpdateSortingOrder(int order)
     {
@@ -25,6 +29,10 @@ public class ScrollingBackground : MonoBehaviour
         tr.sortingOrder = sortingOrder;
     }
 
+    /// <summary>
+    /// Updates the current texture of the background object.
+    /// </summary>
+    /// <param name="texture">The new texture.</param>
     [Button]
     public void UpdateCurrentTexture(Texture2D texture)
     {
@@ -34,16 +42,26 @@ public class ScrollingBackground : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pauses the scrolling of the background.
+    /// </summary>
     public void Pause()
     {
         isPaused = true;
     }
 
+    /// <summary>
+    /// Resumes the scrolling of the background.
+    /// </summary>
     public void Resume()
     {
         isPaused = false;
     }
 
+    /// <summary>
+    /// Adjusts the scrolling speed of the background.
+    /// </summary>
+    /// <param name="newSpeed">The new scrolling speed.</param>
     public void AdjustSpeed(float newSpeed)
     {
         speed = newSpeed;
@@ -54,6 +72,9 @@ public class ScrollingBackground : MonoBehaviour
         ScrollHorizontal();
     }
 
+    /// <summary>
+    /// Scrolls the background horizontally based on the current speed.
+    /// </summary>
     public void ScrollHorizontal()
     {
         if (isPaused)
