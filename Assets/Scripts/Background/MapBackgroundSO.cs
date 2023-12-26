@@ -12,6 +12,7 @@ public class MapBackgroundSO : SerializedScriptableObject
     [InfoBox("KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!")]
     private static string messenge = "KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!";
 
+    // [TableList(DrawScrollView = true, MaxScrollViewHeight = 200, MinScrollViewHeight = 100)]
     [SerializeField] private Dictionary<string, SpritesBackground> keyValuePairs = new Dictionary<string, SpritesBackground>();
     private string[] mapsName = { "Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6", "Map 7", "Map 8", "Map 9" };
     [SerializeField] private string plane; // name: battleground
@@ -35,7 +36,7 @@ public class MapBackgroundSO : SerializedScriptableObject
     {
         for (int i = 0; i < mapsName.Length; i++)
         {
-            keyValuePairs.Add(mapsName[i], LoadCurrentTextureOfBackground(mapsName[i]));
+            keyValuePairs.Add(mapsName[i], LoadCurrentTextureOfBackground(i));
         }
         // Debug log warning with rich text format
         Debug.LogWarning("<color=red>" + messenge + "</color>");
@@ -45,11 +46,13 @@ public class MapBackgroundSO : SerializedScriptableObject
 
     [InfoBox("This button just use for testing, not use in outside")]
     [Button]
-    private SpritesBackground LoadCurrentTextureOfBackground(string mapKey)
+    private SpritesBackground LoadCurrentTextureOfBackground(int mapIndex)
     {
+        string mapName = GetMapNameByIndex(mapIndex);
         // Load String Path
         StringBuilder filePath = new StringBuilder("Background/");
-        filePath.Append(mapKey);
+        filePath.Append(mapName);
+
         // Load All Texture2D of Map folder, Ex: Resources/Background/Map 1
         CurrentListOfTexture = Resources.LoadAll<Texture2D>(filePath.ToString());
         if (CurrentListOfTexture == null || CurrentListOfTexture.Length == 0)
@@ -82,18 +85,22 @@ public class MapBackgroundSO : SerializedScriptableObject
         }
         return newSpriteBackground;
     }
-
+    string GetMapNameByIndex(int mapIndex)
+    {
+        if (mapIndex < 0 || mapIndex >= mapsName.Length)
+        {
+            mapIndex = 0;
+        }
+        return mapsName[mapIndex];
+    }
     public SpritesBackground GetSpritesBackground(int mapIndex)
     {
         if (keyValuePairs.Count == 0)
         {
             LoadAllTextureForMap();
         }
-        if (mapIndex < 0 || mapIndex >= mapsName.Length)
-        {
-            mapIndex = 0;
-        }
-        var mapName = mapsName[mapIndex];
+
+        var mapName = GetMapNameByIndex(mapIndex);
         return keyValuePairs[mapName];
     }
 }
