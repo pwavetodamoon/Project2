@@ -12,14 +12,14 @@ public class MapBackgroundSO : SerializedScriptableObject
     [InfoBox("KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!")]
     private static string messenge = "KEY OF DICTIONARY JUST TEMPORARY RIGHT NOW !!!!\r\nWE NEED USE ENUM LIKE A KEY WHEN MAKING CORE FEARTURE OF MAP !!!";
 
-    [SerializeField] private Dictionary<string, SpriteBackground> keyValuePairs = new Dictionary<string, SpriteBackground>();
+    [SerializeField] private Dictionary<string, SpritesBackground> keyValuePairs = new Dictionary<string, SpritesBackground>();
     private string[] mapsName = { "Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6", "Map 7", "Map 8", "Map 9" };
-    [SerializeField] private string plane;
-    [SerializeField] private string frontWall;
-    [SerializeField] private string backWall;
-    [SerializeField] private string groundDecor;
+    [SerializeField] private string plane; // name: battleground
+    [SerializeField] private string frontWall; // back_decor
+    [SerializeField] private string backWall; // back_land
+    [SerializeField] private string groundDecor; // ground_decor
 
-    [SerializeField] private Texture2D[] ListOfFiles;
+    [SerializeField] private Texture2D[] CurrentListOfTexture;
 
     [Button]
     private void Clear()
@@ -31,46 +31,37 @@ public class MapBackgroundSO : SerializedScriptableObject
     /// Loads all the sprites for the background.
     /// </summary>
     [Button]
-    private void LoadAllSpriteForBackground()
+    private void LoadAllTextureForMap()
     {
         for (int i = 0; i < mapsName.Length; i++)
         {
-            LoadSpriteBackground(mapsName[i]);
+            keyValuePairs.Add(mapsName[i], LoadCurrentTextureOfBackground(mapsName[i]));
         }
         // Debug log warning with rich text format
         Debug.LogWarning("<color=red>" + messenge + "</color>");
 
         //Debug.LogWarning(messenge);
     }
-    /// <summary>
-    /// Loads the sprites for all backgrounds
-    /// </summary>
-    /// <param name="mapKey"></param>
+
     [InfoBox("This button just use for testing, not use in outside")]
     [Button]
-    private void LoadSpriteBackground(string mapKey)
+    private SpritesBackground LoadCurrentTextureOfBackground(string mapKey)
     {
         // Load String Path
-        StringBuilder BackgroundFilePath = new StringBuilder("Background/");
-        BackgroundFilePath.Append(mapKey);
-        // Load All Texture2D of Map folder
-        ListOfFiles = Resources.LoadAll<Texture2D>(BackgroundFilePath.ToString());
-        if (ListOfFiles == null || ListOfFiles.Length == 0)
-            return;
+        StringBuilder filePath = new StringBuilder("Background/");
+        filePath.Append(mapKey);
+        // Load All Texture2D of Map folder, Ex: Resources/Background/Map 1
+        CurrentListOfTexture = Resources.LoadAll<Texture2D>(filePath.ToString());
+        if (CurrentListOfTexture == null || CurrentListOfTexture.Length == 0)
+            return new SpritesBackground();
         // init new SpriteBackground
-        var newSpriteBackground = InitSpriteBackground();
-
-        // Add to dictionary
-        keyValuePairs.Add(mapKey, newSpriteBackground);
+        return InitSpriteBackground();
     }
-    /// <summary>
-    /// Init SpriteBackground
-    /// </summary>
-    /// <returns></returns>
-    private SpriteBackground InitSpriteBackground()
+
+    private SpritesBackground InitSpriteBackground()
     {
-        var newSpriteBackground = new SpriteBackground();
-        foreach (Texture2D background in ListOfFiles)
+        var newSpriteBackground = new SpritesBackground();
+        foreach (Texture2D background in CurrentListOfTexture)
         {
             if (background.name == plane)
             {
@@ -91,19 +82,24 @@ public class MapBackgroundSO : SerializedScriptableObject
         }
         return newSpriteBackground;
     }
-    /// <summary>
-    /// Get SpriteBackground by map name
-    /// </summary>
-    /// <param name="mapName"></param>
-    /// <returns>Return a SpriteBackground type</returns>
-    public SpriteBackground GetSpriteBackground(string mapName)
+
+    public SpritesBackground GetSpritesBackground(int mapIndex)
     {
+        if (keyValuePairs.Count == 0)
+        {
+            LoadAllTextureForMap();
+        }
+        if (mapIndex < 0 || mapIndex >= mapsName.Length)
+        {
+            mapIndex = 0;
+        }
+        var mapName = mapsName[mapIndex];
         return keyValuePairs[mapName];
     }
 }
-
+// Structer of background
 [System.Serializable]
-public struct SpriteBackground
+public struct SpritesBackground
 {
     public Texture2D plane;
     public Texture2D frontWall;

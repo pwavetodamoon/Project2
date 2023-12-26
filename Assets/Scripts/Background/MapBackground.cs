@@ -14,7 +14,8 @@ public class MapBackground : MonoBehaviour
     //[SerializeField] private ScrollingBackground FrontWall;
     //[SerializeField] private ScrollingBackground BackWall;
     //[SerializeField] private ScrollingBackground GroundDecor;
-    public string MapNameLoad = "Map 1";
+    [InfoBox("Map name use for testing, just on play mode, it just temporary")]
+    public int MapIndex = 0;
 
     [ShowInInspector] private ScrollingBackground[] ScrollingBackgroundArray;
 
@@ -39,6 +40,7 @@ public class MapBackground : MonoBehaviour
         //GroundDecor = transform.Find("GroundDecor").GetComponent<ScrollingBackground>();
     }
 
+    [InfoBox("Load all texure for background array, use in play mode")]
     /// <summary>
     /// Loads the textures for the map background.
     /// </summary>
@@ -51,7 +53,7 @@ public class MapBackground : MonoBehaviour
             LoadField();
         }
 
-        SpriteBackground spriteBackground = mapBackgroundSO.GetSpriteBackground(MapNameLoad);
+        SpritesBackground spriteBackground = mapBackgroundSO.GetSpritesBackground(MapIndex);
         var texture2dPlane = spriteBackground.plane;
         var texture2dBackWall = spriteBackground.backWall;
         var texture2dFrontWall = spriteBackground.frontWall;
