@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
-/// <summary>
-/// Represents the map background in the game.
-/// </summary>
+// TODO:Background 7,8,9 have a issue when scrolling, it's not smooth
 public class MapBackground : MonoBehaviour
 {
     [SerializeField] private MapBackgroundSO mapBackgroundSO;
 
-    //[SerializeField] private ScrollingBackground Plane;
-    //[SerializeField] private ScrollingBackground FrontWall;
-    //[SerializeField] private ScrollingBackground BackWall;
-    //[SerializeField] private ScrollingBackground GroundDecor;
     [InfoBox("Map name use for testing, just on play mode, it just temporary")]
     public int MapIndex = 0;
 
@@ -34,47 +29,39 @@ public class MapBackground : MonoBehaviour
     {
         ScrollingBackgroundArray = GetComponentsInChildren<ScrollingBackground>();
 
-        //Plane = transform.Find("Plane").GetComponent<ScrollingBackground>();
-        //FrontWall = transform.Find("FrontWall").GetComponent<ScrollingBackground>();
-        //BackWall = transform.Find("BackWall").GetComponent<ScrollingBackground>();
-        //GroundDecor = transform.Find("GroundDecor").GetComponent<ScrollingBackground>();
     }
 
+
     [InfoBox("Load all texure for background array, use in play mode")]
-    /// <summary>
-    /// Loads the textures for the map background.
-    /// </summary>
     [Button]
     [DisableInEditorMode]
     public void LoadTexture()
     {
+        // make sure array is not null or empty
         if (ScrollingBackgroundArray == null || ScrollingBackgroundArray.Length == 0)
         {
             LoadField();
         }
 
-        SpritesBackground spriteBackground = mapBackgroundSO.GetSpritesBackground(MapIndex);
-        var texture2dPlane = spriteBackground.plane;
-        var texture2dBackWall = spriteBackground.backWall;
-        var texture2dFrontWall = spriteBackground.frontWall;
-        var texture2dGroundDecor = spriteBackground.groundDecor;
+        SpritesBackground textures2d = mapBackgroundSO.GetSpritesBackground(MapIndex);
 
-        ScrollingBackgroundArray[0].UpdateCurrentTexture(texture2dPlane);
+        Texture2D Plane = textures2d.plane;
+        Texture2D BackWall = textures2d.backWall;
+        Texture2D FrontWall = textures2d.frontWall;
+        Texture2D GroundDecor = textures2d.groundDecor;
+
+        ScrollingBackgroundArray[0].UpdateCurrentTexture(Plane);
         ScrollingBackgroundArray[0].UpdateSortingOrder(0);
 
-        ScrollingBackgroundArray[1].UpdateCurrentTexture(texture2dBackWall);
+        ScrollingBackgroundArray[1].UpdateCurrentTexture(BackWall);
         ScrollingBackgroundArray[1].UpdateSortingOrder(1);
 
-        ScrollingBackgroundArray[2].UpdateCurrentTexture(texture2dFrontWall);
+        ScrollingBackgroundArray[2].UpdateCurrentTexture(FrontWall);
         ScrollingBackgroundArray[2].UpdateSortingOrder(2);
 
-        ScrollingBackgroundArray[3].UpdateCurrentTexture(texture2dGroundDecor);
+        ScrollingBackgroundArray[3].UpdateCurrentTexture(GroundDecor);
         ScrollingBackgroundArray[3].UpdateSortingOrder(3);
 
-        //Plane.UpdateCurrentTexture(spriteBackground.plane);
-        //FrontWall.UpdateCurrentTexture(spriteBackground.frontWall);
-        //BackWall.UpdateCurrentTexture(spriteBackground.backWall);
-        //GroundDecor.UpdateCurrentTexture(spriteBackground.groundDecor);
     }
 
     /// <summary>
