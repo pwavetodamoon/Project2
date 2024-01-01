@@ -1,6 +1,3 @@
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Human_Animator : MonoBehaviour
@@ -15,40 +12,20 @@ public class Human_Animator : MonoBehaviour
         Hurt,
     }
 
-    public void Slashing()
+    private void Awake()
     {
-        PlayAnimation(AnimationType.Slash);
+        animator = GetComponentInChildren<Animator>();
     }
 
-    public void Idle()
+    public void PlayAnimation(AnimationType type)
     {
-        PlayAnimation(AnimationType.Idle);
-    }
-
-    public void Walking()
-    {
-        PlayAnimation(AnimationType.Walk);
-    }
-
-    public void Hurt()
-    {
-        PlayAnimation(AnimationType.Hurt);
-    }
-
-    [DisableInEditorMode]
-    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    private void PlayAnimation(AnimationType type)
-    {
-        if (animator == null)
-        {
-            animator = GetComponentInChildren<Animator>();
-        }
         var animationName = GetAnimationName(type);
         animator.Play(animationName);
     }
 
     private string GetAnimationName(AnimationType type)
     {
+
         switch (type)
         {
             case AnimationType.Idle:
@@ -64,8 +41,7 @@ public class Human_Animator : MonoBehaviour
                 return "hurt_1";
 
             default:
-                break;
+                return "";
         }
-        return null;
     }
 }
