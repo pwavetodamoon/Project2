@@ -16,11 +16,11 @@ MonoBehaviour:
   Id: P02
   health: 100
   damage: 30
-  attackTime: 0
-  animationTime: 0
-  timeCoolDown: 3
-  weaponPrefab: {fileID: 3591551370510528849, guid: 0e99deb9add9a5a42b8398fb90aba2c7, type: 3}
+  attackTime: 0.2
+  animationTime: 0.2
+  timeCoolDown: 1
+  weaponPrefab: {fileID: 3591551370510528849, guid: 65381c54f154b634988a3626acb026a1, type: 3}
+  Base: {fileID: 0}
   AttackType: 1
   level: 1
-  Base: {fileID: 0}
   playerWeaponType: 0

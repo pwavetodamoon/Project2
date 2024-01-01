@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bat
   Id: E01
-  health: 50
+  health: 100
   damage: 5
   attackTime: 0
   animationTime: 0
   timeCoolDown: 1
   weaponPrefab: {fileID: 0}
+  Base: {fileID: 0}
   AttackType: 0
-  enemyPos: {fileID: 0}
+  speed: 3
   enemy_type: 3

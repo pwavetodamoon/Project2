@@ -11,6 +11,7 @@ public class BaseData : ScriptableObject
     public float animationTime;
     public float timeCoolDown;
     public GameObject weaponPrefab;
+    public Transform Base;
     public AttackTypeEnum AttackType;
 
 }

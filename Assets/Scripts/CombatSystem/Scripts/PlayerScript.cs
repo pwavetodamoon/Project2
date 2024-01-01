@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static PlayerScript Instance;
+
     [SerializeField] Player playerData;
     [SerializeField] Transform pos;
     [SerializeField] private float timeCounter;
@@ -14,7 +16,16 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] public string ID;
     [SerializeField] AttackTypeEnum type;
 
-    
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
     private void Start()
     {
         playerData = Game_DataBase.Instance.GetPlayerData(ID);
@@ -26,10 +37,11 @@ public class PlayerScript : MonoBehaviour
     }
     private void Update()
     {
-
+        
         //Uu tien danh don manh truoc
         if (timeCounter <= 0)
         {
+           
             Attack();
             timeCounter =  playerData.timeCoolDown + playerData.animationTime + playerData.attackTime;
         }
@@ -58,6 +70,7 @@ public class PlayerScript : MonoBehaviour
     void Attack()
     {
         GetComponent<IAttack>().Attack();
+        playerData.weaponPrefab.SetActive(true);
     }
     IEnumerator TimeCount()
     {

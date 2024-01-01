@@ -18,10 +18,12 @@ public class ShortRange : AttackBase, IAttack
         StartCoroutine(Near(playerData.animationTime));
         IEnumerator Near(float AttackSpeed)
         {
-            yield return transform.DOMove(enemyData.enemyPos.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
+            
+            yield return transform.DOMove(enemyData.Base.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             yield return new WaitForSeconds(AttackSpeed);
             yield return transform.DOMove(playerData.Base.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             IsAttack = false;
+            playerData.weaponPrefab.SetActive(false);
         }
         
         

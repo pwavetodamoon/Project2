@@ -1,20 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class LongRange : AttackBase
+public class LongRange : AttackBase, IAttack
 {
-    [SerializeField] public Transform shotingPos;
-
     public void Attack()
     {
-        //Debug.Log(EnemyData);
-        StopAllCoroutines();
-        shotingPos = GetComponent<Transform>();
+        
+        //Debug.Log(enemyData);
+        
+        StartCoroutine(FarAttack());
         IEnumerator FarAttack()
         {
-            Debug.Log("Long Range Attack");
-            yield return Instantiate(playerData.weaponPrefab, shotingPos.position, Quaternion.identity);
+            yield return Instantiate(playerData.weaponPrefab, playerData.Base.position, Quaternion.identity);
         }
-        StartCoroutine(FarAttack());
     }
 }

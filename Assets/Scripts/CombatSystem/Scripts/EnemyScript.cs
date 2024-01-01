@@ -5,26 +5,41 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] Enemy EnemyData;
+    public static EnemyScript Instance;
+
+    [SerializeField] Enemy enemyData;
+    BaseData baseData;
     [SerializeField] Transform pos;
     [SerializeField] private float timeCounter;
-    [SerializeField] float speed;
-    [SerializeField] string ID; 
+    public float speed;
+    public string ID;
     [SerializeField] AttackTypeEnum type;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
-        EnemyData = Game_DataBase.Instance.GetEnemyData(ID);
+        enemyData = Game_DataBase.Instance.GetEnemyData(ID);
         ChangeComponent();
-        type = EnemyData.AttackType;
+        type = enemyData.AttackType;
+        pos = enemyData.Base;
         StartCoroutine(TimeCount());
+
     }
     private void Update()
     {
         if (timeCounter == 0)
         {
-            Attack();
-            timeCounter = EnemyData.timeCoolDown;
+            //Attack();
+            timeCounter = enemyData.timeCoolDown;
         }
     }
     void Attack()
@@ -33,7 +48,7 @@ public class EnemyScript : MonoBehaviour
     }
     public void ChangeComponent()
     {
-        
+
         if (GetComponent<AttackBase>() != null)
         {
             DestroyImmediate(GetComponent<AttackBase>());
