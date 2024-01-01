@@ -18,15 +18,7 @@ public class Character_Body_Sprites : MonoBehaviour
     public SpriteRenderer item_sword;
     public SpriteRenderer item_shield;
 
-    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    private void LoadSpritePart()
-    {
-        var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach (var spriteRenderer in allSpriteRenderers)
-        {
-            SetSingleSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
-        }
-    }
+
 
     public enum SpritePartEnum
     {
@@ -42,7 +34,15 @@ public class Character_Body_Sprites : MonoBehaviour
         item_sword,
         item_shield,
     }
-
+    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
+    private void LoadSpritePart()
+    {
+        var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (var spriteRenderer in allSpriteRenderers)
+        {
+            SetSingleSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
+        }
+    }
     private void SetSingleSpritePart(SpritePartEnum spritePartEnum, SpriteRenderer sprite)
     {
         switch (spritePartEnum)

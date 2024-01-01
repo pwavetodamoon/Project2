@@ -1,30 +1,16 @@
 using Sirenix.OdinInspector;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Monster_Body_Sprites : MonoBehaviour
 {
     public SpriteRenderer head;
     public SpriteRenderer open_eye;
     public SpriteRenderer close_eye;
-
-    [ShowIf("monsterType", MonsterType.Flying)]
     public SpriteRenderer left_wing;
-
-    [ShowIf("monsterType", MonsterType.Flying)]
     public SpriteRenderer right_wing;
-
-    [ShowIf("monsterType", MonsterType.Land)]
     public SpriteRenderer left_hand;
-
-    [ShowIf("monsterType", MonsterType.Land)]
     public SpriteRenderer right_hand;
-
-    [ShowIf("monsterType", MonsterType.Land)]
     public SpriteRenderer left_leg;
-
-    [ShowIf("monsterType", MonsterType.Land)]
     public SpriteRenderer right_leg;
 
     public enum MonsterType
@@ -46,16 +32,6 @@ public class Monster_Body_Sprites : MonoBehaviour
         right_hand,
         right_leg,
         left_leg,
-    }
-
-    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-    private void LoadSpritePart()
-    {
-        var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach (var spriteRenderer in allSpriteRenderers)
-        {
-            SetSingleSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
-        }
     }
 
     [ShowIf("monsterType", MonsterType.Flying)]
@@ -124,28 +100,34 @@ public class Monster_Body_Sprites : MonoBehaviour
             case SpritePartEnum.right_leg:
                 right_leg = sprite;
                 break;
+        }
+    }
 
-            default:
-                break;
+    [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
+    private void LoadSpritePart()
+    {
+        var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        foreach (var spriteRenderer in allSpriteRenderers)
+        {
+            SetSingleSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
         }
     }
 
     private SpritePartEnum GetSpritePartEnumByName(string name)
     {
+
         return name switch
         {
-            "s_head" => SpritePartEnum.head,
-            "s_open_eye" => SpritePartEnum.open_eye,
-            "s_close_eye" => SpritePartEnum.close_eye,
-            // Flying Part
-            "s_left_wing" => SpritePartEnum.left_Wing,
-            "s_right_wing" => SpritePartEnum.right_Wing,
-            // Land Part
-            "s_left_hand" => SpritePartEnum.left_hand,
-            "s_right_hand" => SpritePartEnum.right_hand,
-            "s_left_leg" => SpritePartEnum.left_leg,
-            "s_right_leg" => SpritePartEnum.right_leg,
-            _ => new SpritePartEnum(),
+            "head" => SpritePartEnum.head,
+            "open_eye" => SpritePartEnum.open_eye,
+            "close_eye" => SpritePartEnum.close_eye,
+            "left_Wing" => SpritePartEnum.left_Wing,
+            "right_Wing" => SpritePartEnum.right_Wing,
+            "left_hand" => SpritePartEnum.left_hand,
+            "right_hand" => SpritePartEnum.right_hand,
+            "left_leg" => SpritePartEnum.left_leg,
+            "right_leg" => SpritePartEnum.right_leg,
+            _ => SpritePartEnum.head,
         };
     }
 }
