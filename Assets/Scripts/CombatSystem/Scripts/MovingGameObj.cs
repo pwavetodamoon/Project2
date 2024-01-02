@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MovingGameObj : MonoBehaviour
+{
+    public Rigidbody2D rb;
+    public float foce;
+    public Transform target;
+    public int rotate = 0;
+    
+
+    public virtual void Moving()    
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        Vector3 dir = target.position - transform.position;
+        rb.velocity = new Vector2(dir.x, dir.y).normalized * foce;
+
+        float rot = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rot + rotate);
+    }
+}
