@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemOnScreen : MonoBehaviour, IPointerEnterHandler
+public class ItemCollectBase : MonoBehaviour, IPointerEnterHandler
 {
     public string Id;
 
@@ -24,7 +24,7 @@ public class ItemOnScreen : MonoBehaviour, IPointerEnterHandler
 
         var newPosition = transform.position.y + yPosition;
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(transform.DOScale(Vector3.one * .5f, time).SetEase(ease));
+        sequence.Append(transform.DOScale(originalScale * 1.5f, time).SetEase(ease));
         sequence.Append(transform.DOMoveY(newPosition, time).SetEase(ease));
         sequence.Play().OnComplete(() =>
         {
@@ -32,12 +32,9 @@ public class ItemOnScreen : MonoBehaviour, IPointerEnterHandler
         });
     }
 
-    public void Collect()
+    protected virtual void Collect()
     {
         Debug.Log("Item Collected: " + Id);
-        QuestingSystem.Instance.CollectItem(Id);
-        transform.gameObject.SetActive(false);
-        // Destroy(gameObject, .1f);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
