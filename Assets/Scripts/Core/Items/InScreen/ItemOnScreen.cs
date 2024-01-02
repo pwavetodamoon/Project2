@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class ItemOnScreen : MonoBehaviour, IPointerEnterHandler
 {
-
     public string Id;
 
     [SerializeField] private float yPosition;
@@ -13,9 +12,13 @@ public class ItemOnScreen : MonoBehaviour, IPointerEnterHandler
     private Vector2 originalPosition;
     private Vector2 originalScale;
     [SerializeField] private Ease ease;
+
     [Button(ButtonSizes.Medium)]
-    public void CollectTest()
+    public bool isCollected = false;
+
+    public void CollectEffect()
     {
+        isCollected = true;
         originalPosition = transform.position;
         originalScale = transform.localScale;
 
@@ -25,18 +28,26 @@ public class ItemOnScreen : MonoBehaviour, IPointerEnterHandler
         sequence.Append(transform.DOMoveY(newPosition, time).SetEase(ease));
         sequence.Play().OnComplete(() =>
         {
-            Debug.Log("Item Collected");
-            QuestingSystem.Instance.CollectItem(Id);
-            transform.gameObject.SetActive(false);
-            // Destroy(gameObject, .1f);
+            Collect();
         });
     }
+
+    public void Collect()
+    {
+        Debug.Log("Item Collected: " + Id);
+        QuestingSystem.Instance.CollectItem(Id);
+        transform.gameObject.SetActive(false);
+        // Destroy(gameObject, .1f);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        CollectTest();
+        if (isCollected) return;
+        CollectEffect();
     }
+
     [Button(ButtonSizes.Medium)]
-    void ResetPosition()
+    private void ResetPosition()
     {
         transform.position = originalPosition;
         transform.localScale = originalScale;

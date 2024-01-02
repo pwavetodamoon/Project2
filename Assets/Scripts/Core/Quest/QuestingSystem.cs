@@ -20,20 +20,22 @@ public class QuestingSystem : SerializedMonoBehaviour
     void CreateQuest()
     {
         questDictionary = new Dictionary<string, int>();
-        foreach (var item in questSO.itemsList)
+        foreach (var item in questSO.GetItemSOList())
         {
             questDictionary.Add(item.Id, 0);
         }
     }
+
     public void CollectItem(string id)
     {
-        if (questDictionary.ContainsKey(id))
+        if (!questDictionary.ContainsKey(id)) return;
+        if (questDictionary[id] > 5) return;
+
+        questDictionary[id]++;
+        if (questDictionary[id] == 5)
         {
-            questDictionary[id]++;
-            if (questDictionary[id] >= 5)
-            {
-                Debug.Log("Quest Completed");
-            }
+            Debug.Log("Complete Quest Collect Item: " + id);
+            questSO.CompleteQuestItem();
         }
     }
 }

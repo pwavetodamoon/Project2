@@ -11,23 +11,38 @@ public class DropItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(StartRandomItem());
+        StartCoroutine(StartDropItemByCurrentQuest());
     }
+    IEnumerator StartDropItemByCurrentQuest()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2);
 
+            var itemSO = questSO.GetCurrentItemSO();
+
+            SpawnItem(itemSO, R_Position());
+        }
+    }
     IEnumerator StartRandomItem()
     {
-        itemsList = questSO.itemsList;
+        // Random item from list
+        itemsList = questSO.GetItemSOList();
         while (true)
         {
             yield return new WaitForSeconds(2);
             var r_itemIndex = Random.Range(0, itemsList.Count);
             var r_itemSO = itemsList[r_itemIndex];
 
-            var r_x = Random.Range(-5, 5);
-            var r_y = Random.Range(-5, 5);
 
-            SpawnItem(r_itemSO, new Vector2(r_x, r_y));
+            SpawnItem(r_itemSO, R_Position());
         }
+    }
+    private Vector2 R_Position()
+    {
+        var r_x = Random.Range(-5, 5);
+        var r_y = Random.Range(-5, 5);
+        return new Vector2(r_x, r_y);
     }
     private void SpawnItem(ItemSO itemSO, Vector2 position)
     {

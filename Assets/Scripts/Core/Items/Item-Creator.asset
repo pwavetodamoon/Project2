@@ -61,3 +61,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d4af4b254ef2c8740ab90f2f74ad0f10, type: 3}
   - {fileID: 21300000, guid: 40abc80326edb1047afe1453e00c8463, type: 3}
   - {fileID: 21300000, guid: 152f378cefa319244abf6f599fd0723a, type: 3}
+  money_item:
+  - {fileID: 21300000, guid: d833994b15c92704a856943e368f2ce0, type: 3}
+  - {fileID: 21300000, guid: 86ab3551376701541ae0716d597580d5, type: 3}
