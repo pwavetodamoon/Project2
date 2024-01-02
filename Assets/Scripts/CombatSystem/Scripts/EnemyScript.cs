@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 
 public partial class EnemyScript : MonoBehaviour
 {
@@ -44,7 +43,7 @@ public partial class EnemyScript : MonoBehaviour
     }
     void Attack()
     {
-        GetComponent<IAttack>().Attack();
+        GetComponent<IAttack>().Attack(enemyData);
     }
     public void ChangeComponent()
     {
@@ -62,7 +61,7 @@ public partial class EnemyScript : MonoBehaviour
             transform.AddComponent<LongRange>();
 
         }
-        GetComponent<AttackBase>().enemyData = Game_DataBase.Instance.GetEnemyData(ID);
+        //GetComponent<AttackBase>().enemyData = Game_DataBase.Instance.GetEnemyData(ID);
 
     }
     IEnumerator TimeCount()

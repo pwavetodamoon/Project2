@@ -8,11 +8,13 @@ public class MovingGameObj : MonoBehaviour
     public float foce;
     public Transform target;
     public int rotate = 0;
-    
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     public virtual void Moving()    
     {
-        rb = GetComponent<Rigidbody2D>();
 
         Vector3 dir = target.position - transform.position;
         rb.velocity = new Vector2(dir.x, dir.y).normalized * foce;

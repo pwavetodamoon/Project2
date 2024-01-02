@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShortRange : AttackBase, IAttack
 {
+    Enemy enemyData; // TODO: FIX THIS
 
-    public void Attack()
+    public void Attack(BaseData playerData)
     {
 
         //Debug.Log("Enemypos" + enemyData.enemyPos.transform.position);
@@ -16,15 +17,20 @@ public class ShortRange : AttackBase, IAttack
         if (IsAttack) return ;
         IsAttack = true;
         StartCoroutine(Near(playerData.animationTime));
+
         IEnumerator Near(float AttackSpeed)
         {
-            
-            yield return transform.DOMove(enemyData.Base.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
+            Vector2 originalPosition = transform.position;
+            //var enemyPos = enemyData.Base.transform.position;
+            var enemyPos = Vector2.zero;// FIXME: enemyData.Base.transform.position;
+
+
+            yield return transform.DOMove(enemyPos, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             yield return new WaitForSeconds(AttackSpeed);
-            playerData.weaponPrefab.SetActive(true);
-            yield return transform.DOMove(playerData.Base.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
+            //playerData.weaponPrefab.SetActive(true);
+            yield return transform.DOMove(originalPosition, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             IsAttack = false;
-            playerData.weaponPrefab.SetActive(false);
+            //playerData.weaponPrefab.SetActive(false);
 
         }
         

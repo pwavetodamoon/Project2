@@ -14,11 +14,6 @@ public class BulletMoving : MovingGameObj
         target = enemy.Base;
         Moving();
         foce = 25;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         Destroy(gameObject, 3);
     }
     private void OnCollisionEnter2D(Collision2D collision)

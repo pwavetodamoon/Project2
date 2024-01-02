@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
 {
     public static PlayerScript Instance;
 
-    [SerializeField] Player playerData;
+    [SerializeField] public Player playerData;
     [SerializeField] Transform pos;
     [SerializeField] private float timeCounter;
   
@@ -24,14 +24,12 @@ public class PlayerScript : MonoBehaviour
             return;
         }
         Instance = this;
-
-        
     }
 
     private void Start()
     {
 
-        playerData = Game_DataBase.Instance.GetPlayerData(ID);
+        //playerData = Game_DataBase.Instance.GetPlayerData(ID);
         
         type = playerData.AttackType;
 
@@ -68,14 +66,15 @@ public class PlayerScript : MonoBehaviour
             transform.AddComponent<LongRange>();
 
         }
-        GetComponent<AttackBase>().enemyData = Game_DataBase.Instance.GetEnemyData("E01");
-        GetComponent<AttackBase>().playerData = Game_DataBase.Instance.GetPlayerData(ID);
+        return;
+
     }
     public AttackBase normalAttack;
     [Button]
     void Attack()
     {
-        GetComponent<IAttack>().Attack();
+        Debug.Log("Attack");
+        GetComponent<IAttack>().Attack(playerData);
        
     }
     IEnumerator TimeCount()
