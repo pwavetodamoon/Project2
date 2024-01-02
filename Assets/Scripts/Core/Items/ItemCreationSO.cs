@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,10 +20,17 @@ public class ItemCreationSO : ScriptableObject
     {
         foreach (var item in sprites)
         {
+            string filePath = "Assets/Scripts/Core/Items/ItemSO/" + "ItemSO_" + item.name + ".asset";
+
+            if (File.Exists(filePath))
+            {
+                Debug.Log("File already exist");
+                continue;
+            }
+
             var itemBase = ScriptableObject.CreateInstance<ItemSO>();
             itemBase.Sprite = item;
-            itemBase.Name = item.name; //  item name of the sprite is a number so we can use it as a name
-            string filePath = "Assets/Scripts/Core/Items/ItemSO/" + "ItemSO_" + item.name + ".asset";
+            itemBase.Id = item.name; //  item name of the sprite is a number so we can use it as a name
             UnityEditor.AssetDatabase.CreateAsset(itemBase, filePath);
         }
     }

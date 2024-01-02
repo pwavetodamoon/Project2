@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6266d62df60ea249a6fca1bbafdaf77, type: 3}
   m_Name: ItemSO_4
   m_EditorClassIdentifier: 
-  Name: 4
+  Id: 4
   Sprite: {fileID: 21300000, guid: 05155f317ddc0fd4ba2e7f4c45580d33, type: 3}
