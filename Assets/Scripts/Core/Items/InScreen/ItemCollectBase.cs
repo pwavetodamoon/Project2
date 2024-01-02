@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class ItemCollectBase : MonoBehaviour, IPointerEnterHandler
 {
     public string Id;
-
+    public float speed = 1;
     [SerializeField] private float yPosition;
     [SerializeField] private float time = .5f;
     private Vector2 originalPosition;
@@ -18,6 +18,10 @@ public class ItemCollectBase : MonoBehaviour, IPointerEnterHandler
     void Awake()
     {
         collider2D = GetComponent<Collider2D>();
+    }
+    void FixedUpdate()
+    {
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
     public void CollectEffect()
     {
