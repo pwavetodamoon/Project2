@@ -19,8 +19,10 @@ MonoBehaviour:
   attackTime: 0.2
   animationTime: 0.2
   timeCoolDown: 3
+  prefab: {fileID: 0}
   weaponPrefab: {fileID: 0}
   Base: {fileID: 0}
   AttackType: 0
   level: 1
+  Slot: {fileID: 0}
   playerWeaponType: 0

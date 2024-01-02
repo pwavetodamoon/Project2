@@ -11,7 +11,7 @@ public class LongRange : AttackBase, IAttack
         StartCoroutine(FarAttack());
         IEnumerator FarAttack()
         {
-            yield return Instantiate(playerData.weaponPrefab, playerData.Base.position, Quaternion.identity);
+            yield return Instantiate(playerData.weaponPrefab, transform.position, Quaternion.identity);
         }
     }
 }

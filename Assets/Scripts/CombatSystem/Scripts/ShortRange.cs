@@ -21,9 +21,11 @@ public class ShortRange : AttackBase, IAttack
             
             yield return transform.DOMove(enemyData.Base.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             yield return new WaitForSeconds(AttackSpeed);
+            playerData.weaponPrefab.SetActive(true);
             yield return transform.DOMove(playerData.Base.transform.position, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             IsAttack = false;
             playerData.weaponPrefab.SetActive(false);
+
         }
         
         

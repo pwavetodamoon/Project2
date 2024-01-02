@@ -21,7 +21,7 @@ public class EnemyMoving : MovingGameObj
     }
     private void Update()
     {
-        float dis = Vector2.Distance(transform.position, player.Base.position);
+        float dis = Vector2.Distance(transform.position, player.Slot.position);
         Moving();
         if (dis <= attackRange)
         {

@@ -4,7 +4,7 @@
 public class Player : BaseData
 {
     public int level;
-    
+    public Transform Slot;
     public WeaponType playerWeaponType;
 
 }

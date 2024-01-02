@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Player playerData;
     [SerializeField] Transform pos;
     [SerializeField] private float timeCounter;
-    [SerializeField] private bool isAttacking;
+  
     [SerializeField] public string ID;
     [SerializeField] AttackTypeEnum type;
 
@@ -24,31 +24,37 @@ public class PlayerScript : MonoBehaviour
             return;
         }
         Instance = this;
+
+        
     }
 
     private void Start()
     {
+
         playerData = Game_DataBase.Instance.GetPlayerData(ID);
-        pos = playerData.Base;
+        
         type = playerData.AttackType;
+
         ChangeComponent();
         timeCounter = playerData.timeCoolDown;
         StartCoroutine(TimeCount());
     }
     private void Update()
     {
-        
+        playerData.Slot = GetComponentInParent<Transform>();
+        pos = playerData.Slot;
+
         //Uu tien danh don manh truoc
         if (timeCounter <= 0)
         {
-           
+            
             Attack();
-            timeCounter =  playerData.timeCoolDown + playerData.animationTime + playerData.attackTime;
+            timeCounter = playerData.timeCoolDown + playerData.animationTime + playerData.attackTime;
         }
     }
     public void ChangeComponent()
     {
-        
+
         if (GetComponent<AttackBase>() != null)
         {
             DestroyImmediate(GetComponent<AttackBase>());
@@ -70,7 +76,7 @@ public class PlayerScript : MonoBehaviour
     void Attack()
     {
         GetComponent<IAttack>().Attack();
-        playerData.weaponPrefab.SetActive(true);
+       
     }
     IEnumerator TimeCount()
     {

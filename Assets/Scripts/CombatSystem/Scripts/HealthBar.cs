@@ -23,6 +23,8 @@ public class HealthBar : MonoBehaviour
     public void TakeDamage()
     {
         currentHealth -= Damage;
+        if (currentHealth < 0)
+        { currentHealth = minHealth; }
     }
    
     public void Dead(float animationTime)
@@ -31,11 +33,10 @@ public class HealthBar : MonoBehaviour
     }
 }
 
-
-
 public class PlayerHealth : HealthBar
 {
     
+   
     private void Start()
     {
         

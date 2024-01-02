@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
-public class EnemyScript : MonoBehaviour
+public partial class EnemyScript : MonoBehaviour
 {
     public static EnemyScript Instance;
 
     [SerializeField] Enemy enemyData;
-    BaseData baseData;
     [SerializeField] Transform pos;
     [SerializeField] private float timeCounter;
     public float speed;
@@ -30,7 +30,7 @@ public class EnemyScript : MonoBehaviour
         enemyData = Game_DataBase.Instance.GetEnemyData(ID);
         ChangeComponent();
         type = enemyData.AttackType;
-        pos = enemyData.Base;
+        enemyData.Base = transform;
         StartCoroutine(TimeCount());
 
     }

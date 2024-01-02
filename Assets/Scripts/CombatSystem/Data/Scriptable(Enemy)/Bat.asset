@@ -19,6 +19,7 @@ MonoBehaviour:
   attackTime: 0
   animationTime: 0
   timeCoolDown: 1
+  prefab: {fileID: 0}
   weaponPrefab: {fileID: 0}
   Base: {fileID: 0}
   AttackType: 0

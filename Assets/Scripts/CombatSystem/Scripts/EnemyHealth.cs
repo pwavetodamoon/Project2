@@ -23,5 +23,6 @@ public class EnemyHealth : HealthBar
         {
             Dead(enemy.animationTime);
         }
+        
     }
 }
