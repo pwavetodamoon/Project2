@@ -12,13 +12,19 @@ public class ItemCollectBase : MonoBehaviour, IPointerEnterHandler
     private Vector2 originalPosition;
     private Vector2 originalScale;
     [SerializeField] private Ease ease;
-
+    [SerializeField] new Collider2D collider2D;
     [Button(ButtonSizes.Medium)]
     public bool isCollected = false;
-
+    void Awake()
+    {
+        collider2D = GetComponent<Collider2D>();
+    }
     public void CollectEffect()
     {
+        if (isCollected) return;
+        collider2D.enabled = false;
         isCollected = true;
+
         originalPosition = transform.position;
         originalScale = transform.localScale;
 
@@ -39,7 +45,6 @@ public class ItemCollectBase : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isCollected) return;
         CollectEffect();
     }
 

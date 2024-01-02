@@ -41,8 +41,8 @@ public class DropItem : MonoBehaviour
     [Button]
     private Vector2 R_Position()
     {
-        float r_x = Random.Range(-1, 2);
-        float r_y = Random.Range(-1, 2);
+        float r_x = Random.Range(-1f, 2f);
+        float r_y = Random.Range(-1f, 2f);
         return new Vector2(r_x, r_y);
     }
     private void SpawnItem(GameObject prefab,ItemSO itemSO, Vector2 position)
