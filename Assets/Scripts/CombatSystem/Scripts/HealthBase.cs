@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HealthBase : MonoBehaviour
 {
-    public float maxHealth;
-    public float minHealth = 0;
-    public float currentHealth;
+    [SerializeField] protected float maxHealth;
+    [SerializeField] protected float minHealth = 0;
+    [SerializeField] protected float currentHealth;
     // Start is called before the first frame update
     public void Setup(BaseData enemy)
     {
@@ -21,6 +21,7 @@ public class HealthBase : MonoBehaviour
         if (currentHealth < 0)
         { 
             currentHealth = minHealth; 
+            Destroy(gameObject);
             Debug.Log("EnemyCharacters is dead");
         }
     }

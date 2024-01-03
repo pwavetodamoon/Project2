@@ -9,7 +9,6 @@ public class PlayerCharacters : CharactersBase
 {
     //public static PlayerCharacters Instance;
 
-
     private void Start()
     {
 

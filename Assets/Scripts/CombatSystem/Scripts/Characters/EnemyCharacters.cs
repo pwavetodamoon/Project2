@@ -13,6 +13,9 @@ public class EnemyCharacters : CharactersBase
 
     private void Start()
     {
+        health = GetComponent<EnemyHealth>();
+        moving = GetComponent<EnemyMoving>();
+
         speed = 1;
         health.Setup(data);
         moving.Setup(speed);

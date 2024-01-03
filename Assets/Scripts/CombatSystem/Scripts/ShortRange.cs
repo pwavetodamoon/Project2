@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class ShortRange : AttackBase, IAttack
 {
-    EnemyData enemyData; // TODO: FIX THIS
-
+    // TODO: FIX THIS
+    public Human_Animator animator;
+    void Awake()
+    {
+        animator = GetComponentInChildren<Human_Animator>();
+    }
     public void Attack(BaseData playerData)
     {
 
@@ -17,25 +21,37 @@ public class ShortRange : AttackBase, IAttack
         {
             Vector2 originalPosition = transform.position;
             //var enemyPos = enemyData.Base.transform.position;
-            var enemyPos = Vector2.zero;// FIXME: enemyData.Base.transform.position;
             var Enemy = CombatManager.GetEnemyPosition?.Invoke();
-            enemyPos = Enemy.transform.position;
+
+            var enemyPos = Enemy == null ? transform.position : Enemy.transform.position;
+
+            // di chuyen
             yield return transform.DOMove(enemyPos, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
 
-            Enemy.moving.isMoving = false;
+            // tan cong
+            animator.PlayAnimation(Human_Animator.AnimationType.Slash);
 
-            yield return new WaitForSeconds(AttackSpeed);
+            ChangeStateMove(Enemy, false);
+            yield return new WaitForSeconds(0.63f);
+            ChangeStateMove(Enemy, true);
+            Enemy.health.TakeDamage(playerData.damage);
+
             //data.weaponPrefab.SetActive(true);
+
+            // di chuyen ve lai
+            animator.PlayAnimation(Human_Animator.AnimationType.Idle);
             yield return transform.DOMove(originalPosition, playerData.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
             IsAttack = false;
             // TODO: Make enemy stop moving in one second
-            Enemy.moving.isMoving = true;
             //data.weaponPrefab.SetActive(false);
 
         }
-        
-        
 
+    }
+    void ChangeStateMove(EnemyCharacters Enemy, bool state)
+    {
+        if(Enemy == null) return;
+        Enemy.moving.isMoving = state;
     }
 
 }
