@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class HealthBase : MonoBehaviour
 {
-    public Enemy enemy;
     public float maxHealth;
     public float minHealth = 0;
     public float currentHealth;
-    public float Damage;
     // Start is called before the first frame update
-    void Start()
+    public void Setup(BaseData enemy)
     {
         minHealth = 0;
         maxHealth = enemy.health;
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float Damage)
     {
         currentHealth -= Damage;
         if (currentHealth < 0)
-        { currentHealth = minHealth; }
+        { 
+            currentHealth = minHealth; 
+            Debug.Log("EnemyCharacters is dead");
+        }
     }
-   
-    public void Dead(float animationTime)
-    {
-        Destroy(gameObject, animationTime);
-    }
+
 }
 

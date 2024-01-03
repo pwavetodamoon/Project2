@@ -3,49 +3,38 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public partial class EnemyScript : MonoBehaviour
+public class EnemyCharacters : CharactersBase
 {
-    public static EnemyScript Instance;
+    //public static EnemyCharacters Instance;
+    public EnemyHealth health;
+    public EnemyMoving moving;
 
-    [SerializeField] Enemy enemyData;
-    [SerializeField] Transform pos;
-    [SerializeField] private float timeCounter;
     public float speed;
-    public string ID;
-    [SerializeField] AttackTypeEnum type;
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
 
     private void Start()
     {
-        enemyData = Game_DataBase.Instance.GetEnemyData(ID);
-        ChangeComponent();
-        type = enemyData.AttackType;
-        enemyData.Base = transform;
-        StartCoroutine(TimeCount());
+        speed = 1;
+        health.Setup(data);
+        moving.Setup(speed);
 
+        ChangeComponent();
+        type = data.AttackType;
+        //data.Base = transform;
+        StartCoroutine(TimeCount());
     }
     private void Update()
     {
         if (timeCounter == 0)
         {
             //Attack();
-            timeCounter = enemyData.timeCoolDown;
+            timeCounter = data.timeCoolDown;
         }
     }
-    void Attack()
+    protected override void Attack()
     {
-        GetComponent<IAttack>().Attack(enemyData);
+        GetComponent<IAttack>().Attack(data);
     }
-    public void ChangeComponent()
+    public override void ChangeComponent()
     {
 
         if (GetComponent<AttackBase>() != null)
@@ -64,7 +53,7 @@ public partial class EnemyScript : MonoBehaviour
         //GetComponent<AttackBase>().enemyData = Game_DataBase.Instance.GetEnemyData(ID);
 
     }
-    IEnumerator TimeCount()
+    protected override IEnumerator TimeCount()
     {
         while (true)
         {

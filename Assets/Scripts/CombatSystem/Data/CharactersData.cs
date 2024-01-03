@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 // DATA cua nhan vat
-[CreateAssetMenu(fileName = "Player Data", menuName = "Scriptable Object/ PLayer")]
-public class Player : BaseData
+[CreateAssetMenu(fileName = "CharactersData Data", menuName = "Scriptable Object/ PLayer")]
+public class CharactersData : BaseData
 {
     public int level;
     public Transform Slot;

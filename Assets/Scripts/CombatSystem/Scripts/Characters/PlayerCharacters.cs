@@ -5,52 +5,36 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class PlayerScript : MonoBehaviour
+public class PlayerCharacters : CharactersBase
 {
-    public static PlayerScript Instance;
+    //public static PlayerCharacters Instance;
 
-    [SerializeField] public Player playerData;
-    [SerializeField] Transform pos;
-    [SerializeField] private float timeCounter;
-  
-    [SerializeField] public string ID;
-    [SerializeField] AttackTypeEnum type;
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
 
     private void Start()
     {
 
-        //playerData = Game_DataBase.Instance.GetPlayerData(ID);
+        //data = Game_DataBase.Instance.GetPlayerData(ID);
         
-        type = playerData.AttackType;
+        type = data.AttackType;
 
         ChangeComponent();
-        timeCounter = playerData.timeCoolDown;
+        timeCounter = data.timeCoolDown;
         StartCoroutine(TimeCount());
     }
     private void Update()
     {
-        playerData.Slot = GetComponentInParent<Transform>();
-        pos = playerData.Slot;
+        //data.Slot = GetComponentInParent<Transform>();
+        //pos = data.Slot;
 
         //Uu tien danh don manh truoc
         if (timeCounter <= 0)
         {
             
             Attack();
-            timeCounter = playerData.timeCoolDown + playerData.animationTime + playerData.attackTime;
+            timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
         }
     }
-    public void ChangeComponent()
+    public override void ChangeComponent()
     {
 
         if (GetComponent<AttackBase>() != null)
@@ -69,15 +53,14 @@ public class PlayerScript : MonoBehaviour
         return;
 
     }
-    public AttackBase normalAttack;
     [Button]
-    void Attack()
+    protected override void Attack()
     {
         Debug.Log("Attack");
-        GetComponent<IAttack>().Attack(playerData);
+        GetComponent<IAttack>().Attack(data);
        
     }
-    IEnumerator TimeCount()
+    protected override IEnumerator TimeCount()
     {
         while (true)
         {
