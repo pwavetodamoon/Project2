@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShortRange : AttackBase, IAttack
 {
-    // TODO: FIX THIS
     public Human_Animator animator;
     void Awake()
     {

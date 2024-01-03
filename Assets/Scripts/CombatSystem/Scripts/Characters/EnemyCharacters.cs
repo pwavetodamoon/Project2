@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyCharacters : CharactersBase
 {
+    // TODO: Add player health and monster attack
+
     //public static EnemyCharacters Instance;
     public EnemyHealth health;
     public EnemyMoving moving;
