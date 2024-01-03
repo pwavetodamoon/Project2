@@ -21,7 +21,10 @@ public class HealthBase : MonoBehaviour
         if (currentHealth < 0)
         { 
             currentHealth = minHealth; 
-            Destroy(gameObject);
+            if(TryGetComponent(out CharactersBase _base))
+            {
+                CombatManager.RemoveAction?.Invoke(_base);
+            }
             Debug.Log("EnemyCharacters is dead");
         }
     }

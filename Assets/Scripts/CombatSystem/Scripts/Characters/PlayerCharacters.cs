@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerCharacters : CharactersBase
 {
     //public static PlayerCharacters Instance;
-
+    bool attacking = false;
     private void Start()
     {
 
@@ -26,10 +26,10 @@ public class PlayerCharacters : CharactersBase
         //pos = data.Slot;
 
         //Uu tien danh don manh truoc
-        if (timeCounter <= 0)
+        if (timeCounter <= 0 && attacking == false)
         {
-            
-            Attack();
+            attacking = true;
+            CombatManager.AddPlayerAction(Attack);
             timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
         }
     }
@@ -57,7 +57,7 @@ public class PlayerCharacters : CharactersBase
     {
         Debug.Log("Attack");
         GetComponent<IAttack>().Attack(data);
-       
+        attacking = false;
     }
     protected override IEnumerator TimeCount()
     {
