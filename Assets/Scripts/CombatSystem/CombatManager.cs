@@ -2,20 +2,50 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
+using UnityEngine.TextCore.Text;
+public class CombatEntity<T>
+{
+    public List<T> entities = new List<T>();
+    public void Add(T entity)
+    {
+        entities.Add(entity);
+    }
+    public void Remove(T entity)
+    {
+        entities.Remove(entity);
+    }
+    public void Clear()
+    {
+        entities.Clear();
+    }
+}
 public class CombatManager : MonoBehaviour
 {
 
     public List<PlayerCharacters> characters = new List<PlayerCharacters>();
     public List<EnemyCharacters> enemies = new List<EnemyCharacters>();
+
     public static Func<EnemyCharacters> GetEnemyPosition;
     public static Action<CharactersBase> RemoveAction;
+
     static List<Action> actionsListPlayer = new List<Action>();
     static List<Action> actionsListMonster = new List<Action>();
 
 
+    private void Awake()
+    {
+        CombatEntity<PlayerCharacters> combatEntity1 = new CombatEntity<PlayerCharacters>();
 
+        GetEnemyPosition += GetEnemy;
+        RemoveAction += Remove;
+    }
+    private void OnDisable()
+    {
+        GetEnemyPosition -= GetEnemy;
+        RemoveAction -= Remove;
+    }
     public static void AddPlayerAction(Action action)
     {
         actionsListPlayer.Add(action);
@@ -44,23 +74,14 @@ public class CombatManager : MonoBehaviour
         {
             foreach (var action in actionsList)
             {
-                Debug.Log("Attack Callback");
+                //Debug.Log("Attack Callback");
                 action?.Invoke();
                 //actionsList.Remove(action);
             }
             actionsList.Clear();
         }
     }
-    private void Awake()
-    {
-        GetEnemyPosition += GetEnemy;
-        RemoveAction += Remove;
-    }
-    private void OnDisable()
-    {
-        GetEnemyPosition -= GetEnemy;
-        RemoveAction -= Remove;
-    }
+
     EnemyCharacters GetEnemy()
     {
         if (enemies.Count == 0)
@@ -81,27 +102,31 @@ public class CombatManager : MonoBehaviour
     }
     public void Add(CharactersBase characters)
     {
-        if (characters is PlayerCharacters)
-        {
-            this.characters.Add(characters as PlayerCharacters);
-        }
-        else if (characters is EnemyCharacters)
-        {
-            enemies.Add(characters as EnemyCharacters);
-        }
+        var list = GetList(characters.GetType());
+        if (list == null) return;
+        list.Add(characters);
     }
     public void Remove(CharactersBase characters)
     {
-
-        if (characters is PlayerCharacters)
-        {
-            this.characters.Remove(characters as PlayerCharacters);
-        }
-        else if (characters is EnemyCharacters)
-        {
-            enemies.Remove(characters as EnemyCharacters);
-        }
-
+        var list = GetList(characters.GetType());
+        if (list == null) return;
+        list.Remove(characters);
         Destroy(characters.gameObject);
+    }
+    [Button]
+    List<CharactersBase> GetList(Type type)
+    {
+        // Get List by type
+        if(type == typeof(PlayerCharacters))
+        {
+            Debug.Log("Player");
+            return characters.OfType<CharactersBase>().ToList();
+        }
+        else if(type == typeof(EnemyCharacters))
+        {
+            Debug.Log("Enemy");
+            return enemies.OfType<CharactersBase>().ToList();
+        }
+        return null;
     }
 }

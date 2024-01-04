@@ -3,7 +3,7 @@ using UnityEngine;
 public class Human_Animator : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-
+    public AnimationType CurrentState;
     public enum AnimationType
     {
         Idle,
@@ -16,13 +16,59 @@ public class Human_Animator : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
     }
-
-    public void PlayAnimation(AnimationType type)
+    /// <summary>
+    /// Idle = 0, Walk = 1, Slash = 2, Hurt = 3
+    /// </summary>
+    /// <param name="indexState"></param>
+    public void ChangeState(int indexState)
+    {
+        CurrentState = GetAnimationType(indexState);
+        PlayAnimation(CurrentState);
+    }
+    private AnimationType GetAnimationType(int indexState)
+    {
+        var CurrentState = AnimationType.Idle;
+        switch (indexState)
+        {
+            case 0:
+                CurrentState = AnimationType.Idle;
+                break;
+            case 1:
+                CurrentState = AnimationType.Walk;
+                break;
+            case 2:
+                CurrentState = AnimationType.Slash;
+                break;
+            case 3:
+                CurrentState = AnimationType.Hurt;
+                break;
+            default:
+                break;
+        }
+        return CurrentState;
+    }
+    private void PlayAnimation(AnimationType type)
     {
         var animationName = GetAnimationName(type);
         animator.Play(animationName);
     }
-
+    public float GetCurrentAnimationLength()
+    {
+        return GetAnimationLength(CurrentState);
+    }
+    private float GetAnimationLength(AnimationType type)
+    {
+        var name = GetAnimationName(type);
+        foreach (var clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == name)
+            {
+                return clip.length;
+            }
+        }
+        Debug.LogError("The animation not exits");
+        return -1;
+    }
     private string GetAnimationName(AnimationType type)
     {
 

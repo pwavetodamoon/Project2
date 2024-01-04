@@ -55,7 +55,7 @@ public class PlayerCharacters : CharactersBase
     [Button]
     protected override void Attack()
     {
-        Debug.Log("Attack");
+        //Debug.Log("Attack");
         GetComponent<IAttack>().Attack(data);
         attacking = false;
     }
