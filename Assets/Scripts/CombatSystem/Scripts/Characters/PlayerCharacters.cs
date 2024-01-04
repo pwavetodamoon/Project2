@@ -47,8 +47,9 @@ public class PlayerCharacters : CharactersBase
         if (type == AttackTypeEnum.Far)
         {
             transform.AddComponent<LongRange>();
-
         }
+        var attackBase = GetComponent<AttackBase>();
+        attackBase = new AttackBase(data);
         return;
 
     }
@@ -56,7 +57,7 @@ public class PlayerCharacters : CharactersBase
     protected override void Attack()
     {
         //Debug.Log("Attack");
-        GetComponent<IAttack>().Attack(data);
+        GetComponent<IAttack>().Attack();
         attacking = false;
     }
     protected override IEnumerator TimeCount()

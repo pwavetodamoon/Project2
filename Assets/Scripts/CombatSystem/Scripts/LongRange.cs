@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class LongRange : AttackBase, IAttack
 {
-    public void Attack(BaseData playerData)
+    public LongRange(BaseData data) : base(data)
+    {
+    }
+
+    public void Attack()
     {
         
         //Debug.Log(enemyData);
         
-        StartCoroutine(FarAttack(playerData));
+        StartCoroutine(FarAttack());
 
-        IEnumerator FarAttack(BaseData playerData)
+        IEnumerator FarAttack()
         {
             //yield return Instantiate(data.weaponPrefab, transform.position, Quaternion.identity);
             yield return null;

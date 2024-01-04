@@ -3,6 +3,6 @@ using UnityEngine;
 
 public interface IAttack
 {
-    void Attack(BaseData data);
+    void Attack();
     
 }
