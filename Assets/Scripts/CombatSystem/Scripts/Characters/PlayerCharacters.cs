@@ -8,12 +8,12 @@ using UnityEngine;
 public class PlayerCharacters : CharactersBase
 {
     //public static PlayerCharacters Instance;
-    bool attacking = false;
+    public bool Test = false;
     private void Start()
     {
 
         //data = Game_DataBase.Instance.GetPlayerData(ID);
-        
+
         type = data.AttackType;
 
         ChangeComponent();
@@ -22,6 +22,10 @@ public class PlayerCharacters : CharactersBase
     }
     private void Update()
     {
+        if(Test == true)
+        {
+            return;
+        }
         //data.Slot = GetComponentInParent<Transform>();
         //pos = data.Slot;
 
@@ -33,26 +37,6 @@ public class PlayerCharacters : CharactersBase
             timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
         }
     }
-    public override void ChangeComponent()
-    {
-
-        if (GetComponent<AttackBase>() != null)
-        {
-            DestroyImmediate(GetComponent<AttackBase>());
-        }
-        if (type == AttackTypeEnum.Near)
-        {
-            transform.AddComponent<ShortRange>();
-        }
-        if (type == AttackTypeEnum.Far)
-        {
-            transform.AddComponent<LongRange>();
-        }
-        var attackBase = GetComponent<AttackBase>();
-        attackBase = new AttackBase(data);
-        return;
-
-    }
     [Button]
     protected override void Attack()
     {
@@ -60,14 +44,14 @@ public class PlayerCharacters : CharactersBase
         GetComponent<IAttack>().Attack();
         attacking = false;
     }
+
     protected override IEnumerator TimeCount()
     {
         while (true)
         {
-            //yield return new WaitForSeconds(1);
-            timeCounter -= Time.deltaTime;
-            yield return null;
+            yield return new WaitForEndOfFrame();
+            if (attacking == false && timeCounter > 0)
+                timeCounter -= Time.deltaTime;
         }
     }
-
 }

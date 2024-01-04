@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class EnemyCharacters : CharactersBase
 {
-    // TODO: Add player health and monster attack
-
-    //public static EnemyCharacters Instance;
-    public EnemyHealth health;
+    // TODO: (Complete player health) Add player health and monster attack
     public EnemyMoving moving;
 
     public float speed;
 
     private void Start()
     {
-        health = GetComponent<EnemyHealth>();
+        health = GetComponent<HealthBase>();
         moving = GetComponent<EnemyMoving>();
 
         speed = 1;
@@ -37,26 +34,7 @@ public class EnemyCharacters : CharactersBase
     }
     protected override void Attack()
     {
-        GetComponent<IAttack>().Attack(data);
-    }
-    public override void ChangeComponent()
-    {
-
-        if (GetComponent<AttackBase>() != null)
-        {
-            DestroyImmediate(GetComponent<AttackBase>());
-        }
-        if (type == AttackTypeEnum.Near)
-        {
-            transform.AddComponent<ShortRange>();
-        }
-        if (type == AttackTypeEnum.Far)
-        {
-            transform.AddComponent<LongRange>();
-
-        }
-        //GetComponent<AttackBase>().enemyData = Game_DataBase.Instance.GetEnemyData(ID);
-
+        GetComponent<IAttack>().Attack();
     }
     protected override IEnumerator TimeCount()
     {

@@ -6,10 +6,6 @@ public class ShortRange : AttackBase, IAttack
 {
     public Human_Animator animator;
 
-    public ShortRange(BaseData data) : base(data)
-    {
-    }
-
     void Awake()
     {
         animator = GetComponentInChildren<Human_Animator>();
@@ -35,11 +31,11 @@ public class ShortRange : AttackBase, IAttack
             yield return StartCoroutine(GoToEnemy(enemyPos));
 
             yield return StartCoroutine(AttackEnemy());
-            ChangeStateMove(Enemy, false);
+            //ChangeStateMove(Enemy, false);
             yield return StartCoroutine(GoBackPosition(originalPosition));
-            ChangeStateMove(Enemy, true);
+            //ChangeStateMove(Enemy, true);
 
-            Enemy.health.TakeDamage(data.damage);
+            Enemy.TakeDamage(data.damage);
 
             IsAttack = false;
             // TODO: Make enemy stop moving in one second

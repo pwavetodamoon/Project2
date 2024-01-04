@@ -15,7 +15,7 @@ public class HealthBase : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float Damage)
+    public void ChangeHealth(float Damage)
     {
         currentHealth -= Damage;
         if (currentHealth < 0)
@@ -23,7 +23,7 @@ public class HealthBase : MonoBehaviour
             currentHealth = minHealth; 
             if(TryGetComponent(out CharactersBase _base))
             {
-                CombatManager.RemoveAction?.Invoke(_base);
+                CombatManager.RemoveCharacter?.Invoke(_base);
             }
             Debug.Log("EnemyCharacters is dead");
         }

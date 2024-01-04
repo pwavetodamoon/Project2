@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackBase : MonoBehaviour
 {
-    public AttackBase(BaseData data)
+    public void Init(BaseData data)
     {
         this.data = data;
         IsAttack = false;

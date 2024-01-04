@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class LongRange : AttackBase, IAttack
 {
-    public LongRange(BaseData data) : base(data)
-    {
-    }
-
     public void Attack()
     {
         
