@@ -13,7 +13,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] List<PlayerCharacters> characters = new List<PlayerCharacters>();
     [SerializeField] List<EnemyCharacters> enemies = new List<EnemyCharacters>();
 
-    public static Func<EnemyCharacters> GetEnemyPosition;
+    public static Func<int, CharactersBase> GetEnemyPosition;
     public static Action<CharactersBase> RemoveCharacter;
 
     static List<Action> actionsListPlayer = new List<Action>();
@@ -70,25 +70,47 @@ public class CombatManager : MonoBehaviour
             actionsList.Clear();
         }
     }
-
-    EnemyCharacters GetEnemy()
+    // TODO: Make method for get enemy of player
+    CharactersBase GetEnemy(int state)
     {
-        if (enemies.Count == 0)
+        if (state == 0)
         {
-            return null;
+            if (enemies.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                foreach (var enemy in enemies)
+                {
+                    if (enemy != null)
+                    {
+                        return enemy;
+                    }
+                }
+            }
         }
         else
         {
-            foreach (var enemy in enemies)
+            if(characters.Count == 0)
             {
-                if (enemy != null)
+                return null;
+            }
+            else
+            {
+                foreach (var character in characters)
                 {
-                    return enemy;
+                    if (character != null)
+                    {
+                        return character;
+                    }
                 }
             }
-            return null;
         }
+        return null;
+
     }
+
     public void Add(CharactersBase character)
     {
         if (character is PlayerCharacters)

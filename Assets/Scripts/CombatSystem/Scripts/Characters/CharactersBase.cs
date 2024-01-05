@@ -12,7 +12,6 @@ public abstract class CharactersBase : MonoBehaviour
     protected bool attacking = false;
 
     public AttackBase normalAttack;
-
     public virtual void ChangeComponent()
     {
         if (GetComponent<AttackBase>() != null)
@@ -45,6 +44,6 @@ public abstract class CharactersBase : MonoBehaviour
     {
 
     }
-    protected abstract IEnumerator TimeCount();
+    public abstract IEnumerator TimeCount();
 
 }

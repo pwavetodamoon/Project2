@@ -45,7 +45,7 @@ public class PlayerCharacters : CharactersBase
         attacking = false;
     }
 
-    protected override IEnumerator TimeCount()
+    public override IEnumerator TimeCount()
     {
         while (true)
         {

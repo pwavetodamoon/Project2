@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShortRange : AttackBase, IAttack
 {
     public Human_Animator animator;
-
+    // TODO: Make Attack for monster 
     void Awake()
     {
         animator = GetComponentInChildren<Human_Animator>();
@@ -22,8 +22,14 @@ public class ShortRange : AttackBase, IAttack
         // 3. di chuyen ve lai
         IEnumerator Near()
         {
-            var Enemy = CombatManager.GetEnemyPosition?.Invoke();
-            
+            var _base = GetComponent<CharactersBase>();
+            CharactersBase Enemy = null;
+            if(_base is PlayerCharacters)
+                Enemy = CombatManager.GetEnemyPosition?.Invoke(0);
+            else if(_base is EnemyCharacters)
+                Enemy = CombatManager.GetEnemyPosition?.Invoke(1);
+
+
             Vector2 originalPosition = transform.position;
             //var enemyPos = enemyData.Base.transform.position;
             var enemyPos = Enemy == null ? transform.position : Enemy.transform.position;
@@ -31,6 +37,7 @@ public class ShortRange : AttackBase, IAttack
             yield return StartCoroutine(GoToEnemy(enemyPos));
 
             yield return StartCoroutine(AttackEnemy());
+
             //ChangeStateMove(Enemy, false);
             yield return StartCoroutine(GoBackPosition(originalPosition));
             //ChangeStateMove(Enemy, true);
@@ -46,21 +53,18 @@ public class ShortRange : AttackBase, IAttack
     IEnumerator GoToEnemy(Vector2 enemyPos)
     {
         // di chuyen
-        animator.ChangeState(1);
+        //animator.ChangeState(1);
         yield return transform.DOMove(enemyPos, data.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
     }
     IEnumerator AttackEnemy()
     {
         // tan cong
-        animator.ChangeState(2);
-        var timeToAttack = animator.GetCurrentAnimationLength();
-        yield return new WaitForSeconds(timeToAttack);
+        yield return new WaitForSeconds(data.attackTime);
     }
     IEnumerator GoBackPosition(Vector2 originalPosition)
     {
         // di chuyen ve lai
         yield return transform.DOMove(originalPosition, data.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
-        animator.ChangeState(0);
         yield return null;
     }
     void ChangeStateMove(EnemyCharacters Enemy, bool state)

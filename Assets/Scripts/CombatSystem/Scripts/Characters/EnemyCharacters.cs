@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,7 +8,7 @@ public class EnemyCharacters : CharactersBase
 {
     // TODO: (Complete player health) Add player health and monster attack
     public EnemyMoving moving;
-
+    bool isAttacking = false;
     public float speed;
 
     private void Start()
@@ -22,21 +23,25 @@ public class EnemyCharacters : CharactersBase
         ChangeComponent();
         type = data.AttackType;
         //data.Base = transform;
-        StartCoroutine(TimeCount());
+        //StartCoroutine(TimeCount());
     }
     private void Update()
     {
-        if (timeCounter == 0)
+        if (timeCounter == 0 && isAttacking == false)
         {
-            //Attack();
+            isAttacking = true;
+            CombatManager.AddMonsterAction(Attack);
             timeCounter = data.timeCoolDown;
         }
     }
+    [Button]
     protected override void Attack()
     {
         GetComponent<IAttack>().Attack();
+        isAttacking = false;
+        Debug.Log("Attack");
     }
-    protected override IEnumerator TimeCount()
+    public override IEnumerator TimeCount()
     {
         while (true)
         {
