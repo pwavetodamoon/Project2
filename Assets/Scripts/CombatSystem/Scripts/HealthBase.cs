@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBase : MonoBehaviour
@@ -7,6 +5,7 @@ public class HealthBase : MonoBehaviour
     [SerializeField] protected float maxHealth;
     [SerializeField] protected float minHealth = 0;
     [SerializeField] protected float currentHealth;
+
     // Start is called before the first frame update
     public void Setup(BaseData enemy)
     {
@@ -14,23 +13,23 @@ public class HealthBase : MonoBehaviour
         maxHealth = enemy.health;
         currentHealth = maxHealth;
     }
+
     public float GetHealth()
     {
         return currentHealth;
     }
+
     public void ChangeHealth(float Damage)
     {
         currentHealth -= Damage;
         if (currentHealth < 0)
-        { 
-            currentHealth = minHealth; 
-            if(TryGetComponent(out CharactersBase _base))
+        {
+            currentHealth = minHealth;
+            if (TryGetComponent(out CharactersBase _base))
             {
                 CombatManager.RemoveCharacter?.Invoke(_base);
             }
             Debug.Log("EnemyCharacters is dead");
         }
     }
-
 }
-

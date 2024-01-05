@@ -9,19 +9,23 @@ public class AttackBase : MonoBehaviour
         this.data = data;
         IsAttack = false;
     }
+
     protected BaseData data;
     protected bool IsAttack = false;
+
     public IEnumerator GoToEnemy(Vector2 enemyPos)
     {
         // di chuyen
         //animator.ChangeState(1);
         yield return transform.DOMove(enemyPos, data.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
     }
+
     public IEnumerator AttackEnemy()
     {
         // tan cong
         yield return new WaitForSeconds(data.attackTime);
     }
+
     public IEnumerator GoBackPosition(Vector2 originalPosition)
     {
         // di chuyen ve lai
@@ -29,4 +33,3 @@ public class AttackBase : MonoBehaviour
         yield return null;
     }
 }
-

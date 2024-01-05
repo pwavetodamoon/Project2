@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class Human_Animator : MonoBehaviour
+public class Human_Animator : Animator_Base
 {
-    [SerializeField] private Animator animator;
     public AnimationType CurrentState;
     public enum AnimationType
     {
@@ -12,15 +11,11 @@ public class Human_Animator : MonoBehaviour
         Hurt,
     }
 
-    private void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
     /// <summary>
     /// Idle = 0, Walk = 1, Slash = 2, Hurt = 3
     /// </summary>
     /// <param name="indexState"></param>
-    public void ChangeState(int indexState)
+    public override void ChangeState(int indexState)
     {
         CurrentState = GetAnimationType(indexState);
         PlayAnimation(CurrentState);
@@ -90,4 +85,5 @@ public class Human_Animator : MonoBehaviour
                 return "";
         }
     }
+
 }

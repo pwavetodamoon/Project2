@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if(collision.TryGetComponent(out EnemyCharacters enemy))
+            if (collision.TryGetComponent(out EnemyCharacters enemy))
             {
                 Debug.Log("Enemy");
                 enemy.Attack();

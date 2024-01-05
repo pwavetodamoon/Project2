@@ -1,12 +1,10 @@
-using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyCharacters : CharactersBase
 {
-    EnemyMoving moving;
+    private EnemyMoving moving;
+
     private void Awake()
     {
         health = GetComponent<HealthBase>();
@@ -15,11 +13,12 @@ public class EnemyCharacters : CharactersBase
         moving.Setup(1);
         ChangeComponent();
     }
+
     public CharactersBase enemy;
 
-    IEnumerator StartAttack()
+    private IEnumerator StartAttack()
     {
-        if(enemy == null)
+        if (enemy == null)
         {
             Debug.Log("Enemy is null");
             yield break;
@@ -28,38 +27,43 @@ public class EnemyCharacters : CharactersBase
         Vector2 originalPosition = transform.position;
         var enemyPos = enemy == null ? transform.position : enemy.transform.position;
         yield return normalAttack.StartCoroutine(normalAttack.GoToEnemy(enemyPos));
-        timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
+
+        var enemyData = data;
+        timeCounter = enemyData.timeCoolDown + enemyData.animationTime + enemyData.attackTime;
         while (true)
         {
-            if(!attacking)
+            if (!attacking)
                 timeCounter -= Time.deltaTime;
 
             yield return new WaitForEndOfFrame();
-            
-            Debug.Log("Time counter " + timeCounter);   
+
+            //Debug.Log("Time counter " + timeCounter);
             if (timeCounter <= 0 && attacking == false)
             {
                 attacking = true;
+                GetComponentInChildren<Monster_Animator>().ChangeState(1);
                 yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
                 enemy.TakeDamage(data.damage);
                 //yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
-                timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
+
+                enemyData = data;
+                timeCounter = enemyData.timeCoolDown + enemyData.animationTime + enemyData.attackTime;
                 if (enemy.GetHealth() <= 0)
                 {
                     enemy = null;
                     break;
                 }
                 attacking = false;
-
+                GetComponentInChildren<Monster_Animator>().ChangeState(0);
             }
         }
         Debug.Log("End Attack");
     }
+
     public override void Attack()
     {
         moving.isMoving = false;
         enemy = CombatManager.GetEnemyPosition?.Invoke(1);
         StartCoroutine(StartAttack());
-
     }
 }

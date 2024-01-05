@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public interface IAttack
+﻿public interface IAttack
 {
     void Attack();
-    
 }

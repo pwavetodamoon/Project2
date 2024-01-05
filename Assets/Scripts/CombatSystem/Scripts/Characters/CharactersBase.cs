@@ -1,8 +1,7 @@
+using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public abstract class CharactersBase : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public abstract class CharactersBase : MonoBehaviour
     [SerializeField] protected bool attacking = false;
 
     public AttackBase normalAttack;
+
     [Button]
     public virtual void ChangeComponent()
     {
@@ -33,24 +33,26 @@ public abstract class CharactersBase : MonoBehaviour
         {
             normalAttack.Init(data);
         }
-
     }
+
     public float GetHealth()
     {
-        if(health != null)
+        if (health != null)
         {
             return health.GetHealth();
         }
         return 0;
     }
+
     public void TakeDamage(float damage)
     {
-        if(health != null)
+        if (health != null)
         {
             Debug.Log(gameObject.name + " take damage " + damage);
             health.ChangeHealth(damage);
         }
     }
+
     [Button]
     public abstract void Attack();
 
@@ -63,5 +65,4 @@ public abstract class CharactersBase : MonoBehaviour
                 timeCounter -= Time.deltaTime;
         }
     }
-
 }

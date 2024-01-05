@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,13 +20,13 @@ public abstract class CharactersSpawner : MonoBehaviour
             AddToList(player);
         }
     }
-    void AddToList(GameObject player)
+
+    private void AddToList(GameObject player)
     {
-        if(combatManager == null)
+        if (combatManager == null)
         {
             combatManager = FindObjectOfType<CombatManager>();
         }
         combatManager.Add(player.GetComponent<CharactersBase>());
-
     }
 }

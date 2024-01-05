@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Bat
   Id: E01
   health: 100
-  damage: 5
+  damage: 52
   attackTime: 0.7
   animationTime: 0.1
   timeCoolDown: 1

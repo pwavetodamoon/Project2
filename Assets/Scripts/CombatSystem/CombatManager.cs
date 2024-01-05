@@ -1,49 +1,49 @@
-using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class CombatManager : MonoBehaviour
 {
     // TODO: Combat manager do to much work, need to refactor
-    [SerializeField] List<PlayerCharacters> characters = new List<PlayerCharacters>();
-    [SerializeField] List<EnemyCharacters> enemies = new List<EnemyCharacters>();
+    [SerializeField] private List<PlayerCharacters> characters = new List<PlayerCharacters>();
 
-    public static Func<int,CharactersBase> GetEnemyPosition;
+    [SerializeField] private List<EnemyCharacters> enemies = new List<EnemyCharacters>();
+
+    public static Func<int, CharactersBase> GetEnemyPosition;
     public static Action<CharactersBase> RemoveCharacter;
 
-    static List<Action> actionsListPlayer = new List<Action>();
-    static List<Action> actionsListMonster = new List<Action>();
-
+    private static List<Action> actionsListPlayer = new List<Action>();
+    private static List<Action> actionsListMonster = new List<Action>();
 
     private void Awake()
     {
-
         GetEnemyPosition += GetEnemy;
         RemoveCharacter += Remove;
     }
+
     private void OnDisable()
     {
         GetEnemyPosition -= GetEnemy;
         RemoveCharacter -= Remove;
     }
+
     public static void AddPlayerAction(Action action)
     {
         actionsListPlayer.Add(action);
     }
+
     public static void AddMonsterAction(Action action)
     {
         actionsListMonster.Add(action);
     }
+
     private void Start()
     {
         StartCoroutine(CheckingReapting());
     }
-    IEnumerator CheckingReapting()
+
+    private IEnumerator CheckingReapting()
     {
         while (true)
         {
@@ -52,11 +52,13 @@ public class CombatManager : MonoBehaviour
             //CheckAttack(actionsListPlayer, character.Count);
         }
     }
+
     public void ClearActionList()
     {
         actionsListMonster.Clear();
         actionsListPlayer.Clear();
     }
+
     private void CheckAttack(List<Action> actionsList, int count)
     {
         if (actionsList.Count > 0 && count > 0)
@@ -70,8 +72,9 @@ public class CombatManager : MonoBehaviour
             actionsList.Clear();
         }
     }
+
     // TODO: Make method for get enemy of player
-    CharactersBase GetEnemy(int state)
+    private CharactersBase GetEnemy(int state)
     {
         if (state == 0)
         {
@@ -92,7 +95,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            if(characters.Count == 0)
+            if (characters.Count == 0)
             {
                 return null;
             }
@@ -108,7 +111,6 @@ public class CombatManager : MonoBehaviour
             }
         }
         return null;
-
     }
 
     public void Add(CharactersBase character)
@@ -121,8 +123,8 @@ public class CombatManager : MonoBehaviour
         {
             enemies.Add(character as EnemyCharacters);
         }
-
     }
+
     public void Remove(CharactersBase character)
     {
         if (character is PlayerCharacters)
@@ -135,7 +137,6 @@ public class CombatManager : MonoBehaviour
             character.gameObject.SetActive(false);
             enemies.Remove(character as EnemyCharacters);
         }
-
+        Destroy(character.gameObject);
     }
-
 }

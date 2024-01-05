@@ -1,15 +1,12 @@
-using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class PlayerCharacters : CharactersBase
 {
     //public static PlayerCharacters Instance;
     public bool Test = false;
+
     private void Start()
     {
         health = GetComponent<HealthBase>();
@@ -22,38 +19,43 @@ public class PlayerCharacters : CharactersBase
         timeCounter = data.timeCoolDown;
         StartCoroutine(TimeCount());
     }
+
     private void Update()
     {
-        if(Test == true)
+        if (Test == true)
         {
             return;
         }
-        //data.Slot = GetComponentInParent<Transform>();
-        //pos = data.Slot;
 
-        //Uu tien danh don manh truoc
         if (timeCounter <= 0 && attacking == false)
         {
             attacking = true;
             CombatManager.AddPlayerAction(Attack);
-            timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
+            var playerdata = data;
+            timeCounter = playerdata.timeCoolDown + playerdata.animationTime + playerdata.attackTime;
         }
     }
+
     public override void Attack()
     {
         StartCoroutine(StartAttack());
     }
+
     [Button]
-    IEnumerator StartAttack()
+    private IEnumerator StartAttack()
     {
         var Enemy = CombatManager.GetEnemyPosition?.Invoke(0);
         Vector2 originalPosition = transform.position;
         var enemyPos = Enemy == null ? transform.position : Enemy.transform.position;
+
+        GetComponentInChildren<Human_Animator>().ChangeState(1);
         yield return normalAttack.StartCoroutine(normalAttack.GoToEnemy(enemyPos));
+        GetComponentInChildren<Human_Animator>().ChangeState(2);
         yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
+        GetComponentInChildren<Human_Animator>().ChangeState(1);
+
         Enemy.TakeDamage(data.damage);
         yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
         attacking = false;
     }
-
 }

@@ -1,7 +1,3 @@
-﻿
-public class MonsterSpawner : CharactersSpawner
+﻿public class MonsterSpawner : CharactersSpawner
 {
-
 }
-
-

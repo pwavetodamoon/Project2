@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class Monster_Animator : MonoBehaviour
+public class Monster_Animator : Animator_Base
 {
-    [SerializeField] private Animator animator;
 
     public enum AnimationType
     {
@@ -14,10 +13,7 @@ public class Monster_Animator : MonoBehaviour
         Attack
     }
 
-    private void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
+
 
     public void PlayAnimation(AnimationType type)
     {
@@ -42,4 +38,41 @@ public class Monster_Animator : MonoBehaviour
                 return "";
         }
     }
+    public AnimationType GetAnimationType(int indexState)
+    {
+        var CurrentState = AnimationType.Walk;
+        switch (indexState)
+        {
+            case 0:
+                CurrentState = AnimationType.Walk;
+                break;
+            case 1:
+                CurrentState = AnimationType.Attack;
+                break;
+            case 2:
+                CurrentState = AnimationType.Hurt;
+                break;
+            default:
+                break;
+        }
+        return CurrentState;
+    }
+    /// <summary>
+    /// 0 is walk, 1 is attack, 2 is hurt   
+    /// </summary>
+    /// <param name="indexState"></param>
+    public override void ChangeState(int indexState)
+    {
+        var type = GetAnimationType(indexState);
+        PlayAnimation(type);
+    }
+}
+public abstract class Animator_Base: MonoBehaviour
+{
+    [SerializeField] protected Animator animator;
+    protected virtual void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+    public abstract void ChangeState(int indexState);
 }
