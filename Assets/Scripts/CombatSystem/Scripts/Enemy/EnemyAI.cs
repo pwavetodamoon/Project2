@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
             if(collision.TryGetComponent(out EnemyCharacters enemy))
             {
                 Debug.Log("Enemy");
-                enemy.StartCoroutine(enemy.TimeCount());
+                enemy.Attack();
             }
         }
     }

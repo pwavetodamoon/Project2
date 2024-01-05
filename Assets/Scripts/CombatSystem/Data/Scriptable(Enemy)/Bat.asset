@@ -16,8 +16,8 @@ MonoBehaviour:
   Id: E01
   health: 100
   damage: 5
-  attackTime: 0
-  animationTime: 0
+  attackTime: 0.7
+  animationTime: 0.1
   timeCoolDown: 1
   prefab: {fileID: 0}
   weaponPrefab: {fileID: 0}

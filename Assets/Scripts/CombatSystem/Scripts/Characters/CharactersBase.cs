@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public abstract class CharactersBase : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public abstract class CharactersBase : MonoBehaviour
     [SerializeField] protected float timeCounter;
     [SerializeField] public HealthBase health;
     [SerializeField] protected AttackTypeEnum type;
-    protected bool attacking = false;
+    [SerializeField] protected bool attacking = false;
 
     public AttackBase normalAttack;
+    [Button]
     public virtual void ChangeComponent()
     {
         if (GetComponent<AttackBase>() != null)
@@ -26,24 +28,40 @@ public abstract class CharactersBase : MonoBehaviour
         {
             transform.AddComponent<LongRange>();
         }
-        var attackBase = GetComponent<AttackBase>();
-        if (attackBase != null)
+        normalAttack = GetComponent<AttackBase>();
+        if (normalAttack != null)
         {
-            attackBase.Init(data);
+            normalAttack.Init(data);
         }
 
+    }
+    public float GetHealth()
+    {
+        if(health != null)
+        {
+            return health.GetHealth();
+        }
+        return 0;
     }
     public void TakeDamage(float damage)
     {
         if(health != null)
         {
+            Debug.Log(gameObject.name + " take damage " + damage);
             health.ChangeHealth(damage);
         }
     }
-    protected virtual void Attack()
-    {
+    [Button]
+    public abstract void Attack();
 
+    public IEnumerator TimeCount()
+    {
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            if (attacking == false && timeCounter > 0)
+                timeCounter -= Time.deltaTime;
+        }
     }
-    public abstract IEnumerator TimeCount();
 
 }

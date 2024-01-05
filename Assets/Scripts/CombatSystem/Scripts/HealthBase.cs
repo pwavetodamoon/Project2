@@ -14,7 +14,10 @@ public class HealthBase : MonoBehaviour
         maxHealth = enemy.health;
         currentHealth = maxHealth;
     }
-
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
     public void ChangeHealth(float Damage)
     {
         currentHealth -= Damage;

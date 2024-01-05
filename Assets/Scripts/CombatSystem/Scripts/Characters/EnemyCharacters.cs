@@ -6,49 +6,60 @@ using UnityEngine;
 
 public class EnemyCharacters : CharactersBase
 {
-    // TODO: (Complete player health) Add player health and monster attack
-    public EnemyMoving moving;
-    bool isAttacking = false;
-    public float speed;
-
-    private void Start()
+    EnemyMoving moving;
+    private void Awake()
     {
         health = GetComponent<HealthBase>();
         moving = GetComponent<EnemyMoving>();
-
-        speed = 1;
         health.Setup(data);
-        moving.Setup(speed);
-
+        moving.Setup(1);
         ChangeComponent();
-        type = data.AttackType;
-        //data.Base = transform;
-        //StartCoroutine(TimeCount());
     }
-    private void Update()
+    public CharactersBase enemy;
+
+    IEnumerator StartAttack()
     {
-        if (timeCounter == 0 && isAttacking == false)
+        if(enemy == null)
         {
-            isAttacking = true;
-            CombatManager.AddMonsterAction(Attack);
-            timeCounter = data.timeCoolDown;
+            Debug.Log("Enemy is null");
+            yield break;
         }
-    }
-    [Button]
-    protected override void Attack()
-    {
-        GetComponent<IAttack>().Attack();
-        isAttacking = false;
-        Debug.Log("Attack");
-    }
-    public override IEnumerator TimeCount()
-    {
+
+        Vector2 originalPosition = transform.position;
+        var enemyPos = enemy == null ? transform.position : enemy.transform.position;
+        yield return normalAttack.StartCoroutine(normalAttack.GoToEnemy(enemyPos));
+        timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
         while (true)
         {
-            yield return new WaitForSeconds(1);
-            timeCounter--;
-            yield return null;
-        }
-    }
+            if(!attacking)
+                timeCounter -= Time.deltaTime;
 
+            yield return new WaitForEndOfFrame();
+            
+            Debug.Log("Time counter " + timeCounter);   
+            if (timeCounter <= 0 && attacking == false)
+            {
+                attacking = true;
+                yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
+                enemy.TakeDamage(data.damage);
+                //yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
+                timeCounter = data.timeCoolDown + data.animationTime + data.attackTime;
+                if (enemy.GetHealth() <= 0)
+                {
+                    enemy = null;
+                    break;
+                }
+                attacking = false;
+
+            }
+        }
+        Debug.Log("End Attack");
+    }
+    public override void Attack()
+    {
+        moving.isMoving = false;
+        enemy = CombatManager.GetEnemyPosition?.Invoke(1);
+        StartCoroutine(StartAttack());
+
+    }
 }

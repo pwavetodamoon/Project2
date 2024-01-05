@@ -13,7 +13,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] List<PlayerCharacters> characters = new List<PlayerCharacters>();
     [SerializeField] List<EnemyCharacters> enemies = new List<EnemyCharacters>();
 
-    public static Func<int, CharactersBase> GetEnemyPosition;
+    public static Func<int,CharactersBase> GetEnemyPosition;
     public static Action<CharactersBase> RemoveCharacter;
 
     static List<Action> actionsListPlayer = new List<Action>();
