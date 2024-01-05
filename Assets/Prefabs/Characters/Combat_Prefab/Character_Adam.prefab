@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4389077187381289432}
   - component: {fileID: 3271387225804418394}
+  - component: {fileID: -6172810343962920925}
   m_Layer: 0
   m_Name: Character_Adam
   m_TagString: Untagged
@@ -126,7 +127,24 @@ MonoBehaviour:
   timeCounter: 0
   health: {fileID: 0}
   type: 0
+  attacking: 0
   normalAttack: {fileID: 0}
+  Test: 0
+--- !u!114 &-6172810343962920925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283030949562738879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f839f684faa8d984fbcc02044d5f56a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  minHealth: 0
+  currentHealth: 0
 --- !u!1001 &8442872290219631783
 PrefabInstance:
   m_ObjectHideFlags: 0

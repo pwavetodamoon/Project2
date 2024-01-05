@@ -45,7 +45,7 @@ public class EnemyCharacters : CharactersBase
                 yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
                 enemy.TakeDamage(data.damage);
                 //yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
-
+                // FIXME: Monster don't stop attack when player is dead
                 enemyData = data;
                 timeCounter = enemyData.timeCoolDown + enemyData.animationTime + enemyData.attackTime;
                 if (enemy.GetHealth() <= 0)
