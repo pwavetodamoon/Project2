@@ -41,8 +41,10 @@ public class EnemyCharacters : CharactersBase
             if (timeCounter <= 0 && attacking == false)
             {
                 attacking = true;
-                GetComponentInChildren<Monster_Animator>().ChangeState(1);
+                //GetComponentInChildren<Monster_Animator>().ChangeState(1);
+                // Add animation here
                 yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
+
                 enemy.TakeDamage(data.damage);
                 //yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
                 // FIXME: Monster don't stop attack when player is dead
@@ -54,7 +56,7 @@ public class EnemyCharacters : CharactersBase
                     break;
                 }
                 attacking = false;
-                GetComponentInChildren<Monster_Animator>().ChangeState(0);
+                // Add animation here
             }
         }
         Debug.Log("End Attack");

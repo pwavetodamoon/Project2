@@ -1,8 +1,13 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Human_Animator : Animator_Base
 {
-    public AnimationType CurrentState;
+    public static AnimationType Idle_State { get => AnimationType.Idle; private set { } }
+    public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
+    public static AnimationType Slash_State { get => AnimationType.Slash; private set { } }
+    public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
+
     public enum AnimationType
     {
         Idle,
@@ -15,58 +20,30 @@ public class Human_Animator : Animator_Base
     /// Idle = 0, Walk = 1, Slash = 2, Hurt = 3
     /// </summary>
     /// <param name="indexState"></param>
-    public override void ChangeState(int indexState)
+    public override void ChangeState<T>(T Type)
     {
-        CurrentState = GetAnimationType(indexState);
-        PlayAnimation(CurrentState);
+        base.ChangeState(Type);
     }
-    private AnimationType GetAnimationType(int indexState)
+    [Button]
+    void Test(AnimationType type)
     {
-        var CurrentState = AnimationType.Idle;
-        switch (indexState)
+        ChangeState(type);
+    }
+    [Button]
+    void Test2()
+    {
+        bool test = animator.GetCurrentAnimatorStateInfo(0).loop;
+        if(test)
         {
-            case 0:
-                CurrentState = AnimationType.Idle;
-                break;
-            case 1:
-                CurrentState = AnimationType.Walk;
-                break;
-            case 2:
-                CurrentState = AnimationType.Slash;
-                break;
-            case 3:
-                CurrentState = AnimationType.Hurt;
-                break;
-            default:
-                break;
+            Debug.Log("Animation is loop");
         }
-        return CurrentState;
-    }
-    private void PlayAnimation(AnimationType type)
-    {
-        var animationName = GetAnimationName(type);
-        animator.Play(animationName);
-    }
-    public float GetCurrentAnimationLength()
-    {
-        return GetAnimationLength(CurrentState);
-    }
-    private float GetAnimationLength(AnimationType type)
-    {
-        var name = GetAnimationName(type);
-        foreach (var clip in animator.runtimeAnimatorController.animationClips)
+        else
         {
-            if (clip.name == name)
-            {
-                return clip.length;
-            }
+            Debug.Log("Animation is not loop");
         }
-        Debug.LogError("The animation not exits");
-        return -1;
     }
-    private string GetAnimationName(AnimationType type)
+    protected override string GetAnimationNameByType<T>(T type)
     {
-
         switch (type)
         {
             case AnimationType.Idle:
@@ -82,8 +59,13 @@ public class Human_Animator : Animator_Base
                 return "hurt_1";
 
             default:
-                return "";
+                return "Idle_1";
         }
     }
 
+    protected override void CallBackAnimation()
+    {
+        Debug.Log("Change to idle");
+        ChangeState(Idle_State);
+    }
 }

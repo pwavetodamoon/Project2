@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class Monster_Animator : Animator_Base
 {
+    public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
+    public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
+    public static AnimationType Attack_State { get => AnimationType.Attack; private set { } }
 
     public enum AnimationType
     {
@@ -13,15 +15,15 @@ public class Monster_Animator : Animator_Base
         Attack
     }
 
-
-
-    public void PlayAnimation(AnimationType type)
+    /// <summary>
+    /// 0 is walk, 1 is attack, 2 is hurt   
+    /// </summary>
+    /// <param name="indexState"></param>
+    public override void ChangeState<T>(T type)
     {
-        string animationName = GetAnimationName(type);
-        animator.Play(animationName);
+        base.ChangeState(type);
     }
-
-    private string GetAnimationName(AnimationType type)
+    protected override string GetAnimationNameByType<T>(T type)
     {
         switch (type)
         {
@@ -35,44 +37,12 @@ public class Monster_Animator : Animator_Base
                 return "attack_1";
 
             default:
-                return "";
+                return "walk_1";
         }
     }
-    public AnimationType GetAnimationType(int indexState)
+
+    protected override void CallBackAnimation()
     {
-        var CurrentState = AnimationType.Walk;
-        switch (indexState)
-        {
-            case 0:
-                CurrentState = AnimationType.Walk;
-                break;
-            case 1:
-                CurrentState = AnimationType.Attack;
-                break;
-            case 2:
-                CurrentState = AnimationType.Hurt;
-                break;
-            default:
-                break;
-        }
-        return CurrentState;
+        ChangeState(Walk_State);
     }
-    /// <summary>
-    /// 0 is walk, 1 is attack, 2 is hurt   
-    /// </summary>
-    /// <param name="indexState"></param>
-    public override void ChangeState(int indexState)
-    {
-        var type = GetAnimationType(indexState);
-        PlayAnimation(type);
-    }
-}
-public abstract class Animator_Base: MonoBehaviour
-{
-    [SerializeField] protected Animator animator;
-    protected virtual void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
-    public abstract void ChangeState(int indexState);
 }

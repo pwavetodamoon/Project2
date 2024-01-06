@@ -48,11 +48,11 @@ public class PlayerCharacters : CharactersBase
         Vector2 originalPosition = transform.position;
         var enemyPos = Enemy == null ? transform.position : Enemy.transform.position;
 
-        GetComponentInChildren<Human_Animator>().ChangeState(1);
+        //GetComponentInChildren<Human_Animator>().ChangeState(1);
         yield return normalAttack.StartCoroutine(normalAttack.GoToEnemy(enemyPos));
-        GetComponentInChildren<Human_Animator>().ChangeState(2);
+        //GetComponentInChildren<Human_Animator>().ChangeState(2);
         yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
-        GetComponentInChildren<Human_Animator>().ChangeState(1);
+        //GetComponentInChildren<Human_Animator>().ChangeState(1);
 
         Enemy.TakeDamage(data.damage);
         yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
