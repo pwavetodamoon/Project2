@@ -3,20 +3,17 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public abstract class Animator_Base : MonoBehaviour
+public abstract class Animator_Base : MonoBehaviour, IChangeAnimation
 {
     [SerializeField] protected Animator animator;
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
     }
-    public virtual void ChangeState<T>(T enumType) where T : Enum
+    public virtual void ChangeAnimation<T>(T enumType) where T : Enum
     {
         string animationName = GetAnimationNameByType(enumType);
         animator.Play(animationName);
-        // FIXME: This is not a good way to check animation is loop or not
-        // code check current animation is loop or not
-        //Debug.Log("Ae: "+animationName);
         StartCoroutine(WaitAnimation());
     }
     IEnumerator WaitAnimation()
@@ -52,4 +49,8 @@ public abstract class Animator_Base : MonoBehaviour
     //protected abstract T _GetAnimationType<T>(int index) where T : Enum;
     protected abstract string GetAnimationNameByType<T>(T type) where T : Enum;
 
+}
+public interface IChangeAnimation
+{
+    void ChangeAnimation<T>(T type) where T : Enum;
 }

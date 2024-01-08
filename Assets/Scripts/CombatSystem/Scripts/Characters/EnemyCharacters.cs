@@ -41,7 +41,7 @@ public class EnemyCharacters : CharactersBase
             if (timeCounter <= 0 && attacking == false)
             {
                 attacking = true;
-                //GetComponentInChildren<Monster_Animator>().ChangeState(1);
+                //GetComponentInChildren<Monster_Animator>().ChangeAnimation(1);
                 // Add animation here
                 yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
 

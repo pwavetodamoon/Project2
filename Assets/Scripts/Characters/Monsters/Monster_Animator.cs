@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
-
 public class Monster_Animator : Animator_Base
 {
     public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
@@ -19,9 +15,9 @@ public class Monster_Animator : Animator_Base
     /// 0 is walk, 1 is attack, 2 is hurt   
     /// </summary>
     /// <param name="indexState"></param>
-    public override void ChangeState<T>(T type)
+    public override void ChangeAnimation<T>(T type)
     {
-        base.ChangeState(type);
+        base.ChangeAnimation(type);
     }
     protected override string GetAnimationNameByType<T>(T type)
     {
@@ -43,6 +39,6 @@ public class Monster_Animator : Animator_Base
 
     protected override void CallBackAnimation()
     {
-        ChangeState(Walk_State);
+        ChangeAnimation(Walk_State);
     }
 }

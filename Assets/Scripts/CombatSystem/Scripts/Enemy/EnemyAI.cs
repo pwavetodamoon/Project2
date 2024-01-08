@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,22 @@ public class EnemyAI : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        
+            
+    }
+    [Button]
+    public void Test()
+    {
+        ActionCommand actionCommand = new ActionCommand()
         {
-            if (collision.TryGetComponent(out EnemyCharacters enemy))
-            {
-                Debug.Log("Enemy");
-                enemy.Attack();
-            }
-        }
+            time = 1f,
+            action = () => { Debug.Log("Attack"); }
+        };
+        attackSequence.AddCommand(actionCommand);
+    }
+    AttackSequence attackSequence;
+    private void Awake()
+    {
+        attackSequence = GetComponent<AttackSequence>();
     }
 }

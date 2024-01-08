@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_Loot : ItemCollectBase
+public class Item_Loot : ItemBase
 {
-    protected override void Collect()
+    public override void Gather()
     {
-        base.Collect();
+        base.Gather();
         QuestingSystem.Instance.CollectItem(Id);
-        transform.gameObject.SetActive(false);
     }
+
 }

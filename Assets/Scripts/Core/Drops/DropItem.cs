@@ -10,7 +10,7 @@ public class DropItem : MonoBehaviour
     [SerializeField] private QuestSO questSO;
     [SerializeField] private GameObject item_loot_Prefab;
     [SerializeField] private GameObject item_money_Prefab;
-    //public List<ItemCollectBase> collectBaseList;
+    //public List<ItemBase> collectBaseList;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -35,12 +35,12 @@ public class DropItem : MonoBehaviour
         {
             var itemMoney = SpawnItem(item_money_Prefab,ItemSO_money, basePosition + R_Position());
 
-            //collectBaseList.Add(itemMoney.GetComponent<ItemCollectBase>());
+            //collectBaseList.Add(itemMoney.GetComponent<ItemBase>());
         }
 
         var itemLoot = SpawnItem(item_loot_Prefab,r_itemSO, basePosition + R_Position());
 
-        //collectBaseList.Add(itemLoot.GetComponent<ItemCollectBase>());
+        //collectBaseList.Add(itemLoot.GetComponent<ItemBase>());
     }
     [Button]
     private Vector2 R_Position()
@@ -54,7 +54,7 @@ public class DropItem : MonoBehaviour
         var go = Instantiate(prefab, position, Quaternion.identity);
         go.SetActive(true);
         go.GetComponent<SpriteRenderer>().sprite = itemSO.Sprite;
-        go.GetComponent<ItemCollectBase>().Id = itemSO.Id;
+        go.GetComponent<ItemBase>().Id = itemSO.Id;
 
         return go;
     }

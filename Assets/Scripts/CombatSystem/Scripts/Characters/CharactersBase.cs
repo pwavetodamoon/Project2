@@ -56,7 +56,7 @@ public abstract class CharactersBase : MonoBehaviour
     [Button]
     public abstract void Attack();
 
-    public IEnumerator TimeCount()
+    public virtual IEnumerator TimeCount()
     {
         while (true)
         {

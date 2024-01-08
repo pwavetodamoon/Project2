@@ -20,14 +20,14 @@ public class Human_Animator : Animator_Base
     /// Idle = 0, Walk = 1, Slash = 2, Hurt = 3
     /// </summary>
     /// <param name="indexState"></param>
-    public override void ChangeState<T>(T Type)
+    public override void ChangeAnimation<T>(T Type)
     {
-        base.ChangeState(Type);
+        base.ChangeAnimation(Type);
     }
     [Button]
     void Test(AnimationType type)
     {
-        ChangeState(type);
+        ChangeAnimation(type);
     }
     [Button]
     void Test2()
@@ -65,7 +65,7 @@ public class Human_Animator : Animator_Base
 
     protected override void CallBackAnimation()
     {
-        Debug.Log("Change to idle");
-        ChangeState(Idle_State);
+        //Debug.Log("Change to idle");
+        ChangeAnimation(Idle_State);
     }
 }

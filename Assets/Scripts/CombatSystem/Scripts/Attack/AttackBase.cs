@@ -16,7 +16,7 @@ public class AttackBase : MonoBehaviour
     public IEnumerator GoToEnemy(Vector2 enemyPos)
     {
         // di chuyen
-        //animator.ChangeState(1);
+        //animator.ChangeAnimation(1);
         yield return transform.DOMove(enemyPos, data.attackTime).SetEase(Ease.OutFlash).WaitForCompletion();
     }
 
