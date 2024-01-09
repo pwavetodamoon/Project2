@@ -4,33 +4,31 @@ using System;
 public struct ActionCommand : ICommand
 {
     // Create a contructer to set the value of the command
-    public ActionCommand(ICommandBehavior behaviour = null, Action callback = null, float time = 0)
+    public ActionCommand(IEnumerator coroutine = null,Action callback = null, float time = 0)
     {
-        CommandBehavior = behaviour;
         EndCallbackMethod = callback;
         Time = time;
         IsDone = false;
+        Coroutine = coroutine;
     }
     public bool IsDone { get; set; }
     public float Time { get; set; }
-
-    public ICommandBehavior CommandBehavior;
+    private IEnumerator Coroutine;
 
     public Action EndCallbackMethod;
     public IEnumerator Execute()
     {
-        yield return CommandBehavior?.FirstBehaviour();
+        yield return Coroutine;
         EndCallbackMethod?.Invoke();
         yield return new WaitForSeconds(Time);
         IsDone = true;
-        Debug.Log("Done EndCallbackMethod");
     }
     public void SetCallback(Action callback)
     {
         EndCallbackMethod = callback;
     }
-    public void SetBehaviour(ICommandBehavior behaviour)
+    public void SetCoroutine(IEnumerator coroutine)
     {
-        CommandBehavior = behaviour;
+        Coroutine = coroutine;
     }
 }

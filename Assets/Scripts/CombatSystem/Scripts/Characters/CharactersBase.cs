@@ -10,6 +10,7 @@ public abstract class CharactersBase : MonoBehaviour
     [SerializeField] public HealthBase health;
     [SerializeField] protected AttackTypeEnum type;
     [SerializeField] protected bool attacking = false;
+    [SerializeField] protected Animator_Base animator;
 
     public AttackBase normalAttack;
 

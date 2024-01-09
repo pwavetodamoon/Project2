@@ -12,6 +12,10 @@ public class ActionSequence : MonoBehaviour
     {
         commands.Add(command);
     }
+    public void AddListCommands(List<ICommand> commands)
+    {
+        this.commands.AddRange(commands);
+    }
     private void Update()
     {
         if (commands.Count == 0 || isExcuted) return;
