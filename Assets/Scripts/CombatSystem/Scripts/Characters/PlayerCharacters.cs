@@ -2,10 +2,11 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 public class PlayerCharacters : CharactersBase
 {
     //public static PlayerCharacters Instance;
-    public bool Test = false; 
+    public bool Test = false;
     private void Start()
     {
         health = GetComponent<HealthBase>();
@@ -16,7 +17,6 @@ public class PlayerCharacters : CharactersBase
 
         ChangeComponent();
         timeCounter = data.timeCoolDown;
-        StartCoroutine(TimeCount());
     }
     [SerializeField] ActionSequence attackSequence;
     private void Update()
@@ -29,41 +29,39 @@ public class PlayerCharacters : CharactersBase
         if (timeCounter <= 0 && attacking == false)
         {
             attacking = true;
+            Test1();
         }
-    }
-    public override IEnumerator TimeCount()
-    {
-        while (true)
+        else
         {
-            yield return new WaitForEndOfFrame();
-            if (attacking == false && timeCounter > 0)
-                timeCounter -= Time.deltaTime;
+            timeCounter -= Time.deltaTime;
         }
     }
     public override void Attack()
     {
         //StartCoroutine(StartAttack());
     }
-    GoToCommand command1;
-    GoToCommand command2;
-    private void Awake()
-    {
-        command1 = new GoToCommand()
-        {
-            Time = .5f,
-            Target = Vector2.zero,
-            Transform = transform
-        };
-        command2 = command1;
-    }
     [Button]
     void Test1()
     {
-        var originalPosition = transform.position;
-        command1.Target = (Vector2)CombatManager.GetEnemyPosition?.Invoke(0).transform.position;
-        command2.Target = originalPosition;
+        var enemyPos = (Vector2)CombatManager.GetEnemyPosition?.Invoke(0).transform.position;
+        ICommand command1 = CreateGoToCommand(enemyPos, 1);
+        ICommand command2 = CreateGoToCommand(transform.position, 1, () => {
+            attacking = false;
+            timeCounter = data.timeCoolDown; 
+        });
+
         attackSequence.AddCommand(command1);
         attackSequence.AddCommand(command2);
+    }
+    private ICommand CreateGoToCommand(Vector2 target, float time, Action callback = null)
+    {
+        ICommandBehavior goToCommand = new GoToCommand()
+        {
+            Transform = transform,
+            Target = target,
+            Time = time
+        };
+        return new ActionCommand(goToCommand, callback, 0);
     }
 
 }

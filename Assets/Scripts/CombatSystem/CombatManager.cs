@@ -40,7 +40,7 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CheckingReapting());
+        //StartCoroutine(CheckingReapting());
     }
 
     private IEnumerator CheckingReapting()

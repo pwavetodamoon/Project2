@@ -56,13 +56,4 @@ public abstract class CharactersBase : MonoBehaviour
     [Button]
     public abstract void Attack();
 
-    public virtual IEnumerator TimeCount()
-    {
-        while (true)
-        {
-            yield return new WaitForEndOfFrame();
-            if (attacking == false && timeCounter > 0)
-                timeCounter -= Time.deltaTime;
-        }
-    }
 }
