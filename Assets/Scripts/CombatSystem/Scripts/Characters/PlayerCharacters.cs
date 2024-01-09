@@ -11,6 +11,7 @@ public class PlayerCharacters : CharactersBase
     public float timeAttack = 0;
     private void Start()
     {
+        InitCommandList();
         health = GetComponent<HealthBase>();
         health.Setup(data);
         //data = Game_DataBase.Instance.GetPlayerData(ID);
@@ -19,7 +20,6 @@ public class PlayerCharacters : CharactersBase
         timeAttack = GetComponentInChildren<IGetAnimationLength>().GetAnimationLength(Human_Animator.Slash_State);
         ChangeComponent();
         timeCounter = data.timeCoolDown;
-        InitValue();
     }
     [SerializeField] ActionSequence attackSequence;
     private void Update()
@@ -32,7 +32,7 @@ public class PlayerCharacters : CharactersBase
         if (timeCounter <= 0 && attacking == false)
         {
             attacking = true;
-            Test1();
+            Attack();
         }
         else
         {
@@ -40,11 +40,6 @@ public class PlayerCharacters : CharactersBase
         }
     }
     public override void Attack()
-    {
-        //StartCoroutine(StartAttack());
-    }
-    [Button]
-    void Test1()
     {
         var enemyPos = (Vector2)CombatManager.GetEnemyPosition?.Invoke(0).transform.position;
 
@@ -55,8 +50,9 @@ public class PlayerCharacters : CharactersBase
 
         attackSequence.AddListCommands(AttackCommands);
     }
-    List<ICommand> AttackCommands = new List<ICommand>();
-    void InitValue()
+
+
+    protected override void InitCommandList()
     {
         ICommand moveCommand = new ActionCommand(MoveToEnemyCoroutine(Vector2.zero));
         ICommand attackCommand = new ActionCommand(null, AttackEnemy, timeAttack);
@@ -79,10 +75,10 @@ public class PlayerCharacters : CharactersBase
         attacking = false;
         timeCounter = data.timeCoolDown;
     }
-    IEnumerator MoveToEnemyCoroutine(Vector2 enemyPos)
-    {
-        animator.ChangeAnimation(Human_Animator.Walk_State);
-        yield return transform.DOMove(enemyPos, 1).WaitForCompletion();
-    }
+    //protected IEnumerator MoveToEnemyCoroutine(Vector2 enemyPos,float time = 1)
+    //{
+    //    animator.ChangeAnimation(Human_Animator.Walk_State);
+    //    yield return transform.DOMove(enemyPos, 1).WaitForCompletion();
+    //}
 
 }

@@ -1,5 +1,7 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,7 +13,7 @@ public abstract class CharactersBase : MonoBehaviour
     [SerializeField] protected AttackTypeEnum type;
     [SerializeField] protected bool attacking = false;
     [SerializeField] protected Animator_Base animator;
-
+    protected List<ICommand> AttackCommands = new List<ICommand>();
     public AttackBase normalAttack;
 
     [Button]
@@ -53,8 +55,11 @@ public abstract class CharactersBase : MonoBehaviour
             health.ChangeHealth(damage);
         }
     }
-
+    protected abstract void InitCommandList();
     [Button]
     public abstract void Attack();
-
+    protected IEnumerator MoveToEnemyCoroutine(Vector2 enemyPos, float time = 1)
+    {
+        yield return transform.DOMove(enemyPos, time).WaitForCompletion();
+    }
 }

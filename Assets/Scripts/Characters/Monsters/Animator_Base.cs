@@ -8,7 +8,7 @@ using UnityEngine;
 public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnimationLength
 {
     [SerializeField] protected Animator animator;
-    protected Dictionary<string,float> animationLengths;
+    [ShowInInspector] protected Dictionary<string,float> animationLengths;
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();

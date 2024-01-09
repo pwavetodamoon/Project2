@@ -1,71 +1,98 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
 public class EnemyCharacters : CharactersBase
 {
     private EnemyMoving moving;
-
-    private void Awake()
+    public ActionSequence attackSequence;
+    private void Start()
     {
         health = GetComponent<HealthBase>();
         moving = GetComponent<EnemyMoving>();
         health.Setup(data);
         moving.Setup(1);
         ChangeComponent();
+        InitCommandList();
     }
 
     public CharactersBase enemy;
 
-    private IEnumerator StartAttack()
-    {
-        if (enemy == null)
-        {
-            Debug.Log("Enemy is null");
-            yield break;
-        }
-
-        Vector2 originalPosition = transform.position;
-        var enemyPos = enemy == null ? transform.position : enemy.transform.position;
-        yield return normalAttack.StartCoroutine(normalAttack.GoToEnemy(enemyPos));
-
-        var enemyData = data;
-        timeCounter = enemyData.timeCoolDown + enemyData.animationTime + enemyData.attackTime;
-        while (true)
-        {
-            if (!attacking)
-                timeCounter -= Time.deltaTime;
-
-            yield return new WaitForEndOfFrame();
-
-            //Debug.Log("Time counter " + timeCounter);
-            if (timeCounter <= 0 && attacking == false)
-            {
-                attacking = true;
-                //GetComponentInChildren<Monster_Animator>().ChangeAnimation(1);
-                // Add animation here
-                yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
-
-                enemy.TakeDamage(data.damage);
-                //yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
-                // FIXME: Monster don't stop attack when player is dead
-                enemyData = data;
-                timeCounter = enemyData.timeCoolDown + enemyData.animationTime + enemyData.attackTime;
-                if (enemy.GetHealth() <= 0)
-                {
-                    enemy = null;
-                    break;
-                }
-                attacking = false;
-                // Add animation here
-            }
-        }
-        Debug.Log("End Attack");
-    }
-
-    public override void Attack()
+    public void StartAttack()
     {
         moving.isMoving = false;
-        enemy = CombatManager.GetEnemyPosition?.Invoke(1);
-        //StartCoroutine(StartAttack());
+    }
+    public override void Attack()
+    {
+        Debug.Log("Attack");
+        attackSequence.AddListCommands(AttackCommands);
+    }
+
+    public bool Test = false;
+    public bool allowAttack;
+    private void Update()
+    {
+        if (Test == true)
+        {
+            return;
+        }
+        if(allowAttack == false)
+        {
+            return;
+        }
+        if (timeCounter <= 0 && attacking == false)
+        {
+            attacking = true;
+            allowAttack = false;
+            Attack();
+        }
+        else
+        {
+            timeCounter -= Time.deltaTime;
+        }
+    }
+    void ResetState()
+    {
+        animator.ChangeAnimation(Human_Animator.Walk_State);
+        attacking = false;
+        timeCounter = data.timeCoolDown;
+    }
+    protected override void InitCommandList()
+    {
+        float timeAttack = animator.GetAnimationLength(Monster_Animator.Attack_State);
+        //AttackCommands.Add(new ActionCommand(MoveToEnemyCoroutine(Vector2.zero), null, 0));
+        AttackCommands.Add(new ActionCommand(null, AttackEnemy, timeAttack + .1f));
+        AttackCommands.Add(new ActionCommand(null, ResetState, 0));
+        AttackCommands.Add(new ActionCommand(null, CheckEnemy, 0));
+    }
+    void AttackEnemy()
+    {
+        animator.ChangeAnimation(Monster_Animator.Attack_State);
+        if (enemy == null)
+        {
+            return;
+        }
+
+    }
+    [Button]
+    public void CheckEnemy()
+    {
+        var newEnemy = CombatManager.GetEnemyPosition?.Invoke(1);
+        if(newEnemy == null)
+        {
+            return;
+        }
+        if (enemy == null)
+        {
+            enemy = newEnemy;
+            var enemyPos = (Vector2)newEnemy.transform.position + new Vector2(2, 0);
+            // di chuyen toi muc tieu va cho phep tan cong
+            attackSequence.AddCommand(new ActionCommand(MoveToEnemyCoroutine(enemyPos), () => { allowAttack = true; }, 0));
+        }
+        else
+        {
+            allowAttack = true;
+        }
+        Debug.Log("Check enemy");
     }
 }

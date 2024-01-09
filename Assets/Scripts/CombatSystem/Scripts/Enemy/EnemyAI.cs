@@ -7,9 +7,10 @@ public class EnemyAI : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Monster")
+        if(collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<EnemyMoving>().isMoving = false;
+            EnemyCharacters enemy = collision.gameObject.GetComponent<EnemyCharacters>();
+            enemy.CheckEnemy();
         }
             
     }
