@@ -31,7 +31,7 @@
         /// I use the UI_ prefix to group all the methods that should be rigged in the Editor so that it's
         /// easy to find the screen-specific methods. It breaks naming convention, but does more good than harm as
         /// the amount of methods grow.
-        /// This is *not* called every time it is closed, just upon user input - for that behaviour, see
+        /// This is *not* called every Time it is closed, just upon user input - for that behaviour, see
         /// WhileHiding();
         /// </summary>
         public virtual void UI_Close() {

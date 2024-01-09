@@ -4,17 +4,17 @@ using UnityEngine;
 
 public abstract class CharactersSpawner : MonoBehaviour
 {
-    public List<BaseData> PlayerDatas;
+    public List<BaseData> CharactersData;
     public CombatManager combatManager;
 
-    public GameObject PlayerPrefabs;
+    public GameObject CharacterPrefab;
 
-    [Button("CreatePlayer")]
-    public void CreatePlayer()
+    [Button]
+    public void CreateCharacters()
     {
-        foreach (var data in PlayerDatas)
+        foreach (var data in CharactersData)
         {
-            var player = Instantiate(PlayerPrefabs, transform);
+            var player = Instantiate(CharacterPrefab, transform);
             player.SetActive(true);
             player.GetComponent<CharactersBase>().data = data;
             AddToList(player);

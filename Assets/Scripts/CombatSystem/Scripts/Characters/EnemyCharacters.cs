@@ -66,6 +66,6 @@ public class EnemyCharacters : CharactersBase
     {
         moving.isMoving = false;
         enemy = CombatManager.GetEnemyPosition?.Invoke(1);
-        StartCoroutine(StartAttack());
+        //StartCoroutine(StartAttack());
     }
 }

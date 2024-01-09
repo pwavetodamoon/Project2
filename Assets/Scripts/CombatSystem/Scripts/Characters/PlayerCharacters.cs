@@ -1,12 +1,11 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class PlayerCharacters : CharactersBase
 {
     //public static PlayerCharacters Instance;
-    public bool Test = false;
-
+    public bool Test = false; 
     private void Start()
     {
         health = GetComponent<HealthBase>();
@@ -19,7 +18,7 @@ public class PlayerCharacters : CharactersBase
         timeCounter = data.timeCoolDown;
         StartCoroutine(TimeCount());
     }
-    [SerializeField] AttackSequence attackSequence;
+    [SerializeField] ActionSequence attackSequence;
     private void Update()
     {
         if (Test == true)
@@ -30,11 +29,6 @@ public class PlayerCharacters : CharactersBase
         if (timeCounter <= 0 && attacking == false)
         {
             attacking = true;
-            
-            //attacking = true;
-            //CombatManager.AddPlayerAction(Attack);
-            //var playerdata = data;
-            //timeCounter = playerdata.timeCoolDown + playerdata.animationTime + playerdata.attackTime;
         }
     }
     public override IEnumerator TimeCount()
@@ -48,41 +42,28 @@ public class PlayerCharacters : CharactersBase
     }
     public override void Attack()
     {
-        StartCoroutine(StartAttack());
+        //StartCoroutine(StartAttack());
     }
-
-    [Button]
-    private IEnumerator StartAttack()
+    GoToCommand command1;
+    GoToCommand command2;
+    private void Awake()
     {
-        var Enemy = CombatManager.GetEnemyPosition?.Invoke(0);
-        Vector2 originalPosition = transform.position;
-        var enemyPos = Enemy == null ? transform.position : Enemy.transform.position;
-
-        //GetComponentInChildren<Human_Animator>().ChangeAnimation(1);
-        yield return normalAttack.StartCoroutine(normalAttack.GoToEnemy(enemyPos));
-        //GetComponentInChildren<Human_Animator>().ChangeAnimation(2);
-        yield return normalAttack.StartCoroutine(normalAttack.AttackEnemy());
-        //GetComponentInChildren<Human_Animator>().ChangeAnimation(1);
-
-        Enemy.TakeDamage(data.damage);
-        yield return normalAttack.StartCoroutine(normalAttack.GoBackPosition(originalPosition));
-        attacking = false;
+        command1 = new GoToCommand()
+        {
+            Time = .5f,
+            Target = Vector2.zero,
+            Transform = transform
+        };
+        command2 = command1;
     }
     [Button]
     void Test1()
     {
         var originalPosition = transform.position;
-        attackSequence.AddCommand(new GoToCommand()
-        {
-            time = .5f,
-            target = (Vector2)CombatManager.GetEnemyPosition?.Invoke(0).transform.position,
-            transform = transform
-        });
-        attackSequence.AddCommand(new GoToCommand()
-        {
-            time = .5f,
-            target = originalPosition,
-            transform = transform
-        });
+        command1.Target = (Vector2)CombatManager.GetEnemyPosition?.Invoke(0).transform.position;
+        command2.Target = originalPosition;
+        attackSequence.AddCommand(command1);
+        attackSequence.AddCommand(command2);
     }
+
 }

@@ -7,7 +7,10 @@ public class EnemyAI : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.gameObject.tag == "Monster")
+        {
+            collision.GetComponent<EnemyMoving>().isMoving = false;
+        }
             
     }
     [Button]
@@ -15,14 +18,14 @@ public class EnemyAI : MonoBehaviour
     {
         ActionCommand actionCommand = new ActionCommand()
         {
-            time = 1f,
-            action = () => { Debug.Log("Attack"); }
+            Time = 1f,
+            CallbackMethod = () => { Debug.Log("Attack"); }
         };
         attackSequence.AddCommand(actionCommand);
     }
-    AttackSequence attackSequence;
+    ActionSequence attackSequence;
     private void Awake()
     {
-        attackSequence = GetComponent<AttackSequence>();
+        attackSequence = GetComponent<ActionSequence>();
     }
 }

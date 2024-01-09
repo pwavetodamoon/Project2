@@ -37,7 +37,7 @@ namespace deVoid.UIFramework {
         }
 
         /// <summary>
-        /// Reparents the screen to this Layer's transform
+        /// Reparents the screen to this Layer's Transform
         /// </summary>
         /// <param name="controller">The screen controller</param>
         /// <param name="screenTransform">The Screen Transform</param>

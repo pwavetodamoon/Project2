@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
-public class AttackSequence : MonoBehaviour
+public class ActionSequence : MonoBehaviour
 {
     [ShowInInspector] List<ICommand> commands = new List<ICommand>();
     public bool isExcuted = false;
@@ -22,7 +22,7 @@ public class AttackSequence : MonoBehaviour
     IEnumerator StartExcute()
     {
         isExcuted = true;
-        if (commands[0].isDone) yield break;
+        if (commands[0].IsDone) yield break;
 
         yield return commands[0].Execute();
         Debug.Log("Done sequence");
@@ -33,7 +33,7 @@ public class AttackSequence : MonoBehaviour
     }
     void Test2(IEnumerator coroutine)
     {
-        if (commands.Count == 0 || isExcuted || !commands[0].isDone) return;
+        if (commands.Count == 0 || isExcuted || !commands[0].IsDone) return;
         StartCoroutine(coroutine);
     }
     public void Remove(ICommand command)
@@ -42,8 +42,4 @@ public class AttackSequence : MonoBehaviour
     }
 }
 
-public interface ICommand
-{
-    bool isDone { get; set; }
-    IEnumerator Execute();
-}
+

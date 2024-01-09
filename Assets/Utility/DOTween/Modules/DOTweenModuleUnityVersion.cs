@@ -22,7 +22,7 @@ namespace DG.Tweening
 
         /// <summary>Tweens a Material's color using the given gradient
         /// (NOTE 1: only uses the colors of the gradient, not the alphas - NOTE 2: creates a Sequence, not a Tweener).
-        /// Also stores the image as the tween's target so it can be used for filtered operations</summary>
+        /// Also stores the image as the tween's Target so it can be used for filtered operations</summary>
         /// <param name="gradient">The gradient to use</param><param name="duration">The duration of the tween</param>
         public static Sequence DOGradientColor(this Material target, Gradient gradient, float duration)
         {
@@ -45,7 +45,7 @@ namespace DG.Tweening
         }
         /// <summary>Tweens a Material's named color property using the given gradient
         /// (NOTE 1: only uses the colors of the gradient, not the alphas - NOTE 2: creates a Sequence, not a Tweener).
-        /// Also stores the image as the tween's target so it can be used for filtered operations</summary>
+        /// Also stores the image as the tween's Target so it can be used for filtered operations</summary>
         /// <param name="gradient">The gradient to use</param>
         /// <param name="property">The name of the material property to tween (like _Tint or _SpecColor)</param>
         /// <param name="duration">The duration of the tween</param>
@@ -132,7 +132,7 @@ namespace DG.Tweening
 
         /// <summary>
         /// Returns a <see cref="CustomYieldInstruction"/> that waits until the tween is killed
-        /// or has reached the given time position (loops included, delays excluded).
+        /// or has reached the given Time position (loops included, delays excluded).
         /// It can be used inside a coroutine as a yield.
         /// <para>Example usage:</para><code>yield return myTween.WaitForPosition(2.5f);</code>
         /// </summary>
@@ -148,7 +148,7 @@ namespace DG.Tweening
 
         /// <summary>
         /// Returns a <see cref="CustomYieldInstruction"/> that waits until the tween is killed or started
-        /// (meaning when the tween is set in a playing state the first time, after any eventual delay).
+        /// (meaning when the tween is set in a playing state the first Time, after any eventual delay).
         /// It can be used inside a coroutine as a yield.
         /// <para>Example usage:</para><code>yield return myTween.WaitForStart();</code>
         /// </summary>
@@ -169,7 +169,7 @@ namespace DG.Tweening
         #region Material
 
         /// <summary>Tweens a Material's named texture offset property with the given ID to the given value.
-        /// Also stores the material as the tween's target so it can be used for filtered operations</summary>
+        /// Also stores the material as the tween's Target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param>
         /// <param name="propertyID">The ID of the material property to tween (also called nameID in Unity's manual)</param>
         /// <param name="duration">The duration of the tween</param>
@@ -185,7 +185,7 @@ namespace DG.Tweening
         }
 
         /// <summary>Tweens a Material's named texture scale property with the given ID to the given value.
-        /// Also stores the material as the tween's target so it can be used for filtered operations</summary>
+        /// Also stores the material as the tween's Target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param>
         /// <param name="propertyID">The ID of the material property to tween (also called nameID in Unity's manual)</param>
         /// <param name="duration">The duration of the tween</param>
@@ -267,7 +267,7 @@ namespace DG.Tweening
 
         /// <summary>
         /// Returns an async <see cref="System.Threading.Tasks.Task"/> that waits until the tween is killed or started
-        /// (meaning when the tween is set in a playing state the first time, after any eventual delay).
+        /// (meaning when the tween is set in a playing state the first Time, after any eventual delay).
         /// It can be used inside an async operation.
         /// <para>Example usage:</para><code>await myTween.AsyncWaitForPosition();</code>
         /// </summary>
