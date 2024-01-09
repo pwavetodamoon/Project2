@@ -52,7 +52,7 @@ public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnima
     /// Call when a animation is done with not have loop
     /// </summary>
     protected abstract void ChangeToDefaultAnimationState();
-    //protected abstract T _GetAnimationType<T>(int index) where T : Enum;
+    //protected abstract T _GetAnimationType<T>(int enemyIndex) where T : Enum;
     protected abstract string GetAnimationNameByType<T>(T type) where T : Enum;
     public abstract void SetDefaultAnimation<T>(T type) where T : Enum;
     public float GetAnimationLength<T>(T type) where T : Enum

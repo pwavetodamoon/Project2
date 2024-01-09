@@ -7,7 +7,7 @@ public class QuestSO : ScriptableObject
     [SerializeField] private int index = 0;
     [SerializeField] private List<ItemSO> itemsList = new List<ItemSO>();
     /// <summary>
-    /// Get index of quest is running
+    /// Get enemyIndex of quest is running
     /// </summary>
     /// <returns></returns>
     public int GetIndexQuest()

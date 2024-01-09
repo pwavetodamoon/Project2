@@ -726,14 +726,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4242bbcd8d99685459b31d16b5376159, type: 2}
-  timeCounter: 0
-  health: {fileID: 703705481}
-  type: 0
-  attacking: 0
-  animator: {fileID: 1838611978}
-  normalAttack: {fileID: 0}
-  attackSequence: {fileID: 703705479}
   enemy: {fileID: 0}
+  enemyIndex: 1
+  health: {fileID: 703705481}
+  animator: {fileID: 1838611978}
+  attacking: 0
+  timeCounter: 0
+  attackSequence: {fileID: 703705479}
   Test: 0
   allowAttack: 0
 --- !u!114 &703705479
@@ -758,7 +757,7 @@ Transform:
   m_GameObject: {fileID: 703705477}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.56, y: 0.87, z: 0}
+  m_LocalPosition: {x: 3.89, y: 0.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1164,13 +1163,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 372e33b34cddefa4190a751249e1043f, type: 2}
-  timeCounter: 0
+  enemy: {fileID: 0}
+  enemyIndex: 0
   health: {fileID: 0}
-  type: 0
-  attacking: 0
   animator: {fileID: 362456255}
-  normalAttack: {fileID: 0}
-  Test: 1
+  attacking: 0
+  timeCounter: 0
+  Test: 0
   timeAttack: 0
   attackSequence: {fileID: 891529341}
 --- !u!114 &891529339

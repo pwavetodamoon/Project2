@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 public class ActionSequence : MonoBehaviour
 {
-    List<ICommand> commands = new List<ICommand>();
+    [ShowInInspector] List<ICommand> commands = new List<ICommand>();
     public bool isExcuted = false;
     public void AddCommand(ICommand command)
     {

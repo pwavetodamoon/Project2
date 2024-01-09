@@ -7,36 +7,85 @@ using UnityEngine;
 
 public abstract class CharactersBase : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] public BaseData data;
-    [SerializeField] protected float timeCounter;
+    [SerializeField] protected CharactersBase enemy;
     [SerializeField] public HealthBase health;
-    [SerializeField] protected AttackTypeEnum type;
-    [SerializeField] protected bool attacking = false;
     [SerializeField] protected Animator_Base animator;
-    protected List<ICommand> AttackCommands = new List<ICommand>();
-    public AttackBase normalAttack;
+    [SerializeField] protected ActionSequence attackSequence;
 
-    [Button]
-    public virtual void ChangeComponent()
+    [Header("Settings")]
+    [SerializeField] protected float timeCounter;
+    [SerializeField] protected int enemyIndex = 0;
+    [SerializeField] protected bool allowAction = true;
+    [SerializeField] protected bool attacking = false;
+
+    protected List<ICommand> AttackCommands = new List<ICommand>();
+
+    protected virtual void Awake()
     {
-        if (GetComponent<AttackBase>() != null)
+        animator = GetComponentInChildren<Animator_Base>();
+        health = GetComponent<HealthBase>();
+    }
+    protected virtual void Start()
+    {
+        health.Setup(data);
+        InitCommandList();
+    }
+    [Button]
+    public abstract void Attack();
+    [Button]
+    public virtual void CheckEnemy()
+    {
+        var newEnemy = CombatManager.GetEnemyPosition?.Invoke(enemyIndex);
+        if (newEnemy == null)
         {
-            DestroyImmediate(GetComponent<AttackBase>());
+            return;
         }
-        if (type == AttackTypeEnum.Near)
+        if (enemy == null)
         {
-            transform.AddComponent<ShortRange>();
-        }
-        if (type == AttackTypeEnum.Far)
-        {
-            transform.AddComponent<LongRange>();
-        }
-        normalAttack = GetComponent<AttackBase>();
-        if (normalAttack != null)
-        {
-            normalAttack.Init(data);
+            enemy = newEnemy;
         }
     }
+
+
+    protected virtual void AttackMechanism()
+    {
+        if (allowAction == false) return;
+        if (enemy == null)
+        {
+            CheckEnemy();
+            return;
+        }
+        if (timeCounter <= 0 && !attacking)
+        {
+            attacking = true;
+            Attack();
+        }
+    }
+    protected virtual void AttackEnemy()
+    {
+        if (enemy == null)
+        {
+            Debug.Log("Enemy is null", gameObject);
+            return;
+        }
+        enemy.TakeDamage(data.damage);
+    }
+
+    protected abstract void InitCommandList();
+
+    protected IEnumerator MoveToEnemyCoroutine(Vector2 enemyPos, float time = 1)
+    {
+        yield return transform.DOMove(enemyPos, time).WaitForCompletion();
+    }
+
+    protected virtual void ResetState()
+    {
+        attacking = false;
+        timeCounter = data.timeCoolDown;
+    }
+
 
     public float GetHealth()
     {
@@ -54,12 +103,5 @@ public abstract class CharactersBase : MonoBehaviour
             Debug.Log(gameObject.name + " take damage " + damage);
             health.ChangeHealth(damage);
         }
-    }
-    protected abstract void InitCommandList();
-    [Button]
-    public abstract void Attack();
-    protected IEnumerator MoveToEnemyCoroutine(Vector2 enemyPos, float time = 1)
-    {
-        yield return transform.DOMove(enemyPos, time).WaitForCompletion();
     }
 }

@@ -9,49 +9,12 @@ public class PlayerCharacters : CharactersBase
     //public static PlayerCharacters Instance;
     public bool Test = false;
     public float timeAttack = 0;
-    private void Start()
+    protected override void Start()
     {
-        InitCommandList();
-        health = GetComponent<HealthBase>();
-        health.Setup(data);
-        //data = Game_DataBase.Instance.GetPlayerData(ID);
-
-        type = data.AttackType;
-        timeAttack = GetComponentInChildren<IGetAnimationLength>().GetAnimationLength(Human_Animator.Slash_State);
-        ChangeComponent();
-        timeCounter = data.timeCoolDown;
+        base.Start();
+        timeAttack = animator.GetAnimationLength(Human_Animator.Slash_State);
+        timeCounter = data.timeCoolDown + .1f;
     }
-    [SerializeField] ActionSequence attackSequence;
-    private void Update()
-    {
-        if (Test == true)
-        {
-            return;
-        }
-
-        if (timeCounter <= 0 && attacking == false)
-        {
-            attacking = true;
-            Attack();
-        }
-        else
-        {
-            timeCounter -= Time.deltaTime;
-        }
-    }
-    public override void Attack()
-    {
-        var enemyPos = (Vector2)CombatManager.GetEnemyPosition?.Invoke(0).transform.position;
-
-        var originalPos = transform.position;
-
-        AttackCommands[0] = new ActionCommand(MoveToEnemyCoroutine(enemyPos));
-        AttackCommands[2] = new ActionCommand(MoveToEnemyCoroutine(originalPos));
-
-        attackSequence.AddListCommands(AttackCommands);
-    }
-
-
     protected override void InitCommandList()
     {
         ICommand moveCommand = new ActionCommand(MoveToEnemyCoroutine(Vector2.zero));
@@ -64,21 +27,51 @@ public class PlayerCharacters : CharactersBase
         AttackCommands.Add(moveCommand2);
         AttackCommands.Add(attackCommand2);
     }
-
-    void AttackEnemy()
+    private void Update()
     {
+        AttackMechanism();
+        TimerCounterMechanism();
+    }
+    private void TimerCounterMechanism()
+    {
+        if (Test == true || attacking)
+        {
+            return;
+        }
+        if (timeCounter >= 0)
+        {
+            timeCounter -= Time.deltaTime;
+        }
+        else
+        {
+            timeCounter = 0;
+        }
+    }
+    public override void Attack()
+    {
+        var enemyPos = (Vector2)enemy.transform.position + new Vector2(-2, 0);
+        //timeAttack = animator.GetAnimationLength(Human_Animator.Slash_State);
+        var originalPos = transform.position;
+        //Debug.Log("Time attack: " + timeAttack);
+        AttackCommands[0] = new ActionCommand(MoveToEnemyCoroutine(enemyPos));
+        AttackCommands[1] = new ActionCommand(null, AttackEnemy, timeAttack);
+        AttackCommands[2] = new ActionCommand(MoveToEnemyCoroutine(originalPos));
+        AttackCommands[3] = new ActionCommand(null, ResetState, 0);
+
+        attackSequence.AddListCommands(AttackCommands);
+        Debug.Log("Start attact");
+    }
+
+    protected override void AttackEnemy()
+    {
+        Debug.Log("Attack to enemy");
+        base.AttackEnemy();
         animator.ChangeAnimation(Human_Animator.Slash_State);
     }
-    void ResetState()
+    protected override void ResetState()
     {
+        Debug.Log("Reset state");
+        base.ResetState();
         animator.ChangeAnimation(Human_Animator.Idle_State);
-        attacking = false;
-        timeCounter = data.timeCoolDown;
     }
-    //protected IEnumerator MoveToEnemyCoroutine(Vector2 enemyPos,float time = 1)
-    //{
-    //    animator.ChangeAnimation(Human_Animator.Walk_State);
-    //    yield return transform.DOMove(enemyPos, 1).WaitForCompletion();
-    //}
-
 }

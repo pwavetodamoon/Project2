@@ -6,7 +6,7 @@
 // function asserts suggestion.
 // ========================================================================================
 // Inspired by StrangeIOC, minus the clutter.
-// Based on http://wiki.unity3d.com/index.php/CSharpMessenger_Extended
+// Based on http://wiki.unity3d.com/enemyIndex.php/CSharpMessenger_Extended
 // Converted to use strongly typed parameters and prevent use of strings as ids.
 //
 // Supports up to 3 parameters. More than that, and you should probably use a VO.
