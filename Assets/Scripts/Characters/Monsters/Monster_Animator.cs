@@ -3,6 +3,7 @@ public class Monster_Animator : Animator_Base
     public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
     public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
     public static AnimationType Attack_State { get => AnimationType.Attack; private set { } }
+    private AnimationType currentAnimation = Walk_State;
 
     public enum AnimationType
     {
@@ -37,8 +38,12 @@ public class Monster_Animator : Animator_Base
         }
     }
 
-    protected override void CallBackAnimation()
+    protected override void ChangeToDefaultAnimationState()
     {
-        ChangeAnimation(Walk_State);
+        ChangeAnimation(currentAnimation);
+    }
+    public override void SetDefaultAnimation<T>(T type)
+    {
+        currentAnimation = (AnimationType)(object)type;
     }
 }

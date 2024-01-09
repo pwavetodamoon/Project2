@@ -7,7 +7,7 @@ public struct GoToCommand : ICommandBehavior
     public Transform Transform;
     public Vector2 Target;
     public float Time;
-    public IEnumerator Behaviour()
+    public IEnumerator FirstBehaviour()
     {
         yield return Transform.DOMove(Target, Time).WaitForCompletion();
     }

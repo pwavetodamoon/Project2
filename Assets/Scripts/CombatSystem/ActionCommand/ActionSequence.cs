@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 public class ActionSequence : MonoBehaviour
 {
-    [ShowInInspector] List<ICommand> commands = new List<ICommand>();
+    List<ICommand> commands = new List<ICommand>();
     public bool isExcuted = false;
     public void AddCommand(ICommand command)
     {
@@ -18,15 +18,17 @@ public class ActionSequence : MonoBehaviour
         //Debug.Log("Start sequence");
         StartCoroutine(StartExcute());
     }
+
     //[Button]
     IEnumerator StartExcute()
     {
         isExcuted = true;
-        if (commands[0].IsDone) yield break;
+        var command = commands[0];
+        if (command.IsDone) yield break;
 
-        yield return commands[0].Execute();
+        yield return command.Execute();
         //Debug.Log("Done sequence");
-        Remove(commands[0]);
+        Remove(command);
 
         yield return new WaitForEndOfFrame();
         isExcuted = false;

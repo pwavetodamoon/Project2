@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
         ActionCommand actionCommand = new ActionCommand()
         {
             Time = 1f,
-            CallbackMethod = () => { Debug.Log("Attack"); }
+            EndCallbackMethod = () => { Debug.Log("Attack"); }
         };
         attackSequence.AddCommand(actionCommand);
     }

@@ -2,5 +2,5 @@
 
 public interface ICommandBehavior
 {
-    IEnumerator Behaviour();
+    IEnumerator FirstBehaviour();
 }

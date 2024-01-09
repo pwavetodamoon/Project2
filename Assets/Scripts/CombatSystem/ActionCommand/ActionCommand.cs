@@ -7,7 +7,7 @@ public struct ActionCommand : ICommand
     public ActionCommand(ICommandBehavior behaviour = null, Action callback = null, float time = 0)
     {
         CommandBehavior = behaviour;
-        CallbackMethod = callback;
+        EndCallbackMethod = callback;
         Time = time;
         IsDone = false;
     }
@@ -16,18 +16,18 @@ public struct ActionCommand : ICommand
 
     public ICommandBehavior CommandBehavior;
 
-    public Action CallbackMethod;
+    public Action EndCallbackMethod;
     public IEnumerator Execute()
     {
-        yield return CommandBehavior?.Behaviour();
+        yield return CommandBehavior?.FirstBehaviour();
+        EndCallbackMethod?.Invoke();
         yield return new WaitForSeconds(Time);
-        CallbackMethod?.Invoke();
         IsDone = true;
-        Debug.Log("Done CallbackMethod");
+        Debug.Log("Done EndCallbackMethod");
     }
     public void SetCallback(Action callback)
     {
-        CallbackMethod = callback;
+        EndCallbackMethod = callback;
     }
     public void SetBehaviour(ICommandBehavior behaviour)
     {

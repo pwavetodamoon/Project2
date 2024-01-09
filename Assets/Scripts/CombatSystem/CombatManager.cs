@@ -67,7 +67,7 @@ public class CombatManager : MonoBehaviour
             {
                 //Debug.Log("Attack Callback");
                 action?.Invoke();
-                //actionsList.Remove(CallbackMethod);
+                //actionsList.Remove(EndCallbackMethod);
             }
             actionsList.Clear();
         }
