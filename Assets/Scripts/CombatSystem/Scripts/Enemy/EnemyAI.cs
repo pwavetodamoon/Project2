@@ -10,7 +10,8 @@ public class EnemyAI : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             EnemyCharacters enemy = collision.gameObject.GetComponent<EnemyCharacters>();
-            enemy.CheckEnemy();
+            enemy.GetComponent<EnemyMoving>().isMoving = false;
+            enemy.StartMoving();
         }
             
     }

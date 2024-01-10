@@ -22,6 +22,8 @@ public abstract class CharactersBase : MonoBehaviour
 
     protected List<ICommand> AttackCommands = new List<ICommand>();
 
+
+    public Transform SlotPosition;
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator_Base>();

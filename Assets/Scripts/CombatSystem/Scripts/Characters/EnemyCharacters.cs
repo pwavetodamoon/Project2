@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
@@ -28,7 +29,18 @@ public class EnemyCharacters : CharactersBase
             timeCounter = 0;
         }
     }
-
+    public void StartMoving()
+    {
+        enemy = CombatManager.GetEnemyPosition?.Invoke(enemyIndex);
+        if (enemy == null)
+            return;
+        var newPos = enemy.SlotPosition.position;
+        Debug.Log(newPos);
+        transform.DOMove(newPos, 1).OnComplete(() =>
+        {
+            allowAction = true;
+        });
+    }
     protected override void InitCommandList()
     {
         float timeAttack = animator.GetAnimationLength(Monster_Animator.Attack_State);

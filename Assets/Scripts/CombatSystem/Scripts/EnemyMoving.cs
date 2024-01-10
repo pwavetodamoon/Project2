@@ -16,7 +16,7 @@ public class EnemyMoving : MonoBehaviour
 
     private void Update()
     {
-        //Moving();
+        Moving();
     }
 
     public void Moving()
