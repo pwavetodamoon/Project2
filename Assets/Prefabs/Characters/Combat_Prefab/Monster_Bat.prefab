@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1073593206273548739}
   - component: {fileID: 394476070285850677}
   - component: {fileID: 835542490287926353}
+  - component: {fileID: 7621916813838243502}
   m_Layer: 0
   m_Name: Monster_Bat
   m_TagString: Enemy
@@ -50,12 +51,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 0}
-  timeCounter: 0
-  health: {fileID: 1073593206273548739}
-  type: 0
-  attacking: 0
-  normalAttack: {fileID: 0}
   enemy: {fileID: 0}
+  health: {fileID: 1073593206273548739}
+  animator: {fileID: 5478207670470647540}
+  attackSequence: {fileID: 7621916813838243502}
+  timeCounter: 0
+  enemyIndex: 0
+  allowAction: 0
+  attacking: 0
+  SlotPosition: {fileID: 0}
+  Test: 0
 --- !u!114 &6056672064702300096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +162,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7621916813838243502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2650380933805647123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f14af59d2fde14585bd7c76ffe187d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isExcuted: 0
 --- !u!1001 &6923140645411577313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,3 +257,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4998867696950289814, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
   m_PrefabInstance: {fileID: 6923140645411577313}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5478207670470647540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3176567593639756565, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
+  m_PrefabInstance: {fileID: 6923140645411577313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8a3536e50a41347a6243f0951d66ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

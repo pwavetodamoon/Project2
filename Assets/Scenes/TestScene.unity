@@ -1308,19 +1308,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2650380933805647123, guid: c449a8cd7c2f5a9489db810cf43efc80, type: 3}
   m_PrefabInstance: {fileID: 7142491348654592640}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1041873672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041873665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f14af59d2fde14585bd7c76ffe187d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isExcuted: 0
 --- !u!1 &1240946593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,17 +1713,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1368692704 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5478207670470647540, guid: c449a8cd7c2f5a9489db810cf43efc80, type: 3}
-  m_PrefabInstance: {fileID: 7142491348654592640}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8a3536e50a41347a6243f0951d66ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1514908771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,21 +2505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Bat
       objectReference: {fileID: 0}
-    - target: {fileID: 7150202148489917233, guid: c449a8cd7c2f5a9489db810cf43efc80, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1368692704}
-    - target: {fileID: 7150202148489917233, guid: c449a8cd7c2f5a9489db810cf43efc80, type: 3}
-      propertyPath: attackSequence
-      value: 
-      objectReference: {fileID: 1041873672}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2650380933805647123, guid: c449a8cd7c2f5a9489db810cf43efc80, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1041873672}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c449a8cd7c2f5a9489db810cf43efc80, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
