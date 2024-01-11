@@ -1,27 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using Sirenix.OdinInspector;
 
-public class HeroNormalAttack : MonoBehaviour, IHeroAttack
+public class HeroMeleeAttack : HeroNormalAttack
 {
-    public bool isActive = false;
-    public float speed = 2;
-    Animator_Base animator;
-    public Transform gizmosTransform;
-    public Vector2 gizmosPosition;
-    public Vector2 size = Vector3.one;
-    public float angle = 0;
-    // Draw the gizmo
-    void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
         if (gizmosTransform == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawCube(gizmosTransform.position, size);
     }
-    // Check the collider in the gizmo
-    [Button]
-    void CheckCollider()
+    protected override void CheckCollider()
     {
         if (gizmosTransform == null) return;
         var colliders = Physics2D.OverlapBoxAll(gizmosTransform.position, size, angle);
@@ -34,27 +23,17 @@ public class HeroNormalAttack : MonoBehaviour, IHeroAttack
             }
         }
     }
-    // Execute the attack, this is interface method
-    public void ExecuteAttack(Animator_Base animator)
+    protected override IEnumerator StartBehavior(HeroCharacter hero)
     {
-        if (isActive) return;
-        isActive = true;
-        this.animator = animator;
-        StartCoroutine(StartBehavior());
-    }
-    // Start the attack behavior with a coroutine
-    private IEnumerator StartBehavior()
-    {
-        HeroCharacter character = GetComponentInParent<HeroCharacter>();
         MonsterCharacter monster = CombatManager.Instance.GetMonster();
         if (monster == null)
         {
             Debug.Log("Target is null");
             yield break;
         }
-        yield return MoveToTransform(character.transform, monster.GetAttackerPosition());
+        yield return MoveToTransform(hero.transform, monster.GetAttackerPosition());
         yield return AttackBetween();
-        yield return MoveToTransform(character.transform, character.Slot.GetCharacterPosition());
+        yield return MoveToTransform(hero.transform, hero.Slot.GetCharacterPosition());
     }
     private IEnumerator AttackBetween()
     {
@@ -82,8 +61,4 @@ public class HeroNormalAttack : MonoBehaviour, IHeroAttack
         animator.ChangeAnimation(Human_Animator.Idle_State);
         isActive = false;
     }
-}
-public interface IHeroAttack
-{
-    void ExecuteAttack(Animator_Base animator);
 }
