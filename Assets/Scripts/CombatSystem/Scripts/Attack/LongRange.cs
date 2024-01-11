@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 
-public class LongRange : AttackBase, IAttack
+public class LongRange : IAttack
 {
     public void Attack()
     {
         //Debug.Log(enemyData);
 
-        StartCoroutine(FarAttack());
+        // StartCoroutine(FarAttack());
 
         IEnumerator FarAttack()
         {

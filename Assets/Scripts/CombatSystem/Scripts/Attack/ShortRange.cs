@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShortRange : AttackBase
+public class ShortRange 
 {
 
 }

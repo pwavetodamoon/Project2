@@ -25,24 +25,6 @@ public class Human_Animator : Animator_Base
     {
         base.ChangeAnimation(Type);
     }
-    [Button]
-    void Test(AnimationType type)
-    {
-        ChangeAnimation(type);
-    }
-    [Button]
-    void Test2()
-    {
-        bool test = animator.GetCurrentAnimatorStateInfo(0).loop;
-        if(test)
-        {
-            Debug.Log("Animation is loop");
-        }
-        else
-        {
-            Debug.Log("Animation is not loop");
-        }
-    }
     protected override string GetAnimationNameByType<T>(T type)
     {
         switch (type)

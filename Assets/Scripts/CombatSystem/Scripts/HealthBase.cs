@@ -27,7 +27,7 @@ public class HealthBase : MonoBehaviour
             currentHealth = minHealth;
             if (TryGetComponent(out CharactersBase _base))
             {
-                CombatManager.RemoveCharacter?.Invoke(_base);
+                // CombatManager.RemoveCharacter?.Invoke(_base);
             }
             Debug.Log("EnemyCharacters is dead");
         }
