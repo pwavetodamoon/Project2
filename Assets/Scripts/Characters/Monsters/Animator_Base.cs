@@ -19,6 +19,7 @@ public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnima
     {
         string animationName = GetAnimationNameByType(type1);
         animator.Play(animationName);
+        var clipInfo = animator.GetCurrentAnimatorStateInfo(0);
         StartCoroutine(WaitAnimation());
     }
     IEnumerator WaitAnimation()
@@ -27,7 +28,7 @@ public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnima
         var clipInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (clipInfo.loop == false)
         {
-            //Debug.Log("Animation is not loop");
+            Debug.Log("Animation is not loop");
             animHaveLoopIsRun = true;
             timeAnimated = clipInfo.length * clipInfo.speed;
         }

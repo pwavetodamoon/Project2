@@ -7,7 +7,7 @@ public class Human_Animator : Animator_Base
     public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
     public static AnimationType Slash_State { get => AnimationType.Slash; private set { } }
     public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
-    private AnimationType currentType;
+    private AnimationType currentType = AnimationType.Idle;
 
     public enum AnimationType
     {
@@ -44,6 +44,11 @@ public class Human_Animator : Animator_Base
             default:
                 return "Idle_1";
         }
+    }
+    [Button]
+    public void Test(AnimationType animationType)
+    {
+        ChangeAnimation(animationType);
     }
     protected override void ChangeToDefaultAnimationState()
     {

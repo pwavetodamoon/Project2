@@ -25,7 +25,7 @@ public class HealthBase : MonoBehaviour
         if (currentHealth < 0)
         {
             currentHealth = minHealth;
-            if (TryGetComponent(out CharactersBase _base))
+            if (TryGetComponent(out HeroCharacter _base))
             {
                 // CombatManager.RemoveCharacter?.Invoke(_base);
             }
