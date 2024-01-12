@@ -8,7 +8,7 @@ using UnityEngine;
 public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnimationLength
 {
     [SerializeField] protected Animator animator;
-    [ShowInInspector] protected Dictionary<string,float> animationLengths;
+    [ShowInInspector] protected Dictionary<string, float> animationLengths;
     protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -19,7 +19,6 @@ public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnima
     {
         string animationName = GetAnimationNameByType(type1);
         animator.Play(animationName);
-        var clipInfo = animator.GetCurrentAnimatorStateInfo(0);
         StartCoroutine(WaitAnimation());
     }
     IEnumerator WaitAnimation()
