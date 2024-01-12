@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using Sirenix.OdinInspector;
 
 public class HeroNormalAttack : MonoBehaviour, IHeroAttack
 {
+    // TODO : Base Attack 
     public bool isActive = false;
     public float speed = 2;
     protected Animator_Base animator;
@@ -20,13 +20,13 @@ public class HeroNormalAttack : MonoBehaviour, IHeroAttack
     // Draw the gizmo
     protected virtual void OnDrawGizmos()
     {
-        
+
     }
     // Check the collider in the gizmo
     [Button]
     protected virtual void CheckCollider()
     {
-        
+
     }
     // Execute the attack, this is interface method
     public void ExecuteAttack(Animator_Base animator)

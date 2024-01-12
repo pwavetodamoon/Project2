@@ -21,12 +21,13 @@ public class HeroRangedAttack : HeroNormalAttack
     {
         animator.ChangeAnimation(Human_Animator.Slash_State);
         var time = animator.GetAnimationLength(Human_Animator.Slash_State);
-        yield return new WaitForSeconds(time/2);
+        yield return new WaitForSeconds(time / 2);
         SpawnProjectile();
-        
+
     }
     protected Transform SpawnProjectile()
     {
+        //TODO : pool obj
         var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         projectile.transform.position = gizmosPosition;
         var monster = CombatManager.Instance.GetMonster();
