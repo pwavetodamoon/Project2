@@ -34,7 +34,7 @@ public class QuestingSystem : SerializedMonoBehaviour
         questDictionary[id]++;
         if (questDictionary[id] == 5)
         {
-            Debug.Log("Complete Quest Collect Item: " + id);
+            Debug.Log("Complete Quest Gather Item: " + id);
             questSO.CompleteQuestItem();
         }
     }

@@ -1,29 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletMoving : MovingGameObj
 {
-    public Enemy enemy;
-    
+    public EnemyData enemy;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rotate = 180;
-        enemy = Game_DataBase.Instance.GetEnemyData(EnemyScript.Instance.ID);
+        //target = Game_DataBase.Instance.GetEnemyData(EnemyCharacters.Instance.ID);
         target = enemy.Base;
         Moving();
-        foce = 25;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        speed = 25;
         Destroy(gameObject, 3);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("EnemyData"))
         {
             Destroy(gameObject);
         }

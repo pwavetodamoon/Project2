@@ -69,7 +69,7 @@ namespace deVoid.UIFramework
         /// <summary>
         /// If this screen is destroyed for some reason, it must warn its layer
         /// </summary>
-        /// <value>The destruction action.</value>
+        /// <value>The destruction EndCallbackMethod.</value>
         public Action<IUIScreenController> ScreenDestroyed { get; set; }
 
         /// <summary>

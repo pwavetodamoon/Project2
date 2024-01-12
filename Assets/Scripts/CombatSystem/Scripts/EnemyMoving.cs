@@ -4,33 +4,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyMoving : MovingGameObj
+public class EnemyMoving : MonoBehaviour
 {
-    public Player player;
-    public Enemy enemy;
-    public float attackRange;
-    
-    void Start()
+    public float speed;
+    public bool isMoving = true;
+
+    public void Setup(float speed)
     {
-        
-        enemy = Game_DataBase.Instance.GetEnemyData(EnemyScript.Instance.ID);
-        player = Game_DataBase.Instance.GetPlayerData(PlayerScript.Instance.ID);
-        target = player.Base;
-        foce = enemy.speed;
-        
+        this.speed = speed;
     }
+
     private void Update()
     {
-        float dis = Vector2.Distance(transform.position, player.Slot.position);
         Moving();
-        if (dis <= attackRange)
-        {
-            foce = 0;
-        }
-        else 
-        {
-            foce = enemy.speed;
-        }
+    }
 
+    public void Moving()
+    {
+        if (!isMoving) return;
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 }

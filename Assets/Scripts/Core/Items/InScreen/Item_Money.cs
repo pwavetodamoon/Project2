@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_Money : ItemCollectBase
+public class Item_Money : ItemBase
 {
-    protected override void Collect()
+    public override void Gather()
     {
-        base.Collect();
-        transform.gameObject.SetActive(false);
+        base.Gather();
+        // Call function to add money
     }
 }

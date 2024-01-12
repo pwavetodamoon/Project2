@@ -186,12 +186,12 @@ namespace deVoid.UIFramework
         }
 
         /// <summary>
-        /// Registers a screen. If transform is passed, the layer will
+        /// Registers a screen. If Transform is passed, the layer will
         /// reparent it to itself. Screens can only be shown after they're registered.
         /// </summary>
         /// <param name="screenId">Screen identifier.</param>
         /// <param name="controller">Controller.</param>
-        /// <param name="screenTransform">Screen transform. If not null, will be reparented to proper layer</param>
+        /// <param name="screenTransform">Screen Transform. If not null, will be reparented to proper layer</param>
         public void RegisterScreen(string screenId, IUIScreenController controller, Transform screenTransform)
         {
             IWindowController window = controller as IWindowController;

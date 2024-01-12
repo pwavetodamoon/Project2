@@ -369,6 +369,7 @@ GameObject:
   - component: {fileID: 717063680}
   - component: {fileID: 717063683}
   - component: {fileID: 717063684}
+  - component: {fileID: 717063685}
   m_Layer: 0
   m_Name: Item-Prefab
   m_TagString: Untagged
@@ -501,12 +502,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 
-  speed: 1
   yPosition: 0.5
   time: 0.5
   ease: 0
   collider2D: {fileID: 717063683}
   isCollected: 0
+--- !u!114 &717063685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717063679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf5c6534dd273347825b73f388c2a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  isMoving: 0
 --- !u!1 &1452965449
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +839,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 
-  speed: 1
   yPosition: 0.5
   time: 0.5
   ease: 0
@@ -882,7 +895,6 @@ MonoBehaviour:
   questSO: {fileID: 11400000, guid: 7dc8a7fc3a08e8e4d8c8a9b4b22a5ffa, type: 2}
   item_loot_Prefab: {fileID: 717063679}
   item_money_Prefab: {fileID: 1904820825}
-  collectBaseList: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

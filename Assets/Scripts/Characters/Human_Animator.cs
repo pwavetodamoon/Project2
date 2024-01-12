@@ -1,8 +1,13 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Human_Animator : MonoBehaviour
+public class Human_Animator : Animator_Base
 {
-    [SerializeField] private Animator animator;
+    public static AnimationType Idle_State { get => AnimationType.Idle; private set { } }
+    public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
+    public static AnimationType Slash_State { get => AnimationType.Slash; private set { } }
+    public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
+    private AnimationType currentType = AnimationType.Idle;
 
     public enum AnimationType
     {
@@ -12,20 +17,16 @@ public class Human_Animator : MonoBehaviour
         Hurt,
     }
 
-    private void Awake()
+    /// <summary>
+    /// Idle = 0, Walk = 1, Slash = 2, Hurt = 3
+    /// </summary>
+    /// <param name="indexState"></param>
+    public override void ChangeAnimation<T>(T Type)
     {
-        animator = GetComponentInChildren<Animator>();
+        base.ChangeAnimation(Type);
     }
-
-    public void PlayAnimation(AnimationType type)
+    protected override string GetAnimationNameByType<T>(T type)
     {
-        var animationName = GetAnimationName(type);
-        animator.Play(animationName);
-    }
-
-    private string GetAnimationName(AnimationType type)
-    {
-
         switch (type)
         {
             case AnimationType.Idle:
@@ -41,7 +42,22 @@ public class Human_Animator : MonoBehaviour
                 return "hurt_1";
 
             default:
-                return "";
+                return "Idle_1";
         }
+    }
+    [Button]
+    public void Test(AnimationType animationType)
+    {
+        ChangeAnimation(animationType);
+    }
+    protected override void ChangeToDefaultAnimationState()
+    {
+        //Debug.Log("Change to idle");
+        ChangeAnimation(currentType);
+    }
+
+    public override void SetDefaultAnimation<T>(T type)
+    {
+        currentType = (AnimationType)(object)type;
     }
 }

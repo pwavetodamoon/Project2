@@ -7,7 +7,7 @@ namespace deVoid.UIFramework
     /// <summary>
     /// This layer controls all Windows.
     /// Windows are Screens that follow a history and a queue, and are displayed
-    /// one at a time (and may or may not be modals). This also includes pop-ups.
+    /// one at a Time (and may or may not be modals). This also includes pop-ups.
     /// </summary>
     public class WindowUILayer : AUILayer<IWindowController>
     {

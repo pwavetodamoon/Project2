@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
-
-public class Monster_Animator : MonoBehaviour
+public class Monster_Animator : Animator_Base
 {
-    [SerializeField] private Animator animator;
+    public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
+    public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
+    public static AnimationType Attack_State { get => AnimationType.Attack; private set { } }
+    private AnimationType currentAnimation = Walk_State;
 
     public enum AnimationType
     {
@@ -14,18 +12,15 @@ public class Monster_Animator : MonoBehaviour
         Attack
     }
 
-    private void Awake()
+    /// <summary>
+    /// 0 is walk, 1 is attack, 2 is hurt   
+    /// </summary>
+    /// <param name="indexState"></param>
+    public override void ChangeAnimation<T>(T type)
     {
-        animator = GetComponentInChildren<Animator>();
+        base.ChangeAnimation(type);
     }
-
-    public void PlayAnimation(AnimationType type)
-    {
-        string animationName = GetAnimationName(type);
-        animator.Play(animationName);
-    }
-
-    private string GetAnimationName(AnimationType type)
+    protected override string GetAnimationNameByType<T>(T type)
     {
         switch (type)
         {
@@ -39,7 +34,16 @@ public class Monster_Animator : MonoBehaviour
                 return "attack_1";
 
             default:
-                return "";
+                return "walk_1";
         }
+    }
+
+    protected override void ChangeToDefaultAnimationState()
+    {
+        ChangeAnimation(currentAnimation);
+    }
+    public override void SetDefaultAnimation<T>(T type)
+    {
+        currentAnimation = (AnimationType)(object)type;
     }
 }

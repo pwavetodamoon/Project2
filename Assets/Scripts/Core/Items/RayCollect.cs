@@ -18,9 +18,9 @@ public class RayCollect : MonoBehaviour
         Debug.DrawRay(transform.position, mousePos, Color.red);
         if (hit2D.collider != null)
         {
-            if (hit2D.collider.TryGetComponent(out ItemCollectBase itemCollectBase))
+            if (hit2D.collider.TryGetComponent(out ICollect icollect))
             {
-                itemCollectBase.CollectEffect();
+                icollect.Gather();
             }
         }
     }
