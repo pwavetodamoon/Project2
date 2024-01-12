@@ -12,11 +12,7 @@ public class HeroNormalAttack : MonoBehaviour, IHeroAttack
     public Vector2 gizmosPosition;
     public Vector2 size = Vector3.one;
     public float angle = 0;
-    public HeroCharacter hero;
-    protected virtual HeroCharacter GetCharacter()
-    {
-        return GetComponentInParent<HeroCharacter>();
-    }
+    protected virtual HeroCharacter GetCharacter() => GetComponentInParent<HeroCharacter>();
     // Draw the gizmo
     protected virtual void OnDrawGizmos()
     {

@@ -27,10 +27,10 @@ public class HeroRangedAttack : HeroNormalAttack
     }
     protected Transform SpawnProjectile()
     {
-        var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        projectile.transform.position = gizmosPosition;
         var monster = CombatManager.Instance.GetMonster();
         if (monster == null) { return null; }
+        var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectile.transform.position = gizmosPosition;
         projectile.GetComponent<Projectile>().SetTarget(monster.transform);
         return projectile.transform;
     }
