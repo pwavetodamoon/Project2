@@ -32,6 +32,7 @@ public class HeroNormalAttack : MonoBehaviour, IHeroAttack
     public void ExecuteAttack(Animator_Base animator)
     {
         if (isActive) return;
+        Debug.Log("Excute attack");
         isActive = true;
         this.animator = animator;
         StartCoroutine(StartBehavior(GetCharacter()));
@@ -41,11 +42,6 @@ public class HeroNormalAttack : MonoBehaviour, IHeroAttack
     protected virtual IEnumerator StartBehavior(HeroCharacter hero)
     {
         yield return null;
-        SetAttackToDeactive();
-    }
-    public void SetAttackToDeactive()
-    {
-        isActive = false;
     }
 }
 public interface IHeroAttack

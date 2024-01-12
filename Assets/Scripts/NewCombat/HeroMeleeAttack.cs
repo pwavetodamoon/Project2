@@ -34,6 +34,7 @@ public class HeroMeleeAttack : HeroNormalAttack
         yield return MoveToTransform(hero.transform, monster.GetAttackerPosition());
         yield return AttackBetween();
         yield return MoveToTransform(hero.transform, hero.Slot.GetCharacterPosition());
+        isActive = false;
     }
     private IEnumerator AttackBetween()
     {
@@ -53,12 +54,11 @@ public class HeroMeleeAttack : HeroNormalAttack
             Character.Translate(speed * Time.deltaTime * direction);
             if (Vector3.Distance(Character.position, TargetPosition) < 0.1f)
             {
-                Debug.Log("MoveToTransform: " + Vector3.Distance(Character.position, TargetPosition));
                 break;
             }
             yield return new WaitForFixedUpdate();
         }
         animator.ChangeAnimation(Human_Animator.Idle_State);
-        isActive = false;
+        
     }
 }
