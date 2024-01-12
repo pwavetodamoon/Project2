@@ -6,7 +6,8 @@ public class HeroCharacter : MonoBehaviour
 {
     public CharacterSlot Slot;
     public Animator_Base Animator;
-
+    public HeroMeleeAttack HeroMeleeAttack;
+    public HeroRangedAttack HeroRangedAttack;
     private void Awake()
     {
         Slot = GetComponentInParent<CharacterSlot>();
@@ -21,11 +22,11 @@ public class HeroCharacter : MonoBehaviour
     {
         if(attackTypeEnum == AttackTypeEnum.Near)
         {
-            GetComponent<HeroMeleeAttack>().ExecuteAttack(Animator);
+            GetComponent<HeroMeleeAttack>().ExecuteAttack();
         }
         else if(attackTypeEnum == AttackTypeEnum.Far)
         {
-            GetComponent<HeroRangedAttack>().ExecuteAttack(Animator);
+            GetComponent<HeroRangedAttack>().ExecuteAttack();
         }
         else
         {

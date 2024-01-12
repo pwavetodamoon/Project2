@@ -819,6 +819,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008246247074431557, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: HeroMeleeAttack
+      value: 
+      objectReference: {fileID: 6647051649778593657}
+    - target: {fileID: 4008246247074431557, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: HeroRangedAttack
+      value: 
+      objectReference: {fileID: 6647051649778593656}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -916,7 +924,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614720514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f804feaf5b77e3d46a42866b1be193b1, type: 3}
   m_Name: 
@@ -927,8 +935,18 @@ MonoBehaviour:
   gizmosPosition: {x: 0, y: 0}
   size: {x: 1, y: 1}
   angle: 0
-  hero: {fileID: 0}
   projectilePrefab: {fileID: 790869691}
+--- !u!114 &6647051649778593657 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6721859214255508898, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+  m_PrefabInstance: {fileID: 281292767943935197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614720514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9523719095571ee4dbb2159cd440731d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7032529306803190659
 GameObject:
   m_ObjectHideFlags: 0
