@@ -4,19 +4,7 @@ using UnityEngine;
 
 public class HeroMeleeAttack : HeroNormalAttack
 {
-    public float timeCounter;
-    public float maxTime = 0.5f;
-    public int attackCount;
-    public int maxAttackCount = 3;
-    private void Update()
-    {
-        if (timeCounter > 0 && isActive == false)
-            timeCounter -= Time.deltaTime;
-        else
-        {
-            timeCounter = 0;
-        }
-    }
+
     protected override void OnDrawGizmos()
     {
         if (gizmosTransform == null) return;
