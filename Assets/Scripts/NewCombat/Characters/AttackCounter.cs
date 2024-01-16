@@ -1,29 +1,31 @@
 using System;
+using UnityEngine;
 
 namespace NewCombat.Characters
 {
     public class AttackCounter
     {
+        public AttackCounter(){}
         public float timeCounter;
         public float maxTime = 0.5f;
-        public int attackCount;
-        public int maxAttackCount = 3;
-        public Action CallbackEvent;
-        public void CheckTimerCounter(BaseHeroNormalAttack heroNormalAttack, float time)
+        [HideInInspector]
+        public Action AttackAction;
+        public void CheckTimerCounter(bool state,float time)
         {
-            if (timeCounter > 0 && heroNormalAttack.isActive == false)
-                timeCounter -= time;
-            else if (timeCounter <= 0 && heroNormalAttack.isActive == false)
+            if (timeCounter > 0 && state == false)
             {
-                timeCounter = maxTime;
-                PlayEvent(heroNormalAttack);
+                timeCounter -= time;
             }
-
+            else if (timeCounter <= 0 && state == false)
+            {
+                // Excute attack method register                
+                AttackAction?.Invoke();
+            }
         }
 
-        private void PlayEvent(BaseHeroNormalAttack heroNormalAttack)
+        public void ResetCounter()
         {
-            heroNormalAttack.ExecuteAttack();
+            timeCounter = maxTime;
         }
     }
 }

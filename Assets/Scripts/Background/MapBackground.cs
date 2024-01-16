@@ -64,9 +64,9 @@ namespace Background
         }
 
         /// <summary>
-        /// Adjusts the scrolling speed of the background.
+        /// Adjusts the scrolling Speed of the background.
         /// </summary>
-        /// <param name="speed">The speed value to adjust the scrolling speed.</param>
+        /// <param name="speed">The Speed value to adjust the scrolling Speed.</param>
         [Button]
         public void AdjustSpeed(float speed = .5f)
         {

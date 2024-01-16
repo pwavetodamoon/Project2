@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Characters.Monsters;
 using NewCombat.Characters;
 using Sirenix.OdinInspector;
@@ -8,27 +9,40 @@ namespace NewCombat
 {
     public abstract class BaseHeroNormalAttack : MonoBehaviour
     {
-        public bool isActive = false;
-        public float speed = 2;
+        [Header("References/BaseClass")]
         protected Animator_Base animator;
         public Transform gizmosTransform;
+
+        [Header("Vector2/BaseClass")]
         public Vector2 gizmosPosition;
         public Vector2 size = Vector3.one;
-        public float angle = 0;
-        [ShowInInspector] AttackCounter attackCounter = new();
-        private void OnEnable()
-        {
-            attackCounter.CallbackEvent += ExecuteAttack;
-        }
-        private void OnDisable()
-        {
-            attackCounter.CallbackEvent -= ExecuteAttack;
-        }
+
+        [Header("Value/BaseClass")]
+        public float Angle = 0;
+        public float Speed = 2;
+        public bool IsActive = false;
+
+        [Header("Features")]
+        [ShowInInspector] protected AttackCounter attackCounter = new();
+
         private void Update()
         {
-            attackCounter.CheckTimerCounter(this,Time.deltaTime);
+            attackCounter.CheckTimerCounter(IsActive,Time.deltaTime);
         }
-        private void Awake() => animator = GetComponentInChildren<Animator_Base>();
+
+        private void OnEnable()
+        {
+            attackCounter.AttackAction += ExecuteAttack;
+        }
+
+        private void OnDisable()
+        {
+            attackCounter.AttackAction -= ExecuteAttack;
+        }
+        protected virtual void Awake()
+        {
+            animator = GetComponentInChildren<Animator_Base>();
+        }
         protected virtual HeroCharacter GetCharacter() => GetComponentInParent<HeroCharacter>();
         protected virtual IEnumerator StartBehavior(HeroCharacter hero) { yield return null; }
 
@@ -40,9 +54,9 @@ namespace NewCombat
         // Execute the attack, this is interface method
         public void ExecuteAttack()
         {
-            if (isActive) return;
+            if (IsActive) return;
             Debug.Log("Excute attack");
-            isActive = true;
+            IsActive = true;
             StartCoroutine(StartBehavior(GetCharacter()));
         }
     }

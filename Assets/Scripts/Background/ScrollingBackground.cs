@@ -61,9 +61,9 @@ namespace Background
         }
 
         /// <summary>
-        /// Adjusts the scrolling speed of the background.
+        /// Adjusts the scrolling Speed of the background.
         /// </summary>
-        /// <param name="newSpeed">The new scrolling speed.</param>
+        /// <param name="newSpeed">The new scrolling Speed.</param>
         public void AdjustSpeed(float newSpeed)
         {
             speed = newSpeed;
@@ -75,7 +75,7 @@ namespace Background
         }
 
         /// <summary>
-        /// Scrolls the background horizontally based on the current speed.
+        /// Scrolls the background horizontally based on the current Speed.
         /// </summary>
         public void ScrollHorizontal()
         {
