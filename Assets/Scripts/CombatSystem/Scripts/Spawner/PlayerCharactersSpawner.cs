@@ -1,3 +1,6 @@
-﻿public class PlayerCharactersSpawner : CharactersSpawner
+﻿namespace CombatSystem.Scripts.Spawner
 {
+    public class PlayerCharactersSpawner : CharactersSpawner
+    {
+    }
 }

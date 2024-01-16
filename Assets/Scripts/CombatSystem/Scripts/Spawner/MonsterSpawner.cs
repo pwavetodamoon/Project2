@@ -1,3 +1,6 @@
-﻿public class MonsterSpawner : CharactersSpawner
+﻿namespace CombatSystem.Scripts.Spawner
 {
+    public class MonsterSpawner : CharactersSpawner
+    {
+    }
 }

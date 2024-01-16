@@ -1,10 +1,11 @@
-using UnityEngine;
-
-public enum CharacterEnumType
+namespace Characters
 {
-    King,
-    Knight,
-    Sergeant,
-    Templar,
-    WhiteArmored
+    public enum CharacterEnumType
+    {
+        King,
+        Knight,
+        Sergeant,
+        Templar,
+        WhiteArmored
+    }
 }

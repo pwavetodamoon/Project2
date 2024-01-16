@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+namespace CombatSystem.Scripts.Enemy
 {
+    public class EnemyAI : MonoBehaviour
+    {
   
+    }
 }

@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/ItemBase", order = 1)]
-public class ItemSO : ScriptableObject
+namespace Core.Items
 {
-    public string Id;
-    [PreviewField(120, ObjectFieldAlignment.Right)]
-    public Sprite Sprite;
+    [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/ItemBase", order = 1)]
+    public class ItemSO : ScriptableObject
+    {
+        public string Id;
+        [PreviewField(120, ObjectFieldAlignment.Right)]
+        public Sprite Sprite;
+    }
 }

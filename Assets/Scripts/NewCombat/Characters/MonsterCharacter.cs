@@ -1,24 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using Characters.Monsters;
 using UnityEngine;
 
-public class MonsterCharacter : MonoBehaviour
+namespace NewCombat.Characters
 {
-    [SerializeField] private Transform AttackedTransform;
-    public Animator_Base Animator;
-    private void Awake()
+    public class MonsterCharacter : MonoBehaviour
     {
-        Animator = GetComponentInChildren<Animator_Base>();
-    }
-    public void Attack()
-    {
-    }
-    public Vector3 GetAttackerPosition()
-    {
-        if(AttackedTransform == null)
+        [SerializeField] private Transform AttackedTransform;
+        public Animator_Base Animator;
+        private void Awake()
         {
-            return transform.position;
+            Animator = GetComponentInChildren<Animator_Base>();
         }
-        return AttackedTransform.position;
+        public void Attack()
+        {
+        }
+        public Vector3 GetAttackerPosition()
+        {
+            if(AttackedTransform == null)
+            {
+                return transform.position;
+            }
+            return AttackedTransform.position;
+        }
     }
 }

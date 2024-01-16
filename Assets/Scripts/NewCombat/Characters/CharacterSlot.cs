@@ -1,32 +1,33 @@
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSlot : MonoBehaviour
+namespace NewCombat.Characters
 {
-    [SerializeField] Transform CharacterStand;
-    [SerializeField] Transform EnemyStand;
-    [SerializeField] string CharacterStandName;
-    [SerializeField] string EnemyStandname;
-    [Button]
-    private void LoadStand()
+    public class CharacterSlot : MonoBehaviour
     {
-        if(CharacterStand == null)
+        [SerializeField] Transform CharacterStand;
+        [SerializeField] Transform EnemyStand;
+        [SerializeField] string CharacterStandName;
+        [SerializeField] string EnemyStandname;
+        [Button]
+        private void LoadStand()
         {
-            CharacterStand = transform.Find(CharacterStandName);
+            if(CharacterStand == null)
+            {
+                CharacterStand = transform.Find(CharacterStandName);
+            }
+            if(EnemyStand == null)
+            {
+                EnemyStand = transform.Find(EnemyStandname);
+            }
         }
-        if(EnemyStand == null)
+        public Vector3 GetCharacterPosition()
         {
-            EnemyStand = transform.Find(EnemyStandname);
+            return CharacterStand.position;
         }
-    }
-    public Vector3 GetCharacterPosition()
-    {
-        return CharacterStand.position;
-    }
-    public Vector3 GetAttackerPosition()
-    {
-        return EnemyStand.position;
+        public Vector3 GetAttackerPosition()
+        {
+            return EnemyStand.position;
+        }
     }
 }

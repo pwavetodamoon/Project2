@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 
-public class LongRange : IAttack
+namespace CombatSystem.Scripts.Attack
 {
-    public void Attack()
+    public class LongRange : IAttack
     {
-        //Debug.Log(enemyData);
-
-        // StartCoroutine(FarAttack());
-
-        IEnumerator FarAttack()
+        public void Attack()
         {
-            //yield return Instantiate(data.weaponPrefab, Transform.position, Quaternion.identity);
-            yield return null;
+            //Debug.Log(enemyData);
+
+            // StartCoroutine(FarAttack());
+
+            IEnumerator FarAttack()
+            {
+                //yield return Instantiate(data.weaponPrefab, Transform.position, Quaternion.identity);
+                yield return null;
+            }
         }
     }
 }

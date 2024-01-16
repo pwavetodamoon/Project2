@@ -1,35 +1,40 @@
+using CombatSystem.Data;
+using NewCombat.Characters;
 using UnityEngine;
 
-public class HealthBase : MonoBehaviour
+namespace CombatSystem.Scripts
 {
-    [SerializeField] protected float maxHealth;
-    [SerializeField] protected float minHealth = 0;
-    [SerializeField] protected float currentHealth;
-
-    // Start is called before the first frame update
-    public void Setup(BaseData enemy)
+    public class HealthBase : MonoBehaviour
     {
-        minHealth = 0;
-        maxHealth = enemy.health;
-        currentHealth = maxHealth;
-    }
+        [SerializeField] protected float maxHealth;
+        [SerializeField] protected float minHealth = 0;
+        [SerializeField] protected float currentHealth;
 
-    public float GetHealth()
-    {
-        return currentHealth;
-    }
-
-    public void ChangeHealth(float Damage)
-    {
-        currentHealth -= Damage;
-        if (currentHealth < 0)
+        // Start is called before the first frame update
+        public void Setup(BaseData enemy)
         {
-            currentHealth = minHealth;
-            if (TryGetComponent(out HeroCharacter _base))
+            minHealth = 0;
+            maxHealth = enemy.health;
+            currentHealth = maxHealth;
+        }
+
+        public float GetHealth()
+        {
+            return currentHealth;
+        }
+
+        public void ChangeHealth(float Damage)
+        {
+            currentHealth -= Damage;
+            if (currentHealth < 0)
             {
-                // CombatManager.RemoveCharacter?.Invoke(_base);
+                currentHealth = minHealth;
+                if (TryGetComponent(out HeroCharacter _base))
+                {
+                    // CombatManager.RemoveCharacter?.Invoke(_base);
+                }
+                Debug.Log("EnemyCharacters is dead");
             }
-            Debug.Log("EnemyCharacters is dead");
         }
     }
 }

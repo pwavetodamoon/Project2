@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 
-public interface ICommandBehavior
+namespace CombatSystem.ActionCommand
 {
-    IEnumerator FirstBehaviour();
+    public interface ICommandBehavior
+    {
+        IEnumerator FirstBehaviour();
+    }
 }

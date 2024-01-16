@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class EnemyMoving : MonoBehaviour
+namespace CombatSystem.Scripts
 {
-    public float speed;
-    public bool isMoving = true;
-
-    public void Setup(float speed)
+    public class EnemyMoving : MonoBehaviour
     {
-        this.speed = speed;
-    }
+        public float speed;
+        public bool isMoving = true;
 
-    private void Update()
-    {
-        Moving();
-    }
+        public void Setup(float speed)
+        {
+            this.speed = speed;
+        }
 
-    public void Moving()
-    {
-        if (!isMoving) return;
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
+        private void Update()
+        {
+            Moving();
+        }
+
+        public void Moving()
+        {
+            if (!isMoving) return;
+            transform.Translate(Vector2.left * speed * Time.deltaTime);
+        }
     }
 }

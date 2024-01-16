@@ -1,41 +1,41 @@
+using NewCombat.Characters;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour
+namespace CombatSystem
 {
-    [SerializeField] HeroCharacter[] Hero;
-    [SerializeField]
-    MonsterCharacter[] Monster;
-    public static CombatManager Instance;
-    private void Awake()
+    public class CombatManager : MonoBehaviour
     {
-        Instance = this;
-    }
-    public MonsterCharacter GetMonster()
-    {
-        if (Monster.Length == 0) return null;
-        return Monster[0];
-    }
-    public int GetMonsterCount()
-    {
-        return Monster.Length;
-    }
-    [Button]
-    void GetAllCharacter()
-    {
-        Hero = FindObjectsOfType<HeroCharacter>();
-        foreach (HeroCharacter character in Hero)
+        [SerializeField] HeroCharacter[] Hero;
+        [SerializeField]
+        MonsterCharacter[] Monster;
+        public static CombatManager Instance;
+        private void Awake()
         {
-            Debug.Log(character.name);
+            Instance = this;
         }
-        Monster = FindObjectsOfType<MonsterCharacter>();
-        foreach (MonsterCharacter character in Monster)
+        public MonsterCharacter GetMonster()
         {
-            Debug.Log(character.name);
+            if (Monster.Length == 0) return null;
+            return Monster[0];
+        }
+        public int GetMonsterCount()
+        {
+            return Monster.Length;
+        }
+        [Button]
+        void GetAllCharacter()
+        {
+            Hero = FindObjectsOfType<HeroCharacter>();
+            foreach (HeroCharacter character in Hero)
+            {
+                Debug.Log(character.name);
+            }
+            Monster = FindObjectsOfType<MonsterCharacter>();
+            foreach (MonsterCharacter character in Monster)
+            {
+                Debug.Log(character.name);
+            }
         }
     }
 }

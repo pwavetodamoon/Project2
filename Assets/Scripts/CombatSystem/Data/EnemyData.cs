@@ -1,13 +1,14 @@
-﻿using UnityEditor;
-using UnityEngine;
-//DATA cua quai
-[CreateAssetMenu(fileName = "EnemyData Data", menuName = "Scriptable Object/ EnemyData")]
-public class EnemyData : BaseData
+﻿using UnityEngine;
+
+namespace CombatSystem.Data
 {
-    public float speed;
-    public EnemyType enemy_type;
+    //DATA cua quai
+    [CreateAssetMenu(fileName = "EnemyData Data", menuName = "Scriptable Object/ EnemyData")]
+    public class EnemyData : BaseData
+    {
+        public float speed;
+        public EnemyType enemy_type;
+    }
+    public enum EnemyType
+    { goblin, elf, monster, bat }
 }
-public enum EnemyType
-{ goblin, elf, monster, bat }
-
-

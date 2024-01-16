@@ -1,49 +1,52 @@
-public class Monster_Animator : Animator_Base
+namespace Characters.Monsters
 {
-    public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
-    public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
-    public static AnimationType Attack_State { get => AnimationType.Attack; private set { } }
-    private AnimationType currentAnimation = Walk_State;
+    public class Monster_Animator : Animator_Base
+    {
+        public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
+        public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
+        public static AnimationType Attack_State { get => AnimationType.Attack; private set { } }
+        private AnimationType currentAnimation = Walk_State;
 
-    public enum AnimationType
-    {
-        Walk,
-        Hurt,
-        Attack
-    }
-
-    /// <summary>
-    /// 0 is walk, 1 is attack, 2 is hurt   
-    /// </summary>
-    /// <param name="indexState"></param>
-    public override void ChangeAnimation<T>(T type)
-    {
-        base.ChangeAnimation(type);
-    }
-    protected override string GetAnimationNameByType<T>(T type)
-    {
-        switch (type)
+        public enum AnimationType
         {
-            case AnimationType.Walk:
-                return "walk_1";
-
-            case AnimationType.Hurt:
-                return "hurt_1";
-
-            case AnimationType.Attack:
-                return "attack_1";
-
-            default:
-                return "walk_1";
+            Walk,
+            Hurt,
+            Attack
         }
-    }
 
-    protected override void ChangeToDefaultAnimationState()
-    {
-        ChangeAnimation(currentAnimation);
-    }
-    public override void SetDefaultAnimation<T>(T type)
-    {
-        currentAnimation = (AnimationType)(object)type;
+        /// <summary>
+        /// 0 is walk, 1 is attack, 2 is hurt   
+        /// </summary>
+        /// <param name="indexState"></param>
+        public override void ChangeAnimation<T>(T type)
+        {
+            base.ChangeAnimation(type);
+        }
+        protected override string GetAnimationNameByType<T>(T type)
+        {
+            switch (type)
+            {
+                case AnimationType.Walk:
+                    return "walk_1";
+
+                case AnimationType.Hurt:
+                    return "hurt_1";
+
+                case AnimationType.Attack:
+                    return "attack_1";
+
+                default:
+                    return "walk_1";
+            }
+        }
+
+        protected override void ChangeToDefaultAnimationState()
+        {
+            ChangeAnimation(currentAnimation);
+        }
+        public override void SetDefaultAnimation<T>(T type)
+        {
+            currentAnimation = (AnimationType)(object)type;
+        }
     }
 }

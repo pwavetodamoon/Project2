@@ -1,23 +1,26 @@
 using UnityEngine;
 
-public class MovingGameObj : MonoBehaviour
+namespace CombatSystem.Scripts
 {
-    public Rigidbody2D rb;
-    public float speed;
-    public Transform target;
-    public int rotate = 0;
-
-    private void Awake()
+    public class MovingGameObj : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        public Rigidbody2D rb;
+        public float speed;
+        public Transform target;
+        public int rotate = 0;
 
-    public virtual void Moving()
-    {
-        Vector3 dir = target.position - transform.position;
-        rb.velocity = new Vector2(dir.x, dir.y).normalized * speed;
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
 
-        float rot = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rot + rotate);
+        public virtual void Moving()
+        {
+            Vector3 dir = target.position - transform.position;
+            rb.velocity = new Vector2(dir.x, dir.y).normalized * speed;
+
+            float rot = Mathf.Atan2(-dir.y, -dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, rot + rotate);
+        }
     }
 }

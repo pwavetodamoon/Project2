@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using Core.Items.InScreen;
 using UnityEngine;
 
-public class RayCollect : MonoBehaviour
+namespace Core.Items
 {
-    // Start is called before the first frame update
-    void Start()
+    public class RayCollect : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit2D = Physics2D.Raycast(transform.position, mousePos);
-        Debug.DrawRay(transform.position, mousePos, Color.red);
-        if (hit2D.collider != null)
+        // Start is called before the first frame update
+        void Start()
         {
-            if (hit2D.collider.TryGetComponent(out ICollect icollect))
+        
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit2D = Physics2D.Raycast(transform.position, mousePos);
+            Debug.DrawRay(transform.position, mousePos, Color.red);
+            if (hit2D.collider != null)
             {
-                icollect.Gather();
+                if (hit2D.collider.TryGetComponent(out ICollect icollect))
+                {
+                    icollect.Gather();
+                }
             }
         }
     }

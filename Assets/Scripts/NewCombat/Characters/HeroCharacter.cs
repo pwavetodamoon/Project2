@@ -1,36 +1,40 @@
+using Characters.Monsters;
+using CombatSystem.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-
-public class HeroCharacter : MonoBehaviour
+namespace NewCombat.Characters
 {
-    public CharacterSlot Slot;
-    public Animator_Base Animator;
-    public HeroMeleeAttack HeroMeleeAttack;
-    public HeroRangedAttack HeroRangedAttack;
-    private void Awake()
+    public class HeroCharacter : MonoBehaviour
     {
-        Slot = GetComponentInParent<CharacterSlot>();
-        Animator = GetComponentInChildren<Animator_Base>();
-    }
-    [Button]
-    //public void Attack()
-    //{
-    //    GetComponent<IHeroAttack>().ExecuteAttack(Animator);
-    //}
-    public void AttackByType(AttackTypeEnum attackTypeEnum)
-    {
-        if(attackTypeEnum == AttackTypeEnum.Near)
+        public CharacterSlot Slot;
+        public Animator_Base Animator;
+        public HeroNearAttack HeroMeleeAttack;
+        public HeroFarAttack HeroRangedAttack;
+        private void Awake()
         {
-            GetComponent<HeroMeleeAttack>().ExecuteAttack();
+            Slot = GetComponentInParent<CharacterSlot>();
+            Animator = GetComponentInChildren<Animator_Base>();
         }
-        else if(attackTypeEnum == AttackTypeEnum.Far)
+        [Button]
+        //public void Attack()
+        //{
+        //    GetComponent<IHeroAttack>().ExecuteAttack(Animator);
+        //}
+        public void AttackByType(AttackTypeEnum attackTypeEnum)
         {
-            GetComponent<HeroRangedAttack>().ExecuteAttack();
-        }
-        else
-        {
-            Debug.LogError("Attack type is not defined");
+            if(attackTypeEnum == AttackTypeEnum.Near)
+            {
+                GetComponent<HeroNearAttack>().ExecuteAttack();
+            }
+            else if(attackTypeEnum == AttackTypeEnum.Far)
+            {
+                GetComponent<HeroFarAttack>().ExecuteAttack();
+            }
+            else
+            {
+                Debug.LogError("Attack type is not defined");
+            }
         }
     }
 }
