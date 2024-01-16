@@ -6,59 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="03a0b6b4-59c3-404e-9fc4-b0946162f6eb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Background/MapBackground.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Background/MapBackground.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Background/MapBackgroundSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Background/MapBackgroundSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Background/ScrollingBackground.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Background/ScrollingBackground.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/CharacterEnumType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/CharacterEnumType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Character_Body_Sprites.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Character_Body_Sprites.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Human_Animator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Human_Animator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Animator_Base.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Animator_Base.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Monster_Animator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Monster_Animator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Monster_Body_Sprites.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Monster_Body_Sprites.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ActionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ActionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ActionSequence.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ActionSequence.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/Behavior/GoToCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/Behavior/GoToCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ICommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ICommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ICommandBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ICommandBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/BaseData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/BaseData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/CharactersData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/CharactersData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/EnemyData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/EnemyData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/Game_DataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Data/Game_DataBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/AttackBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/AttackBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/IAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/IAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/LongRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/LongRange.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/ShortRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/ShortRange.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/BulletMoving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/BulletMoving.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Enemy/EnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Enemy/EnemyAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/EnemyMoving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/EnemyMoving.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/HealthBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/HealthBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/MovingGameObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/MovingGameObj.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/CharactersSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/CharactersSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/MonsterSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/MonsterSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/PlayerCharactersSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/PlayerCharactersSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Drops/DropItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Drops/DropItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/ItemBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/ItemBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/ItemMoving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/ItemMoving.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/Item_Loot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/Item_Loot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/Item_Money.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/InScreen/Item_Money.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/ItemCreationSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/ItemCreationSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/ItemSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/ItemSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items/RayCollect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Items/RayCollect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Quest/QuestSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Quest/QuestSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Quest/QuestingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Quest/QuestingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/BaseHeroNormalAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/BaseHeroNormalAttack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/AttackCounter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/AttackCounter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/CharacterSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/CharacterSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroMeleeAttack.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroMeleeAttack.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroNormalAttack.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroNormalAttack.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroRangedAttack.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroRangedAttack.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Projectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UIAvatarController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UIAvatarController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +104,7 @@
       <workItem from="1704948704652" duration="1021000" />
       <workItem from="1704949776641" duration="1042000" />
       <workItem from="1705374980457" duration="324000" />
+      <workItem from="1705375964509" duration="648000" />
     </task>
     <servers />
   </component>

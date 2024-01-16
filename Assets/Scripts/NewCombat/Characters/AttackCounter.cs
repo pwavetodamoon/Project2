@@ -16,9 +16,14 @@ namespace NewCombat.Characters
             else if (timeCounter <= 0 && heroNormalAttack.isActive == false)
             {
                 timeCounter = maxTime;
-                heroNormalAttack.ExecuteAttack();
+                PlayEvent(heroNormalAttack);
             }
 
+        }
+
+        private void PlayEvent(BaseHeroNormalAttack heroNormalAttack)
+        {
+            heroNormalAttack.ExecuteAttack();
         }
     }
 }

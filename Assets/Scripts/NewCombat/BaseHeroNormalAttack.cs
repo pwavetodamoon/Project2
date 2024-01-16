@@ -16,9 +16,6 @@ namespace NewCombat
         public Vector2 size = Vector3.one;
         public float angle = 0;
         [ShowInInspector] AttackCounter attackCounter = new();
-        private void Awake() => animator = GetComponentInChildren<Animator_Base>();
-        protected virtual HeroCharacter GetCharacter() => GetComponentInParent<HeroCharacter>();
-        protected virtual void OnDrawGizmos() { }
         private void OnEnable()
         {
             attackCounter.CallbackEvent += ExecuteAttack;
@@ -31,6 +28,12 @@ namespace NewCombat
         {
             attackCounter.CheckTimerCounter(this,Time.deltaTime);
         }
+        private void Awake() => animator = GetComponentInChildren<Animator_Base>();
+        protected virtual HeroCharacter GetCharacter() => GetComponentInParent<HeroCharacter>();
+        protected virtual IEnumerator StartBehavior(HeroCharacter hero) { yield return null; }
+
+        protected virtual void OnDrawGizmos() { }
+
         // Check the collider in the gizmo
         [Button]
         protected virtual void CheckCollider() { }
@@ -42,9 +45,6 @@ namespace NewCombat
             isActive = true;
             StartCoroutine(StartBehavior(GetCharacter()));
         }
-
-        // Start the attack behavior with a coroutine
-        protected virtual IEnumerator StartBehavior(HeroCharacter hero) { yield return null; }
     }
 }
 
