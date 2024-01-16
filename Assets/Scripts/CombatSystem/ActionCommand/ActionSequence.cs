@@ -7,7 +7,6 @@ namespace CombatSystem.ActionCommand
 {
     public class ActionSequence : MonoBehaviour
     {
-        public bool isAttacking = false;
     }
 }
 

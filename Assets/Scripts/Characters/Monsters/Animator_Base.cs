@@ -29,7 +29,6 @@ namespace Characters.Monsters
             var clipInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (clipInfo.loop == false)
             {
-                Debug.Log("Animation is not loop");
                 animHaveLoopIsRun = true;
                 timeAnimated = clipInfo.length * clipInfo.speed;
             }

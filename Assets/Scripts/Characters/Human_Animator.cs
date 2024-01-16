@@ -1,6 +1,6 @@
 using Characters.Monsters;
 using Sirenix.OdinInspector;
-
+using UnityEngine;
 namespace Characters
 {
     public class Human_Animator : Animator_Base
@@ -10,7 +10,6 @@ namespace Characters
         public static AnimationType Slash_State { get => AnimationType.Slash; private set { } }
         public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
         private AnimationType currentType = AnimationType.Idle;
-
         public enum AnimationType
         {
             Idle,

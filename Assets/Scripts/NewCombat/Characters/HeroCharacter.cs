@@ -11,6 +11,7 @@ namespace NewCombat.Characters
         public Animator_Base Animator;
         public HeroNearAttack HeroMeleeAttack;
         public HeroFarAttack HeroRangedAttack;
+        public bool allowExcuteAnotherAttack = true;
         private void Awake()
         {
             Slot = GetComponentInParent<CharacterSlot>();

@@ -8,9 +8,10 @@ namespace NewCombat
 {
     public class HeroFarAttack : BaseHeroNormalAttack
     {
+        // FIXME: use check null to much
         public GameObject projectilePrefab;
-
-        protected override IEnumerator StartBehavior(HeroCharacter hero)
+        public float coolDownTime  = 0.5f;
+        protected override IEnumerator StartBehavior()
         {
             MonsterCharacter monster = CombatManager.Instance.GetMonster();
             
@@ -19,9 +20,11 @@ namespace NewCombat
                 Debug.Log("Target is null");
                 yield break;
             }
-            
+
+            Hero.allowExcuteAnotherAttack = false;
             yield return Fire();
-            IsActive = false;
+            yield return new WaitForSeconds(coolDownTime);
+            ResetStateAndCounter();
         }
         IEnumerator Fire()
         {

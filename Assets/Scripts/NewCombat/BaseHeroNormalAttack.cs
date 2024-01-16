@@ -9,25 +9,45 @@ namespace NewCombat
 {
     public abstract class BaseHeroNormalAttack : MonoBehaviour
     {
-        [Header("References/BaseClass")]
+        [Header("References/BaseClass")] 
         protected Animator_Base animator;
         public Transform gizmosTransform;
+        public HeroCharacter Hero;
 
-        [Header("Vector2/BaseClass")]
+        [Header("Vector2/BaseClass")] 
         public Vector2 gizmosPosition;
         public Vector2 size = Vector3.one;
 
-        [Header("Value/BaseClass")]
+        [Header("Value/BaseClass")] 
         public float Angle = 0;
         public float Speed = 2;
         public bool IsActive = false;
 
-        [Header("Features")]
-        [ShowInInspector] protected AttackCounter attackCounter = new();
+        [Header("Counter Setting/ BaseClass")] 
+        
+        public float maxCounterTime = 3f;
+
+        [ProgressBar(0, "maxCounterTime", Height = 30)] 
+        [SerializeField] private float timerCounter = 0;
+        // Features
+        protected AttackCounter attackCounter;
 
         private void Update()
         {
-            attackCounter.CheckTimerCounter(IsActive,Time.deltaTime);
+            if(maxCounterTime >= 0)
+            {
+                attackCounter.UpdateMaxCounterTime(maxCounterTime);
+            }
+            attackCounter.CheckTimerCounter(IsActive, Hero.allowExcuteAnotherAttack, Time.deltaTime);
+            timerCounter = attackCounter.timeCounter;
+            // Debug.Log("TimeCounter: "+attackCounter.timeCounter);
+        }
+
+        private void Awake()
+        {
+            attackCounter = new AttackCounter(maxCounterTime);
+            animator = GetComponentInChildren<Animator_Base>();
+            Hero = GetComponent<HeroCharacter>();
         }
 
         private void OnEnable()
@@ -39,26 +59,33 @@ namespace NewCombat
         {
             attackCounter.AttackAction -= ExecuteAttack;
         }
-        protected virtual void Awake()
+
+        protected virtual IEnumerator StartBehavior()
         {
-            animator = GetComponentInChildren<Animator_Base>();
+            yield return null;
         }
-        protected virtual HeroCharacter GetCharacter() => GetComponentInParent<HeroCharacter>();
-        protected virtual IEnumerator StartBehavior(HeroCharacter hero) { yield return null; }
 
-        protected virtual void OnDrawGizmos() { }
-
-        // Check the collider in the gizmo
+        protected virtual void OnDrawGizmos(){}
         [Button]
-        protected virtual void CheckCollider() { }
+        protected virtual void CheckCollider(){}
+
+
         // Execute the attack, this is interface method
         public void ExecuteAttack()
         {
             if (IsActive) return;
-            Debug.Log("Excute attack");
             IsActive = true;
-            StartCoroutine(StartBehavior(GetCharacter()));
+            StartCoroutine(StartBehavior());
+        }
+
+        /// <summary>
+        /// Use to reset states of attacker after attack:
+        /// </summary>
+        protected virtual void ResetStateAndCounter()
+        {
+            IsActive = false;
+            Hero.allowExcuteAnotherAttack = true;
+            attackCounter.ResetCounter();
         }
     }
 }
-
