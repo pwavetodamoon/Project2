@@ -20,32 +20,39 @@ namespace Characters.Monsters
         public virtual void ChangeAnimation<T>(T type1) where T : Enum
         {
             string animationName = GetAnimationNameByType(type1);
+            Debug.Log("Play Animation: "+animationName);
             animator.Play(animationName);
             StartCoroutine(WaitAnimation());
         }
         IEnumerator WaitAnimation()
         {
             yield return new WaitForEndOfFrame();
+            Debug.Log("Go in WaitAnimation");
             var clipInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (clipInfo.loop == false)
             {
-                animHaveLoopIsRun = true;
+                Debug.Log("Animation not have loop");
+                animationNotHaveLoopIsRun = true;
                 timeAnimated = clipInfo.length * clipInfo.speed;
+            }
+            else
+            {
+                Debug.Log("Animation have loop");
             }
         }
 
-        [SerializeField] protected bool animHaveLoopIsRun = false;
+        [SerializeField] protected bool animationNotHaveLoopIsRun = false;
         [SerializeField] protected float timeAnimated = 0;
         protected virtual void Update()
         {
-            if (!animHaveLoopIsRun)
+            if (!animationNotHaveLoopIsRun)
             {
                 return;
             }
             timeAnimated -= Time.deltaTime;
             if (timeAnimated <= 0)
             {
-                animHaveLoopIsRun = false;
+                animationNotHaveLoopIsRun = false;
                 ChangeToDefaultAnimationState();
             }
         }

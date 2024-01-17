@@ -1,27 +1,23 @@
-using Characters.Monsters;
+using Characters;
 using CombatSystem.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace NewCombat.Characters
 {
-    public class HeroCharacter : MonoBehaviour
+    public class HeroCharacter : EntityCharacter
     {
         public CharacterSlot Slot;
-        public Animator_Base Animator;
         public HeroNearAttack HeroMeleeAttack;
         public HeroFarAttack HeroRangedAttack;
         public bool allowExcuteAnotherAttack = true;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             Slot = GetComponentInParent<CharacterSlot>();
-            Animator = GetComponentInChildren<Animator_Base>();
         }
+
         [Button]
-        //public void Attack()
-        //{
-        //    GetComponent<IHeroAttack>().ExecuteAttack(Animator);
-        //}
         public void AttackByType(AttackTypeEnum attackTypeEnum)
         {
             if(attackTypeEnum == AttackTypeEnum.Near)
@@ -36,6 +32,11 @@ namespace NewCombat.Characters
             {
                 Debug.LogError("Attack type is not defined");
             }
+        }
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            Animator.ChangeAnimation(Human_Animator.Hurt_State);
         }
     }
 }

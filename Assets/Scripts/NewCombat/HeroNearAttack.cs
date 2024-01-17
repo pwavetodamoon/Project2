@@ -20,15 +20,14 @@ namespace NewCombat
         {
             if (gizmosTransform == null) return;
 
-            Collider2D[] results = new Collider2D[] { };
 
-            var size1 = Physics2D.OverlapBoxNonAlloc(gizmosTransform.position, size, Angle, results);
-            if(size1 == 0) return;
+            var results = Physics2D.OverlapBoxAll(gizmosTransform.position, size, Angle);
+            if(results.Length == 0) return;
             foreach (var collider in results)
             {
                 if (collider.TryGetComponent(out MonsterCharacter monster))
                 {
-                    Debug.Log("Monster is hit");
+                    collider.GetComponent<IDamageable>().TakeDamage(Hero.BaseStats.Strength);
                 }
             }
         }

@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03a0b6b4-59c3-404e-9fc4-b0946162f6eb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/BaseStats.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/BaseStats.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/characters/monster_flying/attack_1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/characters/monster_flying/attack_1.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/characters/monster_flying/hurt_1.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/characters/monster_flying/hurt_1.anim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Human_Animator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Human_Animator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Animator_Base.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Animator_Base.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ActionSequence.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/ActionCommand/ActionSequence.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/BaseHeroNormalAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/BaseHeroNormalAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/AttackCounter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/AttackCounter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Monster_Animator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Monster_Animator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Hero.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Hero.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroFarAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroFarAttack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroNearAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroNearAttack.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +24,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

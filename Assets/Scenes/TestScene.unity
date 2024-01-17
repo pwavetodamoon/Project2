@@ -258,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 523186792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.27, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -539,6 +539,7 @@ GameObject:
   - component: {fileID: 1258871191}
   - component: {fileID: 1258871192}
   - component: {fileID: 1258871193}
+  - component: {fileID: 1258871194}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -575,8 +576,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99a43884c53cb94693e7142e4d81f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackedTransform: {fileID: 0}
-  Animator: {fileID: 0}
+  Animator: {fileID: 1444688189}
+  BaseStats: {fileID: 1258871194}
+  AttackedTransform: {fileID: 523186793}
 --- !u!61 &1258871193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -622,6 +624,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1258871194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258871190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa4ae13bcc04fb684f9c4750d46856a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 100
+  Dex: 0
+  Strength: 1
+--- !u!114 &1444688189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3176567593639756565, guid: f9fa98c9d01d3f34f8b7012353cf2571, type: 3}
+  m_PrefabInstance: {fileID: 224009316}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8a3536e50a41347a6243f0951d66ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1835609238
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +797,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 2130498615958115108, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3974775916326653494, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -809,10 +841,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008246247074431557, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: Slot
+      value: 
+      objectReference: {fileID: 1510572885170450183}
+    - target: {fileID: 6697424389384466263, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6697424389384466263, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 790869691}
+    - target: {fileID: 6721859214255508898, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

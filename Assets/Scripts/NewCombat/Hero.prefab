@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 4008246247074431557}
   - component: {fileID: 6721859214255508898}
   - component: {fileID: 6697424389384466263}
-  - component: {fileID: 8660272306959740603}
+  - component: {fileID: 2694655855483602916}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -194,10 +194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slot: {fileID: 0}
-  Animator: {fileID: 0}
+  Animator: {fileID: 6205382650338924181}
   HeroMeleeAttack: {fileID: 6721859214255508898}
   HeroRangedAttack: {fileID: 6697424389384466263}
   allowExcuteAnotherAttack: 1
+  BaseStats: {fileID: 2694655855483602916}
 --- !u!114 &6721859214255508898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +243,7 @@ MonoBehaviour:
   timerCounter: 3
   projectilePrefab: {fileID: 0}
   coolDownTime: 0.5
---- !u!114 &8660272306959740603
+--- !u!114 &2694655855483602916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,9 +252,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2130498615958115108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f14af59d2fde14585bd7c76ffe187d, type: 3}
+  m_Script: {fileID: 11500000, guid: faa4ae13bcc04fb684f9c4750d46856a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 100
+  Dex: 0
+  Strength: 1
 --- !u!1 &2636142058065870773
 GameObject:
   m_ObjectHideFlags: 0
