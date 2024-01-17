@@ -19,16 +19,7 @@ namespace NewCombat.Characters
         public override void TakeDamage(float damage)
         {
             base.TakeDamage(damage);
-            // StartCoroutine(Hurt());
             Animator.ChangeAnimation(Monster_Animator.Hurt_State);
-        }
-
-        private IEnumerator Hurt()
-        {
-            Animator.ChangeAnimation(Monster_Animator.Hurt_State);
-            var time = Animator.GetAnimationLength(Monster_Animator.Hurt_State);
-            yield return new WaitForSeconds(time);
-            Animator.ChangeAnimation(Monster_Animator.Walk_State);
         }
     }
     public interface IDamageable

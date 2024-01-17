@@ -7,12 +7,16 @@ namespace NewCombat
     {
         private BoxCollider2D boxCollder2D;
         private new Rigidbody2D rigidbody2D;
-        public Transform shooter;
+        public EntityCharacter shooter;
         private void Awake()
         {
             boxCollder2D = GetComponent<BoxCollider2D>();
             rigidbody2D = boxCollder2D.attachedRigidbody;
             boxCollder2D.isTrigger = true;
+        }
+        public void SetShooter(EntityCharacter shooter)
+        {
+            this.shooter = shooter;
         }
         public void SetTarget(Transform target)
         {
@@ -34,6 +38,7 @@ namespace NewCombat
                 if (box.TryGetComponent(out MonsterCharacter monsterCharacter))
                 {
                     Debug.Log(shooter + " is hit: " + monsterCharacter.name);
+                    box.GetComponent<IDamageable>().TakeDamage(shooter.BaseStats.Strength);
                 }
             }
             transform.gameObject.SetActive(false);

@@ -45,6 +45,7 @@ namespace NewCombat
             
             projectile.transform.position = gizmosPosition;
             projectile.GetComponent<Projectile>().SetTarget(monster.transform);
+            projectile.GetComponent<Projectile>().SetShooter(Hero);
             
             return projectile.transform;
         }
