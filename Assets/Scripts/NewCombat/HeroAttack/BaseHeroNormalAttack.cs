@@ -48,7 +48,7 @@ namespace NewCombat
             {
                 attackCounter.UpdateMaxCounterTime(maxCounterTime);
             }
-            attackCounter.CheckTimerCounter(IsActive, Hero.allowExcuteAnotherAttack, Time.deltaTime);
+            attackCounter.CheckTimerCounter(Hero.allowCounter,IsActive, Hero.allowExcuteAnotherAttack, Time.deltaTime);
             timerCounterInspector = attackCounter.timeCounter;
             // Debug.Log("TimeCounter: "+attackCounter.timeCounter);
         }

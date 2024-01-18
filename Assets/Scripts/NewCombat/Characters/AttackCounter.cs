@@ -13,12 +13,12 @@ namespace NewCombat.Characters
         public float timeCounter;
         private float maxTime = 0.5f;
         public Action AttackAction;
-        public void CheckTimerCounter(bool attackIsActive, bool allowToExcuteAnotherAttack,float time)
+        public void CheckTimerCounter(bool CanCounter,bool attackIsActive, bool allowToExcuteAnotherAttack,float time)
         {
             bool allowAttack = false;
             bool allowCounter = false;
             // Time counter
-            allowCounter = timeCounter > 0 && attackIsActive == false;
+            allowCounter = CanCounter == true && timeCounter > 0 && attackIsActive == false;
             // Attack
             allowAttack = allowToExcuteAnotherAttack == true && timeCounter <= 0 && attackIsActive == false;
 

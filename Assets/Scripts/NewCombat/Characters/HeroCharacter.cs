@@ -11,6 +11,7 @@ namespace NewCombat.Characters
         public HeroNearAttack HeroMeleeAttack;
         public HeroFarAttack HeroRangedAttack;
         public bool allowExcuteAnotherAttack = true;
+        public bool allowCounter = true;
         protected override void Awake()
         {
             base.Awake();

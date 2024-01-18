@@ -556,8 +556,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.33, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.81, y: 0.81, z: 0.81}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 224009317}
   - {fileID: 523186793}
@@ -578,6 +578,9 @@ MonoBehaviour:
   Animator: {fileID: 1444688189}
   BaseStats: {fileID: 1258871194}
   AttackedTransform: {fileID: 523186793}
+  MonsterState: 0
+  speed: 2
+  attackRange: 0.5
 --- !u!61 &1258871193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -841,9 +844,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1510572885170450183}
     - target: {fileID: 6697424389384466263, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697424389384466263, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 790869691}
+    - target: {fileID: 7260391165171990298, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Size.x
+      value: 1.3208406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260391165171990298, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Size.y
+      value: 1.651016
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260391165171990298, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.09067261
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260391165171990298, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.325508
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260391165171990298, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -7,9 +7,28 @@ namespace NewCombat.Characters
     public class MonsterCharacter : EntityCharacter, IDamageable
     {
         [SerializeField] private Transform AttackedTransform;
+
+        public float speed = 2;
+        public float attackRange = .5f;
+        public HeroCharacter Hero;
+        private void Moving()
+        {
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Hero"))
+            {
+                Attack();
+            }
+        }
+        private void Attack()
+        {
+
+        }
         public Vector3 GetAttackerPosition()
         {
-            if(AttackedTransform == null)
+            if (AttackedTransform == null)
             {
                 return transform.position;
             }
