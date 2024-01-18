@@ -18,6 +18,7 @@ namespace NewCombat
             if (monster == null)
             {
                 Debug.Log("Target is null");
+                IsActive = false;
                 yield break;
             }
 

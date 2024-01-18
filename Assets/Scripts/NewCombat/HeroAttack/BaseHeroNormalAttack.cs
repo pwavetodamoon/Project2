@@ -7,8 +7,18 @@ using UnityEngine;
 
 namespace NewCombat
 {
+    // Explain class:
+    // Properties:
+    // - animator: use to change animation
+    // - IsActive: use to check if this attack is actived
+    // OnDisable, OnEnable :
+    // - Use to subscribe and unsubscribe event in AttackCounter (Excute Attack)
+    // Update:
+    // - Update Max Counter time in AttackCounter class
+    // - Check timer counter in AttackCounter class and excute event Excute Attack
     public abstract class BaseHeroNormalAttack : MonoBehaviour
     {
+
         [Header("References/BaseClass")] 
         protected Animator_Base animator;
         public Transform gizmosTransform;
@@ -26,9 +36,9 @@ namespace NewCombat
         [Header("Counter Setting/ BaseClass")] 
         
         public float maxCounterTime = 3f;
-
+        // create a progress bar with a range from 0 to 100, 
         [ProgressBar(0, "maxCounterTime", Height = 30)] 
-        [SerializeField] private float timerCounter = 0;
+        [SerializeField] private float timerCounterInspector = 0;
         // Features
         protected AttackCounter attackCounter;
 
@@ -39,7 +49,7 @@ namespace NewCombat
                 attackCounter.UpdateMaxCounterTime(maxCounterTime);
             }
             attackCounter.CheckTimerCounter(IsActive, Hero.allowExcuteAnotherAttack, Time.deltaTime);
-            timerCounter = attackCounter.timeCounter;
+            timerCounterInspector = attackCounter.timeCounter;
             // Debug.Log("TimeCounter: "+attackCounter.timeCounter);
         }
 
@@ -62,27 +72,26 @@ namespace NewCombat
 
         protected virtual IEnumerator StartBehavior()
         {
+            // Method use for create behavior of attack
+            // Make sure to call ResetStateAndCounter() at the end of the method
+            // If enemy is null, break the method and reset IsActive to false
             yield return null;
         }
 
         protected virtual void OnDrawGizmos(){}
         [Button]
         protected virtual void CheckCollider(){}
-
-
-        // Execute the attack, this is interface method
         public void ExecuteAttack()
         {
+            // This method is called when the counter is finished
             if (IsActive) return;
             IsActive = true;
             StartCoroutine(StartBehavior());
         }
 
-        /// <summary>
-        /// Use to reset states of attacker after attack:
-        /// </summary>
         protected virtual void ResetStateAndCounter()
         {
+            // Call in StartBehavior and at final the attack to reset state and counter
             IsActive = false;
             Hero.allowExcuteAnotherAttack = true;
             attackCounter.ResetCounter();

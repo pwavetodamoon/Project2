@@ -231,8 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hero:
   - {fileID: 6647051649778593654}
-  Monster:
-  - {fileID: 1258871192}
+  Monster: []
 --- !u!1 &523186792
 GameObject:
   m_ObjectHideFlags: 0

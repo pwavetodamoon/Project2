@@ -3,12 +3,14 @@ using Characters;
 using CombatSystem;
 using CombatSystem.ActionCommand;
 using NewCombat.Characters;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace NewCombat
 {
     public class HeroNearAttack : BaseHeroNormalAttack
     {
+
         protected override void OnDrawGizmos()
         {
             if (gizmosTransform == null) return;
@@ -37,6 +39,7 @@ namespace NewCombat
             var monster = CombatManager.Instance.GetMonster();
             if (monster == null)
             {
+                IsActive = false;
                 yield break;
             }
             // Go to enemy

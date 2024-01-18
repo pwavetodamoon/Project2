@@ -17,14 +17,9 @@ namespace NewCombat.Characters
         {
             bool allowAttack = false;
             bool allowCounter = false;
-
-            // The counter can count even when the allowToExcuteAnotherAttack is false
+            // Time counter
             allowCounter = timeCounter > 0 && attackIsActive == false;
-
-            // The attack can excute when:
-            // 'allowToExcuteAnotherAttack' is true
-            // timeCounter is 0
-            // current attackIsActive is false
+            // Attack
             allowAttack = allowToExcuteAnotherAttack == true && timeCounter <= 0 && attackIsActive == false;
 
             if (allowCounter)
