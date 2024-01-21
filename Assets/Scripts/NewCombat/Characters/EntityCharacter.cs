@@ -20,6 +20,7 @@ namespace NewCombat.Characters
 
         public virtual IEnumerator TakeDamageCoroutine(float damage)
         {
+            ResetState(false);
             if (BaseStats == null)
                 BaseStats = GetComponent<BaseStats>();
             BaseStats.Health -= damage;
@@ -31,6 +32,7 @@ namespace NewCombat.Characters
 
             Debug.Log("Monster is taking damage");
             yield return new WaitForSeconds(PlayHurtAnimation());
+            ResetState(true);
         }
 
         protected abstract float PlayHurtAnimation();

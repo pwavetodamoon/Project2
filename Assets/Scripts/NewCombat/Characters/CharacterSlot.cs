@@ -21,9 +21,9 @@ namespace NewCombat.Characters
                 EnemyStand = transform.Find(EnemyStandname);
             }
         }
-        public Vector3 GetCharacterPosition()
+        public Transform GetCharacterPosition()
         {
-            return CharacterStand.position;
+            return CharacterStand;
         }
         public Vector3 GetAttackerPosition()
         {

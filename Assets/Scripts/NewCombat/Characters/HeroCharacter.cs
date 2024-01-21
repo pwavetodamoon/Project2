@@ -16,7 +16,7 @@ namespace NewCombat.Characters
         protected override void Awake()
         {
             base.Awake();
-            Slot = GetComponentInParent<CharacterSlot>();
+            //Slot = GetComponentInParent<CharacterSlot>();
         }
 
         [Button]

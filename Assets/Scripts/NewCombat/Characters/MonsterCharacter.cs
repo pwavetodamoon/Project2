@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
-using Characters;
 using Characters.Monsters;
 using CombatSystem;
+using NewCombat.HeroAttack;
 using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 namespace NewCombat.Characters
 {
     public class MonsterCharacter : EntityCharacter, IDamageable
@@ -18,8 +15,13 @@ namespace NewCombat.Characters
         public HeroCharacter Hero;
         public bool notMoving = false;
         public bool IsTrackHero = false;
-
         bool isStartAttackBehaviour = false;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            GetComponent<BaseNormalAttack>().enabled = false;
+        }
         void Update()
         {
             Moving();
@@ -29,25 +31,6 @@ namespace NewCombat.Characters
             if(notMoving) return;
             transform.Translate(Vector3.left * (Time.deltaTime * Speed));
         }
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if(collision.TryGetComponent(out HeroCharacter hero))
-            {
-                if (isStartAttackBehaviour == true) return;
-
-                notMoving = true;
-                Hero = hero;
-                StartCoroutine(MoveToAttkedPos());
-                isStartAttackBehaviour = true;
-            }
-        }
-        private void FindTarget()
-        {
-            if(IsTrackHero == true) return;
-            Hero = CombatManager.Instance.GetHero();
-            if(Hero == null) return;
-            IsTrackHero = true;
-        }
         [Button]
         void StartCoroutine()
         {
@@ -56,6 +39,7 @@ namespace NewCombat.Characters
         [HideInEditorMode]
         public IEnumerator MoveToAttkedPos()
         {
+            GetComponent<BaseNormalAttack>().enabled = true;
             //if (Hero == null) yield break;
             while (true)
             {
@@ -90,13 +74,13 @@ namespace NewCombat.Characters
             }
         }
 
-        public Vector3 GetAttackerPosition()
+        public Transform GetAttackerPosition()
         {
             if (AttackedTransform == null)
             {
-                return transform.position;
+                return transform;
             }
-            return AttackedTransform.position;
+            return AttackedTransform;
         }
         protected override float PlayHurtAnimation()
         {

@@ -2,22 +2,17 @@ using System.Collections;
 using Characters;
 using CombatSystem;
 using NewCombat.Characters;
+using NewCombat.MonsterAttack;
 using UnityEngine;
 
 namespace NewCombat.HeroAttack
 {
-    public class HeroFarAttack : BaseHeroNormalAttack
+    public class HeroFarAttack : BaseNormalAttack
     {
         // FIXME: use check null to much
         public GameObject projectilePrefab;
         public float coolDownTime = 0.5f;
-        public HeroCharacter hero;
         public Transform shotterTransform;
-        protected override void Awake()
-        {
-            base.Awake();
-            hero = GetComponent<HeroCharacter>();
-        }
         protected override IEnumerator StartBehavior()
         {
             MonsterCharacter monster = CombatManager.Instance.GetMonster();
@@ -29,7 +24,7 @@ namespace NewCombat.HeroAttack
                 yield break;
             }
 
-            hero.allowExcuteAnotherAttack = false;
+            entityCharacter.allowExcuteAnotherAttack = false;
             yield return Fire();
             yield return new WaitForSeconds(coolDownTime);
             ResetStateAndCounter();
@@ -52,7 +47,7 @@ namespace NewCombat.HeroAttack
             var projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
             projectile.transform.position = shotterTransform.position;
-            projectile.GetComponent<Projectile>().Initialized(hero, monster.transform, "Enemy");
+            projectile.GetComponent<Projectile>().Initialized(entityCharacter, monster.transform, "Enemy");
             return projectile.transform;
         }
     }

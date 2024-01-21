@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using Characters.Monsters;
 using NewCombat.Characters;
 using Sirenix.OdinInspector;
@@ -21,18 +22,10 @@ namespace NewCombat.HeroAttack
         [SerializeField] protected float timerCounterInspector = 0;
 
         private AttackCounter attackCounter;
-        private EntityCharacter entityCharacter;
+        protected EntityCharacter entityCharacter;
         protected CombatCollider CombatCollider;
 
-        protected virtual void CounterForAttack()
-        {
-            if(maxCounterTime >= 0)
-            {
-                attackCounter.UpdateMaxCounterTime(maxCounterTime);
-            }
-            attackCounter.CheckTimerCounter(entityCharacter.allowCounter,IsActive, entityCharacter.allowExcuteAnotherAttack, Time.deltaTime);
-            timerCounterInspector = attackCounter.timeCounter;
-        }
+
 
         protected virtual void Awake()
         {
@@ -52,8 +45,22 @@ namespace NewCombat.HeroAttack
         }
         private void Update()
         {
+            UpdateMaxCounter();
             CounterForAttack();
+            UpdateAttackCounterInspector();
         }
+        protected virtual void CounterForAttack()
+        {
+            attackCounter.CheckTimerCounter(entityCharacter.allowCounter, IsActive, entityCharacter.allowExcuteAnotherAttack, Time.deltaTime);
+        }
+        private void UpdateMaxCounter()
+        {
+            if (maxCounterTime >= 0)
+            {
+                attackCounter.UpdateMaxCounterTime(maxCounterTime);
+            }
+        }
+        private void UpdateAttackCounterInspector() => timerCounterInspector = attackCounter.timeCounter;
         protected virtual IEnumerator StartBehavior()
         {
             // Method use for create behavior of attack
@@ -80,7 +87,8 @@ namespace NewCombat.HeroAttack
 
         protected virtual void CauseDamage(string Tag)
         {
-            
+
         }
+
     }
 }
