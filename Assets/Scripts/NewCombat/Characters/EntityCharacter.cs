@@ -1,5 +1,6 @@
 using System.Collections;
 using Characters.Monsters;
+using CombatSystem;
 using UnityEngine;
 
 namespace NewCombat.Characters
@@ -22,22 +23,31 @@ namespace NewCombat.Characters
         {
             ResetState(false);
             if (BaseStats == null)
+            {
                 BaseStats = GetComponent<BaseStats>();
+            }
+
             BaseStats.Health -= damage;
+            
             if (BaseStats.Health <= 0)
             {
                 BaseStats.Health = 0;
-                Debug.Log("Monster is dead");
             }
 
             Debug.Log("Monster is taking damage");
             yield return new WaitForSeconds(PlayHurtAnimation());
+
+            if (BaseStats.Health <= 0)
+            {
+                Destroy(gameObject);
+            }
+
             ResetState(true);
         }
 
         protected abstract float PlayHurtAnimation();
 
-        private void ResetState(bool boolen)
+        protected virtual void ResetState(bool boolen)
         {
             allowExcuteAnotherAttack = boolen;
             allowCounter = boolen;
@@ -46,7 +56,7 @@ namespace NewCombat.Characters
         public void TakeDamage(float damage)
         {
             StartCoroutine(TakeDamageCoroutine(damage));
-            Debug.Log($"Entity {gameObject.name} is taking damage");
+            Debug.Log($"Entity {gameObject.name} is taking damage",gameObject);
         }
     }
 }

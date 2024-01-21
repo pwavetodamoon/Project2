@@ -1,13 +1,13 @@
 ﻿using NewCombat.HeroAttack;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class BaseNearAttack : BaseNormalAttack
 {
+    [Title("Near Attack Settings")]
     public Transform AttackTransform;
     public Vector2 gizmosPosition;
     public Vector2 size;
-    public string Tag = "Enemy";
-
     protected float Angle = 0;
     public void OnDrawGizmos()
     {

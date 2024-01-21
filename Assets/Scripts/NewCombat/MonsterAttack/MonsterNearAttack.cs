@@ -20,7 +20,7 @@ namespace NewCombat.MonsterAttack
             var attackTime = animator.GetAnimationLength(Monster_Animator.Attack_State);
             animator.ChangeAnimation(Monster_Animator.Attack_State);
             yield return new WaitForSeconds(attackTime);
-            CauseDamage("Hero");
+            CauseDamage(GameTag.Hero);
             ResetStateAndCounter();
         }
     }

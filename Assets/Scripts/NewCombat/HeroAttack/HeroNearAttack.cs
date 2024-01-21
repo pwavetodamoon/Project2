@@ -19,6 +19,8 @@ namespace NewCombat.HeroAttack
                 IsActive = false;
                 yield break;
             }
+            monster.notMoving = true;
+
             // Go to enemy
             entityCharacter.allowExcuteAnotherAttack = false;
 
@@ -26,7 +28,7 @@ namespace NewCombat.HeroAttack
             // Play to end animation
             yield return AttackBetween();
             // Check Collider at end the animation
-            this.CauseDamage(Tag);
+            this.CauseDamage(GameTag.Enemy);
             // Go back position
 
             var slotPosition = GetComponent<HeroCharacter>().Slot.GetCharacterPosition();

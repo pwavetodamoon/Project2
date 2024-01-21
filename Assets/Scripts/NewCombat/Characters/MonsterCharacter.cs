@@ -17,10 +17,16 @@ namespace NewCombat.Characters
         public bool IsTrackHero = false;
         bool isStartAttackBehaviour = false;
 
+        float xRandomNoise = 0;
+        float yRandomNoise = 0;
         protected override void Awake()
         {
             base.Awake();
             GetComponent<BaseNormalAttack>().enabled = false;
+            xRandomNoise = Random.Range(-.2f, .2f);
+            yRandomNoise = Random.Range(-.2f, .2f);
+
+            CombatManager.Instance.AddMonster(this);
         }
         void Update()
         {
@@ -28,13 +34,18 @@ namespace NewCombat.Characters
         }
         private void Moving()
         {
-            if(notMoving) return;
+            if (notMoving || isStartAttackBehaviour) return;
             transform.Translate(Vector3.left * (Time.deltaTime * Speed));
         }
         [Button]
-        void StartCoroutine()
+        public void StartCoroutine()
         {
-            StartCoroutine(MoveToAttkedPos());
+            if (isStartAttackBehaviour == false)
+            {
+                notMoving = true;
+                StartCoroutine(MoveToAttkedPos());
+                isStartAttackBehaviour = true;
+            }
         }
         [HideInEditorMode]
         public IEnumerator MoveToAttkedPos()
@@ -43,12 +54,12 @@ namespace NewCombat.Characters
             //if (Hero == null) yield break;
             while (true)
             {
-                if(Hero != null)
+                if (Hero != null)
                 {
                     var TargetPosition = Hero.Slot.GetAttackerPosition();
                     var direction = TargetPosition - transform.position;
                     var isOnTarget = false;
-                    
+
                     if (Vector3.Distance(transform.position, TargetPosition) < 0.1f)
                     {
                         isOnTarget = true;
@@ -73,7 +84,18 @@ namespace NewCombat.Characters
                 yield return new WaitForFixedUpdate();
             }
         }
-
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            Debug.Log("Trigger Enter");
+            if (collision.tag != GameTag.TriggerEnemy) return;
+            Debug.Log("Trigger Enemy");
+            StartCoroutine();
+        }
+        protected override void ResetState(bool boolen)
+        {
+            base.ResetState(boolen);
+            notMoving = !boolen;
+        }
         public Transform GetAttackerPosition()
         {
             if (AttackedTransform == null)
