@@ -19,6 +19,11 @@ namespace CombatSystem
             if (Monster.Length == 0) return null;
             return Monster[0];
         }
+        public HeroCharacter GetHero()
+        {
+            if (Hero.Length == 0) return null;
+            return Hero[0];
+        }
         public int GetMonsterCount()
         {
             return Monster.Length;

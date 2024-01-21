@@ -1,28 +1,50 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Monsters;
-using NewCombat.Characters;
 using UnityEngine;
 
-[RequireComponent(typeof(BaseStats))]
-public abstract class EntityCharacter : MonoBehaviour , IDamageable
+namespace NewCombat.Characters
 {
-    public Animator_Base Animator;
-    public BaseStats BaseStats;
-    protected virtual void Awake()
+    [RequireComponent(typeof(BaseStats))]
+    public abstract class EntityCharacter : MonoBehaviour, IDamageable
     {
-        BaseStats = GetComponent<BaseStats>();
-        Animator = GetComponentInChildren<Animator_Base>();
-    }
-    public virtual void TakeDamage(float damage)
-    {
-        if(BaseStats == null)
-            BaseStats = GetComponent<BaseStats>();
-        BaseStats.Health -= damage;
-        if(BaseStats.Health <= 0)
+        public Animator_Base Animator;
+        public BaseStats BaseStats;
+        public bool allowExcuteAnotherAttack = true;
+        public bool allowCounter = true;
+
+        protected virtual void Awake()
         {
-            BaseStats.Health = 0;
-            Debug.Log("Monster is dead");
+            BaseStats = GetComponent<BaseStats>();
+            Animator = GetComponentInChildren<Animator_Base>();
+        }
+
+        public virtual IEnumerator TakeDamageCoroutine(float damage)
+        {
+            if (BaseStats == null)
+                BaseStats = GetComponent<BaseStats>();
+            BaseStats.Health -= damage;
+            if (BaseStats.Health <= 0)
+            {
+                BaseStats.Health = 0;
+                Debug.Log("Monster is dead");
+            }
+
+            Debug.Log("Monster is taking damage");
+            yield return new WaitForSeconds(PlayHurtAnimation());
+        }
+
+        protected abstract float PlayHurtAnimation();
+
+        private void ResetState(bool boolen)
+        {
+            allowExcuteAnotherAttack = boolen;
+            allowCounter = boolen;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            StartCoroutine(TakeDamageCoroutine(damage));
+            Debug.Log($"Entity {gameObject.name} is taking damage");
         }
     }
 }

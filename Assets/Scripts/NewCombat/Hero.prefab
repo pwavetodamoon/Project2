@@ -196,10 +196,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 6205382650338924181}
   BaseStats: {fileID: 2694655855483602916}
+  allowExcuteAnotherAttack: 1
+  allowCounter: 1
   Slot: {fileID: 0}
   HeroMeleeAttack: {fileID: 6721859214255508898}
   HeroRangedAttack: {fileID: 6697424389384466263}
-  allowExcuteAnotherAttack: 1
 --- !u!114 &6721859214255508898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,14 +214,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gizmosTransform: {fileID: 4544736767473640351}
-  Hero: {fileID: 4008246247074431557}
   gizmosPosition: {x: 0.55, y: 0}
   size: {x: 0.99, y: 1}
   Angle: 0
-  Speed: 2
   IsActive: 0
   maxCounterTime: 2.78
   timerCounterInspector: 0
+  hero: {fileID: 4008246247074431557}
+  Speed: 4
 --- !u!114 &6697424389384466263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,20 +229,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130498615958115108}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f804feaf5b77e3d46a42866b1be193b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gizmosTransform: {fileID: 4544736767473640351}
-  Hero: {fileID: 4008246247074431557}
   gizmosPosition: {x: 0, y: 0}
   size: {x: 1, y: 1}
   Angle: 0
-  Speed: 5
   IsActive: 0
   maxCounterTime: 3
   timerCounterInspector: 0
+  hero: {fileID: 0}
   projectilePrefab: {fileID: 0}
   coolDownTime: 0.5
 --- !u!114 &2694655855483602916
@@ -288,10 +288,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.09067261, y: 0.325508}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -302,7 +302,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3208406, y: 1.651016}
   m_EdgeRadius: 0
 --- !u!1 &2636142058065870773
 GameObject:

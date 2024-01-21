@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03a0b6b4-59c3-404e-9fc4-b0946162f6eb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseNormalAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseNormalAttack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/CombatCollider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/CombatCollider.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Animator_Base.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Characters/Monsters/Animator_Base.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Hero.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Hero.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseHeroNormalAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseHeroNormalAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroFarAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroFarAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroNearAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroNearAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/MonsterAttack/MonsterNearAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/MonsterAttack/MonsterNearAttack.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +129,10 @@
       <workItem from="1705382005600" duration="1176000" />
       <workItem from="1705389003319" duration="7432000" />
       <workItem from="1705408697867" duration="359000" />
+      <workItem from="1705565142765" duration="1140000" />
+      <workItem from="1705574900510" duration="3603000" />
+      <workItem from="1705743111183" duration="6093000" />
+      <workItem from="1705825643089" duration="5000" />
     </task>
     <servers />
   </component>

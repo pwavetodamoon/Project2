@@ -1,5 +1,7 @@
+using System.Collections;
 using Characters;
 using CombatSystem.Data;
+using NewCombat.HeroAttack;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,8 +12,7 @@ namespace NewCombat.Characters
         public CharacterSlot Slot;
         public HeroNearAttack HeroMeleeAttack;
         public HeroFarAttack HeroRangedAttack;
-        public bool allowExcuteAnotherAttack = true;
-        public bool allowCounter = true;
+
         protected override void Awake()
         {
             base.Awake();
@@ -34,10 +35,11 @@ namespace NewCombat.Characters
                 Debug.LogError("Attack type is not defined");
             }
         }
-        public override void TakeDamage(float damage)
+        protected override float PlayHurtAnimation()
         {
-            base.TakeDamage(damage);
+            var time  = Animator.GetAnimationLength(Human_Animator.Hurt_State);
             Animator.ChangeAnimation(Human_Animator.Hurt_State);
+            return time;
         }
     }
 }

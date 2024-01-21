@@ -1,39 +1,35 @@
 using System.Collections;
 using Characters;
 using CombatSystem;
-using CombatSystem.ActionCommand;
 using NewCombat.Characters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace NewCombat
+namespace NewCombat.HeroAttack
 {
     public class HeroNearAttack : BaseHeroNormalAttack
     {
 
-        protected override void OnDrawGizmos()
+        public Transform gizmosTransform;
+        public Vector2 gizmosPosition;
+        public Vector2 size = Vector3.one;
+        
+        protected float Angle = 0;
+        public float Speed = 2;
+        public HeroCharacter hero;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            hero = GetComponent<HeroCharacter>();
+        }
+        protected void OnDrawGizmos()
         {
             if (gizmosTransform == null) return;
             Gizmos.color = Color.red;
             Gizmos.DrawCube(gizmosTransform.position, size);
         }
-
-        protected override void CheckCollider()
-        {
-            if (gizmosTransform == null) return;
-
-
-            var results = Physics2D.OverlapBoxAll(gizmosTransform.position, size, Angle);
-            if(results.Length == 0) return;
-            foreach (var collider in results)
-            {
-                if (collider.TryGetComponent(out MonsterCharacter monster))
-                {
-                    collider.GetComponent<IDamageable>().TakeDamage(Hero.BaseStats.Strength);
-                }
-            }
-        }
-
+        public string Tag = "Enemy";
         protected override IEnumerator StartBehavior()
         {
             var monster = CombatManager.Instance.GetMonster();
@@ -43,15 +39,15 @@ namespace NewCombat
                 yield break;
             }
             // Go to enemy
-            Hero.allowExcuteAnotherAttack = false;
+            hero.allowExcuteAnotherAttack = false;
             
-            yield return MoveToTarget(Hero.transform, monster.GetAttackerPosition());
+            yield return MoveToTarget(hero.transform, monster.GetAttackerPosition());
             // Play to end animation
             yield return AttackBetween();
             // Check Collider at end the animation
-            CheckCollider();
+            this.CauseDamage(Tag);
             // Go back position
-            yield return MoveToTarget(Hero.transform, Hero.Slot.GetCharacterPosition());
+            yield return MoveToTarget(hero.transform, hero.Slot.GetCharacterPosition());
 
             ResetStateAndCounter();
         }
@@ -66,20 +62,17 @@ namespace NewCombat
         {
             animator.ChangeAnimation(Human_Animator.Walk_State);
 
-            while (true)
+            while (Vector2.Distance(Character.position, TargetPosition) > 0.1f)
             {
-                var direction = TargetPosition - Character.position;
-                direction.Normalize();
-                Character.Translate(Speed * Time.deltaTime * direction);
-
-                if (Vector3.Distance(Character.position, TargetPosition) < 0.1f)
-                {
-                    break;
-                }
-
+                Character.position = Vector2.MoveTowards(Character.position, TargetPosition, Speed * Time.deltaTime);
                 yield return new WaitForFixedUpdate();
             }
+
             animator.ChangeAnimation(Human_Animator.Idle_State);
+        }
+        protected override void CauseDamage(string Tag)
+        {
+            CombatCollider.CheckOverlapBox(Tag, gizmosTransform.position, size, Angle);
         }
     }
 }
