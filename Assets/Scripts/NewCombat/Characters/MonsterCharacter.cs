@@ -54,7 +54,7 @@ namespace NewCombat.Characters
             //if (Hero == null) yield break;
             while (true)
             {
-                if (Hero != null)
+                if (Hero != null && notMoving)
                 {
                     var TargetPosition = Hero.Slot.GetAttackerPosition();
                     var direction = TargetPosition - transform.position;
@@ -76,7 +76,7 @@ namespace NewCombat.Characters
                         transform.Translate(Speed * Time.deltaTime * direction);
                     }
                 }
-                else
+                else if(Hero == null)
                 {
                     Hero = CombatManager.Instance.GetHero();
                     yield return new WaitForSeconds(.1f);

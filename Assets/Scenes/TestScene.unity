@@ -660,6 +660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 2694655855483602916, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: Strength
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3974775916326653494, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.29
