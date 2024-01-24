@@ -1,41 +1,43 @@
-using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class QuestingSystem : SerializedMonoBehaviour
+namespace Core.Quest
 {
-    public static QuestingSystem Instance;
-    [SerializeField] Dictionary<string, int> questDictionary;
-
-    public QuestSO questSO;
-    void Awake()
+    public class QuestingSystem : SerializedMonoBehaviour
     {
-        if (Instance == null)
+        public static QuestingSystem Instance;
+        [SerializeField] Dictionary<string, int> questDictionary;
+
+        public QuestSO questSO;
+        void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            CreateQuest();
         }
-        CreateQuest();
-    }
-    void CreateQuest()
-    {
-        questDictionary = new Dictionary<string, int>();
-        foreach (var item in questSO.GetItemSOList())
+        void CreateQuest()
         {
-            questDictionary.Add(item.Id, 0);
+            questDictionary = new Dictionary<string, int>();
+            foreach (var item in questSO.GetItemSOList())
+            {
+                questDictionary.Add(item.Id, 0);
+            }
         }
-    }
 
-    public void CollectItem(string id)
-    {
-        if (!questDictionary.ContainsKey(id)) return;
-        if (questDictionary[id] > 5) return;
-
-        questDictionary[id]++;
-        if (questDictionary[id] == 5)
+        public void CollectItem(string id)
         {
-            Debug.Log("Complete Quest Gather Item: " + id);
-            questSO.CompleteQuestItem();
+            if (!questDictionary.ContainsKey(id)) return;
+            if (questDictionary[id] > 5) return;
+
+            questDictionary[id]++;
+            if (questDictionary[id] == 5)
+            {
+                Debug.Log("Complete Quest Gather Item: " + id);
+                questSO.CompleteQuestItem();
+            }
         }
     }
 }

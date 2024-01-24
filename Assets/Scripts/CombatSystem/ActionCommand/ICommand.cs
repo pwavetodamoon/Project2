@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 
-public interface ICommand
+namespace CombatSystem.ActionCommand
 {
-    bool IsDone { get; set; }
-    float Time { get; set; }
-    IEnumerator Execute();
+    public interface ICommand
+    {
+        bool IsDone { get; set; }
+        float Time { get; set; }
+        IEnumerator Execute();
+    }
 }

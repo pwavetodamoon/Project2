@@ -1,23 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-public class AttackCounter
+using UnityEngine;
+using Sirenix.OdinInspector;
+using System.Collections;
+namespace NewCombat.Characters
 {
-    public float timeCounter;
-    public float maxTime = 0.5f;
-    public int attackCount;
-    public int maxAttackCount = 3;
-    public Action CallbackEvent;
-    public void CheckTimerCounter(HeroNormalAttack heroNormalAttack, float time)
+    [Serializable]
+    public class AttackCounter 
     {
-        if (timeCounter > 0 && heroNormalAttack.isActive == false)
-            timeCounter -= time;
-        else if (timeCounter <= 0 && heroNormalAttack.isActive == false)
+        public float maxCounterTime = 3f;
+
+        [ProgressBar(0, "maxCounterTime", Height = 30)]
+        [SerializeField] protected float timerCounterInspector = 0;
+        public AttackCounter(float maxTimeCounter = 0.5f)
+        {
+            maxTime = maxTimeCounter;
+            timeCounter = maxTimeCounter;
+        }
+        public float timeCounter;
+        private float maxTime = 3f;
+        
+        
+        public Func<IEnumerator> AttackAction;
+        public ICoroutineRunner CoroutineRunner { get; set; }
+
+
+        public void CheckTimerCounter(bool CanCounter, bool attackIsActive, bool allowToExcuteAnotherAttack, float time)
+        {
+            bool allowAttack = false;
+            bool allowCounter = false;
+            // Time counter
+            allowCounter = CanCounter == true && timeCounter > 0 && attackIsActive == false;
+            // Attack
+            allowAttack = allowToExcuteAnotherAttack == true && timeCounter <= 0 && attackIsActive == false;
+            //allowAttack = allowToExcuteAnotherAttack == true && timeCounter <= 0;
+            if (allowCounter)
+            {
+                timeCounter -= time;
+                timerCounterInspector = timeCounter;
+            }
+            else if (allowAttack)
+            {
+                //AttackAction?.Invoke();
+                CoroutineRunner.StartCoroutine(AttackAction());
+            }
+        }
+        public void ResetCounter()
         {
             timeCounter = maxTime;
-            heroNormalAttack.ExecuteAttack();
         }
 
+        public void UpdateMaxCounterTime(float newMaxTimeCounter)
+        {
+            maxTime = newMaxTimeCounter;
+        }
     }
 }

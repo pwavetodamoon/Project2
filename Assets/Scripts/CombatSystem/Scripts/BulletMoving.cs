@@ -1,25 +1,29 @@
+using CombatSystem.Data;
 using UnityEngine;
 
-public class BulletMoving : MovingGameObj
+namespace CombatSystem.Scripts
 {
-    public EnemyData enemy;
-
-    // Start is called before the first frame update
-    private void Start()
+    public class BulletMoving : MovingGameObj
     {
-        rotate = 180;
-        //target = Game_DataBase.Instance.GetEnemyData(EnemyCharacters.Instance.ID);
-        target = enemy.Base;
-        Moving();
-        speed = 25;
-        Destroy(gameObject, 3);
-    }
+        public EnemyData enemy;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("EnemyData"))
+        // Start is called before the first frame update
+        private void Start()
         {
-            Destroy(gameObject);
+            rotate = 180;
+            //target = Game_DataBase.Instance.GetEnemyData(EnemyCharacters.Instance.ID);
+            target = enemy.Base;
+            Moving();
+            speed = 25;
+            Destroy(gameObject, 3);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("EnemyData"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

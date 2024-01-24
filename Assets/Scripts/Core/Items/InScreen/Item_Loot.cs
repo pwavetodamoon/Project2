@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Core.Quest;
 
-public class Item_Loot : ItemBase
+namespace Core.Items.InScreen
 {
-    public override void Gather()
+    public class Item_Loot : ItemBase
     {
-        base.Gather();
-        QuestingSystem.Instance.CollectItem(Id);
-    }
+        public override void Gather()
+        {
+            base.Gather();
+            QuestingSystem.Instance.CollectItem(Id);
+        }
 
+    }
 }

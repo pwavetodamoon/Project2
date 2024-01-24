@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 
-public class ItemMoving : MonoBehaviour
+namespace Core.Items.InScreen
 {
-    public float speed = 1;
-    public bool isMoving = true;
-
-    void FixedUpdate()
+    public class ItemMoving : MonoBehaviour
     {
-        if (!isMoving) return;
-        transform.Translate(speed * Time.deltaTime * Vector2.left);
+        public float speed = 1;
+        public bool isMoving = true;
+
+        void FixedUpdate()
+        {
+            if (!isMoving) return;
+            transform.Translate(speed * Time.deltaTime * Vector2.left);
+        }
     }
 }

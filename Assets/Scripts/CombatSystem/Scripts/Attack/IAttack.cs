@@ -1,4 +1,7 @@
-﻿public interface IAttack
+﻿namespace CombatSystem.Scripts.Attack
 {
-    void Attack();
+    public interface IAttack
+    {
+        void Attack();
+    }
 }

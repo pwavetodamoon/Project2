@@ -1,41 +1,64 @@
+using NewCombat.Characters;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CombatManager : MonoBehaviour
+namespace CombatSystem
 {
-    [SerializeField] HeroCharacter[] Hero;
-    [SerializeField]
-    MonsterCharacter[] Monster;
-    public static CombatManager Instance;
-    private void Awake()
+    public class CombatManager : MonoBehaviour
     {
-        Instance = this;
-    }
-    public MonsterCharacter GetMonster()
-    {
-        if (Monster.Length == 0) return null;
-        return Monster[0];
-    }
-    public int GetMonsterCount()
-    {
-        return Monster.Length;
-    }
-    [Button]
-    void GetAllCharacter()
-    {
-        Hero = FindObjectsOfType<HeroCharacter>();
-        foreach (HeroCharacter character in Hero)
+        public List<HeroCharacter> Hero;
+        public List<MonsterCharacter> Monster;
+        public static CombatManager Instance;
+        private void Awake()
         {
-            Debug.Log(character.name);
+            Instance = this;
         }
-        Monster = FindObjectsOfType<MonsterCharacter>();
-        foreach (MonsterCharacter character in Monster)
+        public MonsterCharacter GetMonster()
         {
-            Debug.Log(character.name);
+            if (Monster.Count == 0) return null;
+            
+            int index = 0;
+            if (Monster[index] == null)
+            {
+                Monster.RemoveAt(index);
+            }
+            return Monster[index];
+        }
+        public void AddMonster(MonsterCharacter monsterCharacter)
+        {
+            if (Monster.Contains(monsterCharacter))
+            {
+                return;
+            }
+            Monster.Add(monsterCharacter);
+        }
+        public void RemoveMonster(MonsterCharacter monsterCharacter)
+        {
+            if(Monster.Contains(monsterCharacter))
+            {
+                Monster.Remove(monsterCharacter);
+            }
+        }
+        public HeroCharacter GetHero()
+        {
+            if (Hero.Count == 0) return null;
+            return Hero[0];
+        }
+        [Button]
+        void GetAllCharacter()
+        {
+            Hero = FindObjectsOfType<HeroCharacter>().ToList();
+            foreach (HeroCharacter character in Hero)
+            {
+                Debug.Log(character.name);
+            }
+            Monster = FindObjectsOfType<MonsterCharacter>().ToList();
+            foreach (MonsterCharacter character in Monster)
+            {
+                Debug.Log(character.name);
+            }
         }
     }
 }

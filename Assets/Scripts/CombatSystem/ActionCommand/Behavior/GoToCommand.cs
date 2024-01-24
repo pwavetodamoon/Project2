@@ -1,14 +1,17 @@
 ﻿using System.Collections;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
-public struct GoToCommand : ICommandBehavior
+namespace CombatSystem.ActionCommand.Behavior
 {
-    public Transform Transform;
-    public Vector2 Target;
-    public float Time;
-    public IEnumerator FirstBehaviour()
+    public struct GoToCommand : ICommandBehavior
     {
-        yield return Transform.DOMove(Target, Time).WaitForCompletion();
+        public Transform Transform;
+        public Vector2 Target;
+        public float Time;
+        public IEnumerator FirstBehaviour()
+        {
+            yield return Transform.DOMove(Target, Time).WaitForCompletion();
+        }
     }
 }

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Weapon
+  - Hero
+  - Trigger Enemy
   layers:
   - Default
   - TransparentFX

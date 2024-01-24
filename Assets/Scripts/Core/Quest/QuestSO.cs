@@ -1,48 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
+using Core.Items;
 using UnityEngine;
-[CreateAssetMenu(fileName = "Quest 1", menuName = "ScriptableObjects/Quest_SO", order = 1)]
-public class QuestSO : ScriptableObject
+
+namespace Core.Quest
 {
-    [SerializeField] private int index = 0;
-    [SerializeField] private List<ItemSO> itemsList = new List<ItemSO>();
-    /// <summary>
-    /// Get enemyIndex of quest is running
-    /// </summary>
-    /// <returns></returns>
-    public int GetIndexQuest()
+    [CreateAssetMenu(fileName = "Quest 1", menuName = "ScriptableObjects/Quest_SO", order = 1)]
+    public class QuestSO : ScriptableObject
     {
-        if (index < 0)
+        [SerializeField] private int index = 0;
+        [SerializeField] private List<ItemSO> itemsList = new List<ItemSO>();
+        /// <summary>
+        /// Get enemyIndex of quest is running
+        /// </summary>
+        /// <returns></returns>
+        public int GetIndexQuest()
         {
-            index = 0;
+            if (index < 0)
+            {
+                index = 0;
+            }
+            else if (index >= itemsList.Count)
+            {
+                index = itemsList.Count - 1;
+            }
+            return index;
         }
-        else if (index >= itemsList.Count)
+        /// <summary>
+        /// Return ItemSO data of current quest
+        /// </summary>
+        /// <returns></returns>
+        public ItemSO GetCurrentItemSO()
         {
-            index = itemsList.Count - 1;
+            return itemsList[index];
         }
-        return index;
-    }
-    /// <summary>
-    /// Return ItemSO data of current quest
-    /// </summary>
-    /// <returns></returns>
-    public ItemSO GetCurrentItemSO()
-    {
-        return itemsList[index];
-    }
-    public List<ItemSO> GetItemSOList()
-    {
-        return itemsList;
-    }
-    /// <summary>
-    /// Complete quest and move to next quest
-    /// </summary>
-    public void CompleteQuestItem()
-    {
-        index++;
-        if (index >= itemsList.Count)
+        public List<ItemSO> GetItemSOList()
         {
-            index = 0;
+            return itemsList;
+        }
+        /// <summary>
+        /// Complete quest and move to next quest
+        /// </summary>
+        public void CompleteQuestItem()
+        {
+            index++;
+            if (index >= itemsList.Count)
+            {
+                index = 0;
+            }
         }
     }
 }

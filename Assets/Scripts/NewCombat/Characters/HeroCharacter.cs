@@ -1,36 +1,51 @@
+using System.Collections;
+using Characters;
+using CombatSystem.Data;
+using NewCombat.HeroAttack;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-
-public class HeroCharacter : MonoBehaviour
+namespace NewCombat.Characters
 {
-    public CharacterSlot Slot;
-    public Animator_Base Animator;
-    public HeroMeleeAttack HeroMeleeAttack;
-    public HeroRangedAttack HeroRangedAttack;
-    private void Awake()
+    public class HeroCharacter : EntityCharacter
     {
-        Slot = GetComponentInParent<CharacterSlot>();
-        Animator = GetComponentInChildren<Animator_Base>();
-    }
-    [Button]
-    //public void Attack()
-    //{
-    //    GetComponent<IHeroAttack>().ExecuteAttack(Animator);
-    //}
-    public void AttackByType(AttackTypeEnum attackTypeEnum)
-    {
-        if(attackTypeEnum == AttackTypeEnum.Near)
+        public CharacterSlot Slot;
+        public HeroNearAttack HeroMeleeAttack;
+        public HeroFarAttack HeroRangedAttack;
+        protected override void Awake()
         {
-            GetComponent<HeroMeleeAttack>().ExecuteAttack();
+            base.Awake();
+            attackControl.InitAttackControl(new HeroNearAttack(this));
         }
-        else if(attackTypeEnum == AttackTypeEnum.Far)
+        [Button]
+        public void AttackByType(AttackTypeEnum attackTypeEnum)
         {
-            GetComponent<HeroRangedAttack>().ExecuteAttack();
+            if(attackTypeEnum == AttackTypeEnum.Near)
+            {
+                attackControl.InitAttackControl(new HeroNearAttack(this));
+            }
+            else if(attackTypeEnum == AttackTypeEnum.Far)
+            {
+                attackControl.InitAttackControl(new HeroFarAttack(this));
+            }
+            else
+            {
+                Debug.LogError("Attack type is not defined");
+            }
         }
-        else
+        protected override float PlayHurtAnimation()
         {
-            Debug.LogError("Attack type is not defined");
+            var time  = Animator.GetAnimationLength(Human_Animator.Hurt_State);
+            Animator.ChangeAnimation(Human_Animator.Hurt_State);
+            return time;
+        }
+
+        protected override void RegisterObject()
+        {
+        }
+
+        protected override void RelaseObject()
+        {
         }
     }
 }

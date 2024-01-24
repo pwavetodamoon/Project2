@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Item_Money : ItemBase
+namespace Core.Items.InScreen
 {
-    public override void Gather()
+    public class Item_Money : ItemBase
     {
-        base.Gather();
-        // Call function to add money
+        public override void Gather()
+        {
+            base.Gather();
+            // Call function to add money
+        }
     }
 }

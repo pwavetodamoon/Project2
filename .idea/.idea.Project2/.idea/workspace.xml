@@ -5,21 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03a0b6b4-59c3-404e-9fc4-b0946162f6eb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseNormalAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseNormalAttack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/CombatCollider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/CombatCollider.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/AttackBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/AttackBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/LongRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/LongRange.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/ShortRange.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Attack/ShortRange.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Characters/CharactersBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Characters/CharactersBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Characters/EnemyCharacters.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Characters/EnemyCharacters.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Characters/PlayerCharacters.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Characters/PlayerCharacters.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Enemy/EnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Enemy/EnemyAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/HealthBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/HealthBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/CharactersSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CombatSystem/Scripts/Spawner/CharactersSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/HeroCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/MonsterCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Hero.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/Hero.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseHeroNormalAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/BaseHeroNormalAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroFarAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroFarAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroNearAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/HeroNearAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/HeroAttack/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NewCombat/MonsterAttack/MonsterNearAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NewCombat/MonsterAttack/MonsterNearAttack.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,11 +30,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -41,7 +46,10 @@
 }</component>
   <component name="ProjectId" id="2anK2tW7F0CBumubTe9o1sfTh5J" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
@@ -56,7 +64,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -115,12 +123,23 @@
       <updated>1704948701112</updated>
       <workItem from="1704948704652" duration="1021000" />
       <workItem from="1704949776641" duration="1042000" />
+      <workItem from="1705374980457" duration="324000" />
+      <workItem from="1705375964509" duration="648000" />
+      <workItem from="1705378253128" duration="3411000" />
+      <workItem from="1705382005600" duration="1176000" />
+      <workItem from="1705389003319" duration="7432000" />
+      <workItem from="1705408697867" duration="359000" />
+      <workItem from="1705565142765" duration="1140000" />
+      <workItem from="1705574900510" duration="3603000" />
+      <workItem from="1705743111183" duration="6093000" />
+      <workItem from="1705825643089" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="Vcs.Log.Tabs.Properties">

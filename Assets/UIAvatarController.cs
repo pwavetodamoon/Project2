@@ -5,6 +5,7 @@ using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Characters;
 
 
 public class UIAvatarController : APanelController
