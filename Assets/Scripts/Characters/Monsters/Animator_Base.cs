@@ -7,10 +7,24 @@ using UnityEngine;
 
 namespace Characters.Monsters
 {
-    public abstract class Animator_Base : MonoBehaviour, IChangeAnimation, IGetAnimationLength
+    public abstract class Animator_Base : MonoBehaviour, IChangeAndPlayAnimation, IGetAnimationLength
     {
         [SerializeField] protected Animator animator;
         [ShowInInspector] protected Dictionary<string, float> animationLengths;
+        public bool isPlayDefaultAnimation = true;
+
+        public void SetIsPlayDefaultAnimation(bool flag)
+        {
+            if (flag)
+            {
+                isPlayDefaultAnimation = true;
+                ChangeToDefaultAnimationState();
+            }
+            else
+            {
+                isPlayDefaultAnimation = false;
+            }
+        }
         protected virtual void Awake()
         {
             animator = GetComponentInChildren<Animator>();
@@ -19,9 +33,6 @@ namespace Characters.Monsters
         }
         public virtual void ChangeAnimation<T>(T type1) where T : Enum
         {
-            //StopAllCoroutines();
-            //isPlayNewAnimation = true;
-            //animator.StopPlayback();
             string animationName = GetAnimationNameByType(type1);
             //Debug.Log("Play Animation: "+animationName);
             animator.Play(animationName,0,0);
@@ -43,12 +54,10 @@ namespace Characters.Monsters
                 //Debug.Log("Animation have loop");
             }
 
-            isPlayNewAnimation = false;
         }
 
         [SerializeField] protected bool animationNotHaveLoopIsRun = false;
         [SerializeField] protected float timeAnimated = 0;
-        private bool isPlayNewAnimation;
         protected virtual void Update() 
         {
             if (!animationNotHaveLoopIsRun)
@@ -59,6 +68,7 @@ namespace Characters.Monsters
             if (timeAnimated <= 0)
             {
                 animationNotHaveLoopIsRun = false;
+                if (!isPlayDefaultAnimation) return;
                 ChangeToDefaultAnimationState();
             }
         }
@@ -75,7 +85,7 @@ namespace Characters.Monsters
             return animationLengths.TryGetValue(animName, out var length) ? length : 0;
         }
     }
-    public interface IChangeAnimation
+    public interface IChangeAndPlayAnimation
     {
         void ChangeAnimation<T>(T type) where T : Enum;
     }

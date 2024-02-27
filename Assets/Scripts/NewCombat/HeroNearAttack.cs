@@ -1,64 +1,64 @@
-using System.Collections;
 using Characters;
-using CombatSystem;
+using DG.Tweening;
 using NewCombat.Characters;
-using NewCombat.MonsterAttack;
-using Sirenix.OdinInspector;
+using NewCombat.Helper;
+using NewCombat.HeroAttack;
+using NewCombat.ManagerInEntity;
+using NewCombat.Slots;
+using System.Collections;
 using UnityEngine;
 
-namespace NewCombat.HeroAttack
+namespace NewCombat
 {
-    public class HeroNearAttack : BaseNearAttack
+    public class HeroNearAttack : BaseHeroAttack
     {
-        public float Speed = 6;
-
-        public HeroNearAttack(EntityCharacter newEntityCharacter, Transform attackTransform = null) : base(newEntityCharacter, attackTransform)
-        {
-        }
+        protected HeroCharacter Hero;
 
         protected override IEnumerator StartBehavior()
         {
-            var monster = CombatManager.Instance.GetMonster();
-            if (monster == null)
-            {
-                IsActive = false;
-                yield break;
-            }
-            monster.StopMoving();
+            yield return base.StartBehavior();
+            var monster = GetMonsterEntity(Enemy);
+            var attackerTransform = GetAttackerTransform(Enemy);
 
-            // Go to enemy
-            entityCharacter.SetAllowAttackValue(false);
+            PlayAnimation(Human_Animator.Slash_State);
+            var time = GetAnimationLength(Human_Animator.Slash_State);
+            yield return MoveModelToPosition(attackerTransform.position);
 
-            yield return MoveToTarget(entityCharacter.Model, monster.GetAttackedPos());
-            // Play to end animation
-            yield return AttackBetween();
-            // Check Collider at end the animation
-            this.CauseDamage(GameTag.Enemy);
-            // Go back position
+            //yield return new WaitForSeconds(time);
 
-            var slotPosition = entityCharacter.GetComponent<HeroCharacter>().Slot.GetCharacterPosition();
-            yield return MoveToTarget(entityCharacter.Model, slotPosition);
+            CauseDamage();
 
-            ResetStateAndCounter();
-        }
-        private IEnumerator AttackBetween()
-        {
-            animator.ChangeAnimation(Human_Animator.Slash_State);
-            var time = animator.GetAnimationLength(Human_Animator.Slash_State);
-            yield return new WaitForSeconds(time);
+            yield return MoveModelToPosition(GetSlotPosition());
         }
 
-        private IEnumerator MoveToTarget(Transform Character, Transform TargetTransform)
+        private IEnumerator MoveModelToPosition(Vector3 position)
         {
-            animator.ChangeAnimation(Human_Animator.Idle_State);
+            var model = Hero.GetModelTransform();
+            yield return model.DOMove(position, EntityStats.AttackMoveDuration)
+                .SetEase(Ease.OutCubic)
+                .WaitForCompletion();
+        }
 
-            while (Vector2.Distance(Character.position, TargetTransform.position) > 0.1f)
-            {
-                Character.position = Vector2.MoveTowards(Character.position, TargetTransform.position, Speed * Time.deltaTime);
-                yield return new WaitForFixedUpdate();
-            }
-            animator.ChangeAnimation(Human_Animator.Walk_State);
+        private MonsterCharacter GetMonsterEntity(GameObject go)
+        {
+            return go.GetComponent<MonsterCharacter>();
+        }
 
+        private Transform GetAttackerTransform(GameObject go)
+        {
+            return go.GetComponent<IGetAttackerTransform>().GetAttackerTransform();
+        }
+
+        private Vector3 GetSlotPosition()
+        {
+            return SlotManager.Instance.GetStandTransform(Hero.InGameSlotIndex).position;
+        }
+
+        public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
+            AttackManager attackManager, Transform attackTransform = null)
+        {
+            base.GetReference(newEntityCharacter, _animationManager, attackManager, attackTransform);
+            Hero = (HeroCharacter)newEntityCharacter;
         }
     }
 }

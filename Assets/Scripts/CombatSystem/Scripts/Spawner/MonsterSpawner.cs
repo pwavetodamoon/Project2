@@ -7,31 +7,31 @@ namespace CombatSystem.Scripts.Spawner
 {
     public class MonsterSpawner : MonoBehaviour
     {
-        public GameObject MonsterPrefab;
-        public float timeCounter = 5f;
-        public float timeToSpawnRandomNoise = 2f;
-        public float spawnTime = 5f;
-        public int maxMonster = 3;
-        public Transform SpawnPoint1;
-        public Transform SpawnPoint2;
-        public MapBackground mapBackground;
-        bool allowSpawned = false;
+        [SerializeField] private GameObject MonsterPrefab;
+        [SerializeField] private float timeCounter = 5f;
+        [SerializeField] private float timeToSpawnRandomNoise = 2f;
+        [SerializeField] private float spawnTime = 5f;
+        [SerializeField] private int maxMonster = 3;
+        [SerializeField] private Transform SpawnPoint1;
+        [SerializeField] private Transform SpawnPoint2;
+        [SerializeField] private bool allowSpawned = false;
+
         private void Update()
         {
+            if (MonsterPrefab == null) return;
             if (timeCounter <= 0 && maxMonster > 0 && allowSpawned == false)
             {
                 allowSpawned = true;
                 var spawnCount = Random.Range(1, maxMonster);
                 maxMonster -= spawnCount;
-                Debug.Log(spawnCount);
-                StartCoroutine( SpawnMonsters(spawnCount));
-               
+                StartCoroutine(SpawnMonsters(spawnCount));
             }
-            else
+            else if (timeCounter > 0)
             {
                 timeCounter -= Time.deltaTime;
             }
         }
+
         private IEnumerator SpawnMonsters(int spawnCount)
         {
             for (int i = 0; i < spawnCount; i++)
@@ -40,16 +40,18 @@ namespace CombatSystem.Scripts.Spawner
                 var time = Random.Range(0.1f, 0.5f);
                 yield return new WaitForSeconds(time);
             }
+
             timeCounter = Random.Range(spawnTime - timeToSpawnRandomNoise, spawnTime + timeToSpawnRandomNoise);
             allowSpawned = false;
         }
+
         private void SpawnMonster()
         {
             if (MonsterPrefab == null) return;
             float x = Random.Range(SpawnPoint1.position.x, SpawnPoint2.position.x + 1);
             float y = Random.Range(SpawnPoint1.position.y, SpawnPoint2.position.y);
             var spawnPosition = new Vector3(x, y, 0);
-
+            spawnPosition = GridManager.Instance.GetGrid().GetSpawnedCell();
             var go = Instantiate(MonsterPrefab, spawnPosition, Quaternion.identity);
         }
     }

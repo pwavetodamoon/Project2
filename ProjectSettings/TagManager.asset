@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - Hero
   - Trigger Enemy
+  - Trigger Event
+  - TriggerEvent
   layers:
   - Default
   - TransparentFX
@@ -15,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Items
+  - Hero
   - 
   - 
   - 
@@ -44,6 +46,15 @@ TagManager:
   m_SortingLayers:
   - name: SubBackground
     uniqueID: 815286875
+    locked: 0
+  - name: Items
+    uniqueID: 1245687681
+    locked: 0
+  - name: Entities
+    uniqueID: 948043549
+    locked: 0
+  - name: WorldText
+    uniqueID: 160503413
     locked: 0
   - name: Default
     uniqueID: 0

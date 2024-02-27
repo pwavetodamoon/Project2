@@ -9,7 +9,7 @@ namespace Characters
         public static AnimationType Walk_State { get => AnimationType.Walk; private set { } }
         public static AnimationType Slash_State { get => AnimationType.Slash; private set { } }
         public static AnimationType Hurt_State { get => AnimationType.Hurt; private set { } }
-        private AnimationType currentType = AnimationType.Idle;
+        private AnimationType currentType = AnimationType.Walk;
         public enum AnimationType
         {
             Idle,

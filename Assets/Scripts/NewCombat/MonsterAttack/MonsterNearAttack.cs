@@ -1,32 +1,33 @@
-using System.Collections;
 using Characters.Monsters;
-using CombatSystem;
 using NewCombat.Characters;
+using NewCombat.HeroAttack;
+using NewCombat.ManagerInEntity;
+using NewCombat.MonsterAI;
+using System.Collections;
 using UnityEngine;
+
 namespace NewCombat.MonsterAttack
 {
-    public class MonsterNearAttack : BaseNearAttack
+    public class MonsterNearAttack : BaseMonsterAttack
     {
-        public MonsterNearAttack(EntityCharacter newEntityCharacter, Transform attackTransform = null) : base(newEntityCharacter, attackTransform)
-        {
-        }
-        private void Update()
-        {
+        private MonsterNearAI MonsterNearAI;
 
+        public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
+            AttackManager attackManager, Transform attackTransform = null)
+        {
+            base.GetReference(newEntityCharacter, _animationManager, attackManager, attackTransform);
+            MonsterNearAI = entityCharacter.GetComponent<MonsterNearAI>();
         }
+
         protected override IEnumerator StartBehavior()
         {
-            var hero = CombatManager.Instance.GetHero();
-            if (hero == null)
-            {
-                IsActive = false;
-                yield break;
-            }
-            var attackTime = animator.GetAnimationLength(Monster_Animator.Attack_State);
-            animator.ChangeAnimation(Monster_Animator.Attack_State);
+            MonsterNearAI.SetEnemy(Enemy);
+            if (!MonsterNearAI.CanAttack) yield break;
+
+            var attackTime = GetAnimationLength(Monster_Animator.Attack_State);
+            PlayAnimation(Monster_Animator.Attack_State);
             yield return new WaitForSeconds(attackTime);
-            CauseDamage(GameTag.Hero);
-            ResetStateAndCounter();
+            CauseDamage();
         }
     }
 }

@@ -1,59 +1,90 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using NewCombat.HeroAttack;
+using Leveling_System;
+using NewCombat.AttackFactory;
 using NewCombat.Characters;
-using System;
+using NewCombat.HeroAttack;
+using NewCombat.ManagerInEntity;
 using Sirenix.OdinInspector;
-public struct AttackInfo
+using UnityEngine;
+
+namespace NewCombat
 {
-    public AttackInfo(BaseNormalAttack attack, AttackCounter counter)
+    public class AttackControl : MonoBehaviour, ICoroutineRunner
     {
-        this.attack = attack;
-        this.counter = counter;
-    }
-    public BaseNormalAttack attack;
-    public AttackCounter counter;
-}
-public class AttackControl : MonoBehaviour, ICoroutineRunner
-{
-    [ShowInInspector] public AttackInfo attackInfor;
-    public Transform AttackTransform;
-    public EntityCharacter entityCharacter;
-    public float maxCounterTime = 3f;
-    private void Update()
-    {
-        UpdateTimer();
-    }
-    private void UpdateTimer()
-    {
-        if (attackInfor.counter != null)
+        [SerializeField] private Transform attackTransform;
+
+        [ShowInInspector] private BaseSingleTargetAttack attack;
+        [ShowInInspector] private AttackCounter attackCounter;
+
+        private EntityCharacter entityCharacter;
+        private AttackManager attackManager;
+        private AnimationManager animatonManager;
+        private EntityStats EntityStats;
+
+
+        private void Awake()
         {
-            bool allowCounter = entityCharacter.IsAllowCounter();
-            bool allowToExcuteAnotherAttack = entityCharacter.IsAllowAttack();
-            bool isActive = attackInfor.attack.IsActive;
-            attackInfor.counter.CheckTimerCounter(allowCounter, isActive, allowToExcuteAnotherAttack, Time.deltaTime);
+            entityCharacter = GetComponent<EntityCharacter>();
+            attackManager = GetComponent<AttackManager>();
+            EntityStats = GetComponent<EntityStats>();
+            animatonManager = GetComponent<AnimationManager>();
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        private void Update()
+        {
+            if (!CanNotRunAttackTimer())
+            {
+                RunAttackTimer();
+            }
+        }
+        private bool CanNotRunAttackTimer()
+        {
+            return entityCharacter == null || attackCounter == null || attack == null;
+        }
+
+        private void RunAttackTimer()
+        {
+            var allowCounter = attackManager.IsAllowCounter();
+            var allowToExecuteAnotherAttack = attackManager.IsAllowAttack();
+            var isActive = attack.IsActive;
+
+            attackCounter.UpdateMaxCounterTime(EntityStats.AttackCoolDown());
+            attackCounter.UpdateNewControlState(allowCounter, isActive, allowToExecuteAnotherAttack);
+            attackCounter.CheckTimerCounter(Time.deltaTime);
+        }
+
+        public void Create(SingleAttackFactory factory)
+        {
+            InitAttackControl(factory.CreateAttack(), new AttackCounter(3));
+        }
+
+        private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
+        {
+            newAttack.GetReference(entityCharacter, animatonManager, attackManager, null);
+            if (newAttack.IsValidate == false)
+            {
+                Debug.LogError("Attack is not validate");
+                return;
+            }
+
+            attack = newAttack;
+            attackCounter = newAttackCounter;
+
+            attack.SetAttackTransform(attackTransform);
+            attackCounter.SetCoroutineRunner(this);
+            
+            attack.SetOnEndAttackCallBack(attackCounter.ResetCounter);
+            attackCounter.SetAttackCallBack(attack.ExecuteAttack);
+        }
+
+        public bool IsAttacking()
+        {
+            if (attack == null) return false;
+            return attack.IsActive;
         }
     }
-    [Button]
-    public void InitAttackControl(BaseNormalAttack attack)
-    {
-        attack.AttackTransform = AttackTransform;
-        var counter = new AttackCounter(maxCounterTime);
-        counter.CoroutineRunner = this;
-        counter.AttackAction = attack.ExecuteAttack;
-
-        attack.OnEndAttack += counter.ResetCounter;
-
-
-        attackInfor = new AttackInfo(attack, counter);
-    }
-    private void ResetCounter()
-    {
-        attackInfor.counter.ResetCounter();
-    }
-}
-public interface ICoroutineRunner
-{
-    Coroutine StartCoroutine(IEnumerator routine);
 }

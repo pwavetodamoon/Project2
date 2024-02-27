@@ -85,6 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3347218863764075598}
   - component: {fileID: 6707068137147705577}
+  - component: {fileID: 620009584722493185}
+  - component: {fileID: 8900287111251597478}
   m_Layer: 5
   m_Name: UIAvatar
   m_TagString: Untagged
@@ -140,6 +142,65 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8280238c78b7d79478f4c8a6e17df6a2, type: 3}
   - {fileID: 21300000, guid: 1782759cdcf91e0479af02238e00cd68, type: 3}
   - {fileID: 21300000, guid: 0fadc630d22220946ab3556db47c6be0, type: 3}
+--- !u!114 &620009584722493185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271383155268829885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb35da67627a9244a63b045e7aacd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHero: {fileID: 0}
+  SlotIndex: 0
+--- !u!114 &8900287111251597478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271383155268829885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 13
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 620009584722493185}
+          m_TargetAssemblyTypeName: HeroSlotUI, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 620009584722493185}
+          m_TargetAssemblyTypeName: HeroSlotUI, Assembly-CSharp
+          m_MethodName: OnUnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &351415541386152713
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,8 @@ namespace CombatSystem.ActionCommand
 {
     public interface ICommand
     {
-        bool IsDone { get; set; }
-        float Time { get; set; }
-        IEnumerator Execute();
+        float timer { get; set; }
+        float duration { get; set; }
+        void Execute();
     }
 }

@@ -1,120 +1,84 @@
-using System.Collections;
 using Characters.Monsters;
 using CombatSystem;
+using CombatSystem.Scripts;
+using NewCombat.AttackFactory;
+using NewCombat.Helper;
 using NewCombat.HeroAttack;
-using NewCombat.MonsterAttack;
-using Sirenix.OdinInspector;
+using NewCombat.ManagerInEntity;
+using NewCombat.MonsterAI;
+using System;
+using DropItem;
+using Helper;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace NewCombat.Characters
 {
-    public class MonsterCharacter : EntityCharacter, IDamageable
+    [RequireComponent(typeof(DamageSlashEffect))]
+    public class MonsterCharacter : EntityCharacter
     {
-        [SerializeField] private Transform AttackedTransform;
-        [SerializeField] private float Speed = 2;
-        [SerializeField] private HeroCharacter Hero;
-        private bool notMoving = false;
-        bool isStartAttackBehaviour = false;
+        [SerializeField] private MonsterNearAI monsterNearAI;
+        [SerializeField] private EnemyMoving enemyMoving;
 
-        float xRandomNoise = 0;
-        float yRandomNoise = 0;
+        public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
+        private DamageSlashEffect damageSlashEffect;
+        protected DamageManager damageManager;
+        private float xRandomNoise = 0;
+        private float yRandomNoise = 0;
+
         protected override void Awake()
         {
             base.Awake();
-            //GetComponent<BaseNormalAttack>().enabled = false;
-            xRandomNoise = Random.Range(-.2f, .2f);
-            yRandomNoise = Random.Range(-.2f, .2f);
-            attackControl.InitAttackControl(new MonsterNearAttack(this));
-            attackControl.enabled = false;
-        }
-        private void Update()
-        {
-            Moving();
-        }
-        public void StopMoving()
-        {
-            notMoving = true;
-        }
-        private void Moving()
-        {
-            if (notMoving || isStartAttackBehaviour) return;
-            transform.Translate(Vector3.left * (Time.deltaTime * Speed));
+            damageManager = GetComponent<DamageManager>();
+            monsterNearAI = GetComponent<MonsterNearAI>();
+            enemyMoving = GetComponent<EnemyMoving>();
+            
+            damageSlashEffect = GetComponent<DamageSlashEffect>();
+
+            damageManager.OnTakeDamage += DamageManager_OnTakeDamage;
+            damageManager.OnDie += DamageManager_OnDie;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void DamageManager_OnDie()
         {
-            if (collision.tag != GameTag.TriggerEnemy) return;
-            MoveToAttackedPos();
-        }
-        public void MoveToAttackedPos()
-        {
-            // Check if the monster is already moving, coroutine will be called once
-            if (isStartAttackBehaviour) return;
-
-            notMoving = true;
-            StartCoroutine(MoveToAttackedPosCoroutine());
-            isStartAttackBehaviour = true;
-        }
-        private IEnumerator MoveToAttackedPosCoroutine()
-        {
-            //GetComponent<BaseNormalAttack>().enabled = true;
-            attackControl.enabled = true;
-            while (true)
-            {
-                if (Hero == null)
-                {
-                    Hero = CombatManager.Instance.GetHero();
-                    yield return new WaitForSeconds(.1f);
-                }
-                else if (notMoving)
-                {
-                    var targetPosition = Hero.Slot.GetAttackerPosition();
-                    var direction = targetPosition - transform.position;
-                    var isOnTarget = Vector3.Distance(transform.position, targetPosition) < 0.1f;
-                    // Check if the monster is on the target position
-                    // Allow the counter attack
-                    if (!isOnTarget)
-                    {
-                        direction.Normalize();
-                        transform.Translate(Speed * Time.deltaTime * direction);
-                    }
-                    else
-                    {
-                        allowCounter = true;
-                    }
-                }
-                yield return new WaitForFixedUpdate();
-            }
+            GetComponent<RewardSignal>().SendSignal();
         }
 
-
-        protected override void UpdateState(bool boolen)
+        private void DamageManager_OnTakeDamage()
         {
-            base.UpdateState(boolen);
-            notMoving = !boolen;
+            damageSlashEffect.TriggerFlashEffect();
         }
 
-        protected override float PlayHurtAnimation()
+        private void OnDisable()
         {
-            var time = Animator.GetAnimationLength(Monster_Animator.Hurt_State);
-            Animator.ChangeAnimation(Monster_Animator.Hurt_State);
-            return time;
-        }
-        public Transform GetAttackedPos() => AttackedTransform;
-
-        protected override void RegisterObject()
-        {
-            CombatManager.Instance.AddMonster(this);
+            damageManager.OnTakeDamage -= DamageManager_OnTakeDamage;
+            damageManager.OnDie -= DamageManager_OnDie;
         }
 
-        protected override void RelaseObject()
+        private void CreateNoise()
         {
-            CombatManager.Instance.RemoveMonster(this);
+            xRandomNoise = Random.Range(0, 0.3f);
+            yRandomNoise = Random.Range(-0.3f, .3f);
+            monsterNearAI.AddPositionNoise(new Vector3(xRandomNoise, yRandomNoise));
         }
-    }
 
-    public interface IDamageable
-    {
-        void TakeDamage(float damage);
+        public override void PlayHurtAnimation()
+        {
+            animationManager.PlayAnimation(Monster_Animator.Hurt_State);
+        }
+
+        public override void RegisterObject()
+        {
+            CombatEntitiesManager.Instance.AppendEntityToListByTag(gameObject, GameTag.Enemy);
+            monsterNearAI.InitializeComponents();
+            attackControl.Create(monsterSingleAttackFactory);
+            CreateNoise();
+        }
+
+        public override void ReleaseObject()
+        {
+            CombatEntitiesManager.Instance.RemoveEntityByTag(gameObject, GameTag.Enemy);
+            Destroy(gameObject);
+        }
     }
 }

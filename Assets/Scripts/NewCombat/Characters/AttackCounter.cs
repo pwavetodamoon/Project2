@@ -1,49 +1,75 @@
-using System;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
+using UnityEngine;
+
 namespace NewCombat.Characters
 {
     [Serializable]
-    public class AttackCounter 
+    public class AttackCounter
     {
-        public float maxCounterTime = 3f;
-
         [ProgressBar(0, "maxCounterTime", Height = 30)]
-        [SerializeField] protected float timerCounterInspector = 0;
-        public AttackCounter(float maxTimeCounter = 0.5f)
+        [SerializeField]
+        protected float timerCounterInspector;
+
+        public float timeCounter;
+        public float maxCounterTime = 3f;
+        private bool AllowToExecuteAnotherAttack;
+
+        private Func<IEnumerator> AttackAction;
+        private bool AttackIsActive;
+        private bool CanCounter;
+        private float maxTime = 3f;
+
+        public AttackCounter(float maxTimeCounter)
         {
             maxTime = maxTimeCounter;
             timeCounter = maxTimeCounter;
         }
-        public float timeCounter;
-        private float maxTime = 3f;
-        
-        
-        public Func<IEnumerator> AttackAction;
-        public ICoroutineRunner CoroutineRunner { get; set; }
 
+        private ICoroutineRunner CoroutineRunner { get; set; }
 
-        public void CheckTimerCounter(bool CanCounter, bool attackIsActive, bool allowToExcuteAnotherAttack, float time)
+        public void SetCoroutineRunner(ICoroutineRunner theRunner)
         {
-            bool allowAttack = false;
-            bool allowCounter = false;
-            // Time counter
-            allowCounter = CanCounter == true && timeCounter > 0 && attackIsActive == false;
-            // Attack
-            allowAttack = allowToExcuteAnotherAttack == true && timeCounter <= 0 && attackIsActive == false;
-            //allowAttack = allowToExcuteAnotherAttack == true && timeCounter <= 0;
-            if (allowCounter)
+            CoroutineRunner = theRunner;
+        }
+
+        public void SetAttackCallBack(Func<IEnumerator> callback)
+        {
+            AttackAction = callback;
+        }
+
+        public void UpdateNewControlState(bool CanCounter, bool attackIsActive, bool allowToExcuteAnotherAttack)
+        {
+            this.CanCounter = CanCounter;
+            AttackIsActive = attackIsActive;
+            AllowToExecuteAnotherAttack = allowToExcuteAnotherAttack;
+        }
+
+        public void CheckTimerCounter(float time)
+        {
+            if (AllowCounter())
             {
                 timeCounter -= time;
                 timerCounterInspector = timeCounter;
             }
-            else if (allowAttack)
+            else if (AllowAttack())
             {
                 //AttackAction?.Invoke();
                 CoroutineRunner.StartCoroutine(AttackAction());
             }
         }
+
+        private bool AllowCounter()
+        {
+            return CanCounter && timeCounter > 0 && AttackIsActive == false;
+        }
+
+        private bool AllowAttack()
+        {
+            return AllowToExecuteAnotherAttack && timeCounter <= 0 && AttackIsActive == false;
+        }
+
         public void ResetCounter()
         {
             timeCounter = maxTime;

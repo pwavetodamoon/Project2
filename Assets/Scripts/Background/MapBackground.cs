@@ -11,7 +11,7 @@ namespace Background
         [InfoBox("Map name use for testing, just on play mode, it just temporary")]
         public int MapIndex = 0;
 
-        [ShowInInspector] private ScrollingBackground[] ScrollingBackgroundArray;
+        private ScrollingBackground[] ScrollingBackgroundArray;
 
         private void Start()
         {
@@ -36,31 +36,21 @@ namespace Background
         [DisableInEditorMode]
         public void LoadTexture()
         {
-            // make sure array is not null or empty
-            if (ScrollingBackgroundArray == null || ScrollingBackgroundArray.Length == 0)
-            {
-                LoadField();
-            }
-
             SpritesBackground textures2d = mapBackgroundSO.GetSpritesBackground(MapIndex);
 
-            Texture2D Plane = textures2d.plane;
-            Texture2D BackWall = textures2d.backWall;
-            Texture2D FrontWall = textures2d.frontWall;
-            Texture2D GroundDecor = textures2d.groundDecor;
+            var textures = new[]
+            {
+                textures2d.plane, 
+                textures2d.backWall, 
+                textures2d.frontWall, 
+                textures2d.groundDecor
+            };
 
-            ScrollingBackgroundArray[0].UpdateCurrentTexture(Plane);
-            ScrollingBackgroundArray[0].UpdateSortingOrder(0);
-
-            ScrollingBackgroundArray[1].UpdateCurrentTexture(BackWall);
-            ScrollingBackgroundArray[1].UpdateSortingOrder(1);
-
-            ScrollingBackgroundArray[2].UpdateCurrentTexture(FrontWall);
-            ScrollingBackgroundArray[2].UpdateSortingOrder(2);
-
-            ScrollingBackgroundArray[3].UpdateCurrentTexture(GroundDecor);
-            ScrollingBackgroundArray[3].UpdateSortingOrder(3);
-
+            for (int i = 0; i < ScrollingBackgroundArray.Length; i++)
+            {
+                ScrollingBackgroundArray[i].UpdateCurrentTexture(textures[i]);
+                ScrollingBackgroundArray[i].UpdateSortingOrder(i);
+            }
         }
 
         /// <summary>

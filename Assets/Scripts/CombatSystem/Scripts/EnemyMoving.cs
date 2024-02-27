@@ -4,23 +4,17 @@ namespace CombatSystem.Scripts
 {
     public class EnemyMoving : MonoBehaviour
     {
-        public float speed;
-        public bool isMoving = true;
-
-        public void Setup(float speed)
+        public float Speed = 2;
+        private bool notMoving = false;
+        public void SetNotMoving(bool boolen)
         {
-            this.speed = speed;
+            notMoving = boolen;
         }
-
-        private void Update()
+        public void Moving(Vector2 moveVector,float speed = 2)
         {
-            Moving();
-        }
-
-        public void Moving()
-        {
-            if (!isMoving) return;
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
+            if (notMoving) return;
+            Speed = speed;
+            transform.Translate(moveVector * (Time.deltaTime * speed));
         }
     }
 }

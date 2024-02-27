@@ -42,52 +42,52 @@ namespace Characters
                 SetSingleSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
             }
         }
-        private void SetSingleSpritePart(SpritePartEnum spritePartEnum, SpriteRenderer sprite)
+        private void SetSingleSpritePart(SpritePartEnum spritePartEnum, SpriteRenderer spriteRenderer)
         {
             switch (spritePartEnum)
             {
                 case SpritePartEnum.head:
-                    head = sprite;
+                    head = spriteRenderer;
                     break;
 
                 case SpritePartEnum.eye:
-                    eye = sprite;
+                    eye = spriteRenderer;
                     break;
 
                 case SpritePartEnum.body:
-                    body = sprite;
+                    body = spriteRenderer;
                     break;
 
                 case SpritePartEnum.left_arm:
-                    left_arm = sprite;
+                    left_arm = spriteRenderer;
                     break;
 
                 case SpritePartEnum.right_arm:
-                    right_arm = sprite;
+                    right_arm = spriteRenderer;
                     break;
 
                 case SpritePartEnum.left_hand:
-                    left_hand = sprite;
+                    left_hand = spriteRenderer;
                     break;
 
                 case SpritePartEnum.right_hand:
-                    right_hand = sprite;
+                    right_hand = spriteRenderer;
                     break;
 
                 case SpritePartEnum.left_leg:
-                    left_leg = sprite;
+                    left_leg = spriteRenderer;
                     break;
 
                 case SpritePartEnum.right_leg:
-                    right_leg = sprite;
+                    right_leg = spriteRenderer;
                     break;
 
                 case SpritePartEnum.item_sword:
-                    item_sword = sprite;
+                    item_sword = spriteRenderer;
                     break;
 
                 case SpritePartEnum.item_shield:
-                    item_shield = sprite;
+                    item_shield = spriteRenderer;
                     break;
 
                 default:

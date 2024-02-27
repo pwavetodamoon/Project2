@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class GameTag
+namespace Helper
 {
-    public static string Hero = "Hero";
-    public static string Enemy = "Enemy";
-    public static string TriggerEnemy = "Trigger Enemy";
+    public static class GameTag
+    {
+        public static string Hero = "Hero";
+        public static string Enemy = "Enemy";
+        public static string TriggerEvent = "Trigger Event";
+        public static string TriggerEnemy = "Trigger Enemy";
+    }
 }

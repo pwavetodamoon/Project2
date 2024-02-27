@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NewCombat.HeroDataManager.Data;
+using UnityEngine;
 
 namespace CombatSystem.Data
 {

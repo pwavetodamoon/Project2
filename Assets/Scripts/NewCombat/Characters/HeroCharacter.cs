@@ -1,51 +1,93 @@
-using System.Collections;
 using Characters;
+using CombatSystem;
 using CombatSystem.Data;
-using NewCombat.HeroAttack;
-using Sirenix.OdinInspector;
+using Helper;
+using NewCombat.AttackFactory;
+using NewCombat.ManagerInEntity;
+using NewCombat.Slots;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewCombat.Characters
 {
     public class HeroCharacter : EntityCharacter
     {
-        public CharacterSlot Slot;
-        public HeroNearAttack HeroMeleeAttack;
-        public HeroFarAttack HeroRangedAttack;
+        public int InGameSlotIndex;
+        public int UIGameSlotIndex;
+        [SerializeField] private Transform modelTransform;
+        [SerializeField] private HeroSingleAttackFactory attackFactory;
+        [SerializeField] public Transform ModelDrag;
         protected override void Awake()
         {
             base.Awake();
-            attackControl.InitAttackControl(new HeroNearAttack(this));
-        }
-        [Button]
-        public void AttackByType(AttackTypeEnum attackTypeEnum)
-        {
-            if(attackTypeEnum == AttackTypeEnum.Near)
-            {
-                attackControl.InitAttackControl(new HeroNearAttack(this));
-            }
-            else if(attackTypeEnum == AttackTypeEnum.Far)
-            {
-                attackControl.InitAttackControl(new HeroFarAttack(this));
-            }
-            else
-            {
-                Debug.LogError("Attack type is not defined");
-            }
-        }
-        protected override float PlayHurtAnimation()
-        {
-            var time  = Animator.GetAnimationLength(Human_Animator.Hurt_State);
-            Animator.ChangeAnimation(Human_Animator.Hurt_State);
-            return time;
+            RegisterObject();
+            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
         }
 
-        protected override void RegisterObject()
+        private void Start()
         {
+            CreateAttack();
         }
 
-        protected override void RelaseObject()
+        public void SetSlotIndex(int index)
         {
+            if (index == -1)
+            {
+                //Debug.Log("Hero Active False");
+                ReleaseObject();
+            }
+            else if (InGameSlotIndex == -1)
+            {
+                RegisterObject();
+            }
+            InGameSlotIndex = index;
+
+        }
+        public virtual void CreateAttack()
+        {
+            if (attackFactory == null)
+            {
+                return;
+            }
+            attackControl.Create(attackFactory);
+        }
+
+        public void SetAttackFactory(HeroSingleAttackFactory baseAttack)
+        {
+            this.attackFactory = baseAttack;
+        }
+
+        public override void PlayHurtAnimation()
+        {
+            animationManager.PlayAnimation(Human_Animator.Hurt_State);
+        }
+
+        public Transform GetModelTransform()
+        {
+            if (modelTransform == null)
+            {
+                Debug.LogError("Model transform is null");
+                return null;
+            }
+
+            return modelTransform;
+        }
+
+        public override void RegisterObject()
+        {
+            CombatEntitiesManager.Instance.AppendEntityToListByTag(gameObject, GameTag.Hero);
+
+            attackManager.SetAllowExecuteAttackValue(true);
+            attackManager.SetTimeCounterValue(true);
+        }
+
+        public override void ReleaseObject()
+        {
+            attackManager.SetAllowExecuteAttackValue(false);
+            attackManager.SetTimeCounterValue(false);
+
+            CombatEntitiesManager.Instance.RemoveEntityByTag(gameObject, GameTag.Hero);
+            gameObject.SetActive(false);
         }
     }
 }
