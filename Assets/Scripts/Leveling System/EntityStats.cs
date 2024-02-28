@@ -5,56 +5,41 @@ namespace Leveling_System
 {
     public abstract class EntityStats : MonoBehaviour
     {
-        [Header("Normal Stats")]
-        [InfoBox("Damage calculator by difference by level of Entity and Enemy")]
-        [SerializeField] public int Level = 1;
-        [SerializeField] protected float maxHealth = 100;
-        [SerializeField] protected BaseStat health;
-        [SerializeField] protected BaseStat BaseDamage;
-        [SerializeField] protected BaseStat speed;
 
-        [Header("Critical")]
-        [SerializeField] protected BaseStat CritRate;
+        [SerializeField] protected StructStats structStats;
+        public float Health() => structStats.health;
 
-        [SerializeField] protected BaseStat CritDamage;
-
-        [Header("Attack Settings")]
-        public BaseStat attackCoolDown;
-
-        [SerializeField] protected float attackMoveDuration = .5f;
-        public float Health() => health.Value;
-
-        public float MaxHealth() => maxHealth;
+        public float MaxHealth() => structStats.maxHealth;
         public bool IsCritical { get; private set; }
-        public float AttackMoveDuration() => attackMoveDuration / (1 + speed.Value / 200);
-        public float AttackCoolDown() => attackCoolDown.Value;
-
+        public float AttackMoveDuration() => structStats.attackMoveDuration / (1 + structStats.speed / 200);
+        public float AttackCoolDown() => structStats.attackCoolDown;
+        public int Level() => structStats.Level;
         public void DecreaseHealth(float damage)
         {
-            health.Value -= damage;
-            if (health.Value <= 0) health.Value = 0;
+            structStats.health -= damage;
+            if (structStats.health <= 0) structStats.health = 0;
         }
 
         public void IncreaseHealth(float value)
         {
-            health.Value += value;
+            structStats.health += value;
 
-            if (health.Value >= maxHealth) health.Value = maxHealth;
+            if (structStats.health >= structStats.maxHealth) structStats.health = structStats.maxHealth;
         }
 
         public float GetDamage()
         {
-            var damage = BaseDamage.Value;
+            var damage = structStats.BaseDamage;
 
             IsCritical = IsCriticalHit();
 
-            damage = IsCritical ? damage * CritDamage.Value : damage;
+            damage = IsCritical ? damage * structStats.CritDamage : damage;
             return damage;
         }
         private bool IsCriticalHit()
         {
             var rate = UnityEngine.Random.Range(0, 100);
-            return rate <= CritRate.Value ? true : false;
+            return rate <= structStats.CritRate ? true : false;
         }
     }
 }

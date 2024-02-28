@@ -1,6 +1,5 @@
 using Characters;
 using CombatSystem;
-using CombatSystem.Data;
 using Helper;
 using NewCombat.AttackFactory;
 using NewCombat.ManagerInEntity;
@@ -12,6 +11,7 @@ namespace NewCombat.Characters
 {
     public class HeroCharacter : EntityCharacter
     {
+        public CharacterEnumType characterEnumType;
         public int InGameSlotIndex;
         public int UIGameSlotIndex;
         [SerializeField] private Transform modelTransform;
