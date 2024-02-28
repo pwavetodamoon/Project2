@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class HeroSlotUI : MonoBehaviour
 {
-    public HeroCharacter currentHero;
-    public int SlotIndex;
+    [SerializeField] private HeroCharacter currentHero;
+
+    public void SetHero(HeroCharacter hero)
+    {
+        currentHero = hero;
+    }
     public void OnClicked()
     {
         if (currentHero.InGameSlotIndex != -1)

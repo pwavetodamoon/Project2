@@ -24,6 +24,7 @@ namespace NewCombat.Slots
             var combatGrid = GridManager.Instance.GetGrid();
             foreach (var slot in Slots)
             {
+                if(slot.SlotIndex == -1) continue;
                 var position = slot.transform.position;
                 combatGrid.GetXY(position, out var x, out var y);
                 combatGrid.SetValue(position, 1);
@@ -99,6 +100,11 @@ namespace NewCombat.Slots
                 return;
             }
 
+            if (currentSlotIndex != -1 && targetSlotIndex == -1)
+            {
+                SwapSlotIntoBannedSlot(currentSlotIndex);
+                return;
+            }
 
             // TODO: Add logic to add hero to banned slot
             if (currentSlotIndex < 0 || targetSlotIndex < 0 || currentSlotIndex > Slots.Count || targetSlotIndex > Slots.Count)
@@ -121,6 +127,14 @@ namespace NewCombat.Slots
 
         }
 
+        private void SwapSlotIntoBannedSlot(int currentSlotIndex)
+        {
+            var currentSlot = GetSlotBySlotIndexInRange(currentSlotIndex);
+            var currentHero = currentSlot.currentHero;
+            bannedSlotControl.SetHeroIntoStandPosition(currentHero.transform);
+            currentHero.GetComponent<HeroCharacter>().SetSlotIndex(bannedSlotControl.SlotIndex);
+            currentSlot.SetHeroIntoStandPosition(null);
+        }
         private void SwapFromBannedSlotToInGameSlot(int targetSlotIndex)
         {
             var targetSlot = GetSlotBySlotIndexInRange(targetSlotIndex);

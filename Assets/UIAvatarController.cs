@@ -12,7 +12,7 @@ using NewCombat.Characters;
 public class UIAvatarController : APanelController
 {
     [SerializeField] private HeroCharacter _heroCharacter;
-
+    [SerializeField] private HeroSlotUI _heroSlotUI;
     [Header("Buttons")]
     [SerializeField] private Button _buttonLevelUp;
     [SerializeField] private Button _buttonSkill;
@@ -33,10 +33,18 @@ public class UIAvatarController : APanelController
     public void SetHeroCharacter(HeroCharacter heroCharacter)
     {
         _heroCharacter = heroCharacter;
+        _heroSlotUI.SetHero(heroCharacter);
     }
+
+    public HeroCharacter GetHeroCharacter()
+    {
+        return _heroCharacter;
+    }
+
     protected override void Awake()
     {
         base.Awake();
+        _heroSlotUI = GetComponent<HeroSlotUI>();
     }
     protected override void AddListeners()
     {
