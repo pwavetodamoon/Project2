@@ -1,12 +1,14 @@
 using Leveling_System;
 using NewCombat.HeroDataManager.Data;
+using UnityEngine;
 
 public class HeroEntityStats : EntityStats
 {
-    public HeroData heroData;
+    [SerializeField] private HeroData heroData;
 
-    private void Awake()
+    public void SetHero(HeroData newData)
     {
+        heroData = newData;
         LoadData();
     }
     public void LoadData()

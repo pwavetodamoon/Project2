@@ -2,6 +2,7 @@ using Characters;
 using CombatSystem;
 using Helper;
 using NewCombat.AttackFactory;
+using NewCombat.HeroDataManager.Data;
 using NewCombat.ManagerInEntity;
 using NewCombat.Slots;
 using UnityEngine;
@@ -42,6 +43,12 @@ namespace NewCombat.Characters
             }
             InGameSlotIndex = index;
 
+        }
+
+
+        public void SetHeroData(HeroData newHeroData)
+        {
+            GetComponent<HeroEntityStats>().SetHero(newHeroData);
         }
         public virtual void CreateAttack()
         {
