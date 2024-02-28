@@ -7,7 +7,7 @@ using UnityEngine;
 namespace NewCombat.HeroDataManager.Data
 {
     [CreateAssetMenu(fileName = "Hero", menuName = "CombatSystem/Hero", order = 1)]
-    public class BaseData : ScriptableObject
+    public class HeroData : ScriptableObject
     {
         // TODO: Split monster data in game and monster data in scriptable object
         // NOTE: Monster data in game will be changed in game, monster data in scriptable object will be changed in editor
@@ -15,15 +15,31 @@ namespace NewCombat.HeroDataManager.Data
 
         // TODO: Make a properties Level for player and monster (maybe).
         // With player, stats will increase by player level
-        [SerializeField] protected string heroName;
+        public int Level = 1;
+        public float maxHealth = 100;
+        public BaseStat health;
+        public BaseStat BaseDamage;
+        public BaseStat speed;
 
+        [Header("Critical")]
+        public BaseStat CritRate;
+
+        public BaseStat CritDamage;
+
+        [Header("Attack Settings")]
+        public BaseStat attackCoolDown;
+        public Sprite icon;
+
+        public float attackMoveDuration = .5f;
+        [SerializeField] protected string heroName;
         [SerializeField] protected AttackTypeEnum AttackType;
         [SerializeField] protected CharacterEnumType characterEnumType;
         [SerializeField] protected BaseStat baseStats;
         [SerializeField] protected int slotIndex = 0;
         [SerializeField] private HeroSingleAttackFactory HeroSingleAttackFactory;
-        private GameObject heroObject;
 
+
+        private GameObject heroObject;
         public int SlotIndex
         {
             get => slotIndex;
@@ -38,6 +54,8 @@ namespace NewCombat.HeroDataManager.Data
             hero.InGameSlotIndex = slotIndex;
             this.heroObject = heroObject;
         }
+
+
     }
 
     public enum AttackTypeEnum

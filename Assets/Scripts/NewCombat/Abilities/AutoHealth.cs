@@ -36,13 +36,13 @@ namespace NewCombat.Abilities
         private void Update()
         {
             if (EntityStats == null) return;
-            if (EntityStats.Health >= EntityStats.MaxHealth) return;
+            if (EntityStats.Health() >= EntityStats.MaxHealth()) return;
 
             if (healthRegenDelay <= 0)
             {
                 if (healthRegenRate <= 0)
                 {
-                    var value = EntityStats.MaxHealth * healthRegenPercent;
+                    var value = EntityStats.MaxHealth() * healthRegenPercent;
                     EntityStats.IncreaseHealth(value);
 
                     healthRegenRate = healthRegenRateTime;

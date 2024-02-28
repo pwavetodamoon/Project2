@@ -34,7 +34,7 @@ namespace NewCombat
         private IEnumerator MoveModelToPosition(Vector3 position)
         {
             var model = Hero.GetModelTransform();
-            yield return model.DOMove(position, EntityStats.AttackMoveDuration)
+            yield return model.DOMove(position, EntityStats.AttackMoveDuration())
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
         }

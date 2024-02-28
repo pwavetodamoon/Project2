@@ -160,11 +160,11 @@ GameObject:
   - component: {fileID: 3932899607600639534}
   - component: {fileID: 2568691403382899272}
   - component: {fileID: 2666710935510523136}
-  - component: {fileID: 8209676885351302989}
   - component: {fileID: 9164698120020394836}
   - component: {fileID: 789627644689018474}
   - component: {fileID: 5514555860598001570}
   - component: {fileID: 3469162009311317478}
+  - component: {fileID: 6153412626832977644}
   m_Layer: 7
   m_Name: Hero
   m_TagString: Hero
@@ -200,7 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ea4addc56c4514292c216038113cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotIndex: 0
+  InGameSlotIndex: 0
+  UIGameSlotIndex: 0
   modelTransform: {fileID: 7057924690559096653}
   attackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
   ModelDrag: {fileID: 0}
@@ -300,31 +301,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowCounter: 1
   allowExecuteAnotherAttack: 1
---- !u!114 &8209676885351302989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130498615958115108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d9eddb67f52604cb6c0ce1ebe96bae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 1
-  maxHealth: 100
-  health:
-    value: 100
-  BaseDamage:
-    value: 10
-  speed:
-    value: 1
-  CritRate:
-    value: 0
-  CritDamage:
-    value: 1.5
-  attackMoveDuration: 0.5
 --- !u!114 &9164698120020394836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +356,34 @@ MonoBehaviour:
   sortingGroup: {fileID: 5514555860598001570}
   lastYPosition: 0
   isValidate: 0
+--- !u!114 &6153412626832977644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130498615958115108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3370b742d70244faddae34abf0ad74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 1
+  maxHealth: 100
+  health:
+    value: 0
+  BaseDamage:
+    value: 0
+  speed:
+    value: 0
+  CritRate:
+    value: 0
+  CritDamage:
+    value: 0
+  attackCoolDown:
+    value: 0
+  attackMoveDuration: 0.5
+  baseData: {fileID: 11400000, guid: 7996403b868b97c4b82e5a774398da6e, type: 2}
 --- !u!1 &2636142058065870773
 GameObject:
   m_ObjectHideFlags: 0

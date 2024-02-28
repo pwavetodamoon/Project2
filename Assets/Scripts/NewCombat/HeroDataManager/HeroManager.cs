@@ -8,7 +8,7 @@ namespace NewCombat.HeroDataManager
     [CreateAssetMenu(fileName = "Hero Manager", menuName = "HeroManager")]
     public class HeroManager : ScriptableObject
     {
-        public List<BaseData> heroData;
+        public List<HeroData> heroData;
         public GameObject prefabHero;
 
         [Button]

@@ -191,6 +191,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &469181120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469181122}
+  - component: {fileID: 469181121}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &469181121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469181120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c017229b1efc6924e8b8ed600d359b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
+--- !u!4 &469181122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469181120}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &475540182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130498615958115108, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3974775916326653494, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -343,6 +388,14 @@ PrefabInstance:
     - target: {fileID: 4008246247074431557, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: UIGameSlotIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216405689908443297, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514555860598001570, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 292
       objectReference: {fileID: 0}
     - target: {fileID: 8209676885351302989, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: BaseStats.BaseDamage
@@ -796,7 +849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2130498615958115108, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3974775916326653494, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -853,6 +906,10 @@ PrefabInstance:
     - target: {fileID: 4008246247074431557, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: InGameSlotIndex
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514555860598001570, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 8209676885351302989, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: BaseStats.BaseDamage
@@ -1046,6 +1103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hero (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2130498615958115108, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3974775916326653494, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.42
@@ -1093,6 +1154,10 @@ PrefabInstance:
     - target: {fileID: 4008246247074431557, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: UIGameSlotIndex
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514555860598001570, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 192
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1624,6 +1689,7 @@ SceneRoots:
   - {fileID: 1726787413893295851}
   - {fileID: 3451473333681129041}
   - {fileID: 842497466}
+  - {fileID: 469181122}
   - {fileID: 475540182}
   - {fileID: 8966778852006674483}
   - {fileID: 1895916914}

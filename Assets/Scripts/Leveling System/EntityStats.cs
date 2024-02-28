@@ -3,43 +3,31 @@ using UnityEngine;
 
 namespace Leveling_System
 {
-    public class EntityStats : MonoBehaviour
+    public abstract class EntityStats : MonoBehaviour
     {
         [Header("Normal Stats")]
         [InfoBox("Damage calculator by difference by level of Entity and Enemy")]
         [SerializeField] public int Level = 1;
-        [SerializeField] private float maxHealth = 100;
-        [SerializeField] private BaseStat health;
-        [SerializeField] private BaseStat BaseDamage;
-        [SerializeField] private BaseStat speed;
+        [SerializeField] protected float maxHealth = 100;
+        [SerializeField] protected BaseStat health;
+        [SerializeField] protected BaseStat BaseDamage;
+        [SerializeField] protected BaseStat speed;
 
         [Header("Critical")]
-        [SerializeField] private BaseStat CritRate;
+        [SerializeField] protected BaseStat CritRate;
 
-        [SerializeField] private BaseStat CritDamage;
+        [SerializeField] protected BaseStat CritDamage;
 
         [Header("Attack Settings")]
-        private BaseStat attackCoolDown;
+        public BaseStat attackCoolDown;
 
-        [SerializeField] private float attackMoveDuration = .5f;
-        private void Awake()
-        {
-            // For GetItemInPool
-            health.Value = maxHealth;
-            BaseDamage = new BaseStat(10);
-            speed = new BaseStat(1);
-            CritRate = new BaseStat(1.5f);
-            CritDamage = new BaseStat(1.5f);
-            attackCoolDown = new BaseStat(3f);
-        }
-        public float Health => health.Value;
+        [SerializeField] protected float attackMoveDuration = .5f;
+        public float Health() => health.Value;
 
-        public float MaxHealth => maxHealth;
+        public float MaxHealth() => maxHealth;
         public bool IsCritical { get; private set; }
-
-        public float AttackMoveDuration => attackMoveDuration / (1 + speed.Value / 200);
+        public float AttackMoveDuration() => attackMoveDuration / (1 + speed.Value / 200);
         public float AttackCoolDown() => attackCoolDown.Value;
-
 
         public void DecreaseHealth(float damage)
         {
@@ -68,11 +56,5 @@ namespace Leveling_System
             var rate = UnityEngine.Random.Range(0, 100);
             return rate <= CritRate.Value ? true : false;
         }
-        [Button]
-        public void ResetState()
-        {
-            health.Value = 100;
-        }
-      
     }
 }
