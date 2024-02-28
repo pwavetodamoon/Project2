@@ -12,18 +12,17 @@ public class testfunc : MonoBehaviour
 {
     public HeroManager heroManager;
     public UIAvatarController[] uiAvatarControllers;
-    public HeroCharacter[] heroCharacters;
 
     [Button]
     void Test()
     {
         uiAvatarControllers = FindObjectsOfType<UIAvatarController>();
-        heroCharacters = FindObjectsOfType<HeroCharacter>();
     }
 
     [Button]
     public void Spawn()
     {
+        // Cần phải chạy hàm Test trước để lấy danh sách UI avatar
         // Lấy data list hero data trong hero manager
         var list = heroManager.heroData;
         var heroInGameList = new List<HeroCharacter>();
