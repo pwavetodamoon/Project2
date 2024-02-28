@@ -1,4 +1,4 @@
-using NewCombat.Characters;
+﻿using NewCombat.Characters;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace NewCombat.Slots
         [FormerlySerializedAs("BannedSlot")] public BannedSlotControl bannedSlotControl;
         private void Start()
         {
+            // Load các slot vào vị trí giữa grid
             var combatGrid = GridManager.Instance.GetGrid();
             foreach (var slot in Slots)
             {
@@ -34,7 +35,12 @@ namespace NewCombat.Slots
 
             }
 
-            var heroList = new List<GameObject>(CombatEntitiesManager.Instance.GetHeroList());
+            
+        }
+
+        public void LoadHeroIntoSlotInGame(List<HeroCharacter> heroList)
+        {
+            //var heroList = new List<GameObject>(CombatEntitiesManager.Instance.GetHeroList());
             if (heroList.Count == 0)
             {
                 Debug.LogError("Hero list is empty");
@@ -43,15 +49,16 @@ namespace NewCombat.Slots
 
             foreach (var hero in heroList)
             {
-                var heroCharacter = hero.GetComponent<HeroCharacter>();
-                if (heroCharacter.InGameSlotIndex == -1)
+                //var heroCharacter = hero.GetComponent<HeroCharacter>();
+                // -1 nghĩa là ko có trong game
+                if (hero.InGameSlotIndex == -1)
                 {
                     bannedSlotControl.SetHeroIntoStandPosition(hero.transform);
-                    heroCharacter.SetSlotIndex(bannedSlotControl.SlotIndex);
+                    hero.SetSlotIndex(bannedSlotControl.SlotIndex);
                     continue;
                 }
-
-                var slot = GetSlotBySlotIndexInRange(heroCharacter.InGameSlotIndex);
+                // Nếu slot của hero đó đã có hero khác thì ko cho vào
+                var slot = GetSlotBySlotIndexInRange(hero.InGameSlotIndex);
                 if (slot.currentHero == null)
                 {
                     slot.SetHeroIntoStandPosition(hero.transform);
