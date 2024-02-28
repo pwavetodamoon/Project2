@@ -13,11 +13,6 @@ public class testfunc : MonoBehaviour
     public UIAvatarController[] uiAvatarControllers;
     public HeroCharacter[] heroCharacters;
 
-    private void Start()
-    {
-        Test();
-        Spawn();
-    }
     [Button]
     void Test()
     {
