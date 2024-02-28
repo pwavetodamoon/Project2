@@ -25,7 +25,7 @@ namespace SortingLayers
             if (Math.Abs(transform.position.y - lastYPosition) > 0.01f)
             {
                 CalculatorOrderLayer();
-                lastYPosition = transform.position.y;   
+                lastYPosition = transform.position.y;
             }
         }
 

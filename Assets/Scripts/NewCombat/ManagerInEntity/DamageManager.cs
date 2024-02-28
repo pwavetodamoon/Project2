@@ -21,7 +21,7 @@ namespace NewCombat.ManagerInEntity
             OnTakeDamage?.Invoke();
             WorldTextPool.WorldTextPool.Instance.GetCombatTxt(transform.position, damageOfEnemy.ToString());
 
-            if (EntityStats.Health <= 0)
+            if (EntityStats.Health() <= 0)
             {
                 OnDie?.Invoke();
                 entity.ReleaseObject();

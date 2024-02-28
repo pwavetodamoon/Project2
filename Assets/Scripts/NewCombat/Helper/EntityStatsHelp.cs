@@ -7,16 +7,16 @@ namespace NewCombat.Helper
     {
         public static float CalculatorFinalDamage(EntityStats entity, EntityStats enemy)
         {
-            var myDmgResistant = CalculatorDamageResistance(entity,enemy);
-            return DamageCanDealing(enemy.GetDamage(),myDmgResistant);
+            var myDmgResistant = CalculatorDamageResistance(entity, enemy);
+            return DamageCanDealing(enemy.GetDamage(), myDmgResistant);
         }
-        private static float DamageCanDealing(float damage,float DamageResistance)
+        private static float DamageCanDealing(float damage, float DamageResistance)
         {
             return damage * (1 - DamageResistance / (DamageResistance + 100));
         }
-        private static int CalculatorDamageResistance(EntityStats entity,EntityStats enemy)
+        private static int CalculatorDamageResistance(EntityStats entity, EntityStats enemy)
         {
-            var diffenceLevel = enemy.Level - entity.Level;
+            var diffenceLevel = enemy.Level() - entity.Level();
             return diffenceLevel * 5;
         }
     }

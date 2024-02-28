@@ -17,10 +17,10 @@ GameObject:
   - component: {fileID: 3458469622659473241}
   - component: {fileID: 8618022460076518562}
   - component: {fileID: 7250616980711001169}
-  - component: {fileID: 5137630978918385969}
   - component: {fileID: 3233242168743384101}
   - component: {fileID: 3584062236828804731}
   - component: {fileID: -7444902851448697839}
+  - component: {fileID: 8473775802395018784}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Enemy
@@ -186,31 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowCounter: 1
   allowExecuteAnotherAttack: 1
---- !u!114 &5137630978918385969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621426444390167394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d9eddb67f52604cb6c0ce1ebe96bae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Level: 1
-  maxHealth: 100
-  health:
-    value: 0
-  BaseDamage:
-    value: 0
-  speed:
-    value: 0
-  CritRate:
-    value: 0
-  CritDamage:
-    value: 0
-  attackMoveDuration: 0.5
 --- !u!114 &3233242168743384101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +223,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4623270ea0783a4faac37633a0870bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8473775802395018784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621426444390167394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7299b3c6f8c5ec244a448333b11457c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 1
+  maxHealth: 100
+  health:
+    value: 0
+  BaseDamage:
+    value: 0
+  speed:
+    value: 0
+  CritRate:
+    value: 0
+  CritDamage:
+    value: 0
+  attackCoolDown:
+    value: 0
+  attackMoveDuration: 0.5
+  EnemyData: {fileID: 11400000, guid: d175fee70a0d8f842976a621c38bf90c, type: 2}
 --- !u!1 &7363794348653069964
 GameObject:
   m_ObjectHideFlags: 0

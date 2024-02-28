@@ -6,11 +6,12 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Characters;
+using NewCombat.Characters;
 
 
 public class UIAvatarController : APanelController
 {
-    [SerializeField] private CharacterEnumType _characterType;
+    [SerializeField] private HeroCharacter _heroCharacter;
 
     [Header("Buttons")]
     [SerializeField] private Button _buttonLevelUp;
@@ -23,12 +24,19 @@ public class UIAvatarController : APanelController
     [Header("Avatar")]
     [SerializeField] private Image _imageAvatar;
     [SerializeField] private List<Sprite> _spriteAvatar;
+    public int index = 0;
+    public void SetSprite(Sprite newSprite)
+    {
+        _imageAvatar.sprite = newSprite;
+    }
 
-
+    public void SetHeroCharacter(HeroCharacter heroCharacter)
+    {
+        _heroCharacter = heroCharacter;
+    }
     protected override void Awake()
     {
         base.Awake();
-        ChangeSpriteAvatar();
     }
     protected override void AddListeners()
     {
@@ -38,39 +46,36 @@ public class UIAvatarController : APanelController
     {
         base.RemoveListeners();
     }
-    private void ChangeSpriteAvatar()
-    {
-        switch (_characterType)
-        {
-            case CharacterEnumType.King:
-                {
-                    _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_characterType)];
-                    break;
-                }
-            case CharacterEnumType.Knight:
-                {
-                    _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_characterType)];
-                    break;
-                }
-            case CharacterEnumType.Sergeant:
-                {
-                    _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_characterType)];
-                    break;
-                }
-            case CharacterEnumType.Templar:
-                {
-                    _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_characterType)];
-                    break;
-                }
-            case CharacterEnumType.WhiteArmored:
-                {
-                    _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_characterType)];
-                    break;
-                }
-        }
-    }
-
-
-
-
+    // private void ChangeSpriteAvatar()
+    // {
+    //     switch (_heroCharacter.characterEnumType)
+    //     {
+    //         case CharacterEnumType.King:
+    //             {
+    //                 _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_heroCharacter.characterEnumType)];
+    //                 break;
+    //             }
+    //         case CharacterEnumType.Knight:
+    //             {
+    //                 _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_heroCharacter.characterEnumType)];
+    //                 break;
+    //             }
+    //         case CharacterEnumType.Sergeant:
+    //             {
+    //                 _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_heroCharacter.characterEnumType)];
+    //                 break;
+    //             }
+    //         case CharacterEnumType.Templar:
+    //             {
+    //                 _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_heroCharacter.characterEnumType)];
+    //                 break;
+    //             }
+    //         case CharacterEnumType.WhiteArmored:
+    //             {
+    //                 _imageAvatar.sprite = _spriteAvatar[Convert.ToInt32(_heroCharacter.characterEnumType)];
+    //                 break;
+    //             }
+    //     }
 }
+
+

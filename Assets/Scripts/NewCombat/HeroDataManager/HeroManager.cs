@@ -8,18 +8,18 @@ namespace NewCombat.HeroDataManager
     [CreateAssetMenu(fileName = "Hero Manager", menuName = "HeroManager")]
     public class HeroManager : ScriptableObject
     {
-        public List<BaseData> heroData;
+        public List<HeroData> heroData;
         public GameObject prefabHero;
 
-        [Button]
-        public void SpawnHero()
-        {
-            foreach (var data in heroData)
-            {
-                if (data.SlotIndex == -1) continue;
-                var go = Instantiate(prefabHero);
-                data.GetDataForHero(go);
-            }
-        }
+        // [Button]
+        // public void SpawnHero()
+        // {
+        //     foreach (var data in heroData)
+        //     {
+        //         if (data.SlotIndex == -1) continue;
+        //         var go = Instantiate(prefabHero);
+        //         data.GetDataForHero(go);
+        //     }
+        // }
     }
 }

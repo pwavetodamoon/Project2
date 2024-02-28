@@ -16,7 +16,7 @@ namespace NewCombat.HeroAttack
             var enemyStats = Enemy.GetComponent<EntityStats>();
 
             var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemyStats);
-            if (enemyStats.Health - damageOfEnemy <= 0)
+            if (enemyStats.Health() - damageOfEnemy <= 0)
             {
                 CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
             }
