@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ea4addc56c4514292c216038113cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterEnumType: 0
   InGameSlotIndex: 0
   UIGameSlotIndex: 0
   modelTransform: {fileID: 7057924690559096653}
@@ -368,22 +369,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3370b742d70244faddae34abf0ad74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Level: 1
-  maxHealth: 100
-  health:
-    value: 0
-  BaseDamage:
-    value: 0
-  speed:
-    value: 0
-  CritRate:
-    value: 0
-  CritDamage:
-    value: 0
-  attackCoolDown:
-    value: 0
-  attackMoveDuration: 0.5
-  baseData: {fileID: 11400000, guid: 7996403b868b97c4b82e5a774398da6e, type: 2}
+  structStats:
+    Level: 0
+    maxHealth: 0
+    health: 0
+    BaseDamage: 0
+    speed: 0
+    CritRate: 0
+    CritDamage: 0
+    attackCoolDown: 0
+    attackMoveDuration: 0
+  heroData: {fileID: 0}
 --- !u!1 &2636142058065870773
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,17 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4daaead444fe5d34581c7ada00e70e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 6249977467768528188}
-  eye: {fileID: 8262864226345957375}
-  body: {fileID: 7176905869048207623}
-  left_arm: {fileID: 6399576322856572102}
-  right_arm: {fileID: 6575348297060872347}
-  left_hand: {fileID: 4111166271553178129}
-  right_hand: {fileID: 8165601016597269338}
-  left_leg: {fileID: 7032236611498804831}
-  right_leg: {fileID: 3474956448989313619}
-  item_sword: {fileID: 5048154275596489897}
-  item_shield: {fileID: 3001876087663972286}
 --- !u!114 &6205382650338924181
 MonoBehaviour:
   m_ObjectHideFlags: 0

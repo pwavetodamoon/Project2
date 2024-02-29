@@ -7,6 +7,7 @@ using System.Linq;
 using NewCombat.Slots;
 using UnityEngine;
 using Sirenix.Utilities;
+using Characters;
 
 public class testfunc : MonoBehaviour
 {
@@ -31,8 +32,10 @@ public class testfunc : MonoBehaviour
         {
             // ref data thứ i từ list hero data
             var heroData = list[i];
+            if(heroData.heroCharacter != null) continue;
             // tạo hero từ prefab hero trong hero manager
             var hero = Instantiate(heroManager.prefabHero, transform).GetComponent<HeroCharacter>();
+            hero.SetAttackFactory(heroData.GetHeroFactory());
             // chỉnh sprite cho hero
             uiAvatarControllers[i].SetSprite(heroData.icon);
             // Chỉnh data cho class stats của hero
@@ -44,6 +47,9 @@ public class testfunc : MonoBehaviour
             // Chỉnh icon cho avatar
             uiAvatarControllers[i].SetHeroCharacter(hero);
             heroInGameList.Add(hero);
+
+            var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
+            heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
         }
         // Load tất cả hero vào vị trí đúng trong game
         SlotManager.Instance.LoadHeroIntoSlotInGame(heroInGameList);
