@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a52a201afe5a04e84b4ccabaadd0e1, type: 3}
   m_Name: Hero
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   structStats:
     Level: 1
     maxHealth: 100
@@ -31,3 +40,4 @@ MonoBehaviour:
   slotIndex: 0
   HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
   heroCharacter: {fileID: 0}
+  ResourcePath: Hero/Medieval King

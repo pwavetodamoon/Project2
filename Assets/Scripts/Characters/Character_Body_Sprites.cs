@@ -1,24 +1,36 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Characters
 {
+    [System.Serializable]
+    public class HeroSkin
+    {
+        [ShowInInspector]public Dictionary<Character_Body_Sprites.SpritePartEnum, SpriteRenderer> Dictionary;
+
+        public HeroSkin()
+        {
+            Dictionary = new Dictionary<Character_Body_Sprites.SpritePartEnum, SpriteRenderer>();
+            for (int i = 0; i < Character_Body_Sprites.SpritePartCount; i++)
+            {
+                Dictionary.Add((Character_Body_Sprites.SpritePartEnum)i, null);
+            }
+        }
+
+        public void SetSpritePart(Character_Body_Sprites.SpritePartEnum spritePartEnum, SpriteRenderer spriteRenderer)
+        {
+            Dictionary[spritePartEnum] = spriteRenderer;
+        }
+        public void Clear()
+        {
+            Dictionary.Clear();
+        }
+    }
+
     public class Character_Body_Sprites : MonoBehaviour
     {
-        public SpriteRenderer head;
-        public SpriteRenderer eye;
-        public SpriteRenderer body;
-        public SpriteRenderer left_arm;
-        public SpriteRenderer right_arm;
-        public SpriteRenderer left_hand;
-        public SpriteRenderer right_hand;
-        public SpriteRenderer left_leg;
-        public SpriteRenderer right_leg;
-        public SpriteRenderer item_sword;
-        public SpriteRenderer item_shield;
-
-
-
+        public const int SpritePartCount = 11;
         public enum SpritePartEnum
         {
             head,
@@ -33,68 +45,30 @@ namespace Characters
             item_sword,
             item_shield,
         }
+        [SerializeField] HeroSkin HeroSkin;
+        public void SetHeroSprite(Dictionary<SpritePartEnum, Sprite> spriteDictionary)
+        {
+            LoadSpritePart();
+            Debug.Log("Set Hero Sprite");
+            foreach (var skin in HeroSkin.Dictionary)
+            {
+                if(skin.Value == null) continue;
+                skin.Value.sprite = spriteDictionary[skin.Key];
+            }
+        }
+
         [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
         private void LoadSpritePart()
         {
+            if (HeroSkin == null)
+                HeroSkin = new HeroSkin();
+
             var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
             foreach (var spriteRenderer in allSpriteRenderers)
             {
-                SetSingleSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
+                HeroSkin.SetSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
             }
         }
-        private void SetSingleSpritePart(SpritePartEnum spritePartEnum, SpriteRenderer spriteRenderer)
-        {
-            switch (spritePartEnum)
-            {
-                case SpritePartEnum.head:
-                    head = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.eye:
-                    eye = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.body:
-                    body = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.left_arm:
-                    left_arm = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.right_arm:
-                    right_arm = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.left_hand:
-                    left_hand = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.right_hand:
-                    right_hand = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.left_leg:
-                    left_leg = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.right_leg:
-                    right_leg = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.item_sword:
-                    item_sword = spriteRenderer;
-                    break;
-
-                case SpritePartEnum.item_shield:
-                    item_shield = spriteRenderer;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
         private SpritePartEnum GetSpritePartEnumByName(string name)
         {
             return name switch

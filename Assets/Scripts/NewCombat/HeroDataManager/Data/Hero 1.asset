@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a52a201afe5a04e84b4ccabaadd0e1, type: 3}
   m_Name: Hero 1
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   structStats:
     Level: 1
     maxHealth: 100
@@ -23,11 +32,12 @@ MonoBehaviour:
     attackCoolDown: 0
     attackMoveDuration: 0
   icon: {fileID: 21300000, guid: e3062635e5eaa3f4fb052a6af4dfc80b, type: 3}
-  heroName: Quang
+  heroName: Quang 2
   AttackType: 0
   characterEnumType: 4
   baseStats:
     value: 0
-  slotIndex: 0
+  slotIndex: 1
   HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
   heroCharacter: {fileID: 0}
+  ResourcePath: Hero/Templar Knight

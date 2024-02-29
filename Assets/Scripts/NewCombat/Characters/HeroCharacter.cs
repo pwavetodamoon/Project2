@@ -21,15 +21,8 @@ namespace NewCombat.Characters
         protected override void Awake()
         {
             base.Awake();
-            RegisterObject();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
         }
-
-        private void Start()
-        {
-            CreateAttack();
-        }
-
         public void SetSlotIndex(int index)
         {
             if (index == -1)
@@ -83,7 +76,7 @@ namespace NewCombat.Characters
         public override void RegisterObject()
         {
             CombatEntitiesManager.Instance.AppendEntityToListByTag(gameObject, GameTag.Hero);
-
+            CreateAttack();
             attackManager.SetAllowExecuteAttackValue(true);
             attackManager.SetTimeCounterValue(true);
         }
