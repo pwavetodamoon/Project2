@@ -19,13 +19,8 @@ namespace DropItem
 
         //[SerializeField] private string idItemNeedCollect => questItem.Name;
         [Header("Quest Information")]
-        [SerializeField] private int questItemInScene = 0;
-
-        [SerializeField] private int itemNeedCollect = 5;
-        [SerializeField] private int maxItemNeedCollect = 5;
         [SerializeField] private int pointCollected = 0;
         [SerializeField] private int pointNeedCollect = 100;
-        public bool CanSpawnQuestItem => true;
 
         public Action<ItemsSO> OnChangedQuestItem; // Can use for UI and logic game
 
@@ -44,8 +39,6 @@ namespace DropItem
         {
             if (newItemQuest == null) return;
             questItem = newItemQuest;
-            itemNeedCollect = maxItemNeedCollect;
-            questItemInScene = 0;
         }
 
         public void OnCollectItem(string itemId, int newPoint)
@@ -54,13 +47,7 @@ namespace DropItem
             //if (itemId != idItemNeedCollect) return;
 
             Debug.Log("We collect: " + itemId);
-            Debug.Log("Item need collect is: " + (itemNeedCollect - 1));
-            itemNeedCollect--;
             pointCollected += newPoint;
-            if (itemNeedCollect == 0)
-            {
-                Debug.Log("We fine the quest");
-            }
         }
 
         [Button]
