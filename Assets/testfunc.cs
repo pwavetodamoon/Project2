@@ -33,21 +33,27 @@ public class testfunc : MonoBehaviour
             // ref data thứ i từ list hero data
             var heroData = list[i];
             if(heroData.heroCharacter != null) continue;
+
             // tạo hero từ prefab hero trong hero manager
             var hero = Instantiate(heroManager.prefabHero, transform).GetComponent<HeroCharacter>();
             hero.SetAttackFactory(heroData.GetHeroFactory());
+
             // chỉnh sprite cho hero
             uiAvatarControllers[i].SetSprite(heroData.icon);
+
             // Chỉnh data cho class stats của hero
             hero.SetHeroData(heroData);
-            // Chỉnh slot index cho hero bởi hero vừa tạo ra chỉ có xác
-            hero.InGameSlotIndex = heroData.SlotIndex;
+
+            // Chỉnh slot index cho hero bởi hero vừa tạo ra chỉ có xác 
+            hero.SetSlotIndex(heroData.SlotIndex);
+
             // Ref hero object vào trong hero data
             heroData.heroCharacter = hero;
+
             // Chỉnh icon cho avatar
             uiAvatarControllers[i].SetHeroCharacter(hero);
-            heroInGameList.Add(hero);
 
+            heroInGameList.Add(hero);
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
             heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
         }

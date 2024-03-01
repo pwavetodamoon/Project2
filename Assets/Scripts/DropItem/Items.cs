@@ -18,6 +18,7 @@ namespace DropItem
         private SpriteRenderer spriteRenderer;
         private Transform DestinationTransform;
         public string itemID;
+        public int point;
         public Action<Items> ReleaseCallback { get; set; }
         public abstract void SendData();
 

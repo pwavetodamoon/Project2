@@ -9,6 +9,7 @@ namespace DropItem
         [Button]
         public void SendSignal()
         {
+            QuestManager.Instance.IncreasePointMonsterDead();
             RewardManager.Instance.CreateReward(transform.position);
         }
     }

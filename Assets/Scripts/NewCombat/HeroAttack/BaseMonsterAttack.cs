@@ -4,7 +4,7 @@ using NewCombat.ManagerInEntity;
 
 namespace NewCombat.HeroAttack
 {
-    public abstract class BaseMonsterAttack : SingleTargetAttackImprove
+    public abstract class BaseMonsterAttack : BaseSingleTargetAttack
     {
         protected override string GetEnemyTag()
         {
