@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7423600291134737624}
   - component: {fileID: 7967607400148692422}
   - component: {fileID: 4575247551355223819}
+  - component: {fileID: -2437223043107566634}
   m_Layer: 0
   m_Name: Item_Collect
   m_TagString: Untagged
@@ -136,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 
-  timeCollect: 0
   DropConfig: {fileID: 11400000, guid: ca26e682e26bc4b45b8cac6ff52ccd4a, type: 2}
 --- !u!210 &7967607400148692422
 SortingGroup:
@@ -166,3 +166,17 @@ MonoBehaviour:
   sortingGroup: {fileID: 7967607400148692422}
   lastYPosition: 0
   isValidate: 0
+--- !u!114 &-2437223043107566634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071827376406351707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3f9336009439443997b9a8849872fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  moveVector: {x: -1, y: 0}

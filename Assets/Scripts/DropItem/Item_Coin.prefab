@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2015921707029959747}
   - component: {fileID: 6181924666019736221}
   - component: {fileID: 2737730273421399463}
+  - component: {fileID: 3858350163833152776}
   m_Layer: 0
   m_Name: Item_Coin
   m_TagString: Untagged
@@ -136,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 
-  timeCollect: 0
   DropConfig: {fileID: 11400000, guid: 097db5b8592ea894b88819c207dc251c, type: 2}
 --- !u!210 &6181924666019736221
 SortingGroup:
@@ -166,3 +166,17 @@ MonoBehaviour:
   sortingGroup: {fileID: 0}
   lastYPosition: 0
   isValidate: 0
+--- !u!114 &3858350163833152776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237201870872081658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3f9336009439443997b9a8849872fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  moveVector: {x: -1, y: 0}
