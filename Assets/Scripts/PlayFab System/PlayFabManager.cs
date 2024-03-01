@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -5,6 +6,9 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using SystemInfo = UnityEngine.Device.SystemInfo;
 using Currency;
+using PlayFab.PfEditor.EditorModels;
+using LoginResult = PlayFab.ClientModels.LoginResult;
+using PlayFabError = PlayFab.PlayFabError;
 
 namespace PlayFab_System
 {
@@ -17,7 +21,6 @@ namespace PlayFab_System
             Login();
         }
         #region Login
-
         private void Login()
         {
             Player = PlayerData.Instance;
@@ -29,20 +32,19 @@ namespace PlayFab_System
             };
             PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
         }
-
         private void OnLoginSuccess(LoginResult obj)
         {
             Debug.Log("Congratulations, you made your first successful API call!");
+            GetDataPlayer();
         }
-
         private void OnLoginFailure(PlayFabError obj)
         {
             Debug.Log("Error logging in player with custom ID: " + obj.GenerateErrorReport());
         }
-
         #endregion
         
         // Save And GEt Player Data 
+        
         [Button]
         private void GetDataPlayer()
         {
