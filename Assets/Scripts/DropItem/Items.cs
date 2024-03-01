@@ -56,7 +56,9 @@ namespace DropItem
         [Button]
         public virtual void Collect()
         {
+            Debug.Log("check Collect");
             StartCoroutine(MoveToDestination());
+
         }
 
         IEnumerator MoveToDestination()
@@ -69,6 +71,7 @@ namespace DropItem
             }
             SendData();
             Release();
+            Debug.Log("check MoveToDestination");
         }
         [SerializeField, Required] private ItemDropConfig DropConfig;
 
