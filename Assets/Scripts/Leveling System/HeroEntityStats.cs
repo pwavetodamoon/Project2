@@ -9,9 +9,9 @@ public class HeroEntityStats : EntityStats
     public void SetHero(HeroData newData)
     {
         heroData = newData;
-        LoadData();
+        LoadEntityStats();
     }
-    public void LoadData()
+    public void LoadEntityStats()
     {
         structStats = heroData.structStats;
     }

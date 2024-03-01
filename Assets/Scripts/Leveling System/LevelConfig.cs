@@ -7,14 +7,13 @@ namespace Leveling_System
     [CreateAssetMenu(fileName = "LevelConfig", menuName = "Leveling System/LevelConfig")]
     public class LevelConfig : ScriptableObject
     {
-        // Note: AnimationCurve ?
         public AnimationCurve curve;
         public int maxLevel = 100;
         public float maxRequiredMoney = 1000;
         [FormerlySerializedAs("base_cost")] public int baseCost = 100;
         public float scaleMoney = 1.2f;
-        
         private float[] array;
+
         void OnEnable()
         {
             if (array == null || array.Length == 0)
