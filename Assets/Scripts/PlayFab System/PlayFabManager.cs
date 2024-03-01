@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using SystemInfo = UnityEngine.Device.SystemInfo;
 
@@ -14,18 +12,18 @@ namespace PlayFab_System
         public  PlayerData Player;
         private void Start()
         {
-            Player = PlayerData.Instance;
             Login();
         }
-
         #region Login
 
         private void Login()
         {
+            Player = PlayerData.Instance;
+            Player.customId = SystemInfo.deviceUniqueIdentifier;
             var request = new LoginWithCustomIDRequest
             {
-                CustomId = SystemInfo.deviceUniqueIdentifier,
-                CreateAccount = true
+                CustomId =  Player.customId ,
+                CreateAccount = true,
             };
             PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
         }
@@ -42,13 +40,13 @@ namespace PlayFab_System
 
         #endregion
         
+        // Save And GEt Player Data 
         [Button]
         private void GetDataPlayer()
         {
             PlayFabClientAPI.GetUserData( new GetUserDataRequest() , OnRevcievedData, OnDataSendError);
         }
 
-        // Save And GEt Player Data 
         [Button]
         public void SaveDataPlayer()
         {
@@ -58,7 +56,9 @@ namespace PlayFab_System
                 {
                     { "CusTomId" , Player.customId },
                     { "Email" ,Player.email },
-                    { "Password" , Player.passWord }
+                    { "Password" , Player.passWord },
+                    {"Level", Player.levelPlayer.ToString()},
+                    {"Gold", Player.gold.ToString()},
                 }
             };
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
@@ -72,12 +72,12 @@ namespace PlayFab_System
             }
             else
             {
-                Debug.Log("Data found");
                 Player.customId = result.Data["CusTomId"].Value;
                 Player.email = result.Data["Email"].Value;
                 Player.passWord = result.Data["Password"].Value;
-                Debug.Log(  Player.customId + " " + Player.email + " " + Player.passWord);
-
+                Player.levelPlayer = int.Parse(result.Data["Level"].Value);
+                Player.gold = int.Parse(result.Data["Gold"].Value);
+                Debug.Log(  Player.customId + " " + Player.email + " " + Player.passWord + Player.levelPlayer + " " + Player.gold);
             }
         }
         private void OnDataSend(UpdateUserDataResult result)
