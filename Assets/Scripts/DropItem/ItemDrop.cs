@@ -5,7 +5,7 @@ namespace DropItem
         // Update Data in QuestManager
         public override void SendData()
         {
-            QuestManager.Instance.OnCollectItem(itemID);
+            QuestManager.Instance.OnCollectItem(itemID, point);
         }
 
     }

@@ -13,8 +13,7 @@ namespace NewCombat.Characters
     public class HeroCharacter : EntityCharacter
     {
         public CharacterEnumType characterEnumType;
-        public int InGameSlotIndex;
-        public int UIGameSlotIndex;
+        public int InGameSlotIndex { get; private set; }
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
         [SerializeField] public Transform ModelDrag;
@@ -27,10 +26,9 @@ namespace NewCombat.Characters
         {
             if (index == -1)
             {
-                //Debug.Log("Hero Active False");
                 ReleaseObject();
             }
-            else if (InGameSlotIndex == -1)
+            else 
             {
                 RegisterObject();
             }
