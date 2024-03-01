@@ -3,6 +3,7 @@ using Helper;
 using ObjectPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DropItem
 {
@@ -10,17 +11,21 @@ namespace DropItem
     {
         public ItemDrop itemCollectPrefab;
         public Coin itemCoinPrefab;
+
         [Header("Item Information")]
-        [SerializeField] ItemsSO sliverCoinSO;
-        [SerializeField] ItemsSO goldCoinSO;
-        [SerializeField] ItemsSO ItemsSO;
+        [SerializeField] private ItemsSO sliverCoinSO;
+
+        [SerializeField] private ItemsSO goldCoinSO;
+        [FormerlySerializedAs("ItemsSO")][SerializeField] private ItemsSO itemStruct;
 
         [Header("Drop Setting")]
-        [SerializeField] bool enableSpawnCoin = true;
-        [SerializeField] bool enableSpawnItem = true;
+        [SerializeField] private bool enableSpawnCoin = true;
 
-        ObjectPoolPrefab<Items> itemPool;
-        ObjectPoolPrefab<Items> coinPool;
+        [SerializeField] private bool enableSpawnItem = true;
+
+        private ObjectPoolPrefab<Items> itemPool;
+        private ObjectPoolPrefab<Items> coinPool;
+
         protected override void Awake()
         {
             base.Awake();
@@ -28,16 +33,20 @@ namespace DropItem
             coinPool = new ObjectPoolPrefab<Items>(itemCoinPrefab, transform, 20);
             list = new List<Items>();
         }
+
         [TableList(ShowIndexLabels = true)]
-        [ShowInInspector] List<Items> list;
+        [ShowInInspector] private List<Items> list;
+
         private void Start()
         {
             QuestManager.Instance.OnChangedQuestItem += UpdateQuestItem;
         }
+
         private void UpdateQuestItem(ItemsSO newQuestItem)
         {
-            ItemsSO = newQuestItem;
+            itemStruct = newQuestItem;
         }
+
         [Button]
         public void CreateReward(Vector3 position)
         {
@@ -46,14 +55,13 @@ namespace DropItem
             {
                 if (enableSpawnCoin == false) continue;
                 GetItemInPool(sliverCoinSO, coinPool, position);
-                
             }
 
             if (enableSpawnItem == false) return;
 
-            if (QuestManager.Instance.CanSpawnQuestItem == false) return;
-            QuestManager.Instance.QuestItemInScene++;
-            GetItemInPool(ItemsSO, itemPool, position);
+            var itemStruct = QuestManager.Instance.GetRandomItemQuest();
+            var itemInGame = GetItemInPool(itemStruct.itemsSO, itemPool, position);
+            itemInGame.point = itemStruct.pointCollect;
         }
 
         private void Add(Items item)
@@ -61,6 +69,7 @@ namespace DropItem
             if (list.Contains(item)) return;
             list.Add(item);
         }
+
         private Items GetItemInPool(ItemsSO item, ObjectPoolPrefab<Items> rewardItemPool, Vector3 spawnPosition)
         {
             var itemReward = rewardItemPool.Get();
@@ -73,10 +82,10 @@ namespace DropItem
             Add(itemReward);
             return itemReward;
         }
+
         private Vector3 RandomPosition()
         {
             return new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
         }
-
     }
 }

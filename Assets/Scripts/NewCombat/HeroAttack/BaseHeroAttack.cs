@@ -5,6 +5,7 @@ using System.Collections;
 using Helper;
 using Leveling_System;
 using NewCombat.Helper;
+using UnityEngine;
 
 namespace NewCombat.HeroAttack
 {
@@ -12,12 +13,13 @@ namespace NewCombat.HeroAttack
     {
         protected override IEnumerator StartBehavior()
         {
-            yield return base.StartBehavior();
+            IncreaseAttackerCount();
             var enemyStats = Enemy.GetComponent<EntityStats>();
 
             var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemyStats);
             if (enemyStats.Health() - damageOfEnemy <= 0)
             {
+                Debug.Log("Enemy is dead");
                 CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
             }
             yield return null;

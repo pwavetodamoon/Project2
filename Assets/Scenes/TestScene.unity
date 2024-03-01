@@ -154,7 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
   uiAvatarControllers: []
-  heroCharacters: []
 --- !u!4 &469181122
 Transform:
   m_ObjectHideFlags: 0
@@ -430,7 +429,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8013156783536548533, guid: 78b84b4c00bfaa34ca03369565830784, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8013156783536548533, guid: 78b84b4c00bfaa34ca03369565830784, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1045,6 +1044,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5946579767859595968, guid: 0b77664f929d7104bbe93bb2d044978b, type: 3}
+      propertyPath: pointCollected
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7456172871370179096, guid: 0b77664f929d7104bbe93bb2d044978b, type: 3}
       propertyPath: m_Name
       value: QuestManager

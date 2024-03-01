@@ -5,32 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03a0b6b4-59c3-404e-9fc4-b0946162f6eb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Manager/QuestManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Manager/QuestManager.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/QuangScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QuangScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Coin.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Coin.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/ItemDrop.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/ItemDrop.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Coin 1.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Coin 1.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Coin 2.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Coin 2.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Coin.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Coin.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Collect.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Collect.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Fang.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Item_Fang.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Items.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/ItemsSO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/ItemsSO.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/QuestManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/QuestManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RewardManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RewardManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RewardSignal.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RewardSignal.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DropItem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DropItem/QuestManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +22,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/5879d8d225474494bcffdfe64965038e174000/c5/1a092881/02000416.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/66/bf2e1f90/ObjectPool`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5879d8d225474494bcffdfe64965038e174000/8c/c6df280d/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CombatSystem/CombatEntitiesManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NewCombat/Characters/EntityCharacter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NewCombat/Combat_Text/CombatText.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -70,7 +50,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;do_not_show_Android_plugin_suggestion&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Create-grid-system&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Screen-transcition-&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -156,6 +136,9 @@
       <workItem from="1707655658850" duration="491000" />
       <workItem from="1707661960477" duration="95000" />
       <workItem from="1707709103621" duration="4664000" />
+      <workItem from="1709202870962" duration="33000" />
+      <workItem from="1709225882145" duration="149000" />
+      <workItem from="1709226046179" duration="911000" />
     </task>
     <servers />
   </component>

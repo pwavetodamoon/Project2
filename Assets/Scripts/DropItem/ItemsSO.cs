@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DropItem
@@ -7,7 +9,8 @@ namespace DropItem
     {
         public string Name;
         public string Description;
-        public Sprite Sprite;
+        [AssetList(Path = "Sprites/Loot - Items/Loot Items/shadow")]
+        [PreviewField(70, ObjectFieldAlignment.Center)] public Sprite Sprite;
 
     }
 }
