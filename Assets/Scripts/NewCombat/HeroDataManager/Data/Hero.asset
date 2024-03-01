@@ -37,7 +37,7 @@ MonoBehaviour:
   characterEnumType: 4
   baseStats:
     value: 0
-  slotIndex: -1
+  slotIndex: 0
   HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
   heroCharacter: {fileID: 0}
   ResourcePath: Hero/Medieval King

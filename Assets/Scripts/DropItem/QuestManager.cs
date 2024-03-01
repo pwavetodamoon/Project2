@@ -41,6 +41,10 @@ namespace DropItem
             questItem = newItemQuest;
         }
 
+        public void IncreasePointMonsterDead()
+        {
+            pointCollected += 5;
+        }
         public void OnCollectItem(string itemId, int newPoint)
         {
             if (questItem == null) return;
