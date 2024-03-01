@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShadowSprite: {fileID: 713670616752057473}
-  normalColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
-  onChooseColor: {r: 1, g: 0, b: 0, a: 1}
+  normalColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0.50980395}
+  onChooseColor: {r: 1, g: 0, b: 0, a: 0.49019608}
 --- !u!1 &2565841087395869377
 GameObject:
   m_ObjectHideFlags: 0
