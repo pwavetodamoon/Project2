@@ -4,12 +4,14 @@ using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using SystemInfo = UnityEngine.Device.SystemInfo;
+using Currency;
 
 namespace PlayFab_System
 {
     public class PlayFabManager : MonoBehaviour
     {
-        public  PlayerData Player;
+        public PlayerData Player;
+        public CurrencyManager currencyManager;
         private void Start()
         {
             Login();
@@ -46,7 +48,19 @@ namespace PlayFab_System
         {
             PlayFabClientAPI.GetUserData( new GetUserDataRequest() , OnRevcievedData, OnDataSendError);
         }
-
+        [Button]
+        public void SaveRewardData()
+        {
+            Player.gold = currencyManager.currency;
+            PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
+            {
+                Data = new Dictionary<string, string>
+                {
+                    {"Gold", Player.gold.ToString()},
+                }
+            }, result =>{Debug.Log("Save data success!");}, 
+                error =>{Debug.LogError("Fail to save data: " + error.ErrorMessage);});
+        }
         [Button]
         public void SaveDataPlayer()
         {

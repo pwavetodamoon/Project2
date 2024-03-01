@@ -5,7 +5,7 @@ namespace Currency
 {
     public class CurrencyManager : Singleton<CurrencyManager>
     {
-        [SerializeField] private int currency = 0;
+        [SerializeField] public int currency = 0;
 
         public void AddCurrency(int amount)
         {
