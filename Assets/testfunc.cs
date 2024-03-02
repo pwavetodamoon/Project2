@@ -1,19 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using NewCombat.Characters;
 using NewCombat.HeroDataManager;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using System.Linq;
+using Background;
 using NewCombat.Slots;
 using UnityEngine;
 using Sirenix.Utilities;
 using Characters;
 using CombatSystem;
+using CombatSystem.Scripts.Spawner;
+using DropItem;
 
 public class testfunc : MonoBehaviour
 {
     public HeroManager heroManager;
     public UIAvatarController[] uiAvatarControllers;
+    public MonsterSpawner monsterSpawner;
+    public ScreenTransition screenTransition;
+    public MapBackground mapBackground;
+
+    private void Start()
+    {
+        Test();
+        Spawn();
+    }
 
     [Button]
     void Test()
@@ -27,7 +40,6 @@ public class testfunc : MonoBehaviour
         // Cần phải chạy hàm Test trước để lấy danh sách UI avatar
         // Lấy data list hero data trong hero manager
         var list = heroManager.heroData;
-        var heroInGameList = new List<HeroCharacter>();
         uiAvatarControllers = uiAvatarControllers.OrderBy(x => x.index).ToArray();
         for (int i = 0; i < list.Count; i++)
         {
@@ -54,11 +66,53 @@ public class testfunc : MonoBehaviour
             // Chỉnh icon cho avatar
             uiAvatarControllers[i].SetHeroCharacter(hero);
 
-            heroInGameList.Add(hero);
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
             heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
+
+            SlotManager.Instance.LoadHeroIntoSlot(hero);
+
         }
         // Load tất cả hero vào vị trí đúng trong game
-        SlotManager.Instance.LoadHeroIntoSlotInGame(heroInGameList);
+    }
+
+    [Button]
+    public void SaveSlotIndex()
+    {
+        var list = heroManager.heroData;
+        foreach (var heroData in list)
+        {
+            heroData.OnSaveSlotIndex();
+        }
+    }
+
+    [Button]
+    public void GoNextMapSetup()
+    {
+        StartCoroutine(GoNextMap());
+    }
+
+    IEnumerator GoNextMap()
+    {
+        monsterSpawner.SetMaxSpawnCount(0);
+        var list = heroManager.heroData;
+        foreach (var heroData in list)
+        {
+            heroData.heroCharacter.SetAttackState(false);
+            SlotManager.Instance.LoadHeroIntoSlot(heroData.heroCharacter);
+        }
+
+        foreach (var monster in CombatEntitiesManager.Instance.transform.GetComponentsInChildren<MonsterCharacter>())
+        {
+            monster.ReleaseObject();
+        }
+        foreach (var data in list)
+        {
+            yield return new WaitWhile(() => data.heroCharacter.EntityInAttackState());
+            Debug.Log("Hero " + data.heroCharacter.name + " is not in attack state");
+        }
+        RewardManager.Instance.CollectAllItemInGame();
+
+        yield return screenTransition.TransitionCoroutine();
+        mapBackground.GoNextMap();
     }
 }

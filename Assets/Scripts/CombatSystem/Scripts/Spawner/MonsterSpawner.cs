@@ -58,5 +58,10 @@ namespace CombatSystem.Scripts.Spawner
                 Quaternion.identity,
                 CombatEntitiesManager.Instance.transform);
         }
+
+        public void SetMaxSpawnCount(int count)
+        {
+            maxMonster = count;
+        }
     }
 }

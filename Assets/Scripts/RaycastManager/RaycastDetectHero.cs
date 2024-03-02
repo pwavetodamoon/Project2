@@ -47,7 +47,7 @@ namespace RaycastManager
         }
         private void HandleHeroMovement()
         {
-            bool canHoldHero = currentHero.EntityAreNotInAttackState() && attackManager.AttackedByEnemies() == false;
+            bool canHoldHero = currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
             if (canHoldHero)
             {
                 currentHero.transform.position = new Vector2(mousePosition.x, mousePosition.y);

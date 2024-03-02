@@ -73,7 +73,7 @@ namespace NewCombat.Characters
 
         public override void RegisterObject()
         {
-            CombatEntitiesManager.Instance.AppendEntityToListByTag(gameObject, GameTag.Hero);
+            CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
             CreateAttack();
             SetAttackState(true);
         }
@@ -82,7 +82,7 @@ namespace NewCombat.Characters
         {
             SetAttackState(false);
             StopCurrentAttack();
-            CombatEntitiesManager.Instance.RemoveEntityByTag(gameObject, GameTag.Hero);
+            CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             gameObject.SetActive(false);
         }
 

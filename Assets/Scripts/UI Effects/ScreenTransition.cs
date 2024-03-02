@@ -10,13 +10,16 @@ public class ScreenTransition : MonoBehaviour
     public Image image;
     public float duration;
     public float durationInTran = .25f;
+
+
+
     [Button]
     public void Transition()
     {
         StartCoroutine(TransitionCoroutine());
     }
 
-    private IEnumerator TransitionCoroutine()
+    public IEnumerator TransitionCoroutine()
     {
         yield return image.DOFillAmount(1, duration).SetEase(Ease.OutQuart).WaitForCompletion();
         yield return new WaitForSeconds(durationInTran);

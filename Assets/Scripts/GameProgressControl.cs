@@ -9,14 +9,5 @@ using Sirenix.OdinInspector;
 
 public class GameProgressControl : MonoBehaviour
 {
-    [Button]
-    public void Test()
-    {
-        var entities = FindObjectsOfType<EntityCharacter>();
-        foreach (var entity in entities)
-        {
-            entity.ReleaseObject();
-        }
-    }
-
+    
 }

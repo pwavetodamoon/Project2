@@ -3,6 +3,7 @@ using NewCombat.HeroAttack;
 using NewCombat.Projectiles;
 using System.Collections;
 using Helper;
+using NewCombat.Characters;
 using PrefabFactory;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace NewCombat
             IsVfxEnd = false;
         }
 
-        protected ProjectileBase SpawnProjectile(GameObject monster)
+        protected ProjectileBase SpawnProjectile(EntityCharacter monster)
         {
             var projectile = PrefabsFactoryPool.Instance.magicProjectile_pool.Get();
             //var projectile = PrefabsFactory.Instance.GetInstancePrefab(PrefabsFactory.MagicProjectile)

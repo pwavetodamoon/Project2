@@ -34,38 +34,20 @@ namespace NewCombat.Slots
                 slot.enemyStand.position = combatGrid.GetCenterGridWorldPosition(x + 1, y);
 
             }
-
-            
         }
 
-        public void LoadHeroIntoSlotInGame(List<HeroCharacter> heroList)
+
+        public void LoadHeroIntoSlot(HeroCharacter hero)
         {
-            //var heroList = new List<GameObject>(CombatEntitiesManager.Instance.GetHeroList());
-            if (heroList.Count == 0)
+            if (hero.InGameSlotIndex == -1)
             {
-                Debug.LogError("Hero list is empty");
+                bannedSlotControl.SetHeroIntoStandPosition(hero.transform);
                 return;
             }
-
-            foreach (var hero in heroList)
+            var slot = GetSlotBySlotIndexInRange(hero.InGameSlotIndex);
+            if (slot.currentHero == null || slot.currentHero == hero.transform)
             {
-                //var heroCharacter = hero.GetComponent<HeroCharacter>();
-                // -1 nghĩa là ko có trong game
-                if (hero.InGameSlotIndex == -1)
-                {
-                    bannedSlotControl.SetHeroIntoStandPosition(hero.transform);
-                    hero.SetSlotIndex(bannedSlotControl.SlotIndex);
-                    continue;
-                }
-                // Nếu slot của hero đó đã có hero khác thì ko cho vào
-                var slot = GetSlotBySlotIndexInRange(hero.InGameSlotIndex);
-                if (slot.currentHero == null)
-                {
-                    slot.SetHeroIntoStandPosition(hero.transform);
-                }
-                else
-                {
-                }
+                slot.SetHeroIntoStandPosition(hero.transform);
             }
         }
         public bool FindNearSlotAndSwapIfInRange(HeroCharacter hero, int heroIndex)

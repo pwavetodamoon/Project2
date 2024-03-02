@@ -28,7 +28,7 @@ namespace NewCombat.ManagerInEntity
                 return;
             }
 
-            if (entity.EntityAreNotInAttackState()) entity.PlayHurtAnimation();
+            if (entity.EntityInAttackState() == false) entity.PlayHurtAnimation();
             Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damageOfEnemy}", gameObject);
         }
 

@@ -69,7 +69,7 @@ namespace NewCombat.Characters
 
         public override void RegisterObject()
         {
-            CombatEntitiesManager.Instance.AppendEntityToListByTag(gameObject, GameTag.Enemy);
+            CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Enemy);
             monsterNearAI.InitializeComponents();
             attackControl.Create(monsterSingleAttackFactory);
             CreateNoise();
@@ -77,7 +77,7 @@ namespace NewCombat.Characters
 
         public override void ReleaseObject()
         {
-            CombatEntitiesManager.Instance.RemoveEntityByTag(gameObject, GameTag.Enemy);
+            CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
             Destroy(gameObject);
         }
     }

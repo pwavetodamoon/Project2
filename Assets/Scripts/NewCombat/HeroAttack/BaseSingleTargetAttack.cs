@@ -19,7 +19,7 @@ namespace NewCombat.HeroAttack
         [Header("Entity Characters Field")]
         protected EntityCharacter entityCharacter;
 
-        protected GameObject Enemy;
+        protected EntityCharacter Enemy;
         private AttackManager attackManager;
         private AnimationManager animationManager;
         protected DamageManager damageManager;

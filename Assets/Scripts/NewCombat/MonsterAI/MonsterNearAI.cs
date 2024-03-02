@@ -1,5 +1,6 @@
 using CombatSystem.Scripts;
 using Helper;
+using NewCombat.Characters;
 using NewCombat.Helper;
 using NewCombat.ManagerInEntity;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace NewCombat.MonsterAI
 
         private AttackManager attackManager;
         private float distance;
-        private GameObject Enemy;
+        private EntityCharacter Enemy;
 
         protected override void TriggerAttack(Collider2D collision)
         {
@@ -24,10 +25,10 @@ namespace NewCombat.MonsterAI
             IsTriggerAttackBehaviour = true;
         }
 
-        public void SetEnemy(GameObject enemy)
+        public void SetEnemy(EntityCharacter enemy)
         {
             Enemy = enemy;
-            AttackHeroTransform = enemy.GetComponent<IGetAttackerTransform>().GetAttackerTransform();
+            AttackHeroTransform = enemy.GetAttackerTransform();
         }
 
         protected override void Update()

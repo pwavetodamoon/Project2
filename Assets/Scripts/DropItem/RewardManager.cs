@@ -55,6 +55,15 @@ namespace DropItem
             itemInGame.point = itemStruct.pointCollect;
         }
 
+        public void CollectAllItemInGame()
+        {
+            foreach (var item in list)
+            {
+                if(item.gameObject.activeSelf == false) continue;
+                item.Collect();
+            }
+        }
+
         private void Add(Items item)
         {
             if (list.Contains(item)) return;

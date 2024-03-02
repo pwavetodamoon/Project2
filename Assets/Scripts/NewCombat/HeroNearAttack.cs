@@ -13,12 +13,10 @@ namespace NewCombat
     public class HeroNearAttack : BaseHeroAttack
     {
         protected HeroCharacter Hero;
-
         protected override IEnumerator StartBehavior()
         {
             yield return base.StartBehavior();
-            var monster = GetMonsterEntity(Enemy);
-            var attackerTransform = GetAttackerTransform(Enemy);
+            var attackerTransform = Enemy.GetAttackerTransform();
             
             yield return MoveModelToPosition(attackerTransform.position);
             
@@ -44,10 +42,6 @@ namespace NewCombat
             return go.GetComponent<MonsterCharacter>();
         }
 
-        private Transform GetAttackerTransform(GameObject go)
-        {
-            return go.GetComponent<IGetAttackerTransform>().GetAttackerTransform();
-        }
 
         private Vector3 GetSlotPosition()
         {

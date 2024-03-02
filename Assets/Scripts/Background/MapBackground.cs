@@ -98,6 +98,10 @@ namespace Background
         public void GoNextMap()
         {
             MapIndex++;
+            if (MapIndex < 0 || MapIndex >= mapBackgroundSO.MapCount())
+            {
+                MapIndex = 0;
+            }
             LoadTexture();
         }
     }

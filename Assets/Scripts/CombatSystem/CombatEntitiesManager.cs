@@ -9,7 +9,7 @@ namespace CombatSystem
 {
     public class CombatEntitiesManager : Singleton<CombatEntitiesManager>
     {
-        [ShowInInspector] private Dictionary<string, List<GameObject>> entitiesByTag = new Dictionary<string, List<GameObject>>();
+        [ShowInInspector] private Dictionary<string, List<EntityCharacter>> entitiesByTag = new Dictionary<string, List<EntityCharacter>>();
 
         protected override void Awake()
         {
@@ -17,16 +17,16 @@ namespace CombatSystem
             GetAllEntityInWorld();
         }
 
-        public List<GameObject> GetHeroList()
+        public List<EntityCharacter> GetHeroList()
         {
             return entitiesByTag[GameTag.Hero];
         }
 
-        private GameObject GetNearestObject(Transform entity, List<GameObject> entities)
+        private EntityCharacter GetNearestObject(Transform entity, List<EntityCharacter> entities)
         {
 
             var minDistance = entityDistance(entity, entities[0]);
-            GameObject nearestGameObject = entities[0];
+            EntityCharacter nearestGameObject = entities[0];
 
             foreach (var entityInList in entities)
             {
@@ -39,12 +39,12 @@ namespace CombatSystem
             return nearestGameObject;
 
 
-            float entityDistance(Transform entity, GameObject gameObject)
+            float entityDistance(Transform entity, EntityCharacter gameObject)
             {
                 return Vector2.Distance(entity.transform.position, gameObject.transform.position);
             }
         }
-        public GameObject GetEntityTransformByTag(Transform entity, string key)
+        public EntityCharacter GetEntityTransformByTag(Transform entity, string key)
         {
             // far attack
             if (IsContainKey(key) == false)
@@ -63,7 +63,7 @@ namespace CombatSystem
             return entitiesByTag.ContainsKey(tag);
         }
         
-        public void RemoveEntityByTag(GameObject entity, string key)
+        public void RemoveEntityByTag(EntityCharacter entity, string key)
         {
             if (IsContainKey(key) && IsContainValue(key, entity))
             {
@@ -77,18 +77,18 @@ namespace CombatSystem
             return entitiesByTag[tag].Count != 0;
         }
 
-        public List<GameObject> GetListInCombat(string key)
+        public List<EntityCharacter> GetListInCombat(string key)
         {
             var list = IsContainKey(key) ? entitiesByTag[key] : null;
             return list;
         }
 
 
-        public void AppendEntityToListByTag(GameObject entity, string key)
+        public void AppendEntityToListByTag(EntityCharacter entity, string key)
         {
             if (!IsContainKey(key))
             {
-                entitiesByTag[key] = new List<GameObject>();
+                entitiesByTag[key] = new List<EntityCharacter>();
             }
 
             if (!IsContainValue(key, entity))
@@ -96,7 +96,7 @@ namespace CombatSystem
                 entitiesByTag[key].Add(entity);
             }
         }
-        private bool IsContainValue(string key, GameObject value)
+        private bool IsContainValue(string key, EntityCharacter value)
         {
             return entitiesByTag[key].Contains(value);
         }
@@ -109,7 +109,7 @@ namespace CombatSystem
             foreach (var entity in newEntities)
             {
                 Debug.Log($"Add {entity.name} to {entity.tag}");
-                AppendEntityToListByTag(entity.gameObject, entity.tag);
+                AppendEntityToListByTag(entity, entity.tag);
             }
         }
     }

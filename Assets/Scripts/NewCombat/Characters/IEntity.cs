@@ -8,6 +8,6 @@
 
         void PlayHurtAnimation();
 
-        bool EntityAreNotInAttackState();
+        bool EntityInAttackState();
     }
 }
