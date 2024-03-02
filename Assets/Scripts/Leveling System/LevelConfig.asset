@@ -38,5 +38,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxLevel: 100
   maxRequiredMoney: 1000
-  base_cost: 100
+  baseCost: 100
   scaleMoney: 1.152

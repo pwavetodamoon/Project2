@@ -1,22 +1,24 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Leveling_System
 {
     [CreateAssetMenu(fileName = "LevelConfig", menuName = "Leveling System/LevelConfig")]
     public class LevelConfig : ScriptableObject
     {
+        public AnimationCurve curve;
+        public int maxLevel = 100;
+        public float maxRequiredMoney = 1000;
+        [FormerlySerializedAs("base_cost")] public int baseCost = 100;
+        public float scaleMoney = 1.2f;
+        private float[] array;
+
         void OnEnable()
         {
             if (array == null || array.Length == 0)
                 CreateArrayLevel();
         }
-        public AnimationCurve curve;
-        public int maxLevel = 100;
-        public float maxRequiredMoney = 1000;
-        private float[] array;
-        public int base_cost = 100;
-        public float scaleMoney = 1.2f;
         // [Button]
         private float CalculatorMoneyRequired(int level)
         {
@@ -30,7 +32,7 @@ namespace Leveling_System
         {
             if (array == null)
             {
-                Debug.LogError("Array is null, please create array level");
+                Debug.LogError("Array is null, please create array level");                             
                 return 0;
             }
             return array[level - 1];
@@ -38,7 +40,7 @@ namespace Leveling_System
         [Button]
         void CreateArrayLevel()
         {
-            array = new float[maxLevel];
+            array = new float[maxLevel]; //mang level toi da la 100
             for (int i = 0; i < maxLevel; i++)
             {
                 // Array[i] = MoneyRequird(i + 1, base_cost, scaleMoney);

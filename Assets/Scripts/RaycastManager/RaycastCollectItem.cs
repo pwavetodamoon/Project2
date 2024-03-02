@@ -22,6 +22,7 @@ namespace RaycastManager
                 Items item = hit.collider.GetComponent<Items>();
                 if (item != null)
                 {
+                    Debug.Log("check");
                     item.Collect();
                 }
             }
