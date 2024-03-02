@@ -8,6 +8,7 @@ using NewCombat.Slots;
 using UnityEngine;
 using Sirenix.Utilities;
 using Characters;
+using CombatSystem;
 
 public class testfunc : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class testfunc : MonoBehaviour
             if(heroData.heroCharacter != null) continue;
 
             // tạo hero từ prefab hero trong hero manager
-            var hero = Instantiate(heroManager.prefabHero, transform).GetComponent<HeroCharacter>();
+            var hero = Instantiate(heroManager.prefabHero, CombatEntitiesManager.Instance.transform).GetComponent<HeroCharacter>();
             hero.SetAttackFactory(heroData.GetHeroFactory());
 
             // chỉnh sprite cho hero

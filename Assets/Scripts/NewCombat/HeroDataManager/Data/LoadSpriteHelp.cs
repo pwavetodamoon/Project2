@@ -33,6 +33,7 @@ namespace NewCombat.HeroDataManager.Data
             }
             foreach (var sprite in sprites)
             {
+                Debug.Log(sprite.name);
                 if (SpriteName.Contains(sprite.name) == false) continue;
                 var enumType = GetEnumByFileName(sprite.name);
                 Dictionary[enumType] = sprite;

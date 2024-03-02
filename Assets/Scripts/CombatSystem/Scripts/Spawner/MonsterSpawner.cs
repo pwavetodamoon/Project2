@@ -52,7 +52,11 @@ namespace CombatSystem.Scripts.Spawner
             float y = Random.Range(SpawnPoint1.position.y, SpawnPoint2.position.y);
             var spawnPosition = new Vector3(x, y, 0);
             spawnPosition = GridManager.Instance.GetGrid().GetSpawnedCell();
-            var go = Instantiate(MonsterPrefab, spawnPosition, Quaternion.identity);
+            var go = Instantiate(
+                MonsterPrefab, 
+                spawnPosition, 
+                Quaternion.identity,
+                CombatEntitiesManager.Instance.transform);
         }
     }
 }

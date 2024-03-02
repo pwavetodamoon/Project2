@@ -29,6 +29,7 @@ namespace NewCombat
             animatonManager = GetComponent<AnimationManager>();
         }
 
+        [Button]
         private void OnDisable()
         {
             StopAllCoroutines();

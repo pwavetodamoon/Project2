@@ -52,7 +52,7 @@ namespace CombatSystem
                 Debug.LogWarning($"Does not have '{key}' TAG in data", gameObject);
                 return null;
             }
-            var entities = GetList(key);
+            var entities = GetListInCombat(key);
 
             if (entities.Count == 0) { return null; }
 
@@ -76,11 +76,13 @@ namespace CombatSystem
             if (IsContainKey(tag) == false) return false;
             return entitiesByTag[tag].Count != 0;
         }
-        private List<GameObject> GetList(string key)
+
+        public List<GameObject> GetListInCombat(string key)
         {
             var list = IsContainKey(key) ? entitiesByTag[key] : null;
             return list;
         }
+
 
         public void AppendEntityToListByTag(GameObject entity, string key)
         {
