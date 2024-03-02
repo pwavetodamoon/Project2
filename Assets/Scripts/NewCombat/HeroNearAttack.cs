@@ -19,13 +19,13 @@ namespace NewCombat
             yield return base.StartBehavior();
             var monster = GetMonsterEntity(Enemy);
             var attackerTransform = GetAttackerTransform(Enemy);
-
+            
+            yield return MoveModelToPosition(attackerTransform.position);
+            
             PlayAnimation(Human_Animator.Slash_State);
             var time = GetAnimationLength(Human_Animator.Slash_State);
-            yield return MoveModelToPosition(attackerTransform.position);
-
-            //yield return new WaitForSeconds(time);
-
+            
+            yield return new WaitForSeconds(time);
             CauseDamage();
 
             yield return MoveModelToPosition(GetSlotPosition());

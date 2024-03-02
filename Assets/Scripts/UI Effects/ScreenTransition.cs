@@ -16,22 +16,22 @@ public class ScreenTransition : MonoBehaviour
         StartCoroutine(TransitionCoroutine());
     }
 
-    IEnumerator TransitionCoroutine()
+    private IEnumerator TransitionCoroutine()
     {
         yield return image.DOFillAmount(1, duration).SetEase(Ease.OutQuart).WaitForCompletion();
         yield return new WaitForSeconds(durationInTran);
         yield return image.DOFillAmount(0, duration).SetEase(Ease.OutQuart).WaitForCompletion();
 
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Transition();
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            image.fillAmount = 0;
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Transition();
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        image.fillAmount = 0;
+    //    }
+    //}
 }
