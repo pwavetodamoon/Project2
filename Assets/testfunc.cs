@@ -93,26 +93,51 @@ public class testfunc : MonoBehaviour
 
     IEnumerator GoNextMap()
     {
-        monsterSpawner.SetMaxSpawnCount(0);
         var list = heroManager.heroData;
-        foreach (var heroData in list)
+        monsterSpawner.SetMaxSpawnCount(0);
+        bool isAttackState = false;
+        List<HeroCharacter> list1 = new List<HeroCharacter>();
+        List<HeroCharacter> list2 = new List<HeroCharacter>();
+        foreach (var data in list)
         {
-            heroData.heroCharacter.SetAttackState(false);
-            SlotManager.Instance.LoadHeroIntoSlot(heroData.heroCharacter);
+            if(data.heroCharacter == null) continue;
+            list1.Add(data.heroCharacter);
+            data.heroCharacter.SetAttackState(false);
+        }
+        while (true)
+        {
+            if(list1.Count == 0) break;
+            foreach (var hero in list1)
+            {
+                if (hero.EntityInAttackState()) continue;
+                list2.Add(hero);
+            }
+        }
+
+        foreach (var hero in list2)
+        {
+            SlotManager.Instance.LoadHeroIntoSlot(hero);
         }
 
         foreach (var monster in CombatEntitiesManager.Instance.transform.GetComponentsInChildren<MonsterCharacter>())
         {
             monster.ReleaseObject();
         }
-        foreach (var data in list)
+        
+        foreach (var item in RewardManager.Instance.list)
         {
-            yield return new WaitWhile(() => data.heroCharacter.EntityInAttackState());
-            Debug.Log("Hero " + data.heroCharacter.name + " is not in attack state");
+            if (item.gameObject.activeSelf == false) continue;
+            item.Collect();
         }
-        RewardManager.Instance.CollectAllItemInGame();
-
-        yield return screenTransition.TransitionCoroutine();
+        
+        yield return screenTransition.StartTransition();
         mapBackground.GoNextMap();
+        yield return screenTransition.waitBetweenTransition;
+        yield return screenTransition.EndTransition();
+
+        foreach (var heroData in list)
+        {
+            heroData.heroCharacter.SetAttackState(true);
+        }
     }
 }
