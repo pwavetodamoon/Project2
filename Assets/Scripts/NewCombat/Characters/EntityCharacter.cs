@@ -1,4 +1,5 @@
 using Leveling_System;
+using NewCombat.Helper;
 using NewCombat.ManagerInEntity;
 using UnityEngine;
 
@@ -14,11 +15,13 @@ namespace NewCombat.Characters
         protected AnimationManager animationManager;
         protected AttackControl attackControl;
         protected AttackManager attackManager;
+        protected IGetAttackerTransform attackerTransform;
         protected virtual void Awake()
         {
             attackManager = GetComponent<AttackManager>();
             attackControl = GetComponent<AttackControl>();
             animationManager = GetComponent<AnimationManager>();
+            attackerTransform = GetComponent<IGetAttackerTransform>();
         }
 
         public abstract void RegisterObject();
@@ -29,9 +32,13 @@ namespace NewCombat.Characters
         {
         }
 
-        public bool EntityAreNotInAttackState()
+        public Transform GetAttackerTransform()
         {
-            return attackControl.IsAttacking() == false;
+            return attackerTransform.GetAttackerTransform();
+        }
+        public bool EntityInAttackState()
+        {
+            return attackControl.IsAttacking();
         }
     }
 }

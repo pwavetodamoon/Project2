@@ -35,17 +35,8 @@ namespace DropItem
         }
 
         [TableList(ShowIndexLabels = true)]
-        [ShowInInspector] private List<Items> list;
+        [ShowInInspector] public List<Items> list;
 
-        private void Start()
-        {
-            QuestManager.Instance.OnChangedQuestItem += UpdateQuestItem;
-        }
-
-        private void UpdateQuestItem(ItemsSO newQuestItem)
-        {
-            itemStruct = newQuestItem;
-        }
 
         [Button]
         public void CreateReward(Vector3 position)
@@ -63,6 +54,7 @@ namespace DropItem
             var itemInGame = GetItemInPool(itemStruct.itemsSO, itemPool, position);
             itemInGame.point = itemStruct.pointCollect;
         }
+
 
         private void Add(Items item)
         {

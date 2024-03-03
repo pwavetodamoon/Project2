@@ -47,7 +47,7 @@ namespace RaycastManager
         }
         private void HandleHeroMovement()
         {
-            bool canHoldHero = currentHero.EntityAreNotInAttackState() && attackManager.AttackedByEnemies() == false;
+            bool canHoldHero = currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
             if (canHoldHero)
             {
                 currentHero.transform.position = new Vector2(mousePosition.x, mousePosition.y);
@@ -55,7 +55,7 @@ namespace RaycastManager
             }
             else
             {
-                SlotManager.Instance.SetHeroBackToOriginalSlot(currentHero, currentHero.InGameSlotIndex);
+                SlotManager.Instance.LoadHeroIntoSlot(currentHero);
                 currentHero = null;
                 IsHandleHero = false;
             }
@@ -69,7 +69,7 @@ namespace RaycastManager
                 var isInRange = SlotManager.Instance.FindNearSlotAndSwapIfInRange(currentHero, currentHero.InGameSlotIndex);
                 if (!isInRange)
                 {
-                    SlotManager.Instance.SetHeroBackToOriginalSlot(currentHero, currentHero.InGameSlotIndex);
+                    SlotManager.Instance.LoadHeroIntoSlot(currentHero);
                 }
                 currentHero = null;
                 attackManager = null;

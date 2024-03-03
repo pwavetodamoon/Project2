@@ -36,6 +36,11 @@ namespace NewCombat.HeroDataManager.Data
             return HeroSingleAttackFactory;
         }
 
+        public void OnSaveSlotIndex()
+        {
+            slotIndex = heroCharacter.InGameSlotIndex;
+        }
+
         [FolderPath(ParentFolder = "Assets/Resources")]
         public string ResourcePath;
 

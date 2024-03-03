@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8962630266543808109}
   - component: {fileID: 5584744959903285923}
+  - component: {fileID: 6380428280595444250}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -49,7 +50,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapBackgroundSO: {fileID: 11400000, guid: 14adb830591a46c42bbd4497d487b82e, type: 2}
-  MapNameLoad: Map 3
+  MapIndex: 0
+--- !u!210 &6380428280595444250
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398548489598822014}
+  m_Enabled: 1
+  m_SortingLayerID: 815286875
+  m_SortingLayer: -4
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &4221307283258498339
 GameObject:
   m_ObjectHideFlags: 0

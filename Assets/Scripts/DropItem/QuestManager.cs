@@ -21,13 +21,7 @@ namespace DropItem
         [Header("Quest Information")]
         [SerializeField] private int pointCollected = 0;
         [SerializeField] private int pointNeedCollect = 100;
-
-        public Action<ItemsSO> OnChangedQuestItem; // Can use for UI and logic game
-
-        private void OnDisable()
-        {
-            OnChangedQuestItem = null;
-        }
+        public event Action<float> OnUpdateQuestProgress;
 
         public ItemsStruct GetRandomItemQuest()
         {
@@ -35,15 +29,9 @@ namespace DropItem
             return questItem[randomIndex];
         }
 
-        public void ChangeQuestItem(List<ItemsStruct> newItemQuest)
-        {
-            if (newItemQuest == null) return;
-            questItem = newItemQuest;
-        }
-
         public void IncreasePointMonsterDead()
         {
-            pointCollected += 5;
+            IncreasePoint(5);
         }
         public void OnCollectItem(string itemId, int newPoint)
         {
@@ -51,11 +39,21 @@ namespace DropItem
             //if (itemId != idItemNeedCollect) return;
 
             Debug.Log("We collect: " + itemId);
-            pointCollected += newPoint;
+            IncreasePoint(newPoint);
         }
 
-        [Button]
-        public float GetCompletePercent()
+        private void IncreasePoint(int point)
+        {
+            pointCollected += point;
+            OnUpdateQuestProgress?.Invoke(GetCompletePercent());
+
+            if (pointCollected >= pointNeedCollect)
+            {
+                pointCollected = 0;
+            }
+        }
+
+        private float GetCompletePercent()
         {
             return (float) pointCollected / pointNeedCollect;
         }

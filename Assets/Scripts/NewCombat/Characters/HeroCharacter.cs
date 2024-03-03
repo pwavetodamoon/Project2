@@ -73,19 +73,28 @@ namespace NewCombat.Characters
 
         public override void RegisterObject()
         {
-            CombatEntitiesManager.Instance.AppendEntityToListByTag(gameObject, GameTag.Hero);
+            CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
             CreateAttack();
-            attackManager.SetAllowExecuteAttackValue(true);
-            attackManager.SetTimeCounterValue(true);
+            SetAttackState(true);
         }
 
         public override void ReleaseObject()
         {
-            attackManager.SetAllowExecuteAttackValue(false);
-            attackManager.SetTimeCounterValue(false);
-
-            CombatEntitiesManager.Instance.RemoveEntityByTag(gameObject, GameTag.Hero);
+            SetAttackState(false);
+            StopCurrentAttack();
+            CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             gameObject.SetActive(false);
+        }
+
+        private void StopCurrentAttack()
+        {
+            attackControl.StopAllCoroutines();
+        }
+
+        public void SetAttackState(bool state)
+        {
+            attackManager.SetAllowExecuteAttackValue(state);
+            attackManager.SetTimeCounterValue(state);
         }
     }
 }

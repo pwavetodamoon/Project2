@@ -10,28 +10,26 @@ public class ScreenTransition : MonoBehaviour
     public Image image;
     public float duration;
     public float durationInTran = .25f;
-    [Button]
-    public void Transition()
-    {
-        StartCoroutine(TransitionCoroutine());
-    }
+    public YieldInstruction waitBetweenTransition = new WaitForSeconds(.5f);
 
-    IEnumerator TransitionCoroutine()
+    public IEnumerator StartTransition()
     {
         yield return image.DOFillAmount(1, duration).SetEase(Ease.OutQuart).WaitForCompletion();
-        yield return new WaitForSeconds(durationInTran);
-        yield return image.DOFillAmount(0, duration).SetEase(Ease.OutQuart).WaitForCompletion();
+    }
 
-    }
-    void Update()
+    public IEnumerator EndTransition()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Transition();
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            image.fillAmount = 0;
-        }
+        yield return image.DOFillAmount(0, duration).SetEase(Ease.OutQuart).WaitForCompletion();
     }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Transition();
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.F))
+    //    {
+    //        image.fillAmount = 0;
+    //    }
+    //}
 }

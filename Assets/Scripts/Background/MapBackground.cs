@@ -30,12 +30,17 @@ namespace Background
 
         }
 
+        private bool CanLoadMap()
+        {
+            return MapIndex > 0 && MapIndex < mapBackgroundSO.MapCount();
+        }
 
         [InfoBox("Load all texure for background array, use in play mode")]
         [Button]
         [DisableInEditorMode]
         public void LoadTexture()
         {
+            if(CanLoadMap()== false) return;
             SpritesBackground textures2d = mapBackgroundSO.GetSpritesBackground(MapIndex);
 
             var textures = new[]
@@ -88,6 +93,16 @@ namespace Background
             {
                 item.Pause();
             }
+        }
+
+        public void GoNextMap()
+        {
+            MapIndex++;
+            if (MapIndex < 0 || MapIndex >= mapBackgroundSO.MapCount())
+            {
+                MapIndex = 0;
+            }
+            LoadTexture();
         }
     }
 }

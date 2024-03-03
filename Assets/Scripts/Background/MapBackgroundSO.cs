@@ -24,6 +24,8 @@ namespace Background
 
         [SerializeField] private Texture2D[] CurrentListOfTexture;
 
+        public int MapCount()=> mapsName.Length;
+
         [Button]
         private void Clear()
         {
