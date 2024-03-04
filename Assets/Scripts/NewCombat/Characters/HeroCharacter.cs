@@ -16,11 +16,22 @@ namespace NewCombat.Characters
         public int InGameSlotIndex { get; private set; }
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
-        [SerializeField] public Transform ModelDrag;
+
+        [SerializeField] private bool isDead = false;
+        [field: SerializeField] public bool IsDead
+        {
+            get => isDead;
+        }
+
         protected override void Awake()
         {
             base.Awake();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
+            GetComponent<DamageManager>().OnDie += OnDead;
+        }
+        private void OnDead()
+        {
+            isDead = true;
         }
         public void SetSlotIndex(int index)
         {

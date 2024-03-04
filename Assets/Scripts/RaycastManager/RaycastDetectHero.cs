@@ -40,7 +40,7 @@ namespace RaycastManager
                 currentHero = _hero.GetComponent<HeroCharacter>();
                 attackManager = _hero.GetComponent<AttackManager>();
             }
-            else if (currentHero != null)
+            else if (currentHero != null && currentHero.IsDead == false)
             {
                 HandleHeroMovement();
             }
