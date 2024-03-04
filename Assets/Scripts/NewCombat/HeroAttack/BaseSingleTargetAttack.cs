@@ -22,7 +22,7 @@ namespace NewCombat.HeroAttack
         protected EntityCharacter Enemy;
         private AttackManager attackManager;
         private AnimationManager animationManager;
-        protected DamageManager damageManager;
+        protected StateManager StateManager;
 
         protected EntityStats EntityStats;
 

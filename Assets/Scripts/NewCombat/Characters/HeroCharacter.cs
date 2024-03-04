@@ -27,12 +27,21 @@ namespace NewCombat.Characters
         {
             base.Awake();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
-            GetComponent<DamageManager>().OnDie += OnDead;
+            GetComponent<StateManager>().OnDie += OnDead;
+            GetComponent<StateManager>().OnRebirth += OnRebirth;
         }
         private void OnDead()
         {
+            animationManager.DisableAnimator();
             isDead = true;
         }
+
+        private void OnRebirth()
+        {
+            animationManager.EnableAnimator();
+            isDead = false;
+        }
+
         public void SetSlotIndex(int index)
         {
             if (index == -1)
@@ -82,10 +91,6 @@ namespace NewCombat.Characters
             return modelTransform;
         }
 
-        public void GetModelToOriginalTransform()
-        {
-
-        }
         public override void RegisterObject()
         {
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
@@ -98,7 +103,7 @@ namespace NewCombat.Characters
             SetAttackState(false);
             StopCurrentAttack();
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
 
         public void StopCurrentAttack()

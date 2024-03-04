@@ -19,7 +19,7 @@ public class HeroSlotUI : MonoBehaviour
         }
         currentHero.gameObject.SetActive(true);
         SelectionHero.Instance.OnDragInUI = true;
-        SelectionHero.Instance.heroOfUI = currentHero.transform;
+        SelectionHero.Instance.heroOfUI = currentHero;
     }
 
     public void OnUnClicked()

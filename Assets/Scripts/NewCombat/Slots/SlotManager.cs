@@ -45,9 +45,9 @@ namespace NewCombat.Slots
                 return;
             }
             var slot = GetSlotBySlotIndexInRange(hero.InGameSlotIndex);
-            if (slot.currentHero == null || slot.currentHero == hero.transform)
+            if (slot.currentHero == null || slot.currentHero == hero)
             {
-                slot.SetHeroIntoStandPosition(hero.transform);
+                slot.SetHeroIntoStandPosition(hero);
             }
         }
         public bool FindNearSlotAndSwapIfInRange(HeroCharacter hero, int heroIndex)
@@ -68,15 +68,15 @@ namespace NewCombat.Slots
                 }
             }
             bool isInRange = minSqrMagnitude < minSlot.radius * minSlot.radius;
-
+            bool canSwap = isInRange && minSlot.AllowSwap();
             //Debug.Log("Min Slot Name: "+minSlot.name);
             //Debug.Log("Min Slot Index: "+minSlot.SlotIndex);
             //Debug.Log("Is in range of slot: " + isInRange);
-            if (isInRange)
+            if (canSwap)
             {
                 SwapOneWay(heroIndex, minSlot.SlotIndex);
             }
-            return isInRange;
+            return canSwap;
         }
 
 
@@ -112,9 +112,9 @@ namespace NewCombat.Slots
             targetSlot.SetHeroIntoStandPosition(currentHero);
 
             if(currentHero != null)
-                currentHero.GetComponent<HeroCharacter>().SetSlotIndex(targetSlotIndex);
+                currentHero.SetSlotIndex(targetSlotIndex);
             if(targetHero != null)
-                targetHero.GetComponent<HeroCharacter>().SetSlotIndex(currentSlotIndex);
+                targetHero.SetSlotIndex(currentSlotIndex);
 
         }
 
@@ -124,7 +124,7 @@ namespace NewCombat.Slots
             //if (currentSlot.AllowSwap() == false) return;
             var currentHero = currentSlot.currentHero;
             bannedSlotControl.SetHeroIntoStandPosition(currentHero.transform);
-            currentHero.GetComponent<HeroCharacter>().SetSlotIndex(bannedSlotControl.SlotIndex);
+            currentHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             currentSlot.SetHeroIntoStandPosition(null);
         }
         private void SwapFromBannedSlotToInGameSlot(int targetSlotIndex)
@@ -137,7 +137,7 @@ namespace NewCombat.Slots
             if (targetHero != null)
             {
                 bannedSlotControl.SetHeroIntoStandPosition(targetHero.transform);
-                targetHero.GetComponent<HeroCharacter>().SetSlotIndex(bannedSlotControl.SlotIndex);
+                targetHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             }
             var bannedHero = SelectionHero.Instance.heroOfUI;
 
@@ -181,7 +181,7 @@ namespace NewCombat.Slots
                 }
             }
 
-            if (nearSlotInGame == null ||
+            if (nearSlotInGame == null || nearSlotInGame.AllowSwap() == false ||
                 minSqrMagnitude > 15 ||
                 minSqrMagnitude > nearSlotInGame.radius * nearSlotInGame.radius)
             {

@@ -9,7 +9,7 @@ namespace NewCombat.Characters
     {
         [SerializeField] private Transform characterStand;
         [SerializeField] public Transform enemyStand;
-        [SerializeField] public Transform currentHero;
+        [SerializeField] public HeroCharacter currentHero;
         [SerializeField] public float radius = 0;
         public int SlotIndex;
         private ShadowColor ShadowColor;
@@ -24,12 +24,12 @@ namespace NewCombat.Characters
             Gizmos.DrawWireSphere(characterStand.position, radius);
         }
 
-        public void SetHeroIntoStandPosition(Transform hero)
+        public void SetHeroIntoStandPosition(HeroCharacter hero)
         {
             currentHero = hero;
             if (currentHero != null)
             {
-                currentHero.position = characterStand.position;
+                currentHero.transform.position = characterStand.position;
             }
         }
 
@@ -51,6 +51,12 @@ namespace NewCombat.Characters
         public void DesetTriggerShadow()
         {
             ShadowColor.SetOnChoose();
+        }
+
+        public bool AllowSwap()
+        {
+            if(currentHero == null) return true;
+            return currentHero.IsDead == false;
         }
     }
 }

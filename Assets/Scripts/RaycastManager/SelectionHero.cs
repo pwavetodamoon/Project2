@@ -13,13 +13,13 @@ public class SelectionHero : Singleton<SelectionHero>
     [SerializeField] RayInput rayInput;
     public bool OnDragInUI;
 
-    public Transform heroOfUI;
+    public HeroCharacter heroOfUI;
     private void Update()
     {
         rayInput.HandleMouseInput();
         raycastDetectHero.mousePosition = rayInput.worldMousePosition;
         raycastDetectSlot.mousePosition = rayInput.worldMousePosition;
-        Transform hero = null;
+        HeroCharacter hero = null;
         if (OnDragInUI && heroOfUI)
         {
             hero = heroOfUI;
@@ -33,11 +33,10 @@ public class SelectionHero : Singleton<SelectionHero>
         raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero);
 
     }
-    public Transform GetHero()
+    public HeroCharacter GetHero()
     {
-        HeroSlotInGame newSlotInGame = null;
         var mousePosition = rayInput.worldMousePosition;
-        if (SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out newSlotInGame))
+        if (SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out HeroSlotInGame newSlotInGame))
         {
             return newSlotInGame.currentHero;
         }

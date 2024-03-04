@@ -21,7 +21,7 @@ namespace NewCombat.Slots
             {
                 return;
             }
-            hero.gameObject.SetActive(false);
+            //hero.gameObject.SetActive(false);
             hero.position = transform.position;
 
         }

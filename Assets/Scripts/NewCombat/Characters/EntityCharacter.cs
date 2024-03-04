@@ -8,7 +8,7 @@ namespace NewCombat.Characters
     [RequireComponent(typeof(AnimationManager))]
     [RequireComponent(typeof(AttackManager))]
     [RequireComponent(typeof(AttackControl))]
-    [RequireComponent(typeof(DamageManager))]
+    [RequireComponent(typeof(StateManager))]
     [RequireComponent(typeof(EntityStats))]
     public abstract class EntityCharacter : MonoBehaviour, IEntity
     {

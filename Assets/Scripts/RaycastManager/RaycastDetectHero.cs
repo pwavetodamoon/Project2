@@ -20,7 +20,7 @@ namespace RaycastManager
         public Vector2 mousePosition;
         public bool IsHandleHero = false;
 
-        public void HandleHeroSelection(bool isMouseDown, Transform _hero)
+        public void HandleHeroSelection(bool isMouseDown, HeroCharacter _hero)
         {
             //ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -33,11 +33,11 @@ namespace RaycastManager
                 HandleMouseUp();
             }
         }
-        private void HandleMouseDown(Transform _hero)
+        private void HandleMouseDown(HeroCharacter _hero)
         {
             if (_hero != null && currentHero == null)
             {
-                currentHero = _hero.GetComponent<HeroCharacter>();
+                currentHero = _hero;
                 attackManager = _hero.GetComponent<AttackManager>();
             }
             else if (currentHero != null && currentHero.IsDead == false)
@@ -65,8 +65,8 @@ namespace RaycastManager
         {
             if (currentHero != null)
             {
-                var isInRange = SlotManager.Instance.FindNearSlotAndSwapIfInRange(currentHero, currentHero.InGameSlotIndex);
-                if (!isInRange)
+                var isSwap = SlotManager.Instance.FindNearSlotAndSwapIfInRange(currentHero, currentHero.InGameSlotIndex);
+                if (!isSwap)
                 {
                     SlotManager.Instance.LoadHeroIntoSlot(currentHero);
                 }

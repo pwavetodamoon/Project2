@@ -6,11 +6,12 @@ using UnityEngine;
 
 namespace NewCombat.ManagerInEntity
 {
-    public class DamageManager : MonoBehaviour, IDamageable
+    public class StateManager : MonoBehaviour, IDamageable
     {
         private IEntity entity;
         private EntityStats EntityStats;
 
+        public  Action OnRebirth;
         public event Action OnTakeDamage;
         public event Action OnDie;
         public void TakeDamage(EntityStats enemy)

@@ -29,5 +29,15 @@ namespace NewCombat.ManagerInEntity
             if (!valueNotNull) return 0;
             return animator_Base.GetAnimationLength(AnimationEnum);
         }
+
+        public void DisableAnimator()
+        {
+            animator_Base.enabled = false;
+        }
+
+        public void EnableAnimator()
+        {
+            animator_Base.enabled = true;
+        }
     }
 }
