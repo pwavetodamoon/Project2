@@ -90,7 +90,7 @@ namespace NewCombat.Characters
             gameObject.SetActive(false);
         }
 
-        private void StopCurrentAttack()
+        public void StopCurrentAttack()
         {
             attackControl.StopAllCoroutines();
         }
@@ -100,5 +100,6 @@ namespace NewCombat.Characters
             attackManager.SetAllowExecuteAttackValue(state);
             attackManager.SetTimeCounterValue(state);
         }
+
     }
 }

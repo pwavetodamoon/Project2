@@ -65,7 +65,6 @@ namespace RaycastManager
         {
             if (currentHero != null)
             {
-                // TODO: Can check if first selected game object is game avatar then can swap in to banned slot
                 var isInRange = SlotManager.Instance.FindNearSlotAndSwapIfInRange(currentHero, currentHero.InGameSlotIndex);
                 if (!isInRange)
                 {

@@ -20,7 +20,6 @@ public class WinLooseGame : MonoBehaviour
     public ScreenTransition screenTransition;
     public MapBackground mapBackground;
 
-
     [Button]
     public void GoNextMapSetup()
     {
@@ -39,10 +38,16 @@ public class WinLooseGame : MonoBehaviour
             heroList.Add(hero);
             if (hero.InGameSlotIndex == -1) continue;
             hero.DOKill();
+            hero.StopCurrentAttack();
             hero.SetAttackState(false);
             hero.GetComponent<AnimationManager>().PlayAnimation(Human_Animator.Walk_State);
+
+        }
+
+        foreach (var hero in heroList)
+        {
             var model = hero.GetModelTransform();
-            model.transform.position = hero.transform.position;
+            model.transform.position = SlotManager.Instance.GetStandTransform(hero.InGameSlotIndex).position;
         }
         // stop all attack;
         ChangeAttackStateOfHero(false, heroList);
@@ -60,6 +65,11 @@ public class WinLooseGame : MonoBehaviour
 
         ChangeAttackStateOfHero(true, heroList);
 
+
+        foreach(var hero in heroList)
+        {
+            hero.CreateAttack();
+        }
     }
 
     private void ChangeAttackStateOfHero(bool state, List<HeroCharacter> heroList)
