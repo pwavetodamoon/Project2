@@ -38,10 +38,10 @@ namespace NewCombat.Characters
         {
             if (CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
+                WinLooseGame.Instance.ThuaRoiHa();
                 Debug.Log("Thua roi");
             }
             SetModelBackImmediate();
-            ReleaseObject();
             animationManager.DisableAnimator();
             IsDead = true;
 
@@ -51,7 +51,6 @@ namespace NewCombat.Characters
         {
             animationManager.EnableAnimator();
             IsDead = false;
-            RegisterObject();
         }
 
         public void SetSlotIndex(int index)

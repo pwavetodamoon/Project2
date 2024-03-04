@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c0b4c76326dd94f8076369e40f22dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroyOnLoad: 0
   heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
   monsterSpawner: {fileID: 573018985}
   screenTransition: {fileID: 1439957536}
@@ -785,6 +786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScreenTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 4246128740793383987, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6481782144662726714, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
     m_RemovedGameObjects: []
@@ -1125,7 +1130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 886202102}
-  duration: 0
+  duration: 1
   durationInTran: 0.25
 --- !u!1 &1479021096
 GameObject:

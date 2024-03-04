@@ -12,9 +12,11 @@ using NewCombat.ManagerInEntity;
 using UnityEngine;
 using Characters;
 using DG.Tweening;
+using Helper;
 
-public class WinLooseGame : MonoBehaviour
+public class WinLooseGame : Singleton<WinLooseGame>
 {
+    // TODO: Refactory this
     public HeroManager heroManager;
     public MonsterSpawner monsterSpawner;
     public ScreenTransition screenTransition;
@@ -27,31 +29,35 @@ public class WinLooseGame : MonoBehaviour
     }
 
     [Button]
-    private void ThuaRoiHa()
+    public void ThuaRoiHa()
     {
         StartCoroutine(Diead());
     }
     private IEnumerator Diead()
     {
         var slotList = SlotManager.Instance.Slots;
-        // Health all hero in slot
         
         CollectAllItemInGame();
 
         ClearMonsterAndStopSpawnOnMap();
+        // Health all hero in slot
 
         yield return screenTransition.StartTransition();
+        for (int i = 0; i < slotList.Count; i++)
+        {
+            if (slotList[i].currentHero != null && slotList[i].currentHero.IsDead)
+            {
+                var stats = slotList[i].currentHero.GetComponent<HeroEntityStats>();
+                stats.IncreaseHealth(stats.MaxHealth());
+                slotList[i].currentHero.RegisterObject();
+            }
+        }
+
         mapBackground.GoNextMap();
         yield return screenTransition.waitBetweenTransition;
         yield return screenTransition.EndTransition();
 
-        foreach (var slot in slotList)
-        {
-            var entity = slot.currentHero;
-            if (entity == null) continue;
-            var stats = entity.GetComponent<HeroEntityStats>();
-            stats.IncreaseHealth(stats.MaxHealth());
-        }
+        
     }
 
 
@@ -61,9 +67,9 @@ public class WinLooseGame : MonoBehaviour
         var heroList = new List<HeroCharacter>();
 
 
-        foreach (var entityCharacter in entityList)
+        for (int i = 0; i < entityList.Count; i++)
         {
-            var hero = entityCharacter.GetComponent<HeroCharacter>();
+            var hero = entityList[i].GetComponent<HeroCharacter>();
             heroList.Add(hero);
             if (hero.InGameSlotIndex == -1) continue;
             hero.DOKill();
@@ -73,7 +79,6 @@ public class WinLooseGame : MonoBehaviour
             hero.GetComponent<AnimationManager>().PlayAnimation(Human_Animator.Walk_State);
 
         }
-
         foreach (var hero in heroList)
         {
             hero.SetModelBackImmediate();
