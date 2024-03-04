@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
   monsterSpawner: {fileID: 573018985}
-  screenTransition: {fileID: 886202101}
+  screenTransition: {fileID: 1439957536}
   mapBackground: {fileID: 416710688}
 --- !u!114 &416710688 stripped
 MonoBehaviour:
@@ -785,7 +785,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScreenTransition
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6481782144662726714, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -795,15 +796,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1390756752514101843, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
   m_PrefabInstance: {fileID: 886202099}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &886202101 stripped
+--- !u!114 &886202102 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6481782144662726714, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4246128740793383987, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
   m_PrefabInstance: {fileID: 886202099}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dede822a681f4c14bb82d2b08099fe10, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &930732135
@@ -1020,13 +1021,14 @@ GameObject:
   - component: {fileID: 1439957534}
   - component: {fileID: 1439957533}
   - component: {fileID: 1439957532}
+  - component: {fileID: 1439957536}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1439957532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,6 +1112,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1439957536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439957531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dede822a681f4c14bb82d2b08099fe10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 886202102}
+  duration: 0
+  durationInTran: 0.25
 --- !u!1 &1479021096
 GameObject:
   m_ObjectHideFlags: 0

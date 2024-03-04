@@ -26,6 +26,35 @@ public class WinLooseGame : MonoBehaviour
         StartCoroutine(GoNextMap());
     }
 
+    [Button]
+    private void ThuaRoiHa()
+    {
+        StartCoroutine(Diead());
+    }
+    private IEnumerator Diead()
+    {
+        var slotList = SlotManager.Instance.Slots;
+        // Health all hero in slot
+        
+        CollectAllItemInGame();
+
+        ClearMonsterAndStopSpawnOnMap();
+
+        yield return screenTransition.StartTransition();
+        mapBackground.GoNextMap();
+        yield return screenTransition.waitBetweenTransition;
+        yield return screenTransition.EndTransition();
+
+        foreach (var slot in slotList)
+        {
+            var entity = slot.currentHero;
+            if (entity == null) continue;
+            var stats = entity.GetComponent<HeroEntityStats>();
+            stats.IncreaseHealth(stats.MaxHealth());
+        }
+    }
+
+
     IEnumerator GoNextMap()
     {
         var entityList = CombatEntitiesManager.Instance.GetHeroList();
@@ -38,16 +67,16 @@ public class WinLooseGame : MonoBehaviour
             heroList.Add(hero);
             if (hero.InGameSlotIndex == -1) continue;
             hero.DOKill();
-            hero.StopCurrentAttack();
-            hero.SetAttackState(false);
+            //hero.StopCurrentAttack();
+            //hero.SetAttackState(false);
+            hero.ReleaseObject();
             hero.GetComponent<AnimationManager>().PlayAnimation(Human_Animator.Walk_State);
 
         }
 
         foreach (var hero in heroList)
         {
-            var model = hero.GetModelTransform();
-            model.transform.position = SlotManager.Instance.GetStandTransform(hero.InGameSlotIndex).position;
+            hero.SetModelBackImmediate();
         }
         // stop all attack;
         ChangeAttackStateOfHero(false, heroList);
@@ -68,7 +97,7 @@ public class WinLooseGame : MonoBehaviour
 
         foreach(var hero in heroList)
         {
-            hero.CreateAttack();
+            hero.RegisterObject();
         }
     }
 

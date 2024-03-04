@@ -7,11 +7,13 @@ namespace NewCombat.ManagerInEntity
     public class AnimationManager : MonoBehaviour
     {
         private Animator_Base animator_Base;
+        private Animator _animator;
         private bool valueNotNull = false;
 
         private void Awake()
         {
             animator_Base = GetComponentInChildren<Animator_Base>();
+            _animator = GetComponentInChildren<Animator>();
             if (animator_Base != null)
             {
                 valueNotNull = true;
@@ -32,12 +34,12 @@ namespace NewCombat.ManagerInEntity
 
         public void DisableAnimator()
         {
-            animator_Base.enabled = false;
+            _animator.enabled = false;
         }
 
         public void EnableAnimator()
         {
-            animator_Base.enabled = true;
+            _animator.enabled = true;
         }
     }
 }

@@ -7,6 +7,7 @@ using NewCombat.ManagerInEntity;
 using NewCombat.Slots;
 using UnityEngine;
 using UnityEngine.Serialization;
+using StateManager = NewCombat.ManagerInEntity.StateManager;
 
 namespace NewCombat.Characters
 {
@@ -16,30 +17,41 @@ namespace NewCombat.Characters
         public int InGameSlotIndex { get; private set; }
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
+        public bool IsDead = false;
 
-        [SerializeField] private bool isDead = false;
-        [field: SerializeField] public bool IsDead
+        private StateManager stateManager;
+        private void OnDestroy()
         {
-            get => isDead;
+            stateManager.OnDie -= OnDead;
+            stateManager.OnRebirth -= OnRebirth;
         }
 
         protected override void Awake()
         {
             base.Awake();
+            stateManager = GetComponent<StateManager>();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
-            GetComponent<StateManager>().OnDie += OnDead;
-            GetComponent<StateManager>().OnRebirth += OnRebirth;
+            stateManager.OnDie += OnDead;
+            stateManager.OnRebirth += OnRebirth;
         }
         private void OnDead()
         {
+            if (CombatEntitiesManager.Instance.GetHeroCount() == 1)
+            {
+                Debug.Log("Thua roi");
+            }
+            SetModelBackImmediate();
+            ReleaseObject();
             animationManager.DisableAnimator();
-            isDead = true;
+            IsDead = true;
+
         }
 
         private void OnRebirth()
         {
             animationManager.EnableAnimator();
-            isDead = false;
+            IsDead = false;
+            RegisterObject();
         }
 
         public void SetSlotIndex(int index)
@@ -56,6 +68,10 @@ namespace NewCombat.Characters
 
         }
 
+        public void SetModelBackImmediate()
+        {
+            modelTransform.transform.position = SlotManager.Instance.GetStandTransform(InGameSlotIndex).position;
+        }
 
         public void SetHeroData(HeroData newHeroData)
         {

@@ -13,6 +13,9 @@ namespace NewCombat.Abilities
         [SerializeField] private float healthRegenDelayTime = 7f;
         [SerializeField] private float healthRegenRateTime = 3f;
         [SerializeField] private float healthRegenPercent = 0.1f;
+
+        [SerializeField] private float healthRegenPercentWhenDead = .2f;
+        [SerializeField] private float healthRegenPercentDefault = .1f;
         private float healthRegenDelay = 0;
         private float healthRegenRate = 3;
 
@@ -28,7 +31,7 @@ namespace NewCombat.Abilities
 
         private void StopHealth()
         {
-            healthRegenPercent = 2;
+            healthRegenPercent = healthRegenPercentWhenDead;
             isDead = true;
         }
 
@@ -51,7 +54,7 @@ namespace NewCombat.Abilities
                 if (isDead)
                 {
                     isDead = false;
-                    healthRegenPercent = .1f;
+                    healthRegenPercent = healthRegenPercentDefault;
                     stateManager.OnRebirth?.Invoke();
                 }
                 return;
@@ -65,7 +68,7 @@ namespace NewCombat.Abilities
                 {
                     var value = EntityStats.MaxHealth() * healthRegenPercent;
                     EntityStats.IncreaseHealth(value);
-
+                    Debug.Log("Health Value:" +value);
                     healthRegenRate = healthRegenRateTime;
                 }
                 else

@@ -26,6 +26,10 @@ namespace CombatSystem
             return entitiesByTag[GameTag.Hero];
         }
 
+        public int GetHeroCount()
+        {
+            return entitiesByTag[GameTag.Hero].Count;
+        }
         private EntityCharacter GetNearestObject(Transform entity, List<EntityCharacter> entities)
         {
 

@@ -14,12 +14,14 @@ public class ScreenTransition : MonoBehaviour
 
     public IEnumerator StartTransition()
     {
+        image.gameObject.SetActive(true);
         yield return image.DOFillAmount(1, duration).SetEase(Ease.OutQuart).WaitForCompletion();
     }
 
     public IEnumerator EndTransition()
     {
         yield return image.DOFillAmount(0, duration).SetEase(Ease.OutQuart).WaitForCompletion();
+        image.gameObject.SetActive(false);
     }
     //void Update()
     //{

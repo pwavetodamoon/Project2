@@ -2,6 +2,7 @@ using NewCombat.Characters;
 using System;
 using Leveling_System;
 using NewCombat.Helper;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace NewCombat.ManagerInEntity
@@ -31,6 +32,14 @@ namespace NewCombat.ManagerInEntity
 
             if (entity.EntityInAttackState() == false) entity.PlayHurtAnimation();
             Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damageOfEnemy}", gameObject);
+        }
+
+        [Button]
+        private void TestOnDie()
+        {
+            EntityStats.DecreaseHealth(EntityStats.MaxHealth());
+            OnDie?.Invoke();
+            entity.ReleaseObject();
         }
 
         private void Awake()
