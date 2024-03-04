@@ -1,13 +1,15 @@
 ﻿using Background;
 using Sirenix.OdinInspector;
 using System.Collections;
+using System.Collections.Generic;
+using NewCombat.Characters;
 using UnityEngine;
 
 namespace CombatSystem.Scripts.Spawner
 {
     public class MonsterSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject MonsterPrefab;
+        [SerializeField] private MonsterCharacter MonsterPrefab;
         [SerializeField] private float timeCounter = 5f;
         [SerializeField] private float timeToSpawnRandomNoise = 2f;
         [SerializeField] private float spawnTime = 5f;
@@ -63,5 +65,7 @@ namespace CombatSystem.Scripts.Spawner
         {
             maxMonster = count;
         }
+
+ 
     }
 }

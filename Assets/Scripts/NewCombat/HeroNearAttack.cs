@@ -45,7 +45,7 @@ namespace NewCombat
 
         private Vector3 GetSlotPosition()
         {
-            return SlotManager.Instance.GetStandTransform(Hero.InGameSlotIndex).position;
+            return entityCharacter.transform.position;
         }
 
         public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,

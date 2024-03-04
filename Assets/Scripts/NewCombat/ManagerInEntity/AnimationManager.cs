@@ -24,12 +24,6 @@ namespace NewCombat.ManagerInEntity
             animator_Base.ChangeAnimation(AnimationEnum);
         }
 
-        public void SetPlayBackDefaultAnimation(bool flag)
-        {
-            if (!valueNotNull) return;
-            animator_Base.SetIsPlayDefaultAnimation(flag);
-        }
-
         public float GetAnimationLength(Enum AnimationEnum)
         {
             if (!valueNotNull) return 0;

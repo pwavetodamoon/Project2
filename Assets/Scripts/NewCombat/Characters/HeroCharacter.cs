@@ -71,6 +71,10 @@ namespace NewCombat.Characters
             return modelTransform;
         }
 
+        public void GetModelToOriginalTransform()
+        {
+
+        }
         public override void RegisterObject()
         {
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);

@@ -29,6 +29,7 @@ namespace NewCombat
             animatonManager = GetComponent<AnimationManager>();
         }
 
+  
         [Button]
         private void OnDisable()
         {
@@ -86,6 +87,12 @@ namespace NewCombat
         {
             if (attack == null) return false;
             return attack.IsActive;
+        }
+
+        [Button]
+        public void StopExecute()
+        {
+            StopAllCoroutines();
         }
     }
 }

@@ -1,7 +1,9 @@
+using System.Collections;
 using NewCombat.Characters;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using CombatSystem.Scripts.Spawner;
 using Helper;
 using UnityEngine;
 
@@ -10,11 +12,13 @@ namespace CombatSystem
     public class CombatEntitiesManager : Singleton<CombatEntitiesManager>
     {
         [ShowInInspector] private Dictionary<string, List<EntityCharacter>> entitiesByTag = new Dictionary<string, List<EntityCharacter>>();
+        [SerializeField] private MonsterSpawner monsterSpawner;
 
         protected override void Awake()
         {
             base.Awake();
             GetAllEntityInWorld();
+            monsterSpawner = GetComponentInChildren<MonsterSpawner>();
         }
 
         public List<EntityCharacter> GetHeroList()
@@ -62,7 +66,7 @@ namespace CombatSystem
         {
             return entitiesByTag.ContainsKey(tag);
         }
-        
+
         public void RemoveEntityByTag(EntityCharacter entity, string key)
         {
             if (IsContainKey(key) && IsContainValue(key, entity))
@@ -112,5 +116,6 @@ namespace CombatSystem
                 AppendEntityToListByTag(entity, entity.tag);
             }
         }
+
     }
 }

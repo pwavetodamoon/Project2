@@ -50,13 +50,13 @@ namespace DropItem
         public void OnPointerEnter(PointerEventData eventData)
         {
             //Collect();
-            Debug.Log("Trigger mouse");
+            //Debug.Log("Trigger mouse");
         }
         
         [Button]
         public virtual void Collect()
         {
-            Debug.Log("check Collect");
+            //Debug.Log("check Collect");
             StartCoroutine(MoveToDestination());
 
         }
@@ -71,7 +71,7 @@ namespace DropItem
             }
             SendData();
             Release();
-            Debug.Log("check MoveToDestination");
+            //Debug.Log("check MoveToDestination");
         }
         [SerializeField, Required] private ItemDropConfig DropConfig;
 
