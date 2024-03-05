@@ -20,19 +20,20 @@ namespace NewCombat.Abilities
         private float healthRegenRate = 3;
 
 
-        private bool isDead = false;
+        private HeroCharacter heroCharacter;
         private void Awake()
         {
             entityStateManager = GetComponent<EntityStateManager>();
             entityStateManager.OnTakeDamage += TriggerHealth;
             entityStateManager.OnDie += StopHealth;
             EntityStats = GetComponent<EntityStats>();
+            heroCharacter = GetComponent<HeroCharacter>();
         }
 
         private void StopHealth()
         {
             healthRegenPercent = healthRegenPercentWhenDead;
-            isDead = true;
+            heroCharacter.IsDead = true;
         }
 
 
@@ -51,9 +52,9 @@ namespace NewCombat.Abilities
             if (EntityStats == null) return;
             if (EntityStats.Health() >= EntityStats.MaxHealth())
             {
-                if (isDead)
+                if (heroCharacter.IsDead)
                 {
-                    isDead = false;
+                    heroCharacter.IsDead = false;
                     healthRegenPercent = healthRegenPercentDefault;
                     entityStateManager.OnRebirth?.Invoke();
                 }

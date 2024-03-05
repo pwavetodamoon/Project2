@@ -42,14 +42,11 @@ namespace NewCombat.Characters
             }
             SetModelBackImmediate();
             animationManager.DisableAnimator();
-            IsDead = true;
-
         }
 
         private void OnRebirth()
         {
             animationManager.EnableAnimator();
-            IsDead = false;
         }
 
         public void SetSlotIndex(int index)

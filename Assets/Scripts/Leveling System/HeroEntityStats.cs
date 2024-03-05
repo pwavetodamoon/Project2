@@ -11,7 +11,7 @@ public class HeroEntityStats : EntityStats
         heroData = newData;
         LoadEntityStats();
     }
-    public void LoadEntityStats()
+    private void LoadEntityStats()
     {
         structStats = heroData.structStats;
     }

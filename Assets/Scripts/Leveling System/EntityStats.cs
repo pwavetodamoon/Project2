@@ -41,5 +41,10 @@ namespace Leveling_System
             var rate = UnityEngine.Random.Range(0, 100);
             return rate <= structStats.CritRate ? true : false;
         }
+
+        public StructStats GetStructStats()
+        {
+            return structStats;
+        }
     }
 }
