@@ -8,27 +8,32 @@ using NewCombat;
 using NewCombat.Characters;
 using NewCombat.ManagerInEntity;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
+using UnityEngine;
 
-public interface IGameTransitionComponents
-{
-    ICoroutineRunner runner { get; set; }
-    IGameStateHandler GameStateHandler { get; set; }
-    ScreenTransition screen { get; set; }
-    MapBackground map { get; set; }
-}
-public class NextMapTransitionHandler
-{
 
-    public NextMapTransitionHandler(IGameTransitionComponents gameTransitionComponents)
+public abstract class GameTransitionBase
+{
+    public void GetRef(ICoroutineRunner runner, IGameStateHandler GameStateHandler, ScreenTransition screen,
+        MapBackground map)
     {
-        this.gameTransitionComponents = gameTransitionComponents;
+        this.runner = runner;
+        this.screen = screen;
+        this.map = map;
+        this.GameStateHandler = GameStateHandler;
     }
+    protected ICoroutineRunner runner;
+    protected IGameStateHandler GameStateHandler;
+    protected ScreenTransition screen;
+    protected MapBackground map;
 
-    private IGameTransitionComponents gameTransitionComponents;
-    [Button]
-    public void GoNextMapSetup()
+    public abstract void UseRunner();
+}
+public class NextMapTransitionHandler : GameTransitionBase
+{
+    public override void UseRunner()
     {
-        gameTransitionComponents.runner.StartCoroutine(GoNextMap());
+        runner.StartCoroutine(GoNextMap());
     }
 
     private IEnumerator GoNextMap()
@@ -52,20 +57,20 @@ public class NextMapTransitionHandler
             hero.SetModelBackImmediate();
         }
         // stop all attack;
-        gameTransitionComponents.GameStateHandler.ChangeAttackStateOfHero(false, heroList);
+        GameStateHandler.ChangeAttackStateOfHero(false, heroList);
 
 
-        gameTransitionComponents.GameStateHandler.CollectAllItemInGame();
+        GameStateHandler.CollectAllItemInGame();
 
-        gameTransitionComponents.GameStateHandler.ClearMonsterAndStopSpawnOnMap();
+        GameStateHandler.ClearMonsterAndStopSpawnOnMap();
 
 
-        yield return gameTransitionComponents.screen.StartTransition();
-        gameTransitionComponents.map.GoNextMap();
-        yield return gameTransitionComponents.screen.waitBetweenTransition;
-        yield return gameTransitionComponents.screen.EndTransition();
+        yield return screen.StartTransition();
+        map.GoNextMap();
+        yield return screen.waitBetweenTransition;
+        yield return screen.EndTransition();
 
-        gameTransitionComponents.GameStateHandler.ChangeAttackStateOfHero(true, heroList);
+        GameStateHandler.ChangeAttackStateOfHero(true, heroList);
 
 
         foreach(var hero in heroList)

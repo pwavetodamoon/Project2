@@ -35,7 +35,7 @@ namespace DropItem
         }
 
         [TableList(ShowIndexLabels = true)]
-        [ShowInInspector] public List<Items> list;
+        [ShowInInspector] private List<Items> list;
 
 
         [Button]
@@ -73,6 +73,15 @@ namespace DropItem
             itemReward.Pump(jumpPosition);
             Add(itemReward);
             return itemReward;
+        }
+
+        public void CollectAllItemOnActive()
+        {
+            foreach (var item in list)
+            {
+                if (item.gameObject.activeSelf == false) continue;
+                item.Collect();
+            }
         }
 
         private Vector3 RandomPosition()

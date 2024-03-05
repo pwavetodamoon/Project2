@@ -66,6 +66,13 @@ namespace CombatSystem.Scripts.Spawner
             maxMonster = count;
         }
 
- 
+        public void ClearMonsterAndStopSpawnOnMap()
+        {
+            var list = transform.GetComponentsInChildren<MonsterCharacter>();
+            for (int i = 0; i < list.Length; i++)
+            {
+                list[i].ReleaseObject();
+            }
+        }
     }
 }

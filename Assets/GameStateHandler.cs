@@ -18,27 +18,24 @@ public interface IGameStateHandler
     void ClearMonsterAndStopSpawnOnMap();
 }
 
-public class GameStateHandler : Singleton<GameStateHandler>, IGameStateHandler , ICoroutineRunner
+public class GameStateHandler : Singleton<GameStateHandler>, IGameStateHandler, ICoroutineRunner
 {
     [SerializeField] private HeroManager heroManager;
     [SerializeField] private MonsterSpawner monsterSpawner;
     [SerializeField] private ScreenTransition screenTransition;
     [SerializeField] private MapBackground mapBackground;
-    
-    private IGameTransitionComponents gameTransitionComponents;
+
 
     public LossTransitionHandler LossTransitionHandler;
     public NextMapTransitionHandler NextMapTransitionHandler;
     protected override void Awake()
     {
         base.Awake();
-        gameTransitionComponents.map = mapBackground;
-        gameTransitionComponents.screen = screenTransition;
-        gameTransitionComponents.GameStateHandler = this;
-        gameTransitionComponents.runner = this;
-        Debug.Log($"{gameTransitionComponents.map} {gameTransitionComponents.screen} {gameTransitionComponents.GameStateHandler}");
-        LossTransitionHandler = new LossTransitionHandler(gameTransitionComponents);
-        NextMapTransitionHandler = new NextMapTransitionHandler(gameTransitionComponents);
+        LossTransitionHandler = new LossTransitionHandler();
+        NextMapTransitionHandler = new NextMapTransitionHandler();
+
+        LossTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
+        NextMapTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
     }
 
 
@@ -51,21 +48,13 @@ public class GameStateHandler : Singleton<GameStateHandler>, IGameStateHandler ,
     }
     public void CollectAllItemInGame()
     {
-        foreach (var item in RewardManager.Instance.list)
-        {
-            if (item.gameObject.activeSelf == false) continue;
-            item.Collect();
-        }
+        RewardManager.Instance.CollectAllItemOnActive();
     }
 
     [Button]
     public void ClearMonsterAndStopSpawnOnMap()
     {
-        var list = monsterSpawner.transform.GetComponentsInChildren<MonsterCharacter>();
-        for (int i = 0; i < list.Length;i++)
-        {
-            list[i].ReleaseObject();
-        }
+        monsterSpawner.ClearMonsterAndStopSpawnOnMap();
     }
 }
 

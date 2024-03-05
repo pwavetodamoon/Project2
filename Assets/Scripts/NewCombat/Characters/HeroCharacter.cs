@@ -37,7 +37,7 @@ namespace NewCombat.Characters
         {
             if (CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
-                GameStateHandler.Instance.LossTransitionHandler.StartCoroutine();
+                GameStateHandler.Instance.LossTransitionHandler.UseRunner();
                 Debug.Log("Thua roi");
             }
             SetModelBackImmediate();
