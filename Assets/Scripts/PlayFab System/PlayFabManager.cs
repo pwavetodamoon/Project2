@@ -16,6 +16,8 @@ namespace PlayFab_System
     {
         public PlayerData Player;
         public CurrencyManager currencyManager;
+
+        public testfunc testfunc;
         private void Start()
         {
             Login();
@@ -75,6 +77,7 @@ namespace PlayFab_System
                     { "Password" , Player.passWord },
                     {"Level", Player.levelPlayer.ToString()},
                     {"Gold", Player.gold.ToString()},
+                    {"Hero Data",testfunc.ConvertTesT()}
                 }
             };
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
@@ -93,6 +96,7 @@ namespace PlayFab_System
                 Player.passWord = result.Data["Password"].Value;
                 Player.levelPlayer = int.Parse(result.Data["Level"].Value);
                 Player.gold = int.Parse(result.Data["Gold"].Value);
+                testfunc.ConvertBack(result.Data["Hero Data"].Value);
                 Debug.Log(  Player.customId + " " + Player.email + " " + Player.passWord + Player.levelPlayer + " " + Player.gold);
             }
         }

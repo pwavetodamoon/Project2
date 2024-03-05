@@ -172,6 +172,17 @@ MonoBehaviour:
   monsterSpawner: {fileID: 573018985}
   screenTransition: {fileID: 1439957536}
   mapBackground: {fileID: 416710688}
+--- !u!114 &235037155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3585002160872967840, guid: 154f75cabc5cfca45a61a8470f2fe39e, type: 3}
+  m_PrefabInstance: {fileID: 539563525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ceb7a20b5c1494a81014741e31b61c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &416710688 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5584744959903285923, guid: 981d817955f0aa441a0e37bea131895f, type: 3}
@@ -214,6 +225,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
   uiAvatarControllers: []
+  heroSaveList:
+    Datas:
+    - heroName: Quang
+      slotIndex: 0
+      structStats:
+        Level: 1
+        maxHealth: 100
+        health: 100
+        BaseDamage: 100
+        speed: 3
+        CritRate: 0
+        CritDamage: 0
+        attackCoolDown: 1
+        attackMoveDuration: 1
+    - heroName: Quang 2
+      slotIndex: 1
+      structStats:
+        Level: 1
+        maxHealth: 100
+        health: 100
+        BaseDamage: 100
+        speed: 3
+        CritRate: 0
+        CritDamage: 0
+        attackCoolDown: 0.5
+        attackMoveDuration: 0.5
 --- !u!4 &469181122
 Transform:
   m_ObjectHideFlags: 0
@@ -1681,6 +1718,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1620323763510111783, guid: 07adac806d03d9143af8dcf175bbc9dc, type: 3}
+      propertyPath: testfunc
+      value: 
+      objectReference: {fileID: 469181121}
+    - target: {fileID: 1620323763510111783, guid: 07adac806d03d9143af8dcf175bbc9dc, type: 3}
+      propertyPath: currencyManager
+      value: 
+      objectReference: {fileID: 235037155}
     - target: {fileID: 2470708188889195297, guid: 07adac806d03d9143af8dcf175bbc9dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

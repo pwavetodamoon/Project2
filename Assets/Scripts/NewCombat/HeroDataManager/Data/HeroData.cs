@@ -4,6 +4,7 @@ using Characters;
 using Leveling_System;
 using NewCombat.AttackFactory;
 using NewCombat.Characters;
+using NewCombat.HeroDataManager.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -31,6 +32,11 @@ namespace NewCombat.HeroDataManager.Data
             set => slotIndex = value;
         }
 
+        public string HeroName
+        {
+            get => heroName;
+            set => heroName = value;
+        }
         public HeroSingleAttackFactory GetHeroFactory()
         {
             return HeroSingleAttackFactory;
@@ -53,6 +59,14 @@ namespace NewCombat.HeroDataManager.Data
             return spriteDictionary;
         }
 
+        public void LoadFromHeroInGame()
+        {
+            // TODO: Add is dead field
+            if (heroCharacter == null) return;
+            structStats = heroCharacter.GetComponent<HeroEntityStats>().GetStructStats();
+            slotIndex = heroCharacter.InGameSlotIndex;
+        }
+
         [Button]
         private void LoadAllSkinInFolder()
         {
@@ -73,3 +87,4 @@ namespace NewCombat.HeroDataManager.Data
         }
     }
 }
+

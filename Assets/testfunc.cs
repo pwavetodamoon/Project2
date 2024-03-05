@@ -1,4 +1,5 @@
-﻿using Characters;
+﻿using System.Collections.Generic;
+using Characters;
 using CombatSystem;
 using NewCombat.Characters;
 using NewCombat.HeroDataManager;
@@ -6,6 +7,10 @@ using NewCombat.Slots;
 using Sirenix.OdinInspector;
 using System.Linq;
 using UnityEngine;
+using System;
+using PlayFab.PfEditor.Json;
+using UnityEngine.Serialization;
+using NewCombat.HeroDataManager.Data;
 
 public class testfunc : MonoBehaviour
 {
@@ -76,4 +81,51 @@ public class testfunc : MonoBehaviour
         }
     }
 
+    public HeroSaveList heroSaveList = new HeroSaveList();
+    [Button]
+    private void Test222()
+    {
+        var list = heroManager.heroData;
+        foreach (var heroData in list)
+        {
+            var heroSave = new HeroSaveData();
+            heroSave.Load(heroData);
+            heroSaveList.Datas.Add(heroSave);
+        }
+    }
+
+    [Button]
+    public string ConvertTesT()
+    {
+        string json = JsonUtility.ToJson(heroSaveList, true);
+        Debug.Log(json);
+        return json;
+    }
+
+    public void ConvertBack(string json)
+    {
+        heroSaveList = JsonUtility.FromJson<HeroSaveList>(json);
+    }
+
+}
+
+[Serializable]
+public class HeroSaveList
+{
+    public List<HeroSaveData> Datas = new List<HeroSaveData>();
+}
+[System.Serializable]
+public class HeroSaveData
+{
+    public string heroName;
+    public int slotIndex;
+    public StructStats structStats;
+
+    public void Load(HeroData heroData)
+    {
+        heroData.LoadFromHeroInGame();
+        heroName = heroData.HeroName;
+        slotIndex = heroData.SlotIndex;
+        structStats = heroData.structStats;
+    }
 }
