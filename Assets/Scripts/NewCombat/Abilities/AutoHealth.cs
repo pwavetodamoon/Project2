@@ -9,7 +9,7 @@ namespace NewCombat.Abilities
     public class AutoHealth : MonoBehaviour
     {
         private EntityStats EntityStats;
-        private StateManager stateManager;
+        private EntityStateManager entityStateManager;
         [SerializeField] private float healthRegenDelayTime = 7f;
         [SerializeField] private float healthRegenRateTime = 3f;
         [SerializeField] private float healthRegenPercent = 0.1f;
@@ -23,9 +23,9 @@ namespace NewCombat.Abilities
         private bool isDead = false;
         private void Awake()
         {
-            stateManager = GetComponent<StateManager>();
-            stateManager.OnTakeDamage += TriggerHealth;
-            stateManager.OnDie += StopHealth;
+            entityStateManager = GetComponent<EntityStateManager>();
+            entityStateManager.OnTakeDamage += TriggerHealth;
+            entityStateManager.OnDie += StopHealth;
             EntityStats = GetComponent<EntityStats>();
         }
 
@@ -38,7 +38,7 @@ namespace NewCombat.Abilities
 
         private void OnDisable()
         {
-            stateManager.OnTakeDamage -= TriggerHealth;
+            entityStateManager.OnTakeDamage -= TriggerHealth;
         }
 
         private void TriggerHealth()
@@ -55,7 +55,7 @@ namespace NewCombat.Abilities
                 {
                     isDead = false;
                     healthRegenPercent = healthRegenPercentDefault;
-                    stateManager.OnRebirth?.Invoke();
+                    entityStateManager.OnRebirth?.Invoke();
                 }
                 return;
             }

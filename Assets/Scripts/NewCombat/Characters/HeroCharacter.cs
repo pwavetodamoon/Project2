@@ -7,7 +7,6 @@ using NewCombat.ManagerInEntity;
 using NewCombat.Slots;
 using UnityEngine;
 using UnityEngine.Serialization;
-using StateManager = NewCombat.ManagerInEntity.StateManager;
 
 namespace NewCombat.Characters
 {
@@ -19,26 +18,26 @@ namespace NewCombat.Characters
         [SerializeField] private HeroSingleAttackFactory attackFactory;
         public bool IsDead = false;
 
-        private StateManager stateManager;
+        private EntityStateManager entityStateManager;
         private void OnDestroy()
         {
-            stateManager.OnDie -= OnDead;
-            stateManager.OnRebirth -= OnRebirth;
+            entityStateManager.OnDie -= OnDead;
+            entityStateManager.OnRebirth -= OnRebirth;
         }
 
         protected override void Awake()
         {
             base.Awake();
-            stateManager = GetComponent<StateManager>();
+            entityStateManager = GetComponent<EntityStateManager>();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
-            stateManager.OnDie += OnDead;
-            stateManager.OnRebirth += OnRebirth;
+            entityStateManager.OnDie += OnDead;
+            entityStateManager.OnRebirth += OnRebirth;
         }
         private void OnDead()
         {
             if (CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
-                WinLooseGame.Instance.ThuaRoiHa();
+                GameStateHandler.Instance.LossTransitionHandler.StartCoroutine();
                 Debug.Log("Thua roi");
             }
             SetModelBackImmediate();

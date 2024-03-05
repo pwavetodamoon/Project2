@@ -22,37 +22,37 @@ namespace NewCombat.Characters
 
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
         private DamageSlashEffect damageSlashEffect;
-        protected StateManager StateManager;
+        protected EntityStateManager EntityStateManager;
         private float xRandomNoise = 0;
         private float yRandomNoise = 0;
 
         protected override void Awake()
         {
             base.Awake();
-            StateManager = GetComponent<StateManager>();
+            EntityStateManager = GetComponent<EntityStateManager>();
             monsterNearAI = GetComponent<MonsterNearAI>();
             enemyMoving = GetComponent<EnemyMoving>();
             
             damageSlashEffect = GetComponent<DamageSlashEffect>();
 
-            StateManager.OnTakeDamage += StateManagerOnTakeState;
-            StateManager.OnDie += StateManagerOnDie;
+            EntityStateManager.OnTakeDamage += EntityStateManagerOnTakeEntityState;
+            EntityStateManager.OnDie += EntityStateManagerOnDie;
         }
 
-        private void StateManagerOnDie()
+        private void EntityStateManagerOnDie()
         {
             GetComponent<RewardSignal>().SendSignal();
         }
 
-        private void StateManagerOnTakeState()
+        private void EntityStateManagerOnTakeEntityState()
         {
             damageSlashEffect.TriggerFlashEffect();
         }
 
         private void OnDisable()
         {
-            StateManager.OnTakeDamage -= StateManagerOnTakeState;
-            StateManager.OnDie -= StateManagerOnDie;
+            EntityStateManager.OnTakeDamage -= EntityStateManagerOnTakeEntityState;
+            EntityStateManager.OnDie -= EntityStateManagerOnDie;
         }
 
         private void CreateNoise()

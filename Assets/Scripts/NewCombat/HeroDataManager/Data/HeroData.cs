@@ -57,14 +57,14 @@ namespace NewCombat.HeroDataManager.Data
         private void LoadAllSkinInFolder()
         {
             var filePath = Application.dataPath +"/"+ "Resources/" + ResourcePath;
-            Debug.Log(filePath);
-            Debug.Log(Directory.Exists(filePath));
+            //Debug.Log(filePath);
+            //Debug.Log(Directory.Exists(filePath));
             var files = filePath;
 
             var sprites = Resources.LoadAll<Sprite>(ResourcePath);
  
             LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary);
-            Debug.Log("Load all skin done");
+            //Debug.Log("Load all skin done");
         }
         public enum AttackTypeEnum
         {

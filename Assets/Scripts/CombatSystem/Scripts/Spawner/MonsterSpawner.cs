@@ -58,7 +58,7 @@ namespace CombatSystem.Scripts.Spawner
                 MonsterPrefab, 
                 spawnPosition, 
                 Quaternion.identity,
-                CombatEntitiesManager.Instance.transform);
+                transform);
         }
 
         public void SetMaxSpawnCount(int count)

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NewCombat.ManagerInEntity
 {
-    public class StateManager : MonoBehaviour, IDamageable
+    public class EntityStateManager : MonoBehaviour, IDamageable
     {
         private IEntity entity;
         private EntityStats EntityStats;
