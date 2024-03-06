@@ -43,7 +43,7 @@ public class SelectionHero : Singleton<SelectionHero>
         }
 
         raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, IsMouseMove, hero);
-        raycastDetectSlot.Detect(rayInput.isMouseDown, IsMouseMove,raycastDetectHero.IsHandleHero);
+        raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.currentHero, raycastDetectHero.IsHandleHero);
 
     }
     public HeroCharacter GetHero()

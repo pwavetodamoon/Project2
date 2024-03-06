@@ -57,6 +57,21 @@ namespace NewCombat.Characters
             ShadowColor.SetOriginal();
         }
 
+        public void SetAlphaHero()
+        {
+            if (sprites != null)
+            {
+                sprites.SetDeadSprite();
+            }
+        }
+
+        public void ResetAlphaHero()
+        {
+            if (sprites != null)
+            {
+                sprites.SetRebirthSprite();
+            }
+        }
         public bool AllowSwap()
         {
             if (currentHero == null) return true;

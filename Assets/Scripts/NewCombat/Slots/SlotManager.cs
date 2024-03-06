@@ -146,7 +146,7 @@ namespace NewCombat.Slots
 
         }
 
-        private HeroSlotInGame GetSlotBySlotIndexInRange(int index)
+        public HeroSlotInGame GetSlotBySlotIndexInRange(int index)
         {
             return Slots[index];
         }

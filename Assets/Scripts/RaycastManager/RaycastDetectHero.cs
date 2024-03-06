@@ -40,8 +40,8 @@ namespace RaycastManager
         }
         private void HandleHeroMovement()
         {
-            if (currentHero == null && currentHero.IsDead) return;
-
+            if (currentHero == null || attackManager == null || currentHero.IsDead) return;
+            
             // If cannot hold hero then put it back to the slot
             bool canHoldHero = currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
             if (canHoldHero)
