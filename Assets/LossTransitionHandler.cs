@@ -1,10 +1,11 @@
 using System.Collections;
 using NewCombat.Slots;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class LossTransitionHandler : GameTransitionBase
 {
-
+    private YieldInstruction WaitTime = new WaitForSeconds(0.5f);
     public override void UseRunner()
     {
         runner.StartCoroutine(OnLooseProgress());
@@ -18,6 +19,7 @@ public class LossTransitionHandler : GameTransitionBase
 
         GameStateHandler.ClearMonsterAndStopSpawnOnMap();
         // Health all hero in slot
+        yield return WaitTime;
 
         yield return screen.StartTransition();
         for (int i = 0; i < slotList.Count; i++)

@@ -12,7 +12,6 @@ public class SelectionHero : Singleton<SelectionHero>
     [SerializeField] RaycastDetectSlot raycastDetectSlot;
     [SerializeField] RayInput rayInput;
     public bool OnDragInUI;
-
     public HeroCharacter heroOfUI;
     private void Update()
     {

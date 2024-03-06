@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace WorldTextPool
+namespace WorldText
 {
     public partial class WorldTextPool : Singleton<WorldTextPool>
     {
@@ -17,39 +17,30 @@ namespace WorldTextPool
         [FormerlySerializedAs("textPrefab")]
         [Header("Settings of text")]
         [SerializeField] private BaseWorldText combatTxtPrefab;
-
-        [SerializeField] private BaseWorldText coinTxtPrefab;
-
         [SerializeField] TextPoolCustom combatTextPoolCustom;
-        [SerializeField] TextPoolCustom coinTextPoolCustom;
         protected override void Awake()
         {
             base.Awake();
-            combatTextPoolCustom = new TextPoolCustom
-                (combatTxtPrefab, transform, maxPoolSize);
-            coinTextPoolCustom = new TextPoolCustom
-                (coinTxtPrefab, transform, maxPoolSize);
+            combatTextPoolCustom = new TextPoolCustom(combatTxtPrefab, transform, maxPoolSize);
         }
 
         [Button]
         private void Test(TextType type)
         {
-            if (type == TextType.Coin)
-                GetCoinTxt(Vector2.zero, "Test");
-            else
-                GetCombatTxt(Vector2.zero, "Test");
+            GetText(Vector2.zero, "Test");
+        }
+        public void GetText(Vector2 position, string str,Color color)
+        {
+            var text = GetTxtFromPool(position, str);
+            text.SetColor(color);
         }
 
-        public void GetCombatTxt(Vector2 position, string str)
+        public void GetText(Vector2 position, string str)
         {
-            GetTxtFromPool(position, str, combatTextPoolCustom);
+            var txt = GetTxtFromPool(position, str);
+            txt.SetColor(Color.red);
         }
-
-        public void GetCoinTxt(Vector2 position, string str)
-        {
-            GetTxtFromPool(position, str, coinTextPoolCustom);
-        }
-        private void GetTxtFromPool(Vector2 position, string str, TextPoolCustom combatTextPoolCustom)
+        private BaseWorldText GetTxtFromPool(Vector2 position, string str)
         {
             var textMeshPro = combatTextPoolCustom.Get();
             textMeshPro.transform.localPosition =
@@ -57,6 +48,7 @@ namespace WorldTextPool
 
             textMeshPro.Text = str;
             textMeshPro.Init();
+            return textMeshPro;
         }
     }
 }

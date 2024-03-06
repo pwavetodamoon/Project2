@@ -3,7 +3,7 @@ using ObjectPool;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace WorldTextPool
+namespace WorldText
 {
     public partial class WorldTextPool
     {
@@ -23,10 +23,10 @@ namespace WorldTextPool
             }
             [SerializeField] private Vector2 randomPositionRangeX = new Vector2(-1, 1);
             [SerializeField] private Vector2 randomPositionRangeY = new Vector2(-1, 1);
-        
+            [SerializeField] private int fontSize = 5;
+
             private ObjectPoolPrefab<BaseWorldText> objectPoolPrefab;
             private BaseWorldText textPrefab;
-            [SerializeField] private int fontSize = 5;
             public int maxPool = 20;
             public Vector2 GetRandomPosition()
             {

@@ -8,13 +8,6 @@ namespace RaycastManager
 {
     public class RaycastDetectHero : MonoBehaviour
     {
-        Camera mainCamera;
-        public LayerMask layerMask;
-        private void Awake()
-        {
-            mainCamera = Camera.main;
-        }
-
         public HeroCharacter currentHero;
         private AttackManager attackManager;
         public Vector2 mousePosition;

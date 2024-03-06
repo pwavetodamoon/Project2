@@ -1,11 +1,12 @@
 using System;
 using DG.Tweening;
 using ObjectPool;
+using Sirenix.OdinInspector;
 using SortingLayers;
 using TMPro;
 using UnityEngine;
 
-namespace WorldTextPool
+namespace WorldText
 {
     [RequireComponent(typeof(SortingLayerByTime))]
     public class BaseWorldText : MonoBehaviour , IPooled<BaseWorldText>
@@ -32,6 +33,7 @@ namespace WorldTextPool
 
         public void Init()
         {
+            transform.localScale = Vector3.one;
             StartCoroutine(sortingLayerByTime.DecreaseSortingLayer());
             SetTweenDefault(transform);
         }
@@ -40,7 +42,12 @@ namespace WorldTextPool
         {
             Sequence sequence = DOTween.Sequence();
             sequence.Append(textMesh.transform.DOLocalMove(
-                textMesh.transform.localPosition + Vector3.up, duration));
+                textMesh.transform.localPosition + Vector3.up, duration).OnComplete(() =>
+            {
+                textMeshPro.DOFade(0f, duration / 2);
+            }));
+            sequence.Append(textMesh.transform.DOScale(Vector3.zero, duration/2));
+            //sequence.Join(textMeshPro.DOFade(.5f, 1));
             sequence.OnComplete(() =>
             {
                 Release();
@@ -55,5 +62,11 @@ namespace WorldTextPool
         }
 
         public Action<BaseWorldText> ReleaseCallback {get; set; }
+
+        [Button]
+        public void SetColor(Color color)
+        {
+            textMeshPro.color = color;
+        }
     }
 }

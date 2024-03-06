@@ -8,8 +8,8 @@ using UnityEngine.Serialization;
 
 public class RaycastDetectSlot : MonoBehaviour
 {
-    [FormerlySerializedAs("currentSlot")] [SerializeField] private HeroSlotInGame currentSlotInGame;
-    [FormerlySerializedAs("newSlot")] [SerializeField] private HeroSlotInGame newSlotInGame;
+    [SerializeField] private HeroSlotInGame currentSlotInGame;
+    [SerializeField] private HeroSlotInGame newSlotInGame;
     public Vector2 mousePosition;
 
     public void Detect(bool isMouseDown, bool isContainHero)
@@ -23,21 +23,19 @@ public class RaycastDetectSlot : MonoBehaviour
         }
         if (isMouseDown)
         {
-            //CharacterSlot newSlot = null;
-            //mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-
             if (SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out newSlotInGame))
             {
                 if (currentSlotInGame == null)
                 {
                     currentSlotInGame = newSlotInGame;
-                    currentSlotInGame.DesetTriggerShadow();
-
+                    currentSlotInGame.SetTriggerShadow();
+                    Debug.Log("Set shadow");
                 }
+                Debug.Log("Find shadow");
             }
             else
             {
-                ResetCurrentSlot();
+                ResetCurrentSlot(); Debug.Log("No Set shadow");
             }
         }
         else
@@ -51,7 +49,7 @@ public class RaycastDetectSlot : MonoBehaviour
     {
         if (currentSlotInGame != null)
         {
-            currentSlotInGame.SetTriggerShadow();
+            currentSlotInGame.ResetTriggerShadow();
             currentSlotInGame = null;
         }
     }

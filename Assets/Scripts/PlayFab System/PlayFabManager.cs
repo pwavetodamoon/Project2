@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
@@ -20,8 +22,21 @@ namespace PlayFab_System
         public testfunc testfunc;
         private void Start()
         {
-            Login();
+            StartCoroutine(Wait());
         }
+
+        private IEnumerator Wait()
+        {
+            Login();
+            yield return new WaitForSeconds(.2f);
+            testfunc.Spawn();
+        }
+
+        private void OnApplicationQuit()
+        {
+            SaveDataPlayer();
+        }
+
         #region Login
         private void Login()
         {
@@ -45,7 +60,6 @@ namespace PlayFab_System
         }
         #endregion
         
-        // Save And GEt Player Data 
         
         [Button]
         private void GetDataPlayer()
@@ -77,7 +91,7 @@ namespace PlayFab_System
                     { "Password" , Player.passWord },
                     {"Level", Player.levelPlayer.ToString()},
                     {"Gold", Player.gold.ToString()},
-                    {"Hero Data",testfunc.ConvertTesT()}
+                    {"Hero Data",testfunc.ConvertToJson()}
                 }
             };
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
@@ -91,14 +105,27 @@ namespace PlayFab_System
             }
             else
             {
+
                 Player.customId = result.Data["CusTomId"].Value;
                 Player.email = result.Data["Email"].Value;
                 Player.passWord = result.Data["Password"].Value;
                 Player.levelPlayer = int.Parse(result.Data["Level"].Value);
                 Player.gold = int.Parse(result.Data["Gold"].Value);
-                testfunc.ConvertBack(result.Data["Hero Data"].Value);
-                Debug.Log(  Player.customId + " " + Player.email + " " + Player.passWord + Player.levelPlayer + " " + Player.gold);
+                testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
+                DebugResult(result);
             }
+        }
+
+        private void DebugResult(GetUserDataResult result)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in result.Data)
+            {
+                sb.Append(item.Key).Append(": ").Append(item.Value.Value).Append("\n");
+            }
+            Debug.Log(sb.ToString());
+            //Debug.Log(Player.customId + " " + Player.email + " " + Player.passWord + Player.levelPlayer + " " + Player.gold + " " + result.Data["Hero Data"].Value);
+
         }
         private void OnDataSend(UpdateUserDataResult result)
         {

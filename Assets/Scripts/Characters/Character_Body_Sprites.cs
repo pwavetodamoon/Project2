@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -30,6 +31,8 @@ namespace Characters
 
     public class Character_Body_Sprites : MonoBehaviour
     {
+        [SerializeField] private Color deadColor;
+        [SerializeField] private Color liveColor;
         public const int SpritePartCount = 11;
         public enum SpritePartEnum
         {
@@ -86,6 +89,24 @@ namespace Characters
                 "s_item_shield" => SpritePartEnum.item_shield,
                 _ => new SpritePartEnum(),
             };
+        }
+
+        public void SetDeadSprite()
+        {
+            foreach (var skin in HeroSkin.Dictionary)
+            {
+                if(skin.Value == null) continue;
+                skin.Value.DOColor(deadColor, .25f);
+            }
+        }
+
+        public void SetRebirthSprite()
+        {
+            foreach (var skin in HeroSkin.Dictionary)
+            {
+                if (skin.Value == null) continue;
+                skin.Value.DOColor(liveColor, .25f);
+            }
         }
     }
 }

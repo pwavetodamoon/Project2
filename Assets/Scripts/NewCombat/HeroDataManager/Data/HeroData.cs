@@ -22,7 +22,7 @@ namespace NewCombat.HeroDataManager.Data
         [SerializeField] protected BaseStat baseStats;
         [SerializeField] protected int slotIndex = 0;
         [SerializeField] private HeroSingleAttackFactory HeroSingleAttackFactory;
-
+        public bool isDead;
         public HeroCharacter heroCharacter;
 
         private GameObject heroObject;
@@ -59,12 +59,22 @@ namespace NewCombat.HeroDataManager.Data
             return spriteDictionary;
         }
 
+        [Button]
         public void LoadFromHeroInGame()
         {
             // TODO: Add is dead field
             if (heroCharacter == null) return;
             structStats = heroCharacter.GetComponent<HeroEntityStats>().GetStructStats();
             slotIndex = heroCharacter.InGameSlotIndex;
+            isDead = heroCharacter.IsDead;
+        }
+
+        public void LoadFromHeroSaveGame(HeroCloudSaveData heroCloudSave)
+        {
+            heroName = heroCloudSave.heroName;
+            structStats = heroCloudSave.structStats;
+            slotIndex = heroCloudSave.slotIndex;
+            isDead = heroCloudSave.isDead;
         }
 
         [Button]

@@ -21,7 +21,8 @@ namespace NewCombat.ManagerInEntity
             var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemy);
             EntityStats.DecreaseHealth(damageOfEnemy);
             OnTakeDamage?.Invoke();
-            WorldTextPool.WorldTextPool.Instance.GetCombatTxt(transform.position, damageOfEnemy.ToString());
+            var str = "+" + damageOfEnemy;
+            WorldText.WorldTextPool.Instance.GetText(transform.position, str);
 
             if (EntityStats.Health() <= 0)
             {

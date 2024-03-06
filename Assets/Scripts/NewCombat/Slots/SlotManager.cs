@@ -69,9 +69,11 @@ namespace NewCombat.Slots
             }
             bool isInRange = minSqrMagnitude < minSlot.radius * minSlot.radius;
             bool canSwap = isInRange && minSlot.AllowSwap();
-            //Debug.Log("Min Slot Name: "+minSlot.name);
-            //Debug.Log("Min Slot Index: "+minSlot.SlotIndex);
-            //Debug.Log("Is in range of slot: " + isInRange);
+
+            if (heroIndex == -1 && minSlot.SlotIndex == -1)
+            {
+                canSwap = false;
+            }
             if (canSwap)
             {
                 SwapOneWay(heroIndex, minSlot.SlotIndex);
@@ -83,7 +85,6 @@ namespace NewCombat.Slots
         [Button]
         public void SwapOneWay(int currentSlotIndex, int targetSlotIndex)
         {
-
             if (currentSlotIndex == -1 && targetSlotIndex != -1)
             {
                 SwapFromBannedSlotToInGameSlot(targetSlotIndex);
@@ -131,16 +132,13 @@ namespace NewCombat.Slots
         {
             var targetSlot = GetSlotBySlotIndexInRange(targetSlotIndex);
             //if (targetSlot.AllowSwap() == false) return;
-
             var targetHero = targetSlot.currentHero;
-
             if (targetHero != null)
             {
                 bannedSlotControl.SetHeroIntoStandPosition(targetHero.transform);
                 targetHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             }
             var bannedHero = SelectionHero.Instance.heroOfUI;
-
             targetSlot.SetHeroIntoStandPosition(bannedHero);
             bannedHero.GetComponent<HeroCharacter>().SetSlotIndex(targetSlotIndex);
 

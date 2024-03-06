@@ -1,3 +1,4 @@
+using Characters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,12 +9,14 @@ namespace NewCombat.Characters
     public class HeroSlotInGame : MonoBehaviour
     {
         [SerializeField] private Transform characterStand;
-        [SerializeField] public Transform enemyStand;
-        [SerializeField] public HeroCharacter currentHero;
-        [SerializeField] public float radius = 0;
+        public Transform enemyStand;
+        public HeroCharacter currentHero;
+        public float radius = 0;
         public int SlotIndex;
+
         private ShadowColor ShadowColor;
 
+        private Character_Body_Sprites sprites;
         private void Awake()
         {
             ShadowColor = GetComponent<ShadowColor>();
@@ -30,6 +33,7 @@ namespace NewCombat.Characters
             if (currentHero != null)
             {
                 currentHero.transform.position = characterStand.position;
+                sprites = currentHero.GetComponentInChildren<Character_Body_Sprites>();
             }
         }
 
@@ -45,17 +49,17 @@ namespace NewCombat.Characters
 
         public void SetTriggerShadow()
         {
-            ShadowColor.SetOriginal();
+            ShadowColor.SetOnChoose();
         }
 
-        public void DesetTriggerShadow()
+        public void ResetTriggerShadow()
         {
-            ShadowColor.SetOnChoose();
+            ShadowColor.SetOriginal();
         }
 
         public bool AllowSwap()
         {
-            if(currentHero == null) return true;
+            if (currentHero == null) return true;
             return currentHero.IsDead == false;
         }
     }

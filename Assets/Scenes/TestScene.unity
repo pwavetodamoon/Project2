@@ -225,32 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
   uiAvatarControllers: []
-  heroSaveList:
-    Datas:
-    - heroName: Quang
-      slotIndex: 0
-      structStats:
-        Level: 1
-        maxHealth: 100
-        health: 100
-        BaseDamage: 100
-        speed: 3
-        CritRate: 0
-        CritDamage: 0
-        attackCoolDown: 1
-        attackMoveDuration: 1
-    - heroName: Quang 2
-      slotIndex: 1
-      structStats:
-        Level: 1
-        maxHealth: 100
-        health: 100
-        BaseDamage: 100
-        speed: 3
-        CritRate: 0
-        CritDamage: 0
-        attackCoolDown: 0.5
-        attackMoveDuration: 0.5
 --- !u!4 &469181122
 Transform:
   m_ObjectHideFlags: 0
@@ -827,8 +801,7 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6481782144662726714, guid: adf3c1dfdd08c8e438ed99bfdac0f6af, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1168,7 +1141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 886202102}
   duration: 1
-  durationInTran: 0.25
+  durationInTran: 0.5
 --- !u!1 &1479021096
 GameObject:
   m_ObjectHideFlags: 0

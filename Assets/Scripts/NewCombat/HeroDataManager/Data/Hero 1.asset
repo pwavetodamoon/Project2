@@ -31,13 +31,14 @@ MonoBehaviour:
     CritDamage: 0
     attackCoolDown: 0.5
     attackMoveDuration: 0.5
-  icon: {fileID: 21300000, guid: e3062635e5eaa3f4fb052a6af4dfc80b, type: 3}
+  icon: {fileID: 21300000, guid: 225dfd818e8387f44a0c9e72a682e938, type: 3}
   heroName: Quang 2
   AttackType: 0
   characterEnumType: 4
   baseStats:
     value: 0
-  slotIndex: 1
+  slotIndex: -1
   HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
+  isDead: 0
   heroCharacter: {fileID: 0}
   ResourcePath: Hero/Templar Knight

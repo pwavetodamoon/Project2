@@ -203,7 +203,7 @@ MonoBehaviour:
   characterEnumType: 0
   modelTransform: {fileID: 7057924690559096653}
   attackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
-  ModelDrag: {fileID: 0}
+  IsDead: 0
 --- !u!114 &7019300682507094281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,6 +327,8 @@ MonoBehaviour:
   healthRegenDelayTime: 7
   healthRegenRateTime: 3
   healthRegenPercent: 0.1
+  healthRegenPercentWhenDead: 0.2
+  healthRegenPercentDefault: 0.1
 --- !u!210 &5514555860598001570
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -878,6 +880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4daaead444fe5d34581c7ada00e70e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.654902}
+  liveColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &6205382650338924181
 MonoBehaviour:
   m_ObjectHideFlags: 0

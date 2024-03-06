@@ -1,4 +1,5 @@
 using Currency;
+using UnityEngine;
 
 namespace DropItem
 {
@@ -7,7 +8,7 @@ namespace DropItem
         // Send Data to CurrencyManager
         public override void SendData()
         {
-            WorldTextPool.WorldTextPool.Instance.GetCoinTxt(transform.position, "+1");
+            WorldText.WorldTextPool.Instance.GetText(transform.position, "+1",Color.yellow);
             CurrencyManager.Instance.AddCurrency(1);
         }
 

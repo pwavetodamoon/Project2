@@ -3,6 +3,7 @@ using Leveling_System;
 using NewCombat.Characters;
 using NewCombat.ManagerInEntity;
 using UnityEngine;
+using WorldText;
 
 namespace NewCombat.Abilities
 {
@@ -71,6 +72,7 @@ namespace NewCombat.Abilities
                     EntityStats.IncreaseHealth(value);
                     Debug.Log("Health Value:" +value);
                     healthRegenRate = healthRegenRateTime;
+                    WorldTextPool.Instance.GetText(transform.position, $"+{value}",Color.green);
                 }
                 else
                 {

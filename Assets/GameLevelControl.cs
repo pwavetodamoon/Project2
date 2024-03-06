@@ -18,7 +18,7 @@ public interface IGameStateHandler
     void ClearMonsterAndStopSpawnOnMap();
 }
 
-public class GameStateHandler : Singleton<GameStateHandler>, IGameStateHandler, ICoroutineRunner
+public class GameLevelControl : Singleton<GameLevelControl>, IGameStateHandler, ICoroutineRunner
 {
     [SerializeField] private HeroManager heroManager;
     [SerializeField] private MonsterSpawner monsterSpawner;
@@ -38,7 +38,11 @@ public class GameStateHandler : Singleton<GameStateHandler>, IGameStateHandler, 
         NextMapTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
     }
 
-
+    public void LoadToMap(int index)
+    {
+        mapBackground.MapIndex = index;
+        mapBackground.LoadTexture();
+    }
     public void ChangeAttackStateOfHero(bool state, List<HeroCharacter> heroList)
     {
         foreach (var heroData in heroList)

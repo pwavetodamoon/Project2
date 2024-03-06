@@ -16,6 +16,7 @@ namespace NewCombat.Characters
         public int InGameSlotIndex { get; private set; }
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
+        private Character_Body_Sprites sprites;
         public bool IsDead = false;
 
         private EntityStateManager entityStateManager;
@@ -32,21 +33,30 @@ namespace NewCombat.Characters
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
             entityStateManager.OnDie += OnDead;
             entityStateManager.OnRebirth += OnRebirth;
+            sprites = GetComponentInChildren<Character_Body_Sprites>();
         }
         private void OnDead()
         {
-            if (CombatEntitiesManager.Instance.GetHeroCount() == 1)
+            if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
-                GameStateHandler.Instance.LossTransitionHandler.UseRunner();
+                GameLevelControl.Instance.LossTransitionHandler.UseRunner();
                 Debug.Log("Thua roi");
             }
-            SetModelBackImmediate();
-            animationManager.DisableAnimator();
+
+            SetDeadState();
         }
 
+        public void SetDeadState()
+        {
+            SetModelBackImmediate();
+            animationManager.DisableAnimator();
+            sprites.SetDeadSprite();
+        }
         private void OnRebirth()
         {
             animationManager.EnableAnimator();
+            sprites.SetRebirthSprite();
+            RegisterObject();
         }
 
         public void SetSlotIndex(int index)

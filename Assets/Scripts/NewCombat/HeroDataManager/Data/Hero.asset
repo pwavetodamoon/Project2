@@ -31,13 +31,14 @@ MonoBehaviour:
     CritDamage: 0
     attackCoolDown: 1
     attackMoveDuration: 1
-  icon: {fileID: 21300000, guid: e3062635e5eaa3f4fb052a6af4dfc80b, type: 3}
+  icon: {fileID: 21300000, guid: c10ea21566c36044488d0374841623ae, type: 3}
   heroName: Quang
   AttackType: 0
   characterEnumType: 4
   baseStats:
     value: 0
-  slotIndex: 0
+  slotIndex: 2
   HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
+  isDead: 0
   heroCharacter: {fileID: 0}
   ResourcePath: Hero/Medieval King

@@ -11,6 +11,7 @@ using System;
 using PlayFab.PfEditor.Json;
 using UnityEngine.Serialization;
 using NewCombat.HeroDataManager.Data;
+using NewCombat.ManagerInEntity;
 
 public class testfunc : MonoBehaviour
 {
@@ -18,54 +19,40 @@ public class testfunc : MonoBehaviour
     public HeroManager heroManager;
     public UIAvatarController[] uiAvatarControllers;
 
-    private void Start()
-    {
-        Test();
-        Spawn();
-    }
-
-    [Button]
-    void Test()
-    {
-        uiAvatarControllers = FindObjectsOfType<UIAvatarController>();
-    }
 
     [Button]
     public void Spawn()
     {
+        uiAvatarControllers = FindObjectsOfType<UIAvatarController>();
+
         // Cần phải chạy hàm Test trước để lấy danh sách UI avatar
         // Lấy data list hero data trong hero manager
         var list = heroManager.heroData;
         uiAvatarControllers = uiAvatarControllers.OrderBy(x => x.index).ToArray();
         for (int i = 0; i < list.Count; i++)
         {
-            // ref data thứ i từ list hero data
             var heroData = list[i];
             if (heroData.heroCharacter != null) continue;
-
-            // tạo hero từ prefab hero trong hero manager
             var hero = Instantiate(heroManager.prefabHero, CombatEntitiesManager.Instance.transform).GetComponent<HeroCharacter>();
-            hero.SetAttackFactory(heroData.GetHeroFactory());
-
-            // chỉnh sprite cho hero
-            uiAvatarControllers[i].SetSprite(heroData.icon);
-
-            // Chỉnh data cho class stats của hero
-            hero.SetHeroData(heroData);
-
-            // Chỉnh slot index cho hero bởi hero vừa tạo ra chỉ có xác 
-            hero.SetSlotIndex(heroData.SlotIndex);
-
-            // Ref hero object vào trong hero data
             heroData.heroCharacter = hero;
 
-            // Chỉnh icon cho avatar
-            uiAvatarControllers[i].SetHeroCharacter(hero);
-
+            hero.SetAttackFactory(heroData.GetHeroFactory());
+            hero.IsDead = heroData.isDead;
+            hero.SetHeroData(heroData);
+            hero.SetSlotIndex(heroData.SlotIndex);
+            
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
             heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
 
             SlotManager.Instance.LoadHeroIntoSlot(hero);
+            if (hero.IsDead)
+            {
+                hero.SetDeadState();
+                hero.ReleaseObject();
+            }
+
+            uiAvatarControllers[i].SetSprite(heroData.icon);
+            uiAvatarControllers[i].SetHeroCharacter(hero);
 
         }
         // Load tất cả hero vào vị trí đúng trong game
@@ -81,30 +68,36 @@ public class testfunc : MonoBehaviour
         }
     }
 
-    public HeroSaveList heroSaveList = new HeroSaveList();
     [Button]
     private void Test222()
     {
-        var list = heroManager.heroData;
-        foreach (var heroData in list)
-        {
-            var heroSave = new HeroSaveData();
-            heroSave.Load(heroData);
-            heroSaveList.Datas.Add(heroSave);
-        }
+        
     }
 
     [Button]
-    public string ConvertTesT()
+    public string ConvertToJson()
     {
+        var heroSaveList = new HeroSaveList();
+        var list = heroManager.heroData;
+        foreach (var heroData in list)
+        {
+            var heroCloudSaveData = new HeroCloudSaveData();
+            heroCloudSaveData.LoadFromHeroData(heroData);
+            heroSaveList.Datas.Add(heroCloudSaveData);
+        }
         string json = JsonUtility.ToJson(heroSaveList, true);
         Debug.Log(json);
         return json;
     }
 
-    public void ConvertBack(string json)
+    public void ConvertJsonBack(string json)
     {
-        heroSaveList = JsonUtility.FromJson<HeroSaveList>(json);
+        var heroCloudSaveList = JsonUtility.FromJson<HeroSaveList>(json);
+        for (int i = 0; i < heroCloudSaveList.Datas.Count; i++)
+        {
+            var heroData = heroManager.heroData[i];
+            heroData.LoadFromHeroSaveGame(heroCloudSaveList.Datas[i]);
+        }
     }
 
 }
@@ -112,20 +105,22 @@ public class testfunc : MonoBehaviour
 [Serializable]
 public class HeroSaveList
 {
-    public List<HeroSaveData> Datas = new List<HeroSaveData>();
+    public List<HeroCloudSaveData> Datas = new List<HeroCloudSaveData>();
 }
 [System.Serializable]
-public class HeroSaveData
+public class HeroCloudSaveData
 {
     public string heroName;
     public int slotIndex;
     public StructStats structStats;
+    public bool isDead;
 
-    public void Load(HeroData heroData)
+    public void LoadFromHeroData(HeroData heroData)
     {
         heroData.LoadFromHeroInGame();
         heroName = heroData.HeroName;
         slotIndex = heroData.SlotIndex;
         structStats = heroData.structStats;
+        isDead = heroData.isDead;
     }
 }
