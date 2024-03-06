@@ -12,9 +12,23 @@ public class SelectionHero : Singleton<SelectionHero>
     [SerializeField] RaycastDetectSlot raycastDetectSlot;
     [SerializeField] RayInput rayInput;
     public bool OnDragInUI;
+    public bool IsMouseMove;
     public HeroCharacter heroOfUI;
+
     private void Update()
     {
+
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        if (mouseX != 0 || mouseY != 0)
+        {
+            IsMouseMove = true;
+        }
+        else
+        {
+            IsMouseMove = false;
+        }
+
         rayInput.HandleMouseInput();
         raycastDetectHero.mousePosition = rayInput.worldMousePosition;
         raycastDetectSlot.mousePosition = rayInput.worldMousePosition;
@@ -28,8 +42,8 @@ public class SelectionHero : Singleton<SelectionHero>
             hero = GetHero();
         }
 
-        raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, hero);
-        raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero);
+        raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, IsMouseMove, hero);
+        raycastDetectSlot.Detect(rayInput.isMouseDown, IsMouseMove,raycastDetectHero.IsHandleHero);
 
     }
     public HeroCharacter GetHero()

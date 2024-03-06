@@ -12,7 +12,7 @@ public class RaycastDetectSlot : MonoBehaviour
     [SerializeField] private HeroSlotInGame newSlotInGame;
     public Vector2 mousePosition;
 
-    public void Detect(bool isMouseDown, bool isContainHero)
+    public void Detect(bool isMouseDown,bool isMouseMove ,bool isContainHero)
     {
         //allowRay = raycastDetectHero.IsMouseDown();
         if (isContainHero == false)
@@ -21,6 +21,7 @@ public class RaycastDetectSlot : MonoBehaviour
             newSlotInGame = null;
             return;
         }
+
         if (isMouseDown)
         {
             if (SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out newSlotInGame))
@@ -35,13 +36,12 @@ public class RaycastDetectSlot : MonoBehaviour
             }
             else
             {
-                ResetCurrentSlot(); Debug.Log("No Set shadow");
+                ResetCurrentSlot(); 
             }
         }
         else
         {
             ResetCurrentSlot();
-            newSlotInGame = null;
         }
     }
 
@@ -49,9 +49,12 @@ public class RaycastDetectSlot : MonoBehaviour
     {
         if (currentSlotInGame != null)
         {
+            Debug.Log("No Set shadow");
             currentSlotInGame.ResetTriggerShadow();
             currentSlotInGame = null;
         }
+        newSlotInGame = null;
+
     }
-    
+
 }

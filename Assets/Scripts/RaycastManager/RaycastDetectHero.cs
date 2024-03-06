@@ -13,13 +13,17 @@ namespace RaycastManager
         public Vector2 mousePosition;
         public bool IsHandleHero = false;
 
-        public void HandleHeroSelection(bool isMouseDown, HeroCharacter _hero)
+        public void HandleHeroSelection(bool isMouseDown, bool isMouseMove, HeroCharacter _hero)
         {
             //ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (isMouseDown)
             {
                 HandleMouseDown(_hero);
+                if (isMouseMove)
+                {
+                    HandleHeroMovement();
+                }
             }
             else
             {
@@ -33,13 +37,12 @@ namespace RaycastManager
                 currentHero = _hero;
                 attackManager = _hero.GetComponent<AttackManager>();
             }
-            else if (currentHero != null && currentHero.IsDead == false)
-            {
-                HandleHeroMovement();
-            }
         }
         private void HandleHeroMovement()
         {
+            if (currentHero == null && currentHero.IsDead) return;
+
+            // If cannot hold hero then put it back to the slot
             bool canHoldHero = currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
             if (canHoldHero)
             {
