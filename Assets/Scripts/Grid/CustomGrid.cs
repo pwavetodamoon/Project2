@@ -37,14 +37,6 @@ public class CustomGrid
         Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, duration);
     }
 
-    public Vector3 GetSpawnedCell()
-    {
-        var indexRandom = Random.Range(0, monstersSpawnArray.Length);
-        var xy = monstersSpawnArray[indexRandom];
-        var result = GetCenterGridWorldPosition(xy.x, xy.y);
-        return result;
-    }
-
     struct monsterSpawnCell
     {
         public monsterSpawnCell(int x, int y)

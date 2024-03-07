@@ -10,14 +10,14 @@ namespace NewCombat.Helper
             var myDmgResistant = CalculatorDamageResistance(entity, enemy);
             return DamageCanDealing(enemy.GetDamage(), myDmgResistant);
         }
-        private static float DamageCanDealing(float damage, float DamageResistance)
+        private static float DamageCanDealing(float damage, float damageResistance)
         {
-            return damage * (1 - DamageResistance / (DamageResistance + 100));
+            return damage * (1 - damageResistance / (damageResistance + 100));
         }
         private static int CalculatorDamageResistance(EntityStats entity, EntityStats enemy)
         {
-            var diffenceLevel = enemy.Level() - entity.Level();
-            return diffenceLevel * 5;
+            var levelOffset = enemy.Level() - entity.Level();
+            return levelOffset * 5;
         }
     }
 }

@@ -25,27 +25,21 @@ namespace WorldText
         }
 
         [Button]
-        private void Test(TextType type)
+        private void DebugFunction(TextType type)
         {
-            GetText(Vector2.zero, "Test");
+            GetText(Vector2.zero, "Test", Color.white);
         }
-        public void GetText(Vector2 position, string str,Color color)
+        public BaseWorldText GetText(Vector2 position, string str,Color color)
         {
             var text = GetTxtFromPool(position, str);
             text.SetColor(color);
+            return text;
         }
 
-        public void GetText(Vector2 position, string str)
-        {
-            var txt = GetTxtFromPool(position, str);
-            txt.SetColor(Color.red);
-        }
         private BaseWorldText GetTxtFromPool(Vector2 position, string str)
         {
             var textMeshPro = combatTextPoolCustom.Get();
-            textMeshPro.transform.localPosition =
-                position;/*+ combatTextPoolCustom.GetRandomPosition();*/
-
+            textMeshPro.transform.localPosition = position;
             textMeshPro.Text = str;
             textMeshPro.Init();
             return textMeshPro;

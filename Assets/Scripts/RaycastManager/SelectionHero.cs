@@ -15,6 +15,7 @@ public class SelectionHero : Singleton<SelectionHero>
     public bool OnDragInUI;
     public HeroCharacter heroAttachedInUI;
 
+    public HeroCharacter currentHeroAttached;
     private void Update()
     {
         UpdateMousePosition();
@@ -24,17 +25,21 @@ public class SelectionHero : Singleton<SelectionHero>
 
     private HeroCharacter GetHero()
     {
-        HeroCharacter hero = null;
+
         if (OnDragInUI && heroAttachedInUI)
         {
-            hero = heroAttachedInUI;
+            currentHeroAttached = heroAttachedInUI;
         }
         else if (heroAttachedInUI == null && !OnDragInUI)
         {
-            hero = GetHeroNearMouse();
+            currentHeroAttached = GetHeroNearMouse();
+        }
+        else
+        {
+            currentHeroAttached = null;
         }
 
-        return hero;
+        return currentHeroAttached;
     }
     private void UpdateMousePosition()
     {

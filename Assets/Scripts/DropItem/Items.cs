@@ -75,7 +75,7 @@ namespace DropItem
         }
         [SerializeField, Required] private ItemDropConfig DropConfig;
 
-        public void Pump(Vector3 position)
+        public void Jumping(Vector3 position)
         {
             if (DropConfig == null)
                 return;

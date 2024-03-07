@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using Helper;
 using ObjectPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 namespace DropItem
 {
@@ -41,37 +43,44 @@ namespace DropItem
         [Button]
         public void CreateReward(Vector3 position)
         {
+            if (enableSpawnCoin)
+            {
+                SpawnMultipleCoin(position);
+            }
+
+            if (enableSpawnItem)
+            {
+                var itemData = QuestManager.Instance.GetRandomItemQuest();
+                var itemInGame = GetItemInPool(itemData.itemsSO, itemPool, position);
+                itemInGame.point = itemData.pointCollect;
+            }
+        }
+
+        private void SpawnMultipleCoin(Vector3 position)
+        {
             var count = Random.Range(1, 5);
             for (int i = 0; i < count; i++)
             {
                 if (enableSpawnCoin == false) continue;
                 GetItemInPool(sliverCoinSO, coinPool, position);
             }
-
-            if (enableSpawnItem == false) return;
-
-            var itemStruct = QuestManager.Instance.GetRandomItemQuest();
-            var itemInGame = GetItemInPool(itemStruct.itemsSO, itemPool, position);
-            itemInGame.point = itemStruct.pointCollect;
-        }
-
-
-        private void Add(Items item)
-        {
-            if (list.Contains(item)) return;
-            list.Add(item);
         }
 
         private Items GetItemInPool(ItemsSO item, ObjectPoolPrefab<Items> rewardItemPool, Vector3 spawnPosition)
         {
             var itemReward = rewardItemPool.Get();
             var jumpPosition = spawnPosition + RandomPosition();
-
+            
+            itemReward.transform.position = spawnPosition;
             itemReward.itemID = item.Name;
             itemReward.SetSprite(item.Sprite);
-            itemReward.transform.position = spawnPosition;
-            itemReward.Pump(jumpPosition);
-            Add(itemReward);
+            itemReward.Jumping(jumpPosition);
+
+            if (!list.Contains(itemReward))
+            {
+                list.Add(itemReward);
+            }
+
             return itemReward;
         }
 

@@ -53,7 +53,6 @@ namespace CombatSystem.Scripts.Spawner
             float x = Random.Range(SpawnPoint1.position.x, SpawnPoint2.position.x + 1);
             float y = Random.Range(SpawnPoint1.position.y, SpawnPoint2.position.y);
             var spawnPosition = new Vector3(x, y, 0);
-            spawnPosition = GridManager.Instance.GetGrid().GetSpawnedCell();
             var go = Instantiate(
                 MonsterPrefab, 
                 spawnPosition, 

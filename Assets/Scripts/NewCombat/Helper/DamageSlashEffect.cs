@@ -1,17 +1,18 @@
-using Sirenix.OdinInspector;
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace NewCombat.Helper
 {
     public class DamageSlashEffect : MonoBehaviour
     {
+        [SerializeField] [Required] private Material slashMaterial;
+        private readonly float slashDuration = 0.1f;
+        private readonly WaitForEndOfFrame waitForEndOfFrame = new();
         private Material defaultMaterial;
-        [SerializeField, Required] private Material slashMaterial;
+        private bool isSlashing;
+        private float slashTimer;
         private SpriteRenderer[] spriteRenderers;
-        private float slashDuration = 0.1f;
-        private float slashTimer = 0f;
-        private bool isSlashing = false;
 
         private void Awake()
         {
@@ -23,9 +24,8 @@ namespace NewCombat.Helper
         public void TriggerFlashEffect()
         {
             if (slashMaterial == null || defaultMaterial == null) return;
-
-            SetSlashMaterial();
             slashTimer = 0f;
+            SetSlashMaterial();
             StartCoroutine(SlashEffect());
         }
 
@@ -36,26 +36,21 @@ namespace NewCombat.Helper
             while (slashTimer <= slashDuration)
             {
                 slashTimer += Time.deltaTime;
-                yield return new WaitForEndOfFrame();
+                yield return waitForEndOfFrame;
             }
+
             isSlashing = false;
             SetDefaultMaterial();
         }
 
         private void SetSlashMaterial()
         {
-            foreach (var spriteRenderer in spriteRenderers)
-            {
-                spriteRenderer.material = slashMaterial;
-            }
+            foreach (var spriteRenderer in spriteRenderers) spriteRenderer.material = slashMaterial;
         }
 
         private void SetDefaultMaterial()
         {
-            foreach (var spriteRenderer in spriteRenderers)
-            {
-                spriteRenderer.material = defaultMaterial;
-            }
+            foreach (var spriteRenderer in spriteRenderers) spriteRenderer.material = defaultMaterial;
         }
     }
 }

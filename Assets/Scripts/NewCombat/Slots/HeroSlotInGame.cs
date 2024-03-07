@@ -49,17 +49,19 @@ namespace NewCombat.Characters
 
         public void SetTriggerShadow()
         {
+            SetAlphaHero();
             ShadowColor.SetOnChoose();
         }
 
         public void ResetTriggerShadow()
         {
+            ResetAlphaHero();
             ShadowColor.SetOriginal();
         }
 
         public void SetAlphaHero()
         {
-            if (sprites != null)
+            if (CanSetAlphaForHero())
             {
                 sprites.SetDeadSprite();
             }
@@ -71,6 +73,11 @@ namespace NewCombat.Characters
             {
                 sprites.SetRebirthSprite();
             }
+        }
+
+        bool CanSetAlphaForHero()
+        {
+            return sprites != null && currentHero != null && currentHero != SelectionHero.Instance.currentHeroAttached;
         }
         public bool AllowSwap()
         {

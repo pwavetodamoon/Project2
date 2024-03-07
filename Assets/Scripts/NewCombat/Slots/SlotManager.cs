@@ -18,11 +18,14 @@ namespace NewCombat.Slots
     public class SlotManager : Singleton<SlotManager>
     {
         public List<HeroSlotInGame> Slots = new();
-        [FormerlySerializedAs("BannedSlot")] public BannedSlotControl bannedSlotControl;
+        public BannedSlotControl bannedSlotControl;
+
+        private CustomGrid combatGrid;
         private void Start()
         {
+            combatGrid = new CustomGrid(22, 7, 1, new Vector3(-9, -5), false);
+            combatGrid.CreateSpawnArrayAtEnd(3, 7);
             // Load các slot vào vị trí giữa grid
-            var combatGrid = GridManager.Instance.GetGrid();
             foreach (var slot in Slots)
             {
                 if(slot.SlotIndex == -1) continue;
