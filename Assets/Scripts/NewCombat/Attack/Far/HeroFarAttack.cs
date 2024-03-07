@@ -1,14 +1,14 @@
 using System.Collections;
-using Characters;
 using Helper;
-using NewCombat.Characters;
-using NewCombat.HeroAttack;
-using NewCombat.ManagerInEntity;
-using NewCombat.Projectiles;
-using PrefabFactory;
+using Model.Hero;
+using NewCombat.Attack.Abstracts;
+using NewCombat.Attack.Projectiles;
+using NewCombat.Attack.Utilities;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using UnityEngine;
 
-namespace NewCombat
+namespace NewCombat.Attack.Far
 {
     public class HeroFarAttack : BaseHeroAttack
     {

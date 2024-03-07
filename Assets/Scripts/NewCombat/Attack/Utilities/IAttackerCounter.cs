@@ -1,4 +1,4 @@
-﻿namespace NewCombat.AttackedCounting
+﻿namespace NewCombat.Attack.Utilities
 {
     public interface IAttackerCounter
     {

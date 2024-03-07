@@ -1,6 +1,6 @@
 ﻿using Helper;
 
-namespace NewCombat.HeroAttack
+namespace NewCombat.Attack.Abstracts
 {
     public abstract class BaseMonsterAttack : BaseSingleTargetAttack
     {

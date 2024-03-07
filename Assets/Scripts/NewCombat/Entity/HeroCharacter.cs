@@ -1,13 +1,14 @@
-using Characters;
 using CombatSystem;
 using Helper;
-using NewCombat.AttackFactory;
+using LevelAndStats;
+using Model.Hero;
+using NewCombat.Attack.Factory;
+using NewCombat.Entity.Utilities;
 using NewCombat.HeroDataManager.Data;
-using NewCombat.ManagerInEntity;
-using NewCombat.Slots;
+using SlotHero;
 using UnityEngine;
 
-namespace NewCombat.Characters
+namespace NewCombat.Entity
 {
     public class HeroCharacter : EntityCharacter
     {

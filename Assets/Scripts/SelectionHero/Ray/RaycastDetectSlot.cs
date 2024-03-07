@@ -1,27 +1,30 @@
-using NewCombat.Characters;
-using NewCombat.Slots;
+using SlotHero;
+using SlotHero.SlotInGame;
 using UnityEngine;
 
-public class RaycastDetectSlot : MonoBehaviour
+namespace SelectionHero.Ray
 {
-    [SerializeField] private HeroSlotInGame currentSlotInGame;
-    public Vector2 mousePosition;
-
-    public void Detect(bool isMouseDown, bool isContainHero)
+    public class RaycastDetectSlot : MonoBehaviour
     {
-        if (isContainHero && isMouseDown &&
-            SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out currentSlotInGame))
+        [SerializeField] private HeroSlotInGame currentSlotInGame;
+        public Vector2 mousePosition;
+
+        public void Detect(bool isMouseDown, bool isContainHero)
         {
-            currentSlotInGame.SetTriggerShadow();
-            return;
+            if (isContainHero && isMouseDown &&
+                SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out currentSlotInGame))
+            {
+                currentSlotInGame.SetTriggerShadow();
+                return;
+            }
+
+            if (currentSlotInGame != null) ResetCurrentSlot();
         }
 
-        if (currentSlotInGame != null) ResetCurrentSlot();
-    }
-
-    private void ResetCurrentSlot()
-    {
-        currentSlotInGame.ResetTriggerShadow();
-        currentSlotInGame = null;
+        private void ResetCurrentSlot()
+        {
+            currentSlotInGame.ResetTriggerShadow();
+            currentSlotInGame = null;
+        }
     }
 }

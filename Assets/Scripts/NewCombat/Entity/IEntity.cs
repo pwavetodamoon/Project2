@@ -1,4 +1,4 @@
-﻿namespace NewCombat.Characters
+﻿namespace NewCombat.Entity
 {
     public interface IEntity
     {

@@ -1,12 +1,12 @@
 using System.Collections;
-using Characters.Monsters;
-using NewCombat.Characters;
-using NewCombat.HeroAttack;
-using NewCombat.ManagerInEntity;
+using Model.Monsters;
+using NewCombat.Attack.Abstracts;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using NewCombat.MonsterAI;
 using UnityEngine;
 
-namespace NewCombat.MonsterAttack
+namespace NewCombat.Attack.Near
 {
     public class MonsterNearAttack : BaseMonsterAttack
     {

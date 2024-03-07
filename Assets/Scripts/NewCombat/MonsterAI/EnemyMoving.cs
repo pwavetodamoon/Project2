@@ -1,16 +1,11 @@
 using UnityEngine;
 
-namespace CombatSystem.Scripts
+namespace NewCombat.MonsterAI
 {
     public class EnemyMoving : MonoBehaviour
     {
         public float Speed = 2;
         private bool notMoving;
-
-        public void SetNotMoving(bool boolen)
-        {
-            notMoving = boolen;
-        }
 
         public void Moving(Vector2 moveVector, float speed = 2)
         {

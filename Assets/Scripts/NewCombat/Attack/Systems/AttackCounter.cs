@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using NewCombat.Attack.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace NewCombat.Characters
+namespace NewCombat.Attack.Systems
 {
     [Serializable]
     public class AttackCounter

@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Leveling_System
+namespace LevelAndStats
 {
     [CreateAssetMenu(fileName = "LevelConfig", menuName = "Leveling System/LevelConfig")]
     public class LevelConfig : ScriptableObject

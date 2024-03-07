@@ -1,16 +1,15 @@
-using Characters.Monsters;
 using CombatSystem;
-using CombatSystem.Scripts;
-using DropItem;
+using Core.Reward;
 using Helper;
-using NewCombat.AttackFactory;
+using Model.Monsters;
+using NewCombat.Attack.Factory;
+using NewCombat.Entity.Utilities;
 using NewCombat.Helper;
-using NewCombat.ManagerInEntity;
 using NewCombat.MonsterAI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace NewCombat.Characters
+namespace NewCombat.Entity
 {
     [RequireComponent(typeof(DamageSlashEffect))]
     public class MonsterCharacter : EntityCharacter

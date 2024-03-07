@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DropItem
+namespace Item
 {
     [CreateAssetMenu(fileName = "Item_", menuName = "ScriptableObjects/ItemsData")]
     public class ItemsSO : ScriptableObject

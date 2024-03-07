@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class ItemMove : MonoBehaviour
+namespace Item
 {
-    public float speed = 3f;
-    public Vector2 moveVector = Vector2.left;
-
-    public void Update()
+    public class ItemMove : MonoBehaviour
     {
-        transform.Translate(moveVector * (Time.deltaTime * speed));
+        public float speed = 3f;
+        public Vector2 moveVector = Vector2.left;
+
+        public void Update()
+        {
+            transform.Translate(moveVector * (Time.deltaTime * speed));
+        }
     }
 }

@@ -3,7 +3,7 @@ using ObjectPool;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace WorldText
+namespace WorldTextPool
 {
     public partial class WorldTextPool
     {

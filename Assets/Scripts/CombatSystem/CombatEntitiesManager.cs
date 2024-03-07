@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using CombatSystem.Scripts.Spawner;
 using Helper;
-using NewCombat.Characters;
+using NewCombat.Entity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

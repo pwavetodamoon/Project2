@@ -5,7 +5,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Characters.Monsters
+namespace Model.Monsters
 {
     public abstract class Animator_Base : MonoBehaviour, IChangeAndPlayAnimation, IGetAnimationLength
     {

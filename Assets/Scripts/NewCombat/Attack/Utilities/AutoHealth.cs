@@ -1,10 +1,9 @@
-using Leveling_System;
-using NewCombat.Characters;
-using NewCombat.ManagerInEntity;
+using LevelAndStats;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using UnityEngine;
-using WorldText;
 
-namespace NewCombat.Abilities
+namespace NewCombat.Attack.Utilities
 {
     public class AutoHealth : MonoBehaviour
     {
@@ -55,7 +54,7 @@ namespace NewCombat.Abilities
                     EntityStats.IncreaseHealth(value);
                     Debug.Log("Health Value:" + value);
                     healthRegenRate = healthRegenRateTime;
-                    WorldTextPool.Instance.GetText(transform.position, $"+{value}", Color.green);
+                    WorldTextPool.WorldTextPool.Instance.GetText(transform.position, $"+{value}", Color.green);
                 }
                 else
                 {

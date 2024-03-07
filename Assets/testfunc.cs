@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Characters;
 using CombatSystem;
-using NewCombat.Characters;
 using NewCombat.HeroDataManager;
-using NewCombat.Slots;
 using Sirenix.OdinInspector;
 using System.Linq;
 using UnityEngine;
 using System;
+using LevelAndStats;
+using Model.Hero;
+using NewCombat.Entity;
 using PlayFab.PfEditor.Json;
 using UnityEngine.Serialization;
 using NewCombat.HeroDataManager.Data;
-using NewCombat.ManagerInEntity;
+using SlotHero;
 
 public class testfunc : MonoBehaviour
 {

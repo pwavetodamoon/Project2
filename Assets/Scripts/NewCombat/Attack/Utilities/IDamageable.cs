@@ -1,6 +1,6 @@
-﻿using Leveling_System;
+﻿using LevelAndStats;
 
-namespace NewCombat.Characters
+namespace NewCombat.Attack.Utilities
 {
     public interface IDamageable
     {

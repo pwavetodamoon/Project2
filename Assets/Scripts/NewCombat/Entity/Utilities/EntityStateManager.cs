@@ -1,12 +1,11 @@
 using System;
-using Leveling_System;
-using NewCombat.Characters;
+using LevelAndStats;
+using NewCombat.Attack.Utilities;
 using NewCombat.Helper;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using WorldText;
 
-namespace NewCombat.ManagerInEntity
+namespace NewCombat.Entity.Utilities
 {
     public class EntityStateManager : MonoBehaviour, IDamageable
     {
@@ -43,7 +42,7 @@ namespace NewCombat.ManagerInEntity
         private void SpawnText(float damage)
         {
             var builder = "+" + damage;
-            WorldTextPool.Instance.GetText(transform.position, builder, Color.white);
+            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder, Color.white);
         }
 
         [Button]

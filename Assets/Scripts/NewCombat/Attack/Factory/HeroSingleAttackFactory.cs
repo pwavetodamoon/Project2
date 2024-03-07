@@ -1,7 +1,7 @@
-using NewCombat.HeroAttack;
+using NewCombat.Attack.Abstracts;
 using UnityEngine;
 
-namespace NewCombat.AttackFactory
+namespace NewCombat.Attack.Factory
 {
     public abstract class SingleAttackFactory : ScriptableObject
     {

@@ -1,9 +1,9 @@
-using NewCombat.Characters;
-using NewCombat.ManagerInEntity;
-using NewCombat.Slots;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
+using SlotHero;
 using UnityEngine;
 
-namespace RaycastManager
+namespace SelectionHero.Ray
 {
     public class RaycastDetectHero : MonoBehaviour
     {

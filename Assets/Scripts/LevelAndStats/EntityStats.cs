@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Leveling_System
+namespace LevelAndStats
 {
     public abstract class EntityStats : MonoBehaviour
     {

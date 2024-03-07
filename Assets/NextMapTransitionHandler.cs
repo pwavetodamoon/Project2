@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Background;
-using Characters;
 using CombatSystem;
 using DG.Tweening;
+using Model.Hero;
 using NewCombat;
-using NewCombat.Characters;
-using NewCombat.ManagerInEntity;
+using NewCombat.Attack.Utilities;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using Sirenix.OdinInspector;
+using UI_Effects;
 using UnityEngine.Events;
 using UnityEngine;
 

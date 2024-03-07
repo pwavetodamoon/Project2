@@ -4,7 +4,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Characters
+namespace Model.Hero
 {
     [Serializable]
     public class HeroSkin

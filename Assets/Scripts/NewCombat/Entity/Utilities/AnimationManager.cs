@@ -1,8 +1,8 @@
 using System;
-using Characters.Monsters;
+using Model.Monsters;
 using UnityEngine;
 
-namespace NewCombat.ManagerInEntity
+namespace NewCombat.Entity.Utilities
 {
     public class AnimationManager : MonoBehaviour
     {

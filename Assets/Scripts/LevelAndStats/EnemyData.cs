@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyData")]
-public class EnemyData : ScriptableObject
+namespace LevelAndStats
 {
-    public StructStats structStats;
+    [CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyData")]
+    public class EnemyData : ScriptableObject
+    {
+        public StructStats structStats;
+    }
 }

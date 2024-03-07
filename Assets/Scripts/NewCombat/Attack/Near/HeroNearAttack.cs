@@ -1,13 +1,13 @@
 using System.Collections;
-using Characters;
 using DG.Tweening;
-using NewCombat.Characters;
-using NewCombat.HeroAttack;
-using NewCombat.ManagerInEntity;
-using NewCombat.Slots;
+using Model.Hero;
+using NewCombat.Attack.Abstracts;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
+using SlotHero;
 using UnityEngine;
 
-namespace NewCombat
+namespace NewCombat.Attack.Near
 {
     public class HeroNearAttack : BaseHeroAttack
     {

@@ -1,25 +1,28 @@
 using UnityEngine;
 
-public class ShadowColor : MonoBehaviour
+namespace SlotHero
 {
-    [SerializeField] private SpriteRenderer ShadowSprite;
-
-    public Color normalColor;
-    public Color onChooseColor;
-    private bool IsChange = false;
-
-    private void Awake()
+    public class ShadowColor : MonoBehaviour
     {
-        ShadowSprite.color = normalColor;
-    }
+        [SerializeField] private SpriteRenderer ShadowSprite;
 
-    public void SetOriginal()
-    {
-        ShadowSprite.color = normalColor;
-    }
+        public Color normalColor;
+        public Color onChooseColor;
+        private bool IsChange = false;
 
-    public void SetOnChoose()
-    {
-        ShadowSprite.color = onChooseColor;
+        private void Awake()
+        {
+            ShadowSprite.color = normalColor;
+        }
+
+        public void SetOriginal()
+        {
+            ShadowSprite.color = normalColor;
+        }
+
+        public void SetOnChoose()
+        {
+            ShadowSprite.color = onChooseColor;
+        }
     }
 }

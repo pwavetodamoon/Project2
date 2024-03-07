@@ -1,4 +1,6 @@
-namespace DropItem
+using Core.Quest;
+
+namespace Item
 {
     public class ItemDrop : BaseDrop
     {

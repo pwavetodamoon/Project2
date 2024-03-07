@@ -1,7 +1,7 @@
-using Characters.Monsters;
+using Model.Monsters;
 using Sirenix.OdinInspector;
 
-namespace Characters
+namespace Model.Hero
 {
     public class Human_Animator : Animator_Base
     {

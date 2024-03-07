@@ -2,7 +2,7 @@ using System.Collections;
 using Helper;
 using UnityEngine;
 
-namespace NewCombat.Projectiles
+namespace NewCombat.Attack.Projectiles
 {
     [RequireComponent(typeof(GetAnimationLength))]
     public class MagicProjectile : ProjectileBase

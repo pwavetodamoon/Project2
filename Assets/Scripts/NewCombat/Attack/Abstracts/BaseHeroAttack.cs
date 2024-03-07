@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using CombatSystem;
 using Helper;
-using Leveling_System;
+using LevelAndStats;
 using NewCombat.Helper;
 using UnityEngine;
 
-namespace NewCombat.HeroAttack
+namespace NewCombat.Attack.Abstracts
 {
     public abstract class BaseHeroAttack : SingleTargetAttackImprove
     {

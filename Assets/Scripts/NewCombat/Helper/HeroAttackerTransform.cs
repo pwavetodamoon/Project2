@@ -1,5 +1,5 @@
-using NewCombat.Characters;
-using NewCombat.Slots;
+using NewCombat.Entity;
+using SlotHero;
 using UnityEngine;
 
 namespace NewCombat.Helper

@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace Characters.Monsters
+namespace Model.Monsters
 {
     public class Monster_Animator : Animator_Base
     {

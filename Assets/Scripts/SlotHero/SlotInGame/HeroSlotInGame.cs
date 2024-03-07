@@ -1,7 +1,8 @@
-using Characters;
+using Model.Hero;
+using NewCombat.Entity;
 using UnityEngine;
 
-namespace NewCombat.Characters
+namespace SlotHero.SlotInGame
 {
     [RequireComponent(typeof(ShadowColor))]
     public class HeroSlotInGame : MonoBehaviour
@@ -71,7 +72,7 @@ namespace NewCombat.Characters
 
         private bool CanSetAlphaForHero()
         {
-            return sprites != null && currentHero != null && currentHero != SelectionHero.Instance.currentHeroAttached;
+            return sprites != null && currentHero != null && currentHero != SelectionHero.SelectionHero.Instance.currentHeroAttached;
         }
 
         public bool AllowSwap()

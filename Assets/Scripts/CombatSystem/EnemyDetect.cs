@@ -1,23 +1,26 @@
 using Helper;
-using NewCombat.Characters;
+using NewCombat.Entity;
 using UnityEngine;
 
-public class EnemyDetect : MonoBehaviour
+namespace CombatSystem
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class EnemyDetect : MonoBehaviour
     {
-        if (!IsColliderHaveEnemyTag(collision)) return;
-        if (collision.TryGetComponent(out IEntity entityCharacter)) entityCharacter.RegisterObject();
-    }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!IsColliderHaveEnemyTag(collision)) return;
+            if (collision.TryGetComponent(out IEntity entityCharacter)) entityCharacter.RegisterObject();
+        }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!IsColliderHaveEnemyTag(collision)) return;
-        if (collision.TryGetComponent(out IEntity entityCharacter)) entityCharacter.ReleaseObject();
-    }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (!IsColliderHaveEnemyTag(collision)) return;
+            if (collision.TryGetComponent(out IEntity entityCharacter)) entityCharacter.ReleaseObject();
+        }
 
-    private bool IsColliderHaveEnemyTag(Collider2D collider)
-    {
-        return collider.gameObject.CompareTag(GameTag.Enemy);
+        private bool IsColliderHaveEnemyTag(Collider2D collider)
+        {
+            return collider.gameObject.CompareTag(GameTag.Enemy);
+        }
     }
 }

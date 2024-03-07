@@ -1,7 +1,7 @@
-using NewCombat.AttackedCounting;
+using NewCombat.Attack.Utilities;
 using UnityEngine;
 
-namespace NewCombat.ManagerInEntity
+namespace NewCombat.Entity.Utilities
 {
     public class AttackManager : MonoBehaviour, IAttackerCounter
     {

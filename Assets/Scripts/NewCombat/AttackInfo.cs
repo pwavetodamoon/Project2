@@ -1,5 +1,5 @@
-﻿using NewCombat.Characters;
-using NewCombat.HeroAttack;
+﻿using NewCombat.Attack.Abstracts;
+using NewCombat.Attack.Systems;
 
 namespace NewCombat
 {

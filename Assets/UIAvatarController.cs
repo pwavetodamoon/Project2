@@ -5,8 +5,8 @@ using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Characters;
-using NewCombat.Characters;
+using NewCombat.Entity;
+using SlotHero;
 
 
 public class UIAvatarController : APanelController

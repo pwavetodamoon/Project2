@@ -1,4 +1,4 @@
-﻿using Leveling_System;
+﻿using LevelAndStats;
 
 namespace NewCombat.Helper
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NewCombat.Projectiles
+namespace NewCombat.Attack.Projectiles
 {
     public class Projectile : ProjectileBase
     {

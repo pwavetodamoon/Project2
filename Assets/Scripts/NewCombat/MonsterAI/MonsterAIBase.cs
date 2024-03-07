@@ -1,5 +1,4 @@
-using CombatSystem.Scripts;
-using NewCombat.AttackedCounting;
+using NewCombat.Attack.Utilities;
 using UnityEngine;
 
 namespace NewCombat.MonsterAI

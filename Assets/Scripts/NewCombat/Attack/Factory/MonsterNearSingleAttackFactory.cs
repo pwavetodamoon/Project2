@@ -1,8 +1,8 @@
-using NewCombat.HeroAttack;
-using NewCombat.MonsterAttack;
+using NewCombat.Attack.Abstracts;
+using NewCombat.Attack.Near;
 using UnityEngine;
 
-namespace NewCombat.AttackFactory
+namespace NewCombat.Attack.Factory
 {
     [CreateAssetMenu(fileName = "MonsterNearSingleAttackFactory",
         menuName = "SingleAttackFactory/MonsterNearSingleAttackFactory")]

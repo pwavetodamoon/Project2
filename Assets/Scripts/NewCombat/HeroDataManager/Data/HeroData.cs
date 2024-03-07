@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using Characters;
-using NewCombat.AttackFactory;
-using NewCombat.Characters;
+using LevelAndStats;
+using Model.Hero;
+using NewCombat.Attack.Factory;
+using NewCombat.Entity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

@@ -1,19 +1,21 @@
-using Leveling_System;
 using NewCombat.HeroDataManager.Data;
 using UnityEngine;
 
-public class HeroEntityStats : EntityStats
+namespace LevelAndStats
 {
-    [SerializeField] private HeroData heroData;
-
-    public void SetHero(HeroData newData)
+    public class HeroEntityStats : EntityStats
     {
-        heroData = newData;
-        LoadEntityStats();
-    }
+        [SerializeField] private HeroData heroData;
 
-    private void LoadEntityStats()
-    {
-        structStats = heroData.structStats;
+        public void SetHero(HeroData newData)
+        {
+            heroData = newData;
+            LoadEntityStats();
+        }
+
+        private void LoadEntityStats()
+        {
+            structStats = heroData.structStats;
+        }
     }
 }

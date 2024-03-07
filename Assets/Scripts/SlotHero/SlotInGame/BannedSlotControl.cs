@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NewCombat.Slots
+namespace SlotHero.SlotInGame
 {
     public class BannedSlotControl : MonoBehaviour
     {

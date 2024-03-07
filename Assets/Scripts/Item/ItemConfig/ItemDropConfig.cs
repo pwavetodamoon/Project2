@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DropItem.ItemConfig
+namespace Item.ItemConfig
 {
     [CreateAssetMenu(fileName = "Item_Config_", menuName = "ScriptableObjects/Item Drop Config")]
     public class ItemDropConfig : ScriptableObject

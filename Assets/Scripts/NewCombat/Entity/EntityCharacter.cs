@@ -1,9 +1,10 @@
-using Leveling_System;
+using LevelAndStats;
+using NewCombat.Attack.Systems;
+using NewCombat.Entity.Utilities;
 using NewCombat.Helper;
-using NewCombat.ManagerInEntity;
 using UnityEngine;
 
-namespace NewCombat.Characters
+namespace NewCombat.Entity
 {
     [RequireComponent(typeof(AnimationManager))]
     [RequireComponent(typeof(AttackManager))]

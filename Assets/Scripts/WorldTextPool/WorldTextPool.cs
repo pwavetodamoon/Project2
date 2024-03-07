@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace WorldText
+namespace WorldTextPool
 {
     public partial class WorldTextPool : Singleton<WorldTextPool>
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Characters;
+using Model.Hero;
 using UnityEngine;
 
 namespace NewCombat.HeroDataManager.Data

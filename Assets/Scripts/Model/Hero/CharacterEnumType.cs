@@ -1,4 +1,4 @@
-namespace Characters
+namespace Model.Hero
 {
     public enum CharacterEnumType
     {

@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Characters.Monsters
+namespace Model.Monsters
 {
     public class Monster_Body_Sprites : MonoBehaviour
     {

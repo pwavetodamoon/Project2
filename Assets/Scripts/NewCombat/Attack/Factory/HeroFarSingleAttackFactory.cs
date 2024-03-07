@@ -1,8 +1,9 @@
-using NewCombat.HeroAttack;
-using PrefabFactory;
+using NewCombat.Attack.Abstracts;
+using NewCombat.Attack.Far;
+using NewCombat.Attack.Utilities;
 using UnityEngine;
 
-namespace NewCombat.AttackFactory
+namespace NewCombat.Attack.Factory
 {
     [CreateAssetMenu(fileName = "HeroFarSingleAttackFactory",
         menuName = "SingleAttackFactory/HeroFarSingleAttackFactory")]

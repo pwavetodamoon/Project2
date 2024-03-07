@@ -1,29 +1,32 @@
-using NewCombat.Characters;
+using NewCombat.Entity;
 using UnityEngine;
 
-public class HeroSlotUI : MonoBehaviour
+namespace SlotHero
 {
-    [SerializeField] private HeroCharacter currentHero;
-
-    public void SetHero(HeroCharacter hero)
+    public class HeroSlotUI : MonoBehaviour
     {
-        currentHero = hero;
-    }
+        [SerializeField] private HeroCharacter currentHero;
 
-    public void OnClicked()
-    {
-        if (currentHero.InGameSlotIndex != -1) return;
-        currentHero.gameObject.SetActive(true);
-        SelectionHero.Instance.OnDragInUI = true;
-        SelectionHero.Instance.heroAttachedInUI = currentHero;
-    }
+        public void SetHero(HeroCharacter hero)
+        {
+            currentHero = hero;
+        }
 
-    public void OnUnClicked()
-    {
-        // TODO: ADD REFERENCE TO SELECTIONHERO
-        if (currentHero.InGameSlotIndex != -1) return;
-        SelectionHero.Instance.OnDragInUI = false;
-        //SelectionHero.Instance.heroOfUI = null;
-        //currentHero.gameObject.SetActive(true);
+        public void OnClicked()
+        {
+            if (currentHero.InGameSlotIndex != -1) return;
+            currentHero.gameObject.SetActive(true);
+            SelectionHero.SelectionHero.Instance.OnDragInUI = true;
+            SelectionHero.SelectionHero.Instance.heroAttachedInUI = currentHero;
+        }
+
+        public void OnUnClicked()
+        {
+            // TODO: ADD REFERENCE TO SELECTIONHERO
+            if (currentHero.InGameSlotIndex != -1) return;
+            SelectionHero.SelectionHero.Instance.OnDragInUI = false;
+            //SelectionHero.Instance.heroOfUI = null;
+            //currentHero.gameObject.SetActive(true);
+        }
     }
 }

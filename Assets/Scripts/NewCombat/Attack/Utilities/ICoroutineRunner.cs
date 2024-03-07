@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace NewCombat
+namespace NewCombat.Attack.Utilities
 {
     public interface ICoroutineRunner
     {

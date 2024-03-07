@@ -2,7 +2,7 @@ using System;
 using ObjectPool;
 using UnityEngine;
 
-namespace NewCombat.Projectiles
+namespace NewCombat.Attack.Projectiles
 {
     [RequireComponent(typeof(Collider2D))]
     public abstract class ProjectileBase : MonoBehaviour, IPooled<ProjectileBase>

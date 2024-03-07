@@ -1,9 +1,9 @@
 using Helper;
-using NewCombat.Projectiles;
+using NewCombat.Attack.Projectiles;
 using ObjectPool;
 using UnityEngine;
 
-namespace PrefabFactory
+namespace NewCombat.Attack.Utilities
 {
     public enum ProjectileType
     {

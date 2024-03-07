@@ -1,11 +1,12 @@
-using Leveling_System;
-
-public class EnemyStats : EntityStats
+namespace LevelAndStats
 {
-    public EnemyData EnemyData;
-
-    public void LoadData()
+    public class EnemyStats : EntityStats
     {
-        structStats = EnemyData.structStats;
+        public EnemyData EnemyData;
+
+        public void LoadData()
+        {
+            structStats = EnemyData.structStats;
+        }
     }
 }

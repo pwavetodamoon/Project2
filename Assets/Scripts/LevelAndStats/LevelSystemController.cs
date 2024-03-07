@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class LevelSystemController : MonoBehaviour
+namespace LevelAndStats
 {
+    public class LevelSystemController : MonoBehaviour
+    {
+    }
 }

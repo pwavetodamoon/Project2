@@ -1,7 +1,6 @@
-using CombatSystem.Scripts;
 using Helper;
-using NewCombat.Characters;
-using NewCombat.ManagerInEntity;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using UnityEngine;
 
 namespace NewCombat.MonsterAI

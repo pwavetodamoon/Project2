@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using Core.Quest;
 using Helper;
+using Item;
 using ObjectPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace DropItem
+namespace Core.Reward
 {
     public class RewardManager : Singleton<RewardManager>
     {

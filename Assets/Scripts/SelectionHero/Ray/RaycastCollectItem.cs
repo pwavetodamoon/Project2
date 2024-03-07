@@ -1,7 +1,7 @@
-using DropItem;
+using Item;
 using UnityEngine;
 
-namespace RaycastManager
+namespace SelectionHero.Ray
 {
     public class RaycastCollectItem : MonoBehaviour
     {

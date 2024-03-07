@@ -1,7 +1,8 @@
+using Core.Quest;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace DropItem
+namespace Core.Reward
 {
     public class RewardSignal : MonoBehaviour
     {

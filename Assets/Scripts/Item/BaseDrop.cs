@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using DropItem.ItemConfig;
 using Helper;
+using Item.ItemConfig;
 using ObjectPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DropItem
+namespace Item
 {
     [Serializable]
     public abstract class BaseDrop : MonoBehaviour, IPointerEnterHandler, IPooled<BaseDrop>

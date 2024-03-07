@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Currency;
+using Core.Currency;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;

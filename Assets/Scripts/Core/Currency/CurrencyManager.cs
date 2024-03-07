@@ -1,7 +1,7 @@
 using Helper;
 using UnityEngine;
 
-namespace Currency
+namespace Core.Currency
 {
     public class CurrencyManager : Singleton<CurrencyManager>
     {

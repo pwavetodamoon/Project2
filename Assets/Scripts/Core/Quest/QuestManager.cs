@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Helper;
+using Item;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace DropItem
+namespace Core.Quest
 {
     [Serializable]
     public struct ItemsStruct

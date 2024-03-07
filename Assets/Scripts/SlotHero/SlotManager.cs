@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using Helper;
-using NewCombat.Characters;
+using NewCombat.Entity;
 using Sirenix.OdinInspector;
+using SlotHero.Grid;
+using SlotHero.SlotInGame;
 using UnityEngine;
 
-namespace NewCombat.Slots
+namespace SlotHero
 {
     public class SlotManager : Singleton<SlotManager>
     {
@@ -125,11 +127,11 @@ namespace NewCombat.Slots
                 targetHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             }
 
-            var bannedHero = SelectionHero.Instance.heroAttachedInUI;
+            var bannedHero = SelectionHero.SelectionHero.Instance.heroAttachedInUI;
             targetSlot.SetHeroIntoStandPosition(bannedHero);
             bannedHero.GetComponent<HeroCharacter>().SetSlotIndex(targetSlotIndex);
 
-            SelectionHero.Instance.heroAttachedInUI = null;
+            SelectionHero.SelectionHero.Instance.heroAttachedInUI = null;
         }
 
         public HeroSlotInGame GetSlotBySlotIndexInRange(int index)

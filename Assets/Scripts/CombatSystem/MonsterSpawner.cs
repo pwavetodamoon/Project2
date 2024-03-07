@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using NewCombat.Characters;
+using NewCombat.Entity;
 using UnityEngine;
 
-namespace CombatSystem.Scripts.Spawner
+namespace CombatSystem
 {
     public class MonsterSpawner : MonoBehaviour
     {

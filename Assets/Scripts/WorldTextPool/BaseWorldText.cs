@@ -6,7 +6,7 @@ using SortingLayers;
 using TMPro;
 using UnityEngine;
 
-namespace WorldText
+namespace WorldTextPool
 {
     [RequireComponent(typeof(SortingLayerByTime))]
     public class BaseWorldText : MonoBehaviour, IPooled<BaseWorldText>

@@ -1,6 +1,7 @@
 using System.Collections;
-using NewCombat.Slots;
+using LevelAndStats;
 using Sirenix.OdinInspector;
+using SlotHero;
 using UnityEngine;
 
 public class LossTransitionHandler : GameTransitionBase

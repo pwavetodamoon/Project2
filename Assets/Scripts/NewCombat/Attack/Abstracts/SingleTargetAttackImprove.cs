@@ -1,7 +1,7 @@
-﻿using NewCombat.AttackedCounting;
+﻿using NewCombat.Attack.Utilities;
 using UnityEngine;
 
-namespace NewCombat.HeroAttack
+namespace NewCombat.Attack.Abstracts
 {
     public abstract class SingleTargetAttackImprove : BaseSingleTargetAttack
     {

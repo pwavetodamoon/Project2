@@ -1,12 +1,13 @@
-using Leveling_System;
-using NewCombat.AttackFactory;
-using NewCombat.Characters;
-using NewCombat.HeroAttack;
-using NewCombat.ManagerInEntity;
+using LevelAndStats;
+using NewCombat.Attack.Abstracts;
+using NewCombat.Attack.Factory;
+using NewCombat.Attack.Utilities;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace NewCombat
+namespace NewCombat.Attack.Systems
 {
     public class AttackControl : MonoBehaviour, ICoroutineRunner
     {

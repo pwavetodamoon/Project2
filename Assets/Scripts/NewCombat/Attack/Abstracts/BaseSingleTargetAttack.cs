@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using CombatSystem;
-using Leveling_System;
-using NewCombat.Characters;
-using NewCombat.ManagerInEntity;
+using LevelAndStats;
+using NewCombat.Attack.Utilities;
+using NewCombat.Entity;
+using NewCombat.Entity.Utilities;
 using UnityEngine;
 
-namespace NewCombat.HeroAttack
+namespace NewCombat.Attack.Abstracts
 {
     [Serializable]
     public abstract class BaseSingleTargetAttack
