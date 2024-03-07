@@ -7,11 +7,7 @@ using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using DG.Tweening;
 using Model.Hero;
-using NewCombat;
-using Sirenix.OdinInspector;
 using UI_Effects;
-using UnityEngine.Events;
-using UnityEngine;
 
 
 public abstract class GameTransitionBase

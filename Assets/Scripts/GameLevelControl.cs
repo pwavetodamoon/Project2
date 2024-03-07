@@ -8,7 +8,6 @@ using CombatSystem.HeroDataManager;
 using Core.Reward;
 using UnityEngine;
 using Helper;
-using NewCombat;
 using UI_Effects;
 
 
