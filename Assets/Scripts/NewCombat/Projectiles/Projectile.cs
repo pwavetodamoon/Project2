@@ -9,16 +9,12 @@ namespace NewCombat.Projectiles
         [SerializeField] private BoxCollider2D BoxCollder2D;
         private readonly float speed = 20;
 
+        private bool isOnTarget => Vector3.Distance(transform.position, target.transform.position) < 0.1f;
+
         private void Update()
         {
-            if (target == null)
+            if (target == null || isOnTarget)
             {
-                Release();
-            }
-
-            if (isOnTarget)
-            {
-                Debug.Log("Projectile is attacking");
                 Release();
             }
             else
@@ -27,7 +23,6 @@ namespace NewCombat.Projectiles
             }
         }
 
-        private bool isOnTarget => Vector3.Distance(transform.position, target.transform.position) < 0.1f;
 
         private void MoveToTarget()
         {
@@ -36,10 +31,6 @@ namespace NewCombat.Projectiles
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
             transform.right = direction;
         }
-        public override void Release()
-        {
-            OnAttack?.Invoke();
-            ReleaseCallback?.Invoke(this);
-        }
+
     }
 }

@@ -8,70 +8,93 @@ namespace RaycastManager
 {
     public class RaycastDetectHero : MonoBehaviour
     {
-        public HeroCharacter currentHero;
         private AttackManager attackManager;
+        public HeroCharacter currentHero;
         public Vector2 mousePosition;
         public bool IsHandleHero = false;
+        private SlotManager slotManager;
 
+        private void Awake()
+        {
+            slotManager = SlotManager.Instance;
+        }
         public void HandleHeroSelection(bool isMouseDown, bool isMouseMove, HeroCharacter _hero)
         {
-            //ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
             if (isMouseDown)
             {
-                HandleMouseDown(_hero);
-                if (isMouseMove)
+                GetHeroReferences(_hero);
+                if (isMouseMove && CannotMoveHero() == false)
                 {
-                    HandleHeroMovement();
+                    if (CanHoldHeroInMouse())
+                    {
+                        MoveHeroByMouse();
+                    }
+                    else
+                    {
+                        PutHeroBack();
+                        ResetCurrentHeroRef();
+                    }
                 }
             }
             else
             {
-                HandleMouseUp();
-            }
-        }
-        private void HandleMouseDown(HeroCharacter _hero)
-        {
-            if (_hero != null && currentHero == null)
-            {
-                currentHero = _hero;
-                attackManager = _hero.GetComponent<AttackManager>();
-            }
-        }
-        private void HandleHeroMovement()
-        {
-            if (currentHero == null || attackManager == null || currentHero.IsDead) return;
-            
-            // If cannot hold hero then put it back to the slot
-            bool canHoldHero = currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
-            if (canHoldHero)
-            {
-                currentHero.transform.position = new Vector2(mousePosition.x, mousePosition.y);
-                IsHandleHero = true;
-            }
-            else
-            {
-                SlotManager.Instance.LoadHeroIntoSlot(currentHero);
-                currentHero = null;
+                var swapFinished = SwapHero();
+                if (!swapFinished)
+                {
+                    PutHeroBack();
+                }
+
+                ResetCurrentHeroRef();
                 IsHandleHero = false;
             }
         }
 
-        private void HandleMouseUp()
+        private bool CanHoldHeroInMouse()
         {
-            if (currentHero != null)
+            return currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
+        }
+
+        private bool CannotMoveHero()
+        {
+            return currentHero == null || attackManager == null || currentHero.IsDead;
+        }
+
+        private void GetHeroReferences(HeroCharacter hero)
+        {
+            if (hero != null && currentHero == null)
             {
-                var isSwap = SlotManager.Instance.FindNearSlotAndSwapIfInRange(currentHero, currentHero.InGameSlotIndex);
-                if (!isSwap)
-                {
-                    SlotManager.Instance.LoadHeroIntoSlot(currentHero);
-                }
-                currentHero = null;
-                attackManager = null;
+                currentHero = hero;
+                attackManager = hero.GetComponent<AttackManager>();
             }
-            IsHandleHero = false;
+        }
+
+        private void MoveHeroByMouse()
+        {
+            currentHero.transform.position = mousePosition;
+            IsHandleHero = true;
         }
 
 
+        private bool SwapHero()
+        {
+            if (currentHero != null)
+            {
+                return slotManager.FindNearSlotAndSwapIfInRange(currentHero, currentHero.InGameSlotIndex);
+            }
+
+            return false;
+        }
+
+        private void PutHeroBack()
+        {
+            if (currentHero == null) return;
+            slotManager.LoadHeroIntoSlot(currentHero);
+        }
+
+        private void ResetCurrentHeroRef()
+        {
+            currentHero = null;
+            attackManager = null;
+        }
     }
 }

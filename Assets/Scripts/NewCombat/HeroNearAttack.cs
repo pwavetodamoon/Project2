@@ -13,19 +13,14 @@ namespace NewCombat
     public class HeroNearAttack : BaseHeroAttack
     {
         protected HeroCharacter Hero;
+        WaitForSeconds waitForEndAnim;
         protected override IEnumerator StartBehavior()
         {
             yield return base.StartBehavior();
-            var attackerTransform = Enemy.GetAttackerTransform();
-            
-            yield return MoveModelToPosition(attackerTransform.position);
-            
+            yield return MoveModelToPosition(Enemy.GetAttackerTransform().position);
             PlayAnimation(Human_Animator.Slash_State);
-            var time = GetAnimationLength(Human_Animator.Slash_State);
-            
-            yield return new WaitForSeconds(time);
+            yield return waitForEndAnim;
             CauseDamage();
-
             yield return MoveModelToPosition(GetSlotPosition());
         }
 
@@ -37,12 +32,6 @@ namespace NewCombat
                 .WaitForCompletion();
         }
 
-        private MonsterCharacter GetMonsterEntity(GameObject go)
-        {
-            return go.GetComponent<MonsterCharacter>();
-        }
-
-
         private Vector3 GetSlotPosition()
         {
             return SlotManager.Instance.GetStandTransform(Hero.InGameSlotIndex).position;
@@ -52,7 +41,9 @@ namespace NewCombat
             AttackManager attackManager, Transform attackTransform = null)
         {
             base.GetReference(newEntityCharacter, _animationManager, attackManager, attackTransform);
+
             Hero = (HeroCharacter)newEntityCharacter;
+            waitForEndAnim = new WaitForSeconds(GetAnimationLength(Human_Animator.Slash_State));
         }
     }
 }

@@ -11,7 +11,7 @@ public class RaycastDetectSlot : MonoBehaviour
     [SerializeField] private HeroSlotInGame currentSlotInGame;
     public Vector2 mousePosition;
 
-    public void Detect(bool isMouseDown, HeroCharacter currentHero, bool isContainHero)
+    public void Detect(bool isMouseDown, bool isContainHero)
     {
         if (isContainHero && isMouseDown && SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out currentSlotInGame))
         {

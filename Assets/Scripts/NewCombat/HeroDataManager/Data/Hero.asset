@@ -38,7 +38,7 @@ MonoBehaviour:
   baseStats:
     value: 0
   slotIndex: 2
-  HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
+  HeroSingleAttackFactory: {fileID: 11400000, guid: 148f5c0f35354e64b996bc407863da49, type: 2}
   isDead: 0
   heroCharacter: {fileID: 0}
   ResourcePath: Hero/Medieval King

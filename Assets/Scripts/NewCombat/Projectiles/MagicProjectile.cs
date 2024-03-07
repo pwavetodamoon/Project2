@@ -12,29 +12,29 @@ namespace NewCombat.Projectiles
         protected CircleCollider2D CircleCollider2D;
         private float animationTime = 0;
         private Animator animator;
+        private WaitForSeconds waitForEndAnim;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            animationTime = GetComponent<GetAnimationLength>().length;
+            waitForEndAnim = new WaitForSeconds(animationTime);
+            CircleCollider2D = GetComponent<CircleCollider2D>();
+            animator = GetComponent<Animator>();
+        }
         public override void Initialized(Transform target, string tag)
         {
             base.Initialized(target, tag);
             transform.position = target.position;
-            CircleCollider2D = GetComponent<CircleCollider2D>();
-            animator = GetComponent<Animator>();
             animator.enabled = false;
-            StartCoroutine("AttackCoroutine");
+            StartCoroutine(AttackCoroutine());
         }
 
         private IEnumerator AttackCoroutine()
         {
             animator.enabled = true;
-            animationTime = GetComponent<GetAnimationLength>().length;
-            OnAttack?.Invoke();
-            yield return new WaitForSeconds(animationTime / 2);
+            yield return waitForEndAnim;
             Release();
-        }
-
-        public override void Release()
-        {
-            ReleaseCallback?.Invoke(this);
         }
 
     }

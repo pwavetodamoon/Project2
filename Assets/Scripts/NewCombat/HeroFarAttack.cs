@@ -4,6 +4,7 @@ using NewCombat.Projectiles;
 using System.Collections;
 using Helper;
 using NewCombat.Characters;
+using NewCombat.ManagerInEntity;
 using PrefabFactory;
 using UnityEngine;
 
@@ -11,39 +12,60 @@ namespace NewCombat
 {
     public class HeroFarAttack : BaseHeroAttack
     {
-        private bool IsVfxEnd = false;
+        private ProjectileType type;
+        private WaitUntil waitUntilCanCauseDamage;
+        private WaitForSeconds waitForEndAnim;
+
+        
+        private bool IsProjectileHitEnemy = false;
+
+
 
         protected override IEnumerator StartBehavior()
         {
             yield return base.StartBehavior();
             PlayAnimation(Human_Animator.Slash_State);
-            var time = GetAnimationLength(Human_Animator.Slash_State);
 
-            yield return new WaitForSeconds(time / 2);
-            //var go = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GameTag.Enemy);
+            yield return waitForEndAnim;
 
             var projectile = SpawnProjectile(Enemy);
-            yield return new WaitUntil(() => IsVfxEnd);
+            if (projectile == null)
+            {
+                yield break;
+            }
 
-            //yield return AttackEffectIEnumerator.ShakeCharacterMultiplierTimes(go.transform, .2f, 3);
+            yield return waitUntilCanCauseDamage;
+
             CauseDamage();
-            IsVfxEnd = false;
+            IsProjectileHitEnemy = false;
         }
 
         protected ProjectileBase SpawnProjectile(EntityCharacter monster)
         {
-            var projectile = PrefabsFactoryPool.Instance.magicProjectile_pool.Get();
-            //var projectile = PrefabsFactory.Instance.GetInstancePrefab(PrefabsFactory.MagicProjectile)
-            //    .GetComponent<MagicProjectile>();
-            projectile.RegisterOnEndVfx(AllowGoNextStep);
+            var projectile = PrefabsFactoryPool.Instance.Get(type);
             projectile.transform.position = AttackTransform.position;
+            projectile.RegisterOnEndVfx(AllowGoNextStep);
             projectile.Initialized(monster.transform, GameTag.Enemy);
             return projectile;
         }
 
         private void AllowGoNextStep()
         {
-            IsVfxEnd = true;
+            IsProjectileHitEnemy = true;
+        }
+
+        public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager, AttackManager _attackManager,
+            Transform attackTransform = null)
+        {
+            base.GetReference(newEntityCharacter, _animationManager, _attackManager, attackTransform);
+
+            waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
+            waitForEndAnim = new WaitForSeconds(GetAnimationLength(Human_Animator.Slash_State) / 2);
+        }
+
+        public HeroFarAttack(ProjectileType type)
+        {
+            this.type = type;
         }
     }
 }

@@ -12,18 +12,18 @@ namespace NewCombat.Projectiles
         [SerializeField] protected string Tag;
         protected bool isAttack;
         private float TimeOut = 10f;
-        protected Action OnAttack;
+        protected Action OnEndAttack;
 
         public Action<ProjectileBase> ReleaseCallback { get ; set ; }
 
         public void RegisterOnEndVfx(Action method)
         {
-            OnAttack += method;
+            OnEndAttack += method;
         }
 
         private void OnDisable()
         {
-            OnAttack = null;
+            OnEndAttack = null;
         }
 
         protected virtual void Awake()
@@ -41,7 +41,8 @@ namespace NewCombat.Projectiles
 
         public virtual void Release()
         {
-            
+            OnEndAttack?.Invoke();
+            ReleaseCallback?.Invoke(this);
         }
     }
 }

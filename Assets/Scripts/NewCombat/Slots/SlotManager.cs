@@ -138,11 +138,11 @@ namespace NewCombat.Slots
                 bannedSlotControl.SetHeroIntoStandPosition(targetHero.transform);
                 targetHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             }
-            var bannedHero = SelectionHero.Instance.heroOfUI;
+            var bannedHero = SelectionHero.Instance.heroAttachedInUI;
             targetSlot.SetHeroIntoStandPosition(bannedHero);
             bannedHero.GetComponent<HeroCharacter>().SetSlotIndex(targetSlotIndex);
 
-            SelectionHero.Instance.heroOfUI = null;
+            SelectionHero.Instance.heroAttachedInUI = null;
 
         }
 

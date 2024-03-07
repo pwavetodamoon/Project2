@@ -5,6 +5,7 @@ using NewCombat.Characters;
 using NewCombat.Slots;
 using RaycastManager;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SelectionHero : Singleton<SelectionHero>
 {
@@ -12,41 +13,36 @@ public class SelectionHero : Singleton<SelectionHero>
     [SerializeField] RaycastDetectSlot raycastDetectSlot;
     [SerializeField] RayInput rayInput;
     public bool OnDragInUI;
-    public bool IsMouseMove;
-    public HeroCharacter heroOfUI;
+    public HeroCharacter heroAttachedInUI;
 
     private void Update()
     {
+        UpdateMousePosition();
+        raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, rayInput.isMouseMove, GetHero());
+        raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero);
+    }
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-        if (mouseX != 0 || mouseY != 0)
+    private HeroCharacter GetHero()
+    {
+        HeroCharacter hero = null;
+        if (OnDragInUI && heroAttachedInUI)
         {
-            IsMouseMove = true;
+            hero = heroAttachedInUI;
         }
-        else
+        else if (heroAttachedInUI == null && !OnDragInUI)
         {
-            IsMouseMove = false;
+            hero = GetHeroNearMouse();
         }
 
+        return hero;
+    }
+    private void UpdateMousePosition()
+    {
         rayInput.HandleMouseInput();
         raycastDetectHero.mousePosition = rayInput.worldMousePosition;
         raycastDetectSlot.mousePosition = rayInput.worldMousePosition;
-        HeroCharacter hero = null;
-        if (OnDragInUI && heroOfUI)
-        {
-            hero = heroOfUI;
-        }
-        else if(heroOfUI == null && !OnDragInUI)
-        {
-            hero = GetHero();
-        }
-
-        raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, IsMouseMove, hero);
-        raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.currentHero, raycastDetectHero.IsHandleHero);
-
     }
-    public HeroCharacter GetHero()
+    public HeroCharacter GetHeroNearMouse()
     {
         var mousePosition = rayInput.worldMousePosition;
         if (SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out HeroSlotInGame newSlotInGame))
