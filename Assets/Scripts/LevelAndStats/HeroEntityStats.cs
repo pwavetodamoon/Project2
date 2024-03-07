@@ -1,4 +1,4 @@
-using NewCombat.HeroDataManager.Data;
+using CombatSystem.HeroDataManager.Data;
 using UnityEngine;
 
 namespace LevelAndStats

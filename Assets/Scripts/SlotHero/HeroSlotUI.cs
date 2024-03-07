@@ -1,4 +1,4 @@
-using NewCombat.Entity;
+using CombatSystem.Entity;
 using UnityEngine;
 
 namespace SlotHero

@@ -1,5 +1,5 @@
-using NewCombat.Entity;
-using NewCombat.Entity.Utilities;
+using CombatSystem.Entity;
+using CombatSystem.Entity.Utilities;
 using SlotHero;
 using UnityEngine;
 

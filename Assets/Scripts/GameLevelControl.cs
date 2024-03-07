@@ -1,14 +1,14 @@
 using Background;
 using CombatSystem;
-using NewCombat.HeroDataManager;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using CombatSystem.Attack.Utilities;
+using CombatSystem.Entity;
+using CombatSystem.HeroDataManager;
 using Core.Reward;
 using UnityEngine;
 using Helper;
 using NewCombat;
-using NewCombat.Attack.Utilities;
-using NewCombat.Entity;
 using UI_Effects;
 
 

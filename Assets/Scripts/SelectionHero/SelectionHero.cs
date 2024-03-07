@@ -1,5 +1,5 @@
+using CombatSystem.Entity;
 using Helper;
-using NewCombat.Entity;
 using SelectionHero.Ray;
 using SlotHero;
 using UnityEngine;

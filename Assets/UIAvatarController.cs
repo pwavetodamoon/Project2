@@ -5,7 +5,7 @@ using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using NewCombat.Entity;
+using CombatSystem.Entity;
 using SlotHero;
 
 

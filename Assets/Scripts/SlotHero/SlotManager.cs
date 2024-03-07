@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using CombatSystem.Entity;
 using Helper;
-using NewCombat.Entity;
 using Sirenix.OdinInspector;
 using SlotHero.Grid;
 using SlotHero.SlotInGame;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using CombatSystem.Entity;
 using Helper;
-using NewCombat.Entity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

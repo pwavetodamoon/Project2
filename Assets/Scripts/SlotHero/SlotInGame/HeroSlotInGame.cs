@@ -1,5 +1,5 @@
+using CombatSystem.Entity;
 using Model.Hero;
-using NewCombat.Entity;
 using UnityEngine;
 
 namespace SlotHero.SlotInGame
