@@ -1,5 +1,4 @@
 ﻿using Leveling_System;
-using NewCombat.ManagerInEntity;
 
 namespace NewCombat.Helper
 {
@@ -10,10 +9,12 @@ namespace NewCombat.Helper
             var myDmgResistant = CalculatorDamageResistance(entity, enemy);
             return DamageCanDealing(enemy.GetDamage(), myDmgResistant);
         }
+
         private static float DamageCanDealing(float damage, float damageResistance)
         {
             return damage * (1 - damageResistance / (damageResistance + 100));
         }
+
         private static int CalculatorDamageResistance(EntityStats entity, EntityStats enemy)
         {
             var levelOffset = enemy.Level() - entity.Level();

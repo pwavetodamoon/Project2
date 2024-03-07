@@ -5,6 +5,7 @@ namespace Helper
     public class GetAnimationLength : MonoBehaviour
     {
         public float length => RefreshLength();
+
         public float RefreshLength()
         {
             var animator = GetComponent<Animator>();

@@ -1,7 +1,4 @@
-﻿using Background;
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using NewCombat.Characters;
 using UnityEngine;
 
@@ -16,7 +13,7 @@ namespace CombatSystem.Scripts.Spawner
         [SerializeField] private int maxMonster = 3;
         [SerializeField] private Transform SpawnPoint1;
         [SerializeField] private Transform SpawnPoint2;
-        [SerializeField] private bool allowSpawned = false;
+        [SerializeField] private bool allowSpawned;
 
         private void Update()
         {
@@ -36,7 +33,7 @@ namespace CombatSystem.Scripts.Spawner
 
         private IEnumerator SpawnMonsters(int spawnCount)
         {
-            for (int i = 0; i < spawnCount; i++)
+            for (var i = 0; i < spawnCount; i++)
             {
                 SpawnMonster();
                 var time = Random.Range(0.1f, 0.5f);
@@ -50,12 +47,12 @@ namespace CombatSystem.Scripts.Spawner
         private void SpawnMonster()
         {
             if (MonsterPrefab == null) return;
-            float x = Random.Range(SpawnPoint1.position.x, SpawnPoint2.position.x + 1);
-            float y = Random.Range(SpawnPoint1.position.y, SpawnPoint2.position.y);
+            var x = Random.Range(SpawnPoint1.position.x, SpawnPoint2.position.x + 1);
+            var y = Random.Range(SpawnPoint1.position.y, SpawnPoint2.position.y);
             var spawnPosition = new Vector3(x, y, 0);
             var go = Instantiate(
-                MonsterPrefab, 
-                spawnPosition, 
+                MonsterPrefab,
+                spawnPosition,
                 Quaternion.identity,
                 transform);
         }
@@ -68,10 +65,7 @@ namespace CombatSystem.Scripts.Spawner
         public void ClearMonsterAndStopSpawnOnMap()
         {
             var list = transform.GetComponentsInChildren<MonsterCharacter>();
-            for (int i = 0; i < list.Length; i++)
-            {
-                list[i].ReleaseObject();
-            }
+            for (var i = 0; i < list.Length; i++) list[i].ReleaseObject();
         }
     }
 }

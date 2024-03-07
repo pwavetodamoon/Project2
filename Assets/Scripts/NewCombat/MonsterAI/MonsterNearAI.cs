@@ -1,7 +1,6 @@
 using CombatSystem.Scripts;
 using Helper;
 using NewCombat.Characters;
-using NewCombat.Helper;
 using NewCombat.ManagerInEntity;
 using UnityEngine;
 
@@ -12,12 +11,18 @@ namespace NewCombat.MonsterAI
         [SerializeField] private float Speed = 2;
 
         private Vector3 AttackerPositionNoise = Vector3.zero;
-        public bool CanAttack { get; private set; }
         private Transform AttackHeroTransform;
 
         private AttackManager attackManager;
         private float distance;
         private EntityCharacter Enemy;
+        public bool CanAttack { get; private set; }
+
+        protected override void Update()
+        {
+            base.Update();
+            DefineAIBehaviour();
+        }
 
         protected override void TriggerAttack(Collider2D collision)
         {
@@ -29,12 +34,6 @@ namespace NewCombat.MonsterAI
         {
             Enemy = enemy;
             AttackHeroTransform = enemy.GetAttackerTransform();
-        }
-
-        protected override void Update()
-        {
-            base.Update();
-            DefineAIBehaviour();
         }
 
         protected void DefineAIBehaviour()

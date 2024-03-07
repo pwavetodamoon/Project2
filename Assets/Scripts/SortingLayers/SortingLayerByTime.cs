@@ -8,12 +8,17 @@ namespace SortingLayers
     public class SortingLayerByTime : MonoBehaviour
     {
         [SerializeField] private SortingGroup sortingGroup;
-        [SerializeField,Min(0f)] private float sortingDuration = .1f;
+        [SerializeField] [Min(0f)] private float sortingDuration = .1f;
         [SerializeField] private int sortingOrderDefault = 100;
 
         private void Awake()
         {
             sortingGroup = GetComponent<SortingGroup>();
+        }
+
+        private void OnEnable()
+        {
+            sortingGroup.sortingOrder = sortingOrderDefault;
         }
 
         public IEnumerator DecreaseSortingLayer()
@@ -24,11 +29,5 @@ namespace SortingLayers
                 sortingGroup.sortingOrder--;
             }
         }
-
-        private void OnEnable()
-        {
-            sortingGroup.sortingOrder = sortingOrderDefault;
-        }
-
     }
 }

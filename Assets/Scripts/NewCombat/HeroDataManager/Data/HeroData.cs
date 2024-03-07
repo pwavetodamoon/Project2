@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.IO;
 using Characters;
-using Leveling_System;
 using NewCombat.AttackFactory;
 using NewCombat.Characters;
-using NewCombat.HeroDataManager.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,19 +10,28 @@ namespace NewCombat.HeroDataManager.Data
     [CreateAssetMenu(fileName = "Hero", menuName = "CombatSystem/Hero", order = 1)]
     public class HeroData : SerializedScriptableObject
     {
+        public enum AttackTypeEnum
+        {
+            Near,
+            Far
+        }
+
         public StructStats structStats;
         public Sprite icon;
-        [ShowInInspector] private Dictionary<Character_Body_Sprites.SpritePartEnum,Sprite> spriteDictionary;
         [SerializeField] protected string heroName;
         [SerializeField] protected AttackTypeEnum AttackType;
         [SerializeField] protected CharacterEnumType characterEnumType;
-        [SerializeField] protected BaseStat baseStats;
-        [SerializeField] protected int slotIndex = 0;
+        [SerializeField] protected int slotIndex;
         [SerializeField] private HeroSingleAttackFactory HeroSingleAttackFactory;
         public bool isDead;
         public HeroCharacter heroCharacter;
 
+        [FolderPath(ParentFolder = "Assets/Resources")]
+        public string ResourcePath;
+
         private GameObject heroObject;
+        [ShowInInspector] private Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> spriteDictionary;
+
         public int SlotIndex
         {
             get => slotIndex;
@@ -37,6 +43,7 @@ namespace NewCombat.HeroDataManager.Data
             get => heroName;
             set => heroName = value;
         }
+
         public HeroSingleAttackFactory GetHeroFactory()
         {
             return HeroSingleAttackFactory;
@@ -47,15 +54,9 @@ namespace NewCombat.HeroDataManager.Data
             slotIndex = heroCharacter.InGameSlotIndex;
         }
 
-        [FolderPath(ParentFolder = "Assets/Resources")]
-        public string ResourcePath;
-
-        public Dictionary<Character_Body_Sprites.SpritePartEnum,Sprite> GetSkinDictionary()
+        public Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> GetSkinDictionary()
         {
-            if (spriteDictionary == null)
-            {
-                LoadAllSkinInFolder();
-            }
+            if (spriteDictionary == null) LoadAllSkinInFolder();
             return spriteDictionary;
         }
 
@@ -80,21 +81,15 @@ namespace NewCombat.HeroDataManager.Data
         [Button]
         private void LoadAllSkinInFolder()
         {
-            var filePath = Application.dataPath +"/"+ "Resources/" + ResourcePath;
+            var filePath = Application.dataPath + "/" + "Resources/" + ResourcePath;
             //Debug.Log(filePath);
             //Debug.Log(Directory.Exists(filePath));
             var files = filePath;
 
             var sprites = Resources.LoadAll<Sprite>(ResourcePath);
- 
+
             LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary);
             //Debug.Log("Load all skin done");
         }
-        public enum AttackTypeEnum
-        {
-            Near,
-            Far
-        }
     }
 }
-

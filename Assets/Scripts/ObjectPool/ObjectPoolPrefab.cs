@@ -1,29 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using UnityEngine.Pool;
 
 namespace ObjectPool
 {
     public class ObjectPoolPrefab<T> where T : MonoBehaviour, IPooled<T>
     {
-        private T prefab;
         private readonly int maxPoolSize;
-        private readonly Queue<T> queue;
-        private readonly Transform parent;
         private readonly int maxPoolSizeDefault = 20;
+        private readonly Transform parent;
+        private readonly Queue<T> queue;
+        private readonly T prefab;
 
         public ObjectPoolPrefab(T _prefab, Transform _parent, int _size)
         {
-
             queue = new Queue<T>();
             prefab = _prefab;
             parent = _parent;
             maxPoolSize = _size;
-            if (maxPoolSize <= 0)
-            {
-                maxPoolSize = maxPoolSizeDefault;
-            }
+            if (maxPoolSize <= 0) maxPoolSize = maxPoolSizeDefault;
         }
 
         public T Get()
@@ -33,6 +28,7 @@ namespace ObjectPool
                 var newT = Create();
                 queue.Enqueue(newT);
             }
+
             var t = queue.Dequeue();
             t.gameObject.SetActive(true);
             return t;
@@ -52,10 +48,7 @@ namespace ObjectPool
         {
             if (queue.Contains(t))
                 return;
-            if (queue.Count >= maxPoolSize)
-            {
-                Object.Destroy(t.gameObject);
-            }
+            if (queue.Count >= maxPoolSize) Object.Destroy(t.gameObject);
             t.gameObject.SetActive(false);
             queue.Enqueue(t);
         }

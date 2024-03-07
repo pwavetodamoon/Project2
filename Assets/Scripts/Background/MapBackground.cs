@@ -9,7 +9,7 @@ namespace Background
         [SerializeField] private MapBackgroundSO mapBackgroundSO;
 
         [InfoBox("Map name use for testing, just on play mode, it just temporary")]
-        public int MapIndex = 0;
+        public int MapIndex;
 
         private ScrollingBackground[] ScrollingBackgroundArray;
 
@@ -21,13 +21,12 @@ namespace Background
         }
 
         /// <summary>
-        /// Loads the field by getting the components of ScrollingBackground in the children objects.
+        ///     Loads the field by getting the components of ScrollingBackground in the children objects.
         /// </summary>
         [Button]
         private void LoadField()
         {
             ScrollingBackgroundArray = GetComponentsInChildren<ScrollingBackground>();
-
         }
 
         private bool CanLoadMap()
@@ -40,18 +39,18 @@ namespace Background
         [DisableInEditorMode]
         public void LoadTexture()
         {
-            if(CanLoadMap()== false) return;
-            SpritesBackground textures2d = mapBackgroundSO.GetSpritesBackground(MapIndex);
+            if (CanLoadMap() == false) return;
+            var textures2d = mapBackgroundSO.GetSpritesBackground(MapIndex);
 
             var textures = new[]
             {
-                textures2d.plane, 
-                textures2d.backWall, 
-                textures2d.frontWall, 
+                textures2d.plane,
+                textures2d.backWall,
+                textures2d.frontWall,
                 textures2d.groundDecor
             };
 
-            for (int i = 0; i < ScrollingBackgroundArray.Length; i++)
+            for (var i = 0; i < ScrollingBackgroundArray.Length; i++)
             {
                 ScrollingBackgroundArray[i].UpdateCurrentTexture(textures[i]);
                 ScrollingBackgroundArray[i].UpdateSortingOrder(i);
@@ -59,49 +58,37 @@ namespace Background
         }
 
         /// <summary>
-        /// Adjusts the scrolling Speed of the background.
+        ///     Adjusts the scrolling Speed of the background.
         /// </summary>
         /// <param name="speed">The Speed value to adjust the scrolling Speed.</param>
         [Button]
         public void AdjustSpeed(float speed = .5f)
         {
-            foreach (var item in ScrollingBackgroundArray)
-            {
-                item.AdjustSpeed(speed);
-            }
+            foreach (var item in ScrollingBackgroundArray) item.AdjustSpeed(speed);
         }
 
         /// <summary>
-        /// Starts scrolling the background.
+        ///     Starts scrolling the background.
         /// </summary>
         [Button]
         public void StartScrolling()
         {
-            foreach (var item in ScrollingBackgroundArray)
-            {
-                item.Resume();
-            }
+            foreach (var item in ScrollingBackgroundArray) item.Resume();
         }
 
         /// <summary>
-        /// Stops scrolling the background.
+        ///     Stops scrolling the background.
         /// </summary>
         [Button]
         public void StopScrolling()
         {
-            foreach (var item in ScrollingBackgroundArray)
-            {
-                item.Pause();
-            }
+            foreach (var item in ScrollingBackgroundArray) item.Pause();
         }
 
         public void GoNextMap()
         {
             MapIndex++;
-            if (MapIndex < 0 || MapIndex >= mapBackgroundSO.MapCount())
-            {
-                MapIndex = 0;
-            }
+            if (MapIndex < 0 || MapIndex >= mapBackgroundSO.MapCount()) MapIndex = 0;
             LoadTexture();
         }
     }

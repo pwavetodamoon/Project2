@@ -8,7 +8,7 @@ namespace NewCombat.Helper
     {
         public Transform GetAttackerTransform()
         {
-            int index = GetComponent<HeroCharacter>().InGameSlotIndex;
+            var index = GetComponent<HeroCharacter>().InGameSlotIndex;
             return SlotManager.Instance.GetAttackerTransform(index);
         }
     }

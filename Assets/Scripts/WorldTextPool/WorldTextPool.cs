@@ -7,11 +7,6 @@ namespace WorldText
 {
     public partial class WorldTextPool : Singleton<WorldTextPool>
     {
-        public enum TextType
-        {
-            Coin,
-            Combat
-        }
 
         [SerializeField] private int maxPoolSize = 20;
         [FormerlySerializedAs("textPrefab")]
@@ -25,7 +20,7 @@ namespace WorldText
         }
 
         [Button]
-        private void DebugFunction(TextType type)
+        private void DebugFunction()
         {
             GetText(Vector2.zero, "Test", Color.white);
         }

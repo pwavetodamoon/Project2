@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using Sirenix.OdinInspector;
-using Unity.VisualScripting;
+
 public class ScreenTransition : MonoBehaviour
 {
     public Image image;

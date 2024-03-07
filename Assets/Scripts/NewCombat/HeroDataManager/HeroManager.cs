@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using NewCombat.HeroDataManager.Data;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace NewCombat.HeroDataManager
