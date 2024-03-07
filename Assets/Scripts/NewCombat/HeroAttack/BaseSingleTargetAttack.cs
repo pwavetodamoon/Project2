@@ -1,9 +1,9 @@
-using CombatSystem;
-using NewCombat.Characters;
-using NewCombat.ManagerInEntity;
 using System;
 using System.Collections;
+using CombatSystem;
 using Leveling_System;
+using NewCombat.Characters;
+using NewCombat.ManagerInEntity;
 using UnityEngine;
 
 namespace NewCombat.HeroAttack
@@ -12,27 +12,21 @@ namespace NewCombat.HeroAttack
     public abstract class BaseSingleTargetAttack
     {
         [SerializeField] protected bool isActive;
-        private Action onEndAttack;
-        private float WaitTimeToFindEnemy = 0.1f;
-        private bool isValidate = false;
-
-        [Header("Entity Characters Field")]
-        protected EntityCharacter entityCharacter;
-
-        protected EntityCharacter Enemy;
-        private AttackManager attackManager;
         private AnimationManager animationManager;
-        protected EntityStateManager EntityStateManager;
-
-        protected EntityStats EntityStats;
+        private AttackManager attackManager;
 
         protected Transform AttackTransform;
 
-        public bool IsActive { get => isActive; }
-        public bool IsValidate { get => isValidate; }
+        protected EntityCharacter Enemy;
 
-        public BaseSingleTargetAttack()
-        { }
+        [Header("Entity Characters Field")] protected EntityCharacter entityCharacter;
+
+        protected EntityStats EntityStats;
+        private Action onEndAttack;
+        private float WaitTimeToFindEnemy = 0.1f;
+
+        public bool IsActive => isActive;
+        public bool IsValidate { get; private set; }
 
         public virtual void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
             AttackManager _attackManager, Transform attackTransform = null)
@@ -42,7 +36,7 @@ namespace NewCombat.HeroAttack
             animationManager = _animationManager;
             attackManager = _attackManager;
             AttackTransform = attackTransform;
-            isValidate = true;
+            IsValidate = true;
         }
 
         public void SetOnEndAttackCallBack(Action callback)
@@ -62,15 +56,13 @@ namespace NewCombat.HeroAttack
                 yield return WaitAndContinue();
                 yield break;
             }
+
             yield return PerformAttack();
         }
 
         private bool TryFindEnemy()
         {
-            if (!IsEnemyAlive())
-            {
-                return false;
-            }
+            if (!IsEnemyAlive()) return false;
             Enemy = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GetEnemyTag());
             return true;
         }
@@ -90,20 +82,15 @@ namespace NewCombat.HeroAttack
 
         protected virtual void CauseDamage()
         {
-            if (Enemy == null)
-            {
-                Debug.Log(Enemy);
-            }
-            if (Enemy.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(EntityStats);
-            }
+            if (Enemy == null) Debug.Log(Enemy);
+            if (Enemy.TryGetComponent(out IDamageable damageable)) damageable.TakeDamage(EntityStats);
         }
 
         private bool IsEnemyAlive()
         {
             return CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag());
         }
+
         // use for create attack behavior
         protected abstract IEnumerator StartBehavior();
 
