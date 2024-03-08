@@ -5,6 +5,8 @@ using LevelAndStats;
 using Model.Hero;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.U2D;
 
 namespace CombatSystem.HeroDataManager.Data
 {
@@ -17,33 +19,20 @@ namespace CombatSystem.HeroDataManager.Data
             Far
         }
 
-        public StructStats structStats;
-        public Sprite icon;
-        [SerializeField] protected string heroName;
         [SerializeField] protected AttackTypeEnum AttackType;
         [SerializeField] protected CharacterEnumType characterEnumType;
-        [SerializeField] protected int slotIndex;
         [SerializeField] private HeroSingleAttackFactory HeroSingleAttackFactory;
+        [SerializeField] public int slotIndex;
+        [SerializeField] public string heroName;
+
         public bool isDead;
         public HeroCharacter heroCharacter;
-
+        public StructStats structStats;
+        public Sprite icon;
         [FolderPath(ParentFolder = "Assets/Resources")]
-        public string ResourcePath;
+        public string resourcePath;
 
-        private GameObject heroObject;
         [ShowInInspector] private Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> spriteDictionary;
-
-        public int SlotIndex
-        {
-            get => slotIndex;
-            set => slotIndex = value;
-        }
-
-        public string HeroName
-        {
-            get => heroName;
-            set => heroName = value;
-        }
 
         public HeroSingleAttackFactory GetHeroFactory()
         {
@@ -79,18 +68,12 @@ namespace CombatSystem.HeroDataManager.Data
             isDead = heroCloudSave.isDead;
         }
 
+
         [Button]
         private void LoadAllSkinInFolder()
         {
-            var filePath = Application.dataPath + "/" + "Resources/" + ResourcePath;
-            //Debug.Log(filePath);
-            //Debug.Log(Directory.Exists(filePath));
-            var files = filePath;
-
-            var sprites = Resources.LoadAll<Sprite>(ResourcePath);
-
+            var sprites = Resources.LoadAll<Sprite>(resourcePath);
             LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary);
-            //Debug.Log("Load all skin done");
         }
     }
 }

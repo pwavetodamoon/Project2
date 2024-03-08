@@ -9,8 +9,6 @@ using CombatSystem.HeroDataManager;
 using CombatSystem.HeroDataManager.Data;
 using LevelAndStats;
 using Model.Hero;
-using PlayFab.PfEditor.Json;
-using UnityEngine.Serialization;
 using SlotHero;
 
 public class testfunc : MonoBehaviour
@@ -39,7 +37,7 @@ public class testfunc : MonoBehaviour
             hero.SetAttackFactory(heroData.GetHeroFactory());
             hero.IsDead = heroData.isDead;
             hero.SetHeroData(heroData);
-            hero.SetSlotIndex(heroData.SlotIndex);
+            hero.SetSlotIndex(heroData.slotIndex);
             
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
             heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
@@ -118,8 +116,8 @@ public class HeroCloudSaveData
     public void LoadFromHeroData(HeroData heroData)
     {
         heroData.LoadFromHeroInGame();
-        heroName = heroData.HeroName;
-        slotIndex = heroData.SlotIndex;
+        heroName = heroData.heroName;
+        slotIndex = heroData.slotIndex;
         structStats = heroData.structStats;
         isDead = heroData.isDead;
     }

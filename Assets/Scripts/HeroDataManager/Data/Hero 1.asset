@@ -21,6 +21,13 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  AttackType: 0
+  characterEnumType: 4
+  HeroSingleAttackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
+  slotIndex: -1
+  heroName: Quang 2
+  isDead: 0
+  heroCharacter: {fileID: 0}
   structStats:
     Level: 1
     maxHealth: 100
@@ -32,13 +39,4 @@ MonoBehaviour:
     attackCoolDown: 0.5
     attackMoveDuration: 0.5
   icon: {fileID: 21300000, guid: 225dfd818e8387f44a0c9e72a682e938, type: 3}
-  heroName: Quang 2
-  AttackType: 0
-  characterEnumType: 4
-  baseStats:
-    value: 0
-  slotIndex: -1
-  HeroSingleAttackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
-  isDead: 0
-  heroCharacter: {fileID: 0}
-  ResourcePath: Hero/Templar Knight
+  resourcePath: Hero/Medieval Knight

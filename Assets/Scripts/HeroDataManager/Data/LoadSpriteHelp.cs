@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Hero;
 using UnityEngine;
+using UnityEngine.U2D;
 
 namespace CombatSystem.HeroDataManager.Data
 {
