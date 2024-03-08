@@ -6,9 +6,11 @@ namespace Model.Monsters
     {
         public enum AnimationType
         {
+            Idle,
             Walk,
             Hurt,
-            Attack
+            Attack,
+            Dying
         }
 
         public AnimationType currentAnimation = Walk_State;
@@ -44,17 +46,20 @@ namespace Model.Monsters
         {
             switch (type)
             {
+                case AnimationType.Idle:
+                    return "Idle";
                 case AnimationType.Walk:
-                    return "walk_1";
+                    return "Walking";
 
                 case AnimationType.Hurt:
-                    return "hurt_1";
+                    return "Hurt";
 
                 case AnimationType.Attack:
-                    return "attack_1";
-
+                    return "Attack";
+                case AnimationType.Dying:
+                    return "Dying";
                 default:
-                    return "walk_1";
+                    return "Idle";
             }
         }
 

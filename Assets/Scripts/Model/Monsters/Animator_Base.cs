@@ -19,11 +19,13 @@ namespace Model.Monsters
         protected virtual void Awake()
         {
             animator = GetComponentInChildren<Animator>();
-            // add a array of animation to dictionary with 2 value is name and length(string,float)
-            animationLengths =
-                animator.runtimeAnimatorController.animationClips.ToDictionary(clip => clip.name, clip => clip.length);
+            LoadAnimDict();
         }
-
+        [Button]
+        private void LoadAnimDict()
+        {
+            animationLengths = animator.runtimeAnimatorController.animationClips.ToDictionary(clip => clip.name, clip => clip.length);
+        }
         protected virtual void Update()
         {
             if (!animationNotHaveLoopIsRun) return;
@@ -47,7 +49,7 @@ namespace Model.Monsters
         public float GetAnimationLength<T>(T type) where T : Enum
         {
             var animName = GetAnimationNameByType(type);
-            return animationLengths.TryGetValue(animName, out var length) ? length : 0;
+            return animationLengths.GetValueOrDefault(animName, 0);
         }
 
         public void SetIsPlayDefaultAnimation(bool flag)

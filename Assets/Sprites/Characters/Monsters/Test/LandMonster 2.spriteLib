@@ -249,124 +249,145 @@ MonoBehaviour:
       m_Hash: 432720878
       m_Sprite: {fileID: 21300000, guid: 955ca0dde995e4140bcb99d8b7b665a9, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 955ca0dde995e4140bcb99d8b7b665a9, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 1980c9bce89f2c24eb353513d559c413, type: 3}
     - m_Name: Attacking_001
       m_Hash: 785251192
       m_Sprite: {fileID: 21300000, guid: 480583fae9b66164e9ea6a3c54a8dd22, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 480583fae9b66164e9ea6a3c54a8dd22, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 412ab1b37e1a0c74c8bab30c441deea4, type: 3}
     - m_Name: Attacking_002
       m_Hash: 935635650
       m_Sprite: {fileID: 21300000, guid: 6e7c78a21aff00f4fbb1d6459f009465, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 6e7c78a21aff00f4fbb1d6459f009465, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 412ab1b37e1a0c74c8bab30c441deea4, type: 3}
     - m_Name: Attacking_003
       m_Hash: 12819028
       m_Sprite: {fileID: 21300000, guid: 14417bf402967784197c1c37973b4707, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 14417bf402967784197c1c37973b4707, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 928e84532504d734b94795d660db29e3, type: 3}
     - m_Name: Attacking_004
       m_Hash: 514265079
       m_Sprite: {fileID: 21300000, guid: d26a0022899353041ae133cc52692484, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: d26a0022899353041ae133cc52692484, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 55feefa1fee8c94418f52d7be0e96105, type: 3}
     - m_Name: Attacking_005
       m_Hash: 698367841
       m_Sprite: {fileID: 21300000, guid: 602260fcc3438e34d92413149f1c41df, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 602260fcc3438e34d92413149f1c41df, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 503b8add226444f4fad0c5392d68da2b, type: 3}
     - m_Name: Attacking_006
       m_Hash: 816410331
       m_Sprite: {fileID: 21300000, guid: 3834a73e57ea755409b0f19a09da4ab4, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 3834a73e57ea755409b0f19a09da4ab4, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: c7b067b06a7bdf24e926648f0898bad4, type: 3}
     - m_Name: Attacking_007
       m_Hash: 128867917
       m_Sprite: {fileID: 21300000, guid: 98ed7747a7f9df944bfec48ef7521e84, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 98ed7747a7f9df944bfec48ef7521e84, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: 732e738e3306685479f6502d421977e0, type: 3}
     - m_Name: Attacking_008
       m_Hash: 387007452
       m_Sprite: {fileID: 21300000, guid: f2843ea16e294704783689b3e610a1ce, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: f2843ea16e294704783689b3e610a1ce, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: db85fd779db2d5e41b002637c76041e1, type: 3}
     - m_Name: Attacking_009
       m_Hash: 538342218
       m_Sprite: {fileID: 21300000, guid: 92f10cc08da8e444894d7fbbd4349c2e, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 92f10cc08da8e444894d7fbbd4349c2e, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: db85fd779db2d5e41b002637c76041e1, type: 3}
     - m_Name: Attacking_010
       m_Hash: 13761199
       m_Sprite: {fileID: 21300000, guid: 6f527c8d76289ce42a9659c76010444b, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 6f527c8d76289ce42a9659c76010444b, type: 3}
+      m_SpriteOverride: {fileID: 21300000, guid: a8374e8b3b489de49a022ac83bb663fa, type: 3}
     - m_Name: Attacking_011
       m_Hash: 936823353
       m_Sprite: {fileID: 21300000, guid: 8001059991617554c9530230741a7608, type: 3}
       m_FromMain: 1
-      m_SpriteOverride: {fileID: 21300000, guid: 8001059991617554c9530230741a7608, type: 3}
-    - m_Name: Attacking_000_0
-      m_Hash: 375930712
-      m_Sprite: {fileID: 21300000, guid: 1980c9bce89f2c24eb353513d559c413, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 1980c9bce89f2c24eb353513d559c413, type: 3}
-    - m_Name: Attacking_001_0
-      m_Hash: 397038959
-      m_Sprite: {fileID: 21300000, guid: 412ab1b37e1a0c74c8bab30c441deea4, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 412ab1b37e1a0c74c8bab30c441deea4, type: 3}
-    - m_Name: Attacking_002_0
-      m_Hash: 367848246
-      m_Sprite: {fileID: 21300000, guid: 9c80e2f634f9d2347a88921ae3717506, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 9c80e2f634f9d2347a88921ae3717506, type: 3}
-    - m_Name: Attacking_003_0
-      m_Hash: 338592001
-      m_Sprite: {fileID: 21300000, guid: 928e84532504d734b94795d660db29e3, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 928e84532504d734b94795d660db29e3, type: 3}
-    - m_Name: Attacking_004_0
-      m_Hash: 291608452
-      m_Sprite: {fileID: 21300000, guid: 55feefa1fee8c94418f52d7be0e96105, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 55feefa1fee8c94418f52d7be0e96105, type: 3}
-    - m_Name: Attacking_005_0
-      m_Hash: 279182771
-      m_Sprite: {fileID: 21300000, guid: 503b8add226444f4fad0c5392d68da2b, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 503b8add226444f4fad0c5392d68da2b, type: 3}
-    - m_Name: Attacking_006_0
-      m_Hash: 317015018
-      m_Sprite: {fileID: 21300000, guid: c7b067b06a7bdf24e926648f0898bad4, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: c7b067b06a7bdf24e926648f0898bad4, type: 3}
-    - m_Name: Attacking_007_0
-      m_Hash: 321333725
-      m_Sprite: {fileID: 21300000, guid: 732e738e3306685479f6502d421977e0, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 732e738e3306685479f6502d421977e0, type: 3}
-    - m_Name: Attacking_008_0
-      m_Hash: 410742496
-      m_Sprite: {fileID: 21300000, guid: 3c490755b071e4044a578fca80b31d71, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: 3c490755b071e4044a578fca80b31d71, type: 3}
-    - m_Name: Attacking_009_0
-      m_Hash: 431555799
-      m_Sprite: {fileID: 21300000, guid: db85fd779db2d5e41b002637c76041e1, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: db85fd779db2d5e41b002637c76041e1, type: 3}
-    - m_Name: Attacking_010_0
-      m_Hash: 785668157
-      m_Sprite: {fileID: 21300000, guid: a8374e8b3b489de49a022ac83bb663fa, type: 3}
-      m_FromMain: 0
-      m_SpriteOverride: {fileID: 21300000, guid: a8374e8b3b489de49a022ac83bb663fa, type: 3}
-    - m_Name: Attacking_011_0
-      m_Hash: 789983754
-      m_Sprite: {fileID: 21300000, guid: 16e469d407ffd174493f108cb0dc4baf, type: 3}
-      m_FromMain: 0
       m_SpriteOverride: {fileID: 21300000, guid: 16e469d407ffd174493f108cb0dc4baf, type: 3}
     m_FromMain: 1
     m_EntryOverrideCount: 12
+  - m_Name: Dying
+    m_Hash: 315139327
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Dying_000
+      m_Hash: 523304036
+      m_Sprite: {fileID: 21300000, guid: d86bb17e76294594bb395ccf1292171b, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: adada5e2b500e364486fe84c83da835a, type: 3}
+    - m_Name: Dying_001
+      m_Hash: 674745586
+      m_Sprite: {fileID: 21300000, guid: e3c0bb43620a0f6499da965cf719b5e8, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: a0dc026177fc5fb43b79b818f831968e, type: 3}
+    - m_Name: Dying_002
+      m_Hash: 826187080
+      m_Sprite: {fileID: 21300000, guid: 19d1ad76791f5b842bb3923bd24117a3, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 466a5c1c656f237468e71e4e9cda2882, type: 3}
+    - m_Name: Dying_003
+      m_Hash: 104443358
+      m_Sprite: {fileID: 21300000, guid: 749e06d6d6448c847a88aecbdf2301e8, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 3b318aadac9b040478877d12fb6d5d51, type: 3}
+    - m_Name: Dying_004
+      m_Hash: 408762493
+      m_Sprite: {fileID: 21300000, guid: f20c78376f44dc840923d2fc750f4d43, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e304579048e589147995804247dd0689, type: 3}
+    - m_Name: Dying_005
+      m_Hash: 794429675
+      m_Sprite: {fileID: 21300000, guid: 26926a68eb7da0f4a973e79c52c82bc1, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 7f8b26b0891bcf74393427303a29d66b, type: 3}
+    - m_Name: Dying_006
+      m_Hash: 911432017
+      m_Sprite: {fileID: 21300000, guid: 1dbd50234a8a8f0488039a0d057fd9b6, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: f90a53ae5f1eb7f47913e3f13543961e, type: 3}
+    - m_Name: Dying_007
+      m_Hash: 22309319
+      m_Sprite: {fileID: 21300000, guid: e18ff35d000938945a065ec5f769cd50, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: af7b19052f7b910449125596b5bca070, type: 3}
+    - m_Name: Dying_008
+      m_Hash: 300643414
+      m_Sprite: {fileID: 21300000, guid: 757f4c6dd12fc0f4c84d0927289b3869, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 5360c1b3813b249468e9a882213c7809, type: 3}
+    - m_Name: Dying_009
+      m_Hash: 653018304
+      m_Sprite: {fileID: 21300000, guid: 1753b53f1e59703478f9d9c63f5e986d, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 9caf9e356914c03439b7434e60ba661d, type: 3}
+    - m_Name: Dying_010
+      m_Hash: 103533861
+      m_Sprite: {fileID: 21300000, guid: 5275287c6ed6885429681fac7e53f878, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 630ef035cfd22ef46bdb95175afdb0bf, type: 3}
+    - m_Name: Dying_011
+      m_Hash: 825032115
+      m_Sprite: {fileID: 21300000, guid: dfe51853bf6fd604ba37174321b96ce9, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 473b6de486734454099606816f6d238d, type: 3}
+    - m_Name: Dying_012
+      m_Hash: 673557513
+      m_Sprite: {fileID: 21300000, guid: f8fe44513434faf47b8fc58a7fcd7992, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 57bafc4fe9a3605489b71a066fc39c58, type: 3}
+    - m_Name: Dying_013
+      m_Hash: 522362015
+      m_Sprite: {fileID: 21300000, guid: c486badd6c9255f4ea2d173be6e64f7b, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: f41f08def3b71a24b9df9fee77558dd2, type: 3}
+    - m_Name: Dying_014
+      m_Hash: 21367100
+      m_Sprite: {fileID: 21300000, guid: 94b8243581528cd4d9b947b719247a2e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: c94f40641032f0f469446d0e59e0f9cb, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 15
   m_PrimaryLibraryGUID: 5ee9c2e41b22ac24687bf59bdeffaa54
-  m_ModificationHash: 638455067827922181
+  m_ModificationHash: 638455099002373031
   m_Version: 1

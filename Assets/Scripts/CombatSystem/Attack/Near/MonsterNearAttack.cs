@@ -22,9 +22,12 @@ namespace CombatSystem.Attack.Near
         protected override IEnumerator StartBehavior()
         {
             MonsterNearAI.SetEnemy(Enemy);
-            if (!MonsterNearAI.CanAttack) yield break;
+            if (!MonsterNearAI.CanAttack)
+            {
+                yield break;
+            }
 
-            var attackTime = GetAnimationLength(Monster_Animator.Attack_State);
+            var attackTime = GetAnimationLength(Monster_Animator.AnimationType.Attack);
             PlayAnimation(Monster_Animator.Attack_State);
             yield return new WaitForSeconds(attackTime);
             CauseDamage();

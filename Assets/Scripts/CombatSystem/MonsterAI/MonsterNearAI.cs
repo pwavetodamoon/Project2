@@ -41,10 +41,13 @@ namespace CombatSystem.MonsterAI
 
             if (IsOnTarget())
             {
+                Debug.Log("Haha 2");
                 LogicWhenOnTarget();
             }
             else
             {
+                Debug.Log("Haha 1");
+
                 LogicWhenNotOnTarget();
                 CheckMoveBehaviour();
             }
