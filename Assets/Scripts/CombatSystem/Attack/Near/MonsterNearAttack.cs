@@ -12,7 +12,7 @@ namespace CombatSystem.Attack.Near
 {
     public class MonsterNearAttack : BaseMonsterAttack
     {
-
+        WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
         public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
             AttackManager attackManager, Transform attackTransform = null)
         {
@@ -39,8 +39,8 @@ namespace CombatSystem.Attack.Near
                 {
                     MoveDirective(Vector2.left,7);
                 }
-                
-                yield return new WaitForEndOfFrame();
+
+                yield return waitForEndOfFrame;
             }
 
             while (true)
@@ -50,7 +50,8 @@ namespace CombatSystem.Attack.Near
                     var direction = Enemy.GetAttackerTransform().transform.position - entityCharacter.transform.position;
                     MoveDirective(direction.normalized, 1);
                 }
-                yield return new WaitForEndOfFrame();
+
+                yield return waitForEndOfFrame;
             }
 
         }
