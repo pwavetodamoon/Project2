@@ -13,8 +13,6 @@ namespace CombatSystem.Entity
     [RequireComponent(typeof(DamageSlashEffect))]
     public class MonsterCharacter : EntityCharacter
     {
-        [SerializeField] private MonsterNearAI monsterNearAI;
-        [SerializeField] private EnemyMoving enemyMoving;
 
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
         private DamageSlashEffect damageSlashEffect;
@@ -26,13 +24,17 @@ namespace CombatSystem.Entity
         {
             base.Awake();
             EntityStateManager = GetComponent<EntityStateManager>();
-            monsterNearAI = GetComponent<MonsterNearAI>();
-            enemyMoving = GetComponent<EnemyMoving>();
 
             damageSlashEffect = GetComponent<DamageSlashEffect>();
 
             EntityStateManager.OnTakeDamage += EntityStateManagerOnTakeEntityState;
             EntityStateManager.OnDie += EntityStateManagerOnDie;
+
+        }
+
+        private void Start()
+        {
+            attackControl.Create(monsterSingleAttackFactory);
         }
 
         private void OnDisable()
@@ -55,7 +57,6 @@ namespace CombatSystem.Entity
         {
             xRandomNoise = Random.Range(0, 0.3f);
             yRandomNoise = Random.Range(-0.3f, .3f);
-            monsterNearAI.AddPositionNoise(new Vector3(xRandomNoise, yRandomNoise));
         }
 
         public override void PlayHurtAnimation()
@@ -66,8 +67,6 @@ namespace CombatSystem.Entity
         public override void RegisterObject()
         {
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Enemy);
-            monsterNearAI.InitializeComponents();
-            attackControl.Create(monsterSingleAttackFactory);
             CreateNoise();
         }
 

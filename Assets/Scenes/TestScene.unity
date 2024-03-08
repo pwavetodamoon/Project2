@@ -2265,6 +2265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayFabManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6860648364024049784, guid: 07adac806d03d9143af8dcf175bbc9dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
