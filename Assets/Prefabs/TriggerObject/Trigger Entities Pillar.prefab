@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1003415908999330318}
   - component: {fileID: 1712829805591658446}
   - component: {fileID: 8192499224374062993}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trigger Entities Pillar
   m_TagString: Trigger Enemy
   m_Icon: {fileID: 0}
