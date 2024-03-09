@@ -12,7 +12,10 @@ namespace CombatSystem.Attack.Near
 {
     public class MonsterNearAttack : BaseMonsterAttack
     {
-        WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
+        private bool triggerAttack = false;
+        private IAttackerCounter IAttackerCounter;
+        private WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
+        
         public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
             AttackManager attackManager, Transform attackTransform = null)
         {
@@ -20,19 +23,23 @@ namespace CombatSystem.Attack.Near
             entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += EnableAttack;
             IAttackerCounter = newEntityCharacter.GetComponent<IAttackerCounter>();
             newEntityCharacter.StartCoroutine(MoveBehaviour());
-            if (IAttackerCounter != null)
-            {
-                Debug.Log("IAttackerCounter is not null");
-            }
         }
-        bool triggerAttack = false;
-        [ShowInInspector] private IAttackerCounter IAttackerCounter;
+        protected override IEnumerator StartBehavior()
+        {
+            if (IsOnTarget() == false) yield break;
+            PlayAnimation(Monster_Animator.AnimationType.Attack);
+            yield return new WaitForSeconds(GetAnimationLength(Monster_Animator.AnimationType.Attack));
+            CauseDamage();
+
+        }
         private void EnableAttack()
         {
             triggerAttack = true;
         }
         protected IEnumerator MoveBehaviour()
         {
+            PlayAnimation(Monster_Animator.AnimationType.Walk);
+
             while (triggerAttack == false)
             {
                 if (CanMove())
@@ -42,7 +49,6 @@ namespace CombatSystem.Attack.Near
 
                 yield return waitForEndOfFrame;
             }
-
             while (true)
             {
                 if (CanMove())
@@ -50,7 +56,6 @@ namespace CombatSystem.Attack.Near
                     var direction = Enemy.GetAttackerTransform().transform.position - entityCharacter.transform.position;
                     MoveDirective(direction.normalized, 1);
                 }
-
                 yield return waitForEndOfFrame;
             }
 
@@ -71,13 +76,6 @@ namespace CombatSystem.Attack.Near
             var distance = Vector2.Distance(entityCharacter.transform.position, targetPosition);
             return distance < .1f;
         }
-        protected override IEnumerator StartBehavior()
-        {
-            if(IsOnTarget() == false) yield break;
-            var attackTime = GetAnimationLength(Monster_Animator.AnimationType.Attack);
-            PlayAnimation(Monster_Animator.Attack_State);
-            yield return new WaitForSeconds(attackTime);
-            CauseDamage();
-        }
+
     }
 }
