@@ -20,18 +20,26 @@ namespace CombatSystem.Attack.Near
         public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
             base.GetReference(newEntityCharacter, attackTransform);
+            PlayAnimation(AnimationType.Walk);
             entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += EnableAttack;
             IAttackerCounter = newEntityCharacter.GetComponent<IAttackerCounter>();
             newEntityCharacter.StartCoroutine(MoveBehaviour());
         }
         protected override IEnumerator StartBehavior()
         {
-            Debug.Log("Thu tan cong");
             if (IsOnTarget() == false) yield break;
-            Debug.Log("Thu tan cong thanh cong");
             PlayAnimation(AnimationType.Attack);
             yield return new WaitForSeconds(GetAnimationLength(AnimationType.Attack));
             CauseDamage();
+
+            if (IsOnTarget())
+            {
+                PlayAnimation(AnimationType.Idle);
+            }
+            else
+            {
+                PlayAnimation(AnimationType.Walk);
+            }
 
         }
         private void EnableAttack()
@@ -44,7 +52,7 @@ namespace CombatSystem.Attack.Near
 
             while (triggerAttack == false)
             {
-                if (CanMove())
+                if (CanMoveEntity())
                 {
                     MoveDirective(Vector2.left,7);
                 }
@@ -53,9 +61,8 @@ namespace CombatSystem.Attack.Near
             }
             while (true)
             {
-                if (CanMove())
+                if (CanMoveEntity())
                 {
-                    Debug.Log("Dang di chuyen");
                     var direction = Enemy.GetAttackerTransform().transform.position - entityCharacter.transform.position;
                     MoveDirective(direction.normalized, 5);
                 }
@@ -64,7 +71,7 @@ namespace CombatSystem.Attack.Near
 
         }
 
-        private bool CanMove()
+        private bool CanMoveEntity()
         {
             return Enemy != null && !IsOnTarget() && IAttackerCounter.Count == 0;
         }
@@ -73,10 +80,11 @@ namespace CombatSystem.Attack.Near
             entityCharacter.transform.Translate(moveVector * (Time.deltaTime * speed));
         }
 
+        public float distance;
         private bool IsOnTarget()
         {
-            var targetPosition = Enemy.transform.position;
-            var distance = Vector2.Distance(entityCharacter.transform.position, targetPosition);
+            var targetPosition = Enemy.GetAttackerTransform().transform.position;
+            distance = Vector2.Distance(entityCharacter.transform.position, targetPosition);
             return distance < .1f;
         }
 

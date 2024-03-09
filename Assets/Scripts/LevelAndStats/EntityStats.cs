@@ -29,7 +29,7 @@ namespace LevelAndStats
 
         public int Level()
         {
-            return structStats.Level;
+            return structStats.level;
         }
 
         public void DecreaseHealth(float damage)
@@ -47,18 +47,18 @@ namespace LevelAndStats
 
         public float GetDamage()
         {
-            var damage = structStats.BaseDamage;
+            var damage = structStats.baseDamage;
 
             IsCritical = IsCriticalHit();
 
-            damage = IsCritical ? damage * structStats.CritDamage : damage;
+            damage = IsCritical ? damage * structStats.critDamage : damage;
             return damage;
         }
 
         private bool IsCriticalHit()
         {
             var rate = Random.Range(0, 100);
-            return rate <= structStats.CritRate ? true : false;
+            return rate <= structStats.critRate ? true : false;
         }
 
         public StructStats GetStructStats()

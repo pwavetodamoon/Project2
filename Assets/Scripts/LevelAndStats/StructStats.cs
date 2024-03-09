@@ -1,23 +1,20 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LevelAndStats
 {
     [Serializable]
     public struct StructStats
     {
-        public int Level;
+        public int level;
         public float maxHealth;
         public float health;
-        public float BaseDamage;
+        public float baseDamage;
         public float speed;
-
-        [Header("Critical")] public float CritRate;
-
-        public float CritDamage;
-
-        [Header("Attack Settings")] public float attackCoolDown;
-
+        public float critRate;
+        public float critDamage;
+        public float attackCoolDown;
         public float attackMoveDuration;
     }
 }

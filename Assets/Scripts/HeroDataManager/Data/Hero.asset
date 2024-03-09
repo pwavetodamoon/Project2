@@ -29,13 +29,13 @@ MonoBehaviour:
   isDead: 0
   heroCharacter: {fileID: 0}
   structStats:
-    Level: 1
+    level: 1
     maxHealth: 100
     health: 100
-    BaseDamage: 10
+    baseDamage: 10
     speed: 3
-    CritRate: 0
-    CritDamage: 0
+    critRate: 0
+    critDamage: 0
     attackCoolDown: 1
     attackMoveDuration: 1
   icon: {fileID: 21300000, guid: c10ea21566c36044488d0374841623ae, type: 3}

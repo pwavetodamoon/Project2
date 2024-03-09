@@ -20,6 +20,7 @@ namespace CombatSystem.Entity.Utilities
         {
             EntityStats = GetComponent<EntityStats>();
             entity = GetComponent<IEntity>();
+            animation_Base = GetComponentInChildren<Animator_Base>();
         }
 
         public void TakeDamage(EntityStats enemy)
@@ -43,8 +44,8 @@ namespace CombatSystem.Entity.Utilities
 
         private void SpawnText(float damage)
         {
-            var builder = "+" + damage;
-            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder, Color.white);
+            var builder = "-" + damage;
+            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder, Color.red);
         }
 
         [Button]

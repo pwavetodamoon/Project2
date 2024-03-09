@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 5514555860598001570}
   - component: {fileID: 3469162009311317478}
   - component: {fileID: 6153412626832977644}
+  - component: {fileID: 1631389866116440740}
   m_Layer: 7
   m_Name: Hero
   m_TagString: Hero
@@ -372,16 +373,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structStats:
-    Level: 0
+    level: 0
     maxHealth: 0
     health: 0
-    BaseDamage: 0
+    baseDamage: 0
     speed: 0
-    CritRate: 0
-    CritDamage: 0
+    critRate: 0
+    critDamage: 0
     attackCoolDown: 0
     attackMoveDuration: 0
   heroData: {fileID: 0}
+--- !u!114 &1631389866116440740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130498615958115108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e36e731a0feb9438e566ef64c80eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashMaterial: {fileID: 2100000, guid: e4c9e8cefa3a83e428a58fd4e820966f, type: 2}
 --- !u!1 &2636142058065870773
 GameObject:
   m_ObjectHideFlags: 0

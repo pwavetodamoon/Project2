@@ -7,6 +7,7 @@ using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using DG.Tweening;
 using Model.Hero;
+using Model.Monsters;
 using UI_Effects;
 
 
@@ -47,7 +48,7 @@ public class NextMapTransitionHandler : GameTransitionBase
             if (hero.InGameSlotIndex == -1) continue;
             hero.DOKill();
             hero.ReleaseObject();
-            hero.GetComponent<AnimationManager>().PlayAnimation(AnimationType.Walk);
+            hero.GetComponentInChildren<Animator_Base>().ChangeAnimation(AnimationType.Walk);
 
         }
         foreach (var hero in heroList)

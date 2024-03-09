@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using CombatSystem.Entity;
+using LevelAndStats;
 using UnityEngine;
 
 namespace CombatSystem
@@ -55,6 +56,7 @@ namespace CombatSystem
                 spawnPosition,
                 Quaternion.identity,
                 transform);
+            go.GetComponent<EnemyStats>().LoadData();
         }
 
         public void SetMaxSpawnCount(int count)

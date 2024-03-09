@@ -12,8 +12,6 @@ namespace CombatSystem.Attack.Systems
     public class AttackControl : MonoBehaviour, ICoroutineRunner
     {
         [SerializeField] private Transform attackTransform;
-        private AnimationManager animatonManager;
-
         [ShowInInspector] private BaseSingleTargetAttack attack;
         [ShowInInspector] private AttackCounter attackCounter;
         private AttackManager attackManager;
@@ -27,7 +25,6 @@ namespace CombatSystem.Attack.Systems
             entityCharacter = GetComponent<EntityCharacter>();
             attackManager = GetComponent<AttackManager>();
             EntityStats = GetComponent<EntityStats>();
-            animatonManager = GetComponent<AnimationManager>();
         }
 
         private void Update()
@@ -70,6 +67,10 @@ namespace CombatSystem.Attack.Systems
             {
                 Debug.LogError("Attack is not validate");
                 return;
+            }
+            else
+            {
+                Debug.Log($"Attack is validate {newAttack} {newAttackCounter.maxCounterTime}");
             }
 
             attack = newAttack;

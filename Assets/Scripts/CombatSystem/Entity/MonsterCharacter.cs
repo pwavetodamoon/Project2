@@ -28,7 +28,6 @@ namespace CombatSystem.Entity
 
             damageSlashEffect = GetComponent<DamageSlashEffect>();
 
-            EntityStateManager.OnTakeDamage += EntityStateManagerOnTakeEntityState;
             EntityStateManager.OnDie += EntityStateManagerOnDie;
 
         }
@@ -40,7 +39,6 @@ namespace CombatSystem.Entity
 
         private void OnDisable()
         {
-            EntityStateManager.OnTakeDamage -= EntityStateManagerOnTakeEntityState;
             EntityStateManager.OnDie -= EntityStateManagerOnDie;
         }
 

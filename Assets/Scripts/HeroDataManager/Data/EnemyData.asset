@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   structStats:
-    Level: 1
+    level: 1
     maxHealth: 100
     health: 100
-    BaseDamage: 100
+    baseDamage: 5
     speed: 3
-    CritRate: 0
-    CritDamage: 0
+    critRate: 0
+    critDamage: 0
     attackCoolDown: 1
     attackMoveDuration: 1

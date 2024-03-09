@@ -769,7 +769,7 @@ MonoBehaviour:
   timeCounter: 5
   timeToSpawnRandomNoise: 2
   spawnTime: 5
-  maxMonster: 5
+  maxMonster: 2
   SpawnPoint1: {fileID: 1934793217}
   SpawnPoint2: {fileID: 1479021097}
   allowSpawned: 0
