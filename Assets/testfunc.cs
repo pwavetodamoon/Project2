@@ -1,75 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NewCombat.Characters;
-using NewCombat.HeroDataManager;
-using Sirenix.OdinInspector;
-using Unity.VisualScripting;
-using System.Linq;
-using Background;
-using NewCombat.Slots;
-using UnityEngine;
-using Sirenix.Utilities;
-using Characters;
+﻿using System.Collections.Generic;
 using CombatSystem;
-using CombatSystem.Scripts.Spawner;
-using DropItem;
+using Sirenix.OdinInspector;
+using System.Linq;
+using UnityEngine;
+using System;
+using CombatSystem.Entity;
+using CombatSystem.HeroDataManager;
+using CombatSystem.HeroDataManager.Data;
+using LevelAndStats;
+using Model.Hero;
+using SlotHero;
 
 public class testfunc : MonoBehaviour
 {
+
     public HeroManager heroManager;
     public UIAvatarController[] uiAvatarControllers;
-    public MonsterSpawner monsterSpawner;
-    public ScreenTransition screenTransition;
-    public MapBackground mapBackground;
 
-    private void Start()
-    {
-        Test();
-        Spawn();
-    }
-
-    [Button]
-    void Test()
-    {
-        uiAvatarControllers = FindObjectsOfType<UIAvatarController>();
-    }
 
     [Button]
     public void Spawn()
     {
+        uiAvatarControllers = FindObjectsOfType<UIAvatarController>();
+
         // Cần phải chạy hàm Test trước để lấy danh sách UI avatar
         // Lấy data list hero data trong hero manager
         var list = heroManager.heroData;
         uiAvatarControllers = uiAvatarControllers.OrderBy(x => x.index).ToArray();
         for (int i = 0; i < list.Count; i++)
         {
-            // ref data thứ i từ list hero data
             var heroData = list[i];
-            if(heroData.heroCharacter != null) continue;
-
-            // tạo hero từ prefab hero trong hero manager
+            if (heroData.heroCharacter != null) continue;
             var hero = Instantiate(heroManager.prefabHero, CombatEntitiesManager.Instance.transform).GetComponent<HeroCharacter>();
-            hero.SetAttackFactory(heroData.GetHeroFactory());
-
-            // chỉnh sprite cho hero
-            uiAvatarControllers[i].SetSprite(heroData.icon);
-
-            // Chỉnh data cho class stats của hero
-            hero.SetHeroData(heroData);
-
-            // Chỉnh slot index cho hero bởi hero vừa tạo ra chỉ có xác 
-            hero.SetSlotIndex(heroData.SlotIndex);
-
-            // Ref hero object vào trong hero data
             heroData.heroCharacter = hero;
 
-            // Chỉnh icon cho avatar
-            uiAvatarControllers[i].SetHeroCharacter(hero);
-
+            hero.SetAttackFactory(heroData.GetHeroFactory());
+            hero.IsDead = heroData.isDead;
+            hero.SetHeroData(heroData);
+            hero.SetSlotIndex(heroData.slotIndex);
+            
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
             heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
 
             SlotManager.Instance.LoadHeroIntoSlot(hero);
+            if (hero.IsDead)
+            {
+                hero.SetDeadState();
+                hero.ReleaseObject();
+            }
+
+            uiAvatarControllers[i].SetSprite(heroData.icon);
+            uiAvatarControllers[i].SetHeroCharacter(hero);
 
         }
         // Load tất cả hero vào vị trí đúng trong game
@@ -86,58 +67,58 @@ public class testfunc : MonoBehaviour
     }
 
     [Button]
-    public void GoNextMapSetup()
+    private void Test222()
     {
-        StartCoroutine(GoNextMap());
+        
     }
 
-    IEnumerator GoNextMap()
+    [Button]
+    public string ConvertToJson()
     {
+        var heroSaveList = new HeroSaveList();
         var list = heroManager.heroData;
-        monsterSpawner.SetMaxSpawnCount(0);
-        bool isAttackState = false;
-        List<HeroCharacter> list1 = new List<HeroCharacter>();
-        List<HeroCharacter> list2 = new List<HeroCharacter>();
-        foreach (var data in list)
-        {
-            if(data.heroCharacter == null) continue;
-            list1.Add(data.heroCharacter);
-            data.heroCharacter.SetAttackState(false);
-        }
-        while (true)
-        {
-            if(list1.Count == 0) break;
-            foreach (var hero in list1)
-            {
-                if (hero.EntityInAttackState()) continue;
-                list2.Add(hero);
-            }
-        }
-
-        foreach (var hero in list2)
-        {
-            SlotManager.Instance.LoadHeroIntoSlot(hero);
-        }
-
-        foreach (var monster in CombatEntitiesManager.Instance.transform.GetComponentsInChildren<MonsterCharacter>())
-        {
-            monster.ReleaseObject();
-        }
-        
-        foreach (var item in RewardManager.Instance.list)
-        {
-            if (item.gameObject.activeSelf == false) continue;
-            item.Collect();
-        }
-        
-        yield return screenTransition.StartTransition();
-        mapBackground.GoNextMap();
-        yield return screenTransition.waitBetweenTransition;
-        yield return screenTransition.EndTransition();
-
         foreach (var heroData in list)
         {
-            heroData.heroCharacter.SetAttackState(true);
+            var heroCloudSaveData = new HeroCloudSaveData();
+            heroCloudSaveData.LoadFromHeroData(heroData);
+            heroSaveList.Datas.Add(heroCloudSaveData);
         }
+        string json = JsonUtility.ToJson(heroSaveList, true);
+        Debug.Log(json);
+        return json;
+    }
+
+    public void ConvertJsonBack(string json)
+    {
+        var heroCloudSaveList = JsonUtility.FromJson<HeroSaveList>(json);
+        for (int i = 0; i < heroCloudSaveList.Datas.Count; i++)
+        {
+            var heroData = heroManager.heroData[i];
+            heroData.LoadFromHeroSaveGame(heroCloudSaveList.Datas[i]);
+        }
+    }
+
+}
+
+[Serializable]
+public class HeroSaveList
+{
+    public List<HeroCloudSaveData> Datas = new List<HeroCloudSaveData>();
+}
+[System.Serializable]
+public class HeroCloudSaveData
+{
+    public string heroName;
+    public int slotIndex;
+    public StructStats structStats;
+    public bool isDead;
+
+    public void LoadFromHeroData(HeroData heroData)
+    {
+        heroData.LoadFromHeroInGame();
+        heroName = heroData.heroName;
+        slotIndex = heroData.slotIndex;
+        structStats = heroData.structStats;
+        isDead = heroData.isDead;
     }
 }

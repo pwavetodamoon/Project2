@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a52a201afe5a04e84b4ccabaadd0e1, type: 3}
+  m_Name: Hero
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  AttackType: 0
+  characterEnumType: 4
+  HeroSingleAttackFactory: {fileID: 11400000, guid: 403ddf1754cdccb45a5730d3cab5d150, type: 2}
+  slotIndex: 2
+  heroName: Quang
+  isDead: 0
+  heroCharacter: {fileID: 0}
+  structStats:
+    level: 1
+    maxHealth: 100
+    health: 100
+    baseDamage: 10
+    speed: 3
+    critRate: 0
+    critDamage: 0
+    attackCoolDown: 1
+    attackMoveDuration: 1
+  icon: {fileID: 21300000, guid: c10ea21566c36044488d0374841623ae, type: 3}
+  resourcePath: Hero/Medieval King

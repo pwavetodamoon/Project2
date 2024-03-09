@@ -5,8 +5,9 @@ namespace Helper
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        [SerializeField] protected bool DontDestroyOnLoad = false;
         private static T instance;
+        [SerializeField] protected bool DontDestroyOnLoad;
+
         public static T Instance
         {
             get
@@ -20,32 +21,30 @@ namespace Helper
                     if (instance == null)
                     {
                         // create new gameobject
-                        GameObject obj = new GameObject();
+                        var obj = new GameObject();
                         obj.name = typeof(T).Name;
                         // add component of type T
                         instance = obj.AddComponent<T>();
                     }
                 }
+
                 return instance;
             }
         }
+
         // virtual Awake method
         protected virtual void Awake()
         {
             // if instance is null
             if (instance == null)
-            {
                 // set instance to this
                 instance = this as T;
-            }
             // if instance is not this
             else if (instance != this)
-            {
                 // destroy this
                 Destroy(gameObject);
-            }
             // set this to not be destroyed when reloading scene
-            if(DontDestroyOnLoad)
+            if (DontDestroyOnLoad)
                 DontDestroyOnLoad(gameObject);
         }
     }
