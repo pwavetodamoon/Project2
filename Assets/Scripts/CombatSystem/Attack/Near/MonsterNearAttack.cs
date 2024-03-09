@@ -4,6 +4,7 @@ using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using CombatSystem.MonsterAI;
+using Model.Hero;
 using Model.Monsters;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,19 +17,20 @@ namespace CombatSystem.Attack.Near
         private IAttackerCounter IAttackerCounter;
         private WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
         
-        public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
-            AttackManager attackManager, Transform attackTransform = null)
+        public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
-            base.GetReference(newEntityCharacter, _animationManager, attackManager, attackTransform);
+            base.GetReference(newEntityCharacter, attackTransform);
             entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += EnableAttack;
             IAttackerCounter = newEntityCharacter.GetComponent<IAttackerCounter>();
             newEntityCharacter.StartCoroutine(MoveBehaviour());
         }
         protected override IEnumerator StartBehavior()
         {
+            Debug.Log("Thu tan cong");
             if (IsOnTarget() == false) yield break;
-            PlayAnimation(Monster_Animator.AnimationType.Attack);
-            yield return new WaitForSeconds(GetAnimationLength(Monster_Animator.AnimationType.Attack));
+            Debug.Log("Thu tan cong thanh cong");
+            PlayAnimation(AnimationType.Attack);
+            yield return new WaitForSeconds(GetAnimationLength(AnimationType.Attack));
             CauseDamage();
 
         }
@@ -38,7 +40,7 @@ namespace CombatSystem.Attack.Near
         }
         protected IEnumerator MoveBehaviour()
         {
-            PlayAnimation(Monster_Animator.AnimationType.Walk);
+            PlayAnimation(AnimationType.Walk);
 
             while (triggerAttack == false)
             {
@@ -53,8 +55,9 @@ namespace CombatSystem.Attack.Near
             {
                 if (CanMove())
                 {
+                    Debug.Log("Dang di chuyen");
                     var direction = Enemy.GetAttackerTransform().transform.position - entityCharacter.transform.position;
-                    MoveDirective(direction.normalized, 1);
+                    MoveDirective(direction.normalized, 5);
                 }
                 yield return waitForEndOfFrame;
             }

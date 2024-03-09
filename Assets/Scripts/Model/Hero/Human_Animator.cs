@@ -3,42 +3,16 @@ using Sirenix.OdinInspector;
 
 namespace Model.Hero
 {
+    public enum AnimationType
+    {
+        Idle,
+        Walk,
+        Hurt,
+        Attack,
+        Dying
+    }
     public class Human_Animator : Animator_Base
     {
-        public enum AnimationType
-        {
-            Idle,
-            Walk,
-            Slash,
-            Hurt
-        }
-
-        private AnimationType currentType = AnimationType.Walk;
-
-        public static AnimationType Idle_State
-        {
-            get => AnimationType.Idle;
-            private set { }
-        }
-
-        public static AnimationType Walk_State
-        {
-            get => AnimationType.Walk;
-            private set { }
-        }
-
-        public static AnimationType Slash_State
-        {
-            get => AnimationType.Slash;
-            private set { }
-        }
-
-        public static AnimationType Hurt_State
-        {
-            get => AnimationType.Hurt;
-            private set { }
-        }
-
         /// <summary>
         ///     Idle = 0, Walk = 1, Slash = 2, Hurt = 3
         /// </summary>
@@ -58,7 +32,7 @@ namespace Model.Hero
                 case AnimationType.Walk:
                     return "walking_1";
 
-                case AnimationType.Slash:
+                case AnimationType.Attack:
                     return "slashing_1";
 
                 case AnimationType.Hurt:
@@ -77,13 +51,12 @@ namespace Model.Hero
 
         protected override void ChangeToDefaultAnimationState()
         {
-            //Debug.Log("Change to idle");
-            ChangeAnimation(currentType);
+            ChangeAnimation(defaultAnimationPlayBack);
         }
 
         public override void SetDefaultAnimation<T>(T type)
         {
-            currentType = (AnimationType)(object)type;
+            defaultAnimationPlayBack = (AnimationType)(object)type;
         }
     }
 }

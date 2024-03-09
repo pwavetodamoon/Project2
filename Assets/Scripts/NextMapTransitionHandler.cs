@@ -47,7 +47,7 @@ public class NextMapTransitionHandler : GameTransitionBase
             if (hero.InGameSlotIndex == -1) continue;
             hero.DOKill();
             hero.ReleaseObject();
-            hero.GetComponent<AnimationManager>().PlayAnimation(Human_Animator.Walk_State);
+            hero.GetComponent<AnimationManager>().PlayAnimation(AnimationType.Walk);
 
         }
         foreach (var hero in heroList)

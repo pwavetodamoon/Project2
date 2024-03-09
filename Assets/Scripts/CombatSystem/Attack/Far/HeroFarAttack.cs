@@ -26,7 +26,7 @@ namespace CombatSystem.Attack.Far
         protected override IEnumerator StartBehavior()
         {
             yield return base.StartBehavior();
-            PlayAnimation(Human_Animator.Slash_State);
+            PlayAnimation(AnimationType.Attack);
 
             yield return waitForEndAnim;
 
@@ -53,14 +53,13 @@ namespace CombatSystem.Attack.Far
             IsProjectileHitEnemy = true;
         }
 
-        public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
-            AttackManager _attackManager,
+        public override void GetReference(EntityCharacter newEntityCharacter,
             Transform attackTransform = null)
         {
-            base.GetReference(newEntityCharacter, _animationManager, _attackManager, attackTransform);
+            base.GetReference(newEntityCharacter, attackTransform);
 
             waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
-            waitForEndAnim = new WaitForSeconds(GetAnimationLength(Human_Animator.Slash_State) / 2);
+            waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
         }
     }
 }

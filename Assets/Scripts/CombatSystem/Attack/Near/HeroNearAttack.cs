@@ -18,7 +18,7 @@ namespace CombatSystem.Attack.Near
         {
             yield return base.StartBehavior();
             yield return MoveModelToPosition(Enemy.GetAttackerTransform().position);
-            PlayAnimation(Human_Animator.Slash_State);
+            PlayAnimation(AnimationType.Attack);
             yield return waitForEndAnim;
             CauseDamage();
             yield return MoveModelToPosition(GetSlotPosition());
@@ -37,13 +37,12 @@ namespace CombatSystem.Attack.Near
             return SlotManager.Instance.GetStandTransform(Hero.InGameSlotIndex).position;
         }
 
-        public override void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
-            AttackManager attackManager, Transform attackTransform = null)
+        public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
-            base.GetReference(newEntityCharacter, _animationManager, attackManager, attackTransform);
+            base.GetReference(newEntityCharacter, attackTransform);
 
             Hero = (HeroCharacter)newEntityCharacter;
-            waitForEndAnim = new WaitForSeconds(GetAnimationLength(Human_Animator.Slash_State));
+            waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack));
         }
     }
 }

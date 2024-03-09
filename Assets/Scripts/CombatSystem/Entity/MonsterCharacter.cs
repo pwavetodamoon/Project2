@@ -4,6 +4,7 @@ using CombatSystem.Helper;
 using CombatSystem.MonsterAI;
 using Core.Reward;
 using Helper;
+using Model.Hero;
 using Model.Monsters;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -59,10 +60,6 @@ namespace CombatSystem.Entity
             yRandomNoise = Random.Range(-0.3f, .3f);
         }
 
-        public override void PlayHurtAnimation()
-        {
-            animationManager.PlayAnimation(Monster_Animator.Hurt_State);
-        }
 
         public override void RegisterObject()
         {

@@ -155,7 +155,6 @@ MonoBehaviour:
   isPlayDefaultAnimation: 1
   animationNotHaveLoopIsRun: 0
   timeAnimated: 0
-  currentAnimation: 1
 --- !u!1 &6621426444390167394
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +168,6 @@ GameObject:
   - component: {fileID: 321570569799733358}
   - component: {fileID: 9156020029244245189}
   - component: {fileID: 3458469622659473241}
-  - component: {fileID: 8618022460076518562}
   - component: {fileID: 7250616980711001169}
   - component: {fileID: 3233242168743384101}
   - component: {fileID: 3584062236828804731}
@@ -285,18 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AtkTransform: {fileID: 984564786571446642}
---- !u!114 &8618022460076518562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621426444390167394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 910f92d6be599fd4294465661ecf7cd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7250616980711001169
 MonoBehaviour:
   m_ObjectHideFlags: 0

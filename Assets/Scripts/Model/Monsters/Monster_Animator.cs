@@ -1,38 +1,11 @@
+using Model.Hero;
 using Sirenix.OdinInspector;
+using UnityEngine.Serialization;
 
 namespace Model.Monsters
 {
     public class Monster_Animator : Animator_Base
     {
-        public enum AnimationType
-        {
-            Idle,
-            Walk,
-            Hurt,
-            Attack,
-            Dying
-        }
-
-        public AnimationType currentAnimation = Walk_State;
-
-        public static AnimationType Walk_State
-        {
-            get => AnimationType.Walk;
-            private set { }
-        }
-
-        public static AnimationType Hurt_State
-        {
-            get => AnimationType.Hurt;
-            private set { }
-        }
-
-        public static AnimationType Attack_State
-        {
-            get => AnimationType.Attack;
-            private set { }
-        }
-
         /// <summary>
         ///     0 is walk, 1 is attack, 2 is hurt
         /// </summary>
@@ -50,10 +23,8 @@ namespace Model.Monsters
                     return "Idle";
                 case AnimationType.Walk:
                     return "Walking";
-
                 case AnimationType.Hurt:
                     return "Hurt";
-
                 case AnimationType.Attack:
                     return "Attack";
                 case AnimationType.Dying:
@@ -71,12 +42,12 @@ namespace Model.Monsters
 
         protected override void ChangeToDefaultAnimationState()
         {
-            ChangeAnimation(Walk_State);
+            ChangeAnimation(defaultAnimationPlayBack);
         }
 
         public override void SetDefaultAnimation<T>(T type)
         {
-            currentAnimation = (AnimationType)(object)type;
+            defaultAnimationPlayBack = (AnimationType)(object)type;
         }
     }
 }

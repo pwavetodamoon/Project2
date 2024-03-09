@@ -6,8 +6,6 @@
 
         void ReleaseObject();
 
-        void PlayHurtAnimation();
-
         bool EntityInAttackState();
     }
 }

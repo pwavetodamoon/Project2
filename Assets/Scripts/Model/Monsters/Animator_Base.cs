@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Model.Hero;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,7 +16,16 @@ namespace Model.Monsters
         [SerializeField] protected bool animationNotHaveLoopIsRun;
         [SerializeField] protected float timeAnimated;
         [ShowInInspector] protected Dictionary<string, float> animationLengths;
+        protected AnimationType defaultAnimationPlayBack = AnimationType.Idle;
+        public void DisableAnimator()
+        {
+            animator.enabled = false;
+        }
 
+        public void EnableAnimator()
+        {
+            animator.enabled = true;
+        }
         protected virtual void Awake()
         {
             animator = GetComponentInChildren<Animator>();

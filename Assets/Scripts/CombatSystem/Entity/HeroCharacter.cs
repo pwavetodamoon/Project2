@@ -4,6 +4,7 @@ using CombatSystem.HeroDataManager.Data;
 using Helper;
 using LevelAndStats;
 using Model.Hero;
+using Model.Monsters;
 using SlotHero;
 using UnityEngine;
 
@@ -14,20 +15,26 @@ namespace CombatSystem.Entity
         public CharacterEnumType characterEnumType;
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
-        public bool IsDead;
 
         private EntityStateManager entityStateManager;
         private Character_Body_Sprites sprites;
+        private Animator_Base animatorBase;
+        private AttackManager attackManager;
+        public bool IsDead;
+
         public int InGameSlotIndex { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
             entityStateManager = GetComponent<EntityStateManager>();
+            attackManager = GetComponent<AttackManager>();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
+            sprites = GetComponentInChildren<Character_Body_Sprites>();
+            animatorBase = GetComponentInChildren<Animator_Base>();
+
             entityStateManager.OnDie += OnDead;
             entityStateManager.OnRebirth += OnRebirth;
-            sprites = GetComponentInChildren<Character_Body_Sprites>();
         }
 
         private void OnDestroy()
@@ -50,13 +57,13 @@ namespace CombatSystem.Entity
         public void SetDeadState()
         {
             SetModelBackImmediate();
-            animationManager.DisableAnimator();
+            animatorBase.DisableAnimator();
             sprites.SetDeadSprite();
         }
 
         private void OnRebirth()
         {
-            animationManager.EnableAnimator();
+            animatorBase.EnableAnimator();
             sprites.SetRebirthSprite();
             RegisterObject();
         }
@@ -91,10 +98,6 @@ namespace CombatSystem.Entity
             attackFactory = baseAttack;
         }
 
-        public override void PlayHurtAnimation()
-        {
-            animationManager.PlayAnimation(Human_Animator.Hurt_State);
-        }
 
         public Transform GetModelTransform()
         {

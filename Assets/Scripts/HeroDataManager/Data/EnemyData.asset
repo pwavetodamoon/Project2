@@ -20,14 +20,5 @@ MonoBehaviour:
     speed: 3
     CritRate: 0
     CritDamage: 0
-    attackCoolDown: 0
-    attackMoveDuration: 0
-  Level: 0
-  maxHealth: 0
-  health: 0
-  BaseDamage: 0
-  speed: 0
-  CritRate: 0
-  CritDamage: 0
-  attackCoolDown: 0
-  attackMoveDuration: 0.5
+    attackCoolDown: 1
+    attackMoveDuration: 1

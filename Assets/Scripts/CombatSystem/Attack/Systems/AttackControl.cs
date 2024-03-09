@@ -65,7 +65,7 @@ namespace CombatSystem.Attack.Systems
 
         private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
         {
-            newAttack.GetReference(entityCharacter, animatonManager, attackManager);
+            newAttack.GetReference(entityCharacter);
             if (newAttack.IsValidate == false)
             {
                 Debug.LogError("Attack is not validate");

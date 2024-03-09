@@ -4,6 +4,7 @@ using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using LevelAndStats;
+using Model.Monsters;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Abstracts
@@ -12,29 +13,26 @@ namespace CombatSystem.Attack.Abstracts
     public abstract class BaseSingleTargetAttack
     {
         [SerializeField] protected bool isActive;
-        private AnimationManager animationManager;
         private AttackManager attackManager;
 
         protected Transform AttackTransform;
-
+        protected EntityStats EntityStats;
         protected EntityCharacter Enemy;
-
+        protected Animator_Base animator;
         [Header("Entity Characters Field")] protected EntityCharacter entityCharacter;
 
-        protected EntityStats EntityStats;
         private Action onEndAttack;
         private float WaitTimeToFindEnemy = 0.1f;
 
         public bool IsActive => isActive;
         public bool IsValidate { get; private set; }
 
-        public virtual void GetReference(EntityCharacter newEntityCharacter, AnimationManager _animationManager,
-            AttackManager _attackManager, Transform attackTransform = null)
+        public virtual void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
             entityCharacter = newEntityCharacter;
             EntityStats = entityCharacter.GetComponent<EntityStats>();
-            animationManager = _animationManager;
-            attackManager = _attackManager;
+            attackManager = entityCharacter.GetComponent<AttackManager>();
+            animator = entityCharacter.GetComponentInChildren<Animator_Base>();
             AttackTransform = attackTransform;
             IsValidate = true;
         }
@@ -106,14 +104,14 @@ namespace CombatSystem.Attack.Abstracts
 
         protected void PlayAnimation(Enum AnimationEnum)
         {
-            if (animationManager == null) return;
-            animationManager.PlayAnimation(AnimationEnum);
+            if (animator == null) return;
+            animator.ChangeAnimation(AnimationEnum);
         }
 
         protected float GetAnimationLength(Enum AnimationEnum)
         {
-            if (animationManager == null) return 0;
-            return animationManager.GetAnimationLength(AnimationEnum);
+            if (animator == null) return 0;
+            return animator.GetAnimationLength(AnimationEnum);
         }
     }
 }
