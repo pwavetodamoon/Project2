@@ -19,6 +19,7 @@ namespace CombatSystem.Attack.Near
             yield return base.StartBehavior();
             yield return MoveModelToPosition(Enemy.GetAttackerTransform().position);
             PlayAnimation(AnimationType.Attack);
+            AudioManager.Instance.PlaySFX("Near Attack");
             yield return waitForEndAnim;
             CauseDamage();
             yield return MoveModelToPosition(GetSlotPosition());

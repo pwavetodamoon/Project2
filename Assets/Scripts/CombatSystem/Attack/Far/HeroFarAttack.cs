@@ -26,6 +26,7 @@ namespace CombatSystem.Attack.Far
         protected override IEnumerator StartBehavior()
         {
             yield return base.StartBehavior();
+            AudioManager.Instance.PlaySFX("Far Attack");
             PlayAnimation(AnimationType.Attack);
 
             yield return waitForEndAnim;

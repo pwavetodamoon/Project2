@@ -60,6 +60,7 @@ namespace Item
         {
             //Debug.Log("check Collect");
             StartCoroutine(MoveToDestination());
+            AudioManager.Instance.PlaySFX("Collect Item");
         }
 
         private IEnumerator MoveToDestination()
