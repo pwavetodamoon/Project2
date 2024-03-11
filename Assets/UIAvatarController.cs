@@ -5,9 +5,13 @@ using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Globalization;
 using CombatSystem.Entity;
+using LevelAndStats;
 using PlayFab_System;
 using SlotHero;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 
 
 public class UIAvatarController : APanelController
@@ -18,6 +22,8 @@ public class UIAvatarController : APanelController
     [Header("Buttons")]
     [SerializeField] private Button _buttonLevelUp;
     [SerializeField] private Button _buttonSkill;
+    [SerializeField] private TextMeshProUGUI _cointText;
+
 
     [Header("Levels")]
     [SerializeField] private Slider _sliderLevel;
@@ -34,10 +40,17 @@ public class UIAvatarController : APanelController
         _heroSlotUI = GetComponent<HeroSlotUI>();
         _gameManager = FindObjectOfType<GameManager>();
     }
+
+    private void Start()
+    {
+        UpdateCoinText();
+    }
+
     protected override void AddListeners()
     {
         base.AddListeners();
         _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
+        
     }
     protected override void RemoveListeners()
     {
@@ -49,7 +62,14 @@ public class UIAvatarController : APanelController
         //if button interact
         _gameManager.UpgradeHeroLevel(_heroCharacter);
     }
-    
+    private void UpdateCoinText()
+    {
+        Debug.Log("check in Updatecointext");
+        var data =  _gameManager.GetMoney(_heroCharacter).ToString();
+        _cointText.text = data;
+        Debug.Log("Data: "+ data);
+
+    }
     public void SetSprite(Sprite newSprite)
     {
         _imageAvatar.sprite = newSprite;

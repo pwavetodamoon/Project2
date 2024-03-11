@@ -130,10 +130,12 @@ MonoBehaviour:
   animOut: {fileID: 0}
   properties:
     priority: 0
+  _gameManager: {fileID: 0}
   _heroCharacter: {fileID: 0}
   _heroSlotUI: {fileID: 0}
   _buttonLevelUp: {fileID: 7662343040649464141}
   _buttonSkill: {fileID: 7134953892755806291}
+  _cointText: {fileID: 8160821340902700247}
   _sliderLevel: {fileID: 2776481454888862412}
   _textLevel: {fileID: 6672268544077061753}
   _imageAvatar: {fileID: 5685280457244257671}
@@ -1968,7 +1970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1995,7 +1997,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

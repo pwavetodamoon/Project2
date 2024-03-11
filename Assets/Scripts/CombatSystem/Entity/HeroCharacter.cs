@@ -15,7 +15,6 @@ namespace CombatSystem.Entity
         public CharacterEnumType characterEnumType;
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
-
         public EntityStateManager entityStateManager;
         private Character_Body_Sprites sprites;
         private Animator_Base animatorBase;
@@ -41,14 +40,6 @@ namespace CombatSystem.Entity
             entityStateManager.OnDie -= OnDead;
             entityStateManager.OnRebirth -= OnRebirth;
         }
-
-        // public void UpgradeHeroLevel(int level)
-        // {
-        //     entityStateManager.EntityStats.SetLevel(level);
-        //     entityStateManager.EntityStats.SetDamage(level + 2);
-        //
-        // }
-
         private void OnDead()
         {
             if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)

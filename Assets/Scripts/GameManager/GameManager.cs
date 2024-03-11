@@ -7,11 +7,12 @@ using UnityEngine;
 using deVoid;
 using deVoid.Utils;
 using LevelAndStats;
+using TMPro;
 using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private LevelConfig _levelConfig;
+    [SerializeField] public LevelConfig _levelConfig;
     [SerializeField] private CurrencyManager _currencyManager;
     private void Awake()
     {
@@ -34,6 +35,13 @@ public class GameManager : MonoBehaviour
             Debug.Log("Can not Upgrade");
             Debug.Log("moneyRequired:" + moneyRequired);
         }
+    }
+    public int GetMoney(HeroCharacter heroCharacter)
+    {
+        Debug.Log("GetMoney");
+        HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
+        var moneyRequired = Convert.ToInt32(_levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
+        return moneyRequired;
     }
 
 }
