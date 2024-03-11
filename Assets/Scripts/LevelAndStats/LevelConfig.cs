@@ -20,7 +20,7 @@ namespace LevelAndStats
                 CreateArrayLevel();
         }
 
-        // [Button]
+        [Button]
         private float CalculatorMoneyRequired(int level)
         {
             // value in animation curve is 0 - 1

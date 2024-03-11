@@ -12,7 +12,7 @@ namespace CombatSystem.Entity.Utilities
     public class EntityStateManager : MonoBehaviour, IDamageable
     {
         private IEntity entity;
-        private EntityStats EntityStats;
+        public EntityStats EntityStats;
         private Animator_Base animation_Base;
         public Action OnRebirth;
 

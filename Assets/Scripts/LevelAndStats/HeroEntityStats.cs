@@ -13,10 +13,14 @@ namespace LevelAndStats
             heroData = newData;
             LoadEntityStats();
         }
-
         private void LoadEntityStats()
         {
             structStats = heroData.structStats;
+        }
+        public void Upgrade()
+        {
+            structStats.level += 1;
+            structStats.baseDamage += 1.0f;
         }
     }
 }

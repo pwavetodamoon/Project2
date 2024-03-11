@@ -6,11 +6,13 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using CombatSystem.Entity;
+using PlayFab_System;
 using SlotHero;
 
 
 public class UIAvatarController : APanelController
 {
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private HeroCharacter _heroCharacter;
     [SerializeField] private HeroSlotUI _heroSlotUI;
     [Header("Buttons")]
@@ -25,6 +27,29 @@ public class UIAvatarController : APanelController
     [SerializeField] private Image _imageAvatar;
     [SerializeField] private List<Sprite> _spriteAvatar;
     public int index = 0;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _heroSlotUI = GetComponent<HeroSlotUI>();
+        _gameManager = FindObjectOfType<GameManager>();
+    }
+    protected override void AddListeners()
+    {
+        base.AddListeners();
+        _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
+    }
+    protected override void RemoveListeners()
+    {
+        base.RemoveListeners();
+        _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
+    }
+    private void OnButtonLevelUpClicked()
+    {
+        //if button interact
+        _gameManager.UpgradeHeroLevel(_heroCharacter);
+    }
+    
     public void SetSprite(Sprite newSprite)
     {
         _imageAvatar.sprite = newSprite;
@@ -39,28 +64,6 @@ public class UIAvatarController : APanelController
     public HeroCharacter GetHeroCharacter()
     {
         return _heroCharacter;
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        _heroSlotUI = GetComponent<HeroSlotUI>();
-    }
-    protected override void AddListeners()
-    {
-        base.AddListeners();
-        _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
-    }
-
-
-    protected override void RemoveListeners()
-    {
-        base.RemoveListeners();
-        _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
-    }
-    private void OnButtonLevelUpClicked()
-    {
-        Debug.Log("Button clicked");
     }
     // private void ChangeSpriteAvatar()
     // {

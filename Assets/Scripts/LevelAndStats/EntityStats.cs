@@ -32,6 +32,11 @@ namespace LevelAndStats
             return structStats.level;
         }
 
+        public void SetLevel(int value)
+        {
+            structStats.level += value;
+        }
+
         public void DecreaseHealth(float damage)
         {
             structStats.health -= damage;
@@ -53,6 +58,11 @@ namespace LevelAndStats
 
             damage = IsCritical ? damage * structStats.critDamage : damage;
             return damage;
+        }
+
+        public void SetDamage(int value)
+        {
+            structStats.baseDamage += value;
         }
 
         private bool IsCriticalHit()

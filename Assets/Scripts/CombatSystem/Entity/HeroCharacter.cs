@@ -16,7 +16,7 @@ namespace CombatSystem.Entity
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
 
-        private EntityStateManager entityStateManager;
+        public EntityStateManager entityStateManager;
         private Character_Body_Sprites sprites;
         private Animator_Base animatorBase;
         private AttackManager attackManager;
@@ -36,12 +36,18 @@ namespace CombatSystem.Entity
             entityStateManager.OnDie += OnDead;
             entityStateManager.OnRebirth += OnRebirth;
         }
-
         private void OnDestroy()
         {
             entityStateManager.OnDie -= OnDead;
             entityStateManager.OnRebirth -= OnRebirth;
         }
+
+        // public void UpgradeHeroLevel(int level)
+        // {
+        //     entityStateManager.EntityStats.SetLevel(level);
+        //     entityStateManager.EntityStats.SetDamage(level + 2);
+        //
+        // }
 
         private void OnDead()
         {
