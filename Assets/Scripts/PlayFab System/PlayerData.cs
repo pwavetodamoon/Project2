@@ -4,6 +4,7 @@ namespace PlayFab_System
 {
     public class PlayerData : Singleton<PlayerData>
     {
+        // nguoi choi
         public string customId;
         public string email = "gamedev@gmail.com";
         public string passWord = "123123";

@@ -5,6 +5,7 @@ namespace LevelAndStats
 {
     public class HeroEntityStats : EntityStats
     {
+        // nang cap hero
         [SerializeField] private HeroData heroData;
 
         public void SetHero(HeroData newData)
@@ -12,10 +13,14 @@ namespace LevelAndStats
             heroData = newData;
             LoadEntityStats();
         }
-
         private void LoadEntityStats()
         {
             structStats = heroData.structStats;
+        }
+        public void Upgrade()
+        {
+            structStats.level += 1;
+            structStats.baseDamage += 1.0f;
         }
     }
 }

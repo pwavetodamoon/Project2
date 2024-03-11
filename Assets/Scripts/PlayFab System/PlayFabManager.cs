@@ -38,7 +38,7 @@ namespace PlayFab_System
 
 
         [Button]
-        private void GetDataPlayer()
+        public void GetDataPlayer()
         {
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnRevcievedData, OnDataSendError);
         }
@@ -97,7 +97,7 @@ namespace PlayFab_System
             var sb = new StringBuilder();
             foreach (var item in result.Data) sb.Append(item.Key).Append(": ").Append(item.Value.Value).Append("\n");
             Debug.Log(sb.ToString());
-            //Debug.Log(Player.customId + " " + Player.email + " " + Player.passWord + Player.levelPlayer + " " + Player.gold + " " + result.Data["Hero Data"].Value);
+            Debug.Log(Player.customId + "email" + Player.email + "passWord" + Player.passWord + "Level" + Player.levelPlayer + "Gold " + Player.gold + " " + result.Data["Hero Data"].Value);
         }
 
         private void OnDataSend(UpdateUserDataResult result)
