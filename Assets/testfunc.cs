@@ -16,6 +16,7 @@ public class testfunc : MonoBehaviour
 
     public HeroManager heroManager;
     public UIAvatarController[] uiAvatarControllers;
+    public HeroSaveList heroSaveList;
 
 
     [Button]

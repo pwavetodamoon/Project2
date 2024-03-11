@@ -49,10 +49,18 @@ public class UIAvatarController : APanelController
     protected override void AddListeners()
     {
         base.AddListeners();
+        _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
     }
+
+
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
+        _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
+    }
+    private void OnButtonLevelUpClicked()
+    {
+        Debug.Log("Button clicked");
     }
     // private void ChangeSpriteAvatar()
     // {
