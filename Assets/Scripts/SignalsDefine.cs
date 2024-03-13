@@ -23,3 +23,16 @@ public class ShowDPSMenu : ASignal
 public class HideDPSMenu : ASignal
 {
 }
+//_______________
+public class ShowUISetting : ASignal
+{
+}
+public class HideUISetting : ASignal
+{
+}
+public class OpenUISoundSetting : ASignal 
+{ 
+}
+public class CloseUISoundSetting : ASignal 
+{ 
+}
