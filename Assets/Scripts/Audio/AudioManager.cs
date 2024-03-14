@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
-        { 
+        {
             Destroy(gameObject);
         }
     }
@@ -58,6 +58,16 @@ public class AudioManager : MonoBehaviour
             sFXSource.PlayOneShot(s.clip);
         }
     }
-    
 
+    public void ToggleMusic()
+    { 
+        musicSource.mute = !musicSource.mute;
+    }
+    public void ToggleSFX()
+    {
+        sFXSource.mute = !sFXSource.mute;
+    }
+
+    public void MusicVolume(float volume) { musicSource.volume = volume; }
+    public void SFXVolume(float volume) { sFXSource.volume = volume; }
 }
