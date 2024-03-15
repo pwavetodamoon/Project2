@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffa85d0dd09c1f949b2ce1d7d707a518, type: 3}
-  m_Name: UIMainMenuSettings
+  m_Name: UILoginSettings
   m_EditorClassIdentifier: 
-  templateUIPrefab: {fileID: 1622679405214185692, guid: 9feaf7224b611f845bfd4e15feb84934, type: 3}
+  templateUIPrefab: {fileID: 1622679405214185692, guid: 2122c5049811d7b4786ca8d81fbcb11d, type: 3}
   screensToRegister:
-  - {fileID: 4075251830463427082, guid: 6afe141d5fcab844a9c2b43121f60148, type: 3}
+  - {fileID: 8755207945777169488, guid: 7e49deef52c428948976693d98459fa1, type: 3}
   deactivateScreenGOs: 1

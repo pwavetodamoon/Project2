@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Currency;
 using Core.Quest;
+using Helper;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
@@ -13,16 +14,30 @@ using PlayFabError = PlayFab.PlayFabError;
 
 namespace PlayFab_System
 {
-    public class PlayFabManager : MonoBehaviour
+    public class PlayFabManager : Singleton<PlayFabManager>
     {
         public PlayerData Player;
         public CurrencyManager currencyManager;
-
-        public testfunc testfunc;
+        public Testfunc testfunc;
         public StageInformation stageInformation;
+        
+        private static PlayFabManager _instance;
+
+        // Getter cho instance
+  
         private void Start()
         {
-            StartCoroutine(Wait());
+            DontDestroyOnLoad(gameObject);
+ 
+        }
+
+        private void Init()
+        {
+            Login();
+            Debug.Log("Test");
+            currencyManager = FindObjectOfType<CurrencyManager>();
+            testfunc  = FindObjectOfType<Testfunc>();
+            stageInformation = FindObjectOfType<StageInformation>();
         }
 
         private void OnApplicationQuit()
@@ -30,15 +45,18 @@ namespace PlayFab_System
             SaveDataPlayer();
         }
 
+        public void StartCoroutine()
+        {
+            StartCoroutine(Wait());
+        }
         private IEnumerator Wait()
         {
-            Login();
+            yield return new WaitForSeconds(.2f);
+            Init();
             yield return new WaitForSeconds(.2f);
             testfunc.Spawn();
             GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
         }
-
-
         [Button]
         public void GetDataPlayer()
         {
@@ -130,7 +148,7 @@ namespace PlayFab_System
 
         #region Login
 
-        private void Login()
+        public void Login()
         {
             Player = PlayerData.Instance;
             Player.customId = SystemInfo.deviceUniqueIdentifier;

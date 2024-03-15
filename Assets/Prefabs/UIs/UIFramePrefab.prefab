@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2604619735166111577}
   - component: {fileID: 7714506394950728328}
   m_Layer: 5
-  m_Name: UIFrameGamePlay
+  m_Name: UIFramePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
