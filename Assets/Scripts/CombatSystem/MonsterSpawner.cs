@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace CombatSystem
 {
+    [RequireComponent(typeof(MonstersStatsSystem))]
     public class MonsterSpawner : MonoBehaviour
     {
         [Header("References")]

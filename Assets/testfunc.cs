@@ -39,9 +39,9 @@ public class testfunc : MonoBehaviour
             hero.IsDead = heroData.isDead;
             hero.SetHeroData(heroData);
             hero.SetSlotIndex(heroData.slotIndex);
-            
+
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
-            heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
+            // heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
 
             SlotManager.Instance.LoadHeroIntoSlot(hero);
             if (hero.IsDead)
@@ -70,7 +70,7 @@ public class testfunc : MonoBehaviour
     [Button]
     private void Test222()
     {
-        
+
     }
 
     [Button]

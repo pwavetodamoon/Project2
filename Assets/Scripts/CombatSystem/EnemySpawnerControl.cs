@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CombatSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
-
+[RequireComponent(typeof(TimerCounter))]
 public class EnemySpawnerControl : MonoBehaviour
 {
     public MonsterSpawner landMonster;

@@ -22,19 +22,19 @@ namespace Model.Hero
             switch (type)
             {
                 case AnimationType.Idle:
-                    return "Idle_1";
+                    return "Ilde";
 
                 case AnimationType.Walk:
-                    return "walking_1";
+                    return "Walking";
 
                 case AnimationType.Attack:
-                    return "slashing_1";
+                    return "Slashing";
 
                 case AnimationType.Hurt:
-                    return "hurt_1";
+                    return "Hurt";
 
                 default:
-                    return "Idle_1";
+                    return "Ilde";
             }
         }
 
