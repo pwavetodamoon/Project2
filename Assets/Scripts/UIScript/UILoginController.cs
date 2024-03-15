@@ -1,10 +1,13 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
+using PlayFab_System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UILoginController : MonoBehaviour
 {
     [SerializeField] private UISettings _defaultUISetting = null;
+    [SerializeField] private PlayFabManager _playFabManager = null;
     private UIFrame _uIFrameLogin;
     
     private void Awake()
@@ -22,10 +25,19 @@ public class UILoginController : MonoBehaviour
     }
     private void AddListener()
     {
-
+        _uIFrameLogin.ShowPanel(ScreenIds.UILogin);
+        Signals.Get<OnLoginButtonClicked>().AddListener(OpenSceneGamePlay);
     }
     private void RemoveListener()
     {
- 
+        Signals.Get<OnLoginButtonClicked>().RemoveListener(OpenSceneGamePlay);
     }
+
+    private void OpenSceneGamePlay()
+    {
+        PlayFabManager.Instance.StartCoroutine();
+        SceneManager.LoadScene(ScreenIds.TestScene);
+    }
+
+   
 }

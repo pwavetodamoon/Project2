@@ -11,7 +11,7 @@ using LevelAndStats;
 using Model.Hero;
 using SlotHero;
 
-public class testfunc : MonoBehaviour
+public class Testfunc : MonoBehaviour
 {
 
     public HeroManager heroManager;
