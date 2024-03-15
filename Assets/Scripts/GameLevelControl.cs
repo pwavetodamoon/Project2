@@ -24,10 +24,10 @@ public class GameLevelControl : Singleton<GameLevelControl>, IGameStateHandler, 
     [SerializeField] private MonsterSpawner monsterSpawner;
     [SerializeField] private ScreenTransition screenTransition;
     [SerializeField] private MapBackground mapBackground;
+    [SerializeField] private StageInformation stageInformation;
 
-
-    public LossTransitionHandler LossTransitionHandler;
-    public NextMapTransitionHandler NextMapTransitionHandler;
+    private LossTransitionHandler LossTransitionHandler;
+    private NextMapTransitionHandler NextMapTransitionHandler;
     protected override void Awake()
     {
         base.Awake();
@@ -36,6 +36,24 @@ public class GameLevelControl : Singleton<GameLevelControl>, IGameStateHandler, 
 
         LossTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
         NextMapTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
+        stageInformation.OnCompleteMap += OnGoNextMap;
+    }
+
+    public void OnLoose()
+    {
+        LossTransitionHandler.UseRunner();
+        stageInformation.ResetStage();
+    }
+
+    public void OnGoNextMap()
+    {
+        NextMapTransitionHandler.UseRunner();
+        stageInformation.currentMapIndex++;
+    }
+
+    private void OnDisable()
+    {
+        stageInformation.OnCompleteMap -= NextMapTransitionHandler.UseRunner;
     }
 
     public void LoadToMap(int index)

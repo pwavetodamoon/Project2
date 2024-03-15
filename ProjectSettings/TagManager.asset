@@ -59,3 +59,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Layout
+    uniqueID: 1556244597
+    locked: 0
+  - name: Panel
+    uniqueID: 569780981
+    locked: 0

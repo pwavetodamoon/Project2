@@ -18,6 +18,7 @@ namespace SlotHero.SlotInGame
             if (hero == null) return;
             //hero.gameObject.SetActive(false);
             hero.position = transform.position;
+            AudioManager.Instance.PlaySFX("Remove Champion");
         }
     }
 }

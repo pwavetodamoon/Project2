@@ -19,7 +19,6 @@ namespace CombatSystem.Entity
         public EntityStateManager entityStateManager;
         private Character_Body_Sprites sprites;
         private Animator_Base animatorBase;
-        private AttackManager attackManager;
         public bool IsDead;
 
         public int InGameSlotIndex { get; private set; }
@@ -36,11 +35,6 @@ namespace CombatSystem.Entity
             entityStateManager.OnDie += OnDead;
             entityStateManager.OnRebirth += OnRebirth;
         }
-        private void OnDestroy()
-        {
-            entityStateManager.OnDie -= OnDead;
-            entityStateManager.OnRebirth -= OnRebirth;
-        }
 
         // public void UpgradeHeroLevel(int level)
         // {
@@ -53,7 +47,7 @@ namespace CombatSystem.Entity
         {
             if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
-                GameLevelControl.Instance.LossTransitionHandler.UseRunner();
+                GameLevelControl.Instance.OnLoose();
                 Debug.Log("Thua roi");
             }
 
@@ -62,6 +56,7 @@ namespace CombatSystem.Entity
 
         public void SetDeadState()
         {
+            Debug.Log("Dead state");
             SetModelBackImmediate();
             animatorBase.DisableAnimator();
             sprites.SetDeadSprite();
@@ -118,14 +113,14 @@ namespace CombatSystem.Entity
 
         public override void RegisterObject()
         {
+            base.RegisterObject();
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
             CreateAttack();
-            SetAttackState(true);
         }
 
         public override void ReleaseObject()
         {
-            SetAttackState(false);
+            base.ReleaseObject();
             StopCurrentAttack();
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
@@ -136,10 +131,5 @@ namespace CombatSystem.Entity
             attackControl.StopAllCoroutines();
         }
 
-        public void SetAttackState(bool state)
-        {
-            attackManager.SetAllowExecuteAttackValue(state);
-            attackManager.SetTimeCounterValue(state);
-        }
     }
 }

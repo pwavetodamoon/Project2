@@ -24,12 +24,19 @@ public class UIGamePlayController : MonoBehaviour
         _uIFrameGamePlay.ShowPanel(ScreenIds.UIGamePlay);
         Signals.Get<ShowDPSMenu>().AddListener(ShowUIDPS);
         Signals.Get<HideDPSMenu>().AddListener(HideUIDPS);
+        //-----
+        Signals.Get<OpenUIMainMenu>().AddListener(ShowUIMainMenu);
+        Signals.Get<HideUIMainMenu>().AddListener(HideUIMainMenu);
     }
 
     private void RemoveListener()
     {
         Signals.Get<HideDPSMenu>().RemoveListener(HideUIDPS);
         Signals.Get<ShowDPSMenu>().RemoveListener(ShowUIDPS);
+
+        //------
+        Signals.Get<OpenUIMainMenu>().RemoveListener(ShowUIMainMenu);
+        Signals.Get<HideUIMainMenu>().RemoveListener(HideUIMainMenu);
     }
 
     private void ShowUIDPS()
@@ -40,4 +47,14 @@ public class UIGamePlayController : MonoBehaviour
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UIDPS);
     }
+    //-------
+    private void ShowUIMainMenu()
+    {
+        _uIFrameGamePlay.ShowPanel(ScreenIds.UIMainMenu);
+    }
+    private void HideUIMainMenu()
+    {
+        _uIFrameGamePlay.HidePanel(ScreenIds.UIMainMenu);
+    }
+
 }

@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_000
+      m_Hash: 869004620
+      m_Sprite: {fileID: 21300000, guid: 81f8554011b696a4b8480d45b5bfed56, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 15f1511f2c80bd841a87f44a1d6e771b, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_001
+      m_Hash: 80528858
+      m_Sprite: {fileID: 21300000, guid: d557b22801ba1fe47963e4432dda6b4b, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 08aef8eb4a264084497c2436b9b39724, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_002
+      m_Hash: 499487840
+      m_Sprite: {fileID: 21300000, guid: 8727101bfde5ce94da9e8947a7bfc311, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 69c167e148a30ea419703259fa5a5257, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_003
+      m_Hash: 717399286
+      m_Sprite: {fileID: 21300000, guid: 877c4cdf96e1fd043b5ca070426796a8, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 292c6f7afa07fbe468076a3c16fe48bf, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_004
+      m_Hash: 883306837
+      m_Sprite: {fileID: 21300000, guid: aa47a6a33d8e84549a5c3699c8adbb49, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 83fd3f0fd3ebc4a4eb93ce805d5480aa, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_005
+      m_Hash: 60883395
+      m_Sprite: {fileID: 21300000, guid: 827ec291572317f439b8340020d5cad7, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: f968ce62baa54974aba0f0b63591e882, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_006
+      m_Hash: 447238265
+      m_Sprite: {fileID: 21300000, guid: d71ce9ea5ac309c4daef980aafc70344, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: b057c4284dbf3dd4cb3e412045c74f77, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_007
+      m_Hash: 766468335
+      m_Sprite: {fileID: 21300000, guid: 37f6395389720c340b492e2de8e67b9c, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 401d339e5af11f943849b2a139f4d121, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_008
+      m_Hash: 1024490878
+      m_Sprite: {fileID: 21300000, guid: d776d77de9e0ee24a80c3169b3b21a71, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 5d9843e39c2364d4db095576df703ac2, type: 3}
+    - m_Name: Golem_01_1_GOLEM_ATTAK2_009
+      m_Hash: 169299432
+      m_Sprite: {fileID: 21300000, guid: 9707421e4a2ab684e85c513d52ad1586, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e8a014f9cf7d0284bb2bb492559c9f50, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 10
+  - m_Name: Hurt
+    m_Hash: 666872612
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Golem_01_1_GOLEM_HURT_000
+      m_Hash: 141106815
+      m_Sprite: {fileID: 21300000, guid: 3a1011258243efa4d9e300765fa475ca, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 349ee137be9901645948547a424511d3, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_001
+      m_Hash: 1064185577
+      m_Sprite: {fileID: 21300000, guid: f7b749f94893e0e40b957718c8052de4, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 8a32d8e32131dc542b1f939003c385f5, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_002
+      m_Hash: 644317011
+      m_Sprite: {fileID: 21300000, guid: 187aeb768647cea4597311561e4c86c2, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e9d6d14fbca69864a8ca0656e99f2000, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_003
+      m_Hash: 291524549
+      m_Sprite: {fileID: 21300000, guid: ad8c4870217de5a46be4eeb20bb3a022, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: c96eee5cc82825349861170bf8e75f87, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_004
+      m_Hash: 251976294
+      m_Sprite: {fileID: 21300000, guid: 182a8bd25e829bd48a9229f8209cf253, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: fe51ce6b21eb9cc4b90c0f203b5a84c2, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_005
+      m_Hash: 939780848
+      m_Sprite: {fileID: 21300000, guid: 1a18acfd988b2e44f90dcd7c1e3111f9, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 35e6d05d9fabd474eb51d864aada2093, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_006
+      m_Hash: 554351434
+      m_Sprite: {fileID: 21300000, guid: d68e95f240eca714eb24889ec9e3e386, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e381eb8034369b04a9280856c93f53f3, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_007
+      m_Hash: 369986524
+      m_Sprite: {fileID: 21300000, guid: 225ff1fa9d1b1e34ca905aa9e7a23919, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 9b1a8dadec0acfc41945bcef4ab8d96f, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_008
+      m_Hash: 112367181
+      m_Sprite: {fileID: 21300000, guid: fa5b89ce5b2086a4385d06b002998407, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 906686d0d5bc5f241a1ab0f84cf427ee, type: 3}
+    - m_Name: Golem_01_1_GOLEM_HURT_009
+      m_Hash: 833988315
+      m_Sprite: {fileID: 21300000, guid: 187d0acbedb544a429f66e9570db38dc, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 1e54f1d2e74f505428b7dcc2f6e733bd, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 10
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Golem_01_1_GOLEM_WALK_000
+      m_Hash: 621799069
+      m_Sprite: {fileID: 21300000, guid: 5e3196864e8ece442b02aa50d7caad29, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 0c2fa05414e0f98468f207e762ce5f47, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_001
+      m_Hash: 302568971
+      m_Sprite: {fileID: 21300000, guid: d88e6a0aacc9ef14ea01a22c23e2e906, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e102bf4dad11f5144b5f95664abd97d1, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_002
+      m_Hash: 184649649
+      m_Sprite: {fileID: 21300000, guid: 7fef4cdd6c19c3e4992bbf6eaff63c2a, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: c5a113e196205a1488429b3c6b602c26, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_003
+      m_Hash: 1007073063
+      m_Sprite: {fileID: 21300000, guid: 96846e4477e87614eb84a93db146c531, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 0db7ce35e91278948b18cbb79c308c88, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_004
+      m_Hash: 576856708
+      m_Sprite: {fileID: 21300000, guid: 51132e045c474184c9ea21a289a07461, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 316e0605ccba74e41b611ef9c02108aa, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_005
+      m_Hash: 358945298
+      m_Sprite: {fileID: 21300000, guid: 1eaed6366e22082408ab5e775523238e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: da7c1cef5fd85b0458dbe4ee2a645971, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_006
+      m_Hash: 208421800
+      m_Sprite: {fileID: 21300000, guid: 132275f48b7489649a500e3ac16fea67, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 2ebc8b254b2aa6549aab3cb5dd764bed, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_007
+      m_Hash: 996897598
+      m_Sprite: {fileID: 21300000, guid: e2fcc4ac1924eaf4e85b36aadc1713c4, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: cdd13d62d0b37654aa00063307844923, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_008
+      m_Hash: 735342255
+      m_Sprite: {fileID: 21300000, guid: 7ea967fb930329f478375b2969655989, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 28d44e3ae23f72f4684f074b2cfafd8c, type: 3}
+    - m_Name: Golem_01_1_GOLEM_WALK_009
+      m_Hash: 483614265
+      m_Sprite: {fileID: 21300000, guid: 3c7cec3f8f633ad428fb72fd59bc8e54, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 0d718da527dfabb4288ac26b4b47c821, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 10
+  - m_Name: Dying
+    m_Hash: 315139327
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Golem_01_1_GOLEM_DIE_000
+      m_Hash: 81487678
+      m_Sprite: {fileID: 21300000, guid: e5e69e456ee60ff4ea78c94197865615, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 0447f4a3b9851954fa421a5d3877ab89, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_001
+      m_Hash: 870078376
+      m_Sprite: {fileID: 21300000, guid: 1be5ff239ed12ec4ca9dd3ceb1c938ea, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: f8a7a99fc82eafa438e9ef2e0e29c4f2, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_002
+      m_Hash: 718603794
+      m_Sprite: {fileID: 21300000, guid: cffd7a79b1b2ec247b41d64f904acd65, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 9de6c01b2cf3ea44dbcca7f518b61c4e, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_003
+      m_Hash: 500315780
+      m_Sprite: {fileID: 21300000, guid: 775ab4414bf82b44f947e61001fa7de8, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 7af9bb8b0f5cfbd419a32522e282e5ff, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_004
+      m_Hash: 62300967
+      m_Sprite: {fileID: 21300000, guid: d4f8420235c19254ca5ad62941afbe58, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e73db3cf4c4ef9e47911d9bd2fe5aa6f, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_005
+      m_Hash: 884052913
+      m_Sprite: {fileID: 21300000, guid: 161a3855235e602468f625f795059706, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e6f200a31c09f004e8fc862e4aa1da48, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_006
+      m_Hash: 767083019
+      m_Sprite: {fileID: 21300000, guid: cae129635a3a4234385c3c0ca7ac1aaf, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 9c0b6cd805a110e44a5e44700402990e, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_007
+      m_Hash: 448787101
+      m_Sprite: {fileID: 21300000, guid: 982c0d0bbc018e04580cf186224fc27e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 2ab925db51dade041b30e67ab8d85a08, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_008
+      m_Hash: 167833356
+      m_Sprite: {fileID: 21300000, guid: d989a3484ddacc045905c4638dd6ecc7, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: d916331521cdf0644a82dad46a3d58ad, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_009
+      m_Hash: 1023926170
+      m_Sprite: {fileID: 21300000, guid: 86e25c8fd15035f4b9b846bf479535d9, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 0ee4c1e1f48615b48b95aed5450278ce, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 10
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Golem_01_1_GOLEM_DIE_000
+      m_Hash: 81487678
+      m_Sprite: {fileID: 21300000, guid: e5e69e456ee60ff4ea78c94197865615, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: b7fffeaa9fec478429899db4f4c485a4, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_001
+      m_Hash: 870078376
+      m_Sprite: {fileID: 21300000, guid: 1be5ff239ed12ec4ca9dd3ceb1c938ea, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 917e42a487d7c854eb6fd17b1861c0fe, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_002
+      m_Hash: 718603794
+      m_Sprite: {fileID: 21300000, guid: cffd7a79b1b2ec247b41d64f904acd65, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 773a5be0b63e7094c97ff8bbad083754, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_003
+      m_Hash: 500315780
+      m_Sprite: {fileID: 21300000, guid: 775ab4414bf82b44f947e61001fa7de8, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 7423b414cafeaa740977f6a1cf922f99, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_004
+      m_Hash: 62300967
+      m_Sprite: {fileID: 21300000, guid: d4f8420235c19254ca5ad62941afbe58, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: e4c0c616a084c944a8e000152fdca9e0, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_005
+      m_Hash: 884052913
+      m_Sprite: {fileID: 21300000, guid: 161a3855235e602468f625f795059706, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 17b8965f265d06e4b8a983bac04fc4c2, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_006
+      m_Hash: 767083019
+      m_Sprite: {fileID: 21300000, guid: cae129635a3a4234385c3c0ca7ac1aaf, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: f133a09bf72ff6e4cb39ef242ca2d3ee, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_007
+      m_Hash: 448787101
+      m_Sprite: {fileID: 21300000, guid: 982c0d0bbc018e04580cf186224fc27e, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: ecd83eb5c672d474194a171704fa8528, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_008
+      m_Hash: 167833356
+      m_Sprite: {fileID: 21300000, guid: d989a3484ddacc045905c4638dd6ecc7, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: ccd7d696b53809b409890205a890077a, type: 3}
+    - m_Name: Golem_01_1_GOLEM_DIE_009
+      m_Hash: 1023926170
+      m_Sprite: {fileID: 21300000, guid: 86e25c8fd15035f4b9b846bf479535d9, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 3ac09db64c6c1c647b717a0fd83b324a, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 10
+  m_PrimaryLibraryGUID: 8212a2f99a91c364ab18f8d459b7cc43
+  m_ModificationHash: 638461028177674855
+  m_Version: 1

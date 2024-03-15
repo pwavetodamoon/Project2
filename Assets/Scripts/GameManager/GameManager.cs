@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _currencyManager = FindObjectOfType<CurrencyManager>();
-
+        Application.targetFrameRate = 60;
     }
 
     public void UpgradeHeroLevel(HeroCharacter heroCharacter)

@@ -7,7 +7,7 @@ namespace Item
         // Update Data in QuestManager
         public override void SendData()
         {
-            QuestManager.Instance.OnCollectItemAndIncreaseScore(itemID, point);
+            QuestManager.Instance.OnIncreasePoint(point);
         }
     }
 }

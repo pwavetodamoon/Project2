@@ -10,16 +10,30 @@ namespace CombatSystem.Entity
     {
         protected AttackControl attackControl;
         protected IGetAttackerTransform attackerTransform;
+        protected AttackManager attackManager;
+
 
         protected virtual void Awake()
         {
             attackControl = GetComponent<AttackControl>();
             attackerTransform = GetComponent<IGetAttackerTransform>();
+            attackManager = GetComponent<AttackManager>();
         }
 
-        public abstract void RegisterObject();
+        public void SetAttackState(bool state)
+        {
+            attackManager.SetAllowExecuteAttackValue(state);
+            attackManager.SetTimeCounterValue(state);
+        }
+        public virtual void RegisterObject()
+        {
+            SetAttackState(true);
+        }
 
-        public abstract void ReleaseObject();
+        public virtual void ReleaseObject()
+        {
+            SetAttackState(false);
+        }
         public bool EntityInAttackState()
         {
             return attackControl.IsAttacking();

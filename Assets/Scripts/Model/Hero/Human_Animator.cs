@@ -17,11 +17,6 @@ namespace Model.Hero
         ///     Idle = 0, Walk = 1, Slash = 2, Hurt = 3
         /// </summary>
         /// <param name="indexState"></param>
-        public override void ChangeAnimation<T>(T Type)
-        {
-            base.ChangeAnimation(Type);
-        }
-
         protected override string GetAnimationNameByType<T>(T type)
         {
             switch (type)

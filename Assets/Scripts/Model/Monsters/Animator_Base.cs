@@ -16,7 +16,7 @@ namespace Model.Monsters
         [SerializeField] protected bool animationNotHaveLoopIsRun;
         [SerializeField] protected float timeAnimated;
         [ShowInInspector] protected Dictionary<string, float> animationLengths;
-        protected AnimationType defaultAnimationPlayBack = AnimationType.Idle;
+        protected AnimationType defaultAnimationPlayBack = AnimationType.Walk;
         public void DisableAnimator()
         {
             animator.enabled = false;
@@ -51,7 +51,7 @@ namespace Model.Monsters
         public virtual void ChangeAnimation<T>(T type1) where T : Enum
         {
             var animationName = GetAnimationNameByType(type1);
-            //Debug.Log("Play Animation: "+animationName);
+            if(animator == null) return;
             animator.Play(animationName, 0, 0);
             StartCoroutine(WaitAnimation());
         }
