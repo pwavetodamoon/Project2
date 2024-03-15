@@ -27,6 +27,9 @@ public class UIGamePlayController : MonoBehaviour
         //-----
         Signals.Get<OpenUIMainMenu>().AddListener(ShowUIMainMenu);
         Signals.Get<HideUIMainMenu>().AddListener(HideUIMainMenu);
+        //
+        Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
+        Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
     }
 
     private void RemoveListener()
@@ -37,6 +40,15 @@ public class UIGamePlayController : MonoBehaviour
         //------
         Signals.Get<OpenUIMainMenu>().RemoveListener(ShowUIMainMenu);
         Signals.Get<HideUIMainMenu>().RemoveListener(HideUIMainMenu);
+        
+        //
+        Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
+        Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
+        
+        
+        //
+        Signals.Get<OpenUISoundSetting>().RemoveListener(ShowUISoundSetting);
+        Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
     }
 
     private void ShowUIDPS()
@@ -56,5 +68,12 @@ public class UIGamePlayController : MonoBehaviour
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UIMainMenu);
     }
-
+    
+    private void ShowUISoundSetting()
+    {
+        _uIFrameGamePlay.ShowPanel(ScreenIds.UISoundSetting);
+    }private void HideUISoundSetting()
+    {
+        _uIFrameGamePlay.HidePanel(ScreenIds.UISoundSetting);
+    }
 }
