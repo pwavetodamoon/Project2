@@ -17,7 +17,6 @@ namespace PlayFab_System
     {
         public PlayerData Player;
         public CurrencyManager currencyManager;
-
         public testfunc testfunc;
         public StageInformation stageInformation;
         private void Start()
@@ -37,8 +36,6 @@ namespace PlayFab_System
             testfunc.Spawn();
             GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
         }
-
-
         [Button]
         public void GetDataPlayer()
         {

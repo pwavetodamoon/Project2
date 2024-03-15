@@ -1,11 +1,13 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
+using PlayFab_System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UILoginController : MonoBehaviour
 {
     [SerializeField] private UISettings _defaultUISetting = null;
+    [SerializeField] private PlayFabManager _playFabManager = null;
     private UIFrame _uIFrameLogin;
     
     private void Awake()
