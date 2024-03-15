@@ -41,8 +41,8 @@ public class testfunc : MonoBehaviour
             hero.SetSlotIndex(heroData.slotIndex);
 
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
-            // heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
-
+            heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
+            heroSkin.SetEyeSprite(heroData.GetEyeSkin());
             SlotManager.Instance.LoadHeroIntoSlot(hero);
             if (hero.IsDead)
             {

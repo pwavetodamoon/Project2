@@ -12,6 +12,8 @@ namespace CombatSystem.HeroDataManager.Data
         {
             "Body",
             "Face 01",
+            "Face 02",
+            "Face 03",
             "Head",
             "Shield",
             "Weapon",
@@ -22,7 +24,12 @@ namespace CombatSystem.HeroDataManager.Data
             "Right Hand",
             "Right Leg"
         };
-
+        public static string[] EyeName =
+        {
+            "Face 01",
+            "Face 02",
+            "Face 03",
+        };
         public static void LoadSpritePart(Sprite[] sprites,
             out Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> Dictionary)
         {
@@ -55,7 +62,33 @@ namespace CombatSystem.HeroDataManager.Data
                 case "Right Leg": return Character_Body_Sprites.SpritePartEnum.right_leg;
             }
 
-            return Character_Body_Sprites.SpritePartEnum.body;
+            return Character_Body_Sprites.SpritePartEnum.none;
+        }
+
+        internal static void LoadSpriteEye(Sprite[] sprites, out Sprite[] eyeSprites)
+        {
+            // TODO: Check method
+            eyeSprites = new Sprite[3];
+            int count = 0;
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                if (count == 3) break;
+                if (sprites[i].name == "Face 01")
+                {
+                    eyeSprites[0] = sprites[i];
+                    count++;
+                }
+                if (sprites[i].name == "Face 02")
+                {
+                    eyeSprites[1] = sprites[i];
+                    count++;
+                }
+                if (sprites[i].name == "Face 03")
+                {
+                    eyeSprites[2] = sprites[i];
+                    count++;
+                }
+            }
         }
     }
 }

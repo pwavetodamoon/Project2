@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CombatSystem.Attack.Factory;
 using CombatSystem.Entity;
@@ -24,7 +25,7 @@ namespace CombatSystem.HeroDataManager.Data
         [SerializeField] private HeroSingleAttackFactory HeroSingleAttackFactory;
         [SerializeField] public int slotIndex;
         [SerializeField] public string heroName;
-
+        [SerializeField] public Sprite[] eyeSprites;
         public bool isDead;
         public HeroCharacter heroCharacter;
         public StructStats structStats;
@@ -48,6 +49,11 @@ namespace CombatSystem.HeroDataManager.Data
         {
             if (spriteDictionary == null) LoadAllSkinInFolder();
             return spriteDictionary;
+        }
+        public Sprite[] GetEyeSkin()
+        {
+            eyeSprites = new Sprite[3];
+            return eyeSprites;
         }
 
         [Button]
@@ -74,6 +80,9 @@ namespace CombatSystem.HeroDataManager.Data
         {
             var sprites = Resources.LoadAll<Sprite>(resourcePath);
             LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary);
+            LoadSpriteHelp.LoadSpriteEye(sprites, out eyeSprites);
         }
+
+
     }
 }

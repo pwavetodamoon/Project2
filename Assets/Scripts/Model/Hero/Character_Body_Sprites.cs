@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Spriter2UnityDX;
 using UnityEngine;
 
 namespace Model.Hero
@@ -33,6 +34,7 @@ namespace Model.Hero
     {
         public enum SpritePartEnum
         {
+            none,
             head,
             eye,
             body,
@@ -46,11 +48,15 @@ namespace Model.Hero
             item_shield
         }
 
-        public const int SpritePartCount = 11;
+        public const int SpritePartCount = 12;
         [SerializeField] private Color deadColor;
         [SerializeField] private Color liveColor;
         [SerializeField] private HeroSkin HeroSkin;
-
+        [SerializeField] private TextureController textureController;
+        public void SetEyeSprite(Sprite[] sprites)
+        {
+            textureController.Sprites = sprites;
+        }
         public void SetHeroSprite(Dictionary<SpritePartEnum, Sprite> spriteDictionary)
         {
             LoadSpritePart();
@@ -77,17 +83,17 @@ namespace Model.Hero
         {
             return name switch
             {
-                "s_head" => SpritePartEnum.head,
-                "s_eye" => SpritePartEnum.eye,
-                "s_body" => SpritePartEnum.body,
-                "s_left_arm" => SpritePartEnum.left_arm,
-                "s_right_arm" => SpritePartEnum.right_arm,
-                "s_left_hand" => SpritePartEnum.left_hand,
-                "s_right_hand" => SpritePartEnum.right_hand,
-                "s_left_leg" => SpritePartEnum.left_leg,
-                "s_right_leg" => SpritePartEnum.right_leg,
-                "s_item_sword" => SpritePartEnum.item_sword,
-                "s_item_shield" => SpritePartEnum.item_shield,
+                "Head" => SpritePartEnum.head,
+                "Face 01" => SpritePartEnum.eye,
+                "Body" => SpritePartEnum.body,
+                "Left Arm" => SpritePartEnum.left_arm,
+                "Right Arm" => SpritePartEnum.right_arm,
+                "Left Hand" => SpritePartEnum.left_hand,
+                "Right Hand" => SpritePartEnum.right_hand,
+                "Left Leg" => SpritePartEnum.left_leg,
+                "Right Leg" => SpritePartEnum.right_leg,
+                "Sword" => SpritePartEnum.item_sword,
+                "Shield" => SpritePartEnum.item_shield,
                 _ => new SpritePartEnum()
             };
         }
