@@ -35,6 +35,9 @@ public class UILoginController : MonoBehaviour
 
     private void OpenSceneGamePlay()
     {
+        PlayFabManager.Instance.StartCoroutine();
         SceneManager.LoadScene(ScreenIds.TestScene);
     }
+
+   
 }
