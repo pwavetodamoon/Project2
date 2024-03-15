@@ -1,6 +1,7 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UILoginController : MonoBehaviour
 {
@@ -22,10 +23,16 @@ public class UILoginController : MonoBehaviour
     }
     private void AddListener()
     {
-
+        _uIFrameLogin.ShowPanel(ScreenIds.UILogin);
+        Signals.Get<OnLoginButtonClicked>().AddListener(OpenSceneGamePlay);
     }
     private void RemoveListener()
     {
- 
+        Signals.Get<OnLoginButtonClicked>().RemoveListener(OpenSceneGamePlay);
+    }
+
+    private void OpenSceneGamePlay()
+    {
+        SceneManager.LoadScene(ScreenIds.TestScene);
     }
 }

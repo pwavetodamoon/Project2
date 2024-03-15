@@ -36,3 +36,6 @@ public class OpenUISoundSetting : ASignal
 public class CloseUISoundSetting : ASignal 
 { 
 }
+public class OnLoginButtonClicked : ASignal 
+{ 
+}
