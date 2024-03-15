@@ -6,15 +6,6 @@ namespace Model.Monsters
 {
     public class Monster_Animator : Animator_Base
     {
-        /// <summary>
-        ///     0 is walk, 1 is attack, 2 is hurt
-        /// </summary>
-        /// <param name="indexState"></param>
-        public override void ChangeAnimation<T>(T type)
-        {
-            base.ChangeAnimation(type);
-        }
-
         protected override string GetAnimationNameByType<T>(T type)
         {
             switch (type)

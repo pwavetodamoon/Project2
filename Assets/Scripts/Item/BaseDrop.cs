@@ -19,6 +19,7 @@ namespace Item
         private Collider2D collider2d;
         private Transform DestinationTransform;
         private SpriteRenderer spriteRenderer;
+        public Action<BaseDrop> ReleaseCallback { get; set; }
 
 
         private void Awake()
@@ -27,6 +28,11 @@ namespace Item
             collider2d = GetComponent<Collider2D>();
             collider2d.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Items);
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -40,7 +46,6 @@ namespace Item
             //Debug.Log("Trigger mouse");
         }
 
-        public Action<BaseDrop> ReleaseCallback { get; set; }
 
         public void Release()
         {
@@ -58,7 +63,6 @@ namespace Item
         [Button]
         public virtual void Collect()
         {
-            //Debug.Log("check Collect");
             StartCoroutine(MoveToDestination());
             AudioManager.Instance.PlaySFX("Collect Item");
         }
@@ -71,7 +75,6 @@ namespace Item
                 yield return transform.DOLocalMove(DestinationTransform.position, 1f).WaitForCompletion();
             SendData();
             Release();
-            //Debug.Log("check MoveToDestination");
         }
 
         public void Jumping(Vector3 position)

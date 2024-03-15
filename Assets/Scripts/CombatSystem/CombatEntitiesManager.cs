@@ -9,15 +9,7 @@ namespace CombatSystem
 {
     public class CombatEntitiesManager : Singleton<CombatEntitiesManager>
     {
-        [SerializeField] private MonsterSpawner monsterSpawner;
         [ShowInInspector] private Dictionary<string, List<EntityCharacter>> entitiesByTag = new();
-
-        protected override void Awake()
-        {
-            base.Awake();
-            GetAllEntityInWorld();
-            monsterSpawner = GetComponentInChildren<MonsterSpawner>();
-        }
 
         public List<EntityCharacter> GetHeroList()
         {
@@ -86,8 +78,7 @@ namespace CombatSystem
 
         public List<EntityCharacter> GetListInCombat(string key)
         {
-            var list = IsContainKey(key) ? entitiesByTag[key] : null;
-            return list;
+            return entitiesByTag.GetValueOrDefault(key);
         }
 
 
@@ -103,16 +94,5 @@ namespace CombatSystem
             return entitiesByTag[key].Contains(value);
         }
 
-
-        [Button]
-        private void GetAllEntityInWorld()
-        {
-            var newEntities = FindObjectsOfType<EntityCharacter>().ToList();
-            foreach (var entity in newEntities)
-            {
-                Debug.Log($"Add {entity.name} to {entity.tag}");
-                AppendEntityToListByTag(entity, entity.tag);
-            }
-        }
     }
 }

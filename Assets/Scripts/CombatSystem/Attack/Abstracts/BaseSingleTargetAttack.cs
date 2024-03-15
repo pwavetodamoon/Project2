@@ -3,6 +3,8 @@ using System.Collections;
 using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
+using CombatSystem.Helper;
+using Helper;
 using LevelAndStats;
 using Model.Monsters;
 using UnityEngine;
@@ -62,6 +64,7 @@ namespace CombatSystem.Attack.Abstracts
         {
             if (!IsEnemyAlive()) return false;
             Enemy = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GetEnemyTag());
+            //Debug.Log("Try find enemy",Enemy);
             return true;
         }
 
@@ -74,14 +77,25 @@ namespace CombatSystem.Attack.Abstracts
         {
             isActive = true;
             attackManager.SetAllowExecuteAttackValue(false);
-            yield return StartBehavior();
-            ResetStateAndCounter();
+            if (CanExecuteAttack())
+            {
+                yield return StartBehavior();
+                ResetStateAndCounter();
+            }
         }
 
         protected virtual void CauseDamage()
         {
-            if (Enemy == null) Debug.Log(Enemy);
-            if (Enemy.TryGetComponent(out IDamageable damageable)) damageable.TakeDamage(EntityStats);
+            if (Enemy == null)
+            {
+                Debug.Log(Enemy);
+                return;
+            }
+            if (Enemy.TryGetComponent(out IDamageable damageable))
+            {
+                damageable?.TakeDamage(EntityStats);
+            }
+
         }
 
         private bool IsEnemyAlive()
@@ -98,6 +112,7 @@ namespace CombatSystem.Attack.Abstracts
             isActive = false;
             attackManager.SetAllowExecuteAttackValue(true);
             onEndAttack?.Invoke();
+            IAttackerCounter?.DecreaseAttackerCount(EntityStats);
         }
 
         protected abstract string GetEnemyTag();
@@ -113,5 +128,31 @@ namespace CombatSystem.Attack.Abstracts
             if (animator == null) return 0;
             return animator.GetAnimationLength(AnimationEnum);
         }
+        public bool CanExecuteAttack()
+        {
+            if (GetEnemyTag() == GameTag.Hero)
+            {
+                return true;
+            }
+            IAttackerCounter = Enemy.GetComponent<IAttackerCounter>();
+            if (IAttackerCounter.CanAttack())
+            {
+                IncreaseAttackerCount();
+                if (IAttackerCounter.CanAttack() == false)
+                {
+                    CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
+                }
+                return true;
+            }
+            return false;
+        }
+        protected IAttackerCounter IAttackerCounter;
+
+        protected void IncreaseAttackerCount()
+        {
+            //Debug.Log("+1", entityCharacter.gameObject);
+            IAttackerCounter?.IncreaseAttackerCount(EntityStats);
+        }
+
     }
 }

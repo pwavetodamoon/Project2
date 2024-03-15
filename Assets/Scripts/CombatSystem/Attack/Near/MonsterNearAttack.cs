@@ -1,29 +1,39 @@
+using System;
 using System.Collections;
 using CombatSystem.Attack.Abstracts;
+using CombatSystem.Attack.Systems;
 using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using CombatSystem.MonsterAI;
+using Helper;
 using Model.Hero;
 using Model.Monsters;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CombatSystem.Attack.Near
 {
-    public class MonsterNearAttack : BaseMonsterAttack
+    public class MonsterNearAttack : BaseSingleTargetAttack
     {
-        private bool triggerAttack = false;
-        private IAttackerCounter IAttackerCounter;
-        private WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
-        
+        public MonsterNearAttack(MonsterMoveAI monsterMoveAI)
+        {
+            this.MonsterMoveAI = monsterMoveAI;
+        }
+        private MonsterMoveAI MonsterMoveAI;
+
         public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
             base.GetReference(newEntityCharacter, attackTransform);
             PlayAnimation(AnimationType.Walk);
-            entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += EnableAttack;
-            IAttackerCounter = newEntityCharacter.GetComponent<IAttackerCounter>();
-            newEntityCharacter.StartCoroutine(MoveBehaviour());
+            var attackManager = newEntityCharacter.GetComponent<AttackManager>();
+            var attackControl = newEntityCharacter.GetComponent<AttackControl>();
+            var animator_Base = newEntityCharacter.GetComponentInChildren<Animator_Base>();
+            MonsterMoveAI.GetRef(this, attackManager, animator_Base);
+
+            entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += MonsterMoveAI.EnableAttack;
+            attackControl.StartCoroutine(MonsterMoveAI.MoveBehaviour());
         }
         protected override IEnumerator StartBehavior()
         {
@@ -32,21 +42,77 @@ namespace CombatSystem.Attack.Near
             yield return new WaitForSeconds(GetAnimationLength(AnimationType.Attack));
             CauseDamage();
 
-            if (IsOnTarget())
-            {
-                PlayAnimation(AnimationType.Idle);
-            }
-            else
-            {
-                PlayAnimation(AnimationType.Walk);
-            }
-
+            PlayAnimation(IsOnTarget() ? AnimationType.Idle : AnimationType.Walk);
         }
-        private void EnableAttack()
+
+        private bool IsOnTarget()
+        {
+            return MonsterMoveAI.IsOnTarget();
+        }
+
+        protected override string GetEnemyTag()
+        {
+            return GameTag.Hero;
+        }
+
+
+        public EntityCharacter GetEntityCharacter() => entityCharacter;
+        public EntityCharacter GetEnemy() => Enemy;
+
+    }
+    public class MonsterMoveAI
+    {
+        private MonsterNearAttack monsterNearAttack;
+        private Animator_Base animator_Base;
+        private AttackManager attackManager;
+        private EntityCharacter Enemy => monsterNearAttack.GetEnemy();
+        private EntityCharacter currentEntity => monsterNearAttack.GetEntityCharacter();
+        public bool triggerAttack;
+        private float distance;
+
+        public void GetRef(MonsterNearAttack monsterNearAttack, AttackManager attackManager, Animator_Base animator_Base)
+        {
+            this.monsterNearAttack = monsterNearAttack;
+            this.attackManager = attackManager;
+            this.animator_Base = animator_Base;
+            randomPos = CreateNoise();
+        }
+        private void PlayAnimation(Enum AnimationEnum)
+        {
+            animator_Base.ChangeAnimation(AnimationEnum);
+        }
+        public void EnableAttack()
         {
             triggerAttack = true;
         }
-        protected IEnumerator MoveBehaviour()
+
+        private bool CanMoveEntity()
+        {
+            return Enemy != null && !IsOnTarget() && attackManager.AttackedByEnemies() == false;
+        }
+        private void MoveDirective(Vector2 moveVector, float speed)
+        {
+            currentEntity.transform.Translate(moveVector * (Time.deltaTime * speed));
+        }
+
+        public bool IsOnTarget()
+        {
+            var targetPosition = GetDestinationPosition();
+            distance = Vector2.Distance(currentEntity.transform.position, targetPosition);
+            return distance < .1f;
+        }
+        private Vector3 randomPos;
+        private Vector3 GetDestinationPosition()
+        {
+            return Enemy.GetAttackerTransform().transform.position + randomPos;
+        }
+        private Vector3 CreateNoise()
+        {
+            var x = Random.Range(-.3f, .3f);
+            var y = Random.Range(-.3f, .3f);
+            return new Vector3(x, y);
+        }
+        public IEnumerator MoveBehaviour()
         {
             PlayAnimation(AnimationType.Walk);
 
@@ -54,39 +120,25 @@ namespace CombatSystem.Attack.Near
             {
                 if (CanMoveEntity())
                 {
-                    MoveDirective(Vector2.left,7);
+                    MoveDirective(Vector2.left, 7);
+                }
+                else
+                {
+                    MoveDirective(Vector2.left, 0);
                 }
 
-                yield return waitForEndOfFrame;
+                yield return new WaitForEndOfFrame();
             }
             while (true)
             {
                 if (CanMoveEntity())
                 {
-                    var direction = Enemy.GetAttackerTransform().transform.position - entityCharacter.transform.position;
+                    var direction = GetDestinationPosition() - currentEntity.transform.position;
                     MoveDirective(direction.normalized, 5);
                 }
-                yield return waitForEndOfFrame;
+                yield return new WaitForEndOfFrame();
             }
 
         }
-
-        private bool CanMoveEntity()
-        {
-            return Enemy != null && !IsOnTarget() && IAttackerCounter.Count == 0;
-        }
-        private void MoveDirective(Vector2 moveVector, float speed)
-        {
-            entityCharacter.transform.Translate(moveVector * (Time.deltaTime * speed));
-        }
-
-        public float distance;
-        private bool IsOnTarget()
-        {
-            var targetPosition = Enemy.GetAttackerTransform().transform.position;
-            distance = Vector2.Distance(entityCharacter.transform.position, targetPosition);
-            return distance < .1f;
-        }
-
     }
 }

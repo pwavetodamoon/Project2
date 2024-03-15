@@ -1,10 +1,14 @@
-﻿namespace CombatSystem.Attack.Utilities
+﻿using CombatSystem.Entity;
+using LevelAndStats;
+
+namespace CombatSystem.Attack.Utilities
 {
     public interface IAttackerCounter
     {
         int Count { get; set; }
-        void IncreaseAttackerCount();
+        void IncreaseAttackerCount(EntityStats entityStats);
 
-        void DecreaseAttackerCount();
+        void DecreaseAttackerCount(EntityStats entityStats);
+        bool CanAttack();
     }
 }

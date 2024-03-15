@@ -3,26 +3,31 @@ using CombatSystem.Attack.Abstracts;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using DG.Tweening;
+using Helper;
 using Model.Hero;
 using SlotHero;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Near
 {
-    public class HeroNearAttack : BaseHeroAttack
+    public class HeroNearAttack : BaseSingleTargetAttack
     {
         protected HeroCharacter Hero;
         private WaitForSeconds waitForEndAnim;
 
         protected override IEnumerator StartBehavior()
         {
-            yield return base.StartBehavior();
             yield return MoveModelToPosition(Enemy.GetAttackerTransform().position);
             PlayAnimation(AnimationType.Attack);
             AudioManager.Instance.PlaySFX("Near Attack");
             yield return waitForEndAnim;
             CauseDamage();
             yield return MoveModelToPosition(GetSlotPosition());
+        }
+
+        protected override string GetEnemyTag()
+        {
+            return GameTag.Enemy;
         }
 
         private IEnumerator MoveModelToPosition(Vector3 position)

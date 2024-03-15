@@ -54,7 +54,7 @@ namespace Model.Hero
         public void SetHeroSprite(Dictionary<SpritePartEnum, Sprite> spriteDictionary)
         {
             LoadSpritePart();
-            Debug.Log("Set Hero Sprite");
+            //Debug.Log("Set Hero Sprite");
             foreach (var skin in HeroSkin.Dictionary)
             {
                 if (skin.Value == null) continue;

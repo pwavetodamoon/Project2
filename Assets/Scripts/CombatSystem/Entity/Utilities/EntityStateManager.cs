@@ -12,6 +12,10 @@ namespace CombatSystem.Entity.Utilities
     public class EntityStateManager : MonoBehaviour, IDamageable
     {
         private IEntity entity;
+
+        public event Action OnTakeDamage;
+        public event Action OnDie;
+
         public EntityStats EntityStats;
         private Animator_Base animation_Base;
         public Action OnRebirth;
@@ -23,6 +27,11 @@ namespace CombatSystem.Entity.Utilities
             animation_Base = GetComponentInChildren<Animator_Base>();
         }
 
+        private void OnDisable()
+        {
+            OnDie = null;
+            OnTakeDamage = null;
+        }
         public void TakeDamage(EntityStats enemy)
         {
             OnTakeDamage?.Invoke();
@@ -36,11 +45,9 @@ namespace CombatSystem.Entity.Utilities
             }
 
             if (entity.EntityInAttackState() == false) animation_Base.ChangeAnimation(AnimationType.Hurt);
-            //Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damageOfEnemy}", gameObject);
+            Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damageOfEnemy} and have {EntityStats.Health()}", gameObject);
         }
 
-        public event Action OnTakeDamage;
-        public event Action OnDie;
 
         private void SpawnText(float damage)
         {

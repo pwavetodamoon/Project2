@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6464533570369571488}
   - component: {fileID: 1027358158011165982}
   - component: {fileID: 6744323918613235079}
+  - component: {fileID: 3139473457950667728}
   m_Layer: 0
   m_Name: CombatText
   m_TagString: Untagged
@@ -181,8 +182,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2375362087191485945}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 160503413
+  m_SortingLayer: 1
   m_SortingOrder: 100
   m_SortAtRoot: 0
 --- !u!114 &6744323918613235079
@@ -198,8 +199,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.5
-  sortingDuration: 0.05
   fontSize: 5
+  textMeshPro: {fileID: 6464533570369571488}
+--- !u!114 &3139473457950667728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2375362087191485945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d290626bff72778489ef6b2aa34c6a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingGroup: {fileID: 1027358158011165982}
+  sortingDuration: 0.1
   sortingOrderDefault: 100
-  sortingGroup: {fileID: 0}
-  textMeshPro: {fileID: 0}
