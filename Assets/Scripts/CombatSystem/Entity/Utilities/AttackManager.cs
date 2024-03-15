@@ -1,7 +1,9 @@
 using CombatSystem.Attack.Systems;
 using CombatSystem.Attack.Utilities;
+using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
+using UnityEditor;
 using UnityEngine;
 
 namespace CombatSystem.Entity.Utilities
@@ -11,31 +13,52 @@ namespace CombatSystem.Entity.Utilities
         [SerializeField] protected bool allowCounter = true;
         [SerializeField] protected bool allowExecuteAnotherAttack = true;
         private Animator_Base animator_base;
-        private AttackControl attackControl;
+        private IEntity entity;
+        private EntityHelper EntityHelper;
+        private EntityStats entityStats;
+        public int Count { get; set; }
 
         private void Awake()
         {
-            attackControl = GetComponent<AttackControl>();
             animator_base = GetComponentInChildren<Animator_Base>();
+            entity = GetComponent<IEntity>();
+            entityStats = GetComponent<EntityStats>();
+            EntityHelper = new EntityHelper(GetComponent<EntityStats>());
         }
 
-        public int Count { get; set; }
 
-        public void IncreaseAttackerCount()
+        public void IncreaseAttackerCount(EntityStats entity1)
         {
-            //if (attackControl.IsAttacking() == false)
-            //{
-            //    animator_base.ChangeAnimation(AnimationType.Hurt);
-            //}
-            Count++;
+            EntityHelper.Add(entity1);
+            if (CanChangeAnimation())
+            {
+                animator_base.ChangeAnimation(AnimationType.Idle);
+            }
+            ++Count;
         }
 
-        public void DecreaseAttackerCount()
+        public void DecreaseAttackerCount(EntityStats entity1)
         {
-            Count--;
-            if (Count < 0) Count = 0;
+            EntityHelper.Remove(entity1);
+            if (--Count < 0 && CanChangeAnimation())
+            {
+                animator_base.ChangeAnimation(AnimationType.Walk);
+            }
         }
 
+        public bool CanAttack()
+        {
+            if (EntityHelper.sumOfDamage >= entityStats.Health())
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool CanChangeAnimation()
+        {
+            return entity != null && entity.EntityInAttackState() == false;
+        }
         public bool AttackedByEnemies()
         {
             return Count > 0;

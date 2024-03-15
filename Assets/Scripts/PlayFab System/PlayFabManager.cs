@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Core.Currency;
+using Core.Quest;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
@@ -18,7 +19,7 @@ namespace PlayFab_System
         public CurrencyManager currencyManager;
 
         public testfunc testfunc;
-
+        public StageInformation stageInformation;
         private void Start()
         {
             StartCoroutine(Wait());
@@ -34,6 +35,7 @@ namespace PlayFab_System
             Login();
             yield return new WaitForSeconds(.2f);
             testfunc.Spawn();
+            GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
         }
 
 
@@ -46,6 +48,20 @@ namespace PlayFab_System
         [Button]
         public void SaveRewardData()
         {
+            PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
+                {
+                    Data = new Dictionary<string, string>
+                    {
+                        { "Point", stageInformation.pointCollected.ToString() },
+                        { "StageIndex", stageInformation.currentStageIndex.ToString() },
+                        { "MapIndex", stageInformation.currentMapIndex.ToString() }
+                    }
+                }, result => { Debug.Log("Save level data success!"); },
+                error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
+        }
+        [Button]
+        public void SaveGameLevel()
+        {
             Player.gold = currencyManager.currency;
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
                 {
@@ -56,7 +72,6 @@ namespace PlayFab_System
                 }, result => { Debug.Log("Save data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
-
         [Button]
         public void SaveDataPlayer()
         {
@@ -69,7 +84,7 @@ namespace PlayFab_System
                     { "Password", Player.passWord },
                     { "Level", Player.levelPlayer.ToString() },
                     { "Gold", Player.gold.ToString() },
-                    { "Hero Data", testfunc.ConvertToJson() }
+                    { "Hero Data", testfunc.ConvertToJson() },
                 }
             };
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
@@ -89,6 +104,9 @@ namespace PlayFab_System
             Player.levelPlayer = int.Parse(result.Data["Level"].Value);
             Player.gold = int.Parse(result.Data["Gold"].Value);
             testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
+            stageInformation.currentStageIndex = int.Parse(result.Data["StageIndex"].Value);
+            stageInformation.currentMapIndex = int.Parse(result.Data["MapIndex"].Value);
+            stageInformation.pointCollected = int.Parse(result.Data["Point"].Value);
             DebugResult(result);
         }
 

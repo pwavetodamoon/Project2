@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace CombatSystem.Attack.Far
 {
-    public class HeroFarAttack : BaseHeroAttack
+    public class HeroFarAttack : BaseSingleTargetAttack
     {
         private readonly ProjectileType type;
         private bool IsProjectileHitEnemy;
@@ -25,12 +25,11 @@ namespace CombatSystem.Attack.Far
 
         protected override IEnumerator StartBehavior()
         {
-            yield return base.StartBehavior();
             AudioManager.Instance.PlaySFX("Far Attack");
             PlayAnimation(AnimationType.Attack);
 
             yield return waitForEndAnim;
-
+            if (Enemy == null) yield break;
             var projectile = SpawnProjectile(Enemy);
             if (projectile == null) yield break;
 
@@ -38,6 +37,11 @@ namespace CombatSystem.Attack.Far
 
             CauseDamage();
             IsProjectileHitEnemy = false;
+        }
+
+        protected override string GetEnemyTag()
+        {
+            return GameTag.Enemy;
         }
 
         protected ProjectileBase SpawnProjectile(EntityCharacter monster)

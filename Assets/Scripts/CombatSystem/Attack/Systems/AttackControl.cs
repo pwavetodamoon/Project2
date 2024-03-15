@@ -63,15 +63,15 @@ namespace CombatSystem.Attack.Systems
         private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
         {
             newAttack.GetReference(entityCharacter);
-            if (newAttack.IsValidate == false)
-            {
-                Debug.LogError("Attack is not validate");
-                return;
-            }
-            else
-            {
-                Debug.Log($"Attack is validate {newAttack} {newAttackCounter.maxCounterTime}");
-            }
+            // if (newAttack.IsValidate == false)
+            // {
+            //     Debug.LogError("Attack is not validate");
+            //     return;
+            // }
+            // else
+            // {
+            //     Debug.Log($"Attack is validate {newAttack} {newAttackCounter.maxCounterTime}");
+            // }
 
             attack = newAttack;
             attackCounter = newAttackCounter;
@@ -92,6 +92,7 @@ namespace CombatSystem.Attack.Systems
         [Button]
         public void StopExecute()
         {
+            //Debug.Log("Stop Execute");
             StopAllCoroutines();
         }
     }

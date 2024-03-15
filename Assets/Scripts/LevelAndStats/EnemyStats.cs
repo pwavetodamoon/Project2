@@ -4,9 +4,9 @@ namespace LevelAndStats
     {
         public EnemyData EnemyData;
 
-        public void LoadData()
+        public void SetStructStats(StructStats stats)
         {
-            structStats = EnemyData.structStats;
+            structStats = stats;
         }
     }
 }

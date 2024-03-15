@@ -11,7 +11,6 @@ namespace Core.Reward
 {
     public class RewardManager : Singleton<RewardManager>
     {
-        [FormerlySerializedAs("itemBaseCollectPrefab")] [FormerlySerializedAs("itemCollectPrefab")]
         public ItemDrop baseCollectPrefab;
 
         public Coin itemCoinPrefab;
@@ -21,8 +20,6 @@ namespace Core.Reward
 
         [SerializeField] private ItemsSO goldCoinSO;
 
-        [FormerlySerializedAs("ItemsSO")] [SerializeField]
-        private ItemsSO itemStruct;
 
         [Header("Drop Setting")] [SerializeField]
         private bool enableSpawnCoin = true;
@@ -31,7 +28,7 @@ namespace Core.Reward
         private ObjectPoolPrefab<BaseDrop> coinPool;
 
         private ObjectPoolPrefab<BaseDrop> itemPool;
-
+        [SerializeField] private StageInformation stageInformation;
         [TableList(ShowIndexLabels = true)] [ShowInInspector]
         private List<BaseDrop> list;
 
@@ -51,7 +48,7 @@ namespace Core.Reward
 
             if (enableSpawnItem)
             {
-                var itemData = QuestManager.Instance.GetRandomItemQuest();
+                var itemData = stageInformation.GetRandomItemDrop();
                 var itemInGame = GetItemInPool(itemData.itemsSO, itemPool, position);
                 itemInGame.point = itemData.pointCollect;
             }

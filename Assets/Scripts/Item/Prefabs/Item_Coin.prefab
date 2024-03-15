@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 
+  point: 0
   DropConfig: {fileID: 11400000, guid: 097db5b8592ea894b88819c207dc251c, type: 2}
 --- !u!210 &6181924666019736221
 SortingGroup:
@@ -178,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3f9336009439443997b9a8849872fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
   moveVector: {x: -1, y: 0}

@@ -26,14 +26,14 @@ namespace SlotHero.Grid
                 debugTextArray = new TextMesh[width, height];
             var duration = 10f;
             for (var x = 0; x < gridArray.GetLength(0); x++)
-            for (var y = 0; y < gridArray.GetLength(1); y++)
-            {
-                if (showDebug)
-                    debugTextArray[x, y] = Help.CreateTextMeshWorld(gridArray[x, y].ToString(),
-                        GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 150, null);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, duration);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, duration);
-            }
+                for (var y = 0; y < gridArray.GetLength(1); y++)
+                {
+                    if (showDebug)
+                        debugTextArray[x, y] = Help.CreateTextMeshWorld(gridArray[x, y].ToString(),
+                            GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 150, null);
+                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, duration);
+                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, duration);
+                }
 
             Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, duration);
             Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, duration);
@@ -41,7 +41,7 @@ namespace SlotHero.Grid
 
         public void CreateSpawnArrayAtEnd(int x, int y)
         {
-            Debug.Log($"CreateSpawnArrayAtEnd {x} {y}");
+            // Debug.Log($"CreateSpawnArrayAtEnd {x} {y}");
             var xMax = gridArray.GetLength(0) - 1;
             var xMin = xMax - x;
             var yMax = gridArray.GetLength(1) - 1;
@@ -49,12 +49,12 @@ namespace SlotHero.Grid
             var index = 0;
             monstersSpawnArray = new monsterSpawnCell[x * y];
             for (var i = xMax; i > xMin; i--)
-            for (var j = yMax; j > yMin; j--)
-            {
-                SetValue(i, j, 2);
-                monstersSpawnArray[index] = new monsterSpawnCell(i, j);
-                index++;
-            }
+                for (var j = yMax; j > yMin; j--)
+                {
+                    SetValue(i, j, 2);
+                    monstersSpawnArray[index] = new monsterSpawnCell(i, j);
+                    index++;
+                }
         }
 
         public void GetXY(Vector3 worldPosition, out int x, out int y)
@@ -68,7 +68,7 @@ namespace SlotHero.Grid
             if (x >= 0 && y >= 0 && x < width && y < height) gridArray[x, y] = value;
             if (showDebug)
                 debugTextArray[x, y].text = gridArray[x, y].ToString();
-            Debug.Log($"Grid x:{x} y:{y} value:{value} ");
+            //Debug.Log($"Grid x:{x} y:{y} value:{value} ");
         }
 
         public void Clear()

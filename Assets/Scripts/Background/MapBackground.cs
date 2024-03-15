@@ -12,13 +12,13 @@ namespace Background
         public int MapIndex;
 
         private ScrollingBackground[] ScrollingBackgroundArray;
-
         private void Start()
         {
             LoadField();
             LoadTexture();
             StartScrolling();
         }
+
 
         /// <summary>
         ///     Loads the field by getting the components of ScrollingBackground in the children objects.
