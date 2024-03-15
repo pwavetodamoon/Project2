@@ -18,7 +18,7 @@ namespace PlayFab_System
     {
         public PlayerData Player;
         public CurrencyManager currencyManager;
-        public testfunc testfunc;
+        public Testfunc testfunc;
         public StageInformation stageInformation;
         
         private static PlayFabManager _instance;
@@ -28,14 +28,15 @@ namespace PlayFab_System
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+ 
         }
 
         private void Init()
         {
+            Login();
             Debug.Log("Test");
-            Player = FindObjectOfType<PlayerData>();
             currencyManager = FindObjectOfType<CurrencyManager>();
-            testfunc  = FindObjectOfType<testfunc>();
+            testfunc  = FindObjectOfType<Testfunc>();
             stageInformation = FindObjectOfType<StageInformation>();
         }
 
@@ -50,7 +51,6 @@ namespace PlayFab_System
         }
         private IEnumerator Wait()
         {
-            Login();
             yield return new WaitForSeconds(.2f);
             Init();
             yield return new WaitForSeconds(.2f);
