@@ -35,24 +35,26 @@ namespace CombatSystem.HeroDataManager.Data
 
         [ShowInInspector] private Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> spriteDictionary;
 
-        public HeroSingleAttackFactory GetHeroFactory()
-        {
-            return HeroSingleAttackFactory;
-        }
+        public HeroSingleAttackFactory GetHeroFactory() => HeroSingleAttackFactory;
 
-        public void OnSaveSlotIndex()
-        {
-            slotIndex = heroCharacter.InGameSlotIndex;
-        }
+
+        public void OnSaveSlotIndex() => slotIndex = heroCharacter.InGameSlotIndex;
+
 
         public Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> GetSkinDictionary()
         {
-            if (spriteDictionary == null) LoadAllSkinInFolder();
+            if (spriteDictionary == null)
+            {
+                LoadAllSkinInFolder();
+            }
             return spriteDictionary;
         }
         public Sprite[] GetEyeSkin()
         {
-            eyeSprites = new Sprite[3];
+            if (eyeSprites == null)
+            {
+                LoadAllSkinInFolder();
+            }
             return eyeSprites;
         }
 
@@ -79,8 +81,7 @@ namespace CombatSystem.HeroDataManager.Data
         private void LoadAllSkinInFolder()
         {
             var sprites = Resources.LoadAll<Sprite>(resourcePath);
-            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary);
-            LoadSpriteHelp.LoadSpriteEye(sprites, out eyeSprites);
+            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary, out eyeSprites);
         }
 
 

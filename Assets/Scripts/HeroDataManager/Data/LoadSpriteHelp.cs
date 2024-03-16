@@ -12,8 +12,6 @@ namespace CombatSystem.HeroDataManager.Data
         {
             "Body",
             "Face 01",
-            "Face 02",
-            "Face 03",
             "Head",
             "Shield",
             "Weapon",
@@ -24,21 +22,21 @@ namespace CombatSystem.HeroDataManager.Data
             "Right Hand",
             "Right Leg"
         };
-        public static string[] EyeName =
-        {
-            "Face 01",
-            "Face 02",
-            "Face 03",
-        };
         public static void LoadSpritePart(Sprite[] sprites,
-            out Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> Dictionary)
+            out Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> Dictionary,
+            out Sprite[] eyeSprites)
         {
             Dictionary = new Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite>();
             for (var i = 0; i < Character_Body_Sprites.SpritePartCount; i++)
+            {
                 Dictionary.Add((Character_Body_Sprites.SpritePartEnum)i, null);
+
+            }
+
+            eyeSprites = new Sprite[3];
             foreach (var sprite in sprites)
             {
-                //Debug.Log(sprite.name);
+                LoadSpriteEye(sprite, ref eyeSprites);
                 if (SpriteName.Contains(sprite.name) == false) continue;
                 var enumType = GetEnumByFileName(sprite.name);
                 Dictionary[enumType] = sprite;
@@ -65,29 +63,19 @@ namespace CombatSystem.HeroDataManager.Data
             return Character_Body_Sprites.SpritePartEnum.none;
         }
 
-        internal static void LoadSpriteEye(Sprite[] sprites, out Sprite[] eyeSprites)
+        private static void LoadSpriteEye(Sprite sprite, ref Sprite[] eyeSprites)
         {
-            // TODO: Check method
-            eyeSprites = new Sprite[3];
-            int count = 0;
-            for (int i = 0; i < sprites.Length; i++)
+            if (sprite.name == "Face 01")
             {
-                if (count == 3) break;
-                if (sprites[i].name == "Face 01")
-                {
-                    eyeSprites[0] = sprites[i];
-                    count++;
-                }
-                if (sprites[i].name == "Face 02")
-                {
-                    eyeSprites[1] = sprites[i];
-                    count++;
-                }
-                if (sprites[i].name == "Face 03")
-                {
-                    eyeSprites[2] = sprites[i];
-                    count++;
-                }
+                eyeSprites[0] = sprite;
+            }
+            if (sprite.name == "Face 02")
+            {
+                eyeSprites[1] = sprite;
+            }
+            if (sprite.name == "Face 03")
+            {
+                eyeSprites[2] = sprite;
             }
         }
     }

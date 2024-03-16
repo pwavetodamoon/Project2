@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemySpawnerControl : MonoBehaviour
 {
     public MonsterSpawner landMonster;
+    public MonsterSpawner golemMonster;
     [SerializeField] private bool allowSpawn = true;
     [SerializeField] private int enemySpawnPerTime = 1;
     [SerializeField] private TimerCounter timerCounter;

@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayMusic(string name)
     {
-        Sound s = Array.Find(musicSound, x => name == name);
+        Sound s = Array.Find(musicSound, x => x.name == name);
 
         if (s == null)
         {
@@ -60,7 +60,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void ToggleMusic()
-    { 
+    {
         musicSource.mute = !musicSource.mute;
     }
     public void ToggleSFX()

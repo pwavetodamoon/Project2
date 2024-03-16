@@ -47,12 +47,17 @@ namespace Model.Hero
             item_sword,
             item_shield
         }
-
         public const int SpritePartCount = 12;
         [SerializeField] private Color deadColor;
         [SerializeField] private Color liveColor;
         [SerializeField] private HeroSkin HeroSkin;
         [SerializeField] private TextureController textureController;
+
+
+        private void Awake()
+        {
+            textureController = GetComponentInChildren<TextureController>();
+        }
         public void SetEyeSprite(Sprite[] sprites)
         {
             textureController.Sprites = sprites;
