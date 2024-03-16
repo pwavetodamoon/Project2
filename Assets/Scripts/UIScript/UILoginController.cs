@@ -26,16 +26,33 @@ public class UILoginController : MonoBehaviour
     {
         _uIFrameLogin.ShowPanel(ScreenIds.UILogin);
         Signals.Get<OnLoginButtonClicked>().AddListener(OpenSceneGamePlay);
+        Signals.Get<ShowUINotificaltion>().AddListener(OpenUINotificaltion);
+        Signals.Get<HideUINotificaltion>().AddListener(HideUINotification);
+
     }
     private void RemoveListener()
     {
         Signals.Get<OnLoginButtonClicked>().RemoveListener(OpenSceneGamePlay);
+        Signals.Get<ShowUINotificaltion>().RemoveListener(OpenUINotificaltion);
+        Signals.Get<HideUINotificaltion>().RemoveListener(HideUINotification);
+
     }
 
     private void OpenSceneGamePlay()
     {
         PlayFabManager.Instance.StartCoroutine();
         SceneManager.LoadScene(ScreenIds.TestScene);
+    }
+    
+    private void OpenUINotificaltion()
+    {
+        _uIFrameLogin.ShowPanel(ScreenIds.NotificationUI);
+    }
+
+    private void HideUINotification()
+    {
+        _uIFrameLogin.HidePanel(ScreenIds.NotificationUI);
+
     }
 
    

@@ -30,6 +30,12 @@ public class ShowUISetting : ASignal
 public class HideUISetting : ASignal
 {
 }
+public class ShowUINotificaltion : ASignal
+{
+}
+public class HideUINotificaltion : ASignal
+{
+}
 public class OpenUISoundSetting : ASignal 
 { 
 }
