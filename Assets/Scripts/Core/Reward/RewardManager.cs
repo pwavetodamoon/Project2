@@ -15,13 +15,15 @@ namespace Core.Reward
 
         public Coin itemCoinPrefab;
 
-        [Header("Item Information")] [SerializeField]
+        [Header("Item Information")]
+        [SerializeField]
         private ItemsSO sliverCoinSO;
 
         [SerializeField] private ItemsSO goldCoinSO;
 
 
-        [Header("Drop Setting")] [SerializeField]
+        [Header("Drop Setting")]
+        [SerializeField]
         private bool enableSpawnCoin = true;
 
         [SerializeField] private bool enableSpawnItem = true;
@@ -29,9 +31,17 @@ namespace Core.Reward
 
         private ObjectPoolPrefab<BaseDrop> itemPool;
         [SerializeField] private StageInformation stageInformation;
-        [TableList(ShowIndexLabels = true)] [ShowInInspector]
+        [TableList(ShowIndexLabels = true)]
+        [ShowInInspector]
         private List<BaseDrop> list;
 
+        private void OnValidate()
+        {
+            if (stageInformation == null)
+            {
+                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            }
+        }
         protected override void Awake()
         {
             base.Awake();

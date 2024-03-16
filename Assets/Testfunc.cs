@@ -32,7 +32,7 @@ public class Testfunc : MonoBehaviour
         {
             var heroData = list[i];
             if (heroData.heroCharacter != null) continue;
-            var hero = Instantiate(heroManager.prefabHero, CombatEntitiesManager.Instance.transform).GetComponent<HeroCharacter>();
+            var hero = Instantiate(heroManager.prefabHero, null).GetComponent<HeroCharacter>();
             heroData.heroCharacter = hero;
 
             hero.SetAttackFactory(heroData.GetHeroFactory());

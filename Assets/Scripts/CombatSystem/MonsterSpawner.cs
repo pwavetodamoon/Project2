@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using CombatSystem.Entity;
+using CombatSystem.HeroDataManager;
 using LevelAndStats;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace CombatSystem
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
         }
 
-        public MonsterCharacter SpawnEnemy()
+        public MonsterCharacter SpawnMonster()
         {
             if (MonsterPrefab == null) return null;
             var position = SpawnPoint1.position;
@@ -31,11 +32,11 @@ namespace CombatSystem
             return go;
         }
 
-        public void SpawnMonsters(int spawnCount)
+        public void SpawnMultipleMonsters(int spawnCount)
         {
             for (var i = 0; i < spawnCount; i++)
             {
-                var enemy = SpawnEnemy();
+                var enemy = SpawnMonster();
                 SetStatsToMonster(enemy.GetComponent<EnemyStats>());
             }
         }
@@ -52,5 +53,6 @@ namespace CombatSystem
             var list = transform.GetComponentsInChildren<MonsterCharacter>();
             for (var i = 0; i < list.Length; i++) list[i].ReleaseObject();
         }
+
     }
 }

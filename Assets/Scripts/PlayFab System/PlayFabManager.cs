@@ -20,15 +20,15 @@ namespace PlayFab_System
         public CurrencyManager currencyManager;
         public Testfunc testfunc;
         public StageInformation stageInformation;
-        
+
         private static PlayFabManager _instance;
 
         // Getter cho instance
-  
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
- 
+
         }
 
         private void Init()
@@ -36,10 +36,15 @@ namespace PlayFab_System
             Login();
             Debug.Log("Test");
             currencyManager = FindObjectOfType<CurrencyManager>();
-            testfunc  = FindObjectOfType<Testfunc>();
-            stageInformation = FindObjectOfType<StageInformation>();
+            testfunc = FindObjectOfType<Testfunc>();
         }
-
+        private void OnValidate()
+        {
+            if (stageInformation == null)
+            {
+                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            }
+        }
         private void OnApplicationQuit()
         {
             SaveDataPlayer();
@@ -67,14 +72,14 @@ namespace PlayFab_System
         public void SaveRewardData()
         {
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
-                {
-                    Data = new Dictionary<string, string>
+            {
+                Data = new Dictionary<string, string>
                     {
                         { "Point", stageInformation.pointCollected.ToString() },
                         { "StageIndex", stageInformation.currentStageIndex.ToString() },
                         { "MapIndex", stageInformation.currentMapIndex.ToString() }
                     }
-                }, result => { Debug.Log("Save level data success!"); },
+            }, result => { Debug.Log("Save level data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
         [Button]
@@ -82,12 +87,12 @@ namespace PlayFab_System
         {
             Player.gold = currencyManager.currency;
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
-                {
-                    Data = new Dictionary<string, string>
+            {
+                Data = new Dictionary<string, string>
                     {
                         { "Gold", Player.gold.ToString() }
                     }
-                }, result => { Debug.Log("Save data success!"); },
+            }, result => { Debug.Log("Save data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
         [Button]

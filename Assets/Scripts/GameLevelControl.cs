@@ -26,8 +26,20 @@ public class GameLevelControl : Singleton<GameLevelControl>, IGameStateHandler, 
     [SerializeField] private MapBackground mapBackground;
     [SerializeField] private StageInformation stageInformation;
 
+
     private LossTransitionHandler LossTransitionHandler;
     private NextMapTransitionHandler NextMapTransitionHandler;
+    private void OnValidate()
+    {
+        if (stageInformation == null)
+        {
+            stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+        }
+        if (heroManager == null)
+        {
+            heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+        }
+    }
     protected override void Awake()
     {
         base.Awake();

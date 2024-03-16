@@ -17,7 +17,14 @@ namespace Core.Quest
     public class QuestManager : Singleton<QuestManager>
     {
         public StageInformation stageInformation;
+        private void OnValidate()
+        {
+            if (stageInformation == null)
+            {
+                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            }
 
+        }
         public void IncreasePointWhenKillMonster()
         {
             stageInformation.IncreasePointWhenKillMonster();

@@ -22,7 +22,6 @@ public class StageInformation : ScriptableObject
 
     public bool allowGoNextMap;
     public bool allowGoNextStage;
-
     StageSupport stageSupport = new StageSupport();
     // TODO: Custom monster level per stage
 
