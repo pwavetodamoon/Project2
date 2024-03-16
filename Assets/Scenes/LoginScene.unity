@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultUISetting: {fileID: 11400000, guid: 74017a04753cece48bcfb8b4aa8c9eef, type: 2}
-  _playFabManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

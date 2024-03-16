@@ -34,7 +34,6 @@ namespace PlayFab_System
         private void Init()
         {
             Login();
-            Debug.Log("Test");
             currencyManager = FindObjectOfType<CurrencyManager>();
             testfunc  = FindObjectOfType<Testfunc>();
             stageInformation = FindObjectOfType<StageInformation>();
