@@ -6,7 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
-using Ults;
+using  HHP.Ults.UIAnim;
 
 public class NotificationUI : APanelController
 {
@@ -19,7 +19,7 @@ public class NotificationUI : APanelController
    {
       _textNotification.text = "Coming Soon...";
       _transformsGameObjArrays = new [] { _textNotification.transform, _backGround.transform, _buttonOkay.transform};
-      UIAnim.InScale(_transformsGameObjArrays);
+      UIAnim.ZoomInScale(_transformsGameObjArrays);
 
    }
    protected override void AddListeners()
@@ -41,11 +41,11 @@ public class NotificationUI : APanelController
       if (gameObject.activeSelf)
       {
          Debug.Log("true");
-         UIAnim.InScale(_transformsGameObjArrays);
+         UIAnim.ZoomInScale(_transformsGameObjArrays);
       }
    }
    private void OnButtonOkayClicked( )
    {
-      UIAnim.OutScale(this.transform, Signals.Get<HideUINotificaltion>().Dispatch);
+      UIAnim.ZoomOutScale(this.transform, Signals.Get<HideUINotificaltion>().Dispatch);
    }
 }

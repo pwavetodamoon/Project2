@@ -6,8 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Helper;
-using Ults;
-
+using  HHP.Ults.UIAnim;
 public class UILogin : APanelController
 {
    [SerializeField] private Button _loginButton;
@@ -20,7 +19,7 @@ public class UILogin : APanelController
    private void Start()
    {
       _buttons = new Transform[] { _loginButton.transform, _homeButton.transform, _howToPlayButton.transform, _aboutUsButton.transform };
-      Ults.UIAnim.InScale(_buttons);
+    UIAnim.ZoomInScale(_buttons);
    }
 
    protected override void AddListeners()
@@ -44,7 +43,7 @@ public class UILogin : APanelController
    }
    private void OnAllTestingButtonClicked(Button button)
    {
-      UIAnim.ScaleInOut(button, Signals.Get<ShowUINotificaltion>().Dispatch);
+      UIAnim.ZoomInOutScale(button.transform, Signals.Get<ShowUINotificaltion>().Dispatch);
    }
    private void OnLoginButtonClicked(Button button)
    {
