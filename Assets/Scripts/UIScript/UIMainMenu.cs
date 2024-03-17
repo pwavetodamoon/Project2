@@ -2,6 +2,7 @@ using deVoid.Utils;
 using deVoid.UIFramework;
 using UnityEngine.UI;
 using UnityEngine;
+using HHP.Ults.UIAnim;
 
 public class UIMainMenu : APanelController
 {
@@ -10,7 +11,15 @@ public class UIMainMenu : APanelController
     [SerializeField] private Button ButtonActiveQuitAndSave;
 
     [SerializeField] private Button ButtonHideUIMainMenu;
+    private void Start()
+    {
+        UIAnim.ZoomInOutScale(this.transform);
+    }
+    private void OnEnable()
+    {
+        UIAnim.ZoomInOutScale(this.transform);
 
+    }
     protected override void AddListeners()
     {
         base.AddListeners();
@@ -28,7 +37,7 @@ public class UIMainMenu : APanelController
     }
     private void HideUIMainMenu()
     {
-        Signals.Get<HideUIMainMenu>().Dispatch();
+        UIAnim.ZoomOutScale(this.transform, Signals.Get<HideUIMainMenu>().Dispatch);
     } 
     private void ShowUISoundSetting()
     {

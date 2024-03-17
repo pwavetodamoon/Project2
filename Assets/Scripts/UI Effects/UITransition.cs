@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using deVoid.UIFramework;
 
-namespace Ults
+namespace Ults.Ults.AnimUI.Ults.AnimUI.Ults.AnimUI
 {
     public class UITransition : ATransitionComponent
     {
