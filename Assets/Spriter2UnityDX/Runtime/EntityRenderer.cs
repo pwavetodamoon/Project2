@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace Spriter2UnityDX
 {
@@ -110,7 +111,6 @@ namespace Spriter2UnityDX
 		{
 			for (var i = 0; i < renderers.Length; i++) action(renderers[i]);
 		}
-
 		public void RefreshRenders()
 		{
 			renderers = GetComponentsInChildren<SpriteRenderer>(true);

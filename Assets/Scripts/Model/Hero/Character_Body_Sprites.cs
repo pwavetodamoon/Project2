@@ -60,7 +60,7 @@ namespace Model.Hero
         }
         public void SetEyeSprite(Sprite[] sprites)
         {
-            textureController.Sprites = sprites;
+            textureController.SetSprites(sprites);
         }
         public void SetHeroSprite(Dictionary<SpritePartEnum, Sprite> spriteDictionary)
         {
