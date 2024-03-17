@@ -29,7 +29,7 @@ namespace Spriter2UnityDX
 			lastDisplayed = (int)DisplayedSprite;
 			animator = GetComponentInParent<Animator>();
 		}
-		public void SetSprites(Sprite[] sprites)
+		public void SetSpritesAndDisplay(Sprite[] sprites)
 		{
 			Sprites = sprites;
 			srenderer.sprite = Sprites[lastDisplayed];

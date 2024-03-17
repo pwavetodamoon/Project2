@@ -39,7 +39,7 @@ namespace Model.Hero
         }
 
         [Button]
-        public void Test(AnimationType animationType)
+        public void PlayAnimOnInspector(AnimationType animationType)
         {
             ChangeAnimation(animationType);
         }

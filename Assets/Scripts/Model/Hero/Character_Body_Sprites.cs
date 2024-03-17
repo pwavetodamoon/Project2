@@ -28,6 +28,10 @@ namespace Model.Hero
         {
             Dictionary.Clear();
         }
+        public void SetSprite(Character_Body_Sprites.SpritePartEnum spritePartEnum, Sprite sprite)
+        {
+            Dictionary[spritePartEnum].sprite = sprite;
+        }
     }
 
     public class Character_Body_Sprites : MonoBehaviour
@@ -60,28 +64,32 @@ namespace Model.Hero
         }
         public void SetEyeSprite(Sprite[] sprites)
         {
-            textureController.SetSprites(sprites);
+            textureController.SetSpritesAndDisplay(sprites);
         }
         public void SetHeroSprite(Dictionary<SpritePartEnum, Sprite> spriteDictionary)
         {
-            LoadSpritePart();
+            LoadSpriteComponents();
             //Debug.Log("Set Hero Sprite");
-            foreach (var skin in HeroSkin.Dictionary)
+            foreach (var Sprite in HeroSkin.Dictionary)
             {
-                if (skin.Value == null) continue;
-                skin.Value.sprite = spriteDictionary[skin.Key];
+                if (Sprite.Value == null) continue;
+                var sprite = spriteDictionary[Sprite.Key];
+                HeroSkin.SetSprite(Sprite.Key, sprite);
             }
         }
 
         [Button(ButtonSizes.Medium, ButtonStyle.FoldoutButton)]
-        private void LoadSpritePart()
+        private void LoadSpriteComponents()
         {
             if (HeroSkin == null)
                 HeroSkin = new HeroSkin();
 
-            var allSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-            foreach (var spriteRenderer in allSpriteRenderers)
-                HeroSkin.SetSpritePart(GetSpritePartEnumByName(spriteRenderer.name), spriteRenderer);
+            foreach (var spriteRenderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                var spritePartEnum = GetSpritePartEnumByName(spriteRenderer.name);
+                HeroSkin.SetSpritePart(spritePartEnum, spriteRenderer);
+
+            }
         }
 
         private SpritePartEnum GetSpritePartEnumByName(string name)
