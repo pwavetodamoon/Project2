@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1666321835603671537}
   - component: {fileID: 170247209434137629}
   m_Layer: 0
-  m_Name: Face 01 (1)
+  m_Name: Face 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 240063151385497812}
   - component: {fileID: 6818518874228169022}
   m_Layer: 0
-  m_Name: Sword (1)
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 5610836437478563580}
   - component: {fileID: 6969253392319559171}
   m_Layer: 0
-  m_Name: Right Leg (1)
+  m_Name: Right Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 4856308623373714603}
   - component: {fileID: 2965009858788602412}
   m_Layer: 0
-  m_Name: Right Hand (1)
+  m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 1049281677907030716}
   - component: {fileID: 8380237657764990166}
   m_Layer: 0
-  m_Name: Body (1)
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 2219036981296657172}
   - component: {fileID: 5893557373860185830}
   m_Layer: 0
-  m_Name: Head (1)
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 5345098214656992589}
   - component: {fileID: 599780404710605840}
   m_Layer: 0
-  m_Name: Right Arm (1)
+  m_Name: Right Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -940,7 +940,7 @@ GameObject:
   - component: {fileID: 4924083393066617116}
   - component: {fileID: 8062377183760547879}
   m_Layer: 0
-  m_Name: Left Hand (1)
+  m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 9137162826323190147}
   - component: {fileID: 5737752113658452903}
   m_Layer: 0
-  m_Name: Left Leg (1)
+  m_Name: Left Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 5337488013831959116}
   - component: {fileID: 3044477914380990314}
   m_Layer: 0
-  m_Name: Left Arm (1)
+  m_Name: Left Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

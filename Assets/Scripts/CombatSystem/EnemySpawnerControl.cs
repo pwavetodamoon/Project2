@@ -10,6 +10,15 @@ public class EnemySpawnerControl : MonoBehaviour
     [SerializeField] private bool allowSpawn = true;
     [SerializeField] private int entitySpawnPerTime = 1;
     [SerializeField] private TimerCounter timerCounter;
+
+    public void ClearAndStopSpawn()
+    {
+        allowSpawn = false;
+        foreach (var item in monsterSpawners)
+        {
+            item.ClearMonsterAndStopSpawnOnMap();
+        }
+    }
     private void OnValidate()
     {
         if (timerCounter == null)
@@ -22,7 +31,12 @@ public class EnemySpawnerControl : MonoBehaviour
     {
         timerCounter = GetComponent<TimerCounter>();
         timerCounter.RegisterCallback(SpawnMinions);
+
         monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
+    }
+    public void EnableSpawn()
+    {
+        allowSpawn = true;
     }
 
     [Button]
