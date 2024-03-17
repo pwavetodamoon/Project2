@@ -51,7 +51,7 @@ namespace Model.Monsters
         public virtual void ChangeAnimation<T>(T type1) where T : Enum
         {
             var animationName = GetAnimationNameByType(type1);
-            if (animator == null) return;
+            if(animator == null) return;
             animator.Play(animationName, 0, 0);
             StartCoroutine(WaitAnimation());
         }

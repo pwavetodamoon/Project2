@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using CombatSystem.Entity;
-using CombatSystem.HeroDataManager;
 using LevelAndStats;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CombatSystem
 {
-    [RequireComponent(typeof(MonstersStatsSystem))]
     public class MonsterSpawner : MonoBehaviour
     {
         [Header("References")]
@@ -20,7 +18,7 @@ namespace CombatSystem
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
         }
 
-        public MonsterCharacter SpawnMonster()
+        public MonsterCharacter SpawnEnemy()
         {
             if (MonsterPrefab == null) return null;
             var position = SpawnPoint1.position;
@@ -32,11 +30,11 @@ namespace CombatSystem
             return go;
         }
 
-        public void SpawnMultipleMonsters(int spawnCount)
+        public void SpawnMonsters(int spawnCount)
         {
             for (var i = 0; i < spawnCount; i++)
             {
-                var enemy = SpawnMonster();
+                var enemy = SpawnEnemy();
                 SetStatsToMonster(enemy.GetComponent<EnemyStats>());
             }
         }
@@ -53,6 +51,5 @@ namespace CombatSystem
             var list = transform.GetComponentsInChildren<MonsterCharacter>();
             for (var i = 0; i < list.Length; i++) list[i].ReleaseObject();
         }
-
     }
 }

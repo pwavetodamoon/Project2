@@ -12,14 +12,6 @@ public class MonstersStatsSystem : MonoBehaviour
     /// Chỉnh stats bằng hàm từ Enemy Data tương ứng với level trung bình của màn chơi
     /// </summary>
     /// <param name="stats"></param>
-
-    private void OnValidate()
-    {
-        if (stageInformation == null)
-        {
-            stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
-        }
-    }
     public void SetStatsByLevel(EnemyStats stats)
     {
         var level = stageInformation.GetLevelForMonster();

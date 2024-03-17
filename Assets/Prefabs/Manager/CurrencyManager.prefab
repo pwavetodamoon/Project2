@@ -44,5 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ceb7a20b5c1494a81014741e31b61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DontDestroyOnLoad: 0
-  currency: 100
+  currency: 0

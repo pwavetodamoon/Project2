@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/SampleScene.unity.meta
-guid: 7a7fdf5ea2fc2094eb53678dd1fe2b2f
-DefaultImporter:
-========
 guid: 7e49deef52c428948976693d98459fa1
 PrefabImporter:
->>>>>>>> main:Assets/Prefabs/UIs/UILogin.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

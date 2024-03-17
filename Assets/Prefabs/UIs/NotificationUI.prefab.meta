@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Prefabs/Manager/MonsterSpawnControl.prefab.meta
-guid: 7b3b4a98581932743872ed9ecdd213b1
-========
 guid: ffc5378453638ba46bfacf5875ae4d3e
->>>>>>>> main:Assets/Prefabs/UIs/NotificationUI.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

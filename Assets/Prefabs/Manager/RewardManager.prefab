@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788fc8d7d59b1284d9e3d0a96c177bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DontDestroyOnLoad: 0
-  baseCollectPrefab: {fileID: 7423600291134737624, guid: 73590586eddcf8944a949e23f06bc732, type: 3}
+  itemCollectPrefab: {fileID: 7423600291134737624, guid: 73590586eddcf8944a949e23f06bc732, type: 3}
   itemCoinPrefab: {fileID: 2015921707029959747, guid: 28967f99837544e4991440cf0bb5eea4, type: 3}
   sliverCoinSO: {fileID: 11400000, guid: 4bf61d5cf27d5dc4fa8425a2a1e15417, type: 2}
   goldCoinSO: {fileID: 11400000, guid: bcf771b539fdc2d489c4d1b036bb548a, type: 2}
+  ItemsSO: {fileID: 11400000, guid: fc9492687e5d96f4cb9636d1ba50d9f5, type: 2}
   enableSpawnCoin: 1
   enableSpawnItem: 1
-  stageInformation: {fileID: 11400000, guid: 6876edf9fadb22c46bb2abcfcafc68bc, type: 2}

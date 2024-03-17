@@ -8,7 +8,7 @@ namespace SlotHero
 
         public Color normalColor;
         public Color onChooseColor;
-        // private bool IsChange = false;
+        private bool IsChange = false;
 
         private void Awake()
         {

@@ -22,24 +22,24 @@ namespace Model.Hero
             switch (type)
             {
                 case AnimationType.Idle:
-                    return "Ilde";
+                    return "Idle_1";
 
                 case AnimationType.Walk:
-                    return "Walking";
+                    return "walking_1";
 
                 case AnimationType.Attack:
-                    return "Slashing";
+                    return "slashing_1";
 
                 case AnimationType.Hurt:
-                    return "Hurt";
+                    return "hurt_1";
 
                 default:
-                    return "Ilde";
+                    return "Idle_1";
             }
         }
 
         [Button]
-        public void PlayAnimOnInspector(AnimationType animationType)
+        public void Test(AnimationType animationType)
         {
             ChangeAnimation(animationType);
         }

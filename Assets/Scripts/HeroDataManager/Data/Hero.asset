@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23a52a201afe5a04e84b4ccabaadd0e1, type: 3}
-  m_Name: Hero 1
+  m_Name: Hero
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -24,12 +24,8 @@ MonoBehaviour:
   AttackType: 0
   characterEnumType: 4
   HeroSingleAttackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
-  slotIndex: 2
-  heroName: Quang 2
-  eyeSprites:
-  - {fileID: 21300000, guid: 584ec87fe94932f45b277fc4e0d285a5, type: 3}
-  - {fileID: 21300000, guid: 0f704bc0f0946f147806a2109f484205, type: 3}
-  - {fileID: 21300000, guid: eb7f7443645c20849a75e751c08ac75e, type: 3}
+  slotIndex: 3
+  heroName: Quang
   isDead: 0
   heroCharacter: {fileID: 0}
   structStats:
@@ -40,7 +36,7 @@ MonoBehaviour:
     speed: 3
     critRate: 0
     critDamage: 0
-    attackCoolDown: 0.5
-    attackMoveDuration: 0.5
-  icon: {fileID: 21300000, guid: 225dfd818e8387f44a0c9e72a682e938, type: 3}
-  resourcePath: Hero/Medieval Knight
+    attackCoolDown: 1
+    attackMoveDuration: 1
+  icon: {fileID: 21300000, guid: c10ea21566c36044488d0374841623ae, type: 3}
+  resourcePath: Hero/Medieval King

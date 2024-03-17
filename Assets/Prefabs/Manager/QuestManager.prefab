@@ -45,4 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroyOnLoad: 0
-  stageInformation: {fileID: 11400000, guid: 6876edf9fadb22c46bb2abcfcafc68bc, type: 2}
+  questItem:
+  - pointCollect: 2
+    itemsSO: {fileID: 11400000, guid: fc9492687e5d96f4cb9636d1ba50d9f5, type: 2}
+  - pointCollect: 5
+    itemsSO: {fileID: 11400000, guid: 226e82e5fcddcdc4e8632b5df416fd66, type: 2}
+  questItemInScene: 0
+  itemNeedCollect: 5
+  maxItemNeedCollect: 5
+  pointCollected: 50
+  pointNeedCollect: 100

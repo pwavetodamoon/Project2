@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Background;
@@ -14,39 +13,20 @@ using UI_Effects;
 
 public abstract class GameTransitionBase
 {
-    public void GetRef(ICoroutineRunner runner, ScreenTransition screen,
+    public void GetRef(ICoroutineRunner runner, IGameStateHandler GameStateHandler, ScreenTransition screen,
         MapBackground map)
     {
         this.runner = runner;
         this.screen = screen;
         this.map = map;
+        this.GameStateHandler = GameStateHandler;
     }
-    public void RegisterCallback(Action OnStartTransition, Action OnTransitionEnd)
-    {
-        this.OnStartTransition += OnStartTransition;
-        this.OnTransitionEnd += OnTransitionEnd;
-    }
-    public void UnRegisterCallback()
-    {
-        this.OnStartTransition = null;
-        this.OnTransitionEnd = null;
-    }
-
     protected ICoroutineRunner runner;
+    protected IGameStateHandler GameStateHandler;
     protected ScreenTransition screen;
     protected MapBackground map;
 
     public abstract void UseRunner();
-    public Action OnStartTransition;
-
-    public Action OnTransitionEnd;
-    protected virtual void ChangeAttackStateOfHero(bool state, List<HeroCharacter> heroList)
-    {
-        foreach (var heroData in heroList)
-        {
-            heroData.SetAttackState(state);
-        }
-    }
 }
 public class NextMapTransitionHandler : GameTransitionBase
 {
@@ -57,9 +37,6 @@ public class NextMapTransitionHandler : GameTransitionBase
 
     private IEnumerator GoNextMap()
     {
-        OnStartTransition?.Invoke();
-
-
         var entityList = CombatEntitiesManager.Instance.GetHeroList();
         var heroList = new List<HeroCharacter>();
 
@@ -79,7 +56,12 @@ public class NextMapTransitionHandler : GameTransitionBase
             hero.SetModelBackImmediate();
         }
         // stop all attack;
-        ChangeAttackStateOfHero(false, heroList);
+        GameStateHandler.ChangeAttackStateOfHero(false, heroList);
+
+
+        GameStateHandler.CollectAllItemInGame();
+
+        GameStateHandler.ClearMonsterAndStopSpawnOnMap();
 
 
         yield return screen.StartTransition();
@@ -87,14 +69,12 @@ public class NextMapTransitionHandler : GameTransitionBase
         yield return screen.waitBetweenTransition;
         yield return screen.EndTransition();
 
-        ChangeAttackStateOfHero(true, heroList);
+        GameStateHandler.ChangeAttackStateOfHero(true, heroList);
 
 
-        foreach (var hero in heroList)
+        foreach(var hero in heroList)
         {
             hero.RegisterObject();
         }
-
-        OnTransitionEnd?.Invoke();
     }
 }

@@ -14,10 +14,11 @@ public class LossTransitionHandler : GameTransitionBase
 
     private IEnumerator OnLooseProgress()
     {
-        OnStartTransition?.Invoke();
         var slotList = SlotManager.Instance.Slots;
 
+        GameStateHandler.CollectAllItemInGame();
 
+        GameStateHandler.ClearMonsterAndStopSpawnOnMap();
         // Health all hero in slot
         yield return WaitTime;
 
@@ -35,6 +36,5 @@ public class LossTransitionHandler : GameTransitionBase
         map.GoNextMap();
         yield return screen.waitBetweenTransition;
         yield return screen.EndTransition();
-        OnTransitionEnd?.Invoke();
     }
 }

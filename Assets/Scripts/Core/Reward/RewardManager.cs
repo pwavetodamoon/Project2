@@ -15,35 +15,23 @@ namespace Core.Reward
 
         public Coin itemCoinPrefab;
 
-        [Header("Item Information")]
-        [SerializeField]
+        [Header("Item Information")] [SerializeField]
         private ItemsSO sliverCoinSO;
 
         [SerializeField] private ItemsSO goldCoinSO;
 
 
-        [Header("Drop Setting")]
-        [SerializeField]
-        private bool enableDropForMoney = true;
+        [Header("Drop Setting")] [SerializeField]
+        private bool enableSpawnCoin = true;
 
-        [SerializeField] private bool enableLootForItem = true;
+        [SerializeField] private bool enableSpawnItem = true;
         private ObjectPoolPrefab<BaseDrop> coinPool;
 
         private ObjectPoolPrefab<BaseDrop> itemPool;
         [SerializeField] private StageInformation stageInformation;
-        [TableList(ShowIndexLabels = true)]
-        [ShowInInspector]
+        [TableList(ShowIndexLabels = true)] [ShowInInspector]
         private List<BaseDrop> list;
 
-        private Vector3 RandomPosition() => new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
-
-        private void OnValidate()
-        {
-            if (stageInformation == null)
-            {
-                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
-            }
-        }
         protected override void Awake()
         {
             base.Awake();
@@ -56,25 +44,22 @@ namespace Core.Reward
         [Button]
         public void CreateReward(Vector3 position)
         {
-            SpawnMultipleCoin(position);
+            if (enableSpawnCoin) SpawnMultipleCoin(position);
 
-            SpawnItem(position);
-        }
-        private void SpawnItem(Vector3 position)
-        {
-            if (enableLootForItem)
+            if (enableSpawnItem)
             {
                 var itemData = stageInformation.GetRandomItemDrop();
-                var itemInGame = GetItemInPool(itemData.GetItemSO(), itemPool, position);
-                itemInGame.point = itemData.GetPoint();
+                var itemInGame = GetItemInPool(itemData.itemsSO, itemPool, position);
+                itemInGame.point = itemData.pointCollect;
             }
         }
+
         private void SpawnMultipleCoin(Vector3 position)
         {
             var count = Random.Range(1, 5);
             for (var i = 0; i < count; i++)
             {
-                if (enableDropForMoney == false) continue;
+                if (enableSpawnCoin == false) continue;
                 GetItemInPool(sliverCoinSO, coinPool, position);
             }
         }
@@ -103,5 +88,9 @@ namespace Core.Reward
             }
         }
 
+        private Vector3 RandomPosition()
+        {
+            return new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
+        }
     }
 }

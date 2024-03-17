@@ -7,7 +7,7 @@ public class TimerCounter : MonoBehaviour
 {
 
     public float spawnTimer;
-    public float maxSpawnTime = 3;
+    public float maxSpawnTime;
     public bool allowCounter = true;
 
     private Action Callback;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CombatSystem.Attack.Factory;
 using CombatSystem.Entity;
@@ -25,7 +24,7 @@ namespace CombatSystem.HeroDataManager.Data
         [SerializeField] private HeroSingleAttackFactory HeroSingleAttackFactory;
         [SerializeField] public int slotIndex;
         [SerializeField] public string heroName;
-        [SerializeField] public Sprite[] eyeSprites;
+
         public bool isDead;
         public HeroCharacter heroCharacter;
         public StructStats structStats;
@@ -35,27 +34,20 @@ namespace CombatSystem.HeroDataManager.Data
 
         [ShowInInspector] private Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> spriteDictionary;
 
-        public HeroSingleAttackFactory GetHeroFactory() => HeroSingleAttackFactory;
+        public HeroSingleAttackFactory GetHeroFactory()
+        {
+            return HeroSingleAttackFactory;
+        }
 
-
-        public void OnSaveSlotIndex() => slotIndex = heroCharacter.InGameSlotIndex;
-
+        public void OnSaveSlotIndex()
+        {
+            slotIndex = heroCharacter.InGameSlotIndex;
+        }
 
         public Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> GetSkinDictionary()
         {
-            if (spriteDictionary == null)
-            {
-                LoadAllSkinInFolder();
-            }
+            if (spriteDictionary == null) LoadAllSkinInFolder();
             return spriteDictionary;
-        }
-        public Sprite[] GetEyeSkin()
-        {
-            if (eyeSprites == null)
-            {
-                LoadAllSkinInFolder();
-            }
-            return eyeSprites;
         }
 
         [Button]
@@ -81,9 +73,7 @@ namespace CombatSystem.HeroDataManager.Data
         private void LoadAllSkinInFolder()
         {
             var sprites = Resources.LoadAll<Sprite>(resourcePath);
-            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary, out eyeSprites);
+            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary);
         }
-
-
     }
 }

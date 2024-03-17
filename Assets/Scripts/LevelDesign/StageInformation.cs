@@ -22,25 +22,22 @@ public class StageInformation : ScriptableObject
 
     public bool allowGoNextMap;
     public bool allowGoNextStage;
-    StageSupport stageSupport = new StageSupport();
 
-    /// <summary>
-    /// Get level for monster by current map and stage information
-    /// </summary>
-    /// <returns></returns>
+    StageSupport stageSupport = new StageSupport();
+    // TODO: Custom monster level per stage
+
     [Button]
     public int GetLevelForMonster()
     {
-        var currentLevelLocal = currentMapGameData.generalLevelMonster;
-        bool isFirstStage = currentMapIndex == 0;
-        bool isLastMap = currentStageIndex == currentMapGameData.maxStage;
-
-        if (isFirstStage == false && isLastMap == false)
+        var currentLevel = currentMapGameData.generalLevelMonster;
+        if (currentMapIndex + 1 < MapGameConfigs.Length && currentStageIndex > 0)
         {
-            var levelPerStage = stageSupport.CalculatorLevelPerStage(currentMapGameData, MapGameConfigs[currentMapIndex + 1]);
-            currentLevelLocal += levelPerStage * currentStageIndex;
+            var nextMapData = MapGameConfigs[currentMapIndex + 1];
+            var levelPerStage = stageSupport.CalculatorLevelPerStage(currentMapGameData, nextMapData);
+            currentLevel += levelPerStage * currentStageIndex;
         }
-        return currentLevelLocal;
+        // Debug.Log("Current Level: " + currentLevel);
+        return currentLevel;
     }
 
 
@@ -51,8 +48,6 @@ public class StageInformation : ScriptableObject
     }
     public void ResetStage()
     {
-        // có thể là sau khi thua ở stage cuối sẽ không reset về cuối map
-
         currentStageIndex = 0;
         pointCollected = 0;
     }
@@ -66,14 +61,12 @@ public class StageInformation : ScriptableObject
         if (pointCollected > GetPointNeedOfStage())
         {
             pointCollected = GetPointNeedOfStage();
-            // Có thể cho phép đi tiếp stage thành 1 lựa chọn trên UI
             OnGoNextMapOrGoNextStage();
         }
 
     }
     private void OnGoNextMapOrGoNextStage()
     {
-        // logic qua map hoặc qua stage
         if (++currentStageIndex < currentMapGameData.maxStage)
         {
             if (allowGoNextStage == false) return;

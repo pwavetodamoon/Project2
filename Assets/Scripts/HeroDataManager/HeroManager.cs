@@ -20,6 +20,5 @@ namespace CombatSystem.HeroDataManager
         //         data.GetDataForHero(go);
         //     }
         // }
-
     }
 }
