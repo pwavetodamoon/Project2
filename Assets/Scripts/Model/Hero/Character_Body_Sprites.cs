@@ -10,7 +10,7 @@ namespace Model.Hero
     [Serializable]
     public class HeroSkin
     {
-        [ShowInInspector] public Dictionary<Character_Body_Sprites.SpritePartEnum, SpriteRenderer> Dictionary;
+        public Dictionary<Character_Body_Sprites.SpritePartEnum, SpriteRenderer> Dictionary;
 
         public HeroSkin()
         {
@@ -53,10 +53,10 @@ namespace Model.Hero
         [SerializeField] private HeroSkin HeroSkin;
         [SerializeField] private TextureController textureController;
 
-
-        private void Awake()
+        private void OnValidate()
         {
-            textureController = GetComponentInChildren<TextureController>();
+            if (textureController == null)
+                textureController = GetComponentInChildren<TextureController>();
         }
         public void SetEyeSprite(Sprite[] sprites)
         {

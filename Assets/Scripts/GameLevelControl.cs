@@ -11,8 +11,6 @@ using Helper;
 using UI_Effects;
 
 
-
-
 public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
 {
     [SerializeField] private HeroManager heroManager;
@@ -46,6 +44,7 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
 
         LossTransitionHandler.RegisterCallback(StartTransition, EndTransition);
         NextMapTransitionHandler.RegisterCallback(StartTransition, EndTransition);
+
         stageInformation.OnCompleteMap += OnGoNextMap;
     }
     private void StartTransition()
@@ -82,10 +81,6 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     {
         mapBackground.MapIndex = index;
         mapBackground.LoadTexture();
-    }
-    public void ChangeAttackStateOfHero(bool state, List<HeroCharacter> heroList)
-    {
-
     }
 }
 
