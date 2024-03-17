@@ -8,6 +8,7 @@ using deVoid;
 using deVoid.Utils;
 using LevelAndStats;
 using Unity.VisualScripting;
+using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,14 +27,21 @@ public class GameManager : MonoBehaviour
         if (_currencyManager.currency >= Convert.ToInt32(moneyRequired))
         {
             Debug.Log("Upgrade Level");
-          _currencyManager.currency -= Convert.ToInt32(moneyRequired);
-          _heroEntityStats.Upgrade();
+            _currencyManager.currency -= Convert.ToInt32(moneyRequired);
+            _heroEntityStats.Upgrade();
         }
         else
         {
             Debug.Log("Can not Upgrade");
             Debug.Log("moneyRequired:" + moneyRequired);
         }
+    }
+    public GameObject hero;
+    [Button]
+    public void Test()
+    {
+        hero = Instantiate(hero);
+        hero.transform.position = Vector2.one;
     }
 
 }

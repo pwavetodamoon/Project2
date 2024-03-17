@@ -22,6 +22,10 @@ namespace CombatSystem.Entity
 
         public void SetAttackState(bool state)
         {
+            if (attackManager == null)
+            {
+                attackManager = GetComponent<AttackManager>();
+            }
             attackManager.SetAllowExecuteAttackValue(state);
             attackManager.SetTimeCounterValue(state);
         }

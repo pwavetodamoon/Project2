@@ -22,16 +22,21 @@ namespace CombatSystem.HeroDataManager.Data
             "Right Hand",
             "Right Leg"
         };
-
         public static void LoadSpritePart(Sprite[] sprites,
-            out Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> Dictionary)
+            out Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> Dictionary,
+            out Sprite[] eyeSprites)
         {
             Dictionary = new Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite>();
             for (var i = 0; i < Character_Body_Sprites.SpritePartCount; i++)
+            {
                 Dictionary.Add((Character_Body_Sprites.SpritePartEnum)i, null);
+
+            }
+
+            eyeSprites = new Sprite[3];
             foreach (var sprite in sprites)
             {
-                //Debug.Log(sprite.name);
+                LoadSpriteEye(sprite, ref eyeSprites);
                 if (SpriteName.Contains(sprite.name) == false) continue;
                 var enumType = GetEnumByFileName(sprite.name);
                 Dictionary[enumType] = sprite;
@@ -55,7 +60,23 @@ namespace CombatSystem.HeroDataManager.Data
                 case "Right Leg": return Character_Body_Sprites.SpritePartEnum.right_leg;
             }
 
-            return Character_Body_Sprites.SpritePartEnum.body;
+            return Character_Body_Sprites.SpritePartEnum.none;
+        }
+
+        private static void LoadSpriteEye(Sprite sprite, ref Sprite[] eyeSprites)
+        {
+            if (sprite.name == "Face 01")
+            {
+                eyeSprites[0] = sprite;
+            }
+            if (sprite.name == "Face 02")
+            {
+                eyeSprites[1] = sprite;
+            }
+            if (sprite.name == "Face 03")
+            {
+                eyeSprites[2] = sprite;
+            }
         }
     }
 }
