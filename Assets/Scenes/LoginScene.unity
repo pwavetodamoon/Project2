@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 3fd87a8f871c01f4dbc304ba13fd23c3, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -272,6 +272,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
+========
 --- !u!1 &1535304825
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,11 +319,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultUISetting: {fileID: 11400000, guid: 74017a04753cece48bcfb8b4aa8c9eef, type: 2}
-  _playFabManager: {fileID: 0}
+>>>>>>>> main:Assets/Scenes/LoginScene.unity
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+<<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
+========
   - {fileID: 1535304827}
   - {fileID: 241251375}
+>>>>>>>> main:Assets/Scenes/LoginScene.unity
