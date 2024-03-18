@@ -28,7 +28,6 @@ namespace PlayFab_System
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
- 
         }
 
         private void Init()
@@ -50,9 +49,9 @@ namespace PlayFab_System
         }
         private IEnumerator Wait()
         {
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(1f);
             Init();
-            yield return new WaitForSeconds(.2f);
+            yield return new WaitForSeconds(1f);
             testfunc.Spawn();
             GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
         }
@@ -153,16 +152,12 @@ namespace PlayFab_System
 
         public void Login()
         {
-            // Player = PlayerData.Instance;
-            // Player.customId = SystemInfo.deviceUniqueIdentifier;
-            
-            GetDataPlayer();
             var request = new LoginWithEmailAddressRequest()
             {
                Email = Player.email,
                Password = Player.passWord
             };
-  
+            Debug.Log($"email1 {request.Email}, pass1 {request.Password}");
             PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), result =>
             {
                 // Nếu tài khoản đã tồn tại, tiến hành đăng nhập
@@ -182,8 +177,12 @@ namespace PlayFab_System
             {
                 Email = email,
                 Password = password, 
-                RequireBothUsernameAndEmail = false 
+                RequireBothUsernameAndEmail = false ,
+
             };
+            Debug.Log($"email {request.Email}, pass {request.Password}");
+            Player.email = request.Email;
+            Player.passWord = request.Password;
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
           
         }
@@ -196,14 +195,12 @@ namespace PlayFab_System
 
         private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
         {
-            Debug.Log($"email {Player.email}, pass {Player.passWord}");
             Debug.Log("Dang ky thanh cong");
         }
 
         private void OnLoginSuccess(LoginResult obj)
         {
-           // Debug.Log("Congratulations, you made your first successful API call!");
-           // GetDataPlayer();
+           Debug.Log("Congratulations, you made your first successful API call!");
         }
 
         private void OnLoginFailure(PlayFabError obj)
