@@ -42,5 +42,5 @@ MonoBehaviour:
     critDamage: 0
     attackCoolDown: 1
     attackMoveDuration: 1
-  icon: {fileID: 21300000, guid: c10ea21566c36044488d0374841623ae, type: 3}
+  icon: {fileID: 21300000, guid: 19fb230e705685945b990f7b3d35c033, type: 3}
   resourcePath: Hero/Medieval King

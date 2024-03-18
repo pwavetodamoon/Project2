@@ -81,7 +81,7 @@ namespace CombatSystem.HeroDataManager.Data
         private void LoadAllSkinInFolder()
         {
             var sprites = Resources.LoadAll<Sprite>(resourcePath);
-            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary, out eyeSprites);
+            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary, out eyeSprites, out icon);
         }
 
 
