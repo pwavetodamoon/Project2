@@ -61,6 +61,25 @@ namespace PlayFab_System
         {
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnRevcievedData, OnDataSendError);
         }
+        
+        [Button]
+        public void SaveDataPlayer()
+        {
+            var request = new UpdateUserDataRequest
+            {
+                Data = new Dictionary<string, string>
+                {
+                    { "CusTomId", Player.customId },
+                    {"PlayerName",Player.playerName},
+                    { "Email", Player.email },
+                    { "Password", Player.passWord },
+                    { "Level", Player.levelPlayer.ToString() },
+                    { "Gold", Player.gold.ToString() },
+                    { "Hero Data", testfunc.ConvertToJson() },
+                }
+            };
+            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
+        }
 
         [Button]
         public void SaveRewardData()
@@ -89,23 +108,6 @@ namespace PlayFab_System
                 }, result => { Debug.Log("Save data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
-        [Button]
-        public void SaveDataPlayer()
-        {
-            var request = new UpdateUserDataRequest
-            {
-                Data = new Dictionary<string, string>
-                {
-                    { "CusTomId", Player.customId },
-                    { "Email", Player.email },
-                    { "Password", Player.passWord },
-                    { "Level", Player.levelPlayer.ToString() },
-                    { "Gold", Player.gold.ToString() },
-                    { "Hero Data", testfunc.ConvertToJson() },
-                }
-            };
-            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
-        }
 
         private void OnRevcievedData(GetUserDataResult result)
         {
@@ -116,6 +118,7 @@ namespace PlayFab_System
             }
 
             Player.customId = result.Data["CusTomId"].Value;
+            Player.playerName = result.Data["PlayerName"].Value;
             Player.email = result.Data["Email"].Value;
             Player.passWord = result.Data["Password"].Value;
             Player.levelPlayer = int.Parse(result.Data["Level"].Value);
