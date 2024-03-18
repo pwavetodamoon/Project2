@@ -65,6 +65,7 @@ namespace PlayFab_System
         [Button]
         public void SaveDataPlayer()
         {
+            Debug.Log("save");
             var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
@@ -152,20 +153,57 @@ namespace PlayFab_System
 
         public void Login()
         {
+            // Player = PlayerData.Instance;
+            // Player.customId = SystemInfo.deviceUniqueIdentifier;
+            
+            GetDataPlayer();
+            var request = new LoginWithEmailAddressRequest()
+            {
+               Email = Player.email,
+               Password = Player.passWord
+            };
+  
+            PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), result =>
+            {
+                // Nếu tài khoản đã tồn tại, tiến hành đăng nhập
+                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+            }, error =>
+            {
+              Debug.Log("chua co tai khoan");
+            });
+
+        }
+
+        public void Register(string email , string password)
+        {
             Player = PlayerData.Instance;
             Player.customId = SystemInfo.deviceUniqueIdentifier;
-            var request = new LoginWithCustomIDRequest
+            var request = new RegisterPlayFabUserRequest()
             {
-                CustomId = Player.customId,
-                CreateAccount = true
+                Email = email,
+                Password = password, 
+                RequireBothUsernameAndEmail = false 
             };
-            PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+            PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
+          
+        }
+
+        private void OnRegisterFailure(PlayFabError obj)
+        {
+            Debug.Log("Dang ky fail " +obj.GenerateErrorReport());
+
+        }
+
+        private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
+        {
+            Debug.Log($"email {Player.email}, pass {Player.passWord}");
+            Debug.Log("Dang ky thanh cong");
         }
 
         private void OnLoginSuccess(LoginResult obj)
         {
-            Debug.Log("Congratulations, you made your first successful API call!");
-            GetDataPlayer();
+           // Debug.Log("Congratulations, you made your first successful API call!");
+           // GetDataPlayer();
         }
 
         private void OnLoginFailure(PlayFabError obj)
