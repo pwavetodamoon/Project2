@@ -13,17 +13,17 @@ namespace CombatSystem.Entity.Utilities
         [SerializeField] protected bool allowCounter = true;
         [SerializeField] protected bool allowExecuteAnotherAttack = true;
         private Animator_Base animator_base;
-        private IEntity entity;
+        private EntityCharacter entity;
         private EntityHelper EntityHelper;
         private EntityStats entityStats;
         public int Count { get; set; }
 
         private void Awake()
         {
-            animator_base = GetComponentInChildren<Animator_Base>();
-            entity = GetComponent<IEntity>();
-            entityStats = GetComponent<EntityStats>();
-            EntityHelper = new EntityHelper(GetComponent<EntityStats>());
+            entity = GetComponent<EntityCharacter>();
+            entityStats = entity.GetEntityStats();
+            EntityHelper = new EntityHelper(entityStats);
+            animator_base = entity.GetAnimatorBase();
         }
 
 
@@ -46,42 +46,20 @@ namespace CombatSystem.Entity.Utilities
             }
         }
 
-        public bool CanAttack()
-        {
-            if (EntityHelper.sumOfDamage >= entityStats.Health())
-            {
-                return false;
-            }
-            return true;
-        }
+        public bool IsOutOfHealth() => EntityHelper.sumOfDamage >= entityStats.Health();
 
-        private bool CanChangeAnimation()
-        {
-            return entity != null && entity.EntityInAttackState() == false;
-        }
-        public bool AttackedByEnemies()
-        {
-            return Count > 0;
-        }
+        private bool CanChangeAnimation() => entity != null && entity.EntityInAttackState() == false;
 
-        public bool IsAllowAttack()
-        {
-            return allowExecuteAnotherAttack;
-        }
+        public bool AttackedByEnemies() => Count > 0;
 
-        public bool IsAllowCounter()
-        {
-            return allowCounter;
-        }
+        public bool IsAllowAttack() => allowExecuteAnotherAttack;
 
-        public bool SetAllowExecuteAttackValue(bool value)
-        {
-            return allowExecuteAnotherAttack = value;
-        }
 
-        public bool SetTimeCounterValue(bool value)
-        {
-            return allowCounter = value;
-        }
+        public bool IsAllowCounter() => allowCounter;
+
+        public void SetAllowExecuteAttackValue(bool value) => allowExecuteAnotherAttack = value;
+
+        public bool SetTimeCounterValue(bool value) => allowCounter = value;
+
     }
 }

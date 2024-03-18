@@ -15,4 +15,7 @@ MonoBehaviour:
   heroData:
   - {fileID: 11400000, guid: 7996403b868b97c4b82e5a774398da6e, type: 2}
   - {fileID: 11400000, guid: 8703e1587de8ff741bd76e67ebc95990, type: 2}
-  prefabHero: {fileID: 2130498615958115108, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+  - {fileID: 11400000, guid: c5dd8f1443de1b04e96bc2112f3f5940, type: 2}
+  - {fileID: 11400000, guid: 5fe3b48f4f35fcd45b6c0786852db737, type: 2}
+  - {fileID: 11400000, guid: 4aa1930614fd2404db5f7473ae2b07aa, type: 2}
+  prefabHero: {fileID: 6034959875011442393, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}

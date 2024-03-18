@@ -28,21 +28,21 @@ public class Testfunc : MonoBehaviour
         // Lấy data list hero data trong hero manager
         var list = heroManager.heroData;
         uiAvatarControllers = uiAvatarControllers.OrderBy(x => x.index).ToArray();
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < uiAvatarControllers.Length; i++)
         {
             var heroData = list[i];
             if (heroData.heroCharacter != null) continue;
-            var hero = Instantiate(heroManager.prefabHero, CombatEntitiesManager.Instance.transform).GetComponent<HeroCharacter>();
+            var hero = Instantiate(heroManager.prefabHero, null).GetComponent<HeroCharacter>();
             heroData.heroCharacter = hero;
 
             hero.SetAttackFactory(heroData.GetHeroFactory());
             hero.IsDead = heroData.isDead;
             hero.SetHeroData(heroData);
             hero.SetSlotIndex(heroData.slotIndex);
-            
+
             var heroSkin = hero.GetComponentInChildren<Character_Body_Sprites>();
             heroSkin.SetHeroSprite(heroData.GetSkinDictionary());
-
+            heroSkin.SetEyeSprite(heroData.GetEyeSkin());
             SlotManager.Instance.LoadHeroIntoSlot(hero);
             if (hero.IsDead)
             {
@@ -70,7 +70,7 @@ public class Testfunc : MonoBehaviour
     [Button]
     private void Test222()
     {
-        
+
     }
 
     [Button]

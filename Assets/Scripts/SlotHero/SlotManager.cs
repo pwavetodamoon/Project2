@@ -43,6 +43,11 @@ namespace SlotHero
 
             var slot = GetSlotBySlotIndexInRange(hero.InGameSlotIndex);
             if (slot.currentHero == null || slot.currentHero == hero) slot.SetHeroIntoStandPosition(hero);
+            else
+            {
+                hero.SetSlotIndex(-1);
+                bannedSlotControl.SetHeroIntoStandPosition(hero.transform);
+            }
         }
 
         public bool FindNearSlotAndSwapIfInRange(HeroCharacter hero, int heroIndex)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1381157994815478986}
   m_Layer: 0
   m_Name: CombatEntitiesManager
-  m_TagString: TriggerEvent
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7314ec30908f4a443b16bf814734b384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroyOnLoad: 0

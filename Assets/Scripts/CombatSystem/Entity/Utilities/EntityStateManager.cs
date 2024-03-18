@@ -11,7 +11,7 @@ namespace CombatSystem.Entity.Utilities
 {
     public class EntityStateManager : MonoBehaviour, IDamageable
     {
-        private IEntity entity;
+        private EntityCharacter entity;
 
         public event Action OnTakeDamage;
         public event Action OnDie;
@@ -22,9 +22,9 @@ namespace CombatSystem.Entity.Utilities
 
         private void Awake()
         {
-            EntityStats = GetComponent<EntityStats>();
-            entity = GetComponent<IEntity>();
-            animation_Base = GetComponentInChildren<Animator_Base>();
+            entity = GetComponent<EntityCharacter>();
+            EntityStats = entity.GetEntityStats();
+            animation_Base = entity.GetAnimatorBase();
         }
 
         private void OnDisable()

@@ -23,8 +23,8 @@ namespace CombatSystem.Attack.Systems
         private void Awake()
         {
             entityCharacter = GetComponent<EntityCharacter>();
-            attackManager = GetComponent<AttackManager>();
-            EntityStats = GetComponent<EntityStats>();
+            attackManager = entityCharacter.GetAttackManager();
+            EntityStats = entityCharacter.GetEntityStats();
         }
 
         private void Update()
@@ -63,15 +63,7 @@ namespace CombatSystem.Attack.Systems
         private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
         {
             newAttack.GetReference(entityCharacter);
-            // if (newAttack.IsValidate == false)
-            // {
-            //     Debug.LogError("Attack is not validate");
-            //     return;
-            // }
-            // else
-            // {
-            //     Debug.Log($"Attack is validate {newAttack} {newAttackCounter.maxCounterTime}");
-            // }
+
 
             attack = newAttack;
             attackCounter = newAttackCounter;

@@ -8,7 +8,7 @@ using Model.Monsters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class OnDieEffect : MonoBehaviour 
+public class OnDieEffect : MonoBehaviour
 {
     private float time = 1;
     private float fadeTime = 1;
@@ -20,12 +20,13 @@ public class OnDieEffect : MonoBehaviour
 
     private void Start()
     {
+        monsterCharacter = GetComponent<MonsterCharacter>();
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        animatorBase = GetComponentInChildren<Animator_Base>();
+        animatorBase = monsterCharacter.GetAnimatorBase();
         time = animatorBase.GetAnimationLength(AnimationType.Dying);
         EntityStateManager = GetComponent<EntityStateManager>();
         EntityStateManager.OnDie += OnDie;
-        monsterCharacter = GetComponent<MonsterCharacter>();
         shakeEntityEffect = new ShakeMultiplierTimes(transform, 5, 0.1f);
 
     }
@@ -33,6 +34,7 @@ public class OnDieEffect : MonoBehaviour
     [Button]
     public void OnDie()
     {
+        if (monsterCharacter == null || animatorBase == null) return;
         StartCoroutine(OnDieCoroutine());
         StartCoroutine(shakeEntityEffect.ShakeTransform());
     }
