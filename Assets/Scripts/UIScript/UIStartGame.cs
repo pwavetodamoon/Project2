@@ -45,6 +45,7 @@ public class UIStartGame : APanelController
 
     private void OnPlayButtonOnClicked()
     {
+        Debug.Log("OnPlayButtonOnClicked");
         Signals.Get<OpenSceneGamePlay>().Dispatch();
     }
 

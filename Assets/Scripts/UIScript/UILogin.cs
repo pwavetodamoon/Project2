@@ -71,6 +71,6 @@ public class UILogin : APanelController
    private IEnumerator HandleLoginButtonClicked()
    {
       yield return new WaitForSeconds(0.2f);
-     Signals.Get<OnLoginButtonClicked>().Dispatch();
+     Signals.Get<OnLoginButtonClicked>().Dispatch(_emailInputfield.text, _passWordlInputfield.text);
    }
 }

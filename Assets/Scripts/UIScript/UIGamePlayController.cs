@@ -1,5 +1,6 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
+using PlayFab_System;
 using UnityEngine;
 
 public class UIGamePlayController : MonoBehaviour
@@ -12,6 +13,7 @@ public class UIGamePlayController : MonoBehaviour
     }
     private void Start()
     {
+        PlayFabManager.Instance.InitResource();
         AddListener();
     }
 

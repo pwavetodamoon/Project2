@@ -42,7 +42,7 @@ public class OpenUISoundSetting : ASignal
 public class CloseUISoundSetting : ASignal 
 { 
 }
-public class OpenSceneGamePlay : ASignal 
+public class OpenSceneGamePlay : ASignal
 { 
 }
 public class OpenShop : ASignal 
@@ -51,7 +51,7 @@ public class OpenShop : ASignal
 public class HideShop : ASignal 
 { 
 }
-public class OnLoginButtonClicked : ASignal 
+public class OnLoginButtonClicked : ASignal <string,string>
 { 
 }
 

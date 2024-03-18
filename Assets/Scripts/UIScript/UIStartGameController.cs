@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using PlayFab_System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,7 +37,6 @@ public class UIStartGameController : MonoBehaviour
     }
     private void OpenSceneGamePlay()
     {
-        PlayFabManager.Instance.StartCoroutine();
         SceneManager.LoadScene(ScreenIds.TestScene);
     }
 }

@@ -28,11 +28,19 @@ namespace PlayFab_System
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+            Player = PlayerData.Instance;
+            Player.customId = SystemInfo.deviceUniqueIdentifier;
+            DontDestroyOnLoad(Player);
         }
 
-        private void Init()
+        private void InitLogin(string email , string pass)
         {
-            Login();
+            Login(email,pass);
+        }
+
+        public void InitResource()
+        {
+            Debug.Log("InitResource");
             currencyManager = FindObjectOfType<CurrencyManager>();
             testfunc  = FindObjectOfType<Testfunc>();
             stageInformation = FindObjectOfType<StageInformation>();
@@ -43,14 +51,14 @@ namespace PlayFab_System
             SaveDataPlayer();
         }
 
-        public void StartCoroutine()
+        public void StartCoroutine(string email , string pass)
         {
-            StartCoroutine(Wait());
+            StartCoroutine(Wait(email,pass));
         }
-        private IEnumerator Wait()
+        private IEnumerator Wait(string email , string pass)
         {
             yield return new WaitForSeconds(1f);
-            Init();
+            InitLogin(email,pass);
             yield return new WaitForSeconds(1f);
             testfunc.Spawn();
             GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
@@ -150,29 +158,29 @@ namespace PlayFab_System
 
         #region Login
 
-        public void Login()
+        public void Login(string email , string pass)
         {
             var request = new LoginWithEmailAddressRequest()
             {
-               Email = Player.email,
-               Password = Player.passWord
+                Email =  email,
+                Password = pass,
             };
-            Debug.Log($"email1 {request.Email}, pass1 {request.Password}");
-            PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), result =>
-            {
-                // Nếu tài khoản đã tồn tại, tiến hành đăng nhập
-                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-            }, error =>
-            {
-              Debug.Log("chua co tai khoan");
-            });
-
+            Player.email = request.Email;
+            Player.passWord = request.Password;
+            Debug.Log("Email " +  Player.email  + "Password " +Player.passWord);
+            PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+         //   PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), result =>
+            // {
+            //     PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+            // }, error =>
+            // {
+            //     Debug.Log("Không tìm thấy tài khoản với email này trên cơ sở dữ liệu PlayFab.");
+            // });
         }
+
 
         public void Register(string email , string password)
         {
-            Player = PlayerData.Instance;
-            Player.customId = SystemInfo.deviceUniqueIdentifier;
             var request = new RegisterPlayFabUserRequest()
             {
                 Email = email,
