@@ -6,6 +6,7 @@ namespace PlayFab_System
     {
         // nguoi choi
         public string customId;
+        public string playerName;
         public string email = "gamedev@gmail.com";
         public string passWord = "123123";
         public int levelPlayer;
