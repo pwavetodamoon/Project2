@@ -32,6 +32,7 @@ namespace CombatSystem
             return go;
         }
 
+        [Button]
         public void SpawnMultipleMonsters(int spawnCount)
         {
             for (var i = 0; i < spawnCount; i++)

@@ -28,7 +28,7 @@ public class Testfunc : MonoBehaviour
         // Lấy data list hero data trong hero manager
         var list = heroManager.heroData;
         uiAvatarControllers = uiAvatarControllers.OrderBy(x => x.index).ToArray();
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < uiAvatarControllers.Length; i++)
         {
             var heroData = list[i];
             if (heroData.heroCharacter != null) continue;
