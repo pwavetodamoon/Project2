@@ -15,40 +15,54 @@ namespace CombatSystem.Attack.Abstracts
     public abstract class BaseSingleTargetAttack
     {
         [SerializeField] protected bool isActive;
-        private AttackManager attackManager;
 
         protected Transform AttackTransform;
         protected EntityStats EntityStats;
         protected EntityCharacter Enemy;
         protected Animator_Base animator;
+        protected IAttackerCounter IAttackerCounter;
+
         [Header("Entity Characters Field")] protected EntityCharacter entityCharacter;
 
-        private Action onEndAttack;
         private float WaitTimeToFindEnemy = 0.1f;
 
+        private AttackManager attackManager;
         public bool IsActive => isActive;
         public bool IsValidate { get; private set; }
+        private Action onEndAttack;
+
 
         public virtual void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
             entityCharacter = newEntityCharacter;
-            EntityStats = entityCharacter.GetComponent<EntityStats>();
-            attackManager = entityCharacter.GetComponent<AttackManager>();
-            animator = entityCharacter.GetComponentInChildren<Animator_Base>();
+            EntityStats = entityCharacter.GetEntityStats();
+            attackManager = entityCharacter.GetAttackManager();
+            animator = entityCharacter.GetAnimatorBase();
             AttackTransform = attackTransform;
             IsValidate = true;
         }
+        protected abstract string GetEnemyTag();
+        protected abstract IEnumerator StartBehavior();
 
-        public void SetOnEndAttackCallBack(Action callback)
+        public void SetOnEndAttackCallBack(Action callback) => onEndAttack = callback;
+
+        public void SetAttackTransform(Transform newTransform) => AttackTransform = newTransform;
+
+        protected void IncreaseAttackerCount() => IAttackerCounter?.IncreaseAttackerCount(EntityStats);
+
+        private bool IsEnemyAlive() => CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag());
+
+        protected void PlayAnimation(Enum AnimationEnum)
         {
-            onEndAttack = callback;
+            if (animator == null) return;
+            animator.ChangeAnimation(AnimationEnum);
         }
 
-        public void SetAttackTransform(Transform newTransform)
+        protected float GetAnimationLength(Enum AnimationEnum)
         {
-            AttackTransform = newTransform;
+            if (animator == null) return 0;
+            return animator.GetAnimationLength(AnimationEnum);
         }
-
         public IEnumerator ExecuteAttack()
         {
             if (isActive || !TryFindEnemy())
@@ -84,6 +98,35 @@ namespace CombatSystem.Attack.Abstracts
             }
         }
 
+        protected virtual void ResetStateAndCounter()
+        {
+            // Call in StartBehavior and at final the attack to reset state and counter
+            isActive = false;
+            attackManager.SetAllowExecuteAttackValue(true);
+            onEndAttack?.Invoke();
+            IAttackerCounter?.DecreaseAttackerCount(EntityStats);
+        }
+
+        public bool CanExecuteAttack()
+        {
+            if (GetEnemyTag() == GameTag.Hero)
+            {
+                return true;
+            }
+            // if before attack, the enemy is out of health, then return false
+            // if not then increase the attacker count and return true
+            IAttackerCounter = Enemy.GetComponent<IAttackerCounter>();
+            if (IAttackerCounter.IsOutOfHealth() == false)
+            {
+                IncreaseAttackerCount();
+                if (IAttackerCounter.IsOutOfHealth())
+                {
+                    CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
+                }
+                return true;
+            }
+            return false;
+        }
         protected virtual void CauseDamage()
         {
             if (Enemy == null)
@@ -95,64 +138,8 @@ namespace CombatSystem.Attack.Abstracts
             {
                 damageable?.TakeDamage(EntityStats);
             }
-
         }
 
-        private bool IsEnemyAlive()
-        {
-            return CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag());
-        }
-
-        // use for create attack behavior
-        protected abstract IEnumerator StartBehavior();
-
-        protected virtual void ResetStateAndCounter()
-        {
-            // Call in StartBehavior and at final the attack to reset state and counter
-            isActive = false;
-            attackManager.SetAllowExecuteAttackValue(true);
-            onEndAttack?.Invoke();
-            IAttackerCounter?.DecreaseAttackerCount(EntityStats);
-        }
-
-        protected abstract string GetEnemyTag();
-
-        protected void PlayAnimation(Enum AnimationEnum)
-        {
-            if (animator == null) return;
-            animator.ChangeAnimation(AnimationEnum);
-        }
-
-        protected float GetAnimationLength(Enum AnimationEnum)
-        {
-            if (animator == null) return 0;
-            return animator.GetAnimationLength(AnimationEnum);
-        }
-        public bool CanExecuteAttack()
-        {
-            if (GetEnemyTag() == GameTag.Hero)
-            {
-                return true;
-            }
-            IAttackerCounter = Enemy.GetComponent<IAttackerCounter>();
-            if (IAttackerCounter.CanAttack())
-            {
-                IncreaseAttackerCount();
-                if (IAttackerCounter.CanAttack() == false)
-                {
-                    CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
-                }
-                return true;
-            }
-            return false;
-        }
-        protected IAttackerCounter IAttackerCounter;
-
-        protected void IncreaseAttackerCount()
-        {
-            //Debug.Log("+1", entityCharacter.gameObject);
-            IAttackerCounter?.IncreaseAttackerCount(EntityStats);
-        }
 
     }
 }

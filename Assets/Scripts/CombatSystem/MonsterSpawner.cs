@@ -10,8 +10,11 @@ namespace CombatSystem
     [RequireComponent(typeof(MonstersStatsSystem))]
     public class MonsterSpawner : MonoBehaviour
     {
+        // =============================================================================
+        //| Split one prefab one spawner to easy to manage + easy implement object pool|
         [Header("References")]
         [SerializeField] private MonstersStatsSystem _monstersStatsSystem;
+        [SerializeField] private MonsterCharacter MonsterPrefab;
         [SerializeField] private Transform SpawnPoint1;
         [SerializeField] private Transform SpawnPoint2;
         private void Awake()
@@ -19,7 +22,7 @@ namespace CombatSystem
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
         }
 
-        public MonsterCharacter SpawnMonster(MonsterCharacter MonsterPrefab)
+        public MonsterCharacter SpawnMonster()
         {
             if (MonsterPrefab == null) return null;
             var position = SpawnPoint1.position;
@@ -31,13 +34,11 @@ namespace CombatSystem
             return go;
         }
 
-        [Button]
-        public void SpawnMultipleMonsters(int spawnCount, EnemyData enemyData)
+        public void SpawnMultipleMonsters(int spawnCount)
         {
-            if (enemyData == null) return;
             for (var i = 0; i < spawnCount; i++)
             {
-                var enemy = SpawnMonster(enemyData.MonsterPrefab);
+                var enemy = SpawnMonster();
                 SetStatsToMonster(enemy.GetComponent<EnemyStats>());
             }
         }

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c89f063c7c4f24a8f79f76fbb09de4, type: 3}
   m_Name: Golem
   m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: 5825106599316970968, guid: 796c1d37ff7d120499933b4234cdca6a, type: 3}
   structStats:
     level: 1
     maxHealth: 50
     health: 50
     baseDamage: 5
-    speed: 3
+    speed: 2
     critRate: 0
     critDamage: 0
     attackCoolDown: 2.5

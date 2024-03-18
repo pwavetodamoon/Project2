@@ -369,6 +369,14 @@ PrefabInstance:
       propertyPath: liveColor.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8874660619419957547, guid: 678c2b8acf462e84db031f63ec336717, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874660619419957547, guid: 678c2b8acf462e84db031f63ec336717, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

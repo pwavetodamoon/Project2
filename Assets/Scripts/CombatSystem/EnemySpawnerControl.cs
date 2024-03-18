@@ -58,7 +58,7 @@ public class EnemySpawnerControl : MonoBehaviour
     }
     private void Spawn(int index, int count)
     {
-        monsterSpawners[index].SpawnMultipleMonsters(count, null);
+        monsterSpawners[index].SpawnMultipleMonsters(count);
     }
     public void SpawnBoss()
     {
