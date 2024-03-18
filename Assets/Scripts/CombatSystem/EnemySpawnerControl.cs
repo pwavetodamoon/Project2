@@ -34,11 +34,8 @@ public class EnemySpawnerControl : MonoBehaviour
 
         monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
     }
-    public void EnableSpawn()
-    {
-        allowSpawn = true;
-    }
-
+    public void EnableSpawn() => allowSpawn = true;
+    public void DisableSpawn() => allowSpawn = false;
     [Button]
     public void SpawnMinions()
     {
