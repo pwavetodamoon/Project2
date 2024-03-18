@@ -12,7 +12,7 @@ namespace CombatSystem.Attack.Projectiles
         [SerializeField] protected string Tag;
         protected bool isAttack;
         protected Action OnEndAttack;
-        private float TimeOut = 10f;
+        // private float TimeOut = 10f;
 
         protected virtual void Awake()
         {

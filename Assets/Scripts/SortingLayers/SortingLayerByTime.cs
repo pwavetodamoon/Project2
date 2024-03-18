@@ -9,7 +9,6 @@ namespace SortingLayers
     {
         [SerializeField] private SortingGroup sortingGroup;
         [SerializeField][Min(0f)] private float sortingDuration = .1f;
-        [SerializeField] private int sortingOrderDefault = 100;
         private bool goDown = false;
         private void Awake()
         {
@@ -23,6 +22,11 @@ namespace SortingLayers
         {
             sortingGroup.sortingOrder = 0;
             goDown = false;
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
         public IEnumerator DecreaseSortingLayer()

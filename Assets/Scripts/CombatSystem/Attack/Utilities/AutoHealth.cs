@@ -23,11 +23,11 @@ namespace CombatSystem.Attack.Utilities
 
         private void Awake()
         {
+            heroCharacter = GetComponent<HeroCharacter>();
             entityStateManager = GetComponent<EntityStateManager>();
             entityStateManager.OnTakeDamage += TriggerHealth;
             entityStateManager.OnDie += StopHealth;
-            EntityStats = GetComponent<EntityStats>();
-            heroCharacter = GetComponent<HeroCharacter>();
+            EntityStats = heroCharacter.GetEntityStats();
         }
 
         private void Update()

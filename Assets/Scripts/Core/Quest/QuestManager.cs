@@ -10,14 +10,24 @@ namespace Core.Quest
     [Serializable]
     public struct ItemsStruct
     {
-        public int pointCollect;
-        public ItemsSO itemsSO;
+        [SerializeField] private int pointCollect;
+        [SerializeField] private ItemsSO itemsSO;
+
+        public ItemsSO GetItemSO() => itemsSO;
+        public int GetPoint() => pointCollect;
     }
 
     public class QuestManager : Singleton<QuestManager>
     {
         public StageInformation stageInformation;
+        private void OnValidate()
+        {
+            if (stageInformation == null)
+            {
+                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            }
 
+        }
         public void IncreasePointWhenKillMonster()
         {
             stageInformation.IncreasePointWhenKillMonster();

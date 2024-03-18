@@ -11,32 +11,51 @@ using Helper;
 using UI_Effects;
 
 
-public interface IGameStateHandler
-{
-    void ChangeAttackStateOfHero(bool state, List<HeroCharacter> heroList);
-    void CollectAllItemInGame();
-    void ClearMonsterAndStopSpawnOnMap();
-}
-
-public class GameLevelControl : Singleton<GameLevelControl>, IGameStateHandler, ICoroutineRunner
+public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
 {
     [SerializeField] private HeroManager heroManager;
-    [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] private EnemySpawnerControl enemySpawnerControl;
     [SerializeField] private ScreenTransition screenTransition;
     [SerializeField] private MapBackground mapBackground;
     [SerializeField] private StageInformation stageInformation;
 
+
     private LossTransitionHandler LossTransitionHandler;
     private NextMapTransitionHandler NextMapTransitionHandler;
+    private void OnValidate()
+    {
+        if (stageInformation == null)
+        {
+            stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+        }
+        if (heroManager == null)
+        {
+            heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+        }
+    }
     protected override void Awake()
     {
         base.Awake();
         LossTransitionHandler = new LossTransitionHandler();
         NextMapTransitionHandler = new NextMapTransitionHandler();
 
-        LossTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
-        NextMapTransitionHandler.GetRef(this, this, screenTransition, mapBackground);
+        LossTransitionHandler.GetRef(this, screenTransition, mapBackground);
+        NextMapTransitionHandler.GetRef(this, screenTransition, mapBackground);
+
+        LossTransitionHandler.RegisterCallback(StartTransition, EndTransition);
+        NextMapTransitionHandler.RegisterCallback(StartTransition, EndTransition);
+
         stageInformation.OnCompleteMap += OnGoNextMap;
+    }
+    private void StartTransition()
+    {
+        enemySpawnerControl.ClearAndStopSpawn();
+        RewardManager.Instance.CollectAllItemOnActive();
+
+    }
+    private void EndTransition()
+    {
+        enemySpawnerControl.EnableSpawn();
     }
 
     public void OnLoose()
@@ -54,29 +73,14 @@ public class GameLevelControl : Singleton<GameLevelControl>, IGameStateHandler, 
     private void OnDisable()
     {
         stageInformation.OnCompleteMap -= NextMapTransitionHandler.UseRunner;
+        NextMapTransitionHandler.UnRegisterCallback();
+        LossTransitionHandler.UnRegisterCallback();
     }
 
     public void LoadToMap(int index)
     {
         mapBackground.MapIndex = index;
         mapBackground.LoadTexture();
-    }
-    public void ChangeAttackStateOfHero(bool state, List<HeroCharacter> heroList)
-    {
-        foreach (var heroData in heroList)
-        {
-            heroData.SetAttackState(state);
-        }
-    }
-    public void CollectAllItemInGame()
-    {
-        RewardManager.Instance.CollectAllItemOnActive();
-    }
-
-    [Button]
-    public void ClearMonsterAndStopSpawnOnMap()
-    {
-        monsterSpawner.ClearMonsterAndStopSpawnOnMap();
     }
 }
 
