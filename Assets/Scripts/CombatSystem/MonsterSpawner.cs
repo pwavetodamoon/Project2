@@ -51,5 +51,10 @@ namespace CombatSystem
             var list = transform.GetComponentsInChildren<MonsterCharacter>();
             for (var i = 0; i < list.Length; i++) list[i].ReleaseObject();
         }
+
+        internal void SpawnMultipleMonsters(int count)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
