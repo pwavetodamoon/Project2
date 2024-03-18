@@ -12,7 +12,6 @@ namespace CombatSystem
     {
         [Header("References")]
         [SerializeField] private MonstersStatsSystem _monstersStatsSystem;
-        [SerializeField] private MonsterCharacter MonsterPrefab;
         [SerializeField] private Transform SpawnPoint1;
         [SerializeField] private Transform SpawnPoint2;
         private void Awake()
@@ -20,7 +19,7 @@ namespace CombatSystem
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
         }
 
-        public MonsterCharacter SpawnMonster()
+        public MonsterCharacter SpawnMonster(MonsterCharacter MonsterPrefab)
         {
             if (MonsterPrefab == null) return null;
             var position = SpawnPoint1.position;
@@ -33,11 +32,12 @@ namespace CombatSystem
         }
 
         [Button]
-        public void SpawnMultipleMonsters(int spawnCount)
+        public void SpawnMultipleMonsters(int spawnCount, EnemyData enemyData)
         {
+            if (enemyData == null) return;
             for (var i = 0; i < spawnCount; i++)
             {
-                var enemy = SpawnMonster();
+                var enemy = SpawnMonster(enemyData.MonsterPrefab);
                 SetStatsToMonster(enemy.GetComponent<EnemyStats>());
             }
         }

@@ -1,3 +1,4 @@
+using CombatSystem.Entity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,10 +8,23 @@ namespace LevelAndStats
     [CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyData")]
     public class EnemyData : ScriptableObject
     {
-        public StructStats structStats;
-        public ScaleValue healthScaleValue;
-        public ScaleValue damageScaleValue;
+        [SerializeField] private MonsterCharacter monsterPrefab;
+        [SerializeField] private StructStats structStats;
+        [SerializeField] private ScaleValue healthScaleValue;
+        [SerializeField] private ScaleValue damageScaleValue;
 
+
+        public MonsterCharacter MonsterPrefab
+        {
+            get
+            {
+                if (monsterPrefab == null)
+                {
+                    Debug.LogError("MonsterPrefab is null");
+                }
+                return monsterPrefab;
+            }
+        }
         public StructStats GetEnemyStats(int level)
         {
             var stats = structStats;
@@ -68,7 +82,7 @@ namespace LevelAndStats
             return Mathf.RoundToInt(baseValue * Mathf.Pow(currentScale, i));
         }
 
-        
+
 
     }
 }
