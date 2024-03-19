@@ -12,7 +12,10 @@ public class HealthBar : MonoBehaviour
     public Image border;
     public float xPos = -.8f;
     public float yPos = .3f;
-
+    private void Awake()
+    {
+        SetFade(0, 0f);
+    }
     public void SetPosition(Vector2 position)
     {
         position = new Vector3(position.x + xPos, position.y + yPos);

@@ -37,7 +37,7 @@ namespace SlotHero
         {
             if (hero.InGameSlotIndex == -1)
             {
-                bannedSlotControl.SetHeroIntoStandPosition(hero.transform);
+                bannedSlotControl.SetHeroIntoStandPosition(hero);
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace SlotHero
             else
             {
                 hero.SetSlotIndex(-1);
-                bannedSlotControl.SetHeroIntoStandPosition(hero.transform);
+                bannedSlotControl.SetHeroIntoStandPosition(hero);
             }
         }
 
@@ -116,7 +116,7 @@ namespace SlotHero
             var currentSlot = GetSlotBySlotIndexInRange(currentSlotIndex);
             //if (currentSlot.AllowSwap() == false) return;
             var currentHero = currentSlot.currentHero;
-            bannedSlotControl.SetHeroIntoStandPosition(currentHero.transform);
+            bannedSlotControl.SetHeroIntoStandPosition(currentHero);
             currentHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             currentSlot.SetHeroIntoStandPosition(null);
         }
@@ -128,7 +128,7 @@ namespace SlotHero
             var targetHero = targetSlot.currentHero;
             if (targetHero != null)
             {
-                bannedSlotControl.SetHeroIntoStandPosition(targetHero.transform);
+                bannedSlotControl.SetHeroIntoStandPosition(targetHero);
                 targetHero.SetSlotIndex(bannedSlotControl.SlotIndex);
             }
 

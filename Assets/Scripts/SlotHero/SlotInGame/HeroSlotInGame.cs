@@ -40,6 +40,11 @@ namespace SlotHero.SlotInGame
                 currentHero.transform.position = characterStand.position;
                 sprites = currentHero.GetComponentInChildren<Character_Body_Sprites>();
                 AudioManager.Instance.PlaySFX("Placed Champion");
+                healthBar.FadeColorBack();
+            }
+            else
+            {
+                healthBar.FadeColor();
             }
         }
 
