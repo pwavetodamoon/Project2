@@ -1286,8 +1286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroyOnLoad: 0
-  stageInformation: {fileID: 0}
-  heroManager: {fileID: 0}
+  stageInformation: {fileID: 11400000, guid: 6876edf9fadb22c46bb2abcfcafc68bc, type: 2}
+  heroManager: {fileID: 11400000, guid: 200f301689546404bb5c4c497c314e3f, type: 2}
 --- !u!4 &1204564163
 Transform:
   m_ObjectHideFlags: 0
