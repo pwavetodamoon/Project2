@@ -2,6 +2,7 @@ using deVoid.UIFramework;
 using deVoid.Utils;
 using PlayFab_System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIGamePlayController : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
+        //
+        Signals.Get<OpenTest>().AddListener(ShowStartGameScene);
     }
 
     private void RemoveListener()
@@ -55,6 +58,8 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenUISoundSetting>().RemoveListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
+        //
+        Signals.Get<OpenTest>().RemoveListener(ShowStartGameScene);
     }
 
     private void ShowUIDPS()
@@ -82,5 +87,9 @@ public class UIGamePlayController : MonoBehaviour
     private void HideUISoundSetting()
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UISoundSetting);
+    }
+    private void ShowStartGameScene()
+    {
+        SceneManager.LoadScene(ScreenIds.StartGameScene);
     }
 }
