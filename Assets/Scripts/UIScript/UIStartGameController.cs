@@ -46,7 +46,7 @@ public class UIStartGameController : MonoBehaviour
     }
     private void OpenSceneGamePlay()
     {
-       PlayFabManager.Instance.StartCoroutine();
+       //PlayFabManager.Instance.StartCoroutine(,);
        SceneManager.LoadScene(ScreenIds.TestScene);
     }
     private void OpenSceneSelectStage()

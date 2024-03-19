@@ -60,9 +60,8 @@ public class OpenShop : ASignal
 public class HideShop : ASignal
 {
 }
-public class OnLoginButtonClicked : ASignal
+public class OpenTest : ASignal
 {
-
 }
 public class OnLoginButtonClicked : ASignal <string,string>
 { 

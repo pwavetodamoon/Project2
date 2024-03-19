@@ -48,7 +48,7 @@ public class UIMainMenu : APanelController
     }
     private void ShowStartGameScene() 
     { 
-        Signals.Get<OnLoginButtonClicked>().Dispatch();
+        Signals.Get<OpenTest>().Dispatch();
     }
     
    

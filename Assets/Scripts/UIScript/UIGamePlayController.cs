@@ -38,7 +38,7 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
         //
-        Signals.Get<OnLoginButtonClicked>().AddListener(ShowStartGameScene);
+        Signals.Get<OpenTest>().AddListener(ShowStartGameScene);
     }
 
     private void RemoveListener()
@@ -59,7 +59,7 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<OpenUISoundSetting>().RemoveListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
         //
-        Signals.Get<OnLoginButtonClicked>().RemoveListener(ShowStartGameScene);
+        Signals.Get<OpenTest>().RemoveListener(ShowStartGameScene);
     }
 
     private void ShowUIDPS()
