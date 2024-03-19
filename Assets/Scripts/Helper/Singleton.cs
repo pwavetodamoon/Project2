@@ -6,7 +6,6 @@ namespace Helper
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T instance;
-        [SerializeField] protected bool DontDestroyOnLoad;
 
         public static T Instance
         {
@@ -44,8 +43,6 @@ namespace Helper
                 // destroy this
                 Destroy(gameObject);
             // set this to not be destroyed when reloading scene
-            if (DontDestroyOnLoad)
-                DontDestroyOnLoad(gameObject);
         }
     }
 }
