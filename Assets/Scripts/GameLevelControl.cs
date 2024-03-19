@@ -77,9 +77,8 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
         LossTransitionHandler.UnRegisterCallback();
     }
 
-    public void LoadToMap(int index)
+    public void LoadToCurrentMap()
     {
-        mapBackground.MapIndex = index;
         mapBackground.LoadTexture();
     }
 }

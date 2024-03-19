@@ -20,22 +20,22 @@ namespace PlayFab_System
         public CurrencyManager currencyManager;
         public Testfunc testfunc;
         public StageInformation stageInformation;
-        
+
         private static PlayFabManager _instance;
 
         // Getter cho instance
-  
+
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
- 
+
         }
 
         private void Init()
         {
             Login();
             currencyManager = FindObjectOfType<CurrencyManager>();
-            testfunc  = FindObjectOfType<Testfunc>();
+            testfunc = FindObjectOfType<Testfunc>();
             stageInformation = FindObjectOfType<StageInformation>();
         }
 
@@ -54,14 +54,14 @@ namespace PlayFab_System
             Init();
             yield return new WaitForSeconds(.2f);
             testfunc.Spawn();
-            GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
+            GameLevelControl.Instance.LoadToCurrentMap();
         }
         [Button]
         public void GetDataPlayer()
         {
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnRevcievedData, OnDataSendError);
         }
-        
+
         [Button]
         public void SaveDataPlayer()
         {
@@ -85,14 +85,14 @@ namespace PlayFab_System
         public void SaveRewardData()
         {
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
-                {
-                    Data = new Dictionary<string, string>
+            {
+                Data = new Dictionary<string, string>
                     {
                         { "Point", stageInformation.pointCollected.ToString() },
                         { "StageIndex", stageInformation.currentStageIndex.ToString() },
                         { "MapIndex", stageInformation.currentMapIndex.ToString() }
                     }
-                }, result => { Debug.Log("Save level data success!"); },
+            }, result => { Debug.Log("Save level data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
         [Button]
@@ -100,12 +100,12 @@ namespace PlayFab_System
         {
             Player.gold = currencyManager.currency;
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
-                {
-                    Data = new Dictionary<string, string>
+            {
+                Data = new Dictionary<string, string>
                     {
                         { "Gold", Player.gold.ToString() }
                     }
-                }, result => { Debug.Log("Save data success!"); },
+            }, result => { Debug.Log("Save data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
 

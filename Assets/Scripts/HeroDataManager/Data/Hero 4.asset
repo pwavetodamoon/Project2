@@ -42,5 +42,5 @@ MonoBehaviour:
     critDamage: 0
     attackCoolDown: 0.5
     attackMoveDuration: 0.5
-  icon: {fileID: 21300000, guid: 225dfd818e8387f44a0c9e72a682e938, type: 3}
+  icon: {fileID: 21300000, guid: 1511692069327e14eb91ae2f83b2ce05, type: 3}
   resourcePath: Hero/Very Heavy Armored Frontier Defender
