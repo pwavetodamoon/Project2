@@ -9,17 +9,26 @@ using Helper;
 using  HHP.Ults.UIAnim;
 using PlayFab_System;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class UILogin : APanelController
 {
+
+   [SerializeField] private GameObject _uIRegister;
    [SerializeField] private Button _loginButton;
    [SerializeField] private Button _registerButton;
+   [SerializeField] private Button _okayRegisterButton;
    [SerializeField] private Button _homeButton;
    [SerializeField] private Button _howToPlayButton;
    [SerializeField] private Button _aboutUsButton;
    [SerializeField] private TextMeshProUGUI _notificaltionText;
-   [SerializeField] private TMP_InputField _emailInputfield;
-   [SerializeField] private TMP_InputField _passWordlInputfield;
+   //Text Login
+   [SerializeField] private TMP_InputField _emailInputfieldLogin;
+   [SerializeField] private TMP_InputField _passWordlInputfieldLogin;
+   //Text Register
+   [SerializeField] private TMP_InputField _nameInputfieldRegister;
+   [SerializeField] private TMP_InputField _emailInputfieldRegister;
+   [SerializeField] private TMP_InputField _passWordlInputfieldRegister;
 
    private Transform[] _buttons ;
 
@@ -38,6 +47,7 @@ public class UILogin : APanelController
       _howToPlayButton.onClick.AddListener(() => OnAllTestingButtonClicked(_howToPlayButton));
       _aboutUsButton.onClick.AddListener(() => OnAllTestingButtonClicked(_aboutUsButton));
       _registerButton.onClick.AddListener(() => OnRegisterButtonClicked(_registerButton));
+      _okayRegisterButton.onClick.AddListener(() => OnOkayRegisterButtonClicked(_okayRegisterButton));
 
    }
    protected override void RemoveListeners()
@@ -49,6 +59,7 @@ public class UILogin : APanelController
       _howToPlayButton.onClick.RemoveListener(() => OnAllTestingButtonClicked(_howToPlayButton));
       _aboutUsButton.onClick.RemoveListener(() => OnAllTestingButtonClicked(_aboutUsButton));
       _registerButton.onClick.RemoveListener(() => OnRegisterButtonClicked(_registerButton));
+      _okayRegisterButton.onClick.RemoveListener(() => OnOkayRegisterButtonClicked(_okayRegisterButton));
 
    }
    private void OnAllTestingButtonClicked(Button button)
@@ -62,15 +73,20 @@ public class UILogin : APanelController
    }
    private void OnRegisterButtonClicked(Button button)
    {
+      _uIRegister.SetActive(true);
+   }
+
+   private void OnOkayRegisterButtonClicked(Button button)
+   {
       Debug.Log("test");
-      PlayFabManager.Instance.Register(_emailInputfield.text, _passWordlInputfield.text);
+      PlayFabManager.Instance.Register(_nameInputfieldRegister.text,_emailInputfieldRegister.text, _passWordlInputfieldRegister.text);
+      _uIRegister.SetActive(false);
       _notificaltionText.text = "Register Succesfull !";
       _notificaltionText.gameObject.SetActive(true);
-  
    }
    private IEnumerator HandleLoginButtonClicked()
    {
       yield return new WaitForSeconds(0.2f);
-     Signals.Get<OnLoginButtonClicked>().Dispatch(_emailInputfield.text, _passWordlInputfield.text);
+     Signals.Get<OnLoginButtonClicked>().Dispatch(_emailInputfieldLogin.text, _passWordlInputfieldLogin.text);
    }
 }

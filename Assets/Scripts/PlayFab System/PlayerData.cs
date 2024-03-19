@@ -1,4 +1,5 @@
 using System;
+using CombatSystem.HeroDataManager.Data;
 using Helper;
 
 namespace PlayFab_System

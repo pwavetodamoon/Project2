@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using deVoid.UIFramework;
 using deVoid.Utils;
@@ -14,12 +15,9 @@ public class UIStartGame : APanelController
     [SerializeField] private TextMeshProUGUI _playerName;
     [SerializeField] private TextMeshProUGUI _levelPlayer;
 
-
-
     private void Start()
     {
-        Test2();
-        //StartCoroutine(GetInfoPlayer());
+        StartCoroutine(GetInfoPlayer());
     }
 
     protected override void AddListeners()
@@ -50,14 +48,12 @@ public class UIStartGame : APanelController
 
     private IEnumerator GetInfoPlayer()
     {
-        yield return new WaitForSeconds(1f);
-        _playerName.text = $"NAME :{PlayFabManager.Instance.Player.playerName} ";
-        _levelPlayer.text = $"Level :{PlayFabManager.Instance.Player.levelPlayer} ";
+        yield return new WaitForSeconds(3f);
+        Debug.Log("GetInfoPlayer coroutine");
+        var name = PlayFabManager.Instance.Player.playerName;
+        var level = PlayFabManager.Instance.Player.levelPlayer;
+        _playerName.text = name;
+        _levelPlayer.text = level.ToString();
     }
-    [Button]
-    private void Test2()
-    {
-        _playerName.text = $"NAME :{PlayFabManager.Instance.Player.playerName} ";
-        _levelPlayer.text = $"Level :{PlayFabManager.Instance.Player.levelPlayer} ";
-    }
+    
 }
