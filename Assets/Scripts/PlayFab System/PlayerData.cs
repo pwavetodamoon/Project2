@@ -7,7 +7,7 @@ namespace PlayFab_System
     {
         // nguoi choi
         public string customId;
-        public string playerName = "UnityGameDev";
+        public string playerName;
         public string email ;
         public string passWord ;
         public int levelPlayer;

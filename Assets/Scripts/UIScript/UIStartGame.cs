@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using PlayFab_System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class UIStartGame : APanelController
 {
@@ -19,13 +18,8 @@ public class UIStartGame : APanelController
 
     private void Start()
     {
-        // _playerName.text = $"PLAYER NAME :{PlayFabManager.Instance.Player.playerName} ";
-        // _levelPlayer.text = $"PLAYER NAME :{PlayFabManager.Instance.Player.levelPlayer} ";
-        // _playerName.text = "PLAYER NAME : GameDev" ;
-        // _levelPlayer.text = "Level : 1 ";
-        StartCoroutine(GetInfoPlayer());
-
-
+        Test2();
+        //StartCoroutine(GetInfoPlayer());
     }
 
     protected override void AddListeners()
@@ -56,7 +50,13 @@ public class UIStartGame : APanelController
 
     private IEnumerator GetInfoPlayer()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(1f);
+        _playerName.text = $"NAME :{PlayFabManager.Instance.Player.playerName} ";
+        _levelPlayer.text = $"Level :{PlayFabManager.Instance.Player.levelPlayer} ";
+    }
+    [Button]
+    private void Test2()
+    {
         _playerName.text = $"NAME :{PlayFabManager.Instance.Player.playerName} ";
         _levelPlayer.text = $"Level :{PlayFabManager.Instance.Player.levelPlayer} ";
     }

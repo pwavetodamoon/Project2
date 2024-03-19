@@ -159,27 +159,18 @@ namespace PlayFab_System
 
         #region Login
 
-        public void Login(string email , string pass)
+        public void Login(string email, string pass)
         {
             var request = new LoginWithEmailAddressRequest()
             {
-                Email =  email,
+                Email = email,
                 Password = pass,
             };
             Player.email = request.Email;
             Player.passWord = request.Password;
-            Debug.Log("Email " +  Player.email  + "Password " +Player.passWord);
+            Debug.Log("Email " + Player.email + " Password " + Player.passWord);
             PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-         //   PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest(), result =>
-            // {
-            //     PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-            // }, error =>
-            // {
-            //     Debug.Log("Không tìm thấy tài khoản với email này trên cơ sở dữ liệu PlayFab.");
-            // });
         }
-
-
         public void Register(string email , string password)
         {
             var request = new RegisterPlayFabUserRequest()
@@ -193,7 +184,6 @@ namespace PlayFab_System
             Player.email = request.Email;
             Player.passWord = request.Password;
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
-          
         }
 
         private void OnRegisterFailure(PlayFabError obj)
@@ -210,6 +200,7 @@ namespace PlayFab_System
         private void OnLoginSuccess(LoginResult obj)
         {
            Debug.Log("Congratulations, you made your first successful API call!");
+           GetDataPlayer();
         }
 
         private void OnLoginFailure(PlayFabError obj)
