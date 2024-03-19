@@ -9,8 +9,8 @@ namespace Background
         [SerializeField] private MapBackgroundSO mapBackgroundSO;
 
         [InfoBox("Map name use for testing, just on play mode, it just temporary")]
-        public int MapIndex;
-
+        public int MapIndex => stageInformation == null ? 0 : stageInformation.currentMapIndex;
+        public StageInformation stageInformation;
         private ScrollingBackground[] ScrollingBackgroundArray;
         private void Start()
         {
@@ -19,20 +19,21 @@ namespace Background
             StartScrolling();
         }
 
+        private void OnValidate()
+        {
+            if (stageInformation == null)
+            {
+                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            }
+        }
 
-        /// <summary>
-        ///     Loads the field by getting the components of ScrollingBackground in the children objects.
-        /// </summary>
         [Button]
         private void LoadField()
         {
             ScrollingBackgroundArray = GetComponentsInChildren<ScrollingBackground>();
         }
 
-        private bool CanLoadMap()
-        {
-            return MapIndex > 0 && MapIndex < mapBackgroundSO.MapCount();
-        }
+        private bool CanLoadMap() => MapIndex > 0 && MapIndex < mapBackgroundSO.MapCount();
 
         [InfoBox("Load all texure for background array, use in play mode")]
         [Button]
@@ -57,28 +58,19 @@ namespace Background
             }
         }
 
-        /// <summary>
-        ///     Adjusts the scrolling Speed of the background.
-        /// </summary>
-        /// <param name="speed">The Speed value to adjust the scrolling Speed.</param>
         [Button]
         public void AdjustSpeed(float speed = .5f)
         {
             foreach (var item in ScrollingBackgroundArray) item.AdjustSpeed(speed);
         }
 
-        /// <summary>
-        ///     Starts scrolling the background.
-        /// </summary>
+
         [Button]
         public void StartScrolling()
         {
             foreach (var item in ScrollingBackgroundArray) item.Resume();
         }
 
-        /// <summary>
-        ///     Stops scrolling the background.
-        /// </summary>
         [Button]
         public void StopScrolling()
         {
@@ -87,8 +79,7 @@ namespace Background
 
         public void GoNextMap()
         {
-            MapIndex++;
-            if (MapIndex < 0 || MapIndex >= mapBackgroundSO.MapCount()) MapIndex = 0;
+            if (MapIndex < 0 || MapIndex >= mapBackgroundSO.MapCount()) return;
             LoadTexture();
         }
     }
