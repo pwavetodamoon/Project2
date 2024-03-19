@@ -44,6 +44,8 @@ namespace PlayFab_System
             currencyManager = FindObjectOfType<CurrencyManager>();
             testfunc  = FindObjectOfType<Testfunc>();
             stageInformation = FindObjectOfType<StageInformation>();
+            testfunc.Spawn();
+
         }
 
         private void OnApplicationQuit()
@@ -60,7 +62,6 @@ namespace PlayFab_System
             yield return new WaitForSeconds(1f);
             InitLogin(email,pass);
             yield return new WaitForSeconds(1f);
-            testfunc.Spawn();
             GameLevelControl.Instance.LoadToMap(stageInformation.currentMapIndex);
         }
         [Button]
