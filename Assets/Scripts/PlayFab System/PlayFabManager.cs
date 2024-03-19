@@ -55,7 +55,7 @@ namespace PlayFab_System
             SaveDataPlayer();
         }
 
-        public void StartCoroutine(string email , string pass)
+        public void WaitLogin(string email , string pass)
         {
             StartCoroutine(Wait(email,pass));
         }
@@ -197,6 +197,7 @@ namespace PlayFab_System
 
         private void OnRegisterFailure(PlayFabError obj)
         {
+            UILoginController.Instance.RegisterNotification("Register Failure !",Color.red);
             Debug.Log("Dang ky fail " +obj.GenerateErrorReport());
 
         }
@@ -204,6 +205,7 @@ namespace PlayFab_System
         private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
         {
             Debug.Log("Dang ky thanh cong");
+            UILoginController.Instance.RegisterNotification("Register Success !",Color.green);
             SaveDataPlayer();
         }
 

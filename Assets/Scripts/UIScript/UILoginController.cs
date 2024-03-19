@@ -1,13 +1,15 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
+using Helper;
 using PlayFab_System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UILoginController : MonoBehaviour
+public class UILoginController : Singleton<UILoginController>
 {
     [SerializeField] private UISettings _defaultUISetting = null;
     private UIFrame _uIFrameLogin;
+    [SerializeField] private UILogin _uiLogin;
     
     private void Awake()
     {
@@ -16,6 +18,7 @@ public class UILoginController : MonoBehaviour
     private void Start()
     {
         AddListener();
+        _uiLogin = FindObjectOfType<UILogin>();
     }
 
     private void OnDestroy()
@@ -40,7 +43,7 @@ public class UILoginController : MonoBehaviour
     
     private void OpenSceneStartGame(string email , string pass)
     {
-        PlayFabManager.Instance.StartCoroutine(email,pass);
+        PlayFabManager.Instance.WaitLogin(email,pass);
         SceneManager.LoadScene(ScreenIds.StartGameScene);
     }
     private void OpenUINotificaltion()
@@ -52,6 +55,11 @@ public class UILoginController : MonoBehaviour
     {
         _uIFrameLogin.HidePanel(ScreenIds.NotificationUI);
 
+    }
+
+    public void RegisterNotification(string notification, Color color)
+    {
+        StartCoroutine(_uiLogin.HandleTextNotificaltion(notification,color));
     }
 
    
