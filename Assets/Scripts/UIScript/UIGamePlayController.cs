@@ -1,6 +1,7 @@
 using deVoid.UIFramework;
 using deVoid.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIGamePlayController : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
+        //
+        Signals.Get<OnLoginButtonClicked>().AddListener(ShowStartGameScene);
     }
 
     private void RemoveListener()
@@ -40,15 +43,17 @@ public class UIGamePlayController : MonoBehaviour
         //------
         Signals.Get<OpenUIMainMenu>().RemoveListener(ShowUIMainMenu);
         Signals.Get<HideUIMainMenu>().RemoveListener(HideUIMainMenu);
-        
+
         //
         Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
-        
-        
+
+
         //
         Signals.Get<OpenUISoundSetting>().RemoveListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
+        //
+        Signals.Get<OnLoginButtonClicked>().RemoveListener(ShowStartGameScene);
     }
 
     private void ShowUIDPS()
@@ -68,12 +73,17 @@ public class UIGamePlayController : MonoBehaviour
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UIMainMenu);
     }
-    
+
     private void ShowUISoundSetting()
     {
         _uIFrameGamePlay.ShowPanel(ScreenIds.UISoundSetting);
-    }private void HideUISoundSetting()
+    }
+    private void HideUISoundSetting()
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UISoundSetting);
+    }
+    private void ShowStartGameScene()
+    {
+        SceneManager.LoadScene(ScreenIds.StartGameScene);
     }
 }
