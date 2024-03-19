@@ -14,9 +14,13 @@ public class UIGamePlayController : MonoBehaviour
     private void Start()
     {
         AddListener();
-        PlayFabManager.Instance.InitResource();
+        Invoke("Test", 1f);
     }
+    private void Test()
+    {
+        PlayFabManager.Instance.InitResource();
 
+    }
     private void OnDestroy()
     {
         RemoveListener();
