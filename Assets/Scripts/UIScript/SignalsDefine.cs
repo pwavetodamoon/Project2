@@ -45,6 +45,12 @@ public class CloseUISoundSetting : ASignal
 public class OpenSceneGamePlay : ASignal
 {
 }
+public class OpenSceneSelectStage : ASignal 
+{
+}
+public class HideStageSelectionUI : ASignal
+{
+}
 //public class OpenStartGameScene : ASignal
 //{ 
 //}

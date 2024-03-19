@@ -45,7 +45,7 @@ public class UIStartGame : APanelController
 
     private void OnPlayButtonOnClicked()
     {
-        Signals.Get<OpenSceneGamePlay>().Dispatch();
+        Signals.Get<OpenSceneSelectStage>().Dispatch();
     }
 
     private void OnShopButtonOnClicked()
