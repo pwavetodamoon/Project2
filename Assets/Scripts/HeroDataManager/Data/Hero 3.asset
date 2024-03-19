@@ -42,5 +42,5 @@ MonoBehaviour:
     critDamage: 0
     attackCoolDown: 0.5
     attackMoveDuration: 0.5
-  icon: {fileID: 21300000, guid: 1884caff845f7b844bbf2ccbd925f6f4, type: 3}
+  icon: {fileID: 21300000, guid: 8592f02e4b0a7534bb1c0c34e53e42f6, type: 3}
   resourcePath: Hero/Templar Knight
