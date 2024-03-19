@@ -1,3 +1,5 @@
+using System;
+using CombatSystem.HeroDataManager.Data;
 using Helper;
 
 namespace PlayFab_System
@@ -6,9 +8,9 @@ namespace PlayFab_System
     {
         // nguoi choi
         public string customId;
-        public string playerName = "UnityGameDev";
-        public string email = "gamedev@gmail.com";
-        public string passWord = "123123";
+        public string playerName;
+        public string email ;
+        public string passWord ;
         public int levelPlayer;
         public int gold;
     }

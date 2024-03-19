@@ -24,10 +24,8 @@ namespace CombatSystem.HeroDataManager.Data
         };
         public static void LoadSpritePart(Sprite[] sprites,
             out Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite> Dictionary,
-            out Sprite[] eyeSprites,
-            out Sprite avatarSprite)
+            out Sprite[] eyeSprites)
         {
-            avatarSprite = null;
             Dictionary = new Dictionary<Character_Body_Sprites.SpritePartEnum, Sprite>();
             for (var i = 0; i < Character_Body_Sprites.SpritePartCount; i++)
             {
@@ -38,10 +36,6 @@ namespace CombatSystem.HeroDataManager.Data
             eyeSprites = new Sprite[3];
             foreach (var sprite in sprites)
             {
-                if (avatarSprite == null && sprite.name == "avatar")
-                {
-                    Debug.Log("avatar");
-                }
                 LoadSpriteEye(sprite, ref eyeSprites);
                 if (SpriteName.Contains(sprite.name) == false) continue;
 

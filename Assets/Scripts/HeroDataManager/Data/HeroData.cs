@@ -29,6 +29,7 @@ namespace CombatSystem.HeroDataManager.Data
         public bool isDead;
         public HeroCharacter heroCharacter;
         public StructStats structStats;
+        [AssetSelector(Paths = "Assets/Resources/Hero/Icon")]
         public Sprite icon;
         [FolderPath(ParentFolder = "Assets/Resources")]
         public string resourcePath;
@@ -81,7 +82,7 @@ namespace CombatSystem.HeroDataManager.Data
         private void LoadAllSkinInFolder()
         {
             var sprites = Resources.LoadAll<Sprite>(resourcePath);
-            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary, out eyeSprites, out icon);
+            LoadSpriteHelp.LoadSpritePart(sprites, out spriteDictionary, out eyeSprites);
         }
 
 
