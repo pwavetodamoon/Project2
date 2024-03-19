@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using CombatSystem.HeroDataManager.Data;
 using Core.Currency;
 using Core.Quest;
 using Helper;
@@ -28,15 +29,25 @@ namespace PlayFab_System
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+            Player = PlayerData.Instance;
+            Player.customId = SystemInfo.deviceUniqueIdentifier;
+            DontDestroyOnLoad(Player);
 
         }
 
-        private void Init()
+        private void InitLogin(string email , string pass)
         {
-            Login();
+            Login(email,pass);
+        }
+
+        public void InitResource()
+        {
+            Debug.Log("InitResource");
             currencyManager = FindObjectOfType<CurrencyManager>();
             testfunc = FindObjectOfType<Testfunc>();
             stageInformation = FindObjectOfType<StageInformation>();
+            testfunc.Spawn();
+
         }
 
         private void OnApplicationQuit()
@@ -44,16 +55,15 @@ namespace PlayFab_System
             SaveDataPlayer();
         }
 
-        public void StartCoroutine()
+        public void StartCoroutine(string email , string pass)
         {
-            StartCoroutine(Wait());
+            StartCoroutine(Wait(email,pass));
         }
-        private IEnumerator Wait()
+        private IEnumerator Wait(string email , string pass)
         {
-            yield return new WaitForSeconds(.2f);
-            Init();
-            yield return new WaitForSeconds(.2f);
-            testfunc.Spawn();
+            yield return new WaitForSeconds(1f);
+            InitLogin(email,pass);
+            yield return new WaitForSeconds(1f);
             GameLevelControl.Instance.LoadToCurrentMap();
         }
         [Button]
@@ -65,6 +75,7 @@ namespace PlayFab_System
         [Button]
         public void SaveDataPlayer()
         {
+            Debug.Log("save");
             var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
@@ -75,7 +86,7 @@ namespace PlayFab_System
                     { "Password", Player.passWord },
                     { "Level", Player.levelPlayer.ToString() },
                     { "Gold", Player.gold.ToString() },
-                    { "Hero Data", testfunc.ConvertToJson() },
+            //  { "Hero Data", testfunc.ConvertToJson() },
                 }
             };
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
@@ -111,22 +122,27 @@ namespace PlayFab_System
 
         private void OnRevcievedData(GetUserDataResult result)
         {
-            if (result.Data == null || !result.Data.ContainsKey("CusTomId"))
+            if (result.Data == null || !result.Data.ContainsKey("Email"))
             {
                 Debug.Log("No data found");
                 return;
             }
-
+            Debug.Log("founded");
             Player.customId = result.Data["CusTomId"].Value;
             Player.playerName = result.Data["PlayerName"].Value;
             Player.email = result.Data["Email"].Value;
             Player.passWord = result.Data["Password"].Value;
             Player.levelPlayer = int.Parse(result.Data["Level"].Value);
             Player.gold = int.Parse(result.Data["Gold"].Value);
-            testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
-            stageInformation.currentStageIndex = int.Parse(result.Data["StageIndex"].Value);
-            stageInformation.currentMapIndex = int.Parse(result.Data["MapIndex"].Value);
-            stageInformation.pointCollected = int.Parse(result.Data["Point"].Value);
+            
+            // string jsonHeroData = result.Data["HeroData"].Value;
+            // HeroData heroData = JsonUtility.FromJson<HeroData>(jsonHeroData);
+            // Player.HeroData = heroData;
+            
+           // testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
+            // stageInformation.currentStageIndex = int.Parse(result.Data["StageIndex"].Value);
+            // stageInformation.currentMapIndex = int.Parse(result.Data["MapIndex"].Value);
+            // stageInformation.pointCollected = int.Parse(result.Data["Point"].Value);
             DebugResult(result);
         }
 
@@ -150,22 +166,51 @@ namespace PlayFab_System
 
         #region Login
 
-        public void Login()
+        public void Login(string email, string pass)
         {
-            Player = PlayerData.Instance;
-            Player.customId = SystemInfo.deviceUniqueIdentifier;
-            var request = new LoginWithCustomIDRequest
+            var request = new LoginWithEmailAddressRequest()
             {
-                CustomId = Player.customId,
-                CreateAccount = true
+                Email = email,
+                Password =  pass ,
             };
-            PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
+            Player.email = request.Email;
+            Player.passWord = request.Password;
+            Debug.Log("Email " + Player.email + " Password " +     Player.passWord);
+            PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+        }
+        public void Register(string name ,string email , string password)
+        {
+            var request = new RegisterPlayFabUserRequest()
+            {
+                DisplayName = name,
+                Email = email,
+                Password = password, 
+                RequireBothUsernameAndEmail = false ,
+
+            };
+            Debug.Log($"email {request.Email}, pass {request.Password},name {request.DisplayName}");
+            Player.playerName = request.DisplayName;
+            Player.email = request.Email;
+            Player.passWord = request.Password;
+            PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnRegisterFailure);
+        }
+
+        private void OnRegisterFailure(PlayFabError obj)
+        {
+            Debug.Log("Dang ky fail " +obj.GenerateErrorReport());
+
+        }
+
+        private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
+        {
+            Debug.Log("Dang ky thanh cong");
+            SaveDataPlayer();
         }
 
         private void OnLoginSuccess(LoginResult obj)
         {
-            Debug.Log("Congratulations, you made your first successful API call!");
-            GetDataPlayer();
+           Debug.Log("Congratulations, you made your first successful API call!");
+           GetDataPlayer();
         }
 
         private void OnLoginFailure(PlayFabError obj)

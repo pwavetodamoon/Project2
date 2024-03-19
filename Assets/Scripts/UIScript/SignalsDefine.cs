@@ -62,5 +62,9 @@ public class HideShop : ASignal
 }
 public class OnLoginButtonClicked : ASignal
 {
+
+}
+public class OnLoginButtonClicked : ASignal <string,string>
+{ 
 }
 

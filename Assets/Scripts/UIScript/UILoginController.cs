@@ -38,9 +38,9 @@ public class UILoginController : MonoBehaviour
 
     }
     
-    private void OpenSceneStartGame()
+    private void OpenSceneStartGame(string email , string pass)
     {
-        PlayFabManager.Instance.StartCoroutine();
+        PlayFabManager.Instance.StartCoroutine(email,pass);
         SceneManager.LoadScene(ScreenIds.StartGameScene);
     }
     private void OpenUINotificaltion()
