@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 3371715870276447265}
   - component: {fileID: 2411822489179905843}
   m_Layer: 0
-  m_Name: LandMonster
+  m_Name: NormalMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

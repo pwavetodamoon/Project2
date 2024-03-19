@@ -47,7 +47,7 @@ namespace CombatSystem.Entity
         {
             if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
-                GameLevelControl.Instance.OnLoose();
+                // GameLevelControl.Instance.OnLoose();
                 Debug.Log("Thua roi");
             }
 
@@ -58,13 +58,18 @@ namespace CombatSystem.Entity
         {
             Debug.Log("Dead state");
             SetModelBackImmediate();
-            animatorBase.DisableAnimator();
+            // animator_Base.DisableAnimator();
+            animator_Base.ChangeAnimation(AnimationType.Dying);
+            animatorBase.SetIsPlayDefaultAnimation(false);
+
             sprites.SetDeadSprite();
         }
 
         private void OnRebirth()
         {
-            animatorBase.EnableAnimator();
+            animatorBase.SetIsPlayDefaultAnimation(true);
+            animator_Base.ChangeAnimation(AnimationType.Walk);
+            // animatorBase.EnableAnimator();
             sprites.SetRebirthSprite();
             RegisterObject();
         }

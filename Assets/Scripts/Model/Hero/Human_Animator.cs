@@ -22,7 +22,7 @@ namespace Model.Hero
             switch (type)
             {
                 case AnimationType.Idle:
-                    return "Ilde";
+                    return "Idle";
 
                 case AnimationType.Walk:
                     return "Walking";
@@ -32,6 +32,8 @@ namespace Model.Hero
 
                 case AnimationType.Hurt:
                     return "Hurt";
+                case AnimationType.Dying:
+                    return "Dying";
 
                 default:
                     return "Ilde";

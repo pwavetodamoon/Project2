@@ -10,15 +10,20 @@ using CombatSystem.HeroDataManager.Data;
 using LevelAndStats;
 using Model.Hero;
 using SlotHero;
+using UnityEditor.SceneManagement;
 
 public class Testfunc : MonoBehaviour
 {
 
     public HeroManager heroManager;
     public UIAvatarController[] uiAvatarControllers;
-    public HeroSaveList heroSaveList;
-
-
+    // public HeroSaveList heroSaveList;
+    private void OnValidate()
+    {
+        if (heroManager == null)
+            heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+    }
+    public StageInformation stageInformation;
     [Button]
     public void Spawn()
     {
@@ -74,31 +79,31 @@ public class Testfunc : MonoBehaviour
 
     }
 
-    [Button]
-    public string ConvertToJson()
-    {
-        var heroSaveList = new HeroSaveList();
-        var list = heroManager.heroData;
-        foreach (var heroData in list)
-        {
-            var heroCloudSaveData = new HeroCloudSaveData();
-            heroCloudSaveData.LoadFromHeroData(heroData);
-            heroSaveList.Datas.Add(heroCloudSaveData);
-        }
-        string json = JsonUtility.ToJson(heroSaveList, true);
-        Debug.Log(json);
-        return json;
-    }
+    // [Button]
+    // public string ConvertToJson()
+    // {
+    //     var heroSaveList = new HeroSaveList();
+    //     var list = heroManager.heroData;
+    //     foreach (var heroData in list)
+    //     {
+    //         var heroCloudSaveData = new HeroCloudSaveData();
+    //         heroCloudSaveData.LoadFromHeroData(heroData);
+    //         heroSaveList.Datas.Add(heroCloudSaveData);
+    //     }
+    //     string json = JsonUtility.ToJson(heroSaveList, true);
+    //     Debug.Log(json);
+    //     return json;
+    // }
 
-    public void ConvertJsonBack(string json)
-    {
-        var heroCloudSaveList = JsonUtility.FromJson<HeroSaveList>(json);
-        for (int i = 0; i < heroCloudSaveList.Datas.Count; i++)
-        {
-            var heroData = heroManager.heroData[i];
-            heroData.LoadFromHeroSaveGame(heroCloudSaveList.Datas[i]);
-        }
-    }
+    // public void ConvertJsonBack(string json)
+    // {
+    //     var heroCloudSaveList = JsonUtility.FromJson<HeroSaveList>(json);
+    //     for (int i = 0; i < heroCloudSaveList.Datas.Count; i++)
+    //     {
+    //         var heroData = heroManager.heroData[i];
+    //         heroData.LoadFromHeroSaveGame(heroCloudSaveList.Datas[i]);
+    //     }
+    // }
 
 }
 
