@@ -12,7 +12,7 @@ namespace SlotHero.SlotInGame
         public HeroCharacter currentHero;
         public float radius;
         public int SlotIndex;
-
+        public HealthBar healthBar;
         private ShadowColor ShadowColor;
 
         private Character_Body_Sprites sprites;
@@ -33,9 +33,18 @@ namespace SlotHero.SlotInGame
             currentHero = hero;
             if (currentHero != null)
             {
+                var entityStats = currentHero.GetEntityStats();
+                entityStats.OnHealthChange = healthBar.SetHealthBar;
+                entityStats.ChangeHealthEvent();
+
                 currentHero.transform.position = characterStand.position;
                 sprites = currentHero.GetComponentInChildren<Character_Body_Sprites>();
                 AudioManager.Instance.PlaySFX("Placed Champion");
+                healthBar.FadeColorBack();
+            }
+            else
+            {
+                healthBar.FadeColor();
             }
         }
 
