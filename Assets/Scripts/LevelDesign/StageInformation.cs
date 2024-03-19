@@ -51,15 +51,13 @@ public class StageInformation : ScriptableObject
     }
     public void ResetStage()
     {
-        // có thể là sau khi thua ở stage cuối sẽ không reset về cuối map
+        // có thể là sau khi thua ở stage cuối sẽ không reset về cuối map mà chỉ hồi sinh lại và tiếp túc đánh
 
         currentStageIndex = 0;
         pointCollected = 0;
     }
-    public void IncreasePointWhenKillMonster()
-    {
-        pointCollected += pointsPerMonsterKill;
-    }
+    public void IncreasePointWhenKillMonster() => pointCollected += pointsPerMonsterKill;
+
     public void IncreasePoint(int point)
     {
         pointCollected += point;
