@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShadowSprite: {fileID: 713670616752057473}
-  normalColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0.50980395}
+  normalColor: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 0.50980395}
   onChooseColor: {r: 1, g: 0, b: 0, a: 0.49019608}
 --- !u!1 &2565841087395869377
 GameObject:
@@ -204,7 +204,7 @@ SpriteRenderer:
   m_SortingLayer: -4
   m_SortingOrder: 5
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0.6431373}
+  m_Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.6431373}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

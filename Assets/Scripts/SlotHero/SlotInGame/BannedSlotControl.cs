@@ -1,3 +1,4 @@
+using CombatSystem.Entity;
 using UnityEngine;
 
 namespace SlotHero.SlotInGame
@@ -16,6 +17,7 @@ namespace SlotHero.SlotInGame
         public void SetHeroIntoStandPosition(Transform hero)
         {
             if (hero == null) return;
+            hero.GetComponent<EntityCharacter>().GetEntityStats().OnHealthChange = null;
             //hero.gameObject.SetActive(false);
             hero.position = transform.position;
             AudioManager.Instance.PlaySFX("Remove Champion");
