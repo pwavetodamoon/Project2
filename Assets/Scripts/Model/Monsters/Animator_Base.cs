@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Model.Monsters
 {
+    [RequireComponent(typeof(ShootDetect))]
     public abstract class Animator_Base : MonoBehaviour, IChangeAndPlayAnimation, IGetAnimationLength
     {
         [SerializeField] protected Animator animator;

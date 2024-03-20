@@ -16,6 +16,8 @@ namespace CombatSystem.Attack.Far
         private bool IsProjectileHitEnemy;
         private WaitForSeconds waitForEndAnim;
         private WaitUntil waitUntilCanCauseDamage;
+        private WaitUntil waitUntilShootDone;
+        private ShootDetect shootDetect;
 
         public HeroFarAttack(ProjectileType type)
         {
@@ -26,17 +28,16 @@ namespace CombatSystem.Attack.Far
         protected override IEnumerator StartBehavior()
         {
             AudioManager.Instance.PlaySFX("Far Attack");
-            PlayAnimation(AnimationType.Attack);
+            PlayAnimation(AnimationType.Shooting);
 
-            yield return waitForEndAnim;
+            yield return waitUntilShootDone;
             if (Enemy == null) yield break;
             var projectile = SpawnProjectile(Enemy);
             if (projectile == null) yield break;
-
             yield return waitUntilCanCauseDamage;
-
             CauseDamage();
             IsProjectileHitEnemy = false;
+            shootDetect.ResetShoot();
         }
 
         protected override string GetEnemyTag()
@@ -62,8 +63,9 @@ namespace CombatSystem.Attack.Far
             Transform attackTransform = null)
         {
             base.GetReference(newEntityCharacter, attackTransform);
-
+            waitUntilShootDone = new WaitUntil(() => shootDetect.ShootDone);
             waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
+            shootDetect = animator.GetComponent<ShootDetect>();
             waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
         }
     }
