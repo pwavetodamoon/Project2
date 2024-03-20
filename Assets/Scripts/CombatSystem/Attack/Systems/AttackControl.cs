@@ -84,7 +84,7 @@ namespace CombatSystem.Attack.Systems
         [Button]
         public void StopExecute()
         {
-            //Debug.Log("Stop Execute");
+            Debug.Log("Stop Execute");
             StopAllCoroutines();
         }
     }

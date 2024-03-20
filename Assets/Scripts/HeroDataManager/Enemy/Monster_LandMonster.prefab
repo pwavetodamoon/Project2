@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6575936700434489364}
-  isPlayDefaultAnimation: 0
+  isPlayDefaultAnimation: 1
   animationNotHaveLoopIsRun: 0
   timeAnimated: 0
 --- !u!114 &5913776561755179415
@@ -434,6 +434,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a3ae402507fa74eb5d68380ad6dbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  animatorBase: {fileID: 0}
+  EntityStateManager: {fileID: 0}
+  monsterCharacter: {fileID: 0}
 --- !u!1 &7363794348653069964
 GameObject:
   m_ObjectHideFlags: 0

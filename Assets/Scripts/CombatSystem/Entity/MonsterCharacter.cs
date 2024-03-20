@@ -60,8 +60,6 @@ namespace CombatSystem.Entity
         public override void ReleaseObject()
         {
             base.ReleaseObject();
-            attackControl.StopExecute();
-            // Debug.Log("On Get out : "+transform.name,gameObject);
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
             //Destroy(gameObject);
         }
@@ -69,6 +67,11 @@ namespace CombatSystem.Entity
         public void KillMonster()
         {
             Destroy(gameObject);
+        }
+        public void StopExecute()
+        {
+            attackControl.StopExecute();
+
         }
     }
 
