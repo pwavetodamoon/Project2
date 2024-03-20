@@ -3,6 +3,7 @@ using CombatSystem.Entity.Utilities;
 using CombatSystem.Helper;
 using Core.Reward;
 using Helper;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -54,7 +55,6 @@ namespace CombatSystem.Entity
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Enemy);
             CreateNoise();
         }
-
         public override void ReleaseObject()
         {
             base.ReleaseObject();

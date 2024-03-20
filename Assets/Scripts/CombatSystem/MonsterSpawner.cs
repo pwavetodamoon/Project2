@@ -53,7 +53,11 @@ namespace CombatSystem
         public void ClearMonsterAndStopSpawnOnMap()
         {
             var list = transform.GetComponentsInChildren<MonsterCharacter>();
-            for (var i = 0; i < list.Length; i++) list[i].ReleaseObject();
+            for (var i = 0; i < list.Length; i++)
+            {
+                list[i].ReleaseObject();
+                list[i].KillMonster();
+            }
         }
 
     }
