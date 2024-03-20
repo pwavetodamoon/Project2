@@ -17,7 +17,6 @@ namespace PlayFab_System
         public int levelPlayer;
         public int gold;
 
-        [SerializeField] private HeroManager heroManager;
         public HeroSaveList heroSaveList = new HeroSaveList();
     }
 }

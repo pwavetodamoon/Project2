@@ -1,4 +1,5 @@
 using CombatSystem.HeroDataManager;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GetDataSupport", menuName = "GetDataSupport")]
@@ -9,6 +10,7 @@ public class GetDataSupport : ScriptableObject
     {
         return Resources.Load<GetDataSupport>("GetDataSupport");
     }
+
     public StageInformation StageInformation
     {
         get

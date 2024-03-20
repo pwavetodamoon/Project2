@@ -7,14 +7,12 @@ using CombatSystem.HeroDataManager;
 [Serializable]
 public class HeroSaveList
 {
-    public HeroManager HeroManager
-    {
-        get => GetDataSupport.Get().HeroManager;
-    }
+    public HeroManager HeroManager;
     public List<HeroCloudSaveData> Datas = new List<HeroCloudSaveData>();
     public string ConvertToJson()
     {
         // heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+        HeroManager = GetDataSupport.Get().HeroManager;
         Datas = new List<HeroCloudSaveData>();
         var list = HeroManager.heroData;
         foreach (var heroData in list)
@@ -31,6 +29,7 @@ public class HeroSaveList
     public void ConvertJsonBack(string json)
     {
         Debug.Log(json);
+        HeroManager = GetDataSupport.Get().HeroManager;
         Datas = new List<HeroCloudSaveData>();
         var heroCloudSaveList = JsonUtility.FromJson<HeroSaveList>(json);
         for (int i = 0; i < heroCloudSaveList.Datas.Count; i++)
