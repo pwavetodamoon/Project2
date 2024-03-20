@@ -1,3 +1,4 @@
+using CombatSystem;
 using CombatSystem.Entity;
 using Helper;
 using SelectionHero.Ray;
@@ -26,11 +27,18 @@ namespace SelectionHero
         private HeroCharacter GetHero()
         {
             if (OnDragInUI && heroAttachedInUI)
+            {
                 currentHeroAttached = heroAttachedInUI;
-            else if (heroAttachedInUI == null && !OnDragInUI)
+
+            }
+            else if (heroAttachedInUI == null && !OnDragInUI && CombatEntitiesManager.Instance.GetHeroCount() > 1)
+            {
                 currentHeroAttached = GetHeroNearMouse();
+            }
             else
+            {
                 currentHeroAttached = null;
+            }
 
             return currentHeroAttached;
         }
