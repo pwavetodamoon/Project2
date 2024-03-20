@@ -1015,10 +1015,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9016102133458346649, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9214975096825410305, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1877,6 +1873,14 @@ PrefabInstance:
     - target: {fileID: 359286294042539123, guid: 597aaaf38401b1048b1050a5e518a419, type: 3}
       propertyPath: m_Name
       value: SlotManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041041492880280457, guid: 597aaaf38401b1048b1050a5e518a419, type: 3}
+      propertyPath: normalColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041041492880280457, guid: 597aaaf38401b1048b1050a5e518a419, type: 3}
+      propertyPath: onChooseColor.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7400421579962091146, guid: 597aaaf38401b1048b1050a5e518a419, type: 3}
       propertyPath: m_LocalPosition.x
