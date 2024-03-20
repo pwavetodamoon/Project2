@@ -19,6 +19,7 @@ namespace PlayFab_System
         private void Start()
         {
             heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+            heroSaveList.HeroManager = heroManager;
 
         }
         [SerializeField] private HeroManager heroManager;
