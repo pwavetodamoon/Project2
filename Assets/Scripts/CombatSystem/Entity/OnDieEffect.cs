@@ -35,14 +35,15 @@ public class OnDieEffect : MonoBehaviour
     public void OnDie()
     {
         if (monsterCharacter == null || animatorBase == null) return;
+        animatorBase.SetIsPlayDefaultAnimation(false);
+        animatorBase.ChangeAnimation(AnimationType.Dying);
         StartCoroutine(OnDieCoroutine());
         StartCoroutine(shakeEntityEffect.ShakeTransform());
     }
 
     private IEnumerator OnDieCoroutine()
     {
-        animatorBase.ChangeAnimation(AnimationType.Dying);
-        animatorBase.SetIsPlayDefaultAnimation(false);
+
         yield return new WaitForSeconds(time);
         spriteRenderer.DOFade(0, fadeTime).OnComplete(() =>
         {

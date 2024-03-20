@@ -47,7 +47,7 @@ namespace CombatSystem.Entity
         {
             if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
             {
-                // GameLevelControl.Instance.OnLoose();
+                GameLevelControl.Instance.OnLoose();
                 Debug.Log("Thua roi");
             }
 
@@ -63,6 +63,7 @@ namespace CombatSystem.Entity
             animatorBase.SetIsPlayDefaultAnimation(false);
 
             sprites.SetDeadSprite();
+            ReleaseObject();
         }
 
         private void OnRebirth()
@@ -127,6 +128,7 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopCurrentAttack();
+            Debug.Log("Release hero");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
         }
