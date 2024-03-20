@@ -119,7 +119,6 @@ namespace PlayFab_System
             }, result => { Debug.Log("Save data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
-
         private void OnRevcievedData(GetUserDataResult result)
         {
             if (result.Data == null || !result.Data.ContainsKey("Email"))
@@ -168,15 +167,21 @@ namespace PlayFab_System
 
         public void Login(string email, string pass)
         {
-            var request = new LoginWithEmailAddressRequest()
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
             {
-                Email = email,
-                Password =  pass ,
-            };
-            Player.email = request.Email;
-            Player.passWord = request.Password;
-            Debug.Log("Email " + Player.email + " Password " +     Player.passWord);
-            PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+                Debug.Log("test login is null");
+            }
+            else
+            {
+                var request = new LoginWithEmailAddressRequest()
+                {
+                   Email = email,
+                 Password =  pass ,
+                };
+                Player.email = request.Email;
+                Player.passWord = request.Password;
+                PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+            }
         }
         public void Register(string name ,string email , string password)
         {
@@ -188,7 +193,6 @@ namespace PlayFab_System
                 RequireBothUsernameAndEmail = false ,
 
             };
-            Debug.Log($"email {request.Email}, pass {request.Password},name {request.DisplayName}");
             Player.playerName = request.DisplayName;
             Player.email = request.Email;
             Player.passWord = request.Password;
