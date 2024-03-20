@@ -30,7 +30,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  isDead: 0
+  isDead: 1
   heroCharacter: {fileID: 0}
   structStats:
     level: 1

@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using CombatSystem.Entity;
+using Helper;
 using Sirenix.OdinInspector;
 using SlotHero;
 using UnityEngine;
-
-public class HealthBarManager : MonoBehaviour
+public class HealthBarManager : Singleton<HealthBarManager>
 {
-    public List<HealthBar> healthBars;
+    public List<HealthBarStatic> healthBars;
+    public List<HealthBarStatic> MonsterHealthBars;
+    public HealthBarDynamic healthBarPrefab;
     private void Start()
     {
         SetHealthBarPosition();
@@ -27,5 +31,9 @@ public class HealthBarManager : MonoBehaviour
             slot.healthBar = healthBar;
         }
     }
-
+    public void GetHealthBars(EntityCharacter entity)
+    {
+        var healthBar = Instantiate(healthBarPrefab, transform);
+        healthBar.SetTarget(entity);
+    }
 }

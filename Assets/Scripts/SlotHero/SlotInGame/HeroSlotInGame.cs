@@ -12,7 +12,7 @@ namespace SlotHero.SlotInGame
         public HeroCharacter currentHero;
         public float radius;
         public int SlotIndex;
-        public HealthBar healthBar;
+        public HealthBarStatic healthBar;
         private ShadowColor ShadowColor;
 
         private Character_Body_Sprites sprites;

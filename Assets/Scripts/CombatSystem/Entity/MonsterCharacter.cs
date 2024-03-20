@@ -27,6 +27,8 @@ namespace CombatSystem.Entity
 
         private void Start()
         {
+            HealthBarManager.Instance.GetHealthBars(this);
+
             attackControl.Create(monsterSingleAttackFactory);
         }
 
