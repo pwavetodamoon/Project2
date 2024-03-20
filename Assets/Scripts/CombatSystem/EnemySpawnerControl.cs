@@ -11,6 +11,7 @@ public class EnemySpawnerControl : MonoBehaviour
     [SerializeField] private int entitySpawnPerTime = 1;
     [SerializeField] private TimerCounter timerCounter;
 
+    [Button]
     public void ClearAndStopSpawn()
     {
         allowSpawn = false;
