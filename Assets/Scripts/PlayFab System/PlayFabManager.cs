@@ -170,6 +170,7 @@ namespace PlayFab_System
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
             {
                 Debug.Log("test login is null");
+                UILoginController.Instance.LoginNotification("Login Fail Email or Password can not empty",Color.red);
             }
             else
             {
@@ -180,6 +181,7 @@ namespace PlayFab_System
                 };
                 Player.email = request.Email;
                 Player.passWord = request.Password;
+                UILoginController.Instance.LoginNotification("Login Success ",Color.green);
                 PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
             }
         }

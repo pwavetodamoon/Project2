@@ -61,6 +61,10 @@ public class UILoginController : Singleton<UILoginController>
     {
         StartCoroutine(_uiLogin.HandleTextNotificaltion(notification,color));
     }
+    public void LoginNotification(string notification, Color color)
+    {
+        StartCoroutine(_uiLogin.HandleTextNotificaltion(notification,color));
+    }
 
    
 }
