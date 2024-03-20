@@ -7,7 +7,10 @@ using CombatSystem.HeroDataManager;
 [Serializable]
 public class HeroSaveList
 {
-    public HeroManager HeroManager;
+    public HeroManager HeroManager
+    {
+        get => GetDataSupport.Get().HeroManager;
+    }
     public List<HeroCloudSaveData> Datas = new List<HeroCloudSaveData>();
     public string ConvertToJson()
     {
@@ -39,12 +42,12 @@ public class HeroSaveList
         Datas = heroCloudSaveList.Datas;
     }
 
-    internal void Load(string value)
+    public void Load(string value)
     {
         ConvertJsonBack(value);
     }
 
-    internal string Get()
+    public string Get()
     {
         return ConvertToJson();
     }

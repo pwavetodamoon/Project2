@@ -16,12 +16,7 @@ namespace PlayFab_System
         public string passWord;
         public int levelPlayer;
         public int gold;
-        private void Start()
-        {
-            heroManager = GetScriptableObjectSupport.Instance.HeroManager;
-            heroSaveList.HeroManager = heroManager;
 
-        }
         [SerializeField] private HeroManager heroManager;
         public HeroSaveList heroSaveList = new HeroSaveList();
     }

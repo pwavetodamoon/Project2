@@ -19,7 +19,9 @@ public class Testfunc : MonoBehaviour
     private void OnValidate()
     {
         if (heroManager == null)
-            heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+            heroManager = GetDataSupport.Get().HeroManager;
+        if (stageInformation == null)
+            stageInformation = GetDataSupport.Get().StageInformation;
     }
     public StageInformation stageInformation;
     [Button]
