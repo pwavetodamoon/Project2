@@ -6,8 +6,6 @@ using UnityEngine;
 using System;
 using CombatSystem.Entity;
 using CombatSystem.HeroDataManager;
-using CombatSystem.HeroDataManager.Data;
-using LevelAndStats;
 using Model.Hero;
 using SlotHero;
 using UnityEditor.SceneManagement;
@@ -105,27 +103,4 @@ public class Testfunc : MonoBehaviour
     //     }
     // }
 
-}
-
-[Serializable]
-public class HeroSaveList
-{
-    public List<HeroCloudSaveData> Datas = new List<HeroCloudSaveData>();
-}
-[System.Serializable]
-public class HeroCloudSaveData
-{
-    public string heroName;
-    public int slotIndex;
-    public StructStats structStats;
-    public bool isDead;
-
-    public void LoadFromHeroData(HeroData heroData)
-    {
-        heroData.LoadFromHeroInGame();
-        heroName = heroData.heroName;
-        slotIndex = heroData.slotIndex;
-        structStats = heroData.structStats;
-        isDead = heroData.isDead;
-    }
 }
