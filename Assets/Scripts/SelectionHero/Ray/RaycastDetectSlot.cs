@@ -8,13 +8,17 @@ namespace SelectionHero.Ray
     {
         [SerializeField] private HeroSlotInGame currentSlotInGame;
         public Vector2 mousePosition;
-
+        [SerializeField] private ChestSwap chestSwap;
         public void Detect(bool isMouseDown, bool isContainHero)
         {
             if (isContainHero && isMouseDown &&
                 SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out currentSlotInGame))
             {
                 currentSlotInGame.SetTriggerShadow();
+                if (currentSlotInGame.SlotIndex == -1)
+                {
+                    chestSwap.Trigger();
+                }
                 return;
             }
 
@@ -23,6 +27,7 @@ namespace SelectionHero.Ray
 
         private void ResetCurrentSlot()
         {
+            chestSwap.Reset();
             currentSlotInGame.ResetTriggerShadow();
             currentSlotInGame = null;
         }

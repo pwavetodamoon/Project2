@@ -58,13 +58,13 @@ namespace SlotHero.SlotInGame
             return enemyStand;
         }
 
-        public void SetTriggerShadow()
+        public virtual void SetTriggerShadow()
         {
             SetAlphaHero();
             ShadowColor.SetOnChoose();
         }
 
-        public void ResetTriggerShadow()
+        public virtual void ResetTriggerShadow()
         {
             ResetAlphaHero();
             ShadowColor.SetOriginal();
