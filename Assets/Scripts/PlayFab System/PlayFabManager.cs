@@ -90,7 +90,7 @@ namespace PlayFab_System
                     { "Password", Player.passWord },
                     { "Level", Player.levelPlayer.ToString() },
                     { "Gold", Player.gold.ToString() },
-                    { "HeroData", Player.ConvertToJson() },
+                    { "HeroData", Player.heroSaveList.Get() },
             //  { "Hero Data", testfunc.ConvertToJson() },
                 }
             };
@@ -140,7 +140,7 @@ namespace PlayFab_System
             Player.levelPlayer = int.Parse(result.Data["Level"].Value);
             Player.gold = int.Parse(result.Data["Gold"].Value);
 
-            Player.ConvertJsonBack(result.Data["HeroData"].Value);
+            Player.heroSaveList.Load(result.Data["HeroData"].Value);
             // testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
             // stageInformation.currentStageIndex = int.Parse(result.Data["StageIndex"].Value);
             // stageInformation.currentMapIndex = int.Parse(result.Data["MapIndex"].Value);

@@ -118,7 +118,7 @@ namespace CombatSystem.Attack.Near
 
             while (triggerAttack == false)
             {
-                if (CanMoveEntity())
+                if (CanMoveEntity() && currentEntity.GetEntityStats().Health() > 0)
                 {
                     MoveDirective(Vector2.left, 7);
                 }

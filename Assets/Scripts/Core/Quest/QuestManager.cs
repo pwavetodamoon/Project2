@@ -24,7 +24,7 @@ namespace Core.Quest
         {
             if (stageInformation == null)
             {
-                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+                stageInformation = GetDataSupport.Get().StageInformation;
             }
 
         }
