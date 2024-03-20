@@ -1,4 +1,5 @@
 using deVoid.Utils;
+using UnityEngine;
 
 public class OpenUIGamePlay : ASignal
 {
@@ -36,22 +37,38 @@ public class ShowUINotificaltion : ASignal
 public class HideUINotificaltion : ASignal
 {
 }
-public class OpenUISoundSetting : ASignal 
-{ 
+public class OpenUISoundSetting : ASignal
+{
 }
-public class CloseUISoundSetting : ASignal 
-{ 
+public class CloseUISoundSetting : ASignal
+{
 }
 public class OpenSceneGamePlay : ASignal
-{ 
+{
 }
-public class OpenShop : ASignal 
-{ 
+public class OpenSceneSelectStage : ASignal 
+{
 }
-public class HideShop : ASignal 
-{ 
+public class HideStageSelectionUI : ASignal
+{
+}
+//public class OpenStartGameScene : ASignal
+//{ 
+//}
+public class OpenShop : ASignal
+{
+}
+public class HideShop : ASignal
+{
+}
+public class OpenTest : ASignal
+{
 }
 public class OnLoginButtonClicked : ASignal <string,string>
 { 
 }
+public class SendMessage : ASignal <string,Color>
+{ 
+}
+
 

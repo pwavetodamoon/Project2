@@ -37,8 +37,9 @@ public class UIStartGame : APanelController
 
     private void OnPlayButtonOnClicked()
     {
+        //Signals.Get<OpenSceneGamePlay>().Dispatch();
+        Signals.Get<OpenSceneSelectStage>().Dispatch();
         Debug.Log("OnPlayButtonOnClicked");
-        Signals.Get<OpenSceneGamePlay>().Dispatch();
     }
 
     private void OnShopButtonOnClicked()
@@ -54,6 +55,7 @@ public class UIStartGame : APanelController
         var level = PlayFabManager.Instance.Player.levelPlayer;
         _playerName.text = name;
         _levelPlayer.text = level.ToString();
+        Debug.Log($" _playerName.text: { name} ....  _playerName.level{level}");
     }
     
 }

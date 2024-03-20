@@ -11,6 +11,7 @@ public class EnemySpawnerControl : MonoBehaviour
     [SerializeField] private int entitySpawnPerTime = 1;
     [SerializeField] private TimerCounter timerCounter;
 
+    [Button]
     public void ClearAndStopSpawn()
     {
         allowSpawn = false;
@@ -42,7 +43,7 @@ public class EnemySpawnerControl : MonoBehaviour
         if (allowSpawn == false) return;
         var firstSpawn = Random.Range(1, entitySpawnPerTime);
 
-        int maxCount = 0;
+        int maxCount = entitySpawnPerTime;
 
         while (maxCount > 0)
         {

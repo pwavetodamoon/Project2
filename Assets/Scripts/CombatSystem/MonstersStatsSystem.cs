@@ -17,7 +17,7 @@ public class MonstersStatsSystem : MonoBehaviour
     {
         if (stageInformation == null)
         {
-            stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            stageInformation = GetDataSupport.Get().StageInformation;
         }
     }
     public void SetStatsByLevel(EnemyStats stats)

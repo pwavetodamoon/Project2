@@ -58,8 +58,8 @@ namespace CombatSystem.Entity.Utilities
         [Button]
         private void DieInvoke()
         {
+            EntityStats.DecreaseHealth(120);
             OnDie?.Invoke();
-            entity.ReleaseObject();
         }
     }
 }

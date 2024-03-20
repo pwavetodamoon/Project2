@@ -9,6 +9,7 @@ public class ScreenIds : MonoBehaviour
     public const string UISoundSetting = "UISoundSetting";
     public const string NotificationUI = "NotificationUI";
     public const string UIStartGame = "UIStartGame";
+    public const string StageSelectionUI = "StageSelectionUI";
     
     // Scene
     public const string TestScene = "TestScene";

@@ -4,11 +4,13 @@ using System.Text;
 using CombatSystem.HeroDataManager.Data;
 using Core.Currency;
 using Core.Quest;
+using deVoid.Utils;
 using Helper;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using SystemInfo = UnityEngine.Device.SystemInfo;
 using LoginResult = PlayFab.ClientModels.LoginResult;
 using PlayFabError = PlayFab.PlayFabError;
@@ -25,7 +27,11 @@ namespace PlayFab_System
         private static PlayFabManager _instance;
 
         // Getter cho instance
-
+        private void OnValidate()
+        {
+            if (stageInformation == null)
+                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+        }
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
@@ -35,9 +41,9 @@ namespace PlayFab_System
 
         }
 
-        private void InitLogin(string email , string pass)
+        private void InitLogin(string email, string pass)
         {
-            Login(email,pass);
+            Login(email, pass);
         }
 
         public void InitResource()
@@ -45,7 +51,7 @@ namespace PlayFab_System
             Debug.Log("InitResource");
             currencyManager = FindObjectOfType<CurrencyManager>();
             testfunc = FindObjectOfType<Testfunc>();
-            stageInformation = FindObjectOfType<StageInformation>();
+            // stageInformation = FindObjectOfType<StageInformation>();
             testfunc.Spawn();
 
         }
@@ -54,17 +60,17 @@ namespace PlayFab_System
         {
             SaveDataPlayer();
         }
-
         public void WaitLogin(string email , string pass)
+
         {
-            StartCoroutine(Wait(email,pass));
+            StartCoroutine(Wait(email, pass));
         }
-        private IEnumerator Wait(string email , string pass)
+        private IEnumerator Wait(string email, string pass)
         {
             yield return new WaitForSeconds(1f);
-            InitLogin(email,pass);
+            InitLogin(email, pass);
             yield return new WaitForSeconds(1f);
-            GameLevelControl.Instance.LoadToCurrentMap();
+            // GameLevelControl.Instance.LoadToCurrentMap();
         }
         [Button]
         public void GetDataPlayer()
@@ -86,9 +92,11 @@ namespace PlayFab_System
                     { "Password", Player.passWord },
                     { "Level", Player.levelPlayer.ToString() },
                     { "Gold", Player.gold.ToString() },
+                    { "HeroData", Player.heroSaveList.Get() },
             //  { "Hero Data", testfunc.ConvertToJson() },
                 }
             };
+            Debug.Log("SaveDataPlayer");
             PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnDataSendError);
         }
 
@@ -133,12 +141,9 @@ namespace PlayFab_System
             Player.passWord = result.Data["Password"].Value;
             Player.levelPlayer = int.Parse(result.Data["Level"].Value);
             Player.gold = int.Parse(result.Data["Gold"].Value);
+            Player.heroSaveList.Load(result.Data["HeroData"].Value);
             
-            // string jsonHeroData = result.Data["HeroData"].Value;
-            // HeroData heroData = JsonUtility.FromJson<HeroData>(jsonHeroData);
-            // Player.HeroData = heroData;
-            
-           // testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
+            // testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
             // stageInformation.currentStageIndex = int.Parse(result.Data["StageIndex"].Value);
             // stageInformation.currentMapIndex = int.Parse(result.Data["MapIndex"].Value);
             // stageInformation.pointCollected = int.Parse(result.Data["Point"].Value);
@@ -150,7 +155,8 @@ namespace PlayFab_System
             var sb = new StringBuilder();
             foreach (var item in result.Data) sb.Append(item.Key).Append(": ").Append(item.Value.Value).Append("\n");
             Debug.Log(sb.ToString());
-            Debug.Log(Player.customId + "email" + Player.email + "passWord" + Player.passWord + "Level" + Player.levelPlayer + "Gold " + Player.gold + " " + result.Data["Hero Data"].Value);
+            // Debug.Log(Player.customId + "email" + Player.email + "passWord" + Player.passWord + "Level" + Player.levelPlayer + "Gold " + Player.gold);
+            // Debug.Log(Player.customId + "email" + Player.email + "passWord" + Player.passWord + "Level" + Player.levelPlayer + "Gold " + Player.gold + " " + result.Data["Hero Data"].Value);
         }
 
         private void OnDataSend(UpdateUserDataResult result)
@@ -167,33 +173,40 @@ namespace PlayFab_System
 
         public void Login(string email, string pass)
         {
+            Debug.Log("Login");
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
             {
                 Debug.Log("test login is null");
-                UILoginController.Instance.LoginNotification("Login Fail Email or Password can not empty",Color.red);
+                var message = "Login Fail!";
+            //    UILoginController.Instance.LoginNotification("Login Fail Email or Password can not empty",Color.red);
+            Signals.Get<SendMessage>().Dispatch(message,Color.red);
+            
             }
             else
             {
                 var request = new LoginWithEmailAddressRequest()
                 {
-                   Email = email,
-                 Password =  pass ,
+                    Email = email,
+                    Password =  pass ,
                 };
                 Player.email = request.Email;
                 Player.passWord = request.Password;
-                UILoginController.Instance.LoginNotification("Login Success ",Color.green);
+            //    UILoginController.Instance.LoginNotification("Login Success ",Color.green);
+                var message = "Login Success!";
+                Signals.Get<SendMessage>().Dispatch(message,Color.green);
                 PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
+                SceneManager.LoadScene(ScreenIds.StartGameScene);
+                 Debug.Log("LoginEnd");
             }
         }
-        public void Register(string name ,string email , string password)
+        public void Register(string name, string email, string password)
         {
             var request = new RegisterPlayFabUserRequest()
             {
                 DisplayName = name,
                 Email = email,
-                Password = password, 
-                RequireBothUsernameAndEmail = false ,
-
+                Password = password,
+                RequireBothUsernameAndEmail = false,
             };
             Player.playerName = request.DisplayName;
             Player.email = request.Email;
@@ -203,29 +216,27 @@ namespace PlayFab_System
 
         private void OnRegisterFailure(PlayFabError obj)
         {
-            UILoginController.Instance.RegisterNotification("Register Failure !",Color.red);
+          //  UILoginController.Instance.RegisterNotification("Register Failure !",Color.red);
             Debug.Log("Dang ky fail " +obj.GenerateErrorReport());
-
         }
 
         private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
         {
             Debug.Log("Dang ky thanh cong");
-            UILoginController.Instance.RegisterNotification("Register Success !",Color.green);
+           // UILoginController.Instance.RegisterNotification("Register Success !",Color.green);
             SaveDataPlayer();
         }
 
         private void OnLoginSuccess(LoginResult obj)
         {
-           Debug.Log("Congratulations, you made your first successful API call!");
-           GetDataPlayer();
+            Debug.Log("Congratulations, you made your first successful API call!");
+            GetDataPlayer();
         }
 
         private void OnLoginFailure(PlayFabError obj)
         {
             Debug.Log("Error logging in player with custom ID: " + obj.GenerateErrorReport());
         }
-
         #endregion
     }
 }

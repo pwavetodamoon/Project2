@@ -86,10 +86,13 @@ public class UILogin : APanelController
    private IEnumerator HandleLoginButtonClicked()
    {
       yield return new WaitForSeconds(0.2f);
+      Debug.Log("HandleLoginButtonClicked");
      Signals.Get<OnLoginButtonClicked>().Dispatch(_emailInputfieldLogin.text, _passWordlInputfieldLogin.text);
    }
    public IEnumerator HandleTextNotificaltion(string notificaltion , Color color)
    {
+      Debug.Log("HandleTextNotificaltion");
+
       _notificaltionText.text = notificaltion;
       _notificaltionText.color =color;
       _notificaltionText.gameObject.SetActive(true);

@@ -1,6 +1,9 @@
 using System;
+using CombatSystem.HeroDataManager;
 using CombatSystem.HeroDataManager.Data;
 using Helper;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace PlayFab_System
 {
@@ -9,9 +12,11 @@ namespace PlayFab_System
         // nguoi choi
         public string customId;
         public string playerName;
-        public string email ;
-        public string passWord ;
+        public string email;
+        public string passWord;
         public int levelPlayer;
         public int gold;
+
+        public HeroSaveList heroSaveList = new HeroSaveList();
     }
 }

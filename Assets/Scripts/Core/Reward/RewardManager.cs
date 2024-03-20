@@ -41,7 +41,7 @@ namespace Core.Reward
         {
             if (stageInformation == null)
             {
-                stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+                stageInformation = GetDataSupport.Get().StageInformation;
             }
         }
         protected override void Awake()

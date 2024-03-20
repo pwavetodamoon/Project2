@@ -58,13 +58,19 @@ namespace CombatSystem.Entity
         {
             Debug.Log("Dead state");
             SetModelBackImmediate();
-            animatorBase.DisableAnimator();
+            // animator_Base.DisableAnimator();
+            animator_Base.ChangeAnimation(AnimationType.Dying);
+            animatorBase.SetIsPlayDefaultAnimation(false);
+
             sprites.SetDeadSprite();
+            ReleaseObject();
         }
 
         private void OnRebirth()
         {
-            animatorBase.EnableAnimator();
+            animatorBase.SetIsPlayDefaultAnimation(true);
+            animator_Base.ChangeAnimation(AnimationType.Walk);
+            // animatorBase.EnableAnimator();
             sprites.SetRebirthSprite();
             RegisterObject();
         }
@@ -122,6 +128,7 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopCurrentAttack();
+            Debug.Log("Release hero");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
         }

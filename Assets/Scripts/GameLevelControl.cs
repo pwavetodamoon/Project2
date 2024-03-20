@@ -26,11 +26,11 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     {
         if (stageInformation == null)
         {
-            stageInformation = GetScriptableObjectSupport.Instance.StageInformation;
+            stageInformation = GetDataSupport.Get().StageInformation;
         }
         if (heroManager == null)
         {
-            heroManager = GetScriptableObjectSupport.Instance.HeroManager;
+            heroManager = GetDataSupport.Get().HeroManager;
         }
     }
     protected override void Awake()
