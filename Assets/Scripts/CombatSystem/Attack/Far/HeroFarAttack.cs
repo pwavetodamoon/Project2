@@ -28,11 +28,20 @@ namespace CombatSystem.Attack.Far
         protected override IEnumerator StartBehavior()
         {
             AudioManager.Instance.PlaySFX("Far Attack");
-            PlayAnimation(AnimationType.Shooting);
+            var attackTransform = BowAttackTransform;
+            if (type == ProjectileType.Arrow)
+            {
+                PlayAnimation(AnimationType.Shooting);
+            }
+            else
+            {
+                PlayAnimation(AnimationType.Attack);
+                attackTransform = MagicAttackTransform;
+            }
 
             yield return waitUntilShootDone;
             if (Enemy == null) yield break;
-            var projectile = SpawnProjectile(Enemy);
+            var projectile = SpawnProjectile(Enemy, attackTransform);
             if (projectile == null) yield break;
             yield return waitUntilCanCauseDamage;
             CauseDamage();
@@ -45,10 +54,10 @@ namespace CombatSystem.Attack.Far
             return GameTag.Enemy;
         }
 
-        protected ProjectileBase SpawnProjectile(EntityCharacter monster)
+        protected ProjectileBase SpawnProjectile(EntityCharacter monster, Transform attackTransform)
         {
             var projectile = PrefabAttackFactoryPool.Instance.Get(type);
-            projectile.transform.position = AttackTransform.position;
+            projectile.transform.position = attackTransform.position;
             projectile.RegisterOnEndVfx(AllowGoNextStep);
             projectile.Initialized(monster.transform, GameTag.Enemy);
             return projectile;

@@ -31,9 +31,10 @@ public class HealthBarManager : Singleton<HealthBarManager>
             slot.healthBar = healthBar;
         }
     }
-    public void GetHealthBars(EntityCharacter entity)
+    public HealthBarDynamic GetHealthBars(EntityCharacter entity)
     {
         var healthBar = Instantiate(healthBarPrefab, transform);
         healthBar.SetTarget(entity);
+        return healthBar;
     }
 }

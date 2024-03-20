@@ -37,7 +37,7 @@ namespace CombatSystem.Attack.Near
         }
         protected override IEnumerator StartBehavior()
         {
-            if (IsOnTarget() == false) yield break;
+            if (IsOnTarget() == false || EntityStats.Health() < 0) yield break;
             PlayAnimation(AnimationType.Attack);
             yield return new WaitForSeconds(GetAnimationLength(AnimationType.Attack));
             CauseDamage();

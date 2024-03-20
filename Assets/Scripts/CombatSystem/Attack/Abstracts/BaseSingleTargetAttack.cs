@@ -16,7 +16,8 @@ namespace CombatSystem.Attack.Abstracts
     {
         [SerializeField] protected bool isActive;
 
-        [SerializeField] protected Transform AttackTransform;
+        [SerializeField] protected Transform BowAttackTransform;
+        [SerializeField] protected Transform MagicAttackTransform;
         [SerializeField] protected EntityStats EntityStats;
         [SerializeField] protected EntityCharacter Enemy;
         [SerializeField] protected Animator_Base animator;
@@ -38,7 +39,7 @@ namespace CombatSystem.Attack.Abstracts
             EntityStats = entityCharacter.GetEntityStats();
             attackManager = entityCharacter.GetAttackManager();
             animator = entityCharacter.GetAnimatorBase();
-            AttackTransform = attackTransform;
+            BowAttackTransform = attackTransform;
             IsValidate = true;
         }
         protected abstract string GetEnemyTag();
@@ -46,7 +47,11 @@ namespace CombatSystem.Attack.Abstracts
 
         public void SetOnEndAttackCallBack(Action callback) => onEndAttack = callback;
 
-        public void SetAttackTransform(Transform newTransform) => AttackTransform = newTransform;
+        public void SetAttackTransform(Transform bowAttackTransform, Transform magicAttackTransform)
+        {
+            BowAttackTransform = bowAttackTransform;
+            MagicAttackTransform = magicAttackTransform;
+        }
 
         protected void IncreaseAttackerCount() => IAttackerCounter?.IncreaseAttackerCount(EntityStats);
 

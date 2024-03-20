@@ -11,7 +11,8 @@ namespace CombatSystem.Attack.Systems
 {
     public class AttackControl : MonoBehaviour, ICoroutineRunner
     {
-        [SerializeField] private Transform attackTransform;
+        [SerializeField] private Transform bowAttackTransform;
+        [SerializeField] private Transform magicAttackTransform;
         [ShowInInspector] private BaseSingleTargetAttack attack;
         [ShowInInspector] private AttackCounter attackCounter;
         private AttackManager attackManager;
@@ -68,7 +69,7 @@ namespace CombatSystem.Attack.Systems
             attack = newAttack;
             attackCounter = newAttackCounter;
 
-            attack.SetAttackTransform(attackTransform);
+            attack.SetAttackTransform(bowAttackTransform, magicAttackTransform);
             attackCounter.SetCoroutineRunner(this);
 
             attack.SetOnEndAttackCallBack(attackCounter.ResetCounter);

@@ -15,8 +15,8 @@ namespace CombatSystem.Entity
 
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
         protected EntityStateManager EntityStateManager;
-        private float xRandomNoise;
-        private float yRandomNoise;
+        internal HealthBarDynamic healthBar;
+
         protected override void Awake()
         {
             base.Awake();
@@ -27,7 +27,7 @@ namespace CombatSystem.Entity
 
         private void Start()
         {
-            HealthBarManager.Instance.GetHealthBars(this);
+            healthBar = HealthBarManager.Instance.GetHealthBars(this);
 
             attackControl.Create(monsterSingleAttackFactory);
         }
@@ -44,22 +44,17 @@ namespace CombatSystem.Entity
 
         }
 
-        private void CreateNoise()
-        {
-            xRandomNoise = Random.Range(-3f, 3f);
-            yRandomNoise = Random.Range(-3f, .3f);
-        }
 
 
         public override void RegisterObject()
         {
             base.RegisterObject();
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Enemy);
-            CreateNoise();
         }
         public override void ReleaseObject()
         {
             base.ReleaseObject();
+            StopExecute();
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
             //Destroy(gameObject);
         }
@@ -68,11 +63,7 @@ namespace CombatSystem.Entity
         {
             Destroy(gameObject);
         }
-        public void StopExecute()
-        {
-            attackControl.StopExecute();
 
-        }
     }
 
 }

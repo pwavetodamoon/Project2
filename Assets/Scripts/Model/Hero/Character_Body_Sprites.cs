@@ -116,7 +116,7 @@ namespace Model.Hero
             foreach (var skin in HeroSkin.Dictionary)
             {
                 if (skin.Value == null) continue;
-                skin.Value.DOColor(deadColor, .25f);
+                skin.Value.DOColor(deadColor, 0);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Model.Hero
             foreach (var skin in HeroSkin.Dictionary)
             {
                 if (skin.Value == null) continue;
-                skin.Value.DOColor(liveColor, .25f);
+                skin.Value.DOColor(liveColor, 0);
             }
         }
     }

@@ -61,5 +61,10 @@ namespace CombatSystem.Entity
         {
             return attackerTransform.GetAttackerTransform();
         }
+
+        public void StopExecute()
+        {
+            attackControl.StopExecute();
+        }
     }
 }
