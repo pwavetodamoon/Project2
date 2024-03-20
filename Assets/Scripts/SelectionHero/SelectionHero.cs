@@ -21,7 +21,7 @@ namespace SelectionHero
         {
             UpdateMousePosition();
             raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, rayInput.isMouseMove, GetHero());
-            raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero);
+            raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero, raycastDetectHero.currentHero);
         }
 
         private HeroCharacter GetHero()
