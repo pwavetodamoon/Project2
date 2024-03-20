@@ -6,11 +6,11 @@ using HHP.Ults.UIAnim;
 
 public class UIMainMenu : APanelController
 {
+    [SerializeField] private Button ButtonHideUIMainMenu;
     [SerializeField] private Button ButtonShowUISoundSetting;
     [SerializeField] private Button ButtonActiveNewGame;
     [SerializeField] private Button ButtonActiveQuitAndSave;
 
-    [SerializeField] private Button ButtonHideUIMainMenu;
     private void Start()
     {
         UIAnim.ZoomInOutScale(this.transform);
@@ -26,6 +26,7 @@ public class UIMainMenu : APanelController
         ButtonHideUIMainMenu.onClick.AddListener(HideUIMainMenu);
 
         ButtonShowUISoundSetting.onClick.AddListener(ShowUISoundSetting);
+        ButtonActiveQuitAndSave.onClick.AddListener(ShowStartGameScene);
     }
 
     protected override void RemoveListeners()
@@ -34,6 +35,8 @@ public class UIMainMenu : APanelController
         ButtonHideUIMainMenu.onClick.RemoveListener(HideUIMainMenu);
 
         ButtonShowUISoundSetting.onClick.RemoveListener(ShowUISoundSetting);
+        ButtonActiveQuitAndSave.onClick.RemoveListener(ShowStartGameScene);
+
     }
     private void HideUIMainMenu()
     {
@@ -43,6 +46,11 @@ public class UIMainMenu : APanelController
     {
         Signals.Get<OpenUISoundSetting>().Dispatch();
     }
+    private void ShowStartGameScene() 
+    { 
+        Signals.Get<OpenTest>().Dispatch();
+    }
+    
    
 
 

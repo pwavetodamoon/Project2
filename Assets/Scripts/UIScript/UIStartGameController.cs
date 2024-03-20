@@ -11,7 +11,7 @@ public class UIStartGameController : MonoBehaviour
 {
     [SerializeField] private UISettings _defaultUISetting = null;
     private UIFrame _uIFrameStartGame;
-    
+
     private void Awake()
     {
         _uIFrameStartGame = _defaultUISetting.CreateUIInstance();
@@ -29,14 +29,30 @@ public class UIStartGameController : MonoBehaviour
     {
         _uIFrameStartGame.ShowPanel(ScreenIds.UIStartGame);
         Signals.Get<OpenSceneGamePlay>().AddListener(OpenSceneGamePlay);
+
+        Signals.Get<OpenSceneSelectStage>().AddListener(OpenSceneSelectStage);
+        Signals.Get<HideStageSelectionUI>().AddListener(HideStageSelectionUI);
     }
     private void RemoveListener()
     {
         Signals.Get<OpenSceneGamePlay>().RemoveListener(OpenSceneGamePlay);
-   
+
+        Signals.Get<OpenSceneSelectStage>().RemoveListener(OpenSceneSelectStage);
+        Signals.Get<HideStageSelectionUI>().RemoveListener(HideStageSelectionUI);
+    }
+    private void HideStageSelectionUI()
+    {
+        _uIFrameStartGame.HidePanel(ScreenIds.StageSelectionUI);
     }
     private void OpenSceneGamePlay()
     {
-        SceneManager.LoadScene(ScreenIds.TestScene);
+       //PlayFabManager.Instance.StartCoroutine(,);
+       SceneManager.LoadScene(ScreenIds.TestScene);
     }
+    private void OpenSceneSelectStage()
+    {
+        _uIFrameStartGame.ShowPanel(ScreenIds.StageSelectionUI);
+    }
+
 }
+    
