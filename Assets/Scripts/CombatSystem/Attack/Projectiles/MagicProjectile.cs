@@ -18,7 +18,7 @@ namespace CombatSystem.Attack.Projectiles
             animationTime = GetComponent<GetAnimationLength>().length;
             waitForEndAnim = new WaitForSeconds(animationTime);
             CircleCollider2D = GetComponent<CircleCollider2D>();
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         public override void Initialized(Transform target, string tag)

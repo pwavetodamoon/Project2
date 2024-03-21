@@ -1,3 +1,4 @@
+using CombatSystem;
 using CombatSystem.Entity;
 using Helper;
 using SelectionHero.Ray;
@@ -20,17 +21,24 @@ namespace SelectionHero
         {
             UpdateMousePosition();
             raycastDetectHero.HandleHeroSelection(rayInput.isMouseDown, rayInput.isMouseMove, GetHero());
-            raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero);
+            raycastDetectSlot.Detect(rayInput.isMouseDown, raycastDetectHero.IsHandleHero, raycastDetectHero.currentHero);
         }
 
         private HeroCharacter GetHero()
         {
             if (OnDragInUI && heroAttachedInUI)
+            {
                 currentHeroAttached = heroAttachedInUI;
-            else if (heroAttachedInUI == null && !OnDragInUI)
+
+            }
+            else if (heroAttachedInUI == null && !OnDragInUI && CombatEntitiesManager.Instance.GetHeroCount() > 1)
+            {
                 currentHeroAttached = GetHeroNearMouse();
+            }
             else
+            {
                 currentHeroAttached = null;
+            }
 
             return currentHeroAttached;
         }

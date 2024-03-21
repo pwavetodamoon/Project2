@@ -127,15 +127,10 @@ namespace CombatSystem.Entity
         public override void ReleaseObject()
         {
             base.ReleaseObject();
-            StopCurrentAttack();
+            StopExecute();
             Debug.Log("Release hero");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
-        }
-
-        public void StopCurrentAttack()
-        {
-            attackControl.StopAllCoroutines();
         }
 
     }

@@ -12,11 +12,11 @@ public class OnDieEffect : MonoBehaviour
 {
     private float time = 1;
     private float fadeTime = 1;
-    private SpriteRenderer spriteRenderer;
-    private Animator_Base animatorBase;
-    private ShakeMultiplierTimes shakeEntityEffect;
-    private EntityStateManager EntityStateManager;
-    private MonsterCharacter monsterCharacter;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator_Base animatorBase;
+    [SerializeField] private ShakeMultiplierTimes shakeEntityEffect;
+    [SerializeField] private EntityStateManager EntityStateManager;
+    [SerializeField] private MonsterCharacter monsterCharacter;
 
     private void Start()
     {
@@ -34,9 +34,9 @@ public class OnDieEffect : MonoBehaviour
     [Button]
     public void OnDie()
     {
-        if (monsterCharacter == null || animatorBase == null) return;
         animatorBase.SetIsPlayDefaultAnimation(false);
         animatorBase.ChangeAnimation(AnimationType.Dying);
+        monsterCharacter.StopExecute();
         StartCoroutine(OnDieCoroutine());
         StartCoroutine(shakeEntityEffect.ShakeTransform());
     }
