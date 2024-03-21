@@ -55,6 +55,7 @@ public class UIStartGame : APanelController
         var level = PlayFabManager.Instance.Player.levelPlayer;
         _playerName.text = name;
         _levelPlayer.text = level.ToString();
+        Debug.Log($" _playerName.text: { name} ....  _playerName.level{level}");
     }
     
 }

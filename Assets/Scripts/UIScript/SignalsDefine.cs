@@ -1,4 +1,5 @@
 using deVoid.Utils;
+using UnityEngine;
 
 public class OpenUIGamePlay : ASignal
 {
@@ -66,4 +67,8 @@ public class OpenTest : ASignal
 public class OnLoginButtonClicked : ASignal <string,string>
 { 
 }
+public class SendMessageLoginRegister : ASignal <string,Color>
+{ 
+}
+
 
