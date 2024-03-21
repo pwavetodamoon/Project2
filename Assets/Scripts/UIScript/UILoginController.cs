@@ -33,7 +33,8 @@ public  class UILoginController : MonoBehaviour
         Signals.Get<OnLoginButtonClicked>().AddListener(OpenSceneStartGame);
         Signals.Get<ShowUINotificaltion>().AddListener(OpenUINotificaltion);
         Signals.Get<HideUINotificaltion>().AddListener(HideUINotification);
-        Signals.Get<SendMessage>().AddListener(LoginNotification);
+        Signals.Get<SendMessageLoginRegister>().AddListener(LoginNotification);
+        Signals.Get<SendMessageLoginRegister>().AddListener(RegisterNotification);
 
 
     }
@@ -42,7 +43,8 @@ public  class UILoginController : MonoBehaviour
         Signals.Get<OnLoginButtonClicked>().RemoveListener(OpenSceneStartGame);
         Signals.Get<ShowUINotificaltion>().RemoveListener(OpenUINotificaltion);
         Signals.Get<HideUINotificaltion>().RemoveListener(HideUINotification);
-        Signals.Get<SendMessage>().RemoveListener(LoginNotification);
+        Signals.Get<SendMessageLoginRegister>().RemoveListener(LoginNotification);
+        Signals.Get<SendMessageLoginRegister>().RemoveListener(RegisterNotification);
 
 
     }
@@ -63,6 +65,7 @@ public  class UILoginController : MonoBehaviour
     }
     public void RegisterNotification(string notification, Color color)
     {
+        Debug.Log("RegisterNotification");
         StartCoroutine(_uiLogin.HandleTextNotificaltion(notification,color));
     }
     public void LoginNotification(string notification, Color color)

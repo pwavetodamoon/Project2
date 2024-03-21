@@ -67,7 +67,7 @@ public class OpenTest : ASignal
 public class OnLoginButtonClicked : ASignal <string,string>
 { 
 }
-public class SendMessage : ASignal <string,Color>
+public class SendMessageLoginRegister : ASignal <string,Color>
 { 
 }
 

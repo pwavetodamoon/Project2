@@ -81,7 +81,6 @@ public class UILogin : APanelController
    {
       PlayFabManager.Instance.Register(_nameInputfieldRegister.text,_emailInputfieldRegister.text, _passWordlInputfieldRegister.text);
       _uIRegister.SetActive(false);
-    //  StartCoroutine(HandleTextNotificaltion("Register Successfull !"));
    }
    private IEnumerator HandleLoginButtonClicked()
    {

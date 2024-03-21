@@ -178,8 +178,7 @@ namespace PlayFab_System
             {
                 Debug.Log("test login is null");
                 var message = "Login Fail!";
-            //    UILoginController.Instance.LoginNotification("Login Fail Email or Password can not empty",Color.red);
-            Signals.Get<SendMessage>().Dispatch(message,Color.red);
+            Signals.Get<SendMessageLoginRegister>().Dispatch(message,Color.red);
             
             }
             else
@@ -191,9 +190,8 @@ namespace PlayFab_System
                 };
                 Player.email = request.Email;
                 Player.passWord = request.Password;
-            //    UILoginController.Instance.LoginNotification("Login Success ",Color.green);
                 var message = "Login Success!";
-                Signals.Get<SendMessage>().Dispatch(message,Color.green);
+                Signals.Get<SendMessageLoginRegister>().Dispatch(message,Color.green);
                 PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
                 SceneManager.LoadScene(ScreenIds.StartGameScene);
                  Debug.Log("LoginEnd");
@@ -216,14 +214,16 @@ namespace PlayFab_System
 
         private void OnRegisterFailure(PlayFabError obj)
         {
-          //  UILoginController.Instance.RegisterNotification("Register Failure !",Color.red);
             Debug.Log("Dang ky fail " +obj.GenerateErrorReport());
+            var message = "Register Fail!";
+            Signals.Get<SendMessageLoginRegister>().Dispatch(message,Color.red);
+
         }
 
         private void OnRegisterSuccess(RegisterPlayFabUserResult obj)
         {
-            Debug.Log("Dang ky thanh cong");
-           // UILoginController.Instance.RegisterNotification("Register Success !",Color.green);
+           var message = "Register Success!";
+           Signals.Get<SendMessageLoginRegister>().Dispatch(message,Color.green);
             SaveDataPlayer();
         }
 
