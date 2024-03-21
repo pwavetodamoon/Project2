@@ -6,7 +6,9 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using CombatSystem.Entity;
+using deVoid.Utils;
 using PlayFab_System;
+using Sirenix.OdinInspector;
 using SlotHero;
 
 
@@ -16,10 +18,11 @@ public class UIAvatarController : APanelController
     [SerializeField] private HeroCharacter _heroCharacter;
     [SerializeField] private HeroSlotUI _heroSlotUI;
     [Header("Buttons")]
-    [SerializeField] private Button _buttonLevelUp;
     [SerializeField] private Button _buttonSkill;
 
     [Header("Levels")]
+    [SerializeField] private Button _buttonLevelUp;
+    [SerializeField] private TextMeshProUGUI _coinText;
     [SerializeField] private Slider _sliderLevel;
     [SerializeField] private TextMeshProUGUI _textLevel;
 
@@ -38,18 +41,26 @@ public class UIAvatarController : APanelController
     {
         base.AddListeners();
         _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
+        Signals.Get<SendMoneyRequired>().AddListener(SetMoneyRequired);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
+        Signals.Get<SendMoneyRequired>().RemoveListener(SetMoneyRequired);
+
     }
     private void OnButtonLevelUpClicked()
     {
         //if button interact
         _gameManager.UpgradeHeroLevel(_heroCharacter);
     }
-    
+
+    private void SetMoneyRequired(int value)
+    {
+        _coinText.text = value.ToString();
+        Debug.Log("Click and money : " + _textLevel.text);
+    }
     public void SetSprite(Sprite newSprite)
     {
         _imageAvatar.sprite = newSprite;
@@ -59,7 +70,9 @@ public class UIAvatarController : APanelController
     {
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
+        _coinText.text = _gameManager.GetMoneyRequired(_heroCharacter).ToString();
     }
+    
 
     public HeroCharacter GetHeroCharacter()
     {
