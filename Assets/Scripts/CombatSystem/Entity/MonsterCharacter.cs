@@ -16,7 +16,7 @@ namespace CombatSystem.Entity
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
         protected EntityStateManager EntityStateManager;
         internal HealthBarDynamic healthBar;
-
+        public Vector2 HealthBarOffset;
         protected override void Awake()
         {
             base.Awake();
@@ -27,8 +27,9 @@ namespace CombatSystem.Entity
 
         private void Start()
         {
-            healthBar = HealthBarManager.Instance.GetHealthBars(this);
-
+            this.healthBar = HealthBarManager.Instance.GetHealthBars(this);
+            healthBar.offset = HealthBarOffset;
+            Debug.Log("Off set is: " + HealthBarOffset);
             attackControl.Create(monsterSingleAttackFactory);
         }
 
@@ -61,6 +62,10 @@ namespace CombatSystem.Entity
 
         public void KillMonster()
         {
+            if (healthBar != null)
+            {
+                Destroy(healthBar.gameObject);
+            }
             Destroy(gameObject);
         }
 

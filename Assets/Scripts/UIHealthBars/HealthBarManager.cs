@@ -28,7 +28,7 @@ public class HealthBarManager : Singleton<HealthBarManager>
             var slot = SlotManager.Instance.Slots[i];
             var healthBar = healthBars[i];
             healthBar.SetPosition(slot.GetCharacterPosition().position);
-            slot.healthBar = healthBar;
+            slot.SetHealthBar(healthBar);
         }
     }
     public HealthBarDynamic GetHealthBars(EntityCharacter entity)

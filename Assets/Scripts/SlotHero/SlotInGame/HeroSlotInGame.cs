@@ -12,7 +12,7 @@ namespace SlotHero.SlotInGame
         public HeroCharacter currentHero;
         public float radius;
         public int SlotIndex;
-        public HealthBarStatic healthBar;
+        private HealthBarStatic healthBar;
         private ShadowColor ShadowColor;
 
         private Character_Body_Sprites sprites;
@@ -21,7 +21,10 @@ namespace SlotHero.SlotInGame
         {
             ShadowColor = GetComponent<ShadowColor>();
         }
-
+        public void SetHealthBar(HealthBarStatic healthBar)
+        {
+            this.healthBar = healthBar;
+        }
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
