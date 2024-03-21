@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,19 +26,6 @@ public class HealthBarDynamic : HealthBarBase
             var position = target.transform.position;
             transform.position = new Vector2(position.x + offset.x, position.y + offset.y);
         }
-    }
-    public override void SetHealthBar(float value)
-    {
-        if (value < 0)
-        {
-            value = 0;
-        }
-        if (value > 1)
-        {
-            value = 1;
-        }
-        Debug.Log(value);
-        fill.fillAmount = value;
     }
     private void Destroy()
     {

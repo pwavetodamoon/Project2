@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterSingleAttackFactory: {fileID: 11400000, guid: b6ae625281bd123469495f8666d47870, type: 2}
-  HealthBarOffset: {x: 0, y: 1}
+  HealthBarOffset: {x: 0, y: 1.2}
 --- !u!61 &321570569799733358
 BoxCollider2D:
   m_ObjectHideFlags: 0
