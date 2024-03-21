@@ -22,18 +22,25 @@ public class GameManager : MonoBehaviour
     public void UpgradeHeroLevel(HeroCharacter heroCharacter)
     {
         HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
-        var moneyRequired = _levelConfig.GetMoneyRequired(_heroEntityStats.Level());
+        var moneyRequired = GetMoneyLevelRequired(heroCharacter);
         if (_currencyManager.currency >= Convert.ToInt32(moneyRequired))
         {
             Debug.Log("Upgrade Level");
           _currencyManager.currency -= Convert.ToInt32(moneyRequired);
           _heroEntityStats.Upgrade();
+          Signals.Get<SendMoneyLevelRequired>().Dispatch(GetMoneyLevelRequired(heroCharacter));
         }
         else
         {
             Debug.Log("Can not Upgrade");
             Debug.Log("moneyRequired:" + moneyRequired);
         }
+    }
+
+    public int GetMoneyLevelRequired(HeroCharacter heroCharacter)
+    {
+        HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
+        return Convert.ToInt32(_levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
 
 }

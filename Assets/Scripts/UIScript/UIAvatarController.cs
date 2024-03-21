@@ -41,13 +41,13 @@ public class UIAvatarController : APanelController
     {
         base.AddListeners();
         _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
-        Signals.Get<SendMoneyRequired>().AddListener(SetMoneyRequired);
+        Signals.Get<SendMoneyLevelRequired>().AddListener(SetMoneyRequired);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
-        Signals.Get<SendMoneyRequired>().RemoveListener(SetMoneyRequired);
+        Signals.Get<SendMoneyLevelRequired>().RemoveListener(SetMoneyRequired);
 
     }
     private void OnButtonLevelUpClicked()
@@ -70,7 +70,7 @@ public class UIAvatarController : APanelController
     {
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
-        _coinText.text = _gameManager.GetMoneyRequired(_heroCharacter).ToString();
+        _coinText.text = _gameManager.GetMoneyLevelRequired(_heroCharacter).ToString();
     }
     
 

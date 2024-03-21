@@ -73,7 +73,7 @@ public class SendMessageLoginRegister : ASignal <string,Color>
 public class SendCurrency : ASignal <int>
 { 
 }
-public class SendMoneyRequired : ASignal <int>
+public class SendMoneyLevelRequired : ASignal <int>
 { 
 }
 
