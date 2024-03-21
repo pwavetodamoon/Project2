@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using CombatSystem.Entity;
+using Core.Currency;
 using deVoid.Utils;
 using PlayFab_System;
 using Sirenix.OdinInspector;
@@ -38,7 +39,18 @@ public class UIAvatarController : APanelController
         _gameManager = FindObjectOfType<GameManager>();
     }
 
-  
+
+    private void Update()
+    {
+        if (CurrencyManager.Instance.currency >= _gameManager.GetMoneyLevelRequired(_heroCharacter))
+        {
+            _buttonLevelUp.interactable = true;
+        }
+        else
+        {
+            _buttonLevelUp.interactable = false;
+        }
+    }
 
     protected override void AddListeners()
     {
@@ -56,13 +68,18 @@ public class UIAvatarController : APanelController
     private void OnButtonLevelUpClicked()
     {
         //if button interact
-        _gameManager.UpgradeHeroLevel(_heroCharacter);
+        Debug.Log("onclick");
+        if (_buttonLevelUp.interactable == true)
+        {
+            _gameManager.UpgradeHeroLevel(_heroCharacter);
+        }return;
+        
     }
 
-    private void SetMoneyLevelRequired(int value)
+    private void SetMoneyLevelRequired(int value )
     {
         _coinText.text = value.ToString();
-        Debug.Log("Click and money : " + _textLevel.text);
+        Debug.Log("Click and money : " + _coinText.text);
     }
     public void SetSprite(Sprite newSprite)
     {

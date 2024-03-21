@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
           _currencyManager.currency -= Convert.ToInt32(moneyRequired);
           _heroEntityStats.Upgrade();
           Signals.Get<SendMoneyLevelRequired>().Dispatch(Convert.ToInt32(_levelConfig.GetMoneyRequired(_heroEntityStats.Level())));
-          // Debug.Log("money Level : " + GetMoneyLevelRequired(_heroEntityStats));
-
         }
         else
         {
@@ -44,5 +42,6 @@ public class GameManager : MonoBehaviour
         HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
         return Convert.ToInt32( _levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
+    
 
 }

@@ -1,3 +1,4 @@
+using CombatSystem.Entity;
 using CombatSystem.HeroDataManager.Data;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace LevelAndStats
         {
             structStats = heroData.structStats;
         }
-        public void Upgrade()
+        public void Upgrade(  )
         {
             structStats.level += 1;
             structStats.baseDamage += 1.0f;
