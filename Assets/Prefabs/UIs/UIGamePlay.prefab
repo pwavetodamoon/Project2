@@ -498,7 +498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4213,6 +4213,7 @@ MonoBehaviour:
   _uISlot: {fileID: 5847700299486281008}
   _tourTimeLine: {fileID: 8066623640476472146}
   ButtonShowMainMenu: {fileID: 7262869088007086193}
+  _cointText: {fileID: 1650570925080177756}
 --- !u!1 &8558470796656955359
 GameObject:
   m_ObjectHideFlags: 0

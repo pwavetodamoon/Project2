@@ -37,17 +37,20 @@ public class UIAvatarController : APanelController
         _heroSlotUI = GetComponent<HeroSlotUI>();
         _gameManager = FindObjectOfType<GameManager>();
     }
+
+  
+
     protected override void AddListeners()
     {
         base.AddListeners();
         _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
-        Signals.Get<SendMoneyLevelRequired>().AddListener(SetMoneyLevelRequired);
+      Signals.Get<SendMoneyLevelRequired>().AddListener(SetMoneyLevelRequired);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
-        Signals.Get<SendMoneyLevelRequired>().RemoveListener(SetMoneyLevelRequired);
+       Signals.Get<SendMoneyLevelRequired>().RemoveListener(SetMoneyLevelRequired);
 
     }
     private void OnButtonLevelUpClicked()
@@ -70,7 +73,7 @@ public class UIAvatarController : APanelController
     {
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
-        _coinText.text = _gameManager.GetMoneyLevelRequired(_heroCharacter).ToString();
+        _coinText.text = _gameManager.GetMoneyLevelRequired(heroCharacter).ToString();
     }
     
 

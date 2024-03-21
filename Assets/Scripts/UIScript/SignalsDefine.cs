@@ -1,3 +1,4 @@
+using CombatSystem.Entity;
 using deVoid.Utils;
 using UnityEngine;
 
