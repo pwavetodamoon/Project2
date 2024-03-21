@@ -82,6 +82,7 @@ namespace PlayFab_System
         public void SaveDataPlayer()
         {
             Debug.Log("save");
+            Player.gold += currencyManager.currency;
             var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
