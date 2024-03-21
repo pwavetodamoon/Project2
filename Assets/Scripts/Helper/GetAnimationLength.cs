@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Helper
@@ -6,9 +7,14 @@ namespace Helper
     {
         public float length => RefreshLength();
 
+        [Button]
         public float RefreshLength()
         {
             var animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                animator = GetComponentInChildren<Animator>();
+            }
             var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             var clip = clipInfo[0].clip;
             var length = clip.length;

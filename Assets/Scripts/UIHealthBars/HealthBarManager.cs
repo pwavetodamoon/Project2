@@ -28,12 +28,13 @@ public class HealthBarManager : Singleton<HealthBarManager>
             var slot = SlotManager.Instance.Slots[i];
             var healthBar = healthBars[i];
             healthBar.SetPosition(slot.GetCharacterPosition().position);
-            slot.healthBar = healthBar;
+            slot.SetHealthBar(healthBar);
         }
     }
-    public void GetHealthBars(EntityCharacter entity)
+    public HealthBarDynamic GetHealthBars(EntityCharacter entity)
     {
         var healthBar = Instantiate(healthBarPrefab, transform);
         healthBar.SetTarget(entity);
+        return healthBar;
     }
 }

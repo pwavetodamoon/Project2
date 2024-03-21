@@ -16,6 +16,8 @@ namespace CombatSystem.Attack.Far
         private bool IsProjectileHitEnemy;
         private WaitForSeconds waitForEndAnim;
         private WaitUntil waitUntilCanCauseDamage;
+        private WaitUntil waitUntilShootDone;
+        private ShootDetect shootDetect;
 
         public HeroFarAttack(ProjectileType type)
         {
@@ -26,17 +28,25 @@ namespace CombatSystem.Attack.Far
         protected override IEnumerator StartBehavior()
         {
             AudioManager.Instance.PlaySFX("Far Attack");
-            PlayAnimation(AnimationType.Attack);
+            var attackTransform = BowAttackTransform;
+            if (type == ProjectileType.Arrow)
+            {
+                PlayAnimation(AnimationType.Shooting);
+            }
+            else
+            {
+                PlayAnimation(AnimationType.Attack);
+                attackTransform = MagicAttackTransform;
+            }
 
-            yield return waitForEndAnim;
+            yield return waitUntilShootDone;
             if (Enemy == null) yield break;
-            var projectile = SpawnProjectile(Enemy);
+            var projectile = SpawnProjectile(Enemy, attackTransform);
             if (projectile == null) yield break;
-
             yield return waitUntilCanCauseDamage;
-
             CauseDamage();
             IsProjectileHitEnemy = false;
+            shootDetect.ResetShoot();
         }
 
         protected override string GetEnemyTag()
@@ -44,10 +54,10 @@ namespace CombatSystem.Attack.Far
             return GameTag.Enemy;
         }
 
-        protected ProjectileBase SpawnProjectile(EntityCharacter monster)
+        protected ProjectileBase SpawnProjectile(EntityCharacter monster, Transform attackTransform)
         {
             var projectile = PrefabAttackFactoryPool.Instance.Get(type);
-            projectile.transform.position = AttackTransform.position;
+            projectile.transform.position = attackTransform.position;
             projectile.RegisterOnEndVfx(AllowGoNextStep);
             projectile.Initialized(monster.transform, GameTag.Enemy);
             return projectile;
@@ -62,8 +72,9 @@ namespace CombatSystem.Attack.Far
             Transform attackTransform = null)
         {
             base.GetReference(newEntityCharacter, attackTransform);
-
+            waitUntilShootDone = new WaitUntil(() => shootDetect.ShootDone);
             waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
+            shootDetect = animator.GetComponent<ShootDetect>();
             waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
         }
     }

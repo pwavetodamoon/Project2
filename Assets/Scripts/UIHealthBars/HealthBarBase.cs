@@ -8,12 +8,18 @@ using UnityEngine;
 using UnityEngine.UI;
 public abstract class HealthBarBase : MonoBehaviour
 {
+    public Image fill;
+    public Image border;
     private void Awake()
     {
         SetFade(0, 0f);
     }
-    public Image fill;
-    public Image border;
+
+    private void OnDisable()
+    {
+        transform.DOKill();
+    }
+
     [Button]
     public void FadeColor()
     {
@@ -45,6 +51,8 @@ public abstract class HealthBarBase : MonoBehaviour
         {
             value = 1;
         }
-        fill.fillAmount = value;
+        transform.DOKill();
+        transform.DOPunchScale(Vector3.one * .1f, .2f);
+        fill.DOFillAmount(value, .2f);
     }
 }

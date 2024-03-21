@@ -16,17 +16,18 @@ namespace CombatSystem.Attack.Abstracts
     {
         [SerializeField] protected bool isActive;
 
-        protected Transform AttackTransform;
-        protected EntityStats EntityStats;
-        protected EntityCharacter Enemy;
-        protected Animator_Base animator;
-        protected IAttackerCounter IAttackerCounter;
+        [SerializeField] protected Transform BowAttackTransform;
+        [SerializeField] protected Transform MagicAttackTransform;
+        [SerializeField] protected EntityStats EntityStats;
+        [SerializeField] protected EntityCharacter Enemy;
+        [SerializeField] protected Animator_Base animator;
+        [SerializeField] protected IAttackerCounter IAttackerCounter;
 
         [Header("Entity Characters Field")] protected EntityCharacter entityCharacter;
 
         private float WaitTimeToFindEnemy = 0.1f;
 
-        private AttackManager attackManager;
+        [SerializeField] private AttackManager attackManager;
         public bool IsActive => isActive;
         public bool IsValidate { get; private set; }
         private Action onEndAttack;
@@ -38,7 +39,7 @@ namespace CombatSystem.Attack.Abstracts
             EntityStats = entityCharacter.GetEntityStats();
             attackManager = entityCharacter.GetAttackManager();
             animator = entityCharacter.GetAnimatorBase();
-            AttackTransform = attackTransform;
+            BowAttackTransform = attackTransform;
             IsValidate = true;
         }
         protected abstract string GetEnemyTag();
@@ -46,11 +47,19 @@ namespace CombatSystem.Attack.Abstracts
 
         public void SetOnEndAttackCallBack(Action callback) => onEndAttack = callback;
 
-        public void SetAttackTransform(Transform newTransform) => AttackTransform = newTransform;
+        public void SetAttackTransform(Transform bowAttackTransform, Transform magicAttackTransform)
+        {
+            BowAttackTransform = bowAttackTransform;
+            MagicAttackTransform = magicAttackTransform;
+        }
 
         protected void IncreaseAttackerCount() => IAttackerCounter?.IncreaseAttackerCount(EntityStats);
 
-        private bool IsEnemyAlive() => CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag());
+        private bool IsEnemyAlive()
+        {
+            Debug.Log($"{entityCharacter.name}:Ask IsEnemyAlive: {CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag())}");
+            return CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag());
+        }
 
         protected void PlayAnimation(Enum AnimationEnum)
         {
@@ -65,6 +74,7 @@ namespace CombatSystem.Attack.Abstracts
         }
         public IEnumerator ExecuteAttack()
         {
+            Debug.Log("Coroutine ExecuteAttack");
             if (isActive || !TryFindEnemy())
             {
                 yield return WaitAndContinue();
@@ -78,7 +88,7 @@ namespace CombatSystem.Attack.Abstracts
         {
             if (!IsEnemyAlive()) return false;
             Enemy = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GetEnemyTag());
-            //Debug.Log("Try find enemy",Enemy);
+            // Debug.Log($"{entityCharacter.name}: Try find enemy:", Enemy);
             return true;
         }
 
@@ -94,8 +104,8 @@ namespace CombatSystem.Attack.Abstracts
             if (CanExecuteAttack())
             {
                 yield return StartBehavior();
-                ResetStateAndCounter();
             }
+            ResetStateAndCounter();
         }
 
         protected virtual void ResetStateAndCounter()

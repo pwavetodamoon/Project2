@@ -18,6 +18,7 @@ namespace CombatSystem
 
         public int GetHeroCount()
         {
+            if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return 0;
             return entitiesByTag[GameTag.Hero].Count;
         }
 
