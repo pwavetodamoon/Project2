@@ -70,5 +70,8 @@ public class OnLoginButtonClicked : ASignal <string,string>
 public class SendMessageLoginRegister : ASignal <string,Color>
 { 
 }
+public class SendCurrency : ASignal <int>
+{ 
+}
 
 

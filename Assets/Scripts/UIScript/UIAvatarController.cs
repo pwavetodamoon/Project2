@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using CombatSystem.Entity;
-using PlayFab_System;
+using Core.Currency;
 using SlotHero;
 
 
@@ -16,10 +14,11 @@ public class UIAvatarController : APanelController
     [SerializeField] private HeroCharacter _heroCharacter;
     [SerializeField] private HeroSlotUI _heroSlotUI;
     [Header("Buttons")]
-    [SerializeField] private Button _buttonLevelUp;
     [SerializeField] private Button _buttonSkill;
 
     [Header("Levels")]
+    [SerializeField] private Button _buttonLevelUp;
+    [SerializeField] private TextMeshProUGUI _coinText;
     [SerializeField] private Slider _sliderLevel;
     [SerializeField] private TextMeshProUGUI _textLevel;
 
@@ -34,6 +33,20 @@ public class UIAvatarController : APanelController
         _heroSlotUI = GetComponent<HeroSlotUI>();
         _gameManager = FindObjectOfType<GameManager>();
     }
+
+
+    private void Update()
+    {
+        if (CurrencyManager.Instance.currency >= _gameManager.GetMoneyLevelRequired(_heroCharacter))
+        {
+            _buttonLevelUp.interactable = true;
+        }
+        else
+        {
+            _buttonLevelUp.interactable = false;
+        }
+    }
+
     protected override void AddListeners()
     {
         base.AddListeners();
@@ -43,13 +56,24 @@ public class UIAvatarController : APanelController
     {
         base.RemoveListeners();
         _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
+
     }
     private void OnButtonLevelUpClicked()
     {
         //if button interact
-        _gameManager.UpgradeHeroLevel(_heroCharacter);
+        Debug.Log("onclick");
+        if (_buttonLevelUp.interactable == true)
+        {
+            _gameManager.UpgradeHeroLevel(_heroCharacter,_coinText);
+        }return;
+        
     }
-    
+
+    private void SetMoneyLevelRequired(int value )
+    {
+        _coinText.text = value.ToString();
+        Debug.Log("Click and money : " + _coinText.text);
+    }
     public void SetSprite(Sprite newSprite)
     {
         _imageAvatar.sprite = newSprite;
@@ -59,7 +83,9 @@ public class UIAvatarController : APanelController
     {
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
+        _coinText.text = _gameManager.GetMoneyLevelRequired(_heroCharacter).ToString();
     }
+    
 
     public HeroCharacter GetHeroCharacter()
     {

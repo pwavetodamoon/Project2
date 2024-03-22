@@ -24,13 +24,13 @@ MonoBehaviour:
   AttackType: 0
   characterEnumType: 4
   HeroSingleAttackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
-  slotIndex: -1
+  slotIndex: 1
   heroName: Quang 2
   eyeSprites:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  isDead: 0
+  isDead: 1
   heroCharacter: {fileID: 0}
   structStats:
     level: 1

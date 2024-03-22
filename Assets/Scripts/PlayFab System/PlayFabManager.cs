@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using CombatSystem.HeroDataManager.Data;
 using Core.Currency;
-using Core.Quest;
 using deVoid.Utils;
 using Helper;
 using PlayFab;
@@ -82,6 +80,7 @@ namespace PlayFab_System
         public void SaveDataPlayer()
         {
             Debug.Log("save");
+            Player.gold += currencyManager.currency;
             var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>

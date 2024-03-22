@@ -1,14 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using CombatSystem.Entity;
 using Core.Currency;
 using UnityEngine;
-using deVoid;
-using deVoid.Utils;
 using LevelAndStats;
-using Unity.VisualScripting;
-
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private LevelConfig _levelConfig;
@@ -18,16 +13,15 @@ public class GameManager : MonoBehaviour
         _currencyManager = FindObjectOfType<CurrencyManager>();
         Application.targetFrameRate = 60;
     }
-
-    public void UpgradeHeroLevel(HeroCharacter heroCharacter)
+    public void UpgradeHeroLevel(HeroCharacter heroCharacter , TextMeshProUGUI textMeshProUGUI)
     {
         HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
-        var moneyRequired = _levelConfig.GetMoneyRequired(_heroEntityStats.Level());
+        var moneyRequired =_levelConfig.GetMoneyRequired(_heroEntityStats.Level());
         if (_currencyManager.currency >= Convert.ToInt32(moneyRequired))
         {
-            Debug.Log("Upgrade Level");
-          _currencyManager.currency -= Convert.ToInt32(moneyRequired);
-          _heroEntityStats.Upgrade();
+            _currencyManager.currency -= Convert.ToInt32(moneyRequired);
+            _heroEntityStats.Upgrade();
+            textMeshProUGUI.text = _levelConfig.GetMoneyRequired(_heroEntityStats.Level()).ToString();
         }
         else
         {
@@ -36,4 +30,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int GetMoneyLevelRequired(HeroCharacter heroCharacter)
+    {
+        HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
+        return Convert.ToInt32( _levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
+    }
 }
