@@ -39,9 +39,7 @@ public class UIGamePlay : APanelController
         base.RemoveListeners();
         ButtonShowDPS.onClick.RemoveListener(ShowDPS);
         ButtonShowMainMenu.onClick.RemoveListener(ShowMainMenu);
-        Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
-
-
+         Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
     }
 
     private void ShowDPS()
@@ -55,6 +53,7 @@ public class UIGamePlay : APanelController
 
     public void SetCoinText(int value)
     {
+        Debug.Log(("SetCoinText"));
         _cointText.text = value.ToString();
     }
     // private void HideDPS()

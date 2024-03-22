@@ -1,14 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using CombatSystem.Entity;
-using deVoid.Utils;
-using PlayFab_System;
-using Sirenix.OdinInspector;
+using Core.Currency;
 using SlotHero;
 
 
@@ -38,31 +34,45 @@ public class UIAvatarController : APanelController
         _gameManager = FindObjectOfType<GameManager>();
     }
 
-  
+
+    private void Update()
+    {
+        if (CurrencyManager.Instance.currency >= _gameManager.GetMoneyLevelRequired(_heroCharacter))
+        {
+            _buttonLevelUp.interactable = true;
+        }
+        else
+        {
+            _buttonLevelUp.interactable = false;
+        }
+    }
 
     protected override void AddListeners()
     {
         base.AddListeners();
         _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
-      Signals.Get<SendMoneyLevelRequired>().AddListener(SetMoneyLevelRequired);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
-       Signals.Get<SendMoneyLevelRequired>().RemoveListener(SetMoneyLevelRequired);
 
     }
     private void OnButtonLevelUpClicked()
     {
         //if button interact
-        _gameManager.UpgradeHeroLevel(_heroCharacter);
+        Debug.Log("onclick");
+        if (_buttonLevelUp.interactable == true)
+        {
+            _gameManager.UpgradeHeroLevel(_heroCharacter,_coinText);
+        }return;
+        
     }
 
-    private void SetMoneyLevelRequired(int value)
+    private void SetMoneyLevelRequired(int value )
     {
         _coinText.text = value.ToString();
-        Debug.Log("Click and money : " + _textLevel.text);
+        Debug.Log("Click and money : " + _coinText.text);
     }
     public void SetSprite(Sprite newSprite)
     {
@@ -73,7 +83,7 @@ public class UIAvatarController : APanelController
     {
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
-        _coinText.text = _gameManager.GetMoneyLevelRequired(heroCharacter).ToString();
+        _coinText.text = _gameManager.GetMoneyLevelRequired(_heroCharacter).ToString();
     }
     
 
