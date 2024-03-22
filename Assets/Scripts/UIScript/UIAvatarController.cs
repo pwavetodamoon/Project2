@@ -90,7 +90,7 @@ public class UIAvatarController : APanelController
     {
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
-        _coinText.text = _gameManager.GetMoneyLevelRequired(heroCharacter).ToString();
+        _coinText.text = _gameManager.GetMoneyLevelRequired(_heroCharacter).ToString();
     }
     
 
