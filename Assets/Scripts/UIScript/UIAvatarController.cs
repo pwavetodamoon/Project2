@@ -1,15 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using deVoid.UIFramework;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using CombatSystem.Entity;
 using Core.Currency;
-using deVoid.Utils;
-using PlayFab_System;
-using Sirenix.OdinInspector;
 using SlotHero;
 
 
@@ -56,13 +51,11 @@ public class UIAvatarController : APanelController
     {
         base.AddListeners();
         _buttonLevelUp.onClick.AddListener(OnButtonLevelUpClicked);
-      Signals.Get<SendMoneyLevelRequired>().AddListener(SetMoneyLevelRequired);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         _buttonLevelUp.onClick.RemoveListener(OnButtonLevelUpClicked);
-       Signals.Get<SendMoneyLevelRequired>().RemoveListener(SetMoneyLevelRequired);
 
     }
     private void OnButtonLevelUpClicked()
@@ -71,7 +64,7 @@ public class UIAvatarController : APanelController
         Debug.Log("onclick");
         if (_buttonLevelUp.interactable == true)
         {
-            _gameManager.UpgradeHeroLevel(_heroCharacter);
+            _gameManager.UpgradeHeroLevel(_heroCharacter,_coinText);
         }return;
         
     }
