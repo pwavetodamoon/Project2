@@ -30,13 +30,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  isDead: 1
+  isDead: 0
   heroCharacter: {fileID: 0}
   structStats:
     level: 1
     maxHealth: 100
     health: 100
-    baseDamage: 60
+    baseDamage: 61
     speed: 3
     critRate: 0
     critDamage: 0

@@ -30,13 +30,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 584ec87fe94932f45b277fc4e0d285a5, type: 3}
   - {fileID: 21300000, guid: 0f704bc0f0946f147806a2109f484205, type: 3}
   - {fileID: 21300000, guid: eb7f7443645c20849a75e751c08ac75e, type: 3}
-  isDead: 1
+  isDead: 0
   heroCharacter: {fileID: 0}
   structStats:
     level: 1
     maxHealth: 100
-    health: 0
-    baseDamage: 60
+    health: 100
+    baseDamage: 61
     speed: 3
     critRate: 0
     critDamage: 0

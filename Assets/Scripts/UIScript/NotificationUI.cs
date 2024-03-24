@@ -19,7 +19,7 @@ public class NotificationUI : APanelController
    {
       _textNotification.text = "Coming Soon...";
       _transformsGameObjArrays = new [] { _textNotification.transform, _backGround.transform, _buttonOkay.transform};
-      UIAnim.ZoomInScale(_transformsGameObjArrays);
+      UIAnim.ZoomInScaleUIArray(_transformsGameObjArrays);
 
    }
    protected override void AddListeners()
@@ -41,7 +41,7 @@ public class NotificationUI : APanelController
       if (gameObject.activeSelf)
       {
          Debug.Log("true");
-         UIAnim.ZoomInScale(_transformsGameObjArrays);
+         UIAnim.ZoomInScaleUIArray(_transformsGameObjArrays);
       }
    }
    private void OnButtonOkayClicked( )
