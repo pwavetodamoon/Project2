@@ -1,6 +1,7 @@
 using System;
 using CombatSystem.Entity;
 using Core.Currency;
+using Effects.Skill;
 using UnityEngine;
 using LevelAndStats;
 using TMPro;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         if (_currencyManager.currency >= Convert.ToInt32(moneyRequired))
         {
             _currencyManager.currency -= Convert.ToInt32(moneyRequired);
+            heroCharacter.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(EffectSkillsEnum.UpgradeEffect);
             _heroEntityStats.Upgrade();
             textMeshProUGUI.text = _levelConfig.GetMoneyRequired(_heroEntityStats.Level()).ToString();
         }

@@ -36,7 +36,7 @@ public class UILogin : APanelController
    private void Start()
    {
       _buttons = new Transform[] { _loginButton.transform, _homeButton.transform, _howToPlayButton.transform, _aboutUsButton.transform };
-    UIAnim.ZoomInScale(_buttons);
+    UIAnim.ZoomInScaleUIArray(_buttons);
    }
 
    protected override void AddListeners()

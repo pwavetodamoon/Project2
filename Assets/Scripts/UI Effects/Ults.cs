@@ -7,7 +7,7 @@ namespace HHP.Ults.UIAnim
 {
     public static class UIAnim
     {
-        public static void ZoomInScale<T>(T[] obj) where T : Transform
+        public static void ZoomInScaleUIArray<T>(T[] obj) where T : Transform
         {
             foreach (Transform item in obj)
             {
@@ -56,6 +56,14 @@ namespace HHP.Ults.UIAnim
                 {
                     gameObjRectTransform.DOKill();
                 }); 
+        }
+        public static void MoveUIToTarget(Transform gameObjTransform ,Transform targetTransForm)
+        {
+                gameObjTransform.DOMove(targetTransForm.transform.position,0.5f).SetEase(Ease.Linear)
+                    .OnComplete(() =>
+                    {
+                        gameObjTransform.DOKill();
+                    });       
         }
         public static void MoveUIFormLeft(RectTransform gameObjRectTransform)
         {
