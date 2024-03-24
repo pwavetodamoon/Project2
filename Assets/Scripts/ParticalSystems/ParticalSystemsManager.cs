@@ -5,7 +5,6 @@ using UnityEngine;
 public class ParticalSystemsManager : MonoBehaviour
 {
    [SerializeField] private List<ParticleSystem> _listParticalSystems;
- 
    public void FindAndPlayEffect(EffectSkillsEnum effectSkillsEnum)
    {
       for (int i = 0; i < _listParticalSystems.Count; i++)
@@ -17,5 +16,4 @@ public class ParticalSystemsManager : MonoBehaviour
          }
       }
    }
-
 }
