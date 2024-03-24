@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Core.Currency;
 using deVoid.Utils;
 using Helper;
@@ -23,7 +24,7 @@ namespace PlayFab_System
         public StageInformation stageInformation;
 
         private static PlayFabManager _instance;
-
+        private TaskCompletionSource<bool> dataReceivedTaskCompletionSource;
         // Getter cho instance
         private void OnValidate()
         {
@@ -71,11 +72,21 @@ namespace PlayFab_System
             // GameLevelControl.Instance.LoadToCurrentMap();
         }
         [Button]
-        public void GetDataPlayer()
+        private async Task GetDataPlayerAsync()
         {
-            PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnRevcievedData, OnDataSendError);
-        }
 
+             dataReceivedTaskCompletionSource = new TaskCompletionSource<bool>();
+
+            var request = new GetUserDataRequest();
+            PlayFabClientAPI.GetUserData(request, OnRevicedData, OnDataSendError);
+
+            await dataReceivedTaskCompletionSource.Task;
+        }
+        private async void LoadStartGameSceneAfterDataReceived()
+        {
+            await GetDataPlayerAsync();
+            SceneManager.LoadScene(ScreenIds.StartGameScene);
+        }
         [Button]
         public void SaveDataPlayer()
         {
@@ -126,7 +137,7 @@ namespace PlayFab_System
             }, result => { Debug.Log("Save data success!"); },
                 error => { Debug.LogError("Fail to save data: " + error.ErrorMessage); });
         }
-        private void OnRevcievedData(GetUserDataResult result)
+        private void OnRevicedData(GetUserDataResult result)
         {
             if (result.Data == null || !result.Data.ContainsKey("Email"))
             {
@@ -141,7 +152,7 @@ namespace PlayFab_System
             Player.levelPlayer = int.Parse(result.Data["Level"].Value);
             Player.gold = int.Parse(result.Data["Gold"].Value);
             Player.heroSaveList.Load(result.Data["HeroData"].Value);
-            
+            dataReceivedTaskCompletionSource.SetResult(true);
             // testfunc.ConvertJsonBack(result.Data["Hero Data"].Value);
             // stageInformation.currentStageIndex = int.Parse(result.Data["StageIndex"].Value);
             // stageInformation.currentMapIndex = int.Parse(result.Data["MapIndex"].Value);
@@ -192,7 +203,6 @@ namespace PlayFab_System
                 var message = "Login Success!";
                 Signals.Get<SendMessageLoginRegister>().Dispatch(message,Color.green);
                 PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnLoginFailure);
-                SceneManager.LoadScene(ScreenIds.StartGameScene);
                  Debug.Log("LoginEnd");
             }
         }
@@ -229,7 +239,7 @@ namespace PlayFab_System
         private void OnLoginSuccess(LoginResult obj)
         {
             Debug.Log("Congratulations, you made your first successful API call!");
-            GetDataPlayer();
+            LoadStartGameSceneAfterDataReceived();
         }
 
         private void OnLoginFailure(PlayFabError obj)

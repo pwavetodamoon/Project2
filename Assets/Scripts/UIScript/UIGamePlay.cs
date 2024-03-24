@@ -12,12 +12,22 @@ public class UIGamePlay : APanelController
     public Button ButtonShowDPS;
     public Button ButtonHidesDPS;
     [SerializeField] private RectTransform _dFSArea;
-    [SerializeField] private RectTransform _uISlot;
     [SerializeField] private RectTransform _tourTimeLine;
+
+    [Header("UISlot Zone")]
+    [SerializeField] private RectTransform _uISlot;
+    [SerializeField] private Transform _currentTransform;
+    [SerializeField] private Transform _targetTransform;
     [Header("Button")]
     [SerializeField] private Button ButtonShowMainMenu;
+    [SerializeField] private Button _buttonUiSlot;
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI _cointText;
+    [Header("Sprite")]
+    [SerializeField] private Sprite _spriteOnButtonUiSlotl;
+    [SerializeField] private Sprite _spriteOffButtonUiSlotl;
 
-    [Header("Text")] [SerializeField] private TextMeshProUGUI _cointText;
+    private bool isShowUiSlots = true ;
 
     private void Start()
     {
@@ -31,6 +41,7 @@ public class UIGamePlay : APanelController
         base.AddListeners();
         ButtonShowDPS.onClick.AddListener(ShowDPS);
         ButtonShowMainMenu.onClick.AddListener(ShowMainMenu);
+        _buttonUiSlot.onClick.AddListener(ShowHideUiSlot);
         Signals.Get<SendCurrency>().AddListener(SetCoinText);
     }
 
@@ -39,7 +50,8 @@ public class UIGamePlay : APanelController
         base.RemoveListeners();
         ButtonShowDPS.onClick.RemoveListener(ShowDPS);
         ButtonShowMainMenu.onClick.RemoveListener(ShowMainMenu);
-         Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
+        _buttonUiSlot.onClick.RemoveListener(ShowHideUiSlot);
+        Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
     }
 
     private void ShowDPS()
@@ -51,6 +63,27 @@ public class UIGamePlay : APanelController
         Signals.Get<OpenUIMainMenu>().Dispatch();
     }
 
+    private void ShowHideUiSlot()
+    {
+        if (isShowUiSlots == true)
+        {
+            isShowUiSlots = false;
+            _buttonUiSlot.image.sprite = _spriteOnButtonUiSlotl;
+            Debug.Log("isShowUiSlots1: " +isShowUiSlots);
+            UIAnim.MoveUIDownCustom(_uISlot.transform, _targetTransform);
+
+        }
+        
+        else
+        {
+            isShowUiSlots = true;
+          _buttonUiSlot.image.sprite = _spriteOffButtonUiSlotl;
+          Debug.Log("isShowUiSlots2: " +isShowUiSlots);
+          UIAnim.MoveUIDownCustom(_uISlot.transform, _currentTransform);
+        
+        }
+     //   Debug.Log("value : " + -300f );
+    }
     public void SetCoinText(int value)
     {
         Debug.Log(("SetCoinText"));

@@ -57,6 +57,14 @@ namespace HHP.Ults.UIAnim
                     gameObjRectTransform.DOKill();
                 }); 
         }
+        public static void MoveUIToTarget(Transform gameObjTransform ,Transform targetTransForm)
+        {
+                gameObjTransform.DOMove(targetTransForm.transform.position,0.5f).SetEase(Ease.Linear)
+                    .OnComplete(() =>
+                    {
+                        gameObjTransform.DOKill();
+                    });       
+        }
         public static void MoveUIFormLeft(RectTransform gameObjRectTransform)
         {
             Vector3 currentPos = gameObjRectTransform.transform.position;
