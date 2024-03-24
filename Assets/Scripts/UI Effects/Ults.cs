@@ -7,7 +7,7 @@ namespace HHP.Ults.UIAnim
 {
     public static class UIAnim
     {
-        public static void ZoomInScale<T>(T[] obj) where T : Transform
+        public static void ZoomInScaleUIArray<T>(T[] obj) where T : Transform
         {
             foreach (Transform item in obj)
             {
