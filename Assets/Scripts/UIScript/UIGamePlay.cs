@@ -82,12 +82,12 @@ public class UIGamePlay : APanelController
           UIAnim.MoveUIToTarget(_uISlot.transform, _currentTransform);
         
         }
-     //   Debug.Log("value : " + -300f );
     }
     public void SetCoinText(int value)
     {
         Debug.Log(("SetCoinText"));
         _cointText.text = value.ToString();
+        UIAnim.ZoomInOutScale(_cointText.transform);
     }
     // private void HideDPS()
     // {

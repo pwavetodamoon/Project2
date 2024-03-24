@@ -81,7 +81,7 @@ public class UIStartGame : APanelController
     {
         await GetInfoPlayerAsync();
         _uiArrays = new []{_playButton.transform,_shopButton.transform, _uiDailyMission,_uiHandelCurrency,_uiHandlePlayerinfo};
-        UIAnim.ZoomInScale(_uiArrays);
+        UIAnim.ZoomInScaleUIArray(_uiArrays);
     }
     
 }
