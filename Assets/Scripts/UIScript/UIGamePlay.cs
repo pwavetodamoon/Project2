@@ -70,7 +70,7 @@ public class UIGamePlay : APanelController
             isShowUiSlots = false;
             _buttonUiSlot.image.sprite = _spriteOnButtonUiSlotl;
             Debug.Log("isShowUiSlots1: " +isShowUiSlots);
-            UIAnim.MoveUIDownCustom(_uISlot.transform, _targetTransform);
+            UIAnim.MoveUIToTarget(_uISlot.transform, _targetTransform);
 
         }
         
@@ -79,7 +79,7 @@ public class UIGamePlay : APanelController
             isShowUiSlots = true;
           _buttonUiSlot.image.sprite = _spriteOffButtonUiSlotl;
           Debug.Log("isShowUiSlots2: " +isShowUiSlots);
-          UIAnim.MoveUIDownCustom(_uISlot.transform, _currentTransform);
+          UIAnim.MoveUIToTarget(_uISlot.transform, _currentTransform);
         
         }
      //   Debug.Log("value : " + -300f );
