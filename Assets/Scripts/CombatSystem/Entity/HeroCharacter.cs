@@ -6,6 +6,7 @@ using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
 using SlotHero;
+using SortingLayers;
 using UnityEngine;
 
 namespace CombatSystem.Entity
@@ -20,6 +21,7 @@ namespace CombatSystem.Entity
         private Character_Body_Sprites sprites;
         private Animator_Base animatorBase;
         public bool IsDead;
+        public SortingLayerByYAxis sortingLayerByYAxis;
 
         public int InGameSlotIndex { get; private set; }
 
@@ -31,7 +33,7 @@ namespace CombatSystem.Entity
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
             sprites = GetComponentInChildren<Character_Body_Sprites>();
             animatorBase = GetComponentInChildren<Animator_Base>();
-
+            sortingLayerByYAxis = GetComponent<SortingLayerByYAxis>();
             entityStateManager.OnDie += OnDead;
             entityStateManager.OnRebirth += OnRebirth;
         }
