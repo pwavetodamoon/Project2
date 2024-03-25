@@ -27,13 +27,13 @@ public class UIGamePlay : APanelController
     [SerializeField] private Sprite _spriteOnButtonUiSlotl;
     [SerializeField] private Sprite _spriteOffButtonUiSlotl;
 
-    private bool isShowUiSlots = true ;
+    private bool isShowUiSlots = true;
 
     private void Start()
     {
-       UIAnim.MoveDownUI(_dFSArea);
+        UIAnim.MoveDownUI(_dFSArea);
         UIAnim.MoveUIUp(_uISlot);
-      UIAnim.MoveDownUI(_tourTimeLine);
+        UIAnim.MoveDownUI(_tourTimeLine);
     }
 
     protected override void AddListeners()
@@ -69,23 +69,23 @@ public class UIGamePlay : APanelController
         {
             isShowUiSlots = false;
             _buttonUiSlot.image.sprite = _spriteOnButtonUiSlotl;
-            Debug.Log("isShowUiSlots1: " +isShowUiSlots);
+            Debug.Log("isShowUiSlots1: " + isShowUiSlots);
             UIAnim.MoveUIToTarget(_uISlot.transform, _targetTransform);
 
         }
-        
+
         else
         {
             isShowUiSlots = true;
-          _buttonUiSlot.image.sprite = _spriteOffButtonUiSlotl;
-          Debug.Log("isShowUiSlots2: " +isShowUiSlots);
-          UIAnim.MoveUIToTarget(_uISlot.transform, _currentTransform);
-        
+            _buttonUiSlot.image.sprite = _spriteOffButtonUiSlotl;
+            Debug.Log("isShowUiSlots2: " + isShowUiSlots);
+            UIAnim.MoveUIToTarget(_uISlot.transform, _currentTransform);
+
         }
     }
     public void SetCoinText(int value)
     {
-        Debug.Log(("SetCoinText"));
+        // Debug.Log(("SetCoinText"));
         _cointText.text = value.ToString();
         UIAnim.ZoomInOutScale(_cointText.transform);
     }

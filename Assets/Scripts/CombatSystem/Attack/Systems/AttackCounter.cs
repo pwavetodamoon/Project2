@@ -9,7 +9,8 @@ namespace CombatSystem.Attack.Systems
     [Serializable]
     public class AttackCounter
     {
-        [ProgressBar(0, "maxCounterTime", Height = 30)] [SerializeField]
+        [ProgressBar(0, "maxCounterTime", Height = 30)]
+        [SerializeField]
         protected float timerCounterInspector;
 
         public float timeCounter;
@@ -55,7 +56,7 @@ namespace CombatSystem.Attack.Systems
             }
             else if (AllowAttack())
             {
-                //AttackAction?.Invoke();
+                AttackAction?.Invoke();
                 CoroutineRunner.StartCoroutine(AttackAction());
             }
         }

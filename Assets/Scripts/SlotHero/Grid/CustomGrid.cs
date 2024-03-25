@@ -1,25 +1,37 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SlotHero.Grid
 {
-    public class CustomGrid
+    public class CustomGrid : MonoBehaviour
     {
-        private readonly float cellSize;
-        private readonly TextMesh[,] debugTextArray;
-        private int[,] gridArray;
-        private readonly int height;
-
-        private monsterSpawnCell[] monstersSpawnArray;
-        private readonly Vector3 originPosition = Vector3.zero;
+        [SerializeField] private float cellSize;
+        [SerializeField] private TextMesh[,] debugTextArray;
+        [SerializeField] private int[,] gridArray;
+        [SerializeField] private int height;
+        [SerializeField] private int width;
+        [SerializeField] Transform parent;
+        [SerializeField] private Vector3 originPosition = Vector3.zero;
         public bool showDebug = true;
-        private readonly int width;
-
-        public CustomGrid(int width, int height, float cellSize, Vector3 originalPosition, bool showDebug = true)
+        [Button]
+        private void ClearGrid()
         {
-            this.width = width;
-            this.height = height;
-            this.cellSize = cellSize;
-            originPosition = originalPosition;
+            if (debugTextArray.GetLength(0) > 0 && debugTextArray.GetLength(1) > 0)
+            {
+                for (var x = 0; x < debugTextArray.GetLength(0); x++)
+                    for (var y = 0; y < debugTextArray.GetLength(1); y++)
+                    {
+                        Destroy(debugTextArray[x, y].gameObject);
+                    }
+            }
+        }
+        [Button]
+        public void Init(bool showDebug = true)
+        {
+            // this.width = width;
+            // this.height = height;
+            // this.cellSize = cellSize;
+            ClearGrid();
             gridArray = new int[width, height];
             this.showDebug = showDebug;
             if (showDebug)
@@ -30,31 +42,13 @@ namespace SlotHero.Grid
                 {
                     if (showDebug)
                         debugTextArray[x, y] = Help.CreateTextMeshWorld(gridArray[x, y].ToString(),
-                            GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 150, null);
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, duration);
-                    Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, duration);
+                            GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f, 150, parent);
+                    // Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, duration);
+                    // Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, duration);
                 }
 
-            Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, duration);
-            Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, duration);
-        }
-
-        public void CreateSpawnArrayAtEnd(int x, int y)
-        {
-            // Debug.Log($"CreateSpawnArrayAtEnd {x} {y}");
-            var xMax = gridArray.GetLength(0) - 1;
-            var xMin = xMax - x;
-            var yMax = gridArray.GetLength(1) - 1;
-            var yMin = yMax - y;
-            var index = 0;
-            monstersSpawnArray = new monsterSpawnCell[x * y];
-            for (var i = xMax; i > xMin; i--)
-                for (var j = yMax; j > yMin; j--)
-                {
-                    SetValue(i, j, 2);
-                    monstersSpawnArray[index] = new monsterSpawnCell(i, j);
-                    index++;
-                }
+            // Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, duration);
+            // Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, duration);
         }
 
         public void GetXY(Vector3 worldPosition, out int x, out int y)
@@ -108,17 +102,11 @@ namespace SlotHero.Grid
         {
             return GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * .5f;
         }
-
-        private struct monsterSpawnCell
+        public Vector3 GetRandomPosition()
         {
-            public monsterSpawnCell(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public int x;
-            public int y;
+            var x = Random.Range(0, width);
+            var y = Random.Range(0, height);
+            return GetCenterGridWorldPosition(x, y);
         }
     }
 }

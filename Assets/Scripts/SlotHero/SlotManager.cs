@@ -17,19 +17,19 @@ namespace SlotHero
 
         private void Start()
         {
-            combatGrid = new CustomGrid(22, 7, 1, new Vector3(-9, -5), false);
-            combatGrid.CreateSpawnArrayAtEnd(3, 7);
+            // combatGrid = new CustomGrid(22, 7, 1, new Vector3(-9, -5), false);
+            // combatGrid.CreateSpawnArrayAtEnd(3, 7);
             // Load các slot vào vị trí giữa grid
-            foreach (var slot in Slots)
-            {
-                if (slot.SlotIndex == -1) continue;
-                var position = slot.transform.position;
-                combatGrid.GetXY(position, out var x, out var y);
-                combatGrid.SetValue(position, 1);
+            // foreach (var slot in Slots)
+            // {
+            //     if (slot.SlotIndex == -1) continue;
+            //     var position = slot.transform.position;
+            //     combatGrid.GetXY(position, out var x, out var y);
+            //     combatGrid.SetValue(position, 1);
 
-                slot.transform.localPosition = combatGrid.GetCenterGridWorldPosition(x, y);
-                slot.enemyStand.position = combatGrid.GetCenterGridWorldPosition(x + 1, y);
-            }
+            //     slot.transform.localPosition = combatGrid.GetCenterGridWorldPosition(x, y);
+            //     slot.enemyStand.position = combatGrid.GetCenterGridWorldPosition(x + 1, y);
+            // }
         }
 
 

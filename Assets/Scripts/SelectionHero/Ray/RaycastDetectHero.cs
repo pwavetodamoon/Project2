@@ -28,9 +28,12 @@ namespace SelectionHero.Ray
                     if (CanHoldHeroInMouse())
                     {
                         MoveHeroByMouse();
+                        currentHero.sortingLayerByYAxis.PauseSortingLayer();
+                        currentHero.sortingLayerByYAxis.SetOrderToHighest();
                     }
                     else
                     {
+                        currentHero.sortingLayerByYAxis.ResumeSortingLayer();
                         PutHeroBack();
                         ResetCurrentHeroRef();
                     }
@@ -38,6 +41,7 @@ namespace SelectionHero.Ray
             }
             else
             {
+                currentHero?.sortingLayerByYAxis.ResumeSortingLayer();
                 var swapFinished = SwapHero();
                 if (!swapFinished) PutHeroBack();
 

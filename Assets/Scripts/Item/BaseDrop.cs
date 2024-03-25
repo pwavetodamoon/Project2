@@ -15,7 +15,7 @@ namespace Item
     {
         public string itemID;
         public int point;
-        [SerializeField] [Required] private ItemDropConfig DropConfig;
+        [SerializeField][Required] private ItemDropConfig DropConfig;
         private Collider2D collider2d;
         private Transform DestinationTransform;
         private SpriteRenderer spriteRenderer;
@@ -27,7 +27,7 @@ namespace Item
             spriteRenderer = GetComponent<SpriteRenderer>();
             collider2d = GetComponent<Collider2D>();
             collider2d.isTrigger = true;
-            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Items);
+            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.ITEMS);
         }
 
         private void OnDisable()

@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace LevelAndStats
 {
-    public abstract class EntityStats : MonoBehaviour
+    public class EntityStats : MonoBehaviour
     {
         [SerializeField] protected StructStats structStats;
 

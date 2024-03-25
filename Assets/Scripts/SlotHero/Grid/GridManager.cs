@@ -11,8 +11,8 @@ namespace SlotHero.Grid
         protected override void Awake()
         {
             base.Awake();
-            Combat_Grid = new CustomGrid(22, 7, 1, new Vector3(-9, -5), false);
-            Combat_Grid.CreateSpawnArrayAtEnd(3, 7);
+            // Combat_Grid = new CustomGrid(22, 7, 1, new Vector3(-9, -5), false);
+            // Combat_Grid.CreateSpawnArrayAtEnd(3, 7);
         }
 
         public CustomGrid GetGrid()

@@ -28,8 +28,10 @@ namespace CombatSystem.Entity
         private void Start()
         {
             this.healthBar = HealthBarManager.Instance.GetHealthBars(this);
-            healthBar.offset = HealthBarOffset;
-            Debug.Log("Off set is: " + HealthBarOffset);
+            if (healthBar != null)
+            {
+                healthBar.offset = HealthBarOffset;
+            }
             attackControl.Create(monsterSingleAttackFactory);
         }
 
@@ -42,10 +44,7 @@ namespace CombatSystem.Entity
         private void EntityStateManagerOnDie()
         {
             GetComponent<RewardSignal>().SendSignal();
-
         }
-
-
 
         public override void RegisterObject()
         {
