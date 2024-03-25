@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CombatSystem.Entity;
@@ -16,6 +17,10 @@ namespace CombatSystem
             return entitiesByTag[GameTag.Hero];
         }
 
+        public List<EntityCharacter> GetEnemies()
+        {
+            return entitiesByTag[GameTag.Enemy];
+        }
         public int GetHeroCount()
         {
             if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return 0;

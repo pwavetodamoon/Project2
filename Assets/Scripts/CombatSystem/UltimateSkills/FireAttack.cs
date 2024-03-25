@@ -22,10 +22,11 @@ public class FireAttack : MonoBehaviour
     }
     public void DealDamage()
     {
-
         var collider = Physics2D.OverlapBox(transform.transform.position, size, 0, GameLayerMask.Get(GameLayerMask.ENEMY));
         if (collider != null)
-            Debug.Log(collider.name);
+        {
+            collider.GetComponent<IDamageable>().TakeDamage(damage);
+        }
         Debug.Log("Fire Attack");
     }
     public void Destroy()
