@@ -19,7 +19,7 @@ TagManager:
   - UI
   - Items
   - Hero
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -53,11 +53,11 @@ TagManager:
   - name: Entities
     uniqueID: 948043549
     locked: 0
-  - name: WorldText
-    uniqueID: 160503413
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: WorldText
+    uniqueID: 160503413
     locked: 0
   - name: Layout
     uniqueID: 1556244597

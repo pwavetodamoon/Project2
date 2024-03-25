@@ -36,8 +36,13 @@ namespace CombatSystem.Entity.Utilities
         {
             OnTakeDamage?.Invoke();
             var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemy);
-            SpawnText(damageOfEnemy);
-            EntityStats.DecreaseHealth(damageOfEnemy);
+            TakeDamage(damageOfEnemy);
+
+        }
+        private void TakeDamage(float damage)
+        {
+            SpawnText(damage);
+            EntityStats.DecreaseHealth(damage);
             if (EntityStats.Health() <= 0)
             {
                 DieInvoke();
@@ -45,14 +50,13 @@ namespace CombatSystem.Entity.Utilities
             }
 
             if (entity.EntityInAttackState() == false) animation_Base.ChangeAnimation(AnimationType.Hurt);
-            Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damageOfEnemy} and have {EntityStats.Health()}", gameObject);
+            // Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
         }
-
 
         private void SpawnText(float damage)
         {
             var builder = "-" + damage;
-            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder, Color.red);
+            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder.ToString(), Color.red);
         }
 
         [Button]
@@ -61,5 +65,7 @@ namespace CombatSystem.Entity.Utilities
             EntityStats.DecreaseHealth(120);
             OnDie?.Invoke();
         }
+
+
     }
 }

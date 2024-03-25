@@ -44,17 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb0d26454d151540a121bc28510f011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DontDestroyOnLoad: 0
   maxPoolSize: 20
   combatTxtPrefab: {fileID: 6744323918613235079, guid: 4bb3a75eaa9ee184784341dcceae6205, type: 3}
-  coinTxtPrefab: {fileID: 5165286573492555798, guid: f48f38f9321f8674789bed8fa05ff2d4, type: 3}
   combatTextPoolCustom:
     randomPositionRangeX: {x: 0, y: 0}
     randomPositionRangeY: {x: 0, y: 0}
     fontSize: 0
     maxPool: 0
-  coinTextPoolCustom:
-    randomPositionRangeX: {x: 0, y: 0}
-    randomPositionRangeY: {x: 0, y: 0}
-    fontSize: 0
-    maxPool: 0
+  callCount: 0
+  timer: 0
+  maxTimer: 0

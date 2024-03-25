@@ -18,7 +18,7 @@ namespace Helper
             var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             var clip = clipInfo[0].clip;
             var length = clip.length;
-            Debug.Log($"Animation length: {length}");
+            // Debug.Log($"Animation length: {length}");
             return length;
         }
     }

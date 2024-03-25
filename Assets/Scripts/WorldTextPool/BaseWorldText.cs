@@ -57,8 +57,9 @@ namespace WorldTextPool
             Transform textMesh = textMeshPro.transform;
             float x = .5f;
             var boolen = Random.Range(0, 2) == 0;
-            var direction = boolen ? new Vector3(x, 1, 0) : new Vector3(-x, 1, 0);
+            var direction = boolen == true ? new Vector3(x, 1, 0) : new Vector3(-x, 1, 0);
             textMesh.DOMove(textMesh.localPosition + direction, duration * 2);
+            textMesh.transform.rotation = Quaternion.Euler(0, 0, boolen == false ? 10 : -10);
             textMesh.transform.DOScale(Vector2.one, duration).OnComplete(() =>
             {
                 textMeshPro.DOColor(Color.clear, duration);

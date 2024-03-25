@@ -18,7 +18,18 @@ namespace SortingLayers
             sortingGroup = GetComponent<SortingGroup>();
             isValidate = sortingGroup != null;
         }
-
+        public void PauseSortingLayer()
+        {
+            isValidate = false;
+        }
+        public void ResumeSortingLayer()
+        {
+            isValidate = true;
+        }
+        public void SetOrderToHighest()
+        {
+            sortingGroup.sortingOrder = 1000;
+        }
         private void Update()
         {
             if (isValidate == false)

@@ -7,36 +7,32 @@ namespace SelectionHero.Ray
 {
     public class RaycastDetectSlot : MonoBehaviour
     {
-        [SerializeField] private HeroSlotInGame currentSlotInGame;
-        public Vector2 mousePosition;
-        private HeroCharacter currentHero;
+        [SerializeField] private HeroSlotInGame SlotIsAboveMouse;
         [SerializeField] private ChestSwap chestSwap;
-        public void Detect(bool isMouseDown, bool isContainHero, HeroCharacter currentHero)
+        public Vector2 mousePosition;
+
+        public void Detect(bool isMouseDown, bool doesContainHero, HeroCharacter currentHeroOnDrag)
         {
-            if (isContainHero && isMouseDown &&
-                SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out currentSlotInGame))
+            if (doesContainHero && isMouseDown && SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out SlotIsAboveMouse))
             {
-                this.currentHero = currentHero;
-                if (currentHero.InGameSlotIndex != currentSlotInGame.SlotIndex) currentSlotInGame.SetTriggerShadow();
-                if (currentSlotInGame.SlotIndex == -1)
+                if (SlotIsAboveMouse.SlotIndex == -1)
                 {
-                    chestSwap.Trigger();
+                    chestSwap?.Trigger();
                 }
-                return;
+
+                bool doesHeroOnDragDifferHeroFromSlot = currentHeroOnDrag != null &&
+                currentHeroOnDrag.InGameSlotIndex != SlotIsAboveMouse.SlotIndex;
+                if (doesHeroOnDragDifferHeroFromSlot)
+                {
+                    // SlotIsAboveMouse.SetTriggerShadow();
+                }
             }
-
-            if (currentSlotInGame != null) ResetCurrentSlot();
-        }
-
-        private void ResetCurrentSlot()
-        {
-            chestSwap.Reset();
-            if (currentHero != null && currentHero.InGameSlotIndex != currentSlotInGame.SlotIndex)
+            else if (SlotIsAboveMouse != null)
             {
+                // SlotIsAboveMouse.ResetTriggerShadow();
+                SlotIsAboveMouse = null;
             }
-            currentSlotInGame.ResetTriggerShadow();
-
-            currentSlotInGame = null;
         }
+
     }
 }

@@ -11,5 +11,6 @@ namespace CombatSystem.Attack.Utilities
         void DecreaseAttackerCount(EntityStats entityStats);
 
         bool IsOutOfHealth();
+
     }
 }

@@ -48,7 +48,7 @@ namespace ObjectPool
         {
             if (queue.Contains(t))
                 return;
-            if (queue.Count >= maxPoolSize) Object.Destroy(t.gameObject);
+            // if (queue.Count >= maxPoolSize) Object.Destroy(t.gameObject);
             t.gameObject.SetActive(false);
             queue.Enqueue(t);
         }

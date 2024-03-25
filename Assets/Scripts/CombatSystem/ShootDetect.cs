@@ -8,12 +8,12 @@ public class ShootDetect : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("Shoot");
+        // Debug.Log("Shoot");
         ShootDone = true;
     }
     public void ResetShoot()
     {
-        Debug.Log("Reset Shoot");
+        // Debug.Log("Reset Shoot");
         ShootDone = false;
     }
 }
