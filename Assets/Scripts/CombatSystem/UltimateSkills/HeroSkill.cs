@@ -1,30 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using CombatSystem.Attack.Utilities;
+using LevelAndStats;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class HeroSkill : MonoBehaviour
+public abstract class HeroSkill : MonoBehaviour
 {
-    public GameObject Enemy;
     public Animator animator;
+    protected IAttackerCounter attacker;
+    public EntityStats entityStats;
 
-    public float damage;
     public Vector2 size = Vector2.one;
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.transform.position, size);
     }
-    private void Awake()
+    protected virtual void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        entityStats = GetComponent<EntityStats>();
     }
-    public virtual void DealDamage()
-    {
+    public abstract void DealDamage();
+    public abstract void IncreaseAttacker(); // Use for stop enemy moving
+    public abstract void DecreaseAttacker();
 
-    }
-    public void Destroy()
-    {
-        Destroy(gameObject);
-        // transform.gameObject.SetActive(false);
-    }
+    public abstract void Destroy();
 }

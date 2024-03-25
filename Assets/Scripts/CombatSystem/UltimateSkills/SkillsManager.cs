@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SkillsManager : MonoBehaviour
 {
-    public UltimateSkill UltimateSkill1;
+    public UltimateSkillBase UltimateSkill1;
     [Tooltip("This transform use for tracked enemy by calculated distance.")]
     public Transform trackedPosition;
     [Button]

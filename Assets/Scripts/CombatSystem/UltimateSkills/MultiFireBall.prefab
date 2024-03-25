@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6250751139681977560
+--- !u!1 &7154744173304688706
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4931300259021447314}
-  - component: {fileID: 8420365264107537887}
+  - component: {fileID: 5500800873485419651}
+  - component: {fileID: 6742814806612952804}
   m_Layer: 0
-  m_Name: WorldTextPool
+  m_Name: MultiFireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4931300259021447314
+--- !u!4 &5500800873485419651
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250751139681977560}
+  m_GameObject: {fileID: 7154744173304688706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,25 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8420365264107537887
+--- !u!114 &6742814806612952804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250751139681977560}
+  m_GameObject: {fileID: 7154744173304688706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb0d26454d151540a121bc28510f011, type: 3}
+  m_Script: {fileID: 11500000, guid: 51d53d3640f855340a357aff217c3095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPoolSize: 20
-  combatTxtPrefab: {fileID: 6744323918613235079, guid: 4bb3a75eaa9ee184784341dcceae6205, type: 3}
-  combatTextPoolCustom:
-    randomPositionRangeX: {x: 0, y: 0}
-    randomPositionRangeY: {x: 0, y: 0}
-    fontSize: 0
-    maxPool: 0
-  callCount: 0
+  skillPrefab: {fileID: 4720480520867510172, guid: 6f30f6cb50eb2ea40907b306090d2b5e, type: 3}
+  skillCooldown: 5
   timer: 0
-  maxTimer: 0
+  fireBallCount: 3

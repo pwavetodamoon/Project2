@@ -39,7 +39,7 @@ namespace CombatSystem.Entity.Utilities
             TakeDamage(damageOfEnemy);
 
         }
-        public void TakeDamage(float damage)
+        private void TakeDamage(float damage)
         {
             SpawnText(damage);
             EntityStats.DecreaseHealth(damage);
@@ -50,13 +50,13 @@ namespace CombatSystem.Entity.Utilities
             }
 
             if (entity.EntityInAttackState() == false) animation_Base.ChangeAnimation(AnimationType.Hurt);
-            Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
+            // Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
         }
 
         private void SpawnText(float damage)
         {
             var builder = "-" + damage;
-            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder, Color.red);
+            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder.ToString(), Color.red);
         }
 
         [Button]

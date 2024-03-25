@@ -61,5 +61,6 @@ namespace CombatSystem.Entity.Utilities
 
         public bool SetTimeCounterValue(bool value) => allowCounter = value;
 
+
     }
 }

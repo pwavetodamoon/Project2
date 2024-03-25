@@ -6,21 +6,33 @@ using UnityEngine.Events;
 
 public class UltimateSkillAction : MonoBehaviour
 {
-    public UnityEvent unityAction;
-    public UnityEvent unityAction2;
+    public UnityEvent IncreaseAttackerAction;
+    public UnityEvent DecreaseAttackerAction;
+    public UnityEvent DealDamageAction;
+    public UnityEvent DestroyAction;
     public HeroSkill heroSkill;
     private void Awake()
     {
         heroSkill = GetComponentInParent<HeroSkill>();
-        unityAction.AddListener(heroSkill.DealDamage);
-        unityAction2.AddListener(heroSkill.Destroy);
+        IncreaseAttackerAction.AddListener(heroSkill.IncreaseAttacker);
+        DecreaseAttackerAction.AddListener(heroSkill.DecreaseAttacker);
+        DealDamageAction.AddListener(heroSkill.DealDamage);
+        DestroyAction.AddListener(heroSkill.Destroy);
     }
-    public void Invoke()
+    public void IncreaseAttacker()
     {
-        unityAction?.Invoke();
+        IncreaseAttackerAction?.Invoke();
     }
-    public void Invoke2()
+    public void DescreaseAttacker()
     {
-        unityAction2?.Invoke();
+        DecreaseAttackerAction?.Invoke();
+    }
+    public void DealDamage()
+    {
+        DealDamageAction?.Invoke();
+    }
+    public void Destroy()
+    {
+        DestroyAction?.Invoke();
     }
 }

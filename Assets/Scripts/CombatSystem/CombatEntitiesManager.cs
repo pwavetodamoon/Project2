@@ -14,11 +14,13 @@ namespace CombatSystem
 
         public List<EntityCharacter> GetHeroList()
         {
+            if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return new List<EntityCharacter>();
             return entitiesByTag[GameTag.Hero];
         }
 
         public List<EntityCharacter> GetEnemies()
         {
+            if (entitiesByTag.ContainsKey(GameTag.Enemy) == false) return new List<EntityCharacter>();
             return entitiesByTag[GameTag.Enemy];
         }
         public int GetHeroCount()

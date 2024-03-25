@@ -5,6 +5,5 @@ namespace CombatSystem.Attack.Utilities
     public interface IDamageable
     {
         void TakeDamage(EntityStats EntityStats);
-        void TakeDamage(float damage);
     }
 }

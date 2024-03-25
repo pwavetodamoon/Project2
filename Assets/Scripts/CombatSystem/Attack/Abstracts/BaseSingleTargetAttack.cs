@@ -57,7 +57,7 @@ namespace CombatSystem.Attack.Abstracts
 
         private bool IsEnemyAlive()
         {
-            Debug.Log($"{entityCharacter.name}:Ask IsEnemyAlive: {CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag())}");
+            // Debug.Log($"{entityCharacter.name}:Ask IsEnemyAlive: {CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag())}");
             return CombatEntitiesManager.Instance.IsHaveEntityHaveTagAlive(GetEnemyTag());
         }
 
@@ -74,7 +74,7 @@ namespace CombatSystem.Attack.Abstracts
         }
         public IEnumerator ExecuteAttack()
         {
-            Debug.Log("Coroutine ExecuteAttack");
+            // Debug.Log("Coroutine ExecuteAttack");
             if (isActive || !TryFindEnemy())
             {
                 yield return WaitAndContinue();
