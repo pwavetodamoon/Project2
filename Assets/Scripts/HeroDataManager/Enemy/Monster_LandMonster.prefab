@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 736543704765371216}
   - component: {fileID: 3701719870537904625}
   - component: {fileID: 2295233377764011390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monster_LandMonster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3212809774790804750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NormalAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 2133792122113968142}
   - component: {fileID: 1026053090829904829}
   - component: {fileID: 8392997936692571294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Golem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 984564786571446642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SlotAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

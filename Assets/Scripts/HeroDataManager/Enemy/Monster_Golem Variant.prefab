@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 1437484999702074073}
   - component: {fileID: 3068469743616553080}
   - component: {fileID: 436863448028589303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monster_Golem Variant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1469196099982313723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SlotAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 312581003850254727}
   - component: {fileID: 1726857490093402676}
   - component: {fileID: 7904847874784193815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Golem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3845074705839670407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NormalAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

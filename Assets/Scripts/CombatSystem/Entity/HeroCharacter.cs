@@ -30,7 +30,7 @@ namespace CombatSystem.Entity
             base.Awake();
             entityStateManager = GetComponent<EntityStateManager>();
             attackManager = GetComponent<AttackManager>();
-            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.Hero);
+            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.HERO);
             sprites = GetComponentInChildren<Character_Body_Sprites>();
             animatorBase = GetComponentInChildren<Animator_Base>();
             sortingLayerByYAxis = GetComponent<SortingLayerByYAxis>();
