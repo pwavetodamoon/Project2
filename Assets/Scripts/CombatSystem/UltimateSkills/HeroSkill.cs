@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using CombatSystem.Attack.Utilities;
-using Helper;
 using UnityEngine;
 
-public class FireAttack : MonoBehaviour
+public class HeroSkill : MonoBehaviour
 {
     public GameObject Enemy;
     public Animator animator;
 
     public float damage;
-    public Vector2 size;
+    public Vector2 size = Vector2.one;
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -20,14 +18,9 @@ public class FireAttack : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
     }
-    public void DealDamage()
+    public virtual void DealDamage()
     {
-        var collider = Physics2D.OverlapBox(transform.transform.position, size, 0, GameLayerMask.Get(GameLayerMask.ENEMY));
-        if (collider != null)
-        {
-            collider.GetComponent<IDamageable>().TakeDamage(damage);
-        }
-        Debug.Log("Fire Attack");
+
     }
     public void Destroy()
     {
