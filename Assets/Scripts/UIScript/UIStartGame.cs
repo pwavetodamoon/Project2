@@ -58,9 +58,9 @@ public class UIStartGame : APanelController
         var level = PlayFabManager.Instance.Player.levelPlayer;
         var gold = PlayFabManager.Instance.Player.gold;
 
-        _playerName.text = name;
-        _levelPlayer.text = level.ToString();
-        _goldtxt.text = $":{gold.ToString()}";
+        _playerName.text = $"PLAYER NAME: {name}";
+        _levelPlayer.text = $"Level: {level.ToString()}";
+        _goldtxt.text = $"Gold: {gold.ToString()}";
         await Task.Yield();
     }
     private async void LoadUIsStartGame()
