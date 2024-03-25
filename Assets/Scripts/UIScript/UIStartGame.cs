@@ -51,20 +51,6 @@ public class UIStartGame : APanelController
     {
         Signals.Get<OpenShop>().Dispatch();
     }
-
-    private IEnumerator GetInfoPlayer()
-    {
-        yield return new WaitForSeconds(3f);
-        Debug.Log("GetInfoPlayer coroutine");
-        var name = PlayFabManager.Instance.Player.playerName;
-        var level = PlayFabManager.Instance.Player.levelPlayer;
-        var gold = PlayFabManager.Instance.Player.gold;
-
-        _playerName.text = name;
-        _levelPlayer.text = level.ToString();
-        _goldtxt.text = $":{gold.ToString()}";
-        Debug.Log($" _playerName.text: { name} ....  _playerName.level{level} ... _gold.text: { gold}");
-    }
     private async Task GetInfoPlayerAsync()
     {
         Debug.Log("GetInfoPlayer coroutine");

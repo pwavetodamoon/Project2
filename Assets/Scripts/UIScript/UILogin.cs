@@ -35,7 +35,9 @@ public class UILogin : APanelController
 
    private void Start()
    {
-      _buttons = new Transform[] { _loginButton.transform, _homeButton.transform, _howToPlayButton.transform, _aboutUsButton.transform };
+      _buttons = new Transform[] 
+         { _loginButton.transform,_registerButton.transform, _homeButton.transform, _howToPlayButton.transform, 
+            _aboutUsButton.transform ,_emailInputfieldLogin.transform,_passWordlInputfieldLogin.transform};
     UIAnim.ZoomInScaleUIArray(_buttons);
    }
 
