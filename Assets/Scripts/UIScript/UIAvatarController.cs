@@ -61,7 +61,6 @@ public class UIAvatarController : APanelController
     private void OnButtonLevelUpClicked()
     {
         //if button interact
-        Debug.Log("onclick");
         if (_buttonLevelUp.interactable == true)
         {
             _gameManager.UpgradeHeroLevel(_heroCharacter,_coinText);

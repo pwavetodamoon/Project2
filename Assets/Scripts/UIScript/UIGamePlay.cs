@@ -9,8 +9,6 @@ using TMPro;
 
 public class UIGamePlay : APanelController
 {
-    public Button ButtonShowDPS;
-    public Button ButtonHidesDPS;
     [SerializeField] private RectTransform _dFSArea;
     [SerializeField] private RectTransform _tourTimeLine;
 
@@ -21,13 +19,19 @@ public class UIGamePlay : APanelController
     [Header("Button")]
     [SerializeField] private Button ButtonShowMainMenu;
     [SerializeField] private Button _buttonUiSlot;
+    [SerializeField] private Button _buttonPauseGame;
+
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI _cointText;
     [Header("Sprite")]
     [SerializeField] private Sprite _spriteOnButtonUiSlotl;
     [SerializeField] private Sprite _spriteOffButtonUiSlotl;
+    [SerializeField] private Sprite _spriteOnUIPauseGame;
+    [SerializeField] private Sprite _spriteOffUIPauseGame;
 
     private bool isShowUiSlots = true ;
+    private bool isPaused = false ;
+
 
     private void Start()
     {
@@ -39,18 +43,18 @@ public class UIGamePlay : APanelController
     protected override void AddListeners()
     {
         base.AddListeners();
-        ButtonShowDPS.onClick.AddListener(ShowDPS);
         ButtonShowMainMenu.onClick.AddListener(ShowMainMenu);
         _buttonUiSlot.onClick.AddListener(ShowHideUiSlot);
+        _buttonPauseGame.onClick.AddListener(PauseGame);
         Signals.Get<SendCurrency>().AddListener(SetCoinText);
     }
 
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        ButtonShowDPS.onClick.RemoveListener(ShowDPS);
         ButtonShowMainMenu.onClick.RemoveListener(ShowMainMenu);
         _buttonUiSlot.onClick.RemoveListener(ShowHideUiSlot);
+        _buttonPauseGame.onClick.RemoveListener(PauseGame);
         Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
     }
 
@@ -62,7 +66,23 @@ public class UIGamePlay : APanelController
     {
         Signals.Get<OpenUIMainMenu>().Dispatch();
     }
+    private void PauseGame()
+    {
+        if (isPaused == false)
+        {
+            isPaused = true;
+            _buttonPauseGame.image.sprite = _spriteOffUIPauseGame;
+            Time.timeScale = 0;
 
+        }
+        
+        else
+        {
+            isPaused = false;
+            _buttonPauseGame.image.sprite = _spriteOnUIPauseGame;
+            Time.timeScale = 1;
+        }
+    }
     private void ShowHideUiSlot()
     {
         if (isShowUiSlots == true)
@@ -85,9 +105,8 @@ public class UIGamePlay : APanelController
     }
     public void SetCoinText(int value)
     {
-        Debug.Log(("SetCoinText"));
-        _cointText.text = value.ToString();
-        UIAnim.ZoomInOutScale(_cointText.transform);
+        _cointText.text = $"Total Reward: {value}";
+        UIAnim.ZoomInOutScaleCusTom(_cointText.transform,1.1f);
     }
     // private void HideDPS()
     // {
