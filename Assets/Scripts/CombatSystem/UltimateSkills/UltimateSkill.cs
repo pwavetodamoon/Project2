@@ -1,48 +1,45 @@
+using System.Collections;
 using System.Collections.Generic;
 using CombatSystem;
 using CombatSystem.Entity;
 using Helper;
+using Sirenix.OdinInspector;
+using SlotHero.Grid;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UlSkill_", menuName = "UltimateSkill")]
 public class UltimateSkill : UltimateSkillBase
 {
-    public int fireBallCount = 3;
-    public override void Execute(Transform locatedPos)
+    public bool useUnlimited = false;
+    public int fireBallCount = 5;
+    public override void Execute(CustomGrid CustomGrid)
     {
         if (!CanUseSkill) return;
-        if (locatedPos == null) return;
-        var listEnemy = Get3MonsterRandom();
-        for (int i = 0; i < listEnemy.Count; i++)
+        for (int i = 0; i < fireBallCount; i++)
         {
-            if (listEnemy.Count == 0) return;
-            var index = Random.Range(0, listEnemy.Count);
-            var enemy = listEnemy[index];
-            if (enemy == null) return;
-            CreateFireBall(enemy);
-        }
-        timer = skillCooldown;
-    }
-    private List<EntityCharacter> Get3MonsterRandom()
-    {
-        var enemies = new List<EntityCharacter>(CombatEntitiesManager.Instance.GetEnemies());
-        var list = new List<EntityCharacter>();
 
-        while (list.Count < fireBallCount && enemies.Count > 0)
-        {
-            var index = Random.Range(0, enemies.Count);
-            var enemy = enemies[index];
-            if (enemy == null) continue;
-            list.Add(enemy);
-            enemies.RemoveAt(index);
+            var randomTime = Random.Range(1, .1f);
+            StartCoroutine(Execute(CustomGrid.GetRandomPosition(), randomTime));
         }
-        return list;
+        if (useUnlimited == false)
+            timer = skillCooldown;
     }
-    private void CreateFireBall(EntityCharacter enemy)
+    public IEnumerator Execute(Vector3 SpawnPos, float delay)
     {
-        var go = Instantiate(skillPrefab, enemy.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(delay);
+        CreateFireBall(SpawnPos);
+    }
+
+
+    private void CreateFireBall(Vector3 newPosition)
+    {
+        var go = Instantiate(skillPrefab, newPosition + CreateRandomPos(), Quaternion.identity);
         var skill = go.GetComponent<HeroSkill>();
-        skill.animator.Play("Effect");
+        skill.Play();
+    }
+    private Vector3 CreateRandomPos()
+    {
+        float value = .5f;
+        return new Vector3(Random.Range(-value, value), Random.Range(-value, value));
     }
 }
 public abstract class UltimateSkillBase : MonoBehaviour
@@ -51,7 +48,7 @@ public abstract class UltimateSkillBase : MonoBehaviour
     public float skillCooldown;
     public float timer;
     public bool CanUseSkill => timer <= 0;
-    public abstract void Execute(Transform locatedPos);
+    public abstract void Execute(CustomGrid CustomGrid);
 
     private void Update()
     {

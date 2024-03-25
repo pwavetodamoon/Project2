@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5500800873485419651}
   - component: {fileID: 6742814806612952804}
   m_Layer: 0
-  m_Name: MultiFireBall
+  m_Name: Ulti_MultiFireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,4 +47,5 @@ MonoBehaviour:
   skillPrefab: {fileID: 4720480520867510172, guid: 6f30f6cb50eb2ea40907b306090d2b5e, type: 3}
   skillCooldown: 5
   timer: 0
+  useUnlimited: 0
   fireBallCount: 3

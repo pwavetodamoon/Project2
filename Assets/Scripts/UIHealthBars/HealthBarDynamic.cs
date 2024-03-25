@@ -18,8 +18,9 @@ public class HealthBarDynamic : HealthBarBase
         target.GetComponent<EntityStateManager>().OnDie += Destroy;
         target.GetEntityStats().OnHealthChange += SetHealthBar;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         if (target != null)
         {
             target.GetComponent<EntityStateManager>().OnDie -= Destroy;

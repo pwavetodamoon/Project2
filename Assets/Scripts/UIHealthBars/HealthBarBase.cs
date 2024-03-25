@@ -15,7 +15,7 @@ public abstract class HealthBarBase : MonoBehaviour
         SetFade(0, 0f);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         transform.DOKill();
     }
@@ -51,8 +51,9 @@ public abstract class HealthBarBase : MonoBehaviour
         {
             value = 1;
         }
-        transform.DOKill();
+        // transform.DOKill();
         transform.DOPunchScale(Vector3.one * .1f, .2f);
-        fill.DOFillAmount(value, .2f);
+        fill.fillAmount = value;
+        // fill.DOFillAmount(value, .2f);
     }
 }

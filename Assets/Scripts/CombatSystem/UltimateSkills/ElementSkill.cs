@@ -3,18 +3,17 @@ using DG.Tweening;
 using Helper;
 using UnityEngine;
 
-public class FireSkill : HeroSkill
+public class ElementSkill : HeroSkill
 {
     public IDamageable damageable;
-    private SpriteRenderer spriteRenderer;
     protected override void Awake()
     {
         base.Awake();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     public override void DealDamage()
     {
         damageable?.TakeDamage(entityStats);
+        // spriteRenderer.DOFade(0, 1);
 
         Debug.Log("Fire Attack");
     }
@@ -34,6 +33,7 @@ public class FireSkill : HeroSkill
     }
     public override void Destroy()
     {
-        spriteRenderer.DOFade(0, 1).OnComplete(() => Destroy(gameObject));
+        transform.DOKill();
+        Destroy(gameObject);
     }
 }

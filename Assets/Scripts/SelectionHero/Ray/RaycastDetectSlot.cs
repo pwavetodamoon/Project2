@@ -24,12 +24,12 @@ namespace SelectionHero.Ray
                 currentHeroOnDrag.InGameSlotIndex != SlotIsAboveMouse.SlotIndex;
                 if (doesHeroOnDragDifferHeroFromSlot)
                 {
-                    SlotIsAboveMouse.SetTriggerShadow();
+                    // SlotIsAboveMouse.SetTriggerShadow();
                 }
             }
             else if (SlotIsAboveMouse != null)
             {
-                SlotIsAboveMouse.ResetTriggerShadow();
+                // SlotIsAboveMouse.ResetTriggerShadow();
                 SlotIsAboveMouse = null;
             }
         }
