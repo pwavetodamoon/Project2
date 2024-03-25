@@ -30,6 +30,16 @@ namespace HHP.Ults.UIAnim
                     sequence.Kill();
                 });
         }
+        public static void  ZoomInOutScaleCusTom<T>(T obj,float scaleValue, Action onCompleteAction = null)where T : Transform
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(obj.transform.DOScale(new Vector3(scaleValue, scaleValue, scaleValue), 0.2f).SetEase(Ease.Linear));
+            sequence.Append(obj.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.Linear)).OnComplete(() =>
+            {
+                onCompleteAction?.Invoke();
+                sequence.Kill();
+            });
+        }
         public static void  ZoomOutScale<T>(T obj , Action onCompleteAction = null) where T : Transform
         {
            
