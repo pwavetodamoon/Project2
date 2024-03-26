@@ -9,7 +9,7 @@ namespace CombatSystem.Attack.Factory
         menuName = "SingleAttackFactory/HeroFarSingleAttackFactory")]
     public class HeroFarSingleAttackFactory : HeroSingleAttackFactory
     {
-        public RangedProjectileEnum projectileType;
+        public RangedProjectileType projectileType;
 
         public override BaseSingleTargetAttack CreateAttack()
         {
@@ -20,7 +20,7 @@ namespace CombatSystem.Attack.Factory
         menuName = "SingleAttackFactory/HeroMagicAttackFactory")]
     public class HeroMagicAttackFactory : HeroSingleAttackFactory
     {
-        public RangedProjectileEnum projectileType;
+        public RangedProjectileType projectileType;
         public override BaseSingleTargetAttack CreateAttack()
         {
             return new HeroFarMagicAttack(projectileType);

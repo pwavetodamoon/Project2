@@ -9,19 +9,19 @@ using UnityEngine;
 
 namespace CombatSystem.Attack.Factory
 {
-    public class HeroFarMagicAttack : BaseSingleTargetAttack
+    public abstract class FarAttack : BaseSingleTargetAttack
     {
-        private readonly RangedProjectile type;
+        protected readonly RangedProjectileType type;
+        public FarAttack(RangedProjectileType type)
+        {
+            this.type = type;
+        }
         private bool IsProjectileHitEnemy;
         private WaitForSeconds waitForEndAnim;
         private WaitUntil waitUntilCanCauseDamage;
         private WaitUntil WaitForInvokeAction;
         private ShootDetect shootDetect;
 
-        public HeroFarMagicAttack(RangedProjectile type)
-        {
-            this.type = type;
-        }
 
         private void SetupYieldInstruction()
         {
@@ -40,16 +40,8 @@ namespace CombatSystem.Attack.Factory
                 CauseDamage();
             }
         }
-        protected virtual ProjectileBase GetProjectile()
-        {
-            return PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
-        }
-        protected virtual void PlayAnimationAttack()
-        {
-            AudioManager.Instance.PlaySFX("Far Attack");
-            PlayAnimation(AnimationType.Attack);
-
-        }
+        protected abstract ProjectileBase GetProjectile();
+        protected abstract void PlayAnimationAttack();
         protected override void ResetStateAndCounter()
         {
             base.ResetStateAndCounter();
@@ -58,7 +50,7 @@ namespace CombatSystem.Attack.Factory
         }
         protected override string GetEnemyTag() => GameTag.Enemy;
 
-        private void AllowGoNextStep() => IsProjectileHitEnemy = true;
+        protected void AllowGoNextStep() => IsProjectileHitEnemy = true;
 
         public override void GetReference(EntityCharacter newEntityCharacter,
             Transform attackTransform = null)
@@ -67,6 +59,5 @@ namespace CombatSystem.Attack.Factory
             SetupYieldInstruction();
             shootDetect = animator.GetComponent<ShootDetect>();
         }
-
     }
 }
