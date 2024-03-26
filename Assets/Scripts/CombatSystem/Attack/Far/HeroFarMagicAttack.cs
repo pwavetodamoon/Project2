@@ -7,22 +7,13 @@ namespace CombatSystem.Attack.Factory
 {
     public class HeroFarMagicAttack : FarAttack
     {
-        int counter = 0;
         public HeroFarMagicAttack(RangedProjectileType type) : base(type)
         {
         }
 
         protected override ProjectileBase GetProjectile()
         {
-            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
-            counter++;
-
-            if (counter > 2)
-            {
-                counter = 0;
-                go.GetComponent<Projectile>().useVfx = true;
-            }
-            return go;
+            return PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
         }
         protected override void PlayAnimationAttack()
         {
