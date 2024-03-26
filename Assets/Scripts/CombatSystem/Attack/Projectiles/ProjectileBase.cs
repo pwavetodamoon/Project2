@@ -1,4 +1,5 @@
 using System;
+using LevelAndStats;
 using ObjectPool;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace CombatSystem.Attack.Projectiles
     {
         [SerializeField] protected Transform target;
         [SerializeField] protected string Tag;
+        public EntityStats EntityStats;
         protected bool isAttack;
         protected Action OnEndAttack;
         // private float TimeOut = 10f;
@@ -29,11 +31,13 @@ namespace CombatSystem.Attack.Projectiles
             OnEndAttack += method;
         }
 
-        public virtual void Initialized(Transform target, string tag)
+        public virtual void Initialized(Transform target, EntityStats entityStats, string tag)
         {
             this.target = target;
+            EntityStats = entityStats;
             Tag = tag;
             isAttack = false;
         }
+
     }
 }

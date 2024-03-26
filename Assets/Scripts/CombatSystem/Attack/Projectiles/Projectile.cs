@@ -1,3 +1,4 @@
+using CombatSystem.Attack.Utilities;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
@@ -25,7 +26,12 @@ namespace CombatSystem.Attack.Projectiles
         public override void Release()
         {
             base.Release();
-            Debug.Log("Check VFX");
+
+            if (target.TryGetComponent(out IDamageable damageable))
+            {
+                damageable?.TakeDamage(EntityStats);
+            }
+            // Debug.Log("Check VFX");
             if (useVfx)
                 projectileVFX.Play();
             useVfx = false;

@@ -20,10 +20,10 @@ namespace CombatSystem.Attack.Far
 
         protected override ProjectileBase GetProjectile()
         {
-            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
+            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
             counter++;
 
-            if (counter > 2)
+            if (counter > 3)
             {
                 counter = 0;
                 go.GetComponent<Projectile>().useVfx = true;

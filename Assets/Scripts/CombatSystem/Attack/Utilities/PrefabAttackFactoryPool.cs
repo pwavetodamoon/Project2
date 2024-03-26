@@ -2,6 +2,7 @@ using System;
 using CombatSystem.Attack.Projectiles;
 using CombatSystem.Entity;
 using Helper;
+using LevelAndStats;
 using ObjectPool;
 using UnityEngine;
 
@@ -46,13 +47,13 @@ namespace CombatSystem.Attack.Utilities
             return null;
         }
 
-        public ProjectileBase SpawnProjectile(EntityCharacter monster, Transform attackTransform, Action action, string GameTag, RangedProjectileType type)
+        public ProjectileBase SpawnProjectile(EntityCharacter monster, EntityStats entityStats, Transform attackTransform, Action action, string GameTag, RangedProjectileType type)
         {
             var projectile = Get(type);
             if (projectile == null) return null;
             projectile.transform.position = attackTransform.position;
             projectile.RegisterOnEndVfx(action);
-            projectile.Initialized(monster.transform, GameTag);
+            projectile.Initialized(monster.transform, entityStats, GameTag);
             return projectile;
         }
     }

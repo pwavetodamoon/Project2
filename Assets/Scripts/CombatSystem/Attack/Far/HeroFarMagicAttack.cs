@@ -14,7 +14,7 @@ namespace CombatSystem.Attack.Factory
 
         protected override ProjectileBase GetProjectile()
         {
-            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
+            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
             counter++;
 
             if (counter > 2)
