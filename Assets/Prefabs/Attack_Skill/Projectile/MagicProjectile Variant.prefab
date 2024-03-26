@@ -48,7 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Tag: Enemy
-  projectileVFX: {fileID: 0}
+  projectileVFX: {fileID: 535022355236132035}
+  useVfx: 0
 --- !u!114 &535022355236132035
 MonoBehaviour:
   m_ObjectHideFlags: 0

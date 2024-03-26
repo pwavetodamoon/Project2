@@ -8,6 +8,7 @@ public class ProjectileVFX : MonoBehaviour
     public void Play()
     {
         if (particleSystems == null) return;
+        // Debug.Log("Play VFX");
         var go = Instantiate(particleSystems, transform.position, Quaternion.identity);
         go.Play();
     }

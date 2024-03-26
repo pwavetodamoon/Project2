@@ -6,6 +6,7 @@ namespace CombatSystem.Attack.Projectiles
     {
         private readonly float speed = 20;
         public ProjectileVFX projectileVFX;
+        public bool useVfx;
         private void Awake()
         {
             projectileVFX = GetComponent<ProjectileVFX>();
@@ -24,7 +25,10 @@ namespace CombatSystem.Attack.Projectiles
         public override void Release()
         {
             base.Release();
-            projectileVFX.Play();
+            Debug.Log("Check VFX");
+            if (useVfx)
+                projectileVFX.Play();
+            useVfx = false;
         }
         private void MoveToTarget()
         {
