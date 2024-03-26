@@ -5,11 +5,12 @@ using UnityEngine;
 public class ProjectileVFX : MonoBehaviour
 {
     public ParticleSystem particleSystems;
-    public void Play()
+    public void PlayAtEnd()
     {
         if (particleSystems == null) return;
         // Debug.Log("Play VFX");
         var go = Instantiate(particleSystems, transform.position, Quaternion.identity);
         go.Play();
     }
+
 }

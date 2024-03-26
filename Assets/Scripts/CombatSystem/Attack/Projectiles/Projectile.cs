@@ -11,6 +11,7 @@ namespace CombatSystem.Attack.Projectiles
         private void Awake()
         {
             projectileVFX = GetComponent<ProjectileVFX>();
+
         }
 
         private bool isOnTarget => Vector3.Distance(transform.position, target.transform.position) < 0.1f;
@@ -26,14 +27,9 @@ namespace CombatSystem.Attack.Projectiles
         public override void Release()
         {
             base.Release();
-
-            if (target.TryGetComponent(out IDamageable damageable))
-            {
-                damageable?.TakeDamage(EntityStats);
-            }
-            // Debug.Log("Check VFX");
             if (useVfx)
-                projectileVFX.Play();
+                projectileVFX.PlayAtEnd();
+
             useVfx = false;
         }
         private void MoveToTarget()

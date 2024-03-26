@@ -132,7 +132,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Tag: Enemy
+  EntityStats: {fileID: 0}
   projectileVFX: {fileID: 0}
+  useVfx: 0
+  useTrail: 0
 --- !u!114 &8394437481802038889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,4 +148,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f578c00e930724d9b63b8a839d95a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystems: []
+  particleSystems: {fileID: 0}
+  TrailEffect: {fileID: 0}
