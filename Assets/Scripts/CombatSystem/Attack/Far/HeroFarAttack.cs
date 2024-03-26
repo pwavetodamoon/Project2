@@ -12,14 +12,14 @@ namespace CombatSystem.Attack.Far
 {
     public class HeroFarAttack : BaseSingleTargetAttack
     {
-        private readonly ProjectileType type;
+        private readonly RangedProjectileEnum type;
         private bool IsProjectileHitEnemy;
         private WaitForSeconds waitForEndAnim;
         private WaitUntil waitUntilCanCauseDamage;
         private WaitUntil waitUntilShootDone;
         private ShootDetect shootDetect;
 
-        public HeroFarAttack(ProjectileType type)
+        public HeroFarAttack(RangedProjectileEnum type)
         {
             this.type = type;
         }
@@ -29,7 +29,7 @@ namespace CombatSystem.Attack.Far
         {
             AudioManager.Instance.PlaySFX("Far Attack");
             var attackTransform = BowAttackTransform;
-            if (type == ProjectileType.Arrow)
+            if (type == RangedProjectileEnum.Arrow)
             {
                 PlayAnimation(AnimationType.Shooting);
             }

@@ -1,15 +1,23 @@
+using System;
 using CombatSystem.Attack.Projectiles;
+using CombatSystem.Entity;
 using Helper;
 using ObjectPool;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Utilities
 {
-    public enum ProjectileType
+    public enum RangedProjectile
     {
         Arrow,
         Magic1,
         FireBall
+    }
+    public enum MagicProjectileType
+    {
+        Magic1,
+        Magic2,
+        Magic3
     }
 
     public class PrefabAttackFactoryPool : Singleton<PrefabAttackFactoryPool>
@@ -30,17 +38,33 @@ namespace CombatSystem.Attack.Utilities
             magicProjectile_pool = new ObjectPoolPrefab<ProjectileBase>(MagicProjectilePrefab, go.transform, 5);
         }
 
-        public ProjectileBase Get(ProjectileType type)
+        public ProjectileBase Get(RangedProjectile type)
         {
             switch (type)
             {
-                case ProjectileType.Arrow:
+                case RangedProjectile.Arrow:
                     return projectile_pool.Get();
-                case ProjectileType.Magic1:
+            }
+
+            return null;
+        }
+        public ProjectileBase Get(MagicProjectileType type)
+        {
+            switch (type)
+            {
+                case MagicProjectileType.Magic1:
                     return magicProjectile_pool.Get();
             }
 
             return null;
+        }
+        public ProjectileBase SpawnProjectile(EntityCharacter monster, Transform attackTransform, Action action, string GameTag, RangedProjectile type)
+        {
+            var projectile = Get(type);
+            projectile.transform.position = attackTransform.position;
+            projectile.RegisterOnEndVfx(action);
+            projectile.Initialized(monster.transform, GameTag);
+            return projectile;
         }
     }
 }
