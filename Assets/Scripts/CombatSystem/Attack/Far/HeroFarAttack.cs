@@ -13,13 +13,22 @@ namespace CombatSystem.Attack.Far
 {
     public class HeroFarAttack : FarAttack
     {
+        int counter = 0;
         public HeroFarAttack(RangedProjectileType type) : base(type)
         {
         }
 
         protected override ProjectileBase GetProjectile()
         {
-            return PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
+            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, MagicAttackTransform, AllowGoNextStep, GameTag.Enemy, type);
+            counter++;
+
+            if (counter > 3)
+            {
+                counter = 0;
+                go.GetComponent<Projectile>().useVfx = true;
+            }
+            return go;
         }
         protected override void PlayAnimationAttack()
         {

@@ -6,6 +6,13 @@ namespace CombatSystem.Attack.Projectiles
     public class Projectile : ProjectileBase
     {
         private readonly float speed = 20;
+        public ProjectileVFX projectileVFX;
+        public bool useVfx;
+        private void Awake()
+        {
+            projectileVFX = GetComponent<ProjectileVFX>();
+
+        }
 
         private bool isOnTarget => Vector3.Distance(transform.position, target.transform.position) < 0.1f;
 
@@ -20,6 +27,10 @@ namespace CombatSystem.Attack.Projectiles
         public override void Release()
         {
             base.Release();
+            if (useVfx)
+                projectileVFX.PlayAtEnd();
+
+            useVfx = false;
         }
         private void MoveToTarget()
         {

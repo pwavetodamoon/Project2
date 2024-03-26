@@ -3,7 +3,6 @@ using CombatSystem.Attack.Utilities;
 using LevelAndStats;
 using ObjectPool;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace CombatSystem.Attack.Projectiles
 {
@@ -41,7 +40,6 @@ namespace CombatSystem.Attack.Projectiles
         {
             this.target = target;
             EntityStats = entityStats;
-            // entityStats.SetDamage(Random.Range(5, 0));
             Tag = tag;
             isAttack = false;
         }
