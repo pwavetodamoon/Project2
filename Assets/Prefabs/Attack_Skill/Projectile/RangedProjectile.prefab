@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2307740938509964960}
   - component: {fileID: 8394437481802038889}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: RangedProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   Tag: Enemy
+  projectileVFX: {fileID: 0}
 --- !u!114 &8394437481802038889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +145,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f578c00e930724d9b63b8a839d95a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystems: []
