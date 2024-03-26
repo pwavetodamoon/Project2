@@ -10,6 +10,7 @@ namespace Model.Hero
         Hurt,
         Attack,
         Shooting,
+        Spell,
         Dying
     }
     public class Human_Animator : Animator_Base
@@ -37,6 +38,8 @@ namespace Model.Hero
                     return "Dying";
                 case AnimationType.Shooting:
                     return "Shooting";
+                case AnimationType.Spell:
+                    return "Spell";
 
                 default:
                     return "Ilde";

@@ -18,7 +18,7 @@ namespace CombatSystem.Attack.Factory
         protected override void PlayAnimationAttack()
         {
             AudioManager.Instance.PlaySFX("Far Attack");
-            PlayAnimation(AnimationType.Attack);
+            PlayAnimation(AnimationType.Spell);
         }
 
     }

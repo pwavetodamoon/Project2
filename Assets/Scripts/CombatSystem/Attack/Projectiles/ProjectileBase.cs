@@ -4,22 +4,13 @@ using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
 {
-    [RequireComponent(typeof(Collider2D))]
     public abstract class ProjectileBase : MonoBehaviour, IPooled<ProjectileBase>
     {
-        [SerializeField] private Collider2D _Collder2D;
         [SerializeField] protected Transform target;
         [SerializeField] protected string Tag;
         protected bool isAttack;
         protected Action OnEndAttack;
         // private float TimeOut = 10f;
-
-        protected virtual void Awake()
-        {
-            _Collder2D = GetComponent<Collider2D>();
-            _Collder2D.isTrigger = true;
-        }
-
         private void OnDisable()
         {
             OnEndAttack = null;

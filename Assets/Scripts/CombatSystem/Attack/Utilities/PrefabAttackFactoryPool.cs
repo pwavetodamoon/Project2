@@ -11,7 +11,7 @@ namespace CombatSystem.Attack.Utilities
     {
         Arrow,
         Magic1,
-        FireBall
+
     }
 
 
@@ -19,7 +19,7 @@ namespace CombatSystem.Attack.Utilities
     {
         // Use in Scene Environment
         public Projectile ProjectilePrefab;
-        public MagicProjectile MagicProjectilePrefab;
+        public Projectile MagicProjectilePrefab;
         public ObjectPoolPrefab<ProjectileBase> magicProjectile_pool;
         public ObjectPoolPrefab<ProjectileBase> projectile_pool;
 

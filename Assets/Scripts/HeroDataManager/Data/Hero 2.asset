@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   AttackType: 0
   characterEnumType: 4
-  HeroSingleAttackFactory: {fileID: 11400000, guid: 148f5c0f35354e64b996bc407863da49, type: 2}
+  HeroSingleAttackFactory: {fileID: 11400000, guid: 1198bd8238b890349bf7a796feb55402, type: 2}
   slotIndex: 2
   heroName: Quang 2
   eyeSprites:

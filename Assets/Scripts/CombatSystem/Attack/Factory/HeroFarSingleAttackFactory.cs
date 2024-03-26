@@ -16,14 +16,4 @@ namespace CombatSystem.Attack.Factory
             return new HeroFarAttack(projectileType);
         }
     }
-    [CreateAssetMenu(fileName = "HeroMagicAttackFactory",
-        menuName = "SingleAttackFactory/HeroMagicAttackFactory")]
-    public class HeroMagicAttackFactory : HeroSingleAttackFactory
-    {
-        public RangedProjectileType projectileType;
-        public override BaseSingleTargetAttack CreateAttack()
-        {
-            return new HeroFarMagicAttack(projectileType);
-        }
-    }
 }
