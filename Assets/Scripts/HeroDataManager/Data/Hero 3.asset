@@ -36,7 +36,7 @@ MonoBehaviour:
     level: 1
     maxHealth: 100
     health: 100
-    baseDamage: 61
+    baseDamage: 20
     speed: 3
     critRate: 0
     critDamage: 0

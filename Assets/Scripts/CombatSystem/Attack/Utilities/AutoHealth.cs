@@ -24,6 +24,7 @@ namespace CombatSystem.Attack.Utilities
 
         private void Awake()
         {
+            particalSystemsManager = GetComponent<ParticalSystemsManager>();
             heroCharacter = GetComponent<HeroCharacter>();
             entityStateManager = GetComponent<EntityStateManager>();
             entityStateManager.OnTakeDamage += TriggerHealth;

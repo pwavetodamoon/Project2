@@ -79,6 +79,7 @@ namespace Item
 
         public void Jumping(Vector3 position)
         {
+            transform.DORotate(CreateRandom(), 0.2f);
             if (DropConfig == null)
                 return;
             transform.DOLocalJump(position,
@@ -86,6 +87,10 @@ namespace Item
                     DropConfig.jumpCount,
                     DropConfig.duration)
                 .OnComplete(() => { collider2d.enabled = true; });
+        }
+        private Vector3 CreateRandom()
+        {
+            return new Vector3(UnityEngine.Random.Range(-.5f, .5f), UnityEngine.Random.Range(-.5f, .5f));
         }
     }
 }

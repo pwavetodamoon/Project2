@@ -29,7 +29,7 @@ MonoBehaviour:
     minRangeValue: 1
     maxRangeValue: 1.3
   damageScaleValue:
-    baseValue: 70
+    baseValue: 5
     currentScale: 1.2
     minRangeValue: 1
     maxRangeValue: 1.5

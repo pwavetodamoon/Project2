@@ -45,7 +45,7 @@ namespace CombatSystem.Entity.Utilities
             EntityStats.DecreaseHealth(damage);
             if (EntityStats.Health() <= 0)
             {
-                DieInvoke();
+                OnDie?.Invoke();
                 return;
             }
 
@@ -63,7 +63,6 @@ namespace CombatSystem.Entity.Utilities
         private void DieInvoke()
         {
             EntityStats.DecreaseHealth(120);
-            OnDie?.Invoke();
         }
 
 

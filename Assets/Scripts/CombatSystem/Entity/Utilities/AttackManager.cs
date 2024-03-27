@@ -29,6 +29,7 @@ namespace CombatSystem.Entity.Utilities
 
         public void IncreaseAttackerCount(EntityStats entity1)
         {
+            Debug.Log(transform.name + " IncreaseAttackerCount: " + EntityHelper.sumOfDamage);
             EntityHelper.Add(entity1);
             if (CanChangeAnimation())
             {
@@ -48,7 +49,9 @@ namespace CombatSystem.Entity.Utilities
 
         public bool IsOutOfHealth() => EntityHelper.sumOfDamage >= entityStats.Health();
 
-        private bool CanChangeAnimation() => entity != null && entity.EntityInAttackState() == false;
+        private bool CanChangeAnimation() => entity != null
+        && entity.EntityInAttackState() == false
+        && entityStats.Health() > 0;
 
         public bool AttackedByEnemies() => Count > 0;
 

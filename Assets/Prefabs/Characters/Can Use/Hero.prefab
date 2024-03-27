@@ -4797,7 +4797,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 948043549
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9892,6 +9892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listParticalSystems:
   - {fileID: 7645108833349614336}
+  - {fileID: 5972611945681689497}
 --- !u!1001 &9011903409939857441
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ namespace Core.Reward
         [ShowInInspector]
         private List<BaseDrop> list;
 
-        private Vector3 RandomPosition() => new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
+        private Vector3 RandomPosition() => new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-.5f, .5f));
 
         private void OnValidate()
         {
@@ -71,7 +71,7 @@ namespace Core.Reward
         }
         private void SpawnMultipleCoin(Vector3 position)
         {
-            var count = Random.Range(1, 5);
+            var count = Random.Range(1, 3);
             for (var i = 0; i < count; i++)
             {
                 if (enableDropForMoney == false) continue;
