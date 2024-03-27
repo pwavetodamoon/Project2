@@ -18,10 +18,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _slotManager;
     [SerializeField] private ParticalSystemsManager _particalSystems;
     [SerializeField]  private List<HeroSlotInGame> heroSlotInGames = new List<HeroSlotInGame>();
-
+    [SerializeField] private SkillsManager _skillsManager;
     private void Awake()
     {
         _currencyManager = FindObjectOfType<CurrencyManager>();
+        _skillsManager = FindObjectOfType<SkillsManager>();
         Application.targetFrameRate = 60;
     }
 
@@ -53,16 +54,41 @@ public class GameManager : MonoBehaviour
         HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
         return Convert.ToInt32( _levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
-    public void HealAllHeroes( )
+    public void HealAllHeroes(SkillEnum skillEnum )
     {
-        float healValue = 50f;
+        switch (skillEnum)
+        {
+            case SkillEnum.HealTeamSkill:
+                HealTeamSkill();
+                break;
+            case SkillEnum.FireBall:
+                FireBallSkill();
+                Debug.Log("FireBall Skill");
+                break;
+            case SkillEnum.Freeze:
+                FreezeSkill();
+                Debug.Log("Freeze Skill");
+                break;
+        }
+      
+    }
+
+    private void HealTeamSkill()
+    {    float healValue = 50f;
         foreach (var hero in heroSlotInGames)
         { 
             hero.currentHero.entityStateManager.EntityStats.IncreaseHealth(healValue);
-           hero.currentHero.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(EffectSkillsEnum.HealthEffect);
-           
+            hero.currentHero.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(EffectSkillsEnum.HealthEffect);
         }
         _particalSystems.FindAndPlayEffect(EffectSkillsEnum.HealthTeamEffect);
+    }
+    private void FireBallSkill()
+    {
+        _skillsManager.FireAttack();
+    }
+    private void FreezeSkill()
+    {   
+        _skillsManager.FreezeAttack();
     }
     private void GetAllHeroesCharacterInScenes()
     {

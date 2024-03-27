@@ -177,16 +177,15 @@ MonoBehaviour:
   animOut: {fileID: 0}
   properties:
     priority: 0
+  _gameManager: {fileID: 0}
+  _skillEnum: 0
   _buttonSkill: {fileID: 4690924827080679966}
   _skillName: 
   _icon: {fileID: 6258493002025093373}
   _coolDownImage: {fileID: 7061582441740159833}
   _textCoolDown: {fileID: 457497071056602039}
-  _cooldown:
-    NextActionTime: 0
-    CoolDownTime: 2
   _canUseSkill: 0
-  _skillConfig: {fileID: 11400000, guid: 41a567bf89197604e8df141251940690, type: 2}
+  _skillConfig: {fileID: 0}
 --- !u!222 &1569903343746436333
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -462,14 +461,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2535778, g: 0.26490566, b: 0.3207547, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a0f85897435a8414b8f7746b127996ed, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

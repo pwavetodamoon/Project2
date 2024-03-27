@@ -7,16 +7,17 @@ using TMPro;
 public class UIItemSkill : APanelController
 {
     [SerializeField] private GameObject _gameManager;
+    [SerializeField] private SkillEnum _skillEnum;
     [SerializeField] private Button _buttonSkill;
     [SerializeField] private string _skillName;
     [SerializeField] private Image _icon;
     [SerializeField] private Image _coolDownImage;
     [SerializeField] private TextMeshProUGUI _textCoolDown;
-    [SerializeField] private Cooldown _cooldown = new Cooldown();
+    [SerializeField] private Cooldown _cooldown;
     [SerializeField] private bool _canUseSkill;
     [SerializeField] private SkillConfig _skillConfig;
     private GameManager gameManagerComponent;
-
+   
     protected override void Awake()
     {
         base.Awake();
@@ -47,6 +48,8 @@ public class UIItemSkill : APanelController
     private void InitResourceSkill()
     {
          gameManagerComponent = _gameManager.GetComponent<GameManager>();
+        _cooldown.CoolDownTime = _skillConfig.GetCoolDownSkill();
+         _skillEnum = _skillConfig.GetSkillEnum();
         _skillName = _skillConfig.GetSkillName();
         _icon.sprite = _skillConfig.GetIconSkill();
         _canUseSkill = _skillConfig.GetIsCanUse();
@@ -56,10 +59,11 @@ public class UIItemSkill : APanelController
 
     private void UseSkill()
     {
+        //su kien button onclick
         if (!_cooldown.IsCoolingDown)
         {
             _cooldown.StartCooldown();
-            gameManagerComponent.HealAllHeroes();
+            gameManagerComponent.HealAllHeroes(_skillEnum);
         }
     }
 

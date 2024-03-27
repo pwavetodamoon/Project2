@@ -2828,6 +2828,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandelSkill
       objectReference: {fileID: 0}
+    - target: {fileID: 8468104599945967879, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
+      propertyPath: _skillConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 41a567bf89197604e8df141251940690, type: 2}
     - target: {fileID: 9066455552280949202, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2930,6 +2934,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandelSkill (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8468104599945967879, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
+      propertyPath: _skillEnum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468104599945967879, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
+      propertyPath: _skillConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c4f6722476bea6478290da4a6b45166, type: 2}
     - target: {fileID: 9066455552280949202, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3210,6 +3222,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HandelSkill (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8468104599945967879, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
+      propertyPath: _skillEnum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468104599945967879, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
+      propertyPath: _skillConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 4762ba910fd9a9d47be86cfe4aa704e3, type: 2}
     - target: {fileID: 9066455552280949202, guid: ac17240e254fbd84c8c99b972aae9926, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
