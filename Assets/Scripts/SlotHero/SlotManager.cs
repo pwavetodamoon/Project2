@@ -29,7 +29,7 @@ namespace SlotHero
                 combatGrid.SetValue(position, 1);
 
                 slot.transform.localPosition = combatGrid.GetCenterGridWorldPosition(x, y);
-                slot.enemyStand.position = combatGrid.GetCenterGridWorldPosition(x + 1, y);
+                slot.EnemyStand.position = combatGrid.GetCenterGridWorldPosition(x + 1, y);
             }
         }
 

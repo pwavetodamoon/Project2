@@ -47,11 +47,11 @@ namespace CombatSystem.Attack.Utilities
             return null;
         }
 
-        public ProjectileBase SpawnProjectile(EntityCharacter monster, EntityStats entityStats, Transform attackTransform, Action action, string GameTag, RangedProjectileType type)
+        public ProjectileBase SpawnProjectile(EntityCharacter monster, EntityStats entityStats, Vector2 spawnPosition, Action action, string GameTag, RangedProjectileType type)
         {
             var projectile = Get(type);
             if (projectile == null) return null;
-            projectile.transform.position = attackTransform.position;
+            projectile.transform.position = spawnPosition;
             projectile.RegisterOnEndVfx(action);
             projectile.Initialized(monster.transform, entityStats, GameTag);
             return projectile;
