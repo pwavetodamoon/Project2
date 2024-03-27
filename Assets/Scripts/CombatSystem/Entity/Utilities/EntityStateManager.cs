@@ -49,7 +49,7 @@ namespace CombatSystem.Entity.Utilities
                 return;
             }
 
-            if (entity.EntityInAttackState() == false) animation_Base.ChangeAnimation(AnimationType.Hurt);
+            if (entity.EntityInAttackState() == false && EntityStats.Health() > 0) animation_Base.ChangeAnimation(AnimationType.Hurt);
             // Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
         }
 

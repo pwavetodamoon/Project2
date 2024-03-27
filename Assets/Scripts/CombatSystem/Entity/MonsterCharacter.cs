@@ -55,6 +55,7 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopExecute();
+            Debug.Log("ReleaseObject Enemy");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
             //Destroy(gameObject);
         }
@@ -63,7 +64,7 @@ namespace CombatSystem.Entity
         {
             if (healthBar != null)
             {
-                Destroy(healthBar.gameObject);
+                healthBar.Destroy();
             }
             Destroy(gameObject);
         }

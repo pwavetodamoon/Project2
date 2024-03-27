@@ -34,6 +34,7 @@ public class OnDieEffect : MonoBehaviour
     [Button]
     public void OnDie()
     {
+        Debug.Log("OnDie and play animation");
         animatorBase.SetIsPlayDefaultAnimation(false);
         animatorBase.ChangeAnimation(AnimationType.Dying);
         monsterCharacter.StopExecute();
@@ -45,6 +46,7 @@ public class OnDieEffect : MonoBehaviour
     {
 
         yield return new WaitForSeconds(time);
+        animatorBase.enabled = false;
         spriteRenderer.DOFade(0, fadeTime).OnComplete(() =>
         {
             monsterCharacter.KillMonster();

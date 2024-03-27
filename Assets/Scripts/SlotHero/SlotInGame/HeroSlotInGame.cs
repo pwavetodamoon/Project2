@@ -8,15 +8,14 @@ namespace SlotHero.SlotInGame
     public class HeroSlotInGame : MonoBehaviour
     {
         [SerializeField] private Transform characterStand;
-        public Transform enemyStand;
-        public HeroCharacter currentHero;
+        [SerializeField] private Transform enemyStand;
+        [SerializeField] private HealthBarStatic healthBar;
+        [SerializeField] private ShadowColor ShadowColor;
+        public Transform EnemyStand => enemyStand;
         public float radius;
+
+        public HeroCharacter currentHero;
         public int SlotIndex;
-        private HealthBarStatic healthBar;
-        private ShadowColor ShadowColor;
-
-        private Character_Body_Sprites sprites;
-
         private void Awake()
         {
             ShadowColor = GetComponent<ShadowColor>();
@@ -41,7 +40,6 @@ namespace SlotHero.SlotInGame
                 entityStats.ChangeHealthEvent();
 
                 currentHero.transform.position = characterStand.position;
-                sprites = currentHero.GetComponentInChildren<Character_Body_Sprites>();
                 AudioManager.Instance.PlaySFX("Placed Champion");
                 healthBar.FadeColorBack();
             }
@@ -51,43 +49,19 @@ namespace SlotHero.SlotInGame
             }
         }
 
-        public Transform GetCharacterPosition()
+        public Transform GetCharacterPosition() => characterStand;
+
+        public Transform GetAttackerPosition() => enemyStand;
+        bool triggerVFX;
+        public void TriggerVFX()
         {
-            return characterStand;
+            if (ShadowColor.ParticleSystem.isPlaying) return;
+            ShadowColor.ParticleSystem.Play();
         }
-
-        public Transform GetAttackerPosition()
+        public void StopVFX()
         {
-            return enemyStand;
-        }
-
-        public virtual void SetTriggerShadow()
-        {
-            ResetAlphaHero();
-
-            ShadowColor.SetOnChoose();
-        }
-
-        public virtual void ResetTriggerShadow()
-        {
-            SetAlphaHero();
-
-            ShadowColor.SetOriginal();
-        }
-
-        public void SetAlphaHero()
-        {
-            if (CanSetAlphaForHero()) sprites.SetDeadSprite();
-        }
-
-        public void ResetAlphaHero()
-        {
-            if (sprites != null) sprites.SetRebirthSprite();
-        }
-
-        private bool CanSetAlphaForHero()
-        {
-            return sprites != null && currentHero != null && currentHero != SelectionHero.SelectionHero.Instance.currentHeroAttached;
+            if (ShadowColor.ParticleSystem.isPlaying)
+                ShadowColor.ParticleSystem.Stop();
         }
 
         public bool AllowSwap()

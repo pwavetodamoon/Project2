@@ -9,7 +9,7 @@ namespace CombatSystem.Attack.Factory
         menuName = "SingleAttackFactory/HeroFarSingleAttackFactory")]
     public class HeroFarSingleAttackFactory : HeroSingleAttackFactory
     {
-        public ProjectileType projectileType;
+        public RangedProjectileType projectileType;
 
         public override BaseSingleTargetAttack CreateAttack()
         {
