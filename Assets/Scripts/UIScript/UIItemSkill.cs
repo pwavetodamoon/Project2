@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIItemSkill : APanelController
 {
+    [SerializeField] private GameObject _gameManager;
     [SerializeField] private Button _buttonSkill;
     [SerializeField] private string _skillName;
     [SerializeField] private Image _icon;
@@ -14,10 +15,18 @@ public class UIItemSkill : APanelController
     [SerializeField] private Cooldown _cooldown = new Cooldown();
     [SerializeField] private bool _canUseSkill;
     [SerializeField] private SkillConfig _skillConfig;
+    private GameManager gameManagerComponent;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _gameManager = GameObject.FindWithTag("GameManager");
+    }
 
     private void Start()
     {
         InitResourceSkill();
+ 
     }
 
     private void FixedUpdate()
@@ -37,6 +46,7 @@ public class UIItemSkill : APanelController
 
     private void InitResourceSkill()
     {
+         gameManagerComponent = _gameManager.GetComponent<GameManager>();
         _skillName = _skillConfig.GetSkillName();
         _icon.sprite = _skillConfig.GetIconSkill();
         _canUseSkill = _skillConfig.GetIsCanUse();
@@ -49,6 +59,7 @@ public class UIItemSkill : APanelController
         if (!_cooldown.IsCoolingDown)
         {
             _cooldown.StartCooldown();
+            gameManagerComponent.HealAllHeroes();
         }
     }
 
@@ -60,16 +71,13 @@ public class UIItemSkill : APanelController
             _textCoolDown.text = Mathf.CeilToInt(_cooldown.RemainingCooldownTime).ToString();
             _coolDownImage.gameObject.SetActive(true);
             _textCoolDown.gameObject.SetActive(true);
-            _buttonSkill.interactable = false; // Disable the button during cooldown
-          Debug.Log("UpdateCDUI true");
+            _buttonSkill.interactable = false;
         }
         else
         {
             _coolDownImage.gameObject.SetActive(false);
             _textCoolDown.gameObject.SetActive(false);
-           _buttonSkill.interactable = true; // Enable the button when cooldown is finished
-           Debug.Log("UpdateCDUI false");
-
+           _buttonSkill.interactable = true;
         }
     }
 }

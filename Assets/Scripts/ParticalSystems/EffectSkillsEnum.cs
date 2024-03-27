@@ -6,6 +6,8 @@ namespace Effects.Skill
       UpgradeEffect = 0,
 
       HealthEffect = 2,
+      HealthTeamEffect = 3,
+
    }
 
 }
