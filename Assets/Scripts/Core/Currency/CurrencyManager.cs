@@ -6,10 +6,18 @@ namespace Core.Currency
     public class CurrencyManager : Singleton<CurrencyManager>
     {
         [SerializeField] public int currency;
-
-        public void AddCurrency(int amount)
+        [SerializeField] private StageInformation stageInformation;
+        [SerializeField] private MoneyConfig moneyConfig;
+        private void OnValidate()
         {
-            currency += amount;
+            if (stageInformation == null)
+            {
+                stageInformation = GetDataSupport.Get().StageInformation;
+            }
+        }
+        public void AddCurrency()
+        {
+            currency += moneyConfig.Get(stageInformation.GetLevelForMonster());
         }
 
         public void RemoveCurrency(int amount)
