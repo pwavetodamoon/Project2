@@ -1,25 +1,19 @@
 using System;
+using CombatSystem.Attack.Utilities;
+using LevelAndStats;
 using ObjectPool;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
 {
-    [RequireComponent(typeof(Collider2D))]
     public abstract class ProjectileBase : MonoBehaviour, IPooled<ProjectileBase>
     {
-        [SerializeField] private Collider2D _Collder2D;
         [SerializeField] protected Transform target;
         [SerializeField] protected string Tag;
+        public EntityStats EntityStats;
         protected bool isAttack;
         protected Action OnEndAttack;
         // private float TimeOut = 10f;
-
-        protected virtual void Awake()
-        {
-            _Collder2D = GetComponent<Collider2D>();
-            _Collder2D.isTrigger = true;
-        }
-
         private void OnDisable()
         {
             OnEndAttack = null;
@@ -31,6 +25,11 @@ namespace CombatSystem.Attack.Projectiles
         {
             OnEndAttack?.Invoke();
             ReleaseCallback?.Invoke(this);
+            if (target == null) return;
+            if (target.TryGetComponent(out IDamageable damageable))
+            {
+                damageable?.TakeDamage(EntityStats);
+            }
         }
 
         public void RegisterOnEndVfx(Action method)
@@ -38,11 +37,13 @@ namespace CombatSystem.Attack.Projectiles
             OnEndAttack += method;
         }
 
-        public virtual void Initialized(Transform target, string tag)
+        public virtual void Initialized(Transform target, EntityStats entityStats, string tag)
         {
             this.target = target;
+            EntityStats = entityStats;
             Tag = tag;
             isAttack = false;
         }
+
     }
 }

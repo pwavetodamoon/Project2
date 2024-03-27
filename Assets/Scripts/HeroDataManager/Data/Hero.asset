@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   AttackType: 0
   characterEnumType: 4
-  HeroSingleAttackFactory: {fileID: 11400000, guid: 86a9dfcb754e4e74ebe179bd97463f8f, type: 2}
+  HeroSingleAttackFactory: {fileID: 11400000, guid: 1198bd8238b890349bf7a796feb55402, type: 2}
   slotIndex: 4
   heroName: Quang
   eyeSprites:
@@ -41,6 +41,6 @@ MonoBehaviour:
     critRate: 0
     critDamage: 0
     attackCoolDown: 1
-    attackMoveDuration: 1
+    attackMoveDuration: 0.4
   icon: {fileID: 21300000, guid: 8f3831ff8784c894989abfdf65b3f5ab, type: 3}
   resourcePath: Hero/Medieval King

@@ -24,7 +24,7 @@ MonoBehaviour:
   AttackType: 0
   characterEnumType: 4
   HeroSingleAttackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
-  slotIndex: 2
+  slotIndex: 3
   heroName: Quang 2
   eyeSprites:
   - {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
     critRate: 0
     critDamage: 0
     attackCoolDown: 0.5
-    attackMoveDuration: 0.5
+    attackMoveDuration: 0.4
   icon: {fileID: 21300000, guid: 1511692069327e14eb91ae2f83b2ce05, type: 3}
   resourcePath: Hero/Very Heavy Armored Frontier Defender

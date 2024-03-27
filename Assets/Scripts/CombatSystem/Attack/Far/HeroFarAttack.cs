@@ -1,5 +1,6 @@
 using System.Collections;
 using CombatSystem.Attack.Abstracts;
+using CombatSystem.Attack.Factory;
 using CombatSystem.Attack.Projectiles;
 using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
@@ -10,72 +11,33 @@ using UnityEngine;
 
 namespace CombatSystem.Attack.Far
 {
-    public class HeroFarAttack : BaseSingleTargetAttack
+    public class HeroFarAttack : FarAttack
     {
-        private readonly ProjectileType type;
-        private bool IsProjectileHitEnemy;
-        private WaitForSeconds waitForEndAnim;
-        private WaitUntil waitUntilCanCauseDamage;
-        private WaitUntil waitUntilShootDone;
-        private ShootDetect shootDetect;
-
-        public HeroFarAttack(ProjectileType type)
+        int counter = 0;
+        public HeroFarAttack(RangedProjectileType type) : base(type)
         {
-            this.type = type;
         }
 
+        protected override ProjectileBase GetProjectile()
+        {
+            var go = PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, BowAttackTransform.position, AllowGoNextStep, GameTag.Enemy, type);
+            counter++;
 
-        protected override IEnumerator StartBehavior()
+            if (counter > 3)
+            {
+                counter = 0;
+                var pos1 = BowAttackTransform.position + new Vector3(0, 1f);
+                var pos2 = BowAttackTransform.position + new Vector3(0, -1f);
+                PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, pos1, null, GameTag.Enemy, type);
+                PrefabAttackFactoryPool.Instance.SpawnProjectile(Enemy, EntityStats, pos2, null, GameTag.Enemy, type);
+                // go.GetComponent<Projectile>().useVfx = true;
+            }
+            return go;
+        }
+        protected override void PlayAnimationAttack()
         {
             AudioManager.Instance.PlaySFX("Far Attack");
-            var attackTransform = BowAttackTransform;
-            if (type == ProjectileType.Arrow)
-            {
-                PlayAnimation(AnimationType.Shooting);
-            }
-            else
-            {
-                PlayAnimation(AnimationType.Attack);
-                attackTransform = MagicAttackTransform;
-            }
-
-            yield return waitUntilShootDone;
-            if (Enemy == null) yield break;
-            var projectile = SpawnProjectile(Enemy, attackTransform);
-            if (projectile == null) yield break;
-            yield return waitUntilCanCauseDamage;
-            CauseDamage();
-            IsProjectileHitEnemy = false;
-            shootDetect.ResetShoot();
-        }
-
-        protected override string GetEnemyTag()
-        {
-            return GameTag.Enemy;
-        }
-
-        protected ProjectileBase SpawnProjectile(EntityCharacter monster, Transform attackTransform)
-        {
-            var projectile = PrefabAttackFactoryPool.Instance.Get(type);
-            projectile.transform.position = attackTransform.position;
-            projectile.RegisterOnEndVfx(AllowGoNextStep);
-            projectile.Initialized(monster.transform, GameTag.Enemy);
-            return projectile;
-        }
-
-        private void AllowGoNextStep()
-        {
-            IsProjectileHitEnemy = true;
-        }
-
-        public override void GetReference(EntityCharacter newEntityCharacter,
-            Transform attackTransform = null)
-        {
-            base.GetReference(newEntityCharacter, attackTransform);
-            waitUntilShootDone = new WaitUntil(() => shootDetect.ShootDone);
-            waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
-            shootDetect = animator.GetComponent<ShootDetect>();
-            waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
+            PlayAnimation(AnimationType.Shooting);
         }
     }
 }

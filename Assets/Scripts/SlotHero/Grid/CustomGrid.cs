@@ -108,5 +108,13 @@ namespace SlotHero.Grid
             var y = Random.Range(0, height);
             return GetCenterGridWorldPosition(x, y);
         }
+
+        internal void Setup(int _width, int _height, int _cellSize, Vector3 _originalPos)
+        {
+            width = _width;
+            height = _height;
+            cellSize = _cellSize;
+            originPosition = _originalPos;
+        }
     }
 }
