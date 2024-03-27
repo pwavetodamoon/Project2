@@ -48,7 +48,9 @@ MonoBehaviour:
   _levelConfig: {fileID: 11400000, guid: 0fd92441914477e49b047a203d5d3f2b, type: 2}
   _currencyManager: {fileID: 0}
   _slotManager: {fileID: 0}
+  _particalSystems: {fileID: 7350646015142378185}
   heroSlotInGames: []
+  _skillsManager: {fileID: 0}
 --- !u!114 &7350646015142378185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,4 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listParticalSystems:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}

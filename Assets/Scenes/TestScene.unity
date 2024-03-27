@@ -364,17 +364,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 4bb3a75eaa9ee184784341dcceae6205, type: 3}
---- !u!114 &504786669 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
-  m_PrefabInstance: {fileID: 2040708882580555755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf25c34d47df894fadf3c4396e308b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &507864423
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +817,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &912396058 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6966398590890001268, guid: 4fab06cc010f5e04789845f864049599, type: 3}
+  m_PrefabInstance: {fileID: 7526323338827396178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &930732135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,10 +1519,6 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
-      propertyPath: _listParticalSystems.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
       propertyPath: _listParticalSystems.Array.data[0]
       value: 
       objectReference: {fileID: 1335923636}
@@ -1536,14 +1526,14 @@ PrefabInstance:
       propertyPath: _listParticalSystems.Array.data[1]
       value: 
       objectReference: {fileID: 1461960055}
+    - target: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
+      propertyPath: _listParticalSystems.Array.data[2]
+      value: 
+      objectReference: {fileID: 912396058}
     - target: {fileID: 8025750589739058622, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
       propertyPath: _slotManager
       value: 
       objectReference: {fileID: 2018367079}
-    - target: {fileID: 8025750589739058622, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
-      propertyPath: _particalSystems
-      value: 
-      objectReference: {fileID: 504786669}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
