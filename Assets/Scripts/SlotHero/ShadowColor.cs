@@ -4,24 +4,11 @@ namespace SlotHero
 {
     public class ShadowColor : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer ShadowSprite;
-        public Color normalColor;
-        public Color onChooseColor;
-        private bool IsChange = false;
-
+        public ParticleSystem ParticleSystem;
         private void Awake()
         {
-            ShadowSprite.color = normalColor;
+            ParticleSystem.Stop();
         }
 
-        public void SetOriginal()
-        {
-            ShadowSprite.color = normalColor;
-        }
-
-        public void SetOnChoose()
-        {
-            ShadowSprite.color = onChooseColor;
-        }
     }
 }

@@ -1,5 +1,6 @@
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
+using Effects.Skill;
 using LevelAndStats;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace CombatSystem.Attack.Utilities
         private EntityStats EntityStats;
         private float healthRegenDelay;
         private float healthRegenRate = 3;
-
+        private ParticalSystemsManager particalSystemsManager;
 
         private HeroCharacter heroCharacter;
 
@@ -55,6 +56,7 @@ namespace CombatSystem.Attack.Utilities
                     Debug.Log("Health Value:" + value);
                     healthRegenRate = healthRegenRateTime;
                     WorldTextPool.WorldTextPool.Instance.GetText(transform.position, $"+{value}", Color.green);
+                    particalSystemsManager.FindAndPlayEffect(EffectSkillsEnum.HealthEffect);
                 }
                 else
                 {

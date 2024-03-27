@@ -35,7 +35,7 @@ public class HealthBarDynamic : HealthBarBase
             transform.position = new Vector2(position.x + offset.x, position.y + offset.y);
         }
     }
-    private void Destroy()
+    public void Destroy()
     {
         StartCoroutine(DestroyAfter());
     }

@@ -24,12 +24,16 @@ namespace SelectionHero.Ray
                 currentHeroOnDrag.InGameSlotIndex != SlotIsAboveMouse.SlotIndex;
                 if (doesHeroOnDragDifferHeroFromSlot)
                 {
-                    // SlotIsAboveMouse.SetTriggerShadow();
+                    Debug.Log("Play VFX");
+                    //SlotIsAboveMouse.ShadowColor.ParticleSystem.Play();
+                    SlotIsAboveMouse.TriggerVFX();
                 }
             }
             else if (SlotIsAboveMouse != null)
             {
-                // SlotIsAboveMouse.ResetTriggerShadow();
+                Debug.Log("Stop VFX");
+                SlotIsAboveMouse.StopVFX();
+                //SlotIsAboveMouse.ShadowColor.ParticleSystem.Stop();
                 SlotIsAboveMouse = null;
             }
         }

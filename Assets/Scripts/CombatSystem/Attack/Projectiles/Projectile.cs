@@ -1,11 +1,18 @@
+using CombatSystem.Attack.Utilities;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
 {
     public class Projectile : ProjectileBase
     {
-        [SerializeField] private BoxCollider2D BoxCollder2D;
         private readonly float speed = 20;
+        public ProjectileVFX projectileVFX;
+        public bool useVfx;
+        private void Awake()
+        {
+            projectileVFX = GetComponent<ProjectileVFX>();
+
+        }
 
         private bool isOnTarget => Vector3.Distance(transform.position, target.transform.position) < 0.1f;
 
@@ -17,7 +24,14 @@ namespace CombatSystem.Attack.Projectiles
                 MoveToTarget();
         }
 
+        public override void Release()
+        {
+            base.Release();
+            if (useVfx)
+                projectileVFX.PlayAtEnd();
 
+            useVfx = false;
+        }
         private void MoveToTarget()
         {
             var targetPosition = target.transform.position;
