@@ -86,11 +86,19 @@ namespace Item
                     DropConfig.jumpForce,
                     DropConfig.jumpCount,
                     DropConfig.duration)
-                .OnComplete(() => { collider2d.enabled = true; });
+                .OnComplete(() =>
+                {
+                    Collect();
+                    // collider2d.enabled = true;
+                });
         }
         private Vector3 CreateRandom()
         {
             return new Vector3(UnityEngine.Random.Range(-.5f, .5f), UnityEngine.Random.Range(-.5f, .5f));
+        }
+        public void SetDestination(Transform destination)
+        {
+            DestinationTransform = destination;
         }
     }
 }

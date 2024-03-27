@@ -9,7 +9,7 @@ namespace Item
         // Send Data to CurrencyManager
         public override void SendData()
         {
-            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, "+1", Color.yellow);
+            // WorldTextPool.WorldTextPool.Instance.GetText(transform.position, "+1", Color.yellow);
             CurrencyManager.Instance.AddCurrency();
             Signals.Get<SendCurrency>().Dispatch(CurrencyManager.Instance.currency);
         }

@@ -11,6 +11,7 @@ namespace Core.Reward
 {
     public class RewardManager : Singleton<RewardManager>
     {
+        public Transform DestinationTransform;
         public ItemDrop baseCollectPrefab;
 
         public Coin itemCoinPrefab;
@@ -88,7 +89,7 @@ namespace Core.Reward
             itemReward.itemID = item.Name;
             itemReward.SetSprite(item.Sprite);
             itemReward.Jumping(jumpPosition);
-
+            itemReward.SetDestination(DestinationTransform);
             if (!list.Contains(itemReward)) list.Add(itemReward);
 
             return itemReward;

@@ -17,7 +17,7 @@ namespace Core.Currency
         }
         public void AddCurrency()
         {
-            currency += moneyConfig.Get(stageInformation.GetLevelForMonster());
+            currency += moneyConfig.Get(stageInformation.GetLevelForMonster() + 1);
         }
 
         public void RemoveCurrency(int amount)
