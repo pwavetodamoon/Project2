@@ -72,23 +72,30 @@ public class GameManager : MonoBehaviour
         }
       
     }
-
     private void HealTeamSkill()
     {    float healValue = 50f;
-        foreach (var hero in heroSlotInGames)
-        { 
-            hero.currentHero.entityStateManager.EntityStats.IncreaseHealth(healValue);
-            hero.currentHero.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(EffectSkillsEnum.HealthEffect);
-        }
-        _particalSystems.FindAndPlayEffect(EffectSkillsEnum.HealthTeamEffect);
+        heroSlotInGames.ForEach(item => item.currentHero.entityStateManager.EntityStats.IncreaseHealth(healValue));
+        PlayEffectSkill(EffectSkillsEnum.HealthEffect, EffectSkillsEnum.HealthTeamEffect);
     }
     private void FireBallSkill()
     {
         _skillsManager.FireAttack();
+        PlayEffectSkill(EffectSkillsEnum.FireBallEffect, EffectSkillsEnum.FireTeamEffect);
+
     }
     private void FreezeSkill()
     {   
         _skillsManager.FreezeAttack();
+        PlayEffectSkill(EffectSkillsEnum.FreezeEffect, EffectSkillsEnum.FreezeTeamEffect);
+    }
+
+    private void PlayEffectSkill(EffectSkillsEnum effectSkills,EffectSkillsEnum effectSkillsTeam)
+    {
+        foreach (var hero in heroSlotInGames)
+        { 
+            hero.currentHero.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(effectSkills);
+        }
+        _particalSystems.FindAndPlayEffect(effectSkillsTeam);
     }
     private void GetAllHeroesCharacterInScenes()
     {

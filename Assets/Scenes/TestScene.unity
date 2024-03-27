@@ -1254,6 +1254,11 @@ MonoBehaviour:
   image: {fileID: 886202102}
   duration: 1
   durationInTran: 0.5
+--- !u!198 &1461960055 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3689549006641892391, guid: 4fab06cc010f5e04789845f864049599, type: 3}
+  m_PrefabInstance: {fileID: 7526323338827396178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1469212185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1520,9 +1525,17 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
+      propertyPath: _listParticalSystems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
       propertyPath: _listParticalSystems.Array.data[0]
       value: 
       objectReference: {fileID: 1335923636}
+    - target: {fileID: 7350646015142378185, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
+      propertyPath: _listParticalSystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 1461960055}
     - target: {fileID: 8025750589739058622, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
       propertyPath: _slotManager
       value: 
