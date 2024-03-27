@@ -9892,7 +9892,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listParticalSystems:
   - {fileID: 7645108833349614336}
-  - {fileID: 5972611945681689497}
 --- !u!1001 &9011903409939857441
 PrefabInstance:
   m_ObjectHideFlags: 0

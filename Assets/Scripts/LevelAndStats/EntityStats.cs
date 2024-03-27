@@ -37,7 +37,6 @@ namespace LevelAndStats
 
         public void IncreaseHealth(float value)
         {
-            Debug.Log("check");
             structStats.health += value;
 
             if (structStats.health >= structStats.maxHealth) structStats.health = structStats.maxHealth;

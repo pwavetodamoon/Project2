@@ -10,7 +10,6 @@ TagManager:
   - Trigger Enemy
   - Trigger Event
   - TriggerEvent
-  - GameManager
   layers:
   - Default
   - TransparentFX

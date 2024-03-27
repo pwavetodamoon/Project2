@@ -1,35 +1,19 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using CombatSystem.Entity;
 using Core.Currency;
 using Effects.Skill;
 using UnityEngine;
 using LevelAndStats;
-using Sirenix.OdinInspector;
-using SlotHero.SlotInGame;
 using TMPro;
-using Unity.VisualScripting;
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private LevelConfig _levelConfig;
     [SerializeField] private CurrencyManager _currencyManager;
-    [SerializeField] private GameObject _slotManager;
-    [SerializeField] private ParticalSystemsManager _particalSystems;
-    [SerializeField]  private List<HeroSlotInGame> heroSlotInGames = new List<HeroSlotInGame>();
-
     private void Awake()
     {
         _currencyManager = FindObjectOfType<CurrencyManager>();
         Application.targetFrameRate = 60;
     }
-
-    private void Start()
-    {
-        GetAllHeroesCharacterInScenes();
-    }
-
     public void UpgradeHeroLevel(HeroCharacter heroCharacter , TextMeshProUGUI textMeshProUGUI)
     {
         HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
@@ -53,29 +37,4 @@ public class GameManager : MonoBehaviour
         HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
         return Convert.ToInt32( _levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
-    public void HealAllHeroes( )
-    {
-        float healValue = 50f;
-        foreach (var hero in heroSlotInGames)
-        { 
-            hero.currentHero.entityStateManager.EntityStats.IncreaseHealth(healValue);
-           hero.currentHero.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(EffectSkillsEnum.HealthEffect);
-           
-        }
-        _particalSystems.FindAndPlayEffect(EffectSkillsEnum.HealthTeamEffect);
-    }
-    private void GetAllHeroesCharacterInScenes()
-    {
-        HeroSlotInGame[] heroSlots = _slotManager.GetComponentsInChildren<HeroSlotInGame>();
-        heroSlotInGames.Clear();
-        for (int i = 0; i < heroSlots.Length ; i++)
-        {
-            if (heroSlots[i].SlotIndex == -1)
-            {
-                continue;
-            }
-            heroSlotInGames.Add(heroSlots[i]);
-        }
-    }
-    
 }
