@@ -184,6 +184,9 @@ MonoBehaviour:
   _icon: {fileID: 6258493002025093373}
   _coolDownImage: {fileID: 7061582441740159833}
   _textCoolDown: {fileID: 457497071056602039}
+  _cooldown:
+    NextActionTime: 0
+    CoolDownTime: 0
   _canUseSkill: 0
   _skillConfig: {fileID: 0}
 --- !u!222 &1569903343746436333

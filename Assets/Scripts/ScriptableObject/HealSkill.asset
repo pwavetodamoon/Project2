@@ -17,8 +17,5 @@ MonoBehaviour:
   _iconSkill: {fileID: 21300000, guid: e742e3b24debdf84791d722165ae4dea, type: 3}
   _imageCoolDown: {fileID: 0}
   _coolDownText: {fileID: 0}
-  _coolDownSkill: 0
-  _cooldown:
-    NextActionTime: 0
-    CoolDownTime: 5
+  _coolDownSkill: 10
   _canUse: 1
