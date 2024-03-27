@@ -25,6 +25,7 @@ namespace CombatSystem.Attack.Projectiles
         {
             OnEndAttack?.Invoke();
             ReleaseCallback?.Invoke(this);
+            if (target == null) return;
             if (target.TryGetComponent(out IDamageable damageable))
             {
                 damageable?.TakeDamage(EntityStats);
