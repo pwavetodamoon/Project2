@@ -5,26 +5,29 @@ using CombatSystem.Entity.Utilities;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class HealthBarDynamic : HealthBarBase
 {
     [SerializeField] private EntityCharacter target;
     public Vector2 offset = Vector2.zero;
+    public EntityAction entityAction;
     public void SetTarget(EntityCharacter target)
     {
         FadeColorBack();
         this.target = target;
-        target.GetComponent<EntityTakeDamage>().OnDie += Destroy;
-        target.GetEntityStats().OnHealthChange += SetHealthBar;
+        entityAction = target.GetEntityAction();
+        entityAction.OnDie += Destroy;
+        entityAction.OnHealthChange += SetHealthBar;
     }
     protected override void OnDisable()
     {
         base.OnDisable();
         if (target != null)
         {
-            target.GetComponent<EntityTakeDamage>().OnDie -= Destroy;
-            target.GetEntityStats().OnHealthChange -= SetHealthBar;
+            entityAction.OnDie -= Destroy;
+            entityAction.OnHealthChange -= SetHealthBar;
         }
     }
     private void Update()

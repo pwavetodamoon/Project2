@@ -1,3 +1,4 @@
+using CombatSystem.Entity;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,9 +8,7 @@ namespace LevelAndStats
     public class EntityStats : MonoBehaviour
     {
         [SerializeField] protected StructStats structStats;
-
-        public Action<float> OnHealthChange;
-
+        [SerializeField] EntityAction entityAction;
         public bool IsCritical { get; private set; }
 
         public float Health() => structStats.health;
@@ -43,7 +42,7 @@ namespace LevelAndStats
             if (structStats.health >= structStats.maxHealth) structStats.health = structStats.maxHealth;
             ChangeHealthEvent();
         }
-        public void ChangeHealthEvent() => OnHealthChange?.Invoke(GetPercentHealth);
+        public void ChangeHealthEvent() => entityAction.OnHealthChange?.Invoke(GetPercentHealth);
         public float GetDamage()
         {
             var damage = structStats.baseDamage;

@@ -17,7 +17,7 @@ namespace CombatSystem.Entity
         protected override void Awake()
         {
             base.Awake();
-            EntityTakeDamage.OnDie += rewardSignal.SendSignal;
+            entityAction.OnDie += rewardSignal.SendSignal;
         }
         private void Start()
         {
@@ -28,12 +28,6 @@ namespace CombatSystem.Entity
             }
             attackControl.Create(monsterSingleAttackFactory);
         }
-
-        private void OnDisable()
-        {
-            EntityTakeDamage.OnDie -= rewardSignal.SendSignal;
-        }
-
 
         public override void RegisterObject()
         {

@@ -17,7 +17,7 @@ namespace SlotHero.SlotInGame
         public void SetHeroIntoStandPosition(HeroCharacter hero)
         {
             if (hero == null) return;
-            hero.GetEntityStats().OnHealthChange = null;
+            hero.GetEntityAction().OnHealthChange = null;
             //hero.gameObject.SetActive(false);
             hero.transform.position = transform.position;
             AudioManager.Instance.PlaySFX("Remove Champion");
@@ -37,7 +37,7 @@ public class SlotInGameBase : MonoBehaviour
     public virtual void SetHeroIntoStandPosition(HeroCharacter hero)
     {
         if (hero == null) return;
-        hero.GetComponent<EntityCharacter>().GetEntityStats().OnHealthChange = null;
+        hero.GetComponent<EntityCharacter>().GetEntityAction().OnHealthChange = null;
         //hero.gameObject.SetActive(false);
         hero.transform.position = transform.position;
         AudioManager.Instance.PlaySFX("Remove Champion");

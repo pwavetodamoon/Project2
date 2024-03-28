@@ -16,11 +16,7 @@ namespace CombatSystem.Entity.Utilities
 
         [SerializeField] private EntityStats EntityStats;
 
-        public Action OnRebirth;
-
-        public event Action OnDie;
-
-        public event Action OnTakeDamage;
+        [SerializeField] private EntityAction entityAction;
 
         private void Start()
         {
@@ -29,11 +25,6 @@ namespace CombatSystem.Entity.Utilities
             animation_Base = entity.GetAnimatorBase();
         }
 
-        private void OnDisable()
-        {
-            OnDie = null;
-            OnTakeDamage = null;
-        }
 
         private void SpawnText(float damage)
         {
@@ -47,7 +38,7 @@ namespace CombatSystem.Entity.Utilities
             EntityStats.DecreaseHealth(damage);
             if (EntityStats.Health() <= 0)
             {
-                OnDie?.Invoke();
+                entityAction.OnDie?.Invoke();
                 return;
             }
 
@@ -57,7 +48,7 @@ namespace CombatSystem.Entity.Utilities
 
         public void TakeDamage(EntityStats enemy)
         {
-            OnTakeDamage?.Invoke();
+            entityAction.OnTakeDamage?.Invoke();
             var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemy);
             TakeDamage(damageOfEnemy);
         }

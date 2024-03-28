@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fcc26b041ffe94d961ac7c88d0fd25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bowAttackTransform: {fileID: 0}
-  magicAttackTransform: {fileID: 0}
+  bowAttackTransform: {fileID: 735686897749828075}
+  magicAttackTransform: {fileID: 6336699403100041604}
   entityCharacter: {fileID: 1935633485572637146}
 --- !u!1 &1392802278222879842
 GameObject:
@@ -9748,8 +9748,8 @@ MonoBehaviour:
   healthRegenPercentDefault: 0.1
   entity: {fileID: 0}
   particalSystemsManager: {fileID: 6512530285820067865}
-  EntityTakeDamage: {fileID: 2176308543840946561}
   EntityStats: {fileID: 5101025433459023057}
+  entityAction: {fileID: 0}
 --- !u!1 &3539900244046420425
 GameObject:
   m_ObjectHideFlags: 0
@@ -9891,6 +9891,7 @@ MonoBehaviour:
   animation_Base: {fileID: 4331602062921179019}
   entity: {fileID: 1935633485572637146}
   EntityStats: {fileID: 5101025433459023057}
+  entityAction: {fileID: 0}
 --- !u!1 &4721942848255288702
 GameObject:
   m_ObjectHideFlags: 0
@@ -9940,6 +9941,7 @@ GameObject:
   - component: {fileID: 9071444663126028510}
   - component: {fileID: 6512530285820067865}
   - component: {fileID: 5966265637540128700}
+  - component: {fileID: 6235479006327011089}
   m_Layer: 7
   m_Name: Hero
   m_TagString: Hero
@@ -9983,9 +9985,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator_Base: {fileID: 4331602062921179019}
   attackControl: {fileID: 1926153369019233757}
-  attackManager: {fileID: 2791888023047373045}
+  entityCombat: {fileID: 0}
   entityStats: {fileID: 5101025433459023057}
   EntityTakeDamage: {fileID: 0}
+  entityAction: {fileID: 0}
   EntityReferences: {fileID: 5966265637540128700}
   characterEnumType: 0
   modelTransform: {fileID: 9016102133458346649}
@@ -10077,6 +10080,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1505c9e65a2960042858839a69f5435b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6235479006327011089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034959875011442393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6f79222a1354d498135dcf3f23dc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7298545090392537766
@@ -19737,6 +19752,7 @@ MonoBehaviour:
     critDamage: 0
     attackCoolDown: 0
     attackMoveDuration: 0
+  entityAction: {fileID: 6235479006327011089}
   heroData: {fileID: 0}
 --- !u!1 &8691026868659513638
 GameObject:

@@ -36,7 +36,8 @@ namespace SlotHero.SlotInGame
             if (currentHero != null)
             {
                 var entityStats = currentHero.GetEntityStats();
-                entityStats.OnHealthChange = healthBar.SetHealthBar;
+                var entityAction = currentHero.GetEntityAction();
+                entityAction.OnHealthChange = healthBar.SetHealthBar;
                 entityStats.ChangeHealthEvent();
 
                 currentHero.transform.position = characterStand.position;

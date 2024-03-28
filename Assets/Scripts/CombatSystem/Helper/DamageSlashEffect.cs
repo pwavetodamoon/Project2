@@ -1,3 +1,4 @@
+using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -11,27 +12,22 @@ namespace CombatSystem.Helper
         private readonly float slashDuration = 0.1f;
         private readonly WaitForEndOfFrame waitForEndOfFrame = new();
         private float slashTimer;
-        private Material defaultMaterial;
         private bool isSlashing;
+        private Material defaultMaterial;
         private SpriteRenderer[] spriteRenderers;
-        private EntityTakeDamage EntityStateManager;
+        private EntityAction entityAction;
 
         public Transform modelTransform;
         public Transform parent;
 
-        private void Awake()
+        private void Start()
         {
             parent = transform.parent;
             spriteRenderers = modelTransform.GetComponentsInChildren<SpriteRenderer>();
-            EntityStateManager = parent.GetComponentInChildren<EntityTakeDamage>();
+            entityAction = GetComponentInParent<EntityCharacter>().GetEntityAction();
             if (spriteRenderers.Length > 0)
                 defaultMaterial = spriteRenderers[0].material;
-            EntityStateManager.OnTakeDamage += TriggerFlashEffect;
-        }
-
-        private void OnDisable()
-        {
-            EntityStateManager.OnTakeDamage -= TriggerFlashEffect;
+            entityAction.OnTakeDamage += TriggerFlashEffect;
         }
 
         public void TriggerFlashEffect()

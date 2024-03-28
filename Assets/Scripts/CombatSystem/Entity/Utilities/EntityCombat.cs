@@ -56,7 +56,14 @@ namespace CombatSystem.Entity.Utilities
 
         public bool IsAllowCounter() => allowCounter;
 
-        public bool IsOutOfHealth() => EntityHelper.sumOfDamage >= entityStats.Health();
+        public bool IsOutOfHealth()
+        {
+            if (entityStats == null)
+            {
+                Debug.Log("is null");
+            }
+            return EntityHelper.sumOfDamage >= entityStats.Health();
+        }
 
         public void SetAllowExecuteAttackValue(bool value) => allowExecuteAnotherAttack = value;
 

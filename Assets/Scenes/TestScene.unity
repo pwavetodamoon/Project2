@@ -20226,6 +20226,7 @@ MonoBehaviour:
   animation_Base: {fileID: 7537757522340441640}
   entity: {fileID: 3439226937766992324}
   EntityStats: {fileID: 1460957052}
+  entityAction: {fileID: 0}
 --- !u!4 &1040962092
 Transform:
   m_ObjectHideFlags: 0
@@ -20511,7 +20512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
   animatorBase: {fileID: 0}
-  EntityStateManager: {fileID: 0}
+  entityAction: {fileID: 0}
   monsterCharacter: {fileID: 0}
   model: {fileID: 0}
 --- !u!1 &1439957531
@@ -20686,6 +20687,7 @@ MonoBehaviour:
     critDamage: 0
     attackCoolDown: 0
     attackMoveDuration: 0
+  entityAction: {fileID: 0}
   EnemyData: {fileID: 0}
 --- !u!198 &1461960055 stripped
 ParticleSystem:
@@ -21277,9 +21279,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator_Base: {fileID: 0}
   attackControl: {fileID: 0}
-  attackManager: {fileID: 0}
+  entityCombat: {fileID: 0}
   entityStats: {fileID: 0}
   EntityTakeDamage: {fileID: 0}
+  entityAction: {fileID: 0}
   EntityReferences: {fileID: 0}
   monsterSingleAttackFactory: {fileID: 11400000, guid: b6ae625281bd123469495f8666d47870, type: 2}
   HealthBarOffset: {x: 0, y: 1.2}

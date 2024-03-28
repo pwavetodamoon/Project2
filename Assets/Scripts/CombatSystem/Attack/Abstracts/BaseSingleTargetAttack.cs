@@ -126,7 +126,8 @@ namespace CombatSystem.Attack.Abstracts
             }
             // if before attack, the enemy is out of health, then return false
             // if not then increase the attacker count and return true
-            IAttackerCounter = Enemy.GetComponent<IAttackerCounter>();
+            IAttackerCounter = Enemy.GetEntityCombat();
+            //TODO: Check if the enemy is out of health
             if (IAttackerCounter.IsOutOfHealth() == false)
             {
                 IncreaseAttackerCount();

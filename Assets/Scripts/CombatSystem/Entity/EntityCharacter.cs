@@ -13,11 +13,10 @@ namespace CombatSystem.Entity
         [SerializeField] protected Animator_Base animator_Base;
         [SerializeField] protected EntityAttackControl attackControl;
         [SerializeField] protected IGetAttackerTransform attackerTransform;
-        [SerializeField] protected EntityCombat attackManager;
+        [SerializeField] protected EntityCombat entityCombat;
         [SerializeField] protected EntityStats entityStats;
         [SerializeField] protected EntityTakeDamage EntityTakeDamage;
-        protected EntityTakeDamage entityTakeDamage;
-
+        [SerializeField] protected EntityAction entityAction;
         // Support for getting reference from children or parent
         [SerializeField] protected EntityReferences EntityReferences;
 
@@ -26,9 +25,10 @@ namespace CombatSystem.Entity
             animator_Base = EntityReferences.GetRef<Animator_Base>();
             attackControl = EntityReferences.GetRef<EntityAttackControl>();
             attackerTransform = EntityReferences.GetRef<IGetAttackerTransform>();
-            attackManager = EntityReferences.GetRef<EntityCombat>();
+            entityCombat = EntityReferences.GetRef<EntityCombat>();
             entityStats = EntityReferences.GetRef<EntityStats>();
             EntityTakeDamage = EntityReferences.GetRef<EntityTakeDamage>();
+            entityAction = EntityReferences.GetRef<EntityAction>();
         }
 
         public bool EntityInAttackState() => attackControl.IsAttacking();
@@ -37,11 +37,12 @@ namespace CombatSystem.Entity
 
         public Transform GetAttackerTransform() => attackerTransform.GetAttackerTransform();
 
-        public EntityCombat GetEntityCombat() => attackManager;
+        public EntityCombat GetEntityCombat() => entityCombat;
 
         public EntityStats GetEntityStats() => entityStats;
 
         public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
+        public EntityAction GetEntityAction() => entityAction;
 
         public virtual void RegisterObject()
         {
@@ -55,12 +56,12 @@ namespace CombatSystem.Entity
 
         public void SetAttackState(bool state)
         {
-            if (attackManager == null)
+            if (entityCombat == null)
             {
-                attackManager = GetComponent<EntityCombat>();
+                entityCombat = GetComponentInChildren<EntityCombat>();
             }
-            attackManager.SetAllowExecuteAttackValue(state);
-            attackManager.SetTimeCounterValue(state);
+            entityCombat.SetAllowExecuteAttackValue(state);
+            entityCombat.SetTimeCounterValue(state);
         }
 
         public void StopExecute()

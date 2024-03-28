@@ -3,6 +3,7 @@ using CombatSystem.Entity.Utilities;
 using Effects.Skill;
 using LevelAndStats;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CombatSystem.Attack.Utilities
 {
@@ -20,24 +21,22 @@ namespace CombatSystem.Attack.Utilities
         [SerializeField] private HeroCharacter entity;
 
         [SerializeField] private ParticalSystemsManager particalSystemsManager;
-        [SerializeField] private EntityTakeDamage EntityTakeDamage;
         [SerializeField] private EntityStats EntityStats;
-
+        [SerializeField] private EntityAction entityAction;
         private void Start()
         {
             entity = GetComponentInParent<HeroCharacter>();
 
             particalSystemsManager = GetComponentInParent<ParticalSystemsManager>();
-            EntityTakeDamage = entity.GetEntityTakeDamage();
             EntityStats = entity.GetEntityStats();
-
+            entityAction = entity.GetEntityAction();
             RegisterEvent();
         }
 
         private void RegisterEvent()
         {
-            EntityTakeDamage.OnTakeDamage += TriggerHealth;
-            EntityTakeDamage.OnDie += StopHealth;
+            entityAction.OnTakeDamage += TriggerHealth;
+            entityAction.OnDie += StopHealth;
             EntityStats = entity.GetEntityStats();
         }
 
@@ -50,7 +49,7 @@ namespace CombatSystem.Attack.Utilities
                 {
                     entity.IsDead = false;
                     healthRegenPercent = healthRegenPercentDefault;
-                    EntityTakeDamage.OnRebirth?.Invoke();
+                    entityAction.OnRebirth?.Invoke();
                 }
 
                 return;
@@ -76,11 +75,6 @@ namespace CombatSystem.Attack.Utilities
             {
                 healthRegenDelay -= Time.deltaTime;
             }
-        }
-
-        private void OnDisable()
-        {
-            EntityTakeDamage.OnTakeDamage -= TriggerHealth;
         }
 
         private void StopHealth()

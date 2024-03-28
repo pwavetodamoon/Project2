@@ -23,12 +23,12 @@ namespace CombatSystem.Entity
         public SortingLayerByYAxis SortingLayerByYAxis => sortingLayerByYAxis;
         public int InGameSlotIndex { get; private set; }
 
-        protected override void Awake()
+
+        private void Start()
         {
-            base.Awake();
             gameObject.layer = LayerMask.NameToLayer(GameLayerMask.HERO);
-            EntityTakeDamage.OnDie += OnDead;
-            EntityTakeDamage.OnRebirth += OnRebirth;
+            entityAction.OnDie += OnDead;
+            entityAction.OnRebirth += OnRebirth;
         }
 
         private void OnDead()
