@@ -29,7 +29,6 @@ namespace SelectionHero
             if (OnDragInUI && heroAttachedInUI)
             {
                 currentHeroAttached = heroAttachedInUI;
-
             }
             else if (heroAttachedInUI == null && !OnDragInUI && CombatEntitiesManager.Instance.GetHeroCount() > 1)
             {

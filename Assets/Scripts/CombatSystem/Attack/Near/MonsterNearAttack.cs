@@ -27,8 +27,8 @@ namespace CombatSystem.Attack.Near
         {
             base.GetReference(newEntityCharacter, attackTransform);
             PlayAnimation(AnimationType.Walk);
-            var attackManager = newEntityCharacter.GetComponent<AttackManager>();
-            var attackControl = newEntityCharacter.GetComponent<AttackControl>();
+            var attackManager = newEntityCharacter.GetComponent<EntityCombat>();
+            var attackControl = newEntityCharacter.GetComponent<EntityAttackControl>();
             var animator_Base = newEntityCharacter.GetComponentInChildren<Animator_Base>();
             MonsterMoveAI.GetRef(this, attackManager, animator_Base);
 
@@ -64,13 +64,13 @@ namespace CombatSystem.Attack.Near
     {
         private MonsterNearAttack monsterNearAttack;
         private Animator_Base animator_Base;
-        private AttackManager attackManager;
+        private EntityCombat attackManager;
         private EntityCharacter Enemy => monsterNearAttack.GetEnemy();
         private EntityCharacter currentEntity => monsterNearAttack.GetEntityCharacter();
         public bool triggerAttack;
         private float distance;
 
-        public void GetRef(MonsterNearAttack monsterNearAttack, AttackManager attackManager, Animator_Base animator_Base)
+        public void GetRef(MonsterNearAttack monsterNearAttack, EntityCombat attackManager, Animator_Base animator_Base)
         {
             this.monsterNearAttack = monsterNearAttack;
             this.attackManager = attackManager;

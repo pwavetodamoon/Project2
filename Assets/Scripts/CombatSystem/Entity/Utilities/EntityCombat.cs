@@ -8,24 +8,38 @@ using UnityEngine;
 
 namespace CombatSystem.Entity.Utilities
 {
-    public class AttackManager : MonoBehaviour, IAttackerCounter
+    public class EntityCombat : MonoBehaviour, IAttackerCounter
     {
-        [SerializeField] protected bool allowCounter = true;
-        [SerializeField] protected bool allowExecuteAnotherAttack = true;
         private Animator_Base animator_base;
-        private EntityCharacter entity;
+        [SerializeField] private EntityCharacter entity;
         private EntityHelper EntityHelper;
         private EntityStats entityStats;
+        [SerializeField] protected bool allowCounter = true;
+        [SerializeField] protected bool allowExecuteAnotherAttack = true;
         public int Count { get; set; }
 
-        private void Awake()
+        private void Start()
         {
             entity = GetComponent<EntityCharacter>();
             entityStats = entity.GetEntityStats();
-            EntityHelper = new EntityHelper(entityStats);
             animator_base = entity.GetAnimatorBase();
+            EntityHelper = new EntityHelper(entityStats);
         }
 
+        private bool CanChangeAnimation() => entity != null
+        && entity.EntityInAttackState() == false
+        && entityStats.Health() > 0;
+
+        public bool AttackedByEnemies() => Count > 0;
+
+        public void DecreaseAttackerCount(EntityStats entity1)
+        {
+            EntityHelper.Remove(entity1);
+            if (--Count < 0 && CanChangeAnimation())
+            {
+                animator_base.ChangeAnimation(AnimationType.Walk);
+            }
+        }
 
         public void IncreaseAttackerCount(EntityStats entity1)
         {
@@ -38,32 +52,14 @@ namespace CombatSystem.Entity.Utilities
             ++Count;
         }
 
-        public void DecreaseAttackerCount(EntityStats entity1)
-        {
-            EntityHelper.Remove(entity1);
-            if (--Count < 0 && CanChangeAnimation())
-            {
-                animator_base.ChangeAnimation(AnimationType.Walk);
-            }
-        }
-
-        public bool IsOutOfHealth() => EntityHelper.sumOfDamage >= entityStats.Health();
-
-        private bool CanChangeAnimation() => entity != null
-        && entity.EntityInAttackState() == false
-        && entityStats.Health() > 0;
-
-        public bool AttackedByEnemies() => Count > 0;
-
         public bool IsAllowAttack() => allowExecuteAnotherAttack;
 
-
         public bool IsAllowCounter() => allowCounter;
+
+        public bool IsOutOfHealth() => EntityHelper.sumOfDamage >= entityStats.Health();
 
         public void SetAllowExecuteAttackValue(bool value) => allowExecuteAnotherAttack = value;
 
         public bool SetTimeCounterValue(bool value) => allowCounter = value;
-
-
     }
 }

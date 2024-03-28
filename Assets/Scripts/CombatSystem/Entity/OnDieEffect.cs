@@ -15,7 +15,7 @@ public class OnDieEffect : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator_Base animatorBase;
     [SerializeField] private ShakeMultiplierTimes shakeEntityEffect;
-    [SerializeField] private EntityStateManager EntityStateManager;
+    [SerializeField] private EntityTakeDamage EntityStateManager;
     [SerializeField] private MonsterCharacter monsterCharacter;
 
     private void Start()
@@ -25,7 +25,7 @@ public class OnDieEffect : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animatorBase = monsterCharacter.GetAnimatorBase();
         time = animatorBase.GetAnimationLength(AnimationType.Dying);
-        EntityStateManager = GetComponent<EntityStateManager>();
+        EntityStateManager = GetComponent<EntityTakeDamage>();
         EntityStateManager.OnDie += OnDie;
         shakeEntityEffect = new ShakeMultiplierTimes(transform, 5, 0.1f);
 

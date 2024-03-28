@@ -9,40 +9,35 @@ namespace CombatSystem.Entity
 {
     public abstract class EntityCharacter : MonoBehaviour, IEntity
     {
-        protected AttackControl attackControl;
-        protected IGetAttackerTransform attackerTransform;
-        protected AttackManager attackManager;
-        protected EntityStats entityStats;
-        protected Animator_Base animator_Base;
+        [SerializeField] protected Animator_Base animator_Base;
+        [SerializeField] protected EntityAttackControl attackControl;
+        [SerializeField] protected IGetAttackerTransform attackerTransform;
+        [SerializeField] protected EntityCombat attackManager;
+        [SerializeField] protected EntityStats entityStats;
+        [SerializeField] protected EntityTakeDamage EntityTakeDamage;
+        protected EntityTakeDamage entityTakeDamage;
+        // Support for getting reference from children or parent
+        [SerializeField] protected EntityReferences EntityReferences;
         protected virtual void Awake()
         {
-            attackControl = GetComponent<AttackControl>();
-            attackerTransform = GetComponent<IGetAttackerTransform>();
-            attackManager = GetComponent<AttackManager>();
-            entityStats = GetComponent<EntityStats>();
-            animator_Base = GetComponentInChildren<Animator_Base>();
+            animator_Base = EntityReferences.GetRef<Animator_Base>();
+            attackControl = EntityReferences.GetRef<EntityAttackControl>();
+            attackerTransform = EntityReferences.GetRef<IGetAttackerTransform>();
+            attackManager = EntityReferences.GetRef<EntityCombat>();
+            entityStats = EntityReferences.GetRef<EntityStats>();
+            EntityTakeDamage = EntityReferences.GetRef<EntityTakeDamage>();
+
         }
-        public AttackManager GetAttackManager()
-        {
-            return attackManager;
-        }
-        public EntityStats GetEntityStats()
-        {
-            return entityStats;
-        }
-        public Animator_Base GetAnimatorBase()
-        {
-            return animator_Base;
-        }
-        public void SetAttackState(bool state)
-        {
-            if (attackManager == null)
-            {
-                attackManager = GetComponent<AttackManager>();
-            }
-            attackManager.SetAllowExecuteAttackValue(state);
-            attackManager.SetTimeCounterValue(state);
-        }
+        public bool EntityInAttackState() => attackControl.IsAttacking();
+        public Animator_Base GetAnimatorBase()  => animator_Base;
+        public Transform GetAttackerTransform() => attackerTransform.GetAttackerTransform();
+
+        public EntityCombat GetEntityCombat() => attackManager;
+
+        public EntityStats GetEntityStats() => entityStats;
+        public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
+
+
         public virtual void RegisterObject()
         {
             SetAttackState(true);
@@ -52,16 +47,16 @@ namespace CombatSystem.Entity
         {
             SetAttackState(false);
         }
-        public bool EntityInAttackState()
-        {
-            return attackControl.IsAttacking();
-        }
 
-        public Transform GetAttackerTransform()
+        public void SetAttackState(bool state)
         {
-            return attackerTransform.GetAttackerTransform();
+            if (attackManager == null)
+            {
+                attackManager = GetComponent<EntityCombat>();
+            }
+            attackManager.SetAllowExecuteAttackValue(state);
+            attackManager.SetTimeCounterValue(state);
         }
-
         public void StopExecute()
         {
             attackControl.StopExecute();

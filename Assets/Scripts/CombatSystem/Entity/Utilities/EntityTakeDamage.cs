@@ -1,28 +1,30 @@
-using System;
 using CombatSystem.Attack.Utilities;
 using CombatSystem.Helper;
 using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace CombatSystem.Entity.Utilities
 {
-    public class EntityStateManager : MonoBehaviour, IDamageable
+    public class EntityTakeDamage : MonoBehaviour, IDamageable
     {
-        private EntityCharacter entity;
+        [SerializeField] private Animator_Base animation_Base;
 
-        public event Action OnTakeDamage;
-        public event Action OnDie;
+        [SerializeField] private EntityCharacter entity;
 
-        public EntityStats EntityStats;
-        private Animator_Base animation_Base;
+        [SerializeField] private EntityStats EntityStats;
+
         public Action OnRebirth;
 
-        private void Awake()
+        public event Action OnDie;
+
+        public event Action OnTakeDamage;
+        private void Start()
         {
-            entity = GetComponent<EntityCharacter>();
+            entity = GetComponentInParent<EntityCharacter>();
             EntityStats = entity.GetEntityStats();
             animation_Base = entity.GetAnimatorBase();
         }
@@ -32,13 +34,13 @@ namespace CombatSystem.Entity.Utilities
             OnDie = null;
             OnTakeDamage = null;
         }
-        public void TakeDamage(EntityStats enemy)
-        {
-            OnTakeDamage?.Invoke();
-            var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemy);
-            TakeDamage(damageOfEnemy);
 
+        private void SpawnText(float damage)
+        {
+            var builder = "-" + damage;
+            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder.ToString(), Color.red);
         }
+
         private void TakeDamage(float damage)
         {
             SpawnText(damage);
@@ -53,18 +55,11 @@ namespace CombatSystem.Entity.Utilities
             // Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
         }
 
-        private void SpawnText(float damage)
+        public void TakeDamage(EntityStats enemy)
         {
-            var builder = "-" + damage;
-            WorldTextPool.WorldTextPool.Instance.GetText(transform.position, builder.ToString(), Color.red);
+            OnTakeDamage?.Invoke();
+            var damageOfEnemy = EntityStatsHelp.CalculatorFinalDamage(EntityStats, enemy);
+            TakeDamage(damageOfEnemy);
         }
-
-        [Button]
-        private void DieInvoke()
-        {
-            EntityStats.DecreaseHealth(120);
-        }
-
-
     }
 }

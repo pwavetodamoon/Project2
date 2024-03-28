@@ -27,7 +27,7 @@ namespace CombatSystem.Attack.Abstracts
 
         private float WaitTimeToFindEnemy = 0.1f;
 
-        [SerializeField] private AttackManager attackManager;
+        [SerializeField] private EntityCombat attackManager;
         public bool IsActive => isActive;
         public bool IsValidate { get; private set; }
         private Action onEndAttack;
@@ -37,7 +37,7 @@ namespace CombatSystem.Attack.Abstracts
         {
             entityCharacter = newEntityCharacter;
             EntityStats = entityCharacter.GetEntityStats();
-            attackManager = entityCharacter.GetAttackManager();
+            attackManager = entityCharacter.GetEntityCombat();
             animator = entityCharacter.GetAnimatorBase();
             BowAttackTransform = attackTransform;
             IsValidate = true;

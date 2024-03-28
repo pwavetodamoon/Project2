@@ -14,13 +14,13 @@ namespace CombatSystem.Entity
     {
 
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
-        protected EntityStateManager EntityStateManager;
+        protected EntityTakeDamage EntityStateManager;
         internal HealthBarDynamic healthBar;
         public Vector2 HealthBarOffset;
         protected override void Awake()
         {
             base.Awake();
-            EntityStateManager = GetComponent<EntityStateManager>();
+            EntityStateManager = GetComponent<EntityTakeDamage>();
             EntityStateManager.OnDie += EntityStateManagerOnDie;
 
         }

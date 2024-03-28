@@ -10,7 +10,7 @@ namespace SelectionHero.Ray
         public HeroCharacter currentHero;
         public Vector2 mousePosition;
         public bool IsHandleHero;
-        private AttackManager attackManager;
+        private EntityCombat entityCombat;
         private SlotManager slotManager;
 
         private void Awake()
@@ -28,12 +28,12 @@ namespace SelectionHero.Ray
                     if (CanHoldHeroInMouse())
                     {
                         MoveHeroByMouse();
-                        currentHero.sortingLayerByYAxis.PauseSortingLayer();
-                        currentHero.sortingLayerByYAxis.SetOrderToHighest();
+                        currentHero.SortingLayerByYAxis.PauseSortingLayer();
+                        currentHero.SortingLayerByYAxis.SetOrderToHighest();
                     }
                     else
                     {
-                        currentHero.sortingLayerByYAxis.ResumeSortingLayer();
+                        currentHero.SortingLayerByYAxis.ResumeSortingLayer();
                         PutHeroBack();
                         ResetCurrentHeroRef();
                     }
@@ -41,7 +41,7 @@ namespace SelectionHero.Ray
             }
             else
             {
-                currentHero?.sortingLayerByYAxis.ResumeSortingLayer();
+                currentHero?.SortingLayerByYAxis.ResumeSortingLayer();
                 var swapFinished = SwapHero();
                 if (!swapFinished) PutHeroBack();
 
@@ -52,12 +52,12 @@ namespace SelectionHero.Ray
 
         private bool CanHoldHeroInMouse()
         {
-            return currentHero.EntityInAttackState() == false && attackManager.AttackedByEnemies() == false;
+            return currentHero.EntityInAttackState() == false && entityCombat.AttackedByEnemies() == false;
         }
 
         private bool CannotMoveHero()
         {
-            return currentHero == null || attackManager == null || currentHero.IsDead;
+            return currentHero == null || entityCombat == null || currentHero.IsDead;
         }
 
         private void GetHeroReferences(HeroCharacter hero)
@@ -65,7 +65,7 @@ namespace SelectionHero.Ray
             if (hero != null && currentHero == null)
             {
                 currentHero = hero;
-                attackManager = hero.GetComponent<AttackManager>();
+                entityCombat = hero.GetEntityCombat();
             }
         }
 
@@ -93,7 +93,7 @@ namespace SelectionHero.Ray
         private void ResetCurrentHeroRef()
         {
             currentHero = null;
-            attackManager = null;
+            entityCombat = null;
         }
     }
 }

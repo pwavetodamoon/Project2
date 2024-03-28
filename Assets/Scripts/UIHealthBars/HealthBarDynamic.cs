@@ -15,7 +15,7 @@ public class HealthBarDynamic : HealthBarBase
     {
         FadeColorBack();
         this.target = target;
-        target.GetComponent<EntityStateManager>().OnDie += Destroy;
+        target.GetComponent<EntityTakeDamage>().OnDie += Destroy;
         target.GetEntityStats().OnHealthChange += SetHealthBar;
     }
     protected override void OnDisable()
@@ -23,7 +23,7 @@ public class HealthBarDynamic : HealthBarBase
         base.OnDisable();
         if (target != null)
         {
-            target.GetComponent<EntityStateManager>().OnDie -= Destroy;
+            target.GetComponent<EntityTakeDamage>().OnDie -= Destroy;
             target.GetEntityStats().OnHealthChange -= SetHealthBar;
         }
     }

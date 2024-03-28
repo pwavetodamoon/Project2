@@ -7,18 +7,23 @@ namespace CombatSystem.Helper
 {
     public class DamageSlashEffect : MonoBehaviour
     {
-        [SerializeField] [Required] private Material slashMaterial;
+        [SerializeField][Required] private Material slashMaterial;
         private readonly float slashDuration = 0.1f;
         private readonly WaitForEndOfFrame waitForEndOfFrame = new();
         private float slashTimer;
         private Material defaultMaterial;
         private bool isSlashing;
         private SpriteRenderer[] spriteRenderers;
-        private EntityStateManager EntityStateManager;
+        private EntityTakeDamage EntityStateManager;
+
+        public Transform modelTransform;
+        public Transform parent;
+
         private void Awake()
         {
-            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-            EntityStateManager = GetComponent<EntityStateManager>();
+            parent = transform.parent;
+            spriteRenderers = modelTransform.GetComponentsInChildren<SpriteRenderer>();
+            EntityStateManager = parent.GetComponentInChildren<EntityTakeDamage>();
             if (spriteRenderers.Length > 0)
                 defaultMaterial = spriteRenderers[0].material;
             EntityStateManager.OnTakeDamage += TriggerFlashEffect;

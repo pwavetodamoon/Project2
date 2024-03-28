@@ -1,42 +1,53 @@
 using CombatSystem.Entity;
 using SlotHero;
 using SlotHero.SlotInGame;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SelectionHero.Ray
 {
     public class RaycastDetectSlot : MonoBehaviour
     {
-        [SerializeField] private HeroSlotInGame SlotIsAboveMouse;
         [SerializeField] private ChestSwap chestSwap;
+        private bool doesContainHero;
+        private HeroCharacter HeroOnDragInMouse;
+        private bool isMouseDown;
+        [SerializeField] private HeroSlotInGame SlotIsAboveMouse;
         public Vector2 mousePosition;
+        private bool CanFindSlotToSwap() => doesContainHero && isMouseDown;
 
-        public void Detect(bool isMouseDown, bool doesContainHero, HeroCharacter currentHeroOnDrag)
+        private bool IsHeroInSameSlot() => HeroOnDragInMouse.InGameSlotIndex == SlotIsAboveMouse.SlotIndex;
+
+        private void OnCheck()
         {
-            if (doesContainHero && isMouseDown && SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out SlotIsAboveMouse))
+            if (CanFindSlotToSwap() && OnFindSlot())
             {
-                if (SlotIsAboveMouse.SlotIndex == -1)
-                {
-                    chestSwap?.Trigger();
-                }
-
-                bool doesHeroOnDragDifferHeroFromSlot = currentHeroOnDrag != null &&
-                currentHeroOnDrag.InGameSlotIndex != SlotIsAboveMouse.SlotIndex;
-                if (doesHeroOnDragDifferHeroFromSlot)
-                {
-                    Debug.Log("Play VFX");
-                    //SlotIsAboveMouse.ShadowColor.ParticleSystem.Play();
-                    SlotIsAboveMouse.TriggerVFX();
-                }
+                UseVFXWhenTriggerNewHero();
             }
             else if (SlotIsAboveMouse != null)
             {
-                Debug.Log("Stop VFX");
                 SlotIsAboveMouse.StopVFX();
                 //SlotIsAboveMouse.ShadowColor.ParticleSystem.Stop();
                 SlotIsAboveMouse = null;
             }
         }
 
+        private bool OnFindSlot() => SlotManager.Instance.TryGetSlotNearPosition(mousePosition, out SlotIsAboveMouse);
+
+        private void UseVFXWhenTriggerNewHero()
+        {
+            if (IsHeroInSameSlot() == false)
+            {
+                SlotIsAboveMouse.TriggerVFX();
+            }
+        }
+
+        public void Detect(bool isMouseDown, bool doesContainHero, HeroCharacter currentHeroOnDrag)
+        {
+            this.isMouseDown = isMouseDown;
+            this.doesContainHero = doesContainHero;
+            this.HeroOnDragInMouse = currentHeroOnDrag;
+            OnCheck();
+        }
     }
 }
