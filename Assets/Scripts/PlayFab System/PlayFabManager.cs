@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Currency;
 using deVoid.Utils;
-using Helper;
 using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
@@ -16,7 +16,7 @@ using PlayFabError = PlayFab.PlayFabError;
 
 namespace PlayFab_System
 {
-    public class PlayFabManager : Singleton<PlayFabManager>
+    public class PlayFabManager : Helper.Singleton<PlayFabManager>
     {
         public PlayerData Player;
         public CurrencyManager currencyManager;
