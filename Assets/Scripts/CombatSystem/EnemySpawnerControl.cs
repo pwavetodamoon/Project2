@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using CombatSystem;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
+
 [RequireComponent(typeof(TimerCounter))]
 public class EnemySpawnerControl : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class EnemySpawnerControl : MonoBehaviour
             item.ClearMonsterAndStopSpawnOnMap();
         }
     }
+
     private void OnValidate()
     {
         if (timerCounter == null)
@@ -35,8 +36,11 @@ public class EnemySpawnerControl : MonoBehaviour
 
         monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
     }
+
     public void EnableSpawn() => allowSpawn = true;
+
     public void DisableSpawn() => allowSpawn = false;
+
     [Button]
     public void SpawnMinions()
     {
@@ -54,12 +58,13 @@ public class EnemySpawnerControl : MonoBehaviour
             maxCount -= count;
         }
     }
+
     private void Spawn(int index, int count)
     {
         monsterSpawners[index].SpawnMultipleMonsters(count);
     }
+
     public void SpawnBoss()
     {
-
     }
 }

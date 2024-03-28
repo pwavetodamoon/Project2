@@ -1,6 +1,6 @@
-using System.Collections;
 using CombatSystem.Entity.Utilities;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 namespace CombatSystem.Helper

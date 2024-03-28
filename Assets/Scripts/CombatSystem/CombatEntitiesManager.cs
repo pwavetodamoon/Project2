@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CombatSystem.Entity;
 using Helper;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CombatSystem
@@ -23,6 +21,7 @@ namespace CombatSystem
             if (entitiesByTag.ContainsKey(GameTag.Enemy) == false) return new List<EntityCharacter>();
             return entitiesByTag[GameTag.Enemy];
         }
+
         public int GetHeroCount()
         {
             if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return 0;
@@ -44,7 +43,6 @@ namespace CombatSystem
             }
 
             return nearestGameObject;
-
 
             float entityDistance(Transform entity, EntityCharacter gameObject)
             {
@@ -89,7 +87,6 @@ namespace CombatSystem
             return entitiesByTag.GetValueOrDefault(key);
         }
 
-
         public void AppendEntityToListByTag(EntityCharacter entity, string key)
         {
             if (!IsContainKey(key)) entitiesByTag[key] = new List<EntityCharacter>();
@@ -101,6 +98,5 @@ namespace CombatSystem
         {
             return entitiesByTag[key].Contains(value);
         }
-
     }
 }

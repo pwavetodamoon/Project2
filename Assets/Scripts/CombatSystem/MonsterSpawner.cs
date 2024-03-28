@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using CombatSystem.Entity;
-using CombatSystem.HeroDataManager;
+﻿using CombatSystem.Entity;
 using LevelAndStats;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -14,9 +12,11 @@ namespace CombatSystem
         //| Split one prefab one spawner to easy to manage + easy implement object pool|
         [Header("References")]
         [SerializeField] private MonstersStatsSystem _monstersStatsSystem;
+
         [SerializeField] private MonsterCharacter MonsterPrefab;
         [SerializeField] private Transform SpawnPoint1;
         [SerializeField] private Transform SpawnPoint2;
+
         private void Awake()
         {
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
@@ -46,7 +46,6 @@ namespace CombatSystem
         private void SetStatsToMonster(EnemyStats enemyStats)
         {
             _monstersStatsSystem.SetStatsByLevel(enemyStats);
-
         }
 
         [Button]
@@ -60,6 +59,5 @@ namespace CombatSystem
                 list[i].KillMonster();
             }
         }
-
     }
 }

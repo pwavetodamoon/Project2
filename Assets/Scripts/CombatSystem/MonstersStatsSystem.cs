@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using LevelAndStats;
+﻿using LevelAndStats;
 using UnityEngine;
 
 public class MonstersStatsSystem : MonoBehaviour
@@ -20,6 +18,7 @@ public class MonstersStatsSystem : MonoBehaviour
             stageInformation = GetDataSupport.Get().StageInformation;
         }
     }
+
     public void SetStatsByLevel(EnemyStats stats)
     {
         var level = stageInformation.GetLevelForMonster();

@@ -4,10 +4,8 @@ using CombatSystem.HeroDataManager.Data;
 using Helper;
 using LevelAndStats;
 using Model.Hero;
-using Model.Monsters;
 using SlotHero;
 using SortingLayers;
-using System;
 using UnityEngine;
 
 namespace CombatSystem.Entity
@@ -18,7 +16,6 @@ namespace CombatSystem.Entity
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
 
-        
         [SerializeField] private Character_Body_Sprites sprites;
         public bool IsDead;
         [SerializeField] private SortingLayerByYAxis sortingLayerByYAxis;
@@ -96,6 +93,7 @@ namespace CombatSystem.Entity
         {
             attackFactory = baseAttack;
         }
+
         public Transform GetModelTransform()
         {
             if (modelTransform == null)
@@ -122,7 +120,5 @@ namespace CombatSystem.Entity
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
         }
-
-
     }
 }

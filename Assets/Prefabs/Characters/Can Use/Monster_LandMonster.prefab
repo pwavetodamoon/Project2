@@ -11,11 +11,8 @@ GameObject:
   - component: {fileID: 3805899750952220119}
   - component: {fileID: 5268276926429305937}
   - component: {fileID: 321570569799733358}
-  - component: {fileID: 9156020029244245189}
   - component: {fileID: 3458469622659473241}
-  - component: {fileID: 7250616980711001169}
   - component: {fileID: 3233242168743384101}
-  - component: {fileID: 3584062236828804731}
   - component: {fileID: -7444902851448697839}
   - component: {fileID: 8473775802395018784}
   - component: {fileID: 4968109716181084866}
@@ -59,6 +56,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99a43884c53cb94693e7142e4d81f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator_Base: {fileID: 0}
+  attackControl: {fileID: 0}
+  attackManager: {fileID: 0}
+  entityStats: {fileID: 0}
+  EntityTakeDamage: {fileID: 0}
+  EntityReferences: {fileID: 0}
   monsterSingleAttackFactory: {fileID: 11400000, guid: b6ae625281bd123469495f8666d47870, type: 2}
   HealthBarOffset: {x: 0, y: 1.2}
 --- !u!61 &321570569799733358
@@ -106,20 +109,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.8982115, y: 3.2049932}
   m_EdgeRadius: 0
---- !u!114 &9156020029244245189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621426444390167394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3127a447ef891b4ea298ac7803e1e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bowAttackTransform: {fileID: 0}
-  magicAttackTransform: {fileID: 0}
 --- !u!114 &3458469622659473241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,20 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AtkTransform: {fileID: 984564786571446642}
---- !u!114 &7250616980711001169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621426444390167394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8fcb30bec4300c4aab9547c9d2f3525, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allowCounter: 1
-  allowExecuteAnotherAttack: 1
 --- !u!114 &3233242168743384101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,19 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slashMaterial: {fileID: 2100000, guid: e4c9e8cefa3a83e428a58fd4e820966f, type: 2}
---- !u!114 &3584062236828804731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621426444390167394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3de58d609b436e4e8eec23b9b543870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EntityStats: {fileID: 0}
+  modelTransform: {fileID: 0}
+  parent: {fileID: 0}
 --- !u!114 &-7444902851448697839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yAxis: 0
   sortingGroup: {fileID: 0}
+  target: {fileID: 0}
   lastYPosition: 0
   isValidate: 0
 --- !u!114 &2295233377764011390
@@ -485,6 +450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootDone: 0
+  BowAttackTransform: {fileID: 0}
+  MagicAttackTransform: {fileID: 0}
 --- !u!1 &8312958841070634581
 GameObject:
   m_ObjectHideFlags: 0

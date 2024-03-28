@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace CombatSystem.Entity
 {
+    [RequireComponent(typeof(EntityReferences))]
     public abstract class EntityCharacter : MonoBehaviour, IEntity
     {
         [SerializeField] protected Animator_Base animator_Base;
@@ -16,8 +17,10 @@ namespace CombatSystem.Entity
         [SerializeField] protected EntityStats entityStats;
         [SerializeField] protected EntityTakeDamage EntityTakeDamage;
         protected EntityTakeDamage entityTakeDamage;
+
         // Support for getting reference from children or parent
         [SerializeField] protected EntityReferences EntityReferences;
+
         protected virtual void Awake()
         {
             animator_Base = EntityReferences.GetRef<Animator_Base>();
@@ -26,17 +29,19 @@ namespace CombatSystem.Entity
             attackManager = EntityReferences.GetRef<EntityCombat>();
             entityStats = EntityReferences.GetRef<EntityStats>();
             EntityTakeDamage = EntityReferences.GetRef<EntityTakeDamage>();
-
         }
+
         public bool EntityInAttackState() => attackControl.IsAttacking();
-        public Animator_Base GetAnimatorBase()  => animator_Base;
+
+        public Animator_Base GetAnimatorBase() => animator_Base;
+
         public Transform GetAttackerTransform() => attackerTransform.GetAttackerTransform();
 
         public EntityCombat GetEntityCombat() => attackManager;
 
         public EntityStats GetEntityStats() => entityStats;
-        public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
 
+        public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
 
         public virtual void RegisterObject()
         {
@@ -57,6 +62,7 @@ namespace CombatSystem.Entity
             attackManager.SetAllowExecuteAttackValue(state);
             attackManager.SetTimeCounterValue(state);
         }
+
         public void StopExecute()
         {
             attackControl.StopExecute();

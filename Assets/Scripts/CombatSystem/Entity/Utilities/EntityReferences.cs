@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityReferences : MonoBehaviour
@@ -15,7 +13,7 @@ public class EntityReferences : MonoBehaviour
         T t = transform.GetComponentInChildren<T>();
         if (t != null)
         {
-            return t; 
+            return t;
         }
         t = transform.GetComponentInParent<T>();
         return t;

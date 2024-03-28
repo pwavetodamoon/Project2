@@ -3,28 +3,22 @@ using CombatSystem.Entity.Utilities;
 using CombatSystem.Helper;
 using Core.Reward;
 using Helper;
-using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace CombatSystem.Entity
 {
-    [RequireComponent(typeof(DamageSlashEffect))]
     public class MonsterCharacter : EntityCharacter
     {
-
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
-        protected EntityTakeDamage EntityStateManager;
         internal HealthBarDynamic healthBar;
         public Vector2 HealthBarOffset;
+        [SerializeField] private RewardSignal rewardSignal;
+
         protected override void Awake()
         {
             base.Awake();
-            EntityStateManager = GetComponent<EntityTakeDamage>();
-            EntityStateManager.OnDie += EntityStateManagerOnDie;
-
+            EntityTakeDamage.OnDie += rewardSignal.SendSignal;
         }
-
         private void Start()
         {
             this.healthBar = HealthBarManager.Instance.GetHealthBars(this);
@@ -37,20 +31,16 @@ namespace CombatSystem.Entity
 
         private void OnDisable()
         {
-            //Debug.Log("OnDisable",gameObject);
-            EntityStateManager.OnDie -= EntityStateManagerOnDie;
+            EntityTakeDamage.OnDie -= rewardSignal.SendSignal;
         }
 
-        private void EntityStateManagerOnDie()
-        {
-            GetComponent<RewardSignal>().SendSignal();
-        }
 
         public override void RegisterObject()
         {
             base.RegisterObject();
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Enemy);
         }
+
         public override void ReleaseObject()
         {
             base.ReleaseObject();
@@ -68,7 +58,5 @@ namespace CombatSystem.Entity
             }
             Destroy(gameObject);
         }
-
     }
-
 }

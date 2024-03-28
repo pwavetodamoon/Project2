@@ -1,7 +1,7 @@
-using System;
 using CombatSystem.Attack.Utilities;
 using LevelAndStats;
 using ObjectPool;
+using System;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
@@ -13,6 +13,7 @@ namespace CombatSystem.Attack.Projectiles
         public EntityStats EntityStats;
         protected bool isAttack;
         protected Action OnEndAttack;
+
         // private float TimeOut = 10f;
         private void OnDisable()
         {
@@ -44,6 +45,5 @@ namespace CombatSystem.Attack.Projectiles
             Tag = tag;
             isAttack = false;
         }
-
     }
 }

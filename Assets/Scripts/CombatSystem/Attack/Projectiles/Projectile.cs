@@ -1,4 +1,3 @@
-using CombatSystem.Attack.Utilities;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
@@ -8,10 +7,10 @@ namespace CombatSystem.Attack.Projectiles
         private readonly float speed = 20;
         public ProjectileVFX projectileVFX;
         public bool useVfx;
+
         private void Awake()
         {
             projectileVFX = GetComponent<ProjectileVFX>();
-
         }
 
         private bool isOnTarget => Vector3.Distance(transform.position, target.transform.position) < 0.1f;
@@ -32,6 +31,7 @@ namespace CombatSystem.Attack.Projectiles
 
             useVfx = false;
         }
+
         private void MoveToTarget()
         {
             var targetPosition = target.transform.position;

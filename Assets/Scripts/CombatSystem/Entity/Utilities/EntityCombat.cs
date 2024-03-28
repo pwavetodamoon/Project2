@@ -20,7 +20,7 @@ namespace CombatSystem.Entity.Utilities
 
         private void Start()
         {
-            entity = GetComponent<EntityCharacter>();
+            entity = GetComponentInParent<EntityCharacter>();
             entityStats = entity.GetEntityStats();
             animator_base = entity.GetAnimatorBase();
             EntityHelper = new EntityHelper(entityStats);

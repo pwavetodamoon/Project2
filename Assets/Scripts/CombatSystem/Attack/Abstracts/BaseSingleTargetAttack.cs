@@ -1,12 +1,11 @@
-using System;
-using System.Collections;
 using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
-using CombatSystem.Helper;
 using Helper;
 using LevelAndStats;
 using Model.Monsters;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Abstracts
@@ -32,7 +31,6 @@ namespace CombatSystem.Attack.Abstracts
         public bool IsValidate { get; private set; }
         private Action onEndAttack;
 
-
         public virtual void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
             entityCharacter = newEntityCharacter;
@@ -42,7 +40,9 @@ namespace CombatSystem.Attack.Abstracts
             BowAttackTransform = attackTransform;
             IsValidate = true;
         }
+
         protected abstract string GetEnemyTag();
+
         protected abstract IEnumerator StartBehavior();
 
         public void SetOnEndAttackCallBack(Action callback) => onEndAttack = callback;
@@ -72,6 +72,7 @@ namespace CombatSystem.Attack.Abstracts
             if (animator == null) return 0;
             return animator.GetAnimationLength(AnimationEnum);
         }
+
         public IEnumerator ExecuteAttack()
         {
             // Debug.Log("Coroutine ExecuteAttack");
@@ -137,6 +138,7 @@ namespace CombatSystem.Attack.Abstracts
             }
             return false;
         }
+
         protected virtual void CauseDamage()
         {
             if (Enemy == null)
@@ -149,7 +151,5 @@ namespace CombatSystem.Attack.Abstracts
                 damageable?.TakeDamage(EntityStats);
             }
         }
-
-
     }
 }

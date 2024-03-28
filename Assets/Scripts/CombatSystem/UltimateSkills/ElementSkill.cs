@@ -6,10 +6,12 @@ using UnityEngine;
 public class ElementSkill : HeroSkill
 {
     public IDamageable damageable;
+
     protected override void Awake()
     {
         base.Awake();
     }
+
     public override void DealDamage()
     {
         damageable?.TakeDamage(entityStats);
@@ -17,6 +19,7 @@ public class ElementSkill : HeroSkill
 
         Debug.Log("Fire Attack");
     }
+
     public override void IncreaseAttacker()
     {
         var collider = Physics2D.OverlapBox(transform.position, size, 0, GameLayerMask.Get(GameLayerMask.ENEMY));
@@ -27,10 +30,12 @@ public class ElementSkill : HeroSkill
         }
         attacker?.IncreaseAttackerCount(entityStats);
     }
+
     public override void DecreaseAttacker()
     {
         attacker?.DecreaseAttackerCount(entityStats);
     }
+
     public override void Destroy()
     {
         transform.DOKill();

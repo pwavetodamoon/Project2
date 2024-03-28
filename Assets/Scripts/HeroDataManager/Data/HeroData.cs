@@ -64,7 +64,7 @@ namespace CombatSystem.HeroDataManager.Data
         {
             // TODO: Add is dead field
             if (heroCharacter == null) return;
-            structStats = heroCharacter.GetComponent<HeroEntityStats>().GetStructStats();
+            structStats = heroCharacter.GetEntityStats().GetStructStats();
             slotIndex = heroCharacter.InGameSlotIndex;
             isDead = heroCharacter.IsDead;
         }

@@ -3,7 +3,6 @@ using CombatSystem.Helper;
 using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
-using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
@@ -22,6 +21,7 @@ namespace CombatSystem.Entity.Utilities
         public event Action OnDie;
 
         public event Action OnTakeDamage;
+
         private void Start()
         {
             entity = GetComponentInParent<EntityCharacter>();

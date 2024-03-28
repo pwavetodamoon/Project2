@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
 using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Systems;
-using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using CombatSystem.MonsterAI;
 using Helper;
 using Model.Hero;
 using Model.Monsters;
-using Sirenix.OdinInspector;
+using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +19,7 @@ namespace CombatSystem.Attack.Near
         {
             this.MonsterMoveAI = monsterMoveAI;
         }
+
         private MonsterMoveAI MonsterMoveAI;
 
         public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
@@ -35,6 +34,7 @@ namespace CombatSystem.Attack.Near
             entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += MonsterMoveAI.EnableAttack;
             attackControl.StartCoroutine(MonsterMoveAI.MoveBehaviour());
         }
+
         protected override IEnumerator StartBehavior()
         {
             if (IsOnTarget() == false || EntityStats.Health() < 0) yield break;
@@ -55,11 +55,11 @@ namespace CombatSystem.Attack.Near
             return GameTag.Hero;
         }
 
-
         public EntityCharacter GetEntityCharacter() => entityCharacter;
-        public EntityCharacter GetEnemy() => Enemy;
 
+        public EntityCharacter GetEnemy() => Enemy;
     }
+
     public class MonsterMoveAI
     {
         private MonsterNearAttack monsterNearAttack;
@@ -77,10 +77,12 @@ namespace CombatSystem.Attack.Near
             this.animator_Base = animator_Base;
             randomPos = CreateNoise();
         }
+
         private void PlayAnimation(Enum AnimationEnum)
         {
             animator_Base.ChangeAnimation(AnimationEnum);
         }
+
         public void EnableAttack()
         {
             triggerAttack = true;
@@ -90,6 +92,7 @@ namespace CombatSystem.Attack.Near
         {
             return Enemy != null && !IsOnTarget() && attackManager.AttackedByEnemies() == false;
         }
+
         private void MoveDirective(Vector2 moveVector, float speed)
         {
             currentEntity.transform.Translate(moveVector * (Time.deltaTime * speed));
@@ -101,17 +104,21 @@ namespace CombatSystem.Attack.Near
             distance = Vector2.Distance(currentEntity.transform.position, targetPosition);
             return distance < .1f;
         }
+
         private Vector3 randomPos;
+
         private Vector3 GetDestinationPosition()
         {
             return Enemy.GetAttackerTransform().transform.position + randomPos;
         }
+
         private Vector3 CreateNoise()
         {
             var x = Random.Range(-.3f, .3f);
             var y = Random.Range(-.3f, .3f);
             return new Vector3(x, y);
         }
+
         public IEnumerator MoveBehaviour()
         {
             PlayAnimation(AnimationType.Walk);
@@ -138,7 +145,6 @@ namespace CombatSystem.Attack.Near
                 }
                 yield return new WaitForEndOfFrame();
             }
-
         }
     }
 }

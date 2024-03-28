@@ -1,11 +1,10 @@
-using System.Collections;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
-using CombatSystem.Helper;
 using DG.Tweening;
 using Model.Hero;
 using Model.Monsters;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 public class OnDieEffect : MonoBehaviour
@@ -17,18 +16,18 @@ public class OnDieEffect : MonoBehaviour
     [SerializeField] private ShakeMultiplierTimes shakeEntityEffect;
     [SerializeField] private EntityTakeDamage EntityStateManager;
     [SerializeField] private MonsterCharacter monsterCharacter;
-
+    public Transform model;
     private void Start()
     {
-        monsterCharacter = GetComponent<MonsterCharacter>();
+        monsterCharacter = GetComponentInParent<MonsterCharacter>();
 
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer = model.GetComponentInChildren<SpriteRenderer>();
         animatorBase = monsterCharacter.GetAnimatorBase();
+        EntityStateManager = monsterCharacter.GetEntityTakeDamage();
         time = animatorBase.GetAnimationLength(AnimationType.Dying);
-        EntityStateManager = GetComponent<EntityTakeDamage>();
+
         EntityStateManager.OnDie += OnDie;
         shakeEntityEffect = new ShakeMultiplierTimes(transform, 5, 0.1f);
-
     }
 
     [Button]
@@ -44,7 +43,6 @@ public class OnDieEffect : MonoBehaviour
 
     private IEnumerator OnDieCoroutine()
     {
-
         yield return new WaitForSeconds(time);
         animatorBase.enabled = false;
         spriteRenderer.DOFade(0, fadeTime).OnComplete(() =>
@@ -53,6 +51,7 @@ public class OnDieEffect : MonoBehaviour
         });
         StopAllCoroutines();
     }
+
     [Button]
     public void Reset()
     {

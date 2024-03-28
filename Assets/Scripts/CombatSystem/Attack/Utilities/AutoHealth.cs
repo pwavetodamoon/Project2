@@ -33,12 +33,14 @@ namespace CombatSystem.Attack.Utilities
 
             RegisterEvent();
         }
+
         private void RegisterEvent()
         {
             EntityTakeDamage.OnTakeDamage += TriggerHealth;
             EntityTakeDamage.OnDie += StopHealth;
             EntityStats = entity.GetEntityStats();
         }
+
         private void Update()
         {
             if (EntityStats == null) return;
@@ -53,7 +55,6 @@ namespace CombatSystem.Attack.Utilities
 
                 return;
             }
-
 
             if (healthRegenDelay <= 0)
             {
@@ -76,7 +77,6 @@ namespace CombatSystem.Attack.Utilities
                 healthRegenDelay -= Time.deltaTime;
             }
         }
-
 
         private void OnDisable()
         {

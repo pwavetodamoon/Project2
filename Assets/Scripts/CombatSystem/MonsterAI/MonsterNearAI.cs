@@ -1,7 +1,5 @@
-using System;
-using CombatSystem.Entity;
-using CombatSystem.Entity.Utilities;
 using Helper;
+using System;
 using UnityEngine;
 
 namespace CombatSystem.MonsterAI
@@ -9,6 +7,7 @@ namespace CombatSystem.MonsterAI
     public class MonsterNearAI : MonsterAIBase
     {
         public event Action TriggerAttackEvent;
+
         protected override void TriggerAttack(Collider2D collision)
         {
             if (collision.tag != GameTag.TriggerEvent) return;
