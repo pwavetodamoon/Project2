@@ -86,7 +86,6 @@ namespace SelectionHero.Ray
         {
             if (currentHero == null) return;
             currentHero.SortingLayerByYAxis.ResumeSortingLayer();
-
             slotManager.LoadHeroIntoSlot(currentHero);
         }
 

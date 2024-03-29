@@ -12,16 +12,9 @@ namespace CombatSystem
 
         public List<EntityCharacter> GetHeroList()
         {
-            if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return new List<EntityCharacter>();
+            if (IsContainKey(GameTag.Hero) == false) return new List<EntityCharacter>();
             return entitiesByTag[GameTag.Hero];
         }
-
-        public List<EntityCharacter> GetEnemies()
-        {
-            if (entitiesByTag.ContainsKey(GameTag.Enemy) == false) return new List<EntityCharacter>();
-            return entitiesByTag[GameTag.Enemy];
-        }
-
         public int GetHeroCount()
         {
             if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return 0;
@@ -52,7 +45,6 @@ namespace CombatSystem
 
         public EntityCharacter GetEntityTransformByTag(Transform entity, string key)
         {
-            // far attack
             if (IsContainKey(key) == false)
             {
                 Debug.LogWarning($"Does not have '{key}' TAG in data", gameObject);
@@ -66,11 +58,7 @@ namespace CombatSystem
             return GetNearestObject(entity, entities);
         }
 
-        private bool IsContainKey(string tag)
-        {
-            return entitiesByTag.ContainsKey(tag);
-        }
-
+     
         public void RemoveEntityByTag(EntityCharacter entity, string key)
         {
             if (IsContainKey(key) && IsContainValue(key, entity)) entitiesByTag[key].Remove(entity);
@@ -90,7 +78,6 @@ namespace CombatSystem
         public void AppendEntityToListByTag(EntityCharacter entity, string key)
         {
             if (!IsContainKey(key)) entitiesByTag[key] = new List<EntityCharacter>();
-
             if (!IsContainValue(key, entity)) entitiesByTag[key].Add(entity);
         }
 
@@ -98,5 +85,10 @@ namespace CombatSystem
         {
             return entitiesByTag[key].Contains(value);
         }
+        private bool IsContainKey(string tag)
+        {
+            return entitiesByTag.ContainsKey(tag);
+        }
+
     }
 }

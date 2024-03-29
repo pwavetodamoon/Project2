@@ -17,12 +17,12 @@ namespace CombatSystem.Entity
         [SerializeField] private HeroSingleAttackFactory attackFactory;
 
         [SerializeField] private Character_Body_Sprites sprites;
-        public bool IsDead;
         [SerializeField] private SortingLayerByYAxis sortingLayerByYAxis;
 
         public SortingLayerByYAxis SortingLayerByYAxis => sortingLayerByYAxis;
         public int InGameSlotIndex { get; private set; }
 
+        public bool IsDead;
 
         private void Start()
         {
@@ -46,7 +46,6 @@ namespace CombatSystem.Entity
         {
             Debug.Log("Dead state");
             SetModelBackImmediate();
-            // animator_Base.DisableAnimator();
             animator_Base.ChangeAnimation(AnimationType.Dying);
             animator_Base.SetIsPlayDefaultAnimation(false);
 

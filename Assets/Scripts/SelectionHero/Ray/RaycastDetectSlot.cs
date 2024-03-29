@@ -36,6 +36,7 @@ namespace SelectionHero.Ray
 
         private void UseVFXWhenTriggerNewHero()
         {
+            if(HeroOnDragInMouse == null || SlotIsAboveMouse == null) return;
             if (IsHeroInSameSlot() == false)
             {
                 SlotIsAboveMouse.TriggerVFX();
