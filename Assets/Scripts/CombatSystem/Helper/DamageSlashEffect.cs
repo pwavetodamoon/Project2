@@ -24,7 +24,7 @@ namespace CombatSystem.Helper
         {
             parent = transform.parent;
             spriteRenderers = modelTransform.GetComponentsInChildren<SpriteRenderer>();
-            entityAction = GetComponentInParent<EntityCharacter>().GetEntityAction();
+            entityAction = GetComponentInParent<EntityCharacter>().GetRef<EntityAction>();
             if (spriteRenderers.Length > 0)
                 defaultMaterial = spriteRenderers[0].material;
             entityAction.OnTakeDamage += TriggerFlashEffect;

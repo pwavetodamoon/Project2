@@ -23,8 +23,8 @@ namespace CombatSystem.Attack.Systems
         private void Start()
         {
             entityCharacter = GetComponentInParent<EntityCharacter>();
-            attackManager = entityCharacter.GetEntityCombat();
-            EntityStats = entityCharacter.GetEntityStats();
+            attackManager = entityCharacter.GetRef<EntityCombat>();
+            EntityStats = entityCharacter.GetRef<EntityStats>();
         }
 
         private void Update()

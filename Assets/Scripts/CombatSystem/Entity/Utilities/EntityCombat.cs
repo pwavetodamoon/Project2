@@ -21,9 +21,8 @@ namespace CombatSystem.Entity.Utilities
         private void Start()
         {
             entity = GetComponentInParent<EntityCharacter>();
-            entityStats = parent.GetComponentInChildren<EntityStats>();
-            animator_base = parent.GetComponentInChildren<Animator_Base>();
-            animator_base = entity.GetAnimatorBase();
+            entityStats = entity.GetRef<EntityStats>();
+            animator_base = entity.GetRef<Animator_Base>();
             EntityHelper = new EntityHelper(entityStats);
         }
 
@@ -65,8 +64,8 @@ namespace CombatSystem.Entity.Utilities
         {
             if (entityStats == null)
             {
-                entityStats = entity.GetComponentInChildren<EntityStats>();
-                EntityHelper = new EntityHelper(entityStats);
+                //entityStats = entity.GetComponentInChildren<EntityStats>();
+                //EntityHelper = new EntityHelper(entityStats);
                 Debug.Log("is null");
             }
             return EntityHelper.sumOfDamage >= entityStats.Health();

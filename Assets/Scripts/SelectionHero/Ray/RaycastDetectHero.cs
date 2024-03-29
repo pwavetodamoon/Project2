@@ -65,7 +65,7 @@ namespace SelectionHero.Ray
             if (hero != null && currentHero == null)
             {
                 currentHero = hero;
-                entityCombat = hero.GetEntityCombat();
+                entityCombat = hero.GetRef<EntityCombat>();
             }
         }
 

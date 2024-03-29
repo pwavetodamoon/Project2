@@ -34,9 +34,9 @@ namespace CombatSystem.Attack.Abstracts
         public virtual void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
             entityCharacter = newEntityCharacter;
-            EntityStats = entityCharacter.GetEntityStats();
-            entityCombat = entityCharacter.GetEntityCombat();
-            animator = entityCharacter.GetAnimatorBase();
+            EntityStats = entityCharacter.GetRef<EntityStats>();
+            entityCombat = entityCharacter.GetRef<EntityCombat>();
+            animator = entityCharacter.GetRef<Animator_Base>();
             BowAttackTransform = attackTransform;
             IsValidate = true;
         }
@@ -128,7 +128,7 @@ namespace CombatSystem.Attack.Abstracts
             }
             // if before attack, the enemy is out of health, then return false
             // if not then increase the attacker count and return true
-            IAttackerCounter = Enemy.GetEntityCombat().GetComponent<IAttackerCounter>();
+            IAttackerCounter = Enemy.GetRef<IAttackerCounter>();
             //TODO: Check if the enemy is out of health
             if (IAttackerCounter.IsOutOfHealth() == false)
             {

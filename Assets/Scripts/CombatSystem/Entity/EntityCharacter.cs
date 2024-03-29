@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CombatSystem.Entity
 {
-    [RequireComponent(typeof(EntityReferences))]
+    //[RequireComponent(typeof(EntityReferences))]
     public abstract class EntityCharacter : MonoBehaviour, IEntity
     {
         [SerializeField] protected Animator_Base animator_Base;
@@ -22,27 +22,36 @@ namespace CombatSystem.Entity
 
         protected virtual void Awake()
         {
-            animator_Base = EntityReferences.GetRef<Animator_Base>();
-            attackControl = EntityReferences.GetRef<EntityAttackControl>();
-            attackerTransform = EntityReferences.GetRef<IGetAttackerTransform>();
-            entityCombat = EntityReferences.GetRef<EntityCombat>();
-            entityStats = EntityReferences.GetRef<EntityStats>();
-            EntityTakeDamage = EntityReferences.GetRef<EntityTakeDamage>();
-            entityAction = EntityReferences.GetRef<EntityAction>();
+            //animator_Base = EntityReferences.GetRef<Animator_Base>();
+            //attackControl = EntityReferences.GetRef<EntityAttackControl>();
+            //attackerTransform = EntityReferences.GetRef<IGetAttackerTransform>();
+            //entityCombat = EntityReferences.GetRef<EntityCombat>();
+            //entityStats = EntityReferences.GetRef<EntityStats>();
+            //EntityTakeDamage = EntityReferences.GetRef<EntityTakeDamage>();
+            //entityAction = EntityReferences.GetRef<EntityAction>();
+
+            entityCombat = GetComponentInChildren<EntityCombat>();
+            entityStats = GetComponentInChildren<EntityStats>();
+            EntityTakeDamage = GetComponentInChildren<EntityTakeDamage>();
+            entityAction = GetComponentInChildren<EntityAction>();
+            animator_Base = GetComponentInChildren<Animator_Base>();
+            attackControl = GetComponentInChildren<EntityAttackControl>();
+            attackerTransform = GetComponentInChildren<IGetAttackerTransform>();
+
         }
 
         public bool EntityInAttackState() => attackControl.IsAttacking();
 
-        public Animator_Base GetAnimatorBase() => animator_Base;
+        //public Animator_Base GetAnimatorBase() => animator_Base;
 
         public Transform GetAttackerTransform() => attackerTransform.GetAttackerTransform();
 
-        public EntityCombat GetEntityCombat() => entityCombat;
+        //public EntityCombat GetEntityCombat() => entityCombat;
 
-        public EntityStats GetEntityStats() => entityStats;
+        //public EntityStats GetEntityStats() => entityStats;
 
-        public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
-        public EntityAction GetEntityAction() => entityAction;
+        //public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
+        //public EntityAction GetEntityAction() => entityAction;
 
         public virtual void RegisterObject()
         {
@@ -67,6 +76,15 @@ namespace CombatSystem.Entity
         public void StopExecute()
         {
             attackControl.StopExecute();
+        }
+        public T GetRef<T>()
+        {
+            var t = GetComponentInChildren<T>();
+            if(t == null)
+            {
+                t = GetComponentInParent<T>();
+            }
+            return t;
         }
     }
 }

@@ -4,10 +4,12 @@ using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using CombatSystem.MonsterAI;
 using Helper;
+using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -67,6 +69,7 @@ namespace CombatSystem.Attack.Near
         private EntityCombat attackManager;
         private EntityCharacter Enemy => monsterNearAttack.GetEnemy();
         private EntityCharacter currentEntity => monsterNearAttack.GetEntityCharacter();
+        private EntityStats entityStats;
         public bool triggerAttack;
         private float distance;
 
@@ -75,6 +78,7 @@ namespace CombatSystem.Attack.Near
             this.monsterNearAttack = monsterNearAttack;
             this.attackManager = attackManager;
             this.animator_Base = animator_Base;
+            entityStats = currentEntity.GetRef<EntityStats>();
             randomPos = CreateNoise();
         }
 
@@ -125,7 +129,7 @@ namespace CombatSystem.Attack.Near
 
             while (triggerAttack == false)
             {
-                if (CanMoveEntity() && currentEntity.GetEntityStats().Health() > 0)
+                if (CanMoveEntity() && entityStats.Health() > 0)
                 {
                     MoveDirective(Vector2.left, 7);
                 }

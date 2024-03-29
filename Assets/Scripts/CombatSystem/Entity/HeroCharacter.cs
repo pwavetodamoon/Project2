@@ -79,7 +79,7 @@ namespace CombatSystem.Entity
 
         public void SetHeroData(HeroData newHeroData)
         {
-            var stats = (HeroEntityStats)GetEntityStats();
+            var stats = GetRef<HeroEntityStats>();
             stats.SetHero(newHeroData);
         }
 

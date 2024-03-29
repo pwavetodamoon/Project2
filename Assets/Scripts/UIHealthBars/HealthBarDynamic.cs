@@ -17,7 +17,7 @@ public class HealthBarDynamic : HealthBarBase
     {
         FadeColorBack();
         this.target = target;
-        entityAction = target.GetEntityAction();
+        entityAction = target.GetRef<EntityAction>();
         entityAction.OnDie += Destroy;
         entityAction.OnHealthChange += SetHealthBar;
     }

@@ -20,10 +20,9 @@ public class OnDieEffect : MonoBehaviour
     private void Start()
     {
         monsterCharacter = GetComponentInParent<MonsterCharacter>();
-
         spriteRenderer = model.GetComponentInChildren<SpriteRenderer>();
-        animatorBase = monsterCharacter.GetAnimatorBase();
-        entityAction = monsterCharacter.GetEntityAction();
+        animatorBase = monsterCharacter.GetRef<Animator_Base>();
+        entityAction = monsterCharacter.GetRef<EntityAction>();
         time = animatorBase.GetAnimationLength(AnimationType.Dying);
 
         entityAction.OnDie += OnDie;

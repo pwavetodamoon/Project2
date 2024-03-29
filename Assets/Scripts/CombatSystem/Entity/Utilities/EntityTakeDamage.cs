@@ -21,8 +21,8 @@ namespace CombatSystem.Entity.Utilities
         private void Start()
         {
             entity = GetComponentInParent<EntityCharacter>();
-            EntityStats = entity.GetEntityStats();
-            animation_Base = entity.GetAnimatorBase();
+            EntityStats = entity.GetRef<EntityStats>();
+            animation_Base = entity.GetRef<Animator_Base>();
         }
 
 

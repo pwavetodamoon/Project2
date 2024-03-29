@@ -1,4 +1,5 @@
 using CombatSystem.Entity;
+using LevelAndStats;
 using Model.Hero;
 using UnityEngine;
 
@@ -35,8 +36,8 @@ namespace SlotHero.SlotInGame
             currentHero = hero;
             if (currentHero != null)
             {
-                var entityStats = currentHero.GetEntityStats();
-                var entityAction = currentHero.GetEntityAction();
+                var entityStats = currentHero.GetRef<EntityStats>();
+                var entityAction = currentHero.GetRef<EntityAction>();
                 entityAction.OnHealthChange = healthBar.SetHealthBar;
                 entityStats.ChangeHealthEvent();
                 Debug.Log("Increase Scale");

@@ -28,8 +28,8 @@ namespace CombatSystem.Attack.Utilities
             entity = GetComponentInParent<HeroCharacter>();
 
             particalSystemsManager = GetComponentInParent<ParticalSystemsManager>();
-            EntityStats = entity.GetEntityStats();
-            entityAction = entity.GetEntityAction();
+            EntityStats = entity.GetRef<EntityStats>();
+            entityAction = entity.GetRef<EntityAction>();
             RegisterEvent();
         }
 
@@ -37,7 +37,7 @@ namespace CombatSystem.Attack.Utilities
         {
             entityAction.OnTakeDamage += TriggerHealth;
             entityAction.OnDie += StopHealth;
-            EntityStats = entity.GetEntityStats();
+            EntityStats = entity.GetRef<EntityStats>();
         }
 
         private void Update()
