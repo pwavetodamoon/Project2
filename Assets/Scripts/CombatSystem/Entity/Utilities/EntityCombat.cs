@@ -17,13 +17,14 @@ namespace CombatSystem.Entity.Utilities
         [SerializeField] protected bool allowCounter = true;
         [SerializeField] protected bool allowExecuteAnotherAttack = true;
         public int Count { get; set; }
-
+        public Transform parent;
         private void Start()
         {
             entity = GetComponentInParent<EntityCharacter>();
-            entityStats = entity.GetEntityStats();
+            entityStats = parent.GetComponentInChildren<EntityStats>();
+            animator_base = parent.GetComponentInChildren<Animator_Base>();
             animator_base = entity.GetAnimatorBase();
-            EntityHelper = new EntityHelper(entityStats);
+            EntityHelper = new EntityHelper(entityStats as EntityStats);
         }
 
         private bool CanChangeAnimation() => entity != null
@@ -60,6 +61,7 @@ namespace CombatSystem.Entity.Utilities
         {
             if (entityStats == null)
             {
+                entityStats = entity.GetComponent<EntityReferences>().GetRef<EntityStats>();
                 Debug.Log("is null");
             }
             return EntityHelper.sumOfDamage >= entityStats.Health();

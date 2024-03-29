@@ -5025,6 +5025,7 @@ MonoBehaviour:
   entity: {fileID: 1070859182}
   allowCounter: 1
   allowExecuteAnotherAttack: 1
+  parent: {fileID: 0}
 --- !u!1001 &422577633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20290,6 +20291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2791888023047373045, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 1070859184}
     - target: {fileID: 6034959875011442393, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -20310,6 +20315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ea4addc56c4514292c216038113cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1070859184 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2044543618998125847, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
+  m_PrefabInstance: {fileID: 1070859178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1158807989 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6716722789933213714, guid: c7fb184e00614e942bbed2f978af1bd5, type: 3}

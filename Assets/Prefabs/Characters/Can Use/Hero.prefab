@@ -9994,8 +9994,8 @@ MonoBehaviour:
   modelTransform: {fileID: 9016102133458346649}
   attackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
   sprites: {fileID: 817571528654859932}
-  IsDead: 0
   sortingLayerByYAxis: {fileID: 6056657590679052388}
+  IsDead: 0
 --- !u!61 &7183776206213434776
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19803,6 +19803,7 @@ MonoBehaviour:
   entity: {fileID: 1935633485572637146}
   allowCounter: 1
   allowExecuteAnotherAttack: 1
+  parent: {fileID: 2044543618998125847}
 --- !u!1001 &9011903409939857441
 PrefabInstance:
   m_ObjectHideFlags: 0
