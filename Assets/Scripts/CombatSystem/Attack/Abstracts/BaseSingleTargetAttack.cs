@@ -26,7 +26,7 @@ namespace CombatSystem.Attack.Abstracts
 
         private float WaitTimeToFindEnemy = 0.1f;
 
-        [SerializeField] private EntityCombat attackManager;
+        [SerializeField] private EntityCombat entityCombat;
         public bool IsActive => isActive;
         public bool IsValidate { get; private set; }
         private Action onEndAttack;
@@ -35,7 +35,7 @@ namespace CombatSystem.Attack.Abstracts
         {
             entityCharacter = newEntityCharacter;
             EntityStats = entityCharacter.GetEntityStats();
-            attackManager = entityCharacter.GetEntityCombat();
+            entityCombat = entityCharacter.GetEntityCombat();
             animator = entityCharacter.GetAnimatorBase();
             BowAttackTransform = attackTransform;
             IsValidate = true;
@@ -89,6 +89,7 @@ namespace CombatSystem.Attack.Abstracts
         {
             if (!IsEnemyAlive()) return false;
             Enemy = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GetEnemyTag());
+            Debug.Log(Enemy);
             // Debug.Log($"{entityCharacter.name}: Try find enemy:", Enemy);
             return true;
         }
@@ -101,7 +102,8 @@ namespace CombatSystem.Attack.Abstracts
         private IEnumerator PerformAttack()
         {
             isActive = true;
-            attackManager.SetAllowExecuteAttackValue(false);
+            // error is here
+            entityCombat.SetAllowExecuteAttackValue(false);
             if (CanExecuteAttack())
             {
                 yield return StartBehavior();
@@ -113,7 +115,7 @@ namespace CombatSystem.Attack.Abstracts
         {
             // Call in StartBehavior and at final the attack to reset state and counter
             isActive = false;
-            attackManager.SetAllowExecuteAttackValue(true);
+            entityCombat.SetAllowExecuteAttackValue(true);
             onEndAttack?.Invoke();
             IAttackerCounter?.DecreaseAttackerCount(EntityStats);
         }

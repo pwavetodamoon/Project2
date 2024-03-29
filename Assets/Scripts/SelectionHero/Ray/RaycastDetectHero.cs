@@ -23,22 +23,27 @@ namespace SelectionHero.Ray
             if (isMouseDown)
             {
                 GetHeroReferences(_hero);
-
-                if (isMouseMove == false || CannotMoveHero()) return;
-
-                if (CanHoldHeroInMouse())
+                if (isMouseMove && CannotMoveHero() == false)
                 {
-                    MoveHeroByMouse();
-                }
-                else
-                {
-                    PutHeroBack();
-                    ResetCurrentHeroRef();
+                    if (CanHoldHeroInMouse())
+                    {
+                        MoveHeroByMouse();
+                        currentHero.SortingLayerByYAxis.PauseSortingLayer();
+                        currentHero.SortingLayerByYAxis.SetOrderToHighest();
+                    }
+                    else
+                    {
+                        currentHero.SortingLayerByYAxis.ResumeSortingLayer();
+                        PutHeroBack();
+                        ResetCurrentHeroRef();
+                    }
                 }
             }
             else
             {
-                if (!SwapHero()) PutHeroBack();
+                currentHero?.SortingLayerByYAxis.ResumeSortingLayer();
+                var swapFinished = SwapHero();
+                if (!swapFinished) PutHeroBack();
 
                 ResetCurrentHeroRef();
                 IsHandleHero = false;
@@ -66,9 +71,6 @@ namespace SelectionHero.Ray
 
         private void MoveHeroByMouse()
         {
-            currentHero.SortingLayerByYAxis.PauseSortingLayer();
-            currentHero.SortingLayerByYAxis.SetOrderToHighest();
-
             currentHero.transform.position = mousePosition;
             IsHandleHero = true;
         }
@@ -85,7 +87,6 @@ namespace SelectionHero.Ray
         private void PutHeroBack()
         {
             if (currentHero == null) return;
-            currentHero.SortingLayerByYAxis.ResumeSortingLayer();
             slotManager.LoadHeroIntoSlot(currentHero);
         }
 

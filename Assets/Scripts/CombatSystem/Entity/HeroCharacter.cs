@@ -4,6 +4,7 @@ using CombatSystem.HeroDataManager.Data;
 using Helper;
 using LevelAndStats;
 using Model.Hero;
+using Sirenix.OdinInspector;
 using SlotHero;
 using SortingLayers;
 using UnityEngine;
@@ -66,7 +67,7 @@ namespace CombatSystem.Entity
         {
             if (index == -1)
                 ReleaseObject();
-            else
+            else if( index != InGameSlotIndex)
                 RegisterObject();
             InGameSlotIndex = index;
         }
@@ -82,6 +83,7 @@ namespace CombatSystem.Entity
             stats.SetHero(newHeroData);
         }
 
+        [Button]
         public virtual void CreateAttack()
         {
             if (attackFactory == null) return;
@@ -107,6 +109,7 @@ namespace CombatSystem.Entity
         public override void RegisterObject()
         {
             base.RegisterObject();
+            Debug.Log("Register hero",gameObject);
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
             CreateAttack();
         }
@@ -115,7 +118,7 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopExecute();
-            Debug.Log("Release hero");
+            Debug.Log("Release hero",gameObject);
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
         }

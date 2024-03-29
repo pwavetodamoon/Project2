@@ -24,7 +24,7 @@ namespace CombatSystem.Entity.Utilities
             entityStats = parent.GetComponentInChildren<EntityStats>();
             animator_base = parent.GetComponentInChildren<Animator_Base>();
             animator_base = entity.GetAnimatorBase();
-            EntityHelper = new EntityHelper(entityStats as EntityStats);
+            EntityHelper = new EntityHelper(entityStats);
         }
 
         private bool CanChangeAnimation() => entity != null
@@ -35,6 +35,10 @@ namespace CombatSystem.Entity.Utilities
 
         public void DecreaseAttackerCount(EntityStats entity1)
         {
+            if(EntityHelper.EntityStats == null)
+            {
+                Debug.Log("EntityStats is null",gameObject);
+            }
             EntityHelper.Remove(entity1);
             if (--Count < 0 && CanChangeAnimation())
             {
@@ -61,7 +65,8 @@ namespace CombatSystem.Entity.Utilities
         {
             if (entityStats == null)
             {
-                entityStats = entity.GetComponent<EntityReferences>().GetRef<EntityStats>();
+                entityStats = entity.GetComponentInChildren<EntityStats>();
+                EntityHelper = new EntityHelper(entityStats);
                 Debug.Log("is null");
             }
             return EntityHelper.sumOfDamage >= entityStats.Health();
