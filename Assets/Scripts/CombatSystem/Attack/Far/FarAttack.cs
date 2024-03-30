@@ -39,7 +39,7 @@ namespace CombatSystem.Attack.Factory
         //     if (GetProjectile() != null)
         //     {
         //         yield return waitUntilCanCauseDamage;
-        //         // CauseDamage();
+        //         // CheckBeforeAttack();
         //     }
         // }
 

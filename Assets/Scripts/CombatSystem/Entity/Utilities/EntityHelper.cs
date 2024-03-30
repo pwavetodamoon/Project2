@@ -1,13 +1,16 @@
 using CombatSystem.Helper;
 using LevelAndStats;
+using System;
 using System.Collections.Generic;
 
 namespace CombatSystem.Entity.Utilities
 {
+    [Serializable]
     public class EntityHelper
     {
         public List<EntityStats> List = new();
         public EntityStats EntityStats;
+        public float sumOfDamage = 0;
 
         public EntityHelper(EntityStats entityStats)
         {
@@ -28,7 +31,6 @@ namespace CombatSystem.Entity.Utilities
             CalculatorDamage();
         }
 
-        public float sumOfDamage = 0;
 
         public float CalculatorDamage()
         {

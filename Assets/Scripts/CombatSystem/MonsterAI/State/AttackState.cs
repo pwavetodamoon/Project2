@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Systems;
+using CombatSystem.Entity;
 using UnityEngine;
 
 public class AttackState : BaseIState
@@ -8,7 +9,7 @@ public class AttackState : BaseIState
     public float timer;
     public float timerToAttack = 3;
     public EntityAttackControl entityAttackControl;
-    private void Awake()
+    private void Start()
     {
         entityAttackControl.OnEndAttack += ResetCounter;
     }
@@ -29,13 +30,17 @@ public class AttackState : BaseIState
         timer += Time.deltaTime;
         if (timer >= timerToAttack)
         {
-            Debug.Log("Attack");
-            entityAttackControl.Attack();
+            if(entityAttackControl == null)
+            {
+                Debug.LogWarning("Entity Attack Control is null");
+                return;
+            }
+            entityAttackControl.Attack(context.target.GetComponent<EntityCharacter>());
 
         }
     }
     private void ResetCounter()
     {
-
+        timer = 0;
     }
 }

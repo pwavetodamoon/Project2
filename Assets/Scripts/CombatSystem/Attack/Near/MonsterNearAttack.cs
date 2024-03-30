@@ -1,5 +1,6 @@
 using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Systems;
+using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using Helper;
@@ -18,24 +19,56 @@ namespace CombatSystem.Attack.Near
 
         public EntityAttackControl EntityAttackControl;
         public Animator_Base Animator;
-
+        public EntityStats EntityStats;
+        public EntityCharacter EntityCharacter;
         private void Awake()
         {
-            
+            EntityCharacter = GetComponentInParent<EntityCharacter>();
+            EntityAttackControl = EntityCharacter.GetRef<EntityAttackControl>();
+            EntityAttackControl.OnAttack += RunATtack;
+            EntityStats = EntityCharacter.GetRef<EntityStats>();
+            Animator = EntityCharacter.GetRef<Animator_Base>();
         }
-        protected override IEnumerator StartBehavior()
+        private void RunATtack(EntityCharacter entity)
+        {
+            EntityAttackControl.StartCoroutine(StartBehavior(entity));
+        }
+        protected IEnumerator StartBehavior(EntityCharacter entity)
         {
             //if (IsOnTarget() == false || EntityStats.Health() < 0) yield break;
+            //if(CheckBeforeAttack(entity) == false)
+            //{
+            //    yield break;
+            //}
+
             PlayAnimation(AnimationType.Attack);
             yield return new WaitForSeconds(GetAnimationLength(AnimationType.Attack));
-            CauseDamage();
-
+            if(entity == null)
+            {
+                yield break;
+            }
+            CauseDamage(entity);
+            EntityAttackControl.ResetAtackState();
             //PlayAnimation(IsOnTarget() ? AnimationType.Idle : AnimationType.Walk);
         }
 
-        private void CauseDamage()
+        private bool CheckBeforeAttack(EntityCharacter entity)
         {
-            throw new NotImplementedException();
+            var entityCombat = entity.GetRef<EntityCombat>();
+            if (entityCombat != null)
+            {
+                return entityCombat.Check(this.EntityStats, GameTag.Hero);
+            }
+            return false;
+        }
+
+        private void CauseDamage(EntityCharacter entity)
+        {
+            var damageable = entity.GetRef<IDamageable>();
+            if(damageable != null)
+            {
+                damageable.TakeDamage(this.EntityStats);
+            }
         }
 
         private void PlayAnimation(AnimationType attack)

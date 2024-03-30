@@ -67,15 +67,16 @@ namespace CombatSystem.Entity.Utilities
             Debug.Log(transform.name + " Check: " + EntityHelper.sumOfDamage);
             if(IsOutOfHealth() && entityStats.Health() > 0)
             {
+                Debug.Log("Kiem tra co the tan cong ko");
                 IncreaseAttacker(entity1);
+                var enemy = entity1.GetComponentInParent<EntityCharacter>();
+                if (IsOutOfHealth())
+                {
+                    Debug.Log("Kiem tra thanh cong va chuan bi tan cong");
+                    CombatEntitiesManager.Instance.RemoveEntityByTag(enemy, tag);
+                    return true;
+                }
             }
-            var enemy = entity1.GetComponentInParent<EntityCharacter>();
-            if (IsOutOfHealth())
-            {
-                CombatEntitiesManager.Instance.RemoveEntityByTag(enemy, tag);
-                return true;
-            }
-
 
             return false;
         }

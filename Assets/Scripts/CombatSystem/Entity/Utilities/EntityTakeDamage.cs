@@ -23,6 +23,7 @@ namespace CombatSystem.Entity.Utilities
             entity = GetComponentInParent<EntityCharacter>();
             EntityStats = entity.GetRef<EntityStats>();
             animation_Base = entity.GetRef<Animator_Base>();
+            entityAction = entity.GetRef<EntityAction>();
         }
 
 
@@ -43,7 +44,7 @@ namespace CombatSystem.Entity.Utilities
             }
 
             if (entity.EntityInAttackState() == false && EntityStats.Health() > 0) animation_Base.ChangeAnimation(AnimationType.Hurt);
-            // Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
+            Debug.Log($"Entity {gameObject.name} is taking damageOfEnemy: {damage} and have {EntityStats.Health()}", gameObject);
         }
 
         public void TakeDamage(EntityStats enemy)

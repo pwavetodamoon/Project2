@@ -16,8 +16,8 @@ namespace CombatSystem.Attack.Systems
         [SerializeField] private Transform magicAttackTransform;
         [ShowInInspector] public BaseSingleTargetAttack attack;
         [SerializeField] public EntityCharacter entityCharacter;
-        public Action OnAttack;
-        public Action OnEndAttack;
+        public event Action<EntityCharacter> OnAttack;
+        public event Action OnEndAttack;
         private void Start()
         {
             entityCharacter = GetComponentInParent<EntityCharacter>();
@@ -69,9 +69,18 @@ namespace CombatSystem.Attack.Systems
             StopAllCoroutines();
         }
 
-        public void Attack()
+        public void Attack(EntityCharacter entity)
         {
-            OnAttack?.Invoke();
+            if (entity == null)
+            {
+                Debug.Log("The Target is null");
+                return;
+            }
+            OnAttack?.Invoke(entity);
+        }
+        public void ResetAtackState()
+        {
+            OnEndAttack?.Invoke();
         }
     }
 }

@@ -134,7 +134,7 @@ namespace CombatSystem.Attack.Abstracts
         //     return false;
         // }
 
-        // protected virtual void CauseDamage()
+        // protected virtual void CheckBeforeAttack()
         // {
         //     if (Enemy == null)
         //     {

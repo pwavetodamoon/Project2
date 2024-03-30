@@ -3,6 +3,7 @@ using CombatSystem.Entity.Utilities;
 using CombatSystem.Helper;
 using LevelAndStats;
 using Model.Monsters;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CombatSystem.Entity
@@ -51,12 +52,12 @@ namespace CombatSystem.Entity
 
         //public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
         //public EntityAction GetEntityAction() => entityAction;
-
+        [Button]
         public virtual void RegisterObject()
         {
             SetAttackState(true);
         }
-
+        [Button]
         public virtual void ReleaseObject()
         {
             SetAttackState(false);

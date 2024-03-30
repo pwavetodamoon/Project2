@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CombatSystem;
+using Helper;
+using UnityEngine;
 
 public class FindState : BaseIState
 {
@@ -10,7 +12,8 @@ public class FindState : BaseIState
         }
         else
         {
-            Debug.Log("Find");
+            context.target = CombatEntitiesManager.Instance.GetEntityTransformByTag(transform, GameTag.Hero).gameObject;
+            Debug.Log("Find: "+context.target.name);
         }
     }
 }

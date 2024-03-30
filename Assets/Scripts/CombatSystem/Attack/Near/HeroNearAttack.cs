@@ -20,7 +20,7 @@ namespace CombatSystem.Attack.Near
         //     PlayAnimation(AnimationType.Attack);
         //     AudioManager.Instance.PlaySFX("Near Attack");
         //     yield return waitForEndAnim;
-        //     CauseDamage();
+        //     CheckBeforeAttack();
         //     yield return MoveModelToPosition(GetSlotPosition());
         // }
 
