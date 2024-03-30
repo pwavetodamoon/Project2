@@ -5306,39 +5306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &529845145
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 529845146}
-  m_Layer: 8
-  m_Name: EnemyAI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &529845146
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529845145}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 635073852}
-  - {fileID: 1886707315}
-  m_Father: {fileID: 5942357831049801794}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &539563525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10226,51 +10193,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: befcafe0d8fe4a14ca0fd2c5e36d813c, type: 3}
---- !u!1 &635073851
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 635073852}
-  - component: {fileID: 635073853}
-  m_Layer: 7
-  m_Name: MonsterMoveAI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &635073852
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 635073851}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 529845146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &635073853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 635073851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54b140125be53ca4989233a38d8d8180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerAttack: 0
 --- !u!1001 &636363175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20942,51 +20864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AtkTransform: {fileID: 7714625663705664743}
---- !u!1 &1886707314
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1886707315}
-  - component: {fileID: 1886707316}
-  m_Layer: 8
-  m_Name: MonsterNearAI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1886707315
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886707314}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 529845146}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1886707316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886707314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3b0776ee251f9848a2cfbbf756cf639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMoving: {fileID: 0}
 --- !u!1 &1991116887
 GameObject:
   m_ObjectHideFlags: 0
@@ -21325,6 +21202,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ac57fd555ea1af4c8c292433f56b0d9, type: 3}
+--- !u!114 &2473740809281285975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414146775195727607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b0776ee251f9848a2cfbbf756cf639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMoving: {fileID: 0}
 --- !u!1001 &2793021984387304416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21541,6 +21431,7 @@ GameObject:
   - component: {fileID: 5942357831049801794}
   - component: {fileID: 3439226937766992324}
   - component: {fileID: 7120272256933615099}
+  - component: {fileID: 2473740809281285975}
   - component: {fileID: 7826835893874710213}
   - component: {fileID: 7826835893874710214}
   m_Layer: 8
@@ -21690,7 +21581,6 @@ Transform:
   - {fileID: 8388621792462620587}
   - {fileID: 7714625663705664743}
   - {fileID: 5345783932672917659}
-  - {fileID: 529845146}
   - {fileID: 497246230}
   - {fileID: 747502652}
   - {fileID: 1504659661}
