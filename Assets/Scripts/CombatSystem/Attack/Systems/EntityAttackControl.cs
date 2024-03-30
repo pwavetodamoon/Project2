@@ -13,23 +13,12 @@ namespace CombatSystem.Attack.Systems
     {
         [SerializeField] private Transform bowAttackTransform;
         [SerializeField] private Transform magicAttackTransform;
-        [ShowInInspector] private BaseSingleTargetAttack attack;
-        [ShowInInspector] private AttackCounter attackCounter;
-
-        [SerializeField] private EntityCharacter entityCharacter;
-        private EntityStats EntityStats;
-        private EntityCombat attackManager;
+        [ShowInInspector] public BaseSingleTargetAttack attack;
+        [SerializeField] public EntityCharacter entityCharacter;
 
         private void Start()
         {
             entityCharacter = GetComponentInParent<EntityCharacter>();
-            attackManager = entityCharacter.GetRef<EntityCombat>();
-            EntityStats = entityCharacter.GetRef<EntityStats>();
-        }
-
-        private void Update()
-        {
-            if (!CanNotRunAttackTimer()) RunAttackTimer();
         }
 
         [Button]
@@ -40,26 +29,16 @@ namespace CombatSystem.Attack.Systems
 
         private bool CanNotRunAttackTimer()
         {
-            return entityCharacter == null || attackCounter == null || attack == null;
+            return entityCharacter == null || attack == null;
         }
 
-        private void RunAttackTimer()
-        {
-            var allowCounter = attackManager.IsAllowCounter();
-            var allowToExecuteAnotherAttack = attackManager.IsAllowAttack();
-            var isActive = attack.IsActive;
-
-            attackCounter.UpdateMaxCounterTime(EntityStats.AttackCoolDown());
-            attackCounter.UpdateNewControlState(allowCounter, isActive, allowToExecuteAnotherAttack);
-            attackCounter.CheckTimerCounter(Time.deltaTime);
-        }
 
         public void Create(SingleAttackFactory factory)
         {
-            InitAttackControl(factory.CreateAttack(), new AttackCounter(3));
+            InitAttackControl(factory.CreateAttack());
         }
 
-        private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
+        private void InitAttackControl(BaseSingleTargetAttack newAttack)
         {
             if (entityCharacter == null)
             {
@@ -69,13 +48,9 @@ namespace CombatSystem.Attack.Systems
             newAttack.GetReference(entityCharacter);
 
             attack = newAttack;
-            attackCounter = newAttackCounter;
 
             attack.SetAttackTransform(bowAttackTransform, magicAttackTransform);
-            attackCounter.SetCoroutineRunner(this);
 
-            attack.SetOnEndAttackCallBack(attackCounter.ResetCounter);
-            attackCounter.SetAttackCallBack(attack.ExecuteAttack);
         }
 
         public bool IsAttacking()

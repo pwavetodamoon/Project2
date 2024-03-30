@@ -2,7 +2,6 @@ using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Systems;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
-using CombatSystem.MonsterAI;
 using Helper;
 using LevelAndStats;
 using Model.Hero;
@@ -17,7 +16,6 @@ namespace CombatSystem.Attack.Near
     {
 
 
-        private MonsterMoveAI MonsterMoveAI;
 
         public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {
