@@ -8,6 +8,10 @@ public class AttackState : BaseIState
     public float timer;
     public float timerToAttack = 3;
     public EntityAttackControl entityAttackControl;
+    private void Awake()
+    {
+        entityAttackControl.OnEndAttack += ResetCounter;
+    }
     public override void DoThis()
     {
         if (context.target != null)
@@ -26,12 +30,9 @@ public class AttackState : BaseIState
         if (timer >= timerToAttack)
         {
             Debug.Log("Attack");
-            Attack();
-        }
-    }
-    private void Attack()
-    {
+            entityAttackControl.Attack();
 
+        }
     }
     private void ResetCounter()
     {

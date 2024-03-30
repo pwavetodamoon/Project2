@@ -11,59 +11,59 @@ namespace CombatSystem.Attack.Factory
 {
     public abstract class FarAttack : BaseSingleTargetAttack
     {
-        protected readonly RangedProjectileType type;
+        // protected readonly RangedProjectileType type;
 
-        public FarAttack(RangedProjectileType type)
-        {
-            this.type = type;
-        }
+        // public FarAttack(RangedProjectileType type)
+        // {
+        //     this.type = type;
+        // }
 
-        private bool IsProjectileHitEnemy;
-        private WaitForSeconds waitForEndAnim;
-        private WaitUntil waitUntilCanCauseDamage;
-        private WaitUntil WaitForInvokeAction;
-        private ShootDetect shootDetect;
+        // private bool IsProjectileHitEnemy;
+        // private WaitForSeconds waitForEndAnim;
+        // private WaitUntil waitUntilCanCauseDamage;
+        // private WaitUntil WaitForInvokeAction;
+        // private ShootDetect shootDetect;
 
-        private void SetupYieldInstruction()
-        {
-            WaitForInvokeAction = new WaitUntil(() => shootDetect.ShootDone);
-            waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
-            waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
-        }
+        // private void SetupYieldInstruction()
+        // {
+        //     WaitForInvokeAction = new WaitUntil(() => shootDetect.ShootDone);
+        //     waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
+        //     waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
+        // }
 
-        protected override IEnumerator StartBehavior()
-        {
-            PlayAnimationAttack();
-            yield return WaitForInvokeAction;
-            if (Enemy == null) yield break;
-            if (GetProjectile() != null)
-            {
-                yield return waitUntilCanCauseDamage;
-                // CauseDamage();
-            }
-        }
+        // protected override IEnumerator StartBehavior()
+        // {
+        //     PlayAnimationAttack();
+        //     yield return WaitForInvokeAction;
+        //     if (Enemy == null) yield break;
+        //     if (GetProjectile() != null)
+        //     {
+        //         yield return waitUntilCanCauseDamage;
+        //         // CauseDamage();
+        //     }
+        // }
 
-        protected abstract ProjectileBase GetProjectile();
+        // protected abstract ProjectileBase GetProjectile();
 
-        protected abstract void PlayAnimationAttack();
+        // protected abstract void PlayAnimationAttack();
 
-        protected override void ResetStateAndCounter()
-        {
-            base.ResetStateAndCounter();
-            IsProjectileHitEnemy = false;
-            shootDetect.ResetShoot();
-        }
+        // protected override void ResetStateAndCounter()
+        // {
+        //     base.ResetStateAndCounter();
+        //     IsProjectileHitEnemy = false;
+        //     shootDetect.ResetShoot();
+        // }
 
-        protected override string GetEnemyTag() => GameTag.Enemy;
+        // protected override string GetEnemyTag() => GameTag.Enemy;
 
-        protected void AllowGoNextStep() => IsProjectileHitEnemy = true;
+        // protected void AllowGoNextStep() => IsProjectileHitEnemy = true;
 
-        public override void GetReference(EntityCharacter newEntityCharacter,
-            Transform attackTransform = null)
-        {
-            base.GetReference(newEntityCharacter, attackTransform);
-            SetupYieldInstruction();
-            shootDetect = animator.GetComponent<ShootDetect>();
-        }
+        // public override void GetReference(EntityCharacter newEntityCharacter,
+        //     Transform attackTransform = null)
+        // {
+        //     base.GetReference(newEntityCharacter, attackTransform);
+        //     SetupYieldInstruction();
+        //     shootDetect = animator.GetComponent<ShootDetect>();
+        // }
     }
 }

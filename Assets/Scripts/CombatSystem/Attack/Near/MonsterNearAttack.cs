@@ -6,6 +6,7 @@ using Helper;
 using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -15,18 +16,13 @@ namespace CombatSystem.Attack.Near
     public class MonsterNearAttack : BaseSingleTargetAttack
     {
 
+        public EntityAttackControl EntityAttackControl;
+        public Animator_Base Animator;
 
-
-        public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
+        private void Awake()
         {
-            base.GetReference(newEntityCharacter, attackTransform);
-            PlayAnimation(AnimationType.Walk);
-
-
-            //entityCharacter.GetComponent<MonsterNearAI>().TriggerAttackEvent += MonsterMoveAI.EnableAttack;
-            //attackControl.StartCoroutine(MonsterMoveAI.MoveBehaviour());
+            
         }
-
         protected override IEnumerator StartBehavior()
         {
             //if (IsOnTarget() == false || EntityStats.Health() < 0) yield break;
@@ -37,11 +33,27 @@ namespace CombatSystem.Attack.Near
             //PlayAnimation(IsOnTarget() ? AnimationType.Idle : AnimationType.Walk);
         }
 
-
-        protected override string GetEnemyTag()
+        private void CauseDamage()
         {
-            return GameTag.Hero;
+            throw new NotImplementedException();
         }
+
+        private void PlayAnimation(AnimationType attack)
+        {
+            Animator?.ChangeAnimation(attack);
+        }
+
+        private float GetAnimationLength(AnimationType attack)
+        {
+            if (EntityAttackControl == null) return 0;
+            return Animator.GetAnimationLength(AnimationType.Attack);
+        }
+
+
+        // protected override string GetEnemyTag()
+        // {
+        //     return GameTag.Hero;
+        // }
 
     }
 }

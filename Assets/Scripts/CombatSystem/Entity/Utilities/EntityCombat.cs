@@ -65,7 +65,10 @@ namespace CombatSystem.Entity.Utilities
         public bool Check(EntityStats entity1, string tag)
         {
             Debug.Log(transform.name + " Check: " + EntityHelper.sumOfDamage);
-            IncreaseAttacker(entity1);
+            if(IsOutOfHealth() && entityStats.Health() > 0)
+            {
+                IncreaseAttacker(entity1);
+            }
             var enemy = entity1.GetComponentInParent<EntityCharacter>();
             if (IsOutOfHealth())
             {

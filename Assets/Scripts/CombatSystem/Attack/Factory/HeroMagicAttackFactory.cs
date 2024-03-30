@@ -12,7 +12,8 @@ namespace CombatSystem.Attack.Factory
 
         public override BaseSingleTargetAttack CreateAttack()
         {
-            return new HeroFarMagicAttack(projectileType);
+            // return new HeroFarMagicAttack(projectileType);
+            return null;
         }
     }
 }

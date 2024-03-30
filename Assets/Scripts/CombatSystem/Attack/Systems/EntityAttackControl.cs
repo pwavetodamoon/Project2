@@ -1,3 +1,4 @@
+using System;
 using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Factory;
 using CombatSystem.Attack.Utilities;
@@ -15,7 +16,8 @@ namespace CombatSystem.Attack.Systems
         [SerializeField] private Transform magicAttackTransform;
         [ShowInInspector] public BaseSingleTargetAttack attack;
         [SerializeField] public EntityCharacter entityCharacter;
-
+        public Action OnAttack;
+        public Action OnEndAttack;
         private void Start()
         {
             entityCharacter = GetComponentInParent<EntityCharacter>();
@@ -40,23 +42,24 @@ namespace CombatSystem.Attack.Systems
 
         private void InitAttackControl(BaseSingleTargetAttack newAttack)
         {
-            if (entityCharacter == null)
-            {
-                Debug.LogError("EntityCharacter is null");
-                Debug.Log("Please fix it");
-            }
-            newAttack.GetReference(entityCharacter);
+            // if (entityCharacter == null)
+            // {
+            //     Debug.LogError("EntityCharacter is null");
+            //     Debug.Log("Please fix it");
+            // }
+            // newAttack.GetReference(entityCharacter);
 
-            attack = newAttack;
+            // attack = newAttack;
 
-            attack.SetAttackTransform(bowAttackTransform, magicAttackTransform);
+            // attack.SetAttackTransform(bowAttackTransform, magicAttackTransform);
 
         }
 
         public bool IsAttacking()
         {
             if (attack == null) return false;
-            return attack.IsActive;
+            // return attack.IsActive;
+            return true;
         }
 
         [Button]
@@ -64,6 +67,11 @@ namespace CombatSystem.Attack.Systems
         {
             // Debug.Log("Stop Execute");
             StopAllCoroutines();
+        }
+
+        public void Attack()
+        {
+            OnAttack?.Invoke();
         }
     }
 }

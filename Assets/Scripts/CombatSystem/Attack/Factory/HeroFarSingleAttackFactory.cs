@@ -1,6 +1,7 @@
 using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Far;
 using CombatSystem.Attack.Utilities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Factory
@@ -13,7 +14,7 @@ namespace CombatSystem.Attack.Factory
 
         public override BaseSingleTargetAttack CreateAttack()
         {
-            return new HeroFarAttack(projectileType);
+            return null;
         }
     }
 }
