@@ -10,8 +10,7 @@ namespace CombatSystem.Attack.Factory
     {
         public override BaseSingleTargetAttack CreateAttack()
         {
-            var MonsterMoveAI = new MonsterMoveAI();
-            return new MonsterNearAttack(MonsterMoveAI);
+            return new MonsterNearAttack();
         }
     }
 }
