@@ -7,25 +7,28 @@ namespace LevelAndStats
 {
     public class EntityStats : MonoBehaviour
     {
-        [SerializeField] protected StructStats structStats;
         [SerializeField] EntityAction entityAction;
+        [SerializeField] protected StructStats structStats;
+        private float GetPercentHealth => structStats.health / structStats.maxHealth;
+
         public bool IsCritical { get; private set; }
 
-        public float Health() => structStats.health;
+        private bool IsCriticalHit()
+        {
+            var rate = Random.Range(0, 100);
+            return rate <= structStats.critRate ? true : false;
+        }
 
-        public float MaxHealth() => structStats.maxHealth;
+        protected virtual void Awake()
+        {
+            var entity = GetComponentInParent<EntityCharacter>();
+            entityAction = entity.GetRef<EntityAction>();
+        }
+        public float AttackCoolDown() => structStats.attackCoolDown;
 
         public float AttackMoveDuration() => structStats.attackMoveDuration / (1 + structStats.speed / 200);
 
-        public float AttackCoolDown() => structStats.attackCoolDown;
-
-        public StructStats GetStructStats() => structStats;
-
-        public float GetPercentHealth => structStats.health / structStats.maxHealth;
-
-        public int Level() => structStats.level;
-
-        public void SetLevel(int value) => structStats.level = value;
+        public void ChangeHealthEvent() => entityAction.OnHealthChange?.Invoke(GetPercentHealth);
 
         public void DecreaseHealth(float damage)
         {
@@ -34,15 +37,6 @@ namespace LevelAndStats
             ChangeHealthEvent();
         }
 
-        public void IncreaseHealth(float value)
-        {
-            Debug.Log("check");
-            structStats.health += value;
-
-            if (structStats.health >= structStats.maxHealth) structStats.health = structStats.maxHealth;
-            ChangeHealthEvent();
-        }
-        public void ChangeHealthEvent() => entityAction.OnHealthChange?.Invoke(GetPercentHealth);
         public float GetDamage()
         {
             var damage = structStats.baseDamage;
@@ -53,12 +47,24 @@ namespace LevelAndStats
             return damage;
         }
 
+        public StructStats GetStructStats() => structStats;
+
+        public float Health() => structStats.health;
+
+        public void IncreaseHealth(float value)
+        {
+            Debug.Log("check");
+            structStats.health += value;
+
+            if (structStats.health >= structStats.maxHealth) structStats.health = structStats.maxHealth;
+            ChangeHealthEvent();
+        }
+
+        public int Level() => structStats.level;
+
+        public float MaxHealth() => structStats.maxHealth;
         public void SetDamage(int value) => structStats.baseDamage += value;
 
-        private bool IsCriticalHit()
-        {
-            var rate = Random.Range(0, 100);
-            return rate <= structStats.critRate ? true : false;
-        }
+        public void SetLevel(int value) => structStats.level = value;
     }
 }

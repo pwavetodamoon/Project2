@@ -17,7 +17,6 @@ namespace CombatSystem.Entity.Utilities
         [SerializeField] protected bool allowCounter = true;
         [SerializeField] protected bool allowExecuteAnotherAttack = true;
         public int Count { get; set; }
-        public Transform parent;
         private void Start()
         {
             entity = GetComponentInParent<EntityCharacter>();
@@ -34,9 +33,9 @@ namespace CombatSystem.Entity.Utilities
 
         public void DecreaseAttackerCount(EntityStats entity1)
         {
-            if(EntityHelper.EntityStats == null)
+            if (EntityHelper.EntityStats == null)
             {
-                Debug.Log("EntityStats is null",gameObject);
+                Debug.Log("EntityStats is null", gameObject);
             }
             EntityHelper.Remove(entity1);
             if (--Count < 0 && CanChangeAnimation())
@@ -45,15 +44,37 @@ namespace CombatSystem.Entity.Utilities
             }
         }
 
-        public void IncreaseAttackerCount(EntityStats entity1)
+        public void IncreaseAttackerCount(EntityStats entityStats)
         {
-            Debug.Log(transform.name + " IncreaseAttackerCount: " + EntityHelper.sumOfDamage);
+            EntityHelper.Add(entityStats);
+            if (CanChangeAnimation())
+            {
+                animator_base.ChangeAnimation(AnimationType.Idle);
+            }
+            ++Count;
+        }
+        public void IncreaseAttacker(EntityStats entity1)
+        {
             EntityHelper.Add(entity1);
             if (CanChangeAnimation())
             {
                 animator_base.ChangeAnimation(AnimationType.Idle);
             }
             ++Count;
+        }
+        public bool Check(EntityStats entity1, string tag)
+        {
+            Debug.Log(transform.name + " Check: " + EntityHelper.sumOfDamage);
+            IncreaseAttacker(entity1);
+            var enemy = entity1.GetComponentInParent<EntityCharacter>();
+            if (IsOutOfHealth())
+            {
+                CombatEntitiesManager.Instance.RemoveEntityByTag(enemy, tag);
+                return true;
+            }
+
+
+            return false;
         }
 
         public bool IsAllowAttack() => allowExecuteAnotherAttack;
@@ -74,5 +95,6 @@ namespace CombatSystem.Entity.Utilities
         public void SetAllowExecuteAttackValue(bool value) => allowExecuteAnotherAttack = value;
 
         public bool SetTimeCounterValue(bool value) => allowCounter = value;
+
     }
 }

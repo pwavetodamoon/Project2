@@ -18,7 +18,6 @@ namespace CombatSystem.Entity
         [SerializeField] protected EntityTakeDamage EntityTakeDamage;
         [SerializeField] protected EntityAction entityAction;
         // Support for getting reference from children or parent
-        [SerializeField] protected EntityReferences EntityReferences;
 
         protected virtual void Awake()
         {

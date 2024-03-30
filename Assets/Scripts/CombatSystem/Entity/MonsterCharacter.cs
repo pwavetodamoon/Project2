@@ -10,13 +10,14 @@ namespace CombatSystem.Entity
     public class MonsterCharacter : EntityCharacter
     {
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
-        internal HealthBarDynamic healthBar;
-        public Vector2 HealthBarOffset;
+        [SerializeField] private HealthBarDynamic healthBar;
+        [SerializeField] private Vector2 HealthBarOffset;
         [SerializeField] private RewardSignal rewardSignal;
 
         protected override void Awake()
         {
             base.Awake();
+            rewardSignal = GetComponentInChildren<RewardSignal>();
             entityAction.OnDie += rewardSignal.SendSignal;
         }
         private void Start()
@@ -41,7 +42,6 @@ namespace CombatSystem.Entity
             StopExecute();
             Debug.Log("ReleaseObject Enemy");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
-            //Destroy(gameObject);
         }
 
         public void KillMonster()

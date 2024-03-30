@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.GraphicsBuffer;
 
 //[ExecuteAlways]
 namespace SortingLayers
@@ -16,6 +17,7 @@ namespace SortingLayers
         private void Awake()
         {
             sortingGroup = GetComponentInParent<SortingGroup>();
+            target = sortingGroup.transform;
             isValidate = sortingGroup != null;
         }
 

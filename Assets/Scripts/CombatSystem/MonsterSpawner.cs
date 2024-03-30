@@ -55,7 +55,7 @@ namespace CombatSystem
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].ReleaseObject();
-                Destroy(list[i].healthBar.gameObject);
+                //Destroy(list[i].healthBar.gameObject);
                 list[i].KillMonster();
             }
         }

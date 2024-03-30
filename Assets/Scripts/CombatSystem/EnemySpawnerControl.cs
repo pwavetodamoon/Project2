@@ -34,7 +34,7 @@ public class EnemySpawnerControl : MonoBehaviour
         timerCounter = GetComponent<TimerCounter>();
         timerCounter.RegisterCallback(SpawnMinions);
 
-        monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
+        //monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
     }
 
     public void EnableSpawn() => allowSpawn = true;
@@ -45,18 +45,7 @@ public class EnemySpawnerControl : MonoBehaviour
     public void SpawnMinions()
     {
         if (allowSpawn == false) return;
-        var firstSpawn = Random.Range(1, entitySpawnPerTime);
-
-        int maxCount = entitySpawnPerTime;
-
-        while (maxCount > 0)
-        {
-            var index = Random.Range(0, monsterSpawners.Count);
-            var count = Random.Range(1, entitySpawnPerTime);
-
-            Spawn(index, count);
-            maxCount -= count;
-        }
+        monsterSpawners[0].SpawnMonster();
     }
 
     private void Spawn(int index, int count)

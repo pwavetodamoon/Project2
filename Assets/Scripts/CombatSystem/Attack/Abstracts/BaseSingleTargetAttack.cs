@@ -20,7 +20,7 @@ namespace CombatSystem.Attack.Abstracts
         [SerializeField] protected EntityStats EntityStats;
         [SerializeField] protected EntityCharacter Enemy;
         [SerializeField] protected Animator_Base animator;
-        [SerializeField] protected IAttackerCounter IAttackerCounter;
+        [SerializeField] protected EntityCombat IAttackerCounter;
 
         [Header("Entity Characters Field")] protected EntityCharacter entityCharacter;
 
@@ -53,7 +53,6 @@ namespace CombatSystem.Attack.Abstracts
             MagicAttackTransform = magicAttackTransform;
         }
 
-        protected void IncreaseAttackerCount() => IAttackerCounter?.IncreaseAttackerCount(EntityStats);
 
         private bool IsEnemyAlive()
         {
@@ -128,17 +127,10 @@ namespace CombatSystem.Attack.Abstracts
             }
             // if before attack, the enemy is out of health, then return false
             // if not then increase the attacker count and return true
-            IAttackerCounter = Enemy.GetRef<IAttackerCounter>();
+            IAttackerCounter = Enemy.GetRef<EntityCombat>();
             //TODO: Check if the enemy is out of health
-            if (IAttackerCounter.IsOutOfHealth() == false)
-            {
-                IncreaseAttackerCount();
-                if (IAttackerCounter.IsOutOfHealth())
-                {
-                    CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
-                }
-                return true;
-            }
+            IAttackerCounter.Check(EntityStats, GetEnemyTag());
+
             return false;
         }
 

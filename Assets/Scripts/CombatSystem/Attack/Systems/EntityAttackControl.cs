@@ -61,6 +61,11 @@ namespace CombatSystem.Attack.Systems
 
         private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
         {
+            if (entityCharacter == null)
+            {
+                Debug.LogError("EntityCharacter is null");
+                Debug.Log("Please fix it");
+            }
             newAttack.GetReference(entityCharacter);
 
             attack = newAttack;

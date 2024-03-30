@@ -9940,7 +9940,6 @@ GameObject:
   - component: {fileID: 7183776206213434776}
   - component: {fileID: 9071444663126028510}
   - component: {fileID: 6512530285820067865}
-  - component: {fileID: 5966265637540128700}
   - component: {fileID: 6235479006327011089}
   m_Layer: 7
   m_Name: Hero
@@ -9989,7 +9988,6 @@ MonoBehaviour:
   entityStats: {fileID: 5101025433459023057}
   EntityTakeDamage: {fileID: 0}
   entityAction: {fileID: 0}
-  EntityReferences: {fileID: 5966265637540128700}
   characterEnumType: 0
   modelTransform: {fileID: 9016102133458346649}
   attackFactory: {fileID: 11400000, guid: 86f246291ec9cce41a0d5559a112a3a4, type: 2}
@@ -10070,18 +10068,6 @@ MonoBehaviour:
   - {fileID: 5972611945681689497}
   - {fileID: 7033310968869097488}
   - {fileID: 4972238690098428290}
---- !u!114 &5966265637540128700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6034959875011442393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1505c9e65a2960042858839a69f5435b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6235479006327011089
 MonoBehaviour:
   m_ObjectHideFlags: 0

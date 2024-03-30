@@ -150,10 +150,22 @@ PrefabInstance:
       propertyPath: allowCounter
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3371715870276447265, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
+      propertyPath: MonsterPrefab
+      value: 
+      objectReference: {fileID: 3439226937766992324}
     - target: {fileID: 6070266447307848966, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
       propertyPath: entitySpawnPerTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6070266447307848966, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
+      propertyPath: monsterSpawners.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070266447307848966, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
+      propertyPath: monsterSpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 17720458}
     - target: {fileID: 6777206561980498831, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -203,6 +215,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
+--- !u!114 &17720458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3371715870276447265, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
+  m_PrefabInstance: {fileID: 17720457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff9a1b250005be47bad46e0c2103db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &180805094
 GameObject:
   m_ObjectHideFlags: 0
@@ -5022,10 +5045,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7c11eaf3e17964e88e8d3396e1b533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 1070859182}
+  entity: {fileID: 3439226937766992324}
   allowCounter: 1
   allowExecuteAnotherAttack: 1
-  parent: {fileID: 0}
 --- !u!1001 &422577633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20300,17 +20322,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
---- !u!114 &1070859182 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1935633485572637146, guid: 2d187256f0acfeb4aaae2871b6a7f4e5, type: 3}
-  m_PrefabInstance: {fileID: 1070859178}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ea4addc56c4514292c216038113cb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1158807989 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6716722789933213714, guid: c7fb184e00614e942bbed2f978af1bd5, type: 3}
@@ -20515,7 +20526,7 @@ MonoBehaviour:
   animatorBase: {fileID: 0}
   entityAction: {fileID: 0}
   monsterCharacter: {fileID: 0}
-  model: {fileID: 0}
+  model: {fileID: 8388621792462620587}
 --- !u!1 &1439957531
 GameObject:
   m_ObjectHideFlags: 0
@@ -20678,6 +20689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7299b3c6f8c5ec244a448333b11457c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityAction: {fileID: 0}
   structStats:
     level: 0
     maxHealth: 0
@@ -20688,7 +20700,6 @@ MonoBehaviour:
     critDamage: 0
     attackCoolDown: 0
     attackMoveDuration: 0
-  entityAction: {fileID: 0}
   EnemyData: {fileID: 0}
 --- !u!198 &1461960055 stripped
 ParticleSystem:
@@ -21024,7 +21035,7 @@ GameObject:
   - component: {fileID: 7537757522340441640}
   - component: {fileID: 1360034834434451723}
   m_Layer: 8
-  m_Name: Golem
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21204,7 +21215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMoving: {fileID: 0}
-  IsTriggerAttackBehaviour: 0
 --- !u!1001 &2793021984387304416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21284,8 +21294,8 @@ MonoBehaviour:
   entityStats: {fileID: 0}
   EntityTakeDamage: {fileID: 0}
   entityAction: {fileID: 0}
-  EntityReferences: {fileID: 0}
   monsterSingleAttackFactory: {fileID: 11400000, guid: b6ae625281bd123469495f8666d47870, type: 2}
+  healthBar: {fileID: 0}
   HealthBarOffset: {x: 0, y: 1.2}
   rewardSignal: {fileID: 0}
 --- !u!1001 &3451473333681129041
@@ -21423,6 +21433,7 @@ GameObject:
   - component: {fileID: 7120272256933615099}
   - component: {fileID: 2473740809281285975}
   - component: {fileID: 7826835893874710213}
+  - component: {fileID: 7826835893874710214}
   m_Layer: 8
   m_Name: Monster_LandMonster
   m_TagString: Enemy
@@ -21760,6 +21771,18 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &7826835893874710214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414146775195727607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6f79222a1354d498135dcf3f23dc3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8027450070002338875
 PrefabInstance:
   m_ObjectHideFlags: 0
