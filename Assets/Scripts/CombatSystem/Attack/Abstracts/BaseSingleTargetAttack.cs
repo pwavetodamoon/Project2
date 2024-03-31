@@ -129,7 +129,7 @@ namespace CombatSystem.Attack.Abstracts
             }
             // if before attack, the enemy is out of health, then return false
             // if not then increase the attacker count and return true
-            //IAttackerCounter = Enemy.GetRef<EntityCombat>();
+            IAttackerCounter = Enemy.GetRef<EntityCombat>();
             ////TODO: Check if the enemy is out of health
             //if (IAttackerCounter == null) return false;
             //var canAttack = IAttackerCounter.Check(EntityStats, GetEnemyTag());
@@ -161,10 +161,9 @@ namespace CombatSystem.Attack.Abstracts
                 Debug.Log(Enemy);
                 return;
             }
-            if (Enemy.TryGetComponent(out IDamageable damageable))
-            {
-                damageable?.TakeDamage(EntityStats);
-            }
+            var damageable = Enemy.GetRef<IDamageable>();
+            damageable?.TakeDamage(EntityStats);
+
         }
     }
 }

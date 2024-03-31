@@ -23,6 +23,7 @@ namespace CombatSystem.Entity.Utilities
             entity = GetComponentInParent<EntityCharacter>();
             EntityStats = entity.GetRef<EntityStats>();
             animation_Base = entity.GetRef<Animator_Base>();
+            entityAction = entity.GetRef<EntityAction>();
         }
 
 
@@ -38,6 +39,7 @@ namespace CombatSystem.Entity.Utilities
             EntityStats.DecreaseHealth(damage);
             if (EntityStats.Health() <= 0)
             {
+                Debug.Log($"{entity.name} is out of health ", entity.gameObject);
                 entityAction.OnDie?.Invoke();
                 return;
             }

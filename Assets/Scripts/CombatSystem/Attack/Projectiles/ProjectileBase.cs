@@ -1,4 +1,5 @@
 using CombatSystem.Attack.Utilities;
+using CombatSystem.Entity;
 using LevelAndStats;
 using ObjectPool;
 using System;
@@ -27,10 +28,8 @@ namespace CombatSystem.Attack.Projectiles
             OnEndAttack?.Invoke();
             ReleaseCallback?.Invoke(this);
             if (target == null) return;
-            if (target.TryGetComponent(out IDamageable damageable))
-            {
-                damageable?.TakeDamage(EntityStats);
-            }
+            var damageable = target.GetComponent<EntityCharacter>().GetRef<IDamageable>();
+            damageable?.TakeDamage(EntityStats);
         }
 
         public void RegisterOnEndVfx(Action method)
