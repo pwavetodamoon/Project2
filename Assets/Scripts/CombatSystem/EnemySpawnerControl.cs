@@ -34,7 +34,7 @@ public class EnemySpawnerControl : MonoBehaviour
         timerCounter = GetComponent<TimerCounter>();
         timerCounter.RegisterCallback(SpawnMinions);
 
-        //monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
+        monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
     }
 
     public void EnableSpawn() => allowSpawn = true;
@@ -44,13 +44,9 @@ public class EnemySpawnerControl : MonoBehaviour
     [Button]
     public void SpawnMinions()
     {
-        if (allowSpawn == false) return;
-        monsterSpawners[0].SpawnMultipleMonsters(1);
-    }
-
-    private void Spawn(int index, int count)
-    {
-        monsterSpawners[index].SpawnMultipleMonsters(count);
+        if (allowSpawn == false || monsterSpawners.Count == 0) return;
+        var spawnerIndex = Random.Range(0, monsterSpawners.Count);
+        monsterSpawners[spawnerIndex].SpawnMultipleMonsters(entitySpawnPerTime);
     }
 
     public void SpawnBoss()
