@@ -34,12 +34,15 @@ namespace CombatSystem.Entity
 
         private void OnDead()
         {
-            if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
+            //if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
+            //{
+            //    GameLevelControl.Instance.OnLoose();
+            //    Debug.Log("Thua roi");
+            //}
+            if(IsDead == false)
             {
-                GameLevelControl.Instance.OnLoose();
-                Debug.Log("Thua roi");
+                GameLevelControl.Instance.CheckOnLoose();
             }
-
             SetDeadState();
         }
 

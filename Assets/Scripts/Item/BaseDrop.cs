@@ -7,6 +7,7 @@ using ObjectPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 namespace Item
 {
@@ -72,7 +73,10 @@ namespace Item
             collider2d.enabled = false;
 
             if (DestinationTransform != null)
-                yield return transform.DOLocalMove(DestinationTransform.position, 1f).WaitForCompletion();
+            {
+                var time = Random.Range(.5f, 1f);
+                yield return transform.DOLocalMove(DestinationTransform.position, time).WaitForCompletion();
+            }
             SendData();
             Release();
         }

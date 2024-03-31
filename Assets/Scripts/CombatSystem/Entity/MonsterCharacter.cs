@@ -19,6 +19,7 @@ namespace CombatSystem.Entity
             base.Awake();
             rewardSignal = GetComponentInChildren<RewardSignal>();
             entityAction.OnDie += rewardSignal.SendSignal;
+            entityAction.OnDie += StopExecute;
         }
         private void Start()
         {
