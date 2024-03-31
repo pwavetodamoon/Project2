@@ -143,33 +143,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2788485466511362211, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-      propertyPath: spawnTimer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2788485466511362211, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
       propertyPath: allowCounter
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3371715870276447265, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-      propertyPath: MonsterPrefab
-      value: 
-      objectReference: {fileID: 7304157834538290346, guid: d857008bc6fc4c34d95681d1a6c4b431, type: 3}
-    - target: {fileID: 4152636588422711050, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-      propertyPath: MonsterPrefab
-      value: 
-      objectReference: {fileID: 1833744593825847522, guid: a84a0a3bc79f60f45a220496458439e9, type: 3}
-    - target: {fileID: 6070266447307848966, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-      propertyPath: entitySpawnPerTime
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6070266447307848966, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-      propertyPath: monsterSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070266447307848966, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-      propertyPath: monsterSpawners.Array.data[0]
-      value: 
-      objectReference: {fileID: 17720458}
     - target: {fileID: 6777206561980498831, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -219,17 +195,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
---- !u!114 &17720458 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3371715870276447265, guid: 83ad3eb6805d2014281dfaa87c0b86ca, type: 3}
-  m_PrefabInstance: {fileID: 17720457}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ff9a1b250005be47bad46e0c2103db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &452133134
 PrefabInstance:
   m_ObjectHideFlags: 0
