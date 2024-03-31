@@ -22,7 +22,7 @@ namespace CombatSystem
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
         }
 
-        public MonsterCharacter SpawnMonster()
+        private MonsterCharacter SpawnMonster()
         {
             if (MonsterPrefab == null) return null;
             var position = SpawnPoint1.position;
@@ -39,7 +39,12 @@ namespace CombatSystem
             for (var i = 0; i < spawnCount; i++)
             {
                 var enemy = SpawnMonster();
-                SetStatsToMonster(enemy.GetComponent<EnemyStats>());
+                var stats = enemy.GetRef<EnemyStats>();
+                if(stats == null)
+                {
+                    Debug.Log("This stats of monster is null");
+                }
+                SetStatsToMonster(stats);
             }
         }
 

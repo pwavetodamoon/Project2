@@ -45,7 +45,7 @@ public class EnemySpawnerControl : MonoBehaviour
     public void SpawnMinions()
     {
         if (allowSpawn == false) return;
-        monsterSpawners[0].SpawnMonster();
+        monsterSpawners[0].SpawnMultipleMonsters(1);
     }
 
     private void Spawn(int index, int count)

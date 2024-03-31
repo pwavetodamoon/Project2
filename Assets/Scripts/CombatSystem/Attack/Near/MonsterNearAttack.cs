@@ -20,7 +20,7 @@ namespace CombatSystem.Attack.Near
             this.MonsterMoveAI = monsterMoveAI;
         }
 
-        private MonsterMoveAI MonsterMoveAI;
+        public MonsterMoveAI MonsterMoveAI;
 
         public override void GetReference(EntityCharacter newEntityCharacter, Transform attackTransform = null)
         {

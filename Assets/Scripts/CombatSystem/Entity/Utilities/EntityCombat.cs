@@ -64,12 +64,13 @@ namespace CombatSystem.Entity.Utilities
         }
         public bool Check(EntityStats entity1, string tag)
         {
-            Debug.Log(transform.name + " Check: " + EntityHelper.sumOfDamage);
+            //Debug.Log(transform.name + " Check: " + EntityHelper.sumOfDamage);
+            if (IsOutOfHealth()) return false;
             IncreaseAttacker(entity1);
-            var enemy = entity1.GetComponentInParent<EntityCharacter>();
+            //var enemy = entity1.GetComponentInParent<EntityCharacter>();
             if (IsOutOfHealth())
             {
-                CombatEntitiesManager.Instance.RemoveEntityByTag(enemy, tag);
+                CombatEntitiesManager.Instance.RemoveEntityByTag(entity, tag);
                 return true;
             }
 

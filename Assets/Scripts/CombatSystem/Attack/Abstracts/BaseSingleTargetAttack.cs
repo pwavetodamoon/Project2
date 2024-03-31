@@ -74,7 +74,7 @@ namespace CombatSystem.Attack.Abstracts
 
         public IEnumerator ExecuteAttack()
         {
-            // Debug.Log("Coroutine ExecuteAttack");
+            Debug.Log("Coroutine ExecuteAttack");
             if (isActive || !TryFindEnemy())
             {
                 yield return WaitAndContinue();
@@ -88,8 +88,8 @@ namespace CombatSystem.Attack.Abstracts
         {
             if (!IsEnemyAlive()) return false;
             Enemy = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GetEnemyTag());
-            Debug.Log(Enemy);
-            // Debug.Log($"{entityCharacter.name}: Try find enemy:", Enemy);
+            //Debug.Log(Enemy);
+            Debug.Log($"{entityCharacter.name}: Try find enemy:", Enemy);
             return true;
         }
 
@@ -117,6 +117,8 @@ namespace CombatSystem.Attack.Abstracts
             entityCombat.SetAllowExecuteAttackValue(true);
             onEndAttack?.Invoke();
             IAttackerCounter?.DecreaseAttackerCount(EntityStats);
+
+            //Debug.Log("Reset timer", entityCharacter.gameObject);
         }
 
         public bool CanExecuteAttack()
@@ -127,13 +129,31 @@ namespace CombatSystem.Attack.Abstracts
             }
             // if before attack, the enemy is out of health, then return false
             // if not then increase the attacker count and return true
-            IAttackerCounter = Enemy.GetRef<EntityCombat>();
-            //TODO: Check if the enemy is out of health
-            IAttackerCounter.Check(EntityStats, GetEnemyTag());
-
+            //IAttackerCounter = Enemy.GetRef<EntityCombat>();
+            ////TODO: Check if the enemy is out of health
+            //if (IAttackerCounter == null) return false;
+            //var canAttack = IAttackerCounter.Check(EntityStats, GetEnemyTag());
+            //if (canAttack)
+            //{
+            //    Debug.Log(entityCharacter.name + "Can attack: " + Enemy.name, entityCharacter.gameObject);
+            //}
+            //else
+            //{
+            //    Debug.Log("Cannot attack", entityCharacter.gameObject);
+            //}
+            //return canAttack;
+            if (IAttackerCounter.IsOutOfHealth() == false)
+            {
+                IncreaseAttackerCount();
+                if (IAttackerCounter.IsOutOfHealth())
+                {
+                    CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
+                }
+                return true;
+            }
             return false;
         }
-
+        protected void IncreaseAttackerCount() => IAttackerCounter?.IncreaseAttackerCount(EntityStats);
         protected virtual void CauseDamage()
         {
             if (Enemy == null)

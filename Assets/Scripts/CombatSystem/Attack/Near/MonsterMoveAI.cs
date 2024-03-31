@@ -12,14 +12,14 @@ namespace CombatSystem.Attack.Near
 {
     public class MonsterMoveAI
     {
-        private MonsterNearAttack monsterNearAttack;
-        private Animator_Base animator_Base;
-        private EntityCombat attackManager;
+         private MonsterNearAttack monsterNearAttack;
+        [SerializeField] private Animator_Base animator_Base;
+        [SerializeField] private EntityCombat attackManager;
         private EntityCharacter Enemy => monsterNearAttack.GetEnemy();
         private EntityCharacter currentEntity => monsterNearAttack.GetEntityCharacter();
-        private EntityStats entityStats;
+        [SerializeField] private EntityStats entityStats;
         public bool triggerAttack;
-        private float distance;
+        [SerializeField] private float distance;
 
         public void GetRef(MonsterNearAttack monsterNearAttack, EntityCombat attackManager, Animator_Base animator_Base)
         {
@@ -77,12 +77,14 @@ namespace CombatSystem.Attack.Near
 
             while (triggerAttack == false)
             {
-                if (CanMoveEntity() && entityStats.Health() > 0)
+                if (attackManager.AttackedByEnemies() == false && entityStats.Health() > 0)
                 {
+                    Debug.Log("On Move left");
                     MoveDirective(Vector2.left, 7);
                 }
                 else
                 {
+                    Debug.Log("On Stand");
                     MoveDirective(Vector2.left, 0);
                 }
 
@@ -92,6 +94,7 @@ namespace CombatSystem.Attack.Near
             {
                 if (CanMoveEntity())
                 {
+                    Debug.Log("On find enemy");
                     var direction = GetDestinationPosition() - currentEntity.transform.position;
                     MoveDirective(direction.normalized, 5);
                 }
