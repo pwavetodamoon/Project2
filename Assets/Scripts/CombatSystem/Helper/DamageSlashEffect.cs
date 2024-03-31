@@ -1,32 +1,33 @@
-using System.Collections;
+using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 namespace CombatSystem.Helper
 {
     public class DamageSlashEffect : MonoBehaviour
     {
-        [SerializeField] [Required] private Material slashMaterial;
+        [SerializeField][Required] private Material slashMaterial;
         private readonly float slashDuration = 0.1f;
         private readonly WaitForEndOfFrame waitForEndOfFrame = new();
         private float slashTimer;
-        private Material defaultMaterial;
         private bool isSlashing;
+        private Material defaultMaterial;
         private SpriteRenderer[] spriteRenderers;
-        private EntityStateManager EntityStateManager;
-        private void Awake()
+        private EntityAction entityAction;
+
+        public Transform modelTransform;
+        public Transform parent;
+
+        private void Start()
         {
-            spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-            EntityStateManager = GetComponent<EntityStateManager>();
+            parent = transform.parent;
+            spriteRenderers = modelTransform.GetComponentsInChildren<SpriteRenderer>();
+            entityAction = GetComponentInParent<EntityCharacter>().GetRef<EntityAction>();
             if (spriteRenderers.Length > 0)
                 defaultMaterial = spriteRenderers[0].material;
-            EntityStateManager.OnTakeDamage += TriggerFlashEffect;
-        }
-
-        private void OnDisable()
-        {
-            EntityStateManager.OnTakeDamage -= TriggerFlashEffect;
+            entityAction.OnTakeDamage += TriggerFlashEffect;
         }
 
         public void TriggerFlashEffect()

@@ -148,7 +148,7 @@ SortingGroup:
   m_GameObject: {fileID: 9071827376406351707}
   m_Enabled: 1
   m_SortingLayerID: 1245687681
-  m_SortingLayer: -3
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!114 &4575247551355223819
@@ -179,5 +179,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3f9336009439443997b9a8849872fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  moveVector: {x: -1, y: 0}
+  speed: 0
+  moveVector: {x: 0, y: 0}

@@ -57,7 +57,11 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     {
         enemySpawnerControl.EnableSpawn();
     }
-
+    public void CheckOnLoose()
+    {
+        if (CombatEntitiesManager.Instance.GetHeroList().Count > 1) return;
+        OnLoose();
+    }
     public void OnLoose()
     {
         LossTransitionHandler.UseRunner();

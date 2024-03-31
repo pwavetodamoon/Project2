@@ -3,28 +3,24 @@ using CombatSystem.Entity.Utilities;
 using CombatSystem.Helper;
 using Core.Reward;
 using Helper;
-using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace CombatSystem.Entity
 {
-    [RequireComponent(typeof(DamageSlashEffect))]
     public class MonsterCharacter : EntityCharacter
     {
-
         public MonsterNearSingleAttackFactory monsterSingleAttackFactory;
-        protected EntityStateManager EntityStateManager;
-        internal HealthBarDynamic healthBar;
-        public Vector2 HealthBarOffset;
+        [SerializeField] private HealthBarDynamic healthBar;
+        [SerializeField] private Vector2 HealthBarOffset;
+        [SerializeField] private RewardSignal rewardSignal;
+
         protected override void Awake()
         {
             base.Awake();
-            EntityStateManager = GetComponent<EntityStateManager>();
-            EntityStateManager.OnDie += EntityStateManagerOnDie;
-
+            rewardSignal = GetComponentInChildren<RewardSignal>();
+            entityAction.OnDie += rewardSignal.SendSignal;
+            entityAction.OnDie += StopExecute;
         }
-
         private void Start()
         {
             this.healthBar = HealthBarManager.Instance.GetHealthBars(this);
@@ -32,18 +28,7 @@ namespace CombatSystem.Entity
             {
                 healthBar.offset = HealthBarOffset;
             }
-            attackControl.Create(monsterSingleAttackFactory);
-        }
-
-        private void OnDisable()
-        {
-            //Debug.Log("OnDisable",gameObject);
-            EntityStateManager.OnDie -= EntityStateManagerOnDie;
-        }
-
-        private void EntityStateManagerOnDie()
-        {
-            GetComponent<RewardSignal>().SendSignal();
+            entityAttackControl.Create(monsterSingleAttackFactory);
         }
 
         public override void RegisterObject()
@@ -51,13 +36,13 @@ namespace CombatSystem.Entity
             base.RegisterObject();
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Enemy);
         }
+
         public override void ReleaseObject()
         {
             base.ReleaseObject();
             StopExecute();
             Debug.Log("ReleaseObject Enemy");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
-            //Destroy(gameObject);
         }
 
         public void KillMonster()
@@ -68,7 +53,5 @@ namespace CombatSystem.Entity
             }
             Destroy(gameObject);
         }
-
     }
-
 }

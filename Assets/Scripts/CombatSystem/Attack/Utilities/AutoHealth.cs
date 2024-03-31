@@ -3,6 +3,7 @@ using CombatSystem.Entity.Utilities;
 using Effects.Skill;
 using LevelAndStats;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CombatSystem.Attack.Utilities
 {
@@ -14,21 +15,29 @@ namespace CombatSystem.Attack.Utilities
 
         [SerializeField] private float healthRegenPercentWhenDead = .2f;
         [SerializeField] private float healthRegenPercentDefault = .1f;
-        private EntityStateManager entityStateManager;
-        private EntityStats EntityStats;
+
         private float healthRegenDelay;
         private float healthRegenRate = 3;
-        private ParticalSystemsManager particalSystemsManager;
+        [SerializeField] private HeroCharacter entity;
 
-        private HeroCharacter heroCharacter;
-
-        private void Awake()
+        [SerializeField] private ParticalSystemsManager particalSystemsManager;
+        [SerializeField] private EntityStats EntityStats;
+        [SerializeField] private EntityAction entityAction;
+        private void Start()
         {
-            heroCharacter = GetComponent<HeroCharacter>();
-            entityStateManager = GetComponent<EntityStateManager>();
-            entityStateManager.OnTakeDamage += TriggerHealth;
-            entityStateManager.OnDie += StopHealth;
-            EntityStats = heroCharacter.GetEntityStats();
+            entity = GetComponentInParent<HeroCharacter>();
+
+            particalSystemsManager = GetComponentInParent<ParticalSystemsManager>();
+            EntityStats = entity.GetRef<EntityStats>();
+            entityAction = entity.GetRef<EntityAction>();
+            RegisterEvent();
+        }
+
+        private void RegisterEvent()
+        {
+            entityAction.OnTakeDamage += TriggerHealth;
+            entityAction.OnDie += StopHealth;
+            EntityStats = entity.GetRef<EntityStats>();
         }
 
         private void Update()
@@ -36,16 +45,15 @@ namespace CombatSystem.Attack.Utilities
             if (EntityStats == null) return;
             if (EntityStats.Health() >= EntityStats.MaxHealth())
             {
-                if (heroCharacter.IsDead)
+                if (entity.IsDead)
                 {
-                    heroCharacter.IsDead = false;
+                    entity.IsDead = false;
                     healthRegenPercent = healthRegenPercentDefault;
-                    entityStateManager.OnRebirth?.Invoke();
+                    entityAction.OnRebirth?.Invoke();
                 }
 
                 return;
             }
-
 
             if (healthRegenDelay <= 0)
             {
@@ -69,16 +77,10 @@ namespace CombatSystem.Attack.Utilities
             }
         }
 
-
-        private void OnDisable()
-        {
-            entityStateManager.OnTakeDamage -= TriggerHealth;
-        }
-
         private void StopHealth()
         {
             healthRegenPercent = healthRegenPercentWhenDead;
-            heroCharacter.IsDead = true;
+            entity.IsDead = true;
         }
 
         private void TriggerHealth()

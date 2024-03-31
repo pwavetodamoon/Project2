@@ -1,9 +1,9 @@
-using System;
 using CombatSystem.Attack.Projectiles;
 using CombatSystem.Entity;
 using Helper;
 using LevelAndStats;
 using ObjectPool;
+using System;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Utilities
@@ -12,14 +12,13 @@ namespace CombatSystem.Attack.Utilities
     {
         Arrow,
         Magic1,
-
     }
-
 
     public class PrefabAttackFactoryPool : Singleton<PrefabAttackFactoryPool>
     {
         // Use in Scene Environment
         public Projectile ProjectilePrefab;
+
         public Projectile MagicProjectilePrefab;
         public ObjectPoolPrefab<ProjectileBase> magicProjectile_pool;
         public ObjectPoolPrefab<ProjectileBase> projectile_pool;
@@ -40,6 +39,7 @@ namespace CombatSystem.Attack.Utilities
             {
                 case RangedProjectileType.Arrow:
                     return projectile_pool.Get();
+
                 case RangedProjectileType.Magic1:
                     return magicProjectile_pool.Get();
             }

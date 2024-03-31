@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using CombatSystem.Helper;
 using LevelAndStats;
+using System.Collections.Generic;
 
 namespace CombatSystem.Entity.Utilities
 {
@@ -13,6 +13,7 @@ namespace CombatSystem.Entity.Utilities
         {
             EntityStats = entityStats;
         }
+
         public void Add(EntityStats EntityStats)
         {
             if (List.Contains(EntityStats) == true) return;
@@ -26,7 +27,9 @@ namespace CombatSystem.Entity.Utilities
             List.Remove(EntityStats);
             CalculatorDamage();
         }
+
         public float sumOfDamage = 0;
+
         public float CalculatorDamage()
         {
             sumOfDamage = 0;

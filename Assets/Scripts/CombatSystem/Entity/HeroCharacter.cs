@@ -4,7 +4,7 @@ using CombatSystem.HeroDataManager.Data;
 using Helper;
 using LevelAndStats;
 using Model.Hero;
-using Model.Monsters;
+using Sirenix.OdinInspector;
 using SlotHero;
 using SortingLayers;
 using UnityEngine;
@@ -17,42 +17,32 @@ namespace CombatSystem.Entity
         [SerializeField] private Transform modelTransform;
         [SerializeField] private HeroSingleAttackFactory attackFactory;
 
-        public EntityStateManager entityStateManager;
-        private Character_Body_Sprites sprites;
-        private Animator_Base animatorBase;
-        public bool IsDead;
-        public SortingLayerByYAxis sortingLayerByYAxis;
+        [SerializeField] private Character_Body_Sprites sprites;
+        [SerializeField] private SortingLayerByYAxis sortingLayerByYAxis;
 
+        public SortingLayerByYAxis SortingLayerByYAxis => sortingLayerByYAxis;
         public int InGameSlotIndex { get; private set; }
 
-        protected override void Awake()
-        {
-            base.Awake();
-            entityStateManager = GetComponent<EntityStateManager>();
-            attackManager = GetComponent<AttackManager>();
-            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.HERO);
-            sprites = GetComponentInChildren<Character_Body_Sprites>();
-            animatorBase = GetComponentInChildren<Animator_Base>();
-            sortingLayerByYAxis = GetComponent<SortingLayerByYAxis>();
-            entityStateManager.OnDie += OnDead;
-            entityStateManager.OnRebirth += OnRebirth;
-        }
+        public bool IsDead;
 
-        // public void UpgradeHeroLevel(int level)
-        // {
-        //     entityStateManager.EntityStats.SetLevel(level);
-        //     entityStateManager.EntityStats.SetDamage(level + 2);
-        //
-        // }
+        private void Start()
+        {
+            gameObject.layer = LayerMask.NameToLayer(GameLayerMask.HERO);
+            entityAction.OnDie += OnDead;
+            entityAction.OnRebirth += OnRebirth;
+        }
 
         private void OnDead()
         {
-            if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
+            //if (IsDead == false && CombatEntitiesManager.Instance.GetHeroCount() == 1)
+            //{
+            //    GameLevelControl.Instance.OnLoose();
+            //    Debug.Log("Thua roi");
+            //}
+            if(IsDead == false)
             {
-                GameLevelControl.Instance.OnLoose();
-                Debug.Log("Thua roi");
+                GameLevelControl.Instance.CheckOnLoose();
             }
-
             SetDeadState();
         }
 
@@ -60,9 +50,8 @@ namespace CombatSystem.Entity
         {
             Debug.Log("Dead state");
             SetModelBackImmediate();
-            // animator_Base.DisableAnimator();
             animator_Base.ChangeAnimation(AnimationType.Dying);
-            animatorBase.SetIsPlayDefaultAnimation(false);
+            animator_Base.SetIsPlayDefaultAnimation(false);
 
             sprites.SetDeadSprite();
             ReleaseObject();
@@ -70,7 +59,7 @@ namespace CombatSystem.Entity
 
         private void OnRebirth()
         {
-            animatorBase.SetIsPlayDefaultAnimation(true);
+            animator_Base.SetIsPlayDefaultAnimation(true);
             animator_Base.ChangeAnimation(AnimationType.Walk);
             // animatorBase.EnableAnimator();
             sprites.SetRebirthSprite();
@@ -81,7 +70,7 @@ namespace CombatSystem.Entity
         {
             if (index == -1)
                 ReleaseObject();
-            else
+            else if( index != InGameSlotIndex)
                 RegisterObject();
             InGameSlotIndex = index;
         }
@@ -93,20 +82,21 @@ namespace CombatSystem.Entity
 
         public void SetHeroData(HeroData newHeroData)
         {
-            GetComponent<HeroEntityStats>().SetHero(newHeroData);
+            var stats = GetRef<HeroEntityStats>();
+            stats.SetHero(newHeroData);
         }
 
+        [Button]
         public virtual void CreateAttack()
         {
             if (attackFactory == null) return;
-            attackControl.Create(attackFactory);
+            entityAttackControl.Create(attackFactory);
         }
 
         public void SetAttackFactory(HeroSingleAttackFactory baseAttack)
         {
             attackFactory = baseAttack;
         }
-
 
         public Transform GetModelTransform()
         {
@@ -122,6 +112,7 @@ namespace CombatSystem.Entity
         public override void RegisterObject()
         {
             base.RegisterObject();
+            Debug.Log("Register hero",gameObject);
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
             CreateAttack();
         }
@@ -130,10 +121,9 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopExecute();
-            Debug.Log("Release hero");
+            Debug.Log("Release hero",gameObject);
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
         }
-
     }
 }

@@ -28,6 +28,7 @@ namespace Model.Hero
         {
             Dictionary.Clear();
         }
+
         public void SetSprite(Character_Body_Sprites.SpritePartEnum spritePartEnum, Sprite sprite)
         {
             Dictionary[spritePartEnum].sprite = sprite;
@@ -51,6 +52,7 @@ namespace Model.Hero
             item_sword,
             item_shield
         }
+
         public const int SpritePartCount = 12;
         [SerializeField] private Color deadColor;
         [SerializeField] private Color liveColor;
@@ -62,10 +64,12 @@ namespace Model.Hero
             if (textureController == null)
                 textureController = GetComponentInChildren<TextureController>();
         }
+
         public void SetEyeSprite(Sprite[] sprites)
         {
             textureController.SetSpritesAndDisplay(sprites);
         }
+
         public void SetHeroSprite(Dictionary<SpritePartEnum, Sprite> spriteDictionary)
         {
             LoadSpriteComponents();
@@ -88,7 +92,6 @@ namespace Model.Hero
             {
                 var spritePartEnum = GetSpritePartEnumByName(spriteRenderer.name);
                 HeroSkin.SetSpritePart(spritePartEnum, spriteRenderer);
-
             }
         }
 

@@ -1,10 +1,10 @@
-using System.Collections;
 using CombatSystem.Attack.Abstracts;
 using CombatSystem.Attack.Projectiles;
 using CombatSystem.Attack.Utilities;
 using CombatSystem.Entity;
 using Helper;
 using Model.Hero;
+using System.Collections;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Factory
@@ -12,16 +12,17 @@ namespace CombatSystem.Attack.Factory
     public abstract class FarAttack : BaseSingleTargetAttack
     {
         protected readonly RangedProjectileType type;
+
         public FarAttack(RangedProjectileType type)
         {
             this.type = type;
         }
+
         private bool IsProjectileHitEnemy;
         private WaitForSeconds waitForEndAnim;
         private WaitUntil waitUntilCanCauseDamage;
         private WaitUntil WaitForInvokeAction;
         private ShootDetect shootDetect;
-
 
         private void SetupYieldInstruction()
         {
@@ -29,6 +30,7 @@ namespace CombatSystem.Attack.Factory
             waitUntilCanCauseDamage = new WaitUntil(() => IsProjectileHitEnemy);
             waitForEndAnim = new WaitForSeconds(GetAnimationLength(AnimationType.Attack) / 2);
         }
+
         protected override IEnumerator StartBehavior()
         {
             PlayAnimationAttack();
@@ -40,14 +42,18 @@ namespace CombatSystem.Attack.Factory
                 // CauseDamage();
             }
         }
+
         protected abstract ProjectileBase GetProjectile();
+
         protected abstract void PlayAnimationAttack();
+
         protected override void ResetStateAndCounter()
         {
             base.ResetStateAndCounter();
             IsProjectileHitEnemy = false;
             shootDetect.ResetShoot();
         }
+
         protected override string GetEnemyTag() => GameTag.Enemy;
 
         protected void AllowGoNextStep() => IsProjectileHitEnemy = true;

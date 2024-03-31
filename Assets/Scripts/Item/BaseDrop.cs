@@ -7,6 +7,7 @@ using ObjectPool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 namespace Item
 {
@@ -72,20 +73,36 @@ namespace Item
             collider2d.enabled = false;
 
             if (DestinationTransform != null)
-                yield return transform.DOLocalMove(DestinationTransform.position, 1f).WaitForCompletion();
+            {
+                var time = Random.Range(.5f, 1f);
+                yield return transform.DOLocalMove(DestinationTransform.position, time).WaitForCompletion();
+            }
             SendData();
             Release();
         }
 
         public void Jumping(Vector3 position)
         {
+            transform.DORotate(CreateRandom(), 0.2f);
             if (DropConfig == null)
                 return;
             transform.DOLocalJump(position,
                     DropConfig.jumpForce,
                     DropConfig.jumpCount,
                     DropConfig.duration)
-                .OnComplete(() => { collider2d.enabled = true; });
+                .OnComplete(() =>
+                {
+                    Collect();
+                    // collider2d.enabled = true;
+                });
+        }
+        private Vector3 CreateRandom()
+        {
+            return new Vector3(UnityEngine.Random.Range(-.5f, .5f), UnityEngine.Random.Range(-.5f, .5f));
+        }
+        public void SetDestination(Transform destination)
+        {
+            DestinationTransform = destination;
         }
     }
 }

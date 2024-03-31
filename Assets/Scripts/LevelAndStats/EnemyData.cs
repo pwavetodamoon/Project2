@@ -30,6 +30,7 @@ namespace LevelAndStats
             var stats = structStats;
             stats.level = level;
             stats.health = GetRandomHealthByLevel(level);
+            stats.maxHealth = stats.health;
             stats.baseDamage = GetRandomDamageByLevel(level);
             return stats;
         }

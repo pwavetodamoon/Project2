@@ -9,6 +9,7 @@ namespace CombatSystem.Attack.Factory
     public class HeroMagicAttackFactory : HeroSingleAttackFactory
     {
         public RangedProjectileType projectileType;
+
         public override BaseSingleTargetAttack CreateAttack()
         {
             return new HeroFarMagicAttack(projectileType);

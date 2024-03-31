@@ -1,7 +1,8 @@
-using System;
 using CombatSystem.Attack.Utilities;
+using CombatSystem.Entity;
 using LevelAndStats;
 using ObjectPool;
+using System;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Projectiles
@@ -13,6 +14,7 @@ namespace CombatSystem.Attack.Projectiles
         public EntityStats EntityStats;
         protected bool isAttack;
         protected Action OnEndAttack;
+
         // private float TimeOut = 10f;
         private void OnDisable()
         {
@@ -26,10 +28,8 @@ namespace CombatSystem.Attack.Projectiles
             OnEndAttack?.Invoke();
             ReleaseCallback?.Invoke(this);
             if (target == null) return;
-            if (target.TryGetComponent(out IDamageable damageable))
-            {
-                damageable?.TakeDamage(EntityStats);
-            }
+            var damageable = target.GetComponent<EntityCharacter>().GetRef<IDamageable>();
+            damageable?.TakeDamage(EntityStats);
         }
 
         public void RegisterOnEndVfx(Action method)
@@ -44,6 +44,5 @@ namespace CombatSystem.Attack.Projectiles
             Tag = tag;
             isAttack = false;
         }
-
     }
 }

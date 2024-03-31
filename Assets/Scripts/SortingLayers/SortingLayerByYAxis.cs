@@ -1,40 +1,46 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.GraphicsBuffer;
 
 //[ExecuteAlways]
 namespace SortingLayers
 {
-    [RequireComponent(typeof(SortingGroup))]
     public class SortingLayerByYAxis : MonoBehaviour
     {
         public float yAxis;
         [SerializeField] private SortingGroup sortingGroup;
+        [SerializeField] private Transform target;
         [SerializeField] private float lastYPosition;
         [SerializeField] private bool isValidate;
 
         private void Awake()
         {
-            sortingGroup = GetComponent<SortingGroup>();
+            sortingGroup = GetComponentInParent<SortingGroup>();
+            target = sortingGroup.transform;
             isValidate = sortingGroup != null;
         }
+
         public void PauseSortingLayer()
         {
             isValidate = false;
         }
+
         public void ResumeSortingLayer()
         {
             isValidate = true;
         }
+
         public void SetOrderToHighest()
         {
             sortingGroup.sortingOrder = 1000;
         }
+
         private void Update()
         {
             if (isValidate == false)
                 return;
-            if (Math.Abs(transform.position.y - lastYPosition) > 0.01f)
+            if (Math.Abs(target.position.y - lastYPosition) > 0.01f)
             {
                 CalculatorOrderLayer();
                 lastYPosition = transform.position.y;
@@ -43,7 +49,7 @@ namespace SortingLayers
 
         private void CalculatorOrderLayer()
         {
-            yAxis = transform.position.y;
+            yAxis = target.position.y;
             var orderLayer = Mathf.RoundToInt(yAxis * 100);
             orderLayer = Mathf.Clamp(orderLayer, int.MinValue, int.MaxValue);
             sortingGroup.sortingOrder = -orderLayer;

@@ -33,6 +33,7 @@ public class HealthBarManager : Singleton<HealthBarManager>
     }
     public HealthBarDynamic GetHealthBars(EntityCharacter entity)
     {
+        if (healthBarPrefab == null) return null;
         var healthBar = Instantiate(healthBarPrefab, transform);
         healthBar.SetTarget(entity);
         return healthBar;
