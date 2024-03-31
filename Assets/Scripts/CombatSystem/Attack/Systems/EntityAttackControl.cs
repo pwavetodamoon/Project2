@@ -83,12 +83,13 @@ namespace CombatSystem.Attack.Systems
             if (attack == null) return false;
             return attack.IsActive;
         }
-
+        public bool isRunning = true;
         [Button]
         public void StopExecute()
         {
             // Debug.Log("Stop Execute");
             StopAllCoroutines();
+            isRunning = false;
         }
     }
 }

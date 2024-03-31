@@ -28,7 +28,7 @@ namespace CombatSystem.Entity
             {
                 healthBar.offset = HealthBarOffset;
             }
-            attackControl.Create(monsterSingleAttackFactory);
+            entityAttackControl.Create(monsterSingleAttackFactory);
         }
 
         public override void RegisterObject()

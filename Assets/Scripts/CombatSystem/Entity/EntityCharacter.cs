@@ -11,7 +11,7 @@ namespace CombatSystem.Entity
     public abstract class EntityCharacter : MonoBehaviour, IEntity
     {
         [SerializeField] protected Animator_Base animator_Base;
-        [SerializeField] protected EntityAttackControl attackControl;
+        [SerializeField] protected EntityAttackControl entityAttackControl;
         [SerializeField] protected IGetAttackerTransform attackerTransform;
         [SerializeField] protected EntityCombat entityCombat;
         [SerializeField] protected EntityStats entityStats;
@@ -22,7 +22,7 @@ namespace CombatSystem.Entity
         protected virtual void Awake()
         {
             //animator_Base = EntityReferences.GetRef<Animator_Base>();
-            //attackControl = EntityReferences.GetRef<EntityAttackControl>();
+            //entityAttackControl = EntityReferences.GetRef<EntityAttackControl>();
             //attackerTransform = EntityReferences.GetRef<IGetAttackerTransform>();
             //entityCombat = EntityReferences.GetRef<EntityCombat>();
             //entityStats = EntityReferences.GetRef<EntityStats>();
@@ -34,12 +34,12 @@ namespace CombatSystem.Entity
             EntityTakeDamage = GetComponentInChildren<EntityTakeDamage>();
             entityAction = GetComponentInChildren<EntityAction>();
             animator_Base = GetComponentInChildren<Animator_Base>();
-            attackControl = GetComponentInChildren<EntityAttackControl>();
+            entityAttackControl = GetComponentInChildren<EntityAttackControl>();
             attackerTransform = GetComponentInChildren<IGetAttackerTransform>();
 
         }
 
-        public bool EntityInAttackState() => attackControl.IsAttacking();
+        public bool EntityInAttackState() => entityAttackControl.IsAttacking();
 
         //public Animator_Base GetAnimatorBase() => animator_Base;
 
@@ -74,7 +74,7 @@ namespace CombatSystem.Entity
 
         public void StopExecute()
         {
-            attackControl.StopExecute();
+            entityAttackControl.StopExecute();
         }
         public T GetRef<T>()
         {

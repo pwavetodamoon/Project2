@@ -90,7 +90,7 @@ namespace CombatSystem.Entity
         public virtual void CreateAttack()
         {
             if (attackFactory == null) return;
-            attackControl.Create(attackFactory);
+            entityAttackControl.Create(attackFactory);
         }
 
         public void SetAttackFactory(HeroSingleAttackFactory baseAttack)
