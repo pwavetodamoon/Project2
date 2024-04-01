@@ -9,30 +9,28 @@ using UnityEngine;
 
 namespace CombatSystem.Attack.Systems
 {
-    public class AttackControl : MonoBehaviour, ICoroutineRunner
+    public class EntityAttackControl : MonoBehaviour, ICoroutineRunner
     {
         [SerializeField] private Transform bowAttackTransform;
         [SerializeField] private Transform magicAttackTransform;
         [ShowInInspector] private BaseSingleTargetAttack attack;
         [ShowInInspector] private AttackCounter attackCounter;
-        private AttackManager attackManager;
 
-        private EntityCharacter entityCharacter;
+        [SerializeField] private EntityCharacter entityCharacter;
         private EntityStats EntityStats;
+        private EntityCombat attackManager;
 
-
-        private void Awake()
+        private void Start()
         {
-            entityCharacter = GetComponent<EntityCharacter>();
-            attackManager = entityCharacter.GetAttackManager();
-            EntityStats = entityCharacter.GetEntityStats();
+            entityCharacter = GetComponentInParent<EntityCharacter>();
+            attackManager = entityCharacter.GetRef<EntityCombat>();
+            EntityStats = entityCharacter.GetRef<EntityStats>();
         }
 
         private void Update()
         {
             if (!CanNotRunAttackTimer()) RunAttackTimer();
         }
-
 
         [Button]
         private void OnDisable()
@@ -63,8 +61,12 @@ namespace CombatSystem.Attack.Systems
 
         private void InitAttackControl(BaseSingleTargetAttack newAttack, AttackCounter newAttackCounter)
         {
+            if (entityCharacter == null)
+            {
+                Debug.LogError("EntityCharacter is null");
+                Debug.Log("Please fix it");
+            }
             newAttack.GetReference(entityCharacter);
-
 
             attack = newAttack;
             attackCounter = newAttackCounter;
@@ -81,12 +83,13 @@ namespace CombatSystem.Attack.Systems
             if (attack == null) return false;
             return attack.IsActive;
         }
-
+        public bool isRunning = true;
         [Button]
         public void StopExecute()
         {
             // Debug.Log("Stop Execute");
             StopAllCoroutines();
+            isRunning = false;
         }
     }
 }

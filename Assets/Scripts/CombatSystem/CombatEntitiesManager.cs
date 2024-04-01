@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CombatSystem.Entity;
 using Helper;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CombatSystem
@@ -14,14 +12,8 @@ namespace CombatSystem
 
         public List<EntityCharacter> GetHeroList()
         {
-            if (entitiesByTag.ContainsKey(GameTag.Hero) == false) return new List<EntityCharacter>();
+            if (IsContainKey(GameTag.Hero) == false) return new List<EntityCharacter>();
             return entitiesByTag[GameTag.Hero];
-        }
-
-        public List<EntityCharacter> GetEnemies()
-        {
-            if (entitiesByTag.ContainsKey(GameTag.Enemy) == false) return new List<EntityCharacter>();
-            return entitiesByTag[GameTag.Enemy];
         }
         public int GetHeroCount()
         {
@@ -45,7 +37,6 @@ namespace CombatSystem
 
             return nearestGameObject;
 
-
             float entityDistance(Transform entity, EntityCharacter gameObject)
             {
                 return Vector2.Distance(entity.transform.position, gameObject.transform.position);
@@ -54,7 +45,6 @@ namespace CombatSystem
 
         public EntityCharacter GetEntityTransformByTag(Transform entity, string key)
         {
-            // far attack
             if (IsContainKey(key) == false)
             {
                 Debug.LogWarning($"Does not have '{key}' TAG in data", gameObject);
@@ -68,11 +58,7 @@ namespace CombatSystem
             return GetNearestObject(entity, entities);
         }
 
-        private bool IsContainKey(string tag)
-        {
-            return entitiesByTag.ContainsKey(tag);
-        }
-
+     
         public void RemoveEntityByTag(EntityCharacter entity, string key)
         {
             if (IsContainKey(key) && IsContainValue(key, entity)) entitiesByTag[key].Remove(entity);
@@ -89,17 +75,19 @@ namespace CombatSystem
             return entitiesByTag.GetValueOrDefault(key);
         }
 
-
         public void AppendEntityToListByTag(EntityCharacter entity, string key)
         {
             if (!IsContainKey(key)) entitiesByTag[key] = new List<EntityCharacter>();
-
             if (!IsContainValue(key, entity)) entitiesByTag[key].Add(entity);
         }
 
         private bool IsContainValue(string key, EntityCharacter value)
         {
             return entitiesByTag[key].Contains(value);
+        }
+        private bool IsContainKey(string tag)
+        {
+            return entitiesByTag.ContainsKey(tag);
         }
 
     }

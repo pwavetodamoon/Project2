@@ -1,6 +1,8 @@
-using System;using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Effects.Skill;
+using Sirenix.OdinInspector;
 using UnityEngine;
 public class ParticalSystemsManager : MonoBehaviour
 {
@@ -15,5 +17,10 @@ public class ParticalSystemsManager : MonoBehaviour
             break;
          }
       }
+   }
+   [Button]
+   public void Test()
+   {
+      FindAndPlayEffect(EffectSkillsEnum.HealthEffect);
    }
 }

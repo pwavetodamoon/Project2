@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using CombatSystem.Helper;
-using Helper;
-using LevelAndStats;
-using UnityEngine;
+﻿using Helper;
 
 namespace CombatSystem.Attack.Abstracts
 {
     public abstract class BaseHeroAttack : SingleTargetAttackImprove
     {
-        
         protected override string GetEnemyTag()
         {
             return GameTag.Enemy;

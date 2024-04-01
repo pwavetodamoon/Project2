@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using CombatSystem.Entity;
-using CombatSystem.HeroDataManager;
+﻿using CombatSystem.Entity;
 using LevelAndStats;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -14,15 +12,17 @@ namespace CombatSystem
         //| Split one prefab one spawner to easy to manage + easy implement object pool|
         [Header("References")]
         [SerializeField] private MonstersStatsSystem _monstersStatsSystem;
+
         [SerializeField] private MonsterCharacter MonsterPrefab;
         [SerializeField] private Transform SpawnPoint1;
         [SerializeField] private Transform SpawnPoint2;
+
         private void Awake()
         {
             _monstersStatsSystem = GetComponent<MonstersStatsSystem>();
         }
 
-        public MonsterCharacter SpawnMonster()
+        private MonsterCharacter SpawnMonster()
         {
             if (MonsterPrefab == null) return null;
             var position = SpawnPoint1.position;
@@ -39,14 +39,18 @@ namespace CombatSystem
             for (var i = 0; i < spawnCount; i++)
             {
                 var enemy = SpawnMonster();
-                SetStatsToMonster(enemy.GetComponent<EnemyStats>());
+                var stats = enemy.GetRef<EnemyStats>();
+                if(stats == null)
+                {
+                    Debug.Log("This stats of monster is null");
+                }
+                SetStatsToMonster(stats);
             }
         }
 
         private void SetStatsToMonster(EnemyStats enemyStats)
         {
             _monstersStatsSystem.SetStatsByLevel(enemyStats);
-
         }
 
         [Button]
@@ -56,10 +60,9 @@ namespace CombatSystem
             for (var i = 0; i < list.Length; i++)
             {
                 list[i].ReleaseObject();
-                Destroy(list[i].healthBar.gameObject);
+                //Destroy(list[i].healthBar.gameObject);
                 list[i].KillMonster();
             }
         }
-
     }
 }

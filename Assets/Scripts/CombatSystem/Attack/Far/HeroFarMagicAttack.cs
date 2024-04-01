@@ -7,7 +7,8 @@ namespace CombatSystem.Attack.Factory
 {
     public class HeroFarMagicAttack : FarAttack
     {
-        int counter = 0;
+        private int counter = 0;
+
         public HeroFarMagicAttack(RangedProjectileType type) : base(type)
         {
         }
@@ -24,11 +25,11 @@ namespace CombatSystem.Attack.Factory
             }
             return go;
         }
+
         protected override void PlayAnimationAttack()
         {
             AudioManager.Instance.PlaySFX("Far Attack");
             PlayAnimation(AnimationType.Spell);
         }
-
     }
 }

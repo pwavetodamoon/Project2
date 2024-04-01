@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +8,7 @@ public class UltimateSkillAction : MonoBehaviour
     public UnityEvent DealDamageAction;
     public UnityEvent DestroyAction;
     public HeroSkill heroSkill;
+
     private void Awake()
     {
         heroSkill = GetComponentInParent<HeroSkill>();
@@ -19,18 +17,22 @@ public class UltimateSkillAction : MonoBehaviour
         DealDamageAction.AddListener(heroSkill.DealDamage);
         DestroyAction.AddListener(heroSkill.Destroy);
     }
+
     public void IncreaseAttacker()
     {
         IncreaseAttackerAction?.Invoke();
     }
+
     public void DescreaseAttacker()
     {
         DecreaseAttackerAction?.Invoke();
     }
+
     public void DealDamage()
     {
         DealDamageAction?.Invoke();
     }
+
     public void Destroy()
     {
         DestroyAction?.Invoke();

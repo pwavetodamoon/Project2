@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monstersStatsSystem: {fileID: 2411822489179905843}
-  MonsterPrefab: {fileID: 5268276926429305937, guid: a840e83e62e96c0449ec0b0631cc4276, type: 3}
+  MonsterPrefab: {fileID: 7304157834538290346, guid: d857008bc6fc4c34d95681d1a6c4b431, type: 3}
   SpawnPoint1: {fileID: 2488394704736680681}
   SpawnPoint2: {fileID: 4649730470761307761}
 --- !u!114 &2411822489179905843
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _monstersStatsSystem: {fileID: 6820239319195304970}
-  MonsterPrefab: {fileID: 5825106599316970968, guid: 796c1d37ff7d120499933b4234cdca6a, type: 3}
+  MonsterPrefab: {fileID: 1833744593825847522, guid: a84a0a3bc79f60f45a220496458439e9, type: 3}
   SpawnPoint1: {fileID: 2573827652067552117}
   SpawnPoint2: {fileID: 9032520417456415339}
 --- !u!114 &6820239319195304970
@@ -270,9 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586f6c5921ff6c6448f1fcc60751f386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSpawners: []
+  monsterSpawners:
+  - {fileID: 3371715870276447265}
   allowSpawn: 1
-  entitySpawnPerTime: 3
+  entitySpawnPerTime: 1
   timerCounter: {fileID: 2788485466511362211}
 --- !u!114 &2788485466511362211
 MonoBehaviour:
@@ -286,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bab7931c25b9a9449d179b5a403b28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimer: 0
+  spawnTimer: 5
   maxSpawnTime: 5
   allowCounter: 0
 --- !u!1 &8323097333177471064

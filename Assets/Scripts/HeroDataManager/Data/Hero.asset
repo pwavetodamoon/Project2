@@ -24,7 +24,7 @@ MonoBehaviour:
   AttackType: 0
   characterEnumType: 4
   HeroSingleAttackFactory: {fileID: 11400000, guid: 1198bd8238b890349bf7a796feb55402, type: 2}
-  slotIndex: 4
+  slotIndex: -1
   heroName: Quang
   eyeSprites:
   - {fileID: 21300000, guid: 2a7372758ca35dd46b7a99594af7468b, type: 3}
@@ -36,7 +36,7 @@ MonoBehaviour:
     level: 1
     maxHealth: 100
     health: 100
-    baseDamage: 61
+    baseDamage: 20
     speed: 3
     critRate: 0
     critDamage: 0

@@ -51,8 +51,11 @@ public abstract class HealthBarBase : MonoBehaviour
         {
             value = 1;
         }
-        // transform.DOKill();
-        transform.DOPunchScale(Vector3.one * .1f, .2f);
+        //transform.DOKill();
+        //transform.DOShakeScale(.2f).OnComplete(() =>
+        //{
+
+        //});
         // fill.fillAmount = value;
         fill.DOFillAmount(value, .2f);
     }

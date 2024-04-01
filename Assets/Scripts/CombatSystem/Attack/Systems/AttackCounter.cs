@@ -1,7 +1,7 @@
-using System;
-using System.Collections;
 using CombatSystem.Attack.Utilities;
 using Sirenix.OdinInspector;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace CombatSystem.Attack.Systems

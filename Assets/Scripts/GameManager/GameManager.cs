@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeHeroLevel(HeroCharacter heroCharacter , TextMeshProUGUI textMeshProUGUI)
     {
-        HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
+        HeroEntityStats _heroEntityStats = (HeroEntityStats)heroCharacter.GetRef<EntityStats>();
         var moneyRequired =_levelConfig.GetMoneyRequired(_heroEntityStats.Level());
         if (_currencyManager.currency >= Convert.ToInt32(moneyRequired))
         {
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public int GetMoneyLevelRequired(HeroCharacter heroCharacter)
     {
-        HeroEntityStats _heroEntityStats = heroCharacter.GetComponent<HeroEntityStats>();
+        HeroEntityStats _heroEntityStats = heroCharacter.GetRef<HeroEntityStats>();
         return Convert.ToInt32( _levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
     public void OnSkillUse(SkillEnum skillEnum )
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     }
     private void HealTeamSkill()
     {    float healValue = 50f;
-        heroSlotInGames.ForEach(item => item.currentHero.entityStateManager.EntityStats.IncreaseHealth(healValue));
+        heroSlotInGames.ForEach(item => item.currentHero.GetRef<EntityStats>().IncreaseHealth(healValue));
         PlayEffectSkill(EffectSkillsEnum.HealthEffect, EffectSkillsEnum.HealthTeamEffect);
     }
     private void FireBallSkill()

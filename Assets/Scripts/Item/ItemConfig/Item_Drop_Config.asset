@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Item_Drop_Config
   m_EditorClassIdentifier: 
   jumpCount: 1
-  jumpForce: 0.5
-  duration: 0.25
+  jumpForce: 1
+  duration: 0.4

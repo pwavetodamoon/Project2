@@ -7,42 +7,51 @@ using UnityEngine;
 
 namespace CombatSystem.Entity
 {
+    //[RequireComponent(typeof(EntityReferences))]
     public abstract class EntityCharacter : MonoBehaviour, IEntity
     {
-        protected AttackControl attackControl;
-        protected IGetAttackerTransform attackerTransform;
-        protected AttackManager attackManager;
-        protected EntityStats entityStats;
-        protected Animator_Base animator_Base;
+        [SerializeField] protected Animator_Base animator_Base;
+        [SerializeField] protected EntityAttackControl entityAttackControl;
+        [SerializeField] protected IGetAttackerTransform attackerTransform;
+        [SerializeField] protected EntityCombat entityCombat;
+        [SerializeField] protected EntityStats entityStats;
+        [SerializeField] protected EntityTakeDamage EntityTakeDamage;
+        [SerializeField] protected EntityAction entityAction;
+        // Support for getting reference from children or parent
+
         protected virtual void Awake()
         {
-            attackControl = GetComponent<AttackControl>();
-            attackerTransform = GetComponent<IGetAttackerTransform>();
-            attackManager = GetComponent<AttackManager>();
-            entityStats = GetComponent<EntityStats>();
+            //animator_Base = EntityReferences.GetRef<Animator_Base>();
+            //entityAttackControl = EntityReferences.GetRef<EntityAttackControl>();
+            //attackerTransform = EntityReferences.GetRef<IGetAttackerTransform>();
+            //entityCombat = EntityReferences.GetRef<EntityCombat>();
+            //entityStats = EntityReferences.GetRef<EntityStats>();
+            //EntityTakeDamage = EntityReferences.GetRef<EntityTakeDamage>();
+            //entityAction = EntityReferences.GetRef<EntityAction>();
+
+            entityCombat = GetComponentInChildren<EntityCombat>();
+            entityStats = GetComponentInChildren<EntityStats>();
+            EntityTakeDamage = GetComponentInChildren<EntityTakeDamage>();
+            entityAction = GetComponentInChildren<EntityAction>();
             animator_Base = GetComponentInChildren<Animator_Base>();
+            entityAttackControl = GetComponentInChildren<EntityAttackControl>();
+            attackerTransform = GetComponentInChildren<IGetAttackerTransform>();
+
         }
-        public AttackManager GetAttackManager()
-        {
-            return attackManager;
-        }
-        public EntityStats GetEntityStats()
-        {
-            return entityStats;
-        }
-        public Animator_Base GetAnimatorBase()
-        {
-            return animator_Base;
-        }
-        public void SetAttackState(bool state)
-        {
-            if (attackManager == null)
-            {
-                attackManager = GetComponent<AttackManager>();
-            }
-            attackManager.SetAllowExecuteAttackValue(state);
-            attackManager.SetTimeCounterValue(state);
-        }
+
+        public bool EntityInAttackState() => entityAttackControl.IsAttacking();
+
+        //public Animator_Base GetAnimatorBase() => animator_Base;
+
+        public Transform GetAttackerTransform() => attackerTransform.GetAttackerTransform();
+
+        //public EntityCombat GetEntityCombat() => entityCombat;
+
+        //public EntityStats GetEntityStats() => entityStats;
+
+        //public EntityTakeDamage GetEntityTakeDamage() => EntityTakeDamage;
+        //public EntityAction GetEntityAction() => entityAction;
+
         public virtual void RegisterObject()
         {
             SetAttackState(true);
@@ -52,19 +61,29 @@ namespace CombatSystem.Entity
         {
             SetAttackState(false);
         }
-        public bool EntityInAttackState()
-        {
-            return attackControl.IsAttacking();
-        }
 
-        public Transform GetAttackerTransform()
+        public void SetAttackState(bool state)
         {
-            return attackerTransform.GetAttackerTransform();
+            if (entityCombat == null)
+            {
+                entityCombat = GetComponentInChildren<EntityCombat>();
+            }
+            entityCombat.SetAllowExecuteAttackValue(state);
+            entityCombat.SetTimeCounterValue(state);
         }
 
         public void StopExecute()
         {
-            attackControl.StopExecute();
+            entityAttackControl.StopExecute();
+        }
+        public T GetRef<T>()
+        {
+            var t = GetComponentInChildren<T>();
+            if(t == null)
+            {
+                t = GetComponentInParent<T>();
+            }
+            return t;
         }
     }
 }

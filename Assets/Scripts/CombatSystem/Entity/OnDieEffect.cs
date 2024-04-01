@@ -1,11 +1,10 @@
-using System.Collections;
 using CombatSystem.Entity;
 using CombatSystem.Entity.Utilities;
-using CombatSystem.Helper;
 using DG.Tweening;
 using Model.Hero;
 using Model.Monsters;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 public class OnDieEffect : MonoBehaviour
@@ -15,20 +14,19 @@ public class OnDieEffect : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator_Base animatorBase;
     [SerializeField] private ShakeMultiplierTimes shakeEntityEffect;
-    [SerializeField] private EntityStateManager EntityStateManager;
+    [SerializeField] private EntityAction entityAction;
     [SerializeField] private MonsterCharacter monsterCharacter;
-
+    public Transform model;
     private void Start()
     {
-        monsterCharacter = GetComponent<MonsterCharacter>();
-
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        animatorBase = monsterCharacter.GetAnimatorBase();
+        monsterCharacter = GetComponentInParent<MonsterCharacter>();
+        spriteRenderer = model.GetComponentInChildren<SpriteRenderer>();
+        animatorBase = monsterCharacter.GetRef<Animator_Base>();
+        entityAction = monsterCharacter.GetRef<EntityAction>();
         time = animatorBase.GetAnimationLength(AnimationType.Dying);
-        EntityStateManager = GetComponent<EntityStateManager>();
-        EntityStateManager.OnDie += OnDie;
-        shakeEntityEffect = new ShakeMultiplierTimes(transform, 5, 0.1f);
 
+        entityAction.OnDie += OnDie;
+        shakeEntityEffect = new ShakeMultiplierTimes(transform, 5, 0.1f);
     }
 
     [Button]
@@ -44,7 +42,6 @@ public class OnDieEffect : MonoBehaviour
 
     private IEnumerator OnDieCoroutine()
     {
-
         yield return new WaitForSeconds(time);
         animatorBase.enabled = false;
         spriteRenderer.DOFade(0, fadeTime).OnComplete(() =>
@@ -53,6 +50,7 @@ public class OnDieEffect : MonoBehaviour
         });
         StopAllCoroutines();
     }
+
     [Button]
     public void Reset()
     {
