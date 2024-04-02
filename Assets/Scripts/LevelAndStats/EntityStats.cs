@@ -24,6 +24,7 @@ namespace LevelAndStats
             var entity = GetComponentInParent<EntityCharacter>();
             entityAction = entity.GetRef<EntityAction>();
         }
+        public float Speed() => structStats.speed;
         public float AttackCoolDown() => structStats.attackCoolDown;
 
         public float AttackMoveDuration() => structStats.attackMoveDuration / (1 + structStats.speed / 200);

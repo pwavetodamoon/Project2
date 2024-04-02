@@ -10,7 +10,7 @@ public class EnemySpawnerControl : MonoBehaviour
     [SerializeField] private bool allowSpawn = true;
     [SerializeField] private int entitySpawnPerTime = 1;
     [SerializeField] private TimerCounter timerCounter;
-
+    [SerializeField] private StageInformation stageInformation;
     [Button]
     public void ClearAndStopSpawn()
     {
@@ -18,6 +18,18 @@ public class EnemySpawnerControl : MonoBehaviour
         foreach (var item in monsterSpawners)
         {
             item.ClearMonsterAndStopSpawnOnMap();
+        }
+        stageInformation.OnCompleteStage += StageInformation_OnCompleteStage;
+    }
+    private void OnDestroy()
+    {
+        stageInformation.OnCompleteStage -= StageInformation_OnCompleteStage;
+    }
+    private void StageInformation_OnCompleteStage()
+    {
+        if(stageInformation.currentStageIndex == 4)
+        {
+            SpawnBoss();
         }
     }
 
@@ -51,5 +63,9 @@ public class EnemySpawnerControl : MonoBehaviour
 
     public void SpawnBoss()
     {
+        if (allowSpawn == false || monsterSpawners.Count == 0) return;
+        var spawnerIndex = Random.Range(0, monsterSpawners.Count);
+        monsterSpawners[spawnerIndex].SpawnBoss();
+        allowSpawn = false;
     }
 }

@@ -80,7 +80,7 @@ namespace CombatSystem.Attack.Near
                 if (attackManager.AttackedByEnemies() == false && entityStats.Health() > 0)
                 {
                     Debug.Log("On Move left");
-                    MoveDirective(Vector2.left, 4);
+                    MoveDirective(Vector2.left, entityStats.Speed());
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace CombatSystem.Attack.Near
                 {
                     Debug.Log("On find enemy");
                     var direction = GetDestinationPosition() - currentEntity.transform.position;
-                    MoveDirective(direction.normalized, 3);
+                    MoveDirective(direction.normalized, entityStats.Speed());
                 }
                 yield return new WaitForEndOfFrame();
             }

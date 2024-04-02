@@ -43,7 +43,10 @@ public class StageInformation : ScriptableObject
         return currentLevelLocal;
     }
 
-
+    public int GetMaxStage()
+    {
+        return currentMapGameData.maxStage;
+    }
     public ItemsStruct GetRandomItemDrop()
     {
         var randomIndex = Random.Range(0, currentMapGameData.itemDrop.Count);
@@ -52,9 +55,10 @@ public class StageInformation : ScriptableObject
     public void ResetStage()
     {
         // có thể là sau khi thua ở stage cuối sẽ không reset về cuối map mà chỉ hồi sinh lại và tiếp túc đánh
-
-        currentStageIndex = 0;
-        pointCollected = 0;
+        currentStageIndex--;
+        if(currentMapIndex < 0 )
+            currentMapIndex = 0;
+        //pointCollected = 0;
     }
     public void IncreasePointWhenKillMonster() => pointCollected += pointsPerMonsterKill;
 
@@ -69,7 +73,7 @@ public class StageInformation : ScriptableObject
         }
 
     }
-    private void OnGoNextMapOrGoNextStage()
+    public void OnGoNextMapOrGoNextStage()
     {
         // logic qua map hoặc qua stage
         if (++currentStageIndex < currentMapGameData.maxStage)
@@ -88,7 +92,5 @@ public class StageInformation : ScriptableObject
     {
         return currentMapGameData.GetPointNeedOfStage(stageIndex == -1 ? currentStageIndex : stageIndex);
     }
-
-
 
 }
