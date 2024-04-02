@@ -18,7 +18,7 @@ MonoBehaviour:
     maxHealth: 50
     health: 50
     baseDamage: 5
-    speed: 2
+    speed: 3
     critRate: 0
     critDamage: 0
     attackCoolDown: 2.5

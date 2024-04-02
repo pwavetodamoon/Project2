@@ -34,7 +34,15 @@ namespace LevelAndStats
             stats.baseDamage = GetRandomDamageByLevel(level);
             return stats;
         }
-
+        public StructStats GetBossStats(int level)
+        {
+            var stuctStats = GetEnemyStats(level);
+            stuctStats.level = level + 5;
+            structStats.baseDamage = structStats.baseDamage * 2;
+            structStats.health = stuctStats.health * 2;
+            structStats.speed = stuctStats.speed / 2;
+            return structStats;
+        }
         [Button]
         public void CreateData()
         {

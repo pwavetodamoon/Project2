@@ -24,4 +24,9 @@ public class MonstersStatsSystem : MonoBehaviour
         var level = stageInformation.GetLevelForMonster();
         stats.SetStructStats(EnemyData.GetEnemyStats(level));
     }
+    public void SetStatsForBoss(EnemyStats stats)
+    {
+        var level = stageInformation.GetLevelForMonster();
+        stats.SetStructStats(EnemyData.GetBossStats(level));
+    }
 }

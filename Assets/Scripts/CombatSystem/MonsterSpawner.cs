@@ -52,6 +52,10 @@ namespace CombatSystem
         {
             _monstersStatsSystem.SetStatsByLevel(enemyStats);
         }
+        private void SetStatsForBoss(EnemyStats enemyStats)
+        {
+            _monstersStatsSystem.SetStatsForBoss(enemyStats);
+        }
 
         [Button]
         public void ClearMonsterAndStopSpawnOnMap()
@@ -63,6 +67,13 @@ namespace CombatSystem
                 //Destroy(list[i].healthBar.gameObject);
                 list[i].KillMonster();
             }
+        }
+        public void SpawnBoss()
+        {
+            var enemy = SpawnMonster();
+            var stats = enemy.GetRef<EnemyStats>();
+            enemy.transform.localScale = new Vector3(.5f, .5f, .5f);
+            SetStatsForBoss(stats);
         }
     }
 }

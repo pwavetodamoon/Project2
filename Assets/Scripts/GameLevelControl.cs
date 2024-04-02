@@ -46,6 +46,8 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
         NextMapTransitionHandler.RegisterCallback(StartTransition, EndTransition);
 
         stageInformation.OnCompleteMap += OnGoNextMap;
+
+        //enemySpawnerControl.EnableSpawn();
     }
     private void StartTransition()
     {
@@ -72,6 +74,7 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     {
         NextMapTransitionHandler.UseRunner();
         stageInformation.currentMapIndex++;
+        if(stageInformation.currentMapIndex > 1) { }
     }
 
     private void OnDisable()
