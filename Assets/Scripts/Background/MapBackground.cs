@@ -41,7 +41,7 @@ namespace Background
         public void LoadTexture()
         {
             if (CanLoadMap() == false) return;
-            var textures2d = mapBackgroundSO.GetSpritesBackground(MapIndex);
+            var textures2d = mapBackgroundSO.GetSpritesBackground(0);
 
             var textures = new[]
             {

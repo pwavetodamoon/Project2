@@ -83,7 +83,7 @@ public class NextMapTransitionHandler : GameTransitionBase
 
 
         yield return screen.StartTransition();
-        map.GoNextMap();
+        //map.GoNextMap();
         yield return screen.waitBetweenTransition;
         yield return screen.EndTransition();
 
