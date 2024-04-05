@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "StageInformation", menuName = "ScriptableObjects/StageInformation")]
 public class StageInformation : ScriptableObject
@@ -19,6 +20,8 @@ public class StageInformation : ScriptableObject
     public event Action OnCompleteMap;
     public event Action OnCompleteStage;
     private MapGameConfig currentMapGameData => MapGameConfigs[currentMapIndex];
+
+
 
     public bool allowGoNextMap;
     public bool allowGoNextStage;
@@ -43,10 +46,7 @@ public class StageInformation : ScriptableObject
         return currentLevelLocal;
     }
 
-    public int GetMaxStage()
-    {
-        return currentMapGameData.maxStage;
-    }
+
     public ItemsStruct GetRandomItemDrop()
     {
         var randomIndex = Random.Range(0, currentMapGameData.itemDrop.Count);
@@ -55,16 +55,16 @@ public class StageInformation : ScriptableObject
     public void ResetStage()
     {
         // có thể là sau khi thua ở stage cuối sẽ không reset về cuối map mà chỉ hồi sinh lại và tiếp túc đánh
-        currentStageIndex--;
-        if(currentMapIndex < 0 )
-            currentMapIndex = 0;
-        //pointCollected = 0;
+
+        currentStageIndex = 0;
+        pointCollected = 0;
     }
     public void IncreasePointWhenKillMonster() => pointCollected += pointsPerMonsterKill;
 
     public void IncreasePoint(int point)
     {
         pointCollected += point;
+
         if (pointCollected > GetPointNeedOfStage())
         {
             pointCollected = GetPointNeedOfStage();
@@ -73,7 +73,7 @@ public class StageInformation : ScriptableObject
         }
 
     }
-    public void OnGoNextMapOrGoNextStage()
+    private void OnGoNextMapOrGoNextStage()
     {
         // logic qua map hoặc qua stage
         if (++currentStageIndex < currentMapGameData.maxStage)
@@ -81,16 +81,25 @@ public class StageInformation : ScriptableObject
             if (allowGoNextStage == false) return;
             OnCompleteStage?.Invoke();
         }
-        else
-        {
-            if (allowGoNextMap == false) return;
-            OnCompleteMap?.Invoke();
-        }
+        //else
+        //{
+        //    if (allowGoNextMap == false) return;
+        //    OnCompleteMap?.Invoke();
+        //}
+    }
+
+    public void UpdateProgessValue()
+    { 
+        
     }
 
     private int GetPointNeedOfStage(int stageIndex = -1)
     {
         return currentMapGameData.GetPointNeedOfStage(stageIndex == -1 ? currentStageIndex : stageIndex);
     }
+
+    
+    
+    
 
 }

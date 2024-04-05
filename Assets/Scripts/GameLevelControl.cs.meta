@@ -3,7 +3,12 @@ guid: 33c0b4c76326dd94f8076369e40f22dc
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - heroManager: {instanceID: 0}
+  - enemySpawnerControl: {instanceID: 0}
+  - screenTransition: {instanceID: 0}
+  - mapBackground: {instanceID: 0}
+  - stageInformation: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

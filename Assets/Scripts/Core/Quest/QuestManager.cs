@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Helper;
 using Item;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core.Quest
@@ -11,10 +12,13 @@ namespace Core.Quest
     public struct ItemsStruct
     {
         [SerializeField] private int pointCollect;
+        
         [SerializeField] private ItemsSO itemsSO;
 
         public ItemsSO GetItemSO() => itemsSO;
         public int GetPoint() => pointCollect;
+
+        
     }
 
     public class QuestManager : Singleton<QuestManager>

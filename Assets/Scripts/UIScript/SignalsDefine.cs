@@ -73,5 +73,8 @@ public class SendMessageLoginRegister : ASignal <string,Color>
 public class SendCurrency : ASignal <int>
 { 
 }
+public class SendProgessValue : ASignal <float>
+{ 
+}
 
 

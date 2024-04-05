@@ -6,11 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using HHP.Ults.UIAnim;
 using TMPro;
+using Core.Quest;
 
 public class UIGamePlay : APanelController
 {
     [SerializeField] private RectTransform _dFSArea;
     [SerializeField] private RectTransform _tourTimeLine;
+    //t
+    [SerializeField] private RectTransform _progessArea;
 
     [Header("UISlot Zone")]
     [SerializeField] private RectTransform _uISlot;
@@ -22,7 +25,11 @@ public class UIGamePlay : APanelController
     [SerializeField] private Button _buttonPauseGame;
 
     [Header("Text")]
-    [SerializeField] private TextMeshProUGUI _cointText;
+    [SerializeField] private TextMeshProUGUI _cointText; 
+    //
+    [Header("Slider")]
+    [SerializeField] private Slider _slider;
+    
     [Header("Sprite")]
     [SerializeField] private Sprite _spriteOnButtonUiSlotl;
     [SerializeField] private Sprite _spriteOffButtonUiSlotl;
@@ -35,10 +42,14 @@ public class UIGamePlay : APanelController
 
     private void Start()
     {
+        //
+        UIAnim.MoveDownUI(_progessArea);
+
         UIAnim.MoveDownUI(_dFSArea);
         UIAnim.MoveUIUp(_uISlot);
         UIAnim.MoveDownUI(_tourTimeLine);
     }
+   
 
     protected override void AddListeners()
     {
@@ -47,6 +58,8 @@ public class UIGamePlay : APanelController
         _buttonUiSlot.onClick.AddListener(ShowHideUiSlot);
         _buttonPauseGame.onClick.AddListener(PauseGame);
         Signals.Get<SendCurrency>().AddListener(SetCoinText);
+
+        Signals.Get<SendProgessValue>().AddListener(SetSlider);
     }
 
     protected override void RemoveListeners()
@@ -56,6 +69,8 @@ public class UIGamePlay : APanelController
         _buttonUiSlot.onClick.RemoveListener(ShowHideUiSlot);
         _buttonPauseGame.onClick.RemoveListener(PauseGame);
         Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
+
+        Signals.Get<SendProgessValue>().RemoveListener(SetSlider);
     }
 
     private void ShowDPS()
@@ -105,9 +120,17 @@ public class UIGamePlay : APanelController
     }
     public void SetCoinText(int value)
     {
+
         _cointText.text = $"Total Reward: {value}";
         UIAnim.ZoomInOutScaleCusTom(_cointText.transform,1.1f);
 
+    }
+    public void SetSlider(float t)
+    {
+        //var value = QuestManager.Instance.stageInformation.pointCollected;
+        //_slider.value = value;
+        _slider.value = t;
+        
     }
     // private void HideDPS()
     // {
