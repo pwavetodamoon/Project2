@@ -56,9 +56,12 @@ public class EnemySpawnerControl : MonoBehaviour
     [Button]
     public void SpawnMinions()
     {
+
         if (allowSpawn == false || monsterSpawners.Count == 0) return;
         var spawnerIndex = Random.Range(0, monsterSpawners.Count);
         monsterSpawners[spawnerIndex].SpawnMultipleMonsters(entitySpawnPerTime);
+
+        StageInformation_OnCompleteStage();
     }
 
     public void SpawnBoss()

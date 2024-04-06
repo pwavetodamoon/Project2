@@ -458,6 +458,29 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5221329053050391346, guid: 6afe141d5fcab844a9c2b43121f60148, type: 3}
   m_PrefabInstance: {fileID: 521874231}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &815905232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1775049056689161095, guid: d7d66259785992b4b980505b9eb72269, type: 3}
+  m_PrefabInstance: {fileID: 1150872489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &815905233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815905232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4c5724dc728d646a2c541f88bad8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animIn: {fileID: 0}
+  animOut: {fileID: 0}
+  properties:
+    priority: 0
+  restart: {fileID: 0}
+  backToMenu: {fileID: 0}
 --- !u!1 &852994068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LosePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1775049056689161095, guid: d7d66259785992b4b980505b9eb72269, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2092869722946235058, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1278,7 +1305,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1775049056689161095, guid: d7d66259785992b4b980505b9eb72269, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 815905233}
   m_SourcePrefab: {fileID: 100100000, guid: d7d66259785992b4b980505b9eb72269, type: 3}
 --- !u!224 &1204798787 stripped
 RectTransform:
@@ -4607,6 +4637,7 @@ MonoBehaviour:
     priority: 0
   _dFSArea: {fileID: 6135704827958350533}
   _tourTimeLine: {fileID: 0}
+  _progessArea: {fileID: 0}
   _uISlot: {fileID: 3964339714972429829}
   _currentTransform: {fileID: 5713523198333263627}
   _targetTransform: {fileID: 7713316622838839109}

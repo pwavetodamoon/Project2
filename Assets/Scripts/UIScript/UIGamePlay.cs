@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using HHP.Ults.UIAnim;
 using TMPro;
 using Core.Quest;
+using System.Xml.Serialization;
+using CombatSystem;
 
 public class UIGamePlay : APanelController
 {
@@ -38,6 +40,7 @@ public class UIGamePlay : APanelController
 
     private bool isShowUiSlots = true ;
     private bool isPaused = false ;
+   
 
 
     private void Start()
@@ -57,9 +60,11 @@ public class UIGamePlay : APanelController
         ButtonShowMainMenu.onClick.AddListener(ShowMainMenu);
         _buttonUiSlot.onClick.AddListener(ShowHideUiSlot);
         _buttonPauseGame.onClick.AddListener(PauseGame);
-        Signals.Get<SendCurrency>().AddListener(SetCoinText);
 
+        Signals.Get<SendCurrency>().AddListener(SetCoinText);
         Signals.Get<SendProgessValue>().AddListener(SetSlider);
+
+        
     }
 
     protected override void RemoveListeners()
@@ -68,9 +73,11 @@ public class UIGamePlay : APanelController
         ButtonShowMainMenu.onClick.RemoveListener(ShowMainMenu);
         _buttonUiSlot.onClick.RemoveListener(ShowHideUiSlot);
         _buttonPauseGame.onClick.RemoveListener(PauseGame);
-        Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
 
+        Signals.Get<SendCurrency>().RemoveListener(SetCoinText);
         Signals.Get<SendProgessValue>().RemoveListener(SetSlider);
+        
+        
     }
 
     private void ShowDPS()
@@ -127,13 +134,7 @@ public class UIGamePlay : APanelController
     }
     public void SetSlider(float t)
     {
-        //var value = QuestManager.Instance.stageInformation.pointCollected;
-        //_slider.value = value;
         _slider.value = t;
-        
     }
-    // private void HideDPS()
-    // {
-    //     Signals.Get<HideDPSMenu>().Dispatch();
-    // }
+   
 }

@@ -88,11 +88,6 @@ public class StageInformation : ScriptableObject
         //}
     }
 
-    public void UpdateProgessValue()
-    { 
-        
-    }
-
     private int GetPointNeedOfStage(int stageIndex = -1)
     {
         return currentMapGameData.GetPointNeedOfStage(stageIndex == -1 ? currentStageIndex : stageIndex);

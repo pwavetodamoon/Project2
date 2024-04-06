@@ -61,9 +61,9 @@ namespace deVoid.UIFramework
         public Action<IUIScreenController> OutTransitionFinished { get; set; }
 
         /// <summary>
-        /// Screen can fire this event to request its responsible layer to close it
+        /// Screen can fire this event to request its responsible layer to selectStage it
         /// </summary>
-        /// <value>The close request.</value>
+        /// <value>The selectStage request.</value>
         public Action<IUIScreenController> CloseRequest { get; set; }
 
         /// <summary>

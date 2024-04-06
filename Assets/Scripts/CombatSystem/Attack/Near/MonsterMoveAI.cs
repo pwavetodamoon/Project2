@@ -12,7 +12,9 @@ namespace CombatSystem.Attack.Near
 {
     public class MonsterMoveAI
     {
-         private MonsterNearAttack monsterNearAttack;
+        public bool isBoss = false;
+
+        private MonsterNearAttack monsterNearAttack;
         [SerializeField] private Animator_Base animator_Base;
         [SerializeField] private EntityCombat attackManager;
         private EntityCharacter Enemy => monsterNearAttack.GetEnemy();
@@ -28,6 +30,7 @@ namespace CombatSystem.Attack.Near
             this.animator_Base = animator_Base;
             entityStats = currentEntity.GetRef<EntityStats>();
             randomPos = CreateNoise();
+            isBoss = currentEntity.GetComponent<MonsterCharacter>().isBoss;
         }
 
         private void PlayAnimation(Enum AnimationEnum)
@@ -77,29 +80,44 @@ namespace CombatSystem.Attack.Near
 
             while (triggerAttack == false)
             {
-                if (attackManager.AttackedByEnemies() == false && entityStats.Health() > 0)
+                if (isBoss == true)
                 {
-                    Debug.Log("On Move left");
                     MoveDirective(Vector2.left, entityStats.Speed());
                 }
                 else
                 {
-                    Debug.Log("On Stand");
-                    MoveDirective(Vector2.left, 0);
+
+                    if (attackManager.AttackedByEnemies() == false && entityStats.Health() > 0)
+                    {
+
+                        Debug.Log("On Move left");
+                        MoveDirective(Vector2.left, entityStats.Speed());
+                    }
+                    else
+                    {
+                        Debug.Log("On Stand");
+                        MoveDirective(Vector2.left, 0);
+                    }
                 }
 
                 yield return new WaitForEndOfFrame();
             }
             while (true)
             {
-                if (CanMoveEntity())
+                if (CanMoveEntity() && isBoss == false)
                 {
                     Debug.Log("On find enemy");
                     var direction = GetDestinationPosition() - currentEntity.transform.position;
                     MoveDirective(direction.normalized, entityStats.Speed());
                 }
+                else if (Enemy != null)
+                {
+                    var direction = GetDestinationPosition() - currentEntity.transform.position;
+                    MoveDirective(direction.normalized, entityStats.Speed());
+                }
                 yield return new WaitForEndOfFrame();
             }
+
         }
     }
 }

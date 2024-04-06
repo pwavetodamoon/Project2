@@ -72,6 +72,7 @@ namespace CombatSystem
         {
             var enemy = SpawnMonster();
             var stats = enemy.GetRef<EnemyStats>();
+            enemy.isBoss = true;
             enemy.transform.localScale = new Vector3(.5f, .5f, .5f);
             SetStatsForBoss(stats);
         }

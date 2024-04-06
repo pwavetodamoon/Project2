@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28b543c27b4d3c40a17a49ce8166b40, type: 3}
   m_Name: MapGameConfig 1
   m_EditorClassIdentifier: 
-  maxStage: 5
-  maxPointNeedToComplete: 900
+  maxStage: 4
+  maxPointNeedToComplete: 100
   generalLevelMonster: 1
   itemDrop:
   - pointCollect: 0

@@ -218,7 +218,7 @@ namespace deVoid.UIFramework
         }
 
         /// <summary>
-        /// Registers the panel. Panels can only be shown after they're registered.
+        /// Registers the panel. UILosePanel can only be shown after they're registered.
         /// </summary>
         /// <param name="screenId">Screen identifier.</param>
         /// <param name="controller">Controller.</param>

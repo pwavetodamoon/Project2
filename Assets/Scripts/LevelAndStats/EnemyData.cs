@@ -36,12 +36,13 @@ namespace LevelAndStats
         }
         public StructStats GetBossStats(int level)
         {
-            var stuctStats = GetEnemyStats(level);
-            stuctStats.level = level + 5;
-            structStats.baseDamage = structStats.baseDamage * 2;
-            structStats.health = stuctStats.health * 2;
-            structStats.speed = stuctStats.speed / 2;
-            return structStats;
+            var Stats = GetEnemyStats(level);
+            Stats.level = level + 5;
+            Stats.baseDamage = GetRandomDamageByLevel(level)* 2;
+            Stats.health = GetRandomHealthByLevel(level) * 40;
+            Stats.maxHealth = Stats.health;
+            Stats.speed = structStats.speed / 2;
+            return Stats;
         }
         [Button]
         public void CreateData()

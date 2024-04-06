@@ -13,7 +13,7 @@ namespace deVoid.UIFramework
     {
         [Tooltip("Prefab for the UI Frame structure itself")]
         [SerializeField] private UIFrame templateUIPrefab = null;
-        [Tooltip("Prefabs for all the screens (both Panels and Windows) that are to be instanced and registered when the UI is instantiated")]
+        [Tooltip("Prefabs for all the screens (both UILosePanel and Windows) that are to be instanced and registered when the UI is instantiated")]
         [SerializeField] private List<GameObject> screensToRegister = null;
         [Tooltip("In case a screen prefab is not deactivated, should the system automatically deactivate its GameObject upon instantiation? If false, the screen will be at a visible state upon instantiation.")]
         [SerializeField] private bool deactivateScreenGOs = true;

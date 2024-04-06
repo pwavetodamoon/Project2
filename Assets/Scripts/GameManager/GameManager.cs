@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CurrencyManager _currencyManager;
     [SerializeField] private GameObject _slotManager;
     [SerializeField] private ParticalSystemsManager _particalSystems;
-    [SerializeField]  private List<HeroSlotInGame> heroSlotInGames = new List<HeroSlotInGame>();
+    [SerializeField] private List<HeroSlotInGame> heroSlotInGames = new List<HeroSlotInGame>();
     [SerializeField] private SkillsManager _skillsManager;
     private void Awake()
     {
@@ -31,10 +31,10 @@ public class GameManager : MonoBehaviour
         GetAllHeroesCharacterInScenes();
     }
 
-    public void UpgradeHeroLevel(HeroCharacter heroCharacter , TextMeshProUGUI textMeshProUGUI)
+    public void UpgradeHeroLevel(HeroCharacter heroCharacter, TextMeshProUGUI textMeshProUGUI)
     {
         HeroEntityStats _heroEntityStats = (HeroEntityStats)heroCharacter.GetRef<EntityStats>();
-        var moneyRequired =_levelConfig.GetMoneyRequired(_heroEntityStats.Level());
+        var moneyRequired = _levelConfig.GetMoneyRequired(_heroEntityStats.Level());
         if (_currencyManager.currency >= Convert.ToInt32(moneyRequired))
         {
             _currencyManager.currency -= Convert.ToInt32(moneyRequired);
@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour
     public int GetMoneyLevelRequired(HeroCharacter heroCharacter)
     {
         HeroEntityStats _heroEntityStats = heroCharacter.GetRef<HeroEntityStats>();
-        return Convert.ToInt32( _levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
+        return Convert.ToInt32(_levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
-    public void HealAllHeroes(SkillEnum skillEnum )
+    public void HealAllHeroes(SkillEnum skillEnum)
     {
         switch (skillEnum)
         {
@@ -70,12 +70,20 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Freeze Skill");
                 break;
         }
-      
+
     }
     private void HealTeamSkill()
-    {    float healValue = 50f;
-        heroSlotInGames.ForEach(item => item.currentHero.GetRef<EntityStats>().IncreaseHealth(healValue));
-        PlayEffectSkill(EffectSkillsEnum.HealthEffect, EffectSkillsEnum.HealthTeamEffect);
+    {
+        foreach (var slot in heroSlotInGames)
+        {
+            if (slot.currentHero != null)
+            {
+                float healValue = 50f;
+
+                PlayEffectSkill(EffectSkillsEnum.HealthEffect, EffectSkillsEnum.HealthTeamEffect);
+                slot.currentHero.GetRef<EntityStats>().IncreaseHealth(healValue);
+            }
+        }
     }
     private void FireBallSkill()
     {
@@ -84,16 +92,16 @@ public class GameManager : MonoBehaviour
 
     }
     private void FreezeSkill()
-    {   
+    {
         _skillsManager.FreezeAttack();
         PlayEffectSkill(EffectSkillsEnum.FreezeEffect, EffectSkillsEnum.FreezeTeamEffect);
     }
 
-    private void PlayEffectSkill(EffectSkillsEnum effectSkills,EffectSkillsEnum effectSkillsTeam)
+    private void PlayEffectSkill(EffectSkillsEnum effectSkills, EffectSkillsEnum effectSkillsTeam)
     {
-        foreach (var hero in heroSlotInGames)
-        { 
-            hero.currentHero.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(effectSkills);
+        foreach (var slot in heroSlotInGames)
+        {
+            slot.currentHero?.GetComponent<ParticalSystemsManager>().FindAndPlayEffect(effectSkills);
         }
         _particalSystems.FindAndPlayEffect(effectSkillsTeam);
     }
@@ -101,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         HeroSlotInGame[] heroSlots = _slotManager.GetComponentsInChildren<HeroSlotInGame>();
         heroSlotInGames.Clear();
-        for (int i = 0; i < heroSlots.Length ; i++)
+        for (int i = 0; i < heroSlots.Length; i++)
         {
             if (heroSlots[i].SlotIndex == -1)
             {
@@ -110,5 +118,5 @@ public class GameManager : MonoBehaviour
             heroSlotInGames.Add(heroSlots[i]);
         }
     }
-    
+
 }

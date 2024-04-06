@@ -39,6 +39,8 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
         //
         Signals.Get<OpenTest>().AddListener(ShowStartGameScene);
+        Signals.Get<OpenLosePanel>().AddListener(OpenLosePanels);
+        Signals.Get<CloseLosePanel>().AddListener(ShowStartGameScene);
     }
 
     private void RemoveListener()
@@ -60,6 +62,8 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
         //
         Signals.Get<OpenTest>().RemoveListener(ShowStartGameScene);
+        Signals.Get<OpenLosePanel>().RemoveListener(OpenLosePanels);
+        Signals.Get<CloseLosePanel>().RemoveListener(ClosePanels);
     }
 
     private void ShowUIDPS()
@@ -91,5 +95,13 @@ public class UIGamePlayController : MonoBehaviour
     private void ShowStartGameScene()
     {
         SceneManager.LoadScene(ScreenIds.StartGameScene);
+    }
+    private void ClosePanels()
+    {
+        _uIFrameGamePlay.HidePanel(ScreenIds.UILosePanel);
+    }
+    private void OpenLosePanels()
+    {
+        _uIFrameGamePlay.ShowPanel(ScreenIds.UILosePanel);
     }
 }

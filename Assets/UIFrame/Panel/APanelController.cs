@@ -5,7 +5,7 @@
     public abstract class APanelController : APanelController<PanelProperties> { }
 
     /// <summary>
-    /// Base class for Panels
+    /// Base class for UILosePanel
     /// </summary>
     public abstract class APanelController<T> : AUIScreenController<T>, IPanelController where T : IPanelProperties {
         public PanelPriority Priority {

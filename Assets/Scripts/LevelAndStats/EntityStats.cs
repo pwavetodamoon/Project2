@@ -22,14 +22,17 @@ namespace LevelAndStats
         protected virtual void Awake()
         {
             var entity = GetComponentInParent<EntityCharacter>();
-            entityAction = entity.GetRef<EntityAction>();
+            if (entity != null)
+            {
+                entityAction = entity.GetRef<EntityAction>(); 
+            }
         }
         public float Speed() => structStats.speed;
         public float AttackCoolDown() => structStats.attackCoolDown;
 
         public float AttackMoveDuration() => structStats.attackMoveDuration / (1 + structStats.speed / 200);
 
-        public void ChangeHealthEvent() => entityAction.OnHealthChange?.Invoke(GetPercentHealth);
+        public void ChangeHealthEvent() => entityAction?.OnHealthChange?.Invoke(GetPercentHealth);
 
         public void DecreaseHealth(float damage)
         {

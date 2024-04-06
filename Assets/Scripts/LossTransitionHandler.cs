@@ -26,7 +26,7 @@ public class LossTransitionHandler : GameTransitionBase
         {
             if (slotList[i].currentHero != null && slotList[i].currentHero.IsDead)
             {
-                var stats = slotList[i].currentHero.GetComponent<HeroEntityStats>();
+                var stats = slotList[i].currentHero.GetRef<HeroEntityStats>();
                 stats.IncreaseHealth(stats.MaxHealth());
                 slotList[i].currentHero.RegisterObject();
             }

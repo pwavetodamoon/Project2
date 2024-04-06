@@ -20,7 +20,7 @@ namespace deVoid.UIFramework
         [Tooltip("The panel priority type for a given Target para-layer")]
         private PanelPriority priority;
         [SerializeField] 
-        [Tooltip("The GameObject that should house all Panels tagged with this priority")]
+        [Tooltip("The GameObject that should house all UILosePanel tagged with this priority")]
         private Transform targetParent;
 
         public Transform TargetParent {

@@ -25,6 +25,16 @@ public class HideDPSMenu : ASignal
 {
 }
 //_______________
+public class CloseLosePanel : ASignal
+{ 
+}
+public class OpenLosePanel : ASignal
+{ 
+}
+public class OpenWinPanel : ASignal
+{ 
+}
+
 public class ShowUISetting : ASignal
 {
 }

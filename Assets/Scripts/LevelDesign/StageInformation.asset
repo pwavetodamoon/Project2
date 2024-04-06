@@ -17,9 +17,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 888ee81ec85f4444a888e86ccd48cb90, type: 2}
   - {fileID: 11400000, guid: ff7acbb0b66d4904088a18c6e5606e66, type: 2}
   pointsPerMonsterKill: 1
-  pointCollected: 0
+  pointCollected: 117
   currentMapIndex: 0
-  currentStageIndex: 0
-  value: {fileID: 0}
+  currentStageIndex: 4
   allowGoNextMap: 0
   allowGoNextStage: 0

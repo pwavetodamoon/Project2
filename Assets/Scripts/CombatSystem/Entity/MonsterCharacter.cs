@@ -13,7 +13,7 @@ namespace CombatSystem.Entity
         [SerializeField] private HealthBarDynamic healthBar;
         [SerializeField] private Vector2 HealthBarOffset;
         [SerializeField] private RewardSignal rewardSignal;
-
+        public bool isBoss;
         protected override void Awake()
         {
             base.Awake();

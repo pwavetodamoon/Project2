@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace deVoid.UIFramework {
     /// <summary>
-    /// This Layer controls Panels.
-    /// Panels are Screens that have no history or queuing,
+    /// This Layer controls UILosePanel.
+    /// UILosePanel are Screens that have no history or queuing,
     /// they are simply shown and hidden in the Frame
     /// eg: a HUD, an energy bar, a mini map etc.
     /// </summary>

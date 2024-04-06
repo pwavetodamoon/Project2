@@ -14,7 +14,7 @@ public class MapGameConfig : ScriptableObject
 
     public int GetPointNeedOfStage(int stageIndex)
     {
-        return maxPointNeedToComplete / maxStage * (stageIndex + 1);
+        return maxPointNeedToComplete / maxStage *(stageIndex + 1);
     }
 }
 

@@ -9,6 +9,8 @@ using Core.Reward;
 using UnityEngine;
 using Helper;
 using UI_Effects;
+using deVoid.UIFramework;
+using deVoid.Utils;
 
 
 public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
@@ -66,6 +68,7 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     }
     public void OnLoose()
     {
+        Signals.Get<OpenLosePanel>().Dispatch();
         LossTransitionHandler.UseRunner();
         stageInformation.ResetStage();
     }

@@ -27,7 +27,7 @@ namespace deVoid.UIFramework {
     }
 
     /// <summary>
-    /// Interface that all Panels must implement
+    /// Interface that all UILosePanel must implement
     /// </summary>
     public interface IPanelController : IUIScreenController {
         PanelPriority Priority { get; }
