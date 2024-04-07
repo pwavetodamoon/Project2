@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillEnum: 2
   _skillName: FreezeSkill
+  _descriptTions: 
+  _costSkill: 50
   _iconSkill: {fileID: 21300000, guid: 0582afad13ddf1249b3f3c050f3b7cca, type: 3}
   _imageCoolDown: {fileID: 0}
   _coolDownText: {fileID: 0}

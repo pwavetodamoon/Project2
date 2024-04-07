@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
         HeroEntityStats _heroEntityStats = heroCharacter.GetRef<HeroEntityStats>();
         return Convert.ToInt32(_levelConfig.GetMoneyRequired(_heroEntityStats.Level()));
     }
-    public void HealAllHeroes(SkillEnum skillEnum)
+    //
+    public void OnSkillUse(SkillEnum skillEnum )
     {
         switch (skillEnum)
         {
@@ -63,11 +64,9 @@ public class GameManager : MonoBehaviour
                 break;
             case SkillEnum.FireBall:
                 FireBallSkill();
-                Debug.Log("FireBall Skill");
                 break;
             case SkillEnum.Freeze:
                 FreezeSkill();
-                Debug.Log("Freeze Skill");
                 break;
         }
 

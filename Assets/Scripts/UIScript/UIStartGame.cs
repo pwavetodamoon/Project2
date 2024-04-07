@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using deVoid.UIFramework;
@@ -8,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using HHP.Ults.UIAnim;
 
-public class UIStartGame : APanelController
+public class UIStartGame : APanelController, IEventListener
 {
     [SerializeField] private TextMeshProUGUI _playerName;
     [SerializeField] private TextMeshProUGUI _levelPlayer;
@@ -18,8 +19,20 @@ public class UIStartGame : APanelController
     [SerializeField] private Transform _uiDailyMission;
     [SerializeField] private Transform _uiHandelCurrency;
     [SerializeField] private Transform _uiHandlePlayerinfo;
-    
     private Transform[] _uiArrays;
+    public event Action _action;
+
+    public void SetGoldText(int value)
+    {
+        _goldtxt.text = $"Gold: {value.ToString()}";
+    }
+
+    protected virtual void ListenersEventCallBack()
+    {
+        _action?.Invoke();
+        Debug.Log("Call");
+    }
+
     private void Start()
     {
         LoadUIsStartGame();
@@ -30,7 +43,6 @@ public class UIStartGame : APanelController
         base.AddListeners();
         _playButton.onClick.AddListener(OnPlayButtonOnClicked);
         _shopButton.onClick.AddListener(OnShopButtonOnClicked);
-
     }
 
     protected override void RemoveListeners()
@@ -38,6 +50,20 @@ public class UIStartGame : APanelController
         base.RemoveListeners();
         _playButton.onClick.RemoveListener(OnPlayButtonOnClicked);
         _shopButton.onClick.RemoveListener(OnShopButtonOnClicked);
+    }
+
+    public void RegisterActionEvent(Action actionHandler)
+    {
+        Debug.Log("RegisterActionEvent");
+        _action += actionHandler;
+        ListenersEventCallBack();
+    }
+
+    public void UnregisterActionEvent(Action actionHandler)
+    {
+        Debug.Log("UnregisterActionEvent");
+        _action -= actionHandler;
+        ListenersEventCallBack();
     }
 
     private void OnPlayButtonOnClicked()
@@ -51,6 +77,7 @@ public class UIStartGame : APanelController
     {
         Signals.Get<OpenShop>().Dispatch();
     }
+
     private async Task GetInfoPlayerAsync()
     {
         Debug.Log("GetInfoPlayer coroutine");

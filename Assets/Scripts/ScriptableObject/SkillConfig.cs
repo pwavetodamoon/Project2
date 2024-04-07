@@ -7,6 +7,8 @@ public class SkillConfig : ScriptableObject
 {
     [SerializeField] private SkillEnum _skillEnum;
     [SerializeField]  private string _skillName;
+    [SerializeField]  private string _descriptTions;
+    [SerializeField] private int _costSkill;
     [SerializeField]  private Sprite _iconSkill;
     [SerializeField]  private Image _imageCoolDown;
     [SerializeField]  private TextMeshProUGUI _coolDownText;
@@ -28,6 +30,15 @@ public class SkillConfig : ScriptableObject
   public void SetSkillName(string name)
   {
      _skillName = name;
+  }
+  //
+  public string GetDesriptTions()
+  {
+      return _descriptTions;
+  }
+  public void SetDesriptions(string descriptTions)
+  {
+      _descriptTions = descriptTions;
   }
   //
   public Sprite GetIconSkill()
@@ -67,6 +78,17 @@ public class SkillConfig : ScriptableObject
   {
 
       _coolDownSkill = value;
+  }
+  //
+  //
+  public int GetCostSkill()
+  {
+      return _costSkill;
+  }
+  public void SetCostSkill(int value)
+  {
+
+      _costSkill = value;
   }
   //
   public bool GetIsCanUse()

@@ -33,10 +33,10 @@ RectTransform:
   - {fileID: 7750086155042565840}
   m_Father: {fileID: 2583510063273100141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40.5}
-  m_SizeDelta: {x: -158, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.25, y: -60}
+  m_SizeDelta: {x: -169.5, y: -260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3207970865773815729
 CanvasRenderer:
@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.32000732, y: -0.6500015}
+  m_AnchoredPosition: {x: 0.32000732, y: -0.6499939}
   m_SizeDelta: {x: -7.59, y: -7.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4859427637995477200
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e742e3b24debdf84791d722165ae4dea, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -337,7 +337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -5.399994}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 231, y: 152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7915515825222691042
@@ -571,9 +571,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2583510063273100141}
-  - component: {fileID: 1907484570735973563}
+  - component: {fileID: 1781254066137092281}
   m_Layer: 5
-  m_Name: UIItemSkill
+  m_Name: UIItemSkillShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,16 +594,16 @@ RectTransform:
   - {fileID: 1916573197301522494}
   - {fileID: 3589498633666411434}
   - {fileID: 2822492454635489133}
-  - {fileID: 3141480767356073355}
   - {fileID: 2194082641036440448}
+  - {fileID: 3141480767356073355}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1.0300293, y: -82.66}
-  m_SizeDelta: {x: 257.56006, y: 349.65002}
+  m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1907484570735973563
+--- !u!114 &1781254066137092281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -612,9 +612,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7521755936840107934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2168024439276564784307c8e60f0e39, type: 3}
+  m_Script: {fileID: 11500000, guid: 6da4da0562244274287f36efa3db609c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animIn: {fileID: 0}
+  animOut: {fileID: 0}
+  properties:
+    priority: 0
+  _icon: {fileID: 4275392520904969676}
+  _nameSkill: {fileID: 3341976083467294983}
+  _descriptionSkill: {fileID: 5464342625012639506}
+  _buttonBuy: {fileID: 9062991071052412862}
+  _skillConfig: {fileID: 11400000, guid: 41a567bf89197604e8df141251940690, type: 2}
+  _cost: 0
+  _uiStartGame: {fileID: 0}
 --- !u!1 &7727793012464684248
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,7 +766,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Health Skill
+  m_text: Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0795345bbc3901418ba82196bf9b999, type: 2}
   m_sharedMaterial: {fileID: -6702199071709565678, guid: c0795345bbc3901418ba82196bf9b999, type: 2}
@@ -782,10 +793,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 42.15
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -858,8 +869,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -123.62}
-  m_SizeDelta: {x: 0, y: 91.25}
+  m_AnchoredPosition: {x: 0, y: -134}
+  m_SizeDelta: {x: 0, y: 112.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3567733590190648740
 CanvasRenderer:
@@ -889,7 +900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Heal all allies in battle for 20 health.
+  m_text: Descripstion
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0795345bbc3901418ba82196bf9b999, type: 2}
   m_sharedMaterial: {fileID: -6702199071709565678, guid: c0795345bbc3901418ba82196bf9b999, type: 2}
@@ -916,12 +927,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.4
+  m_fontSize: 37.9
   m_fontSizeBase: 23.4
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 37.9
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
