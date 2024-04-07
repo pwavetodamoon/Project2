@@ -68,7 +68,6 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     }
     public void OnLoose()
     {
-        Signals.Get<OpenLosePanel>().Dispatch();
         LossTransitionHandler.UseRunner();
         stageInformation.ResetStage();
     }

@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultUISetting: {fileID: 11400000, guid: a443f44f6c3c8904db64ec0775e4ca78, type: 2}
+  _stageInformation: {fileID: 11400000, guid: 6876edf9fadb22c46bb2abcfcafc68bc, type: 2}

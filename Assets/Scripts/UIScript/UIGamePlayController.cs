@@ -1,3 +1,4 @@
+using CombatSystem.HeroDataManager;
 using deVoid.UIFramework;
 using deVoid.Utils;
 using PlayFab_System;
@@ -8,10 +9,22 @@ public class UIGamePlayController : MonoBehaviour
 {
     [SerializeField] private UISettings _defaultUISetting = null;
     private UIFrame _uIFrameGamePlay;
-    private void Awake()
+    [SerializeField] StageInformation _stageInformation; 
+    [SerializeField] private HeroManager heroManager;
+    private void OnValidate()
     {
+
+        if (_stageInformation == null)
+        {
+            _stageInformation = GetDataSupport.Get().StageInformation;
+        }
+        if (heroManager == null)
+        {
+            heroManager = GetDataSupport.Get().HeroManager;
+        }
         _uIFrameGamePlay = _defaultUISetting.CreateUIInstance();
     }
+   
     private void Start()
     {
         AddListener();
@@ -40,7 +53,7 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenTest>().AddListener(ShowStartGameScene);
         Signals.Get<OpenLosePanel>().AddListener(OpenLosePanels);
-        Signals.Get<CloseLosePanel>().AddListener(ShowStartGameScene);
+        Signals.Get<ClosePanel>().AddListener(RestartGame);
     }
 
     private void RemoveListener()
@@ -63,7 +76,7 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenTest>().RemoveListener(ShowStartGameScene);
         Signals.Get<OpenLosePanel>().RemoveListener(OpenLosePanels);
-        Signals.Get<CloseLosePanel>().RemoveListener(ClosePanels);
+        Signals.Get<ClosePanel>().RemoveListener(RestartGame);
     }
 
     private void ShowUIDPS()
@@ -96,11 +109,18 @@ public class UIGamePlayController : MonoBehaviour
     {
         SceneManager.LoadScene(ScreenIds.StartGameScene);
     }
-    private void ClosePanels()
+    private void RestartGame()
     {
-        _uIFrameGamePlay.HidePanel(ScreenIds.UILosePanel);
+        //_uIFrameGamePlay.HidePanel(ScreenIds.UILosePanel);
+        SceneManager.LoadScene(ScreenIds.TestScene);
+        _stageInformation.ResetStage();
+        
     }
     private void OpenLosePanels()
+    {
+        _uIFrameGamePlay.ShowPanel(ScreenIds.UILosePanel);
+    }
+    private void OpenWinPanels()
     {
         _uIFrameGamePlay.ShowPanel(ScreenIds.UILosePanel);
     }
