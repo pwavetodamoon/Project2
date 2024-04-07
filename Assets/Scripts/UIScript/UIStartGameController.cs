@@ -29,14 +29,16 @@ public class UIStartGameController : MonoBehaviour
     {
         _uIFrameStartGame.ShowPanel(ScreenIds.UIStartGame);
         Signals.Get<OpenSceneGamePlay>().AddListener(OpenSceneGamePlay);
-
+        Signals.Get<OpenShop>().AddListener(OpenShop);
+        Signals.Get<HideShop>().AddListener(HideShop);
         Signals.Get<OpenSceneSelectStage>().AddListener(OpenSceneSelectStage);
         Signals.Get<HideStageSelectionUI>().AddListener(HideStageSelectionUI);
     }
     private void RemoveListener()
     {
         Signals.Get<OpenSceneGamePlay>().RemoveListener(OpenSceneGamePlay);
-
+        Signals.Get<OpenShop>().RemoveListener(OpenShop);
+        Signals.Get<HideShop>().RemoveListener(HideShop);
         Signals.Get<OpenSceneSelectStage>().RemoveListener(OpenSceneSelectStage);
         Signals.Get<HideStageSelectionUI>().RemoveListener(HideStageSelectionUI);
     }
@@ -52,6 +54,14 @@ public class UIStartGameController : MonoBehaviour
     private void OpenSceneSelectStage()
     {
         _uIFrameStartGame.ShowPanel(ScreenIds.StageSelectionUI);
+    }
+    private void OpenShop()
+    {
+        _uIFrameStartGame.ShowPanel(ScreenIds.UIShop);
+    }
+    private void HideShop()
+    {
+        _uIFrameStartGame.HidePanel(ScreenIds.UIShop);
     }
 
 }

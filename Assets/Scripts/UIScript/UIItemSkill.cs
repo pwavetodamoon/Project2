@@ -63,7 +63,7 @@ public class UIItemSkill : APanelController
         if (!_cooldown.IsCoolingDown)
         {
             _cooldown.StartCooldown();
-            gameManagerComponent.HealAllHeroes(_skillEnum);
+            gameManagerComponent.OnSkillUse(_skillEnum);
         }
     }
 
