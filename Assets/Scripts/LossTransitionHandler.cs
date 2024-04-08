@@ -1,5 +1,4 @@
 using System.Collections;
-using deVoid.Utils;
 using LevelAndStats;
 using Sirenix.OdinInspector;
 using SlotHero;
@@ -36,10 +35,6 @@ public class LossTransitionHandler : GameTransitionBase
         map.GoNextMap();
         yield return screen.waitBetweenTransition;
         yield return screen.EndTransition();
-        
-        Signals.Get<OpenLosePanel>().Dispatch();
         OnTransitionEnd?.Invoke();
-        
-        
     }
 }

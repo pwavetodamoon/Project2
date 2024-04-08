@@ -24,8 +24,8 @@ public class UIMainMenu : APanelController
     {
         base.AddListeners();
         ButtonHideUIMainMenu.onClick.AddListener(HideUIMainMenu);
+
         ButtonShowUISoundSetting.onClick.AddListener(ShowUISoundSetting);
-        ButtonActiveNewGame.onClick.AddListener(RestartGame);
         ButtonActiveQuitAndSave.onClick.AddListener(ShowStartGameScene);
     }
 
@@ -33,8 +33,8 @@ public class UIMainMenu : APanelController
     {
         base.RemoveListeners();
         ButtonHideUIMainMenu.onClick.RemoveListener(HideUIMainMenu);
+
         ButtonShowUISoundSetting.onClick.RemoveListener(ShowUISoundSetting);
-        ButtonActiveNewGame.onClick.RemoveListener(RestartGame);
         ButtonActiveQuitAndSave.onClick.RemoveListener(ShowStartGameScene);
 
     }
@@ -49,10 +49,6 @@ public class UIMainMenu : APanelController
     private void ShowStartGameScene() 
     { 
         Signals.Get<OpenTest>().Dispatch();
-    }
-    private void RestartGame()
-    { 
-        Signals.Get<ClosePanel>().Dispatch();
     }
     
    

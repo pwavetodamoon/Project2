@@ -10,34 +10,28 @@ public class UILosePanel : APanelController
 {
     [SerializeField] private Button selectStage;
     [SerializeField] private Button restart;
-    private void Start()
-    {
-        Time.timeScale = 0;
-    }
     protected override void AddListeners()
     {
         base.AddListeners();
-        restart.onClick.AddListener(OnButtonRestart);
-        selectStage.onClick.AddListener(OnbuttonBackToMenuClick);
+        restart.onClick.AddListener(OnbuttonBackToMenuClick);
+        selectStage.onClick.AddListener(OnButtonRestart);
 
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        restart.onClick.RemoveListener(OnButtonRestart);
-        selectStage.onClick.RemoveListener(OnbuttonBackToMenuClick);
+        restart.onClick.RemoveListener(OnbuttonBackToMenuClick);
+        selectStage.onClick.RemoveListener(OnButtonRestart);
     }
 
     public void OnbuttonBackToMenuClick()
     {
-        Time.timeScale = 1;
-        UIAnim.ZoomOutScale(this.transform, Signals.Get<OpenSceneSelectStage>().Dispatch);
+        UIAnim.ZoomOutScale(this.transform, Signals.Get<OpenSceneSelectStage>().Dispatch) ;
     }
-    public void OnButtonRestart()
+    public void OnButtonRestart() 
     {
-        Time.timeScale = 1;
-        UIAnim.ZoomOutScale(this.transform, Signals.Get<ClosePanel>().Dispatch);
-    }
-
+        UIAnim.ZoomOutScale(this.transform, Signals.Get<CloseLosePanel>().Dispatch);
+    } 
+   
 
 }

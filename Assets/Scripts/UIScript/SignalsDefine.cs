@@ -25,7 +25,7 @@ public class HideDPSMenu : ASignal
 {
 }
 //_______________
-public class ClosePanel : ASignal
+public class CloseLosePanel : ASignal
 { 
 }
 public class OpenLosePanel : ASignal
