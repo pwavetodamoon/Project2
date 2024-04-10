@@ -112,7 +112,7 @@ namespace CombatSystem.Entity
         public override void RegisterObject()
         {
             base.RegisterObject();
-            //Debug.Log("Register hero",gameObject);
+            Debug.Log("Register hero", gameObject);
             CombatEntitiesManager.Instance.AppendEntityToListByTag(this, GameTag.Hero);
             CreateAttack();
         }
@@ -121,7 +121,7 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopExecute();
-            //Debug.Log("Release hero",gameObject);
+            //Debug.Log("Release hero", gameObject);
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Hero);
             //gameObject.SetActive(false);
         }

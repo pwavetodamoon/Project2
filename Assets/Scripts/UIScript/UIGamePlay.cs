@@ -94,7 +94,7 @@ public class UIGamePlay : APanelController
         {
             isPaused = true;
             _buttonPauseGame.image.sprite = _spriteOffUIPauseGame;
-            Time.timeScale = 0;
+            Time.timeScale = 2;
 
         }
         

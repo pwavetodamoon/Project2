@@ -36,6 +36,7 @@ public class Testfunc : MonoBehaviour
         uiAvatarControllers = uiAvatarControllers.OrderBy(x => x.index).ToArray();
         for (int i = 0; i < uiAvatarControllers.Length; i++)
         {
+            
             var heroData = list[i];
             if (heroData.heroCharacter != null) continue;
             var hero = Instantiate(heroManager.prefabHero, null).GetComponent<HeroCharacter>();
@@ -60,6 +61,7 @@ public class Testfunc : MonoBehaviour
             uiAvatarControllers[i].SetHeroCharacter(hero);
 
         }
+        Debug.Log(uiAvatarControllers.Length);
         // Load tất cả hero vào vị trí đúng trong game
     }
 

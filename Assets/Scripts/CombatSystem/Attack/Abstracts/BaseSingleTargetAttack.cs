@@ -147,7 +147,7 @@ namespace CombatSystem.Attack.Abstracts
                 IncreaseAttackerCount();
                 if (IAttackerCounter.IsOutOfHealth())
                 {
-                    CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
+                    //CombatEntitiesManager.Instance.RemoveEntityByTag(Enemy, GetEnemyTag());
                 }
                 return true;
             }
