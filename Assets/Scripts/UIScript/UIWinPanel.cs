@@ -27,7 +27,7 @@ public class UIWinPanel : APanelController
         Time.timeScale = 1.0f;
         //Signals.Get<OpenSceneSelectStage>().Dispatch();
         Signals.Get<OpenStartGameScene>().Dispatch();
-
+        GameLevelControl.Instance.CheckOnWin();
 
     }
     public void OnButtonRestart()

@@ -479,8 +479,8 @@ MonoBehaviour:
   animOut: {fileID: 0}
   properties:
     priority: 0
+  selectStage: {fileID: 0}
   restart: {fileID: 0}
-  backToMenu: {fileID: 0}
 --- !u!1 &852994068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1775049056689161095, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2092869722946235058, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_Pivot.x
@@ -1272,35 +1272,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120952254838872088, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2120952254838872088, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2120952254838872088, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 2120952254838872088, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -833.9667
       objectReference: {fileID: 0}
     - target: {fileID: 7749887007533251341, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7749887007533251341, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7749887007533251341, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 7749887007533251341, guid: d7d66259785992b4b980505b9eb72269, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -833.9667
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

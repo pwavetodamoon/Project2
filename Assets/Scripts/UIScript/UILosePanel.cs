@@ -32,12 +32,12 @@ public class UILosePanel : APanelController
 
         //Signals.Get<OpenSceneSelectStage>().Dispatch() ;
         Signals.Get<OpenStartGameScene>().Dispatch();
+        GameLevelControl.Instance.OnLoose();
     }
     public void OnButtonRestart() 
     {
         Time.timeScale = 1f ;
         Signals.Get<CloseLosePanel>().Dispatch();
-        
         GameLevelControl.Instance.OnLoose();
     } 
    

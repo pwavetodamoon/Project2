@@ -38,7 +38,7 @@ public class UIStage : APanelController
     }
     private void Stage1()
     {
-        UIAnim.ZoomOutScale(this.transform, Signals.Get<OpenSceneGamePlay>().Dispatch);
+      Signals.Get<OpenSceneGamePlay>().Dispatch();
     }
     private void HideStageSelectionUI()
     {
