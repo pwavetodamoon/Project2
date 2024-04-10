@@ -4,6 +4,7 @@ using LevelAndStats;
 using Model.Hero;
 using Model.Monsters;
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace CombatSystem.Entity.Utilities
@@ -35,11 +36,12 @@ namespace CombatSystem.Entity.Utilities
 
         private void TakeDamage(float damage)
         {
+            damage = Mathf.Round(damage);
             SpawnText(damage);
             EntityStats.DecreaseHealth(damage);
             if (EntityStats.Health() <= 0)
             {
-                Debug.Log($"{entity.name} is out of health ", entity.gameObject);
+                //Debug.Log($"{entity.name} is out of health ", entity.gameObject);
                 entityAction.OnDie?.Invoke();
                 return;
             }

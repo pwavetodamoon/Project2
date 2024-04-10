@@ -90,12 +90,12 @@ namespace CombatSystem.Attack.Near
                     if (attackManager.AttackedByEnemies() == false && entityStats.Health() > 0)
                     {
 
-                        Debug.Log("On Move left");
+                        //Debug.Log("On Move left");
                         MoveDirective(Vector2.left, entityStats.Speed());
                     }
                     else
                     {
-                        Debug.Log("On Stand");
+                        //Debug.Log("On Stand");
                         MoveDirective(Vector2.left, 0);
                     }
                 }
@@ -106,7 +106,7 @@ namespace CombatSystem.Attack.Near
             {
                 if (CanMoveEntity() && isBoss == false)
                 {
-                    Debug.Log("On find enemy");
+                    //Debug.Log("On find enemy");
                     var direction = GetDestinationPosition() - currentEntity.transform.position;
                     MoveDirective(direction.normalized, entityStats.Speed());
                 }

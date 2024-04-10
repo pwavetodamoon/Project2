@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapGameConfigs:
   - {fileID: 11400000, guid: 9ae0b98a5281b614da370304b2b1961a, type: 2}
-  - {fileID: 11400000, guid: 888ee81ec85f4444a888e86ccd48cb90, type: 2}
-  - {fileID: 11400000, guid: ff7acbb0b66d4904088a18c6e5606e66, type: 2}
   pointsPerMonsterKill: 1
-  pointCollected: 117
+  pointCollected: 8
   currentMapIndex: 0
   currentStageIndex: 4
   allowGoNextMap: 0

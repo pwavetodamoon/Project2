@@ -11,10 +11,13 @@ using Helper;
 using UI_Effects;
 using deVoid.UIFramework;
 using deVoid.Utils;
+using CombatSystem.Attack.Near;
+using UnityEditor.Experimental.GraphView;
 
 
 public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
 {
+
     [SerializeField] private HeroManager heroManager;
     [SerializeField] private EnemySpawnerControl enemySpawnerControl;
     [SerializeField] private ScreenTransition screenTransition;
@@ -61,8 +64,18 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     {
         enemySpawnerControl.EnableSpawn();
     }
+    public void CheckOnWin()
+    {
+        enemySpawnerControl.ClearAndStopSpawn();
+        
+    }
+    public void OnWin()
+    {
+        
+    }
     public void CheckOnLoose()
     {
+        Debug.Log("Checklose");
         if (CombatEntitiesManager.Instance.GetHeroList().Count > 1) return;
         OnLoose();
     }
@@ -77,7 +90,7 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     {
         NextMapTransitionHandler.UseRunner();
         stageInformation.currentMapIndex++;
-        if(stageInformation.currentMapIndex > 1) { }
+        if (stageInformation.currentMapIndex > 1) { }
     }
 
     private void OnDisable()

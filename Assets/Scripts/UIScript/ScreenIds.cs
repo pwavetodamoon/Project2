@@ -13,6 +13,7 @@ public class ScreenIds : MonoBehaviour
     public const string UIShop = "UIShop";
     public const string UIItemSkill = "UIItemSkill";
     public const string UILosePanel = "UILosePanel";
+    public const string UIWinPanel = "UIWinPanel";
 
 
     

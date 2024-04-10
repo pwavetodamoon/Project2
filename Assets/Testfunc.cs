@@ -27,7 +27,7 @@ public class Testfunc : MonoBehaviour
     [Button]
     public void Spawn()
     {
-        Debug.Log("Spawn");
+        //Debug.Log("Spawn");
         uiAvatarControllers = FindObjectsOfType<UIAvatarController>();
 
         // Cần phải chạy hàm Test trước để lấy danh sách UI avatar

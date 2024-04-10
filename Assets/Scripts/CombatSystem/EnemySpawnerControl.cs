@@ -19,7 +19,6 @@ public class EnemySpawnerControl : MonoBehaviour
         {
             item.ClearMonsterAndStopSpawnOnMap();
         }
-        stageInformation.OnCompleteStage += StageInformation_OnCompleteStage;
     }
     private void OnDestroy()
     {
@@ -45,6 +44,7 @@ public class EnemySpawnerControl : MonoBehaviour
     {
         timerCounter = GetComponent<TimerCounter>();
         timerCounter.RegisterCallback(SpawnMinions);
+        stageInformation.OnCompleteStage += StageInformation_OnCompleteStage;
 
         monsterSpawners = new List<MonsterSpawner>(GetComponentsInChildren<MonsterSpawner>());
     }

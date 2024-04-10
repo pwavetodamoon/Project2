@@ -4,6 +4,8 @@ using CombatSystem.Helper;
 using Core.Reward;
 using Helper;
 using UnityEngine;
+using deVoid;
+using deVoid.Utils;
 
 namespace CombatSystem.Entity
 {
@@ -29,6 +31,7 @@ namespace CombatSystem.Entity
                 healthBar.offset = HealthBarOffset;
             }
             entityAttackControl.Create(monsterSingleAttackFactory);
+            
         }
 
         public override void RegisterObject()
@@ -41,14 +44,20 @@ namespace CombatSystem.Entity
         {
             base.ReleaseObject();
             StopExecute();
-            Debug.Log("ReleaseObject Enemy");
+            //Debug.Log("ReleaseObject Enemy");
             CombatEntitiesManager.Instance.RemoveEntityByTag(this, GameTag.Enemy);
         }
 
         public void KillMonster()
         {
+            if (isBoss == true)
+            {
+                Debug.Log("Win");
+                Signals.Get<OpenWinPanel>().Dispatch();
+            }
             if (healthBar != null)
             {
+                
                 healthBar.Destroy();
             }
             Destroy(gameObject);

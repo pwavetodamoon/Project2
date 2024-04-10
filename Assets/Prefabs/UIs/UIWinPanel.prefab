@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3386613257985224100}
   - component: {fileID: 1386673831715363428}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button(Restart)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 6848186333079093260}
   - component: {fileID: 4806225492411769865}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button (MainMenu)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -613,8 +613,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963336958965860534}
+  - component: {fileID: 5325329319135293395}
   m_Layer: 5
-  m_Name: WinPanel
+  m_Name: UIWinPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,6 +641,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5325329319135293395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4904814765626859356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4600a4e2b4ec2b6409fc43e6cb836a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animIn: {fileID: 0}
+  animOut: {fileID: 0}
+  properties:
+    priority: 0
+  selectStage: {fileID: 4806225492411769865}
+  restart: {fileID: 1386673831715363428}
 --- !u!1 &6964881763022366793
 GameObject:
   m_ObjectHideFlags: 0

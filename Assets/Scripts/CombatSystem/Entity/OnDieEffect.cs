@@ -32,7 +32,7 @@ public class OnDieEffect : MonoBehaviour
     [Button]
     public void OnDie()
     {
-        Debug.Log("OnDie and play animation");
+        //Debug.Log("OnDie and play animation");
         animatorBase.SetIsPlayDefaultAnimation(false);
         animatorBase.ChangeAnimation(AnimationType.Dying);
         monsterCharacter.StopExecute();

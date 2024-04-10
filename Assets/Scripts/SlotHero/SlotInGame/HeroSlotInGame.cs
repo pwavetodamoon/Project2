@@ -40,7 +40,7 @@ namespace SlotHero.SlotInGame
                 var entityAction = currentHero.GetRef<EntityAction>();
                 entityAction.OnHealthChange = healthBar.SetHealthBar;
                 entityStats.ChangeHealthEvent();
-                Debug.Log("Increase Scale");
+               // Debug.Log("Increase Scale");
                 currentHero.transform.position = characterStand.position;
                 AudioManager.Instance.PlaySFX("Placed Champion");
                 healthBar.FadeColorBack();

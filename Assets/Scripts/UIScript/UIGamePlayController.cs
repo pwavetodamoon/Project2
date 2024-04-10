@@ -40,6 +40,7 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenTest>().AddListener(ShowStartGameScene);
         Signals.Get<OpenLosePanel>().AddListener(OpenLosePanels);
+        Signals.Get<OpenWinPanel>().AddListener(OpenWinPanels);
         Signals.Get<CloseLosePanel>().AddListener(ShowStartGameScene);
     }
 
@@ -63,6 +64,7 @@ public class UIGamePlayController : MonoBehaviour
         //
         Signals.Get<OpenTest>().RemoveListener(ShowStartGameScene);
         Signals.Get<OpenLosePanel>().RemoveListener(OpenLosePanels);
+        Signals.Get<OpenWinPanel>().RemoveListener(OpenWinPanels);
         Signals.Get<CloseLosePanel>().RemoveListener(ClosePanels);
     }
 
@@ -104,4 +106,8 @@ public class UIGamePlayController : MonoBehaviour
     {
         _uIFrameGamePlay.ShowPanel(ScreenIds.UILosePanel);
     }
-}
+    private void OpenWinPanels()
+    {
+        _uIFrameGamePlay.ShowPanel(ScreenIds.UIWinPanel);
+    }
+}   

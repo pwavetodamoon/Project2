@@ -74,7 +74,7 @@ namespace CombatSystem.Attack.Abstracts
 
         public IEnumerator ExecuteAttack()
         {
-            Debug.Log("Coroutine ExecuteAttack");
+            //Debug.Log("Coroutine ExecuteAttack");
             if (isActive || !TryFindEnemy())
             {
                 yield return WaitAndContinue();
@@ -89,7 +89,7 @@ namespace CombatSystem.Attack.Abstracts
             if (!IsEnemyAlive()) return false;
             Enemy = CombatEntitiesManager.Instance.GetEntityTransformByTag(entityCharacter.transform, GetEnemyTag());
             //Debug.Log(Enemy);
-            Debug.Log($"{entityCharacter.name}: Try find enemy:", Enemy);
+            //Debug.Log($"{entityCharacter.name}: Try find enemy:", Enemy);
             return true;
         }
 
