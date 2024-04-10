@@ -25,12 +25,12 @@ public class ElementSkill : HeroSkill
         var collider = Physics2D.OverlapBox(transform.position, size, 0, GameLayerMask.Get(GameLayerMask.ENEMY));
         if (collider != null)
         {
-            attacker = collider.GetComponent<IAttackerCounter>();
-            damageable = collider.GetComponent<IDamageable>();
+            var entity = collider.GetComponent<EntityCharacter>();
+            attacker = entity.GetRef<IAttackerCounter>();
+            damageable = entity.GetRef<IDamageable>();
         }
         attacker?.IncreaseAttackerCount(entityStats);
     }
-
     public override void DecreaseAttacker()
     {
         attacker?.DecreaseAttackerCount(entityStats);
