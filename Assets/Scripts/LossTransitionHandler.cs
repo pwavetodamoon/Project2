@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class LossTransitionHandler : GameTransitionBase
 {
+    
     private YieldInstruction WaitTime = new WaitForSeconds(0.5f);
+    private WaitWhile done;
     public override void UseRunner()
     {
         runner.StartCoroutine(OnLooseProgress());
@@ -14,6 +16,7 @@ public class LossTransitionHandler : GameTransitionBase
 
     private IEnumerator OnLooseProgress()
     {
+        Debug.Log("OKx2163892u4y1t79y104u981");
         OnStartTransition?.Invoke();
         var slotList = SlotManager.Instance.Slots;
 
@@ -33,6 +36,7 @@ public class LossTransitionHandler : GameTransitionBase
         }
 
         map.GoNextMap();
+        
         yield return screen.waitBetweenTransition;
         yield return screen.EndTransition();
         OnTransitionEnd?.Invoke();

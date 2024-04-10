@@ -8,8 +8,10 @@ using deVoid.Utils;
 
 public class UILosePanel : APanelController
 {
+    private LossTransitionHandler lossTransitionHandler;
     [SerializeField] private Button selectStage;
     [SerializeField] private Button restart;
+
     protected override void AddListeners()
     {
         base.AddListeners();
@@ -27,13 +29,16 @@ public class UILosePanel : APanelController
     public void OnbuttonBackToMenuClick()
     {
         Time.timeScale = 1.0f;
-        Signals.Get<OpenSceneSelectStage>().Dispatch() ;
+
+        //Signals.Get<OpenSceneSelectStage>().Dispatch() ;
+        Signals.Get<OpenStartGameScene>().Dispatch();
     }
     public void OnButtonRestart() 
     {
-        GameLevelControl.Instance.CheckOnLoose();
         Time.timeScale = 1f ;
         Signals.Get<CloseLosePanel>().Dispatch();
+        
+        GameLevelControl.Instance.OnLoose();
     } 
    
 

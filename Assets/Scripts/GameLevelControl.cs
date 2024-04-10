@@ -67,6 +67,7 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     }
     public void CheckOnWin()
     {
+
         enemySpawnerControl.ClearAndStopSpawn();
         OnWin();
     }
@@ -78,20 +79,19 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     public void CheckOnLoose()
     {
         Debug.Log("Checklose");
+        Debug.Log("HERO Number: " + CombatEntitiesManager.Instance.GetHeroList().Count);
         if (CombatEntitiesManager.Instance.GetHeroList().Count <= 1)
-            OnLoose();
+        {
+            Signals.Get<OpenLosePanel>().Dispatch();
+            //OnLoose()
+        }
     }
-
-    public void test()
-    {
-        enemySpawnerControl.ClearAndStopSpawn();
-    }
-    private void OnLoose()
+    public void OnLoose()
     {
         Debug.Log("You lose");
-        //Signals.Get<OpenLosePanel>().Dispatch();
         LossTransitionHandler.UseRunner();
-        stageInformation.ResetStage();
+        enemySpawnerControl.ClearAndStopSpawn();
+
     }
 
     public void OnGoNextMap()

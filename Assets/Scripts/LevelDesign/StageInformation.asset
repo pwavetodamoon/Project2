@@ -15,8 +15,8 @@ MonoBehaviour:
   MapGameConfigs:
   - {fileID: 11400000, guid: 9ae0b98a5281b614da370304b2b1961a, type: 2}
   pointsPerMonsterKill: 1
-  pointCollected: 1
+  pointCollected: 33
   currentMapIndex: 0
-  currentStageIndex: 0
+  currentStageIndex: 1
   allowGoNextMap: 0
   allowGoNextStage: 0

@@ -40,12 +40,9 @@ namespace CombatSystem.Entity
             //    GameLevelControl.Instance.OnLoose();
             //    Debug.Log("Thua roi");
             //}
-            if(IsDead == false)
+            if (IsDead == false)
             {
-                Signals.Get<OpenLosePanel>().Dispatch();
-                GameLevelControl.Instance.test();
-
-                //GameLevelControl.Instance.CheckOnLoose();
+                GameLevelControl.Instance.CheckOnLoose();
             }
             SetDeadState();
         }

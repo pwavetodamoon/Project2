@@ -3,9 +3,12 @@ using deVoid.UIFramework;
 using UnityEngine.UI;
 using UnityEngine;
 using HHP.Ults.UIAnim;
+using PlayFab_System;
+using System.Collections;
 
 public class UIMainMenu : APanelController
 {
+    StageInformation stageInformation;
     [SerializeField] private Button ButtonHideUIMainMenu;
     [SerializeField] private Button ButtonShowUISoundSetting;
     [SerializeField] private Button ButtonActiveNewGame;
@@ -37,6 +40,7 @@ public class UIMainMenu : APanelController
         ButtonShowUISoundSetting.onClick.RemoveListener(ShowUISoundSetting);
         ButtonActiveQuitAndSave.onClick.RemoveListener(ShowStartGameScene);
 
+
     }
     private void HideUIMainMenu()
     {
@@ -46,12 +50,21 @@ public class UIMainMenu : APanelController
     {
         Signals.Get<OpenUISoundSetting>().Dispatch();
     }
-    private void ShowStartGameScene() 
-    { 
-        Signals.Get<OpenTest>().Dispatch();
+    private void NewGame()
+    {
+        
+        Signals.Get<OpenStartGameScene>().Dispatch();
+        
     }
-    
+    private void ShowStartGameScene() 
+    {
+        Signals.Get<OpenStartGameScene>().Dispatch();
+        PlayFabManager.Instance.SaveDataPlayer();
+    }
    
+   
+
+
 
 
 }

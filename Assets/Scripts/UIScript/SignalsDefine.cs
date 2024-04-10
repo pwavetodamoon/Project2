@@ -1,5 +1,8 @@
 using deVoid.Utils;
+using PlayFab_System;
 using UnityEngine;
+
+
 
 public class OpenUIGamePlay : ASignal
 {
@@ -30,6 +33,10 @@ public class CloseLosePanel : ASignal
 }
 public class OpenLosePanel : ASignal
 { 
+}
+public class CloseWinPanel : ASignal
+{ 
+
 }
 public class OpenWinPanel : ASignal
 { 
@@ -62,9 +69,9 @@ public class OpenSceneSelectStage : ASignal
 public class HideStageSelectionUI : ASignal
 {
 }
-//public class OpenStartGameScene : ASignal
-//{ 
-//}
+public class OpenStartGameScene : ASignal
+{
+}
 public class OpenShop : ASignal
 {
 }

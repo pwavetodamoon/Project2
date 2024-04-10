@@ -8,6 +8,7 @@ public class UIGamePlayController : MonoBehaviour
 {
     [SerializeField] private UISettings _defaultUISetting = null;
     private UIFrame _uIFrameGamePlay;
+    
     private void Awake()
     {
         _uIFrameGamePlay = _defaultUISetting.CreateUIInstance();
@@ -38,10 +39,12 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
         //
-        Signals.Get<OpenTest>().AddListener(ClosePanel);
+        Signals.Get<OpenTest>().AddListener(ShowTestScene);
         Signals.Get<OpenLosePanel>().AddListener(OpenLosePanels);
         Signals.Get<OpenWinPanel>().AddListener(OpenWinPanels);
+        Signals.Get<CloseWinPanel>().AddListener(ClosePanels);
         Signals.Get<CloseLosePanel>().AddListener(ClosePanels);
+        Signals.Get<OpenStartGameScene>().AddListener(StartGameScene);
     }
 
     private void RemoveListener()
@@ -62,10 +65,12 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<OpenUISoundSetting>().RemoveListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
         //
-        Signals.Get<OpenTest>().RemoveListener(ClosePanel);
+        Signals.Get<OpenTest>().RemoveListener(ShowTestScene);
         Signals.Get<OpenLosePanel>().RemoveListener(OpenLosePanels);
         Signals.Get<OpenWinPanel>().RemoveListener(OpenWinPanels);
+        Signals.Get<CloseWinPanel>().RemoveListener(ClosePanels);
         Signals.Get<CloseLosePanel>().RemoveListener(ClosePanels);
+        Signals.Get<OpenStartGameScene>().RemoveListener(StartGameScene);
     }
 
     private void ShowUIDPS()
@@ -94,14 +99,12 @@ public class UIGamePlayController : MonoBehaviour
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UISoundSetting);
     }
-    private void ClosePanel()
-    {
-        _uIFrameGamePlay.HidePanel(ScreenIds.UILosePanel);
-        _uIFrameGamePlay.HidePanel(ScreenIds.UIWinPanel);
-    }
+    
     private void ClosePanels()
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UILosePanel);
+        _uIFrameGamePlay.HidePanel(ScreenIds.UIWinPanel);
+        
     }
     private void OpenLosePanels()
     {
@@ -110,5 +113,16 @@ public class UIGamePlayController : MonoBehaviour
     private void OpenWinPanels()
     {
         _uIFrameGamePlay.ShowPanel(ScreenIds.UIWinPanel);
+    }
+    private void StartGameScene()
+    {
+        Time.timeScale = 1;
+        
+        SceneManager.LoadScene(ScreenIds.StartGameScene);
+    }
+    private void ShowTestScene()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(ScreenIds.TestScene);
     }
 }   
