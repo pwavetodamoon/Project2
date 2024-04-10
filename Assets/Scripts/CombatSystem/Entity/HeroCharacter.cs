@@ -1,6 +1,7 @@
 using CombatSystem.Attack.Factory;
 using CombatSystem.Entity.Utilities;
 using CombatSystem.HeroDataManager.Data;
+using deVoid.Utils;
 using Helper;
 using LevelAndStats;
 using Model.Hero;
@@ -41,7 +42,10 @@ namespace CombatSystem.Entity
             //}
             if(IsDead == false)
             {
-                GameLevelControl.Instance.CheckOnLoose();
+                Signals.Get<OpenLosePanel>().Dispatch();
+                GameLevelControl.Instance.test();
+
+                //GameLevelControl.Instance.CheckOnLoose();
             }
             SetDeadState();
         }
@@ -68,9 +72,9 @@ namespace CombatSystem.Entity
 
         public void SetSlotIndex(int index)
         {
-            if (index == -1)
+            if (index < 0)
                 ReleaseObject();
-            else if( index != InGameSlotIndex)
+            else
                 RegisterObject();
             InGameSlotIndex = index;
         }

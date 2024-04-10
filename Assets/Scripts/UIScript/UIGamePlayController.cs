@@ -38,10 +38,10 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<OpenUISoundSetting>().AddListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().AddListener(HideUISoundSetting);
         //
-        Signals.Get<OpenTest>().AddListener(ShowStartGameScene);
+        Signals.Get<OpenTest>().AddListener(ClosePanel);
         Signals.Get<OpenLosePanel>().AddListener(OpenLosePanels);
         Signals.Get<OpenWinPanel>().AddListener(OpenWinPanels);
-        Signals.Get<CloseLosePanel>().AddListener(ShowStartGameScene);
+        Signals.Get<CloseLosePanel>().AddListener(ClosePanels);
     }
 
     private void RemoveListener()
@@ -62,7 +62,7 @@ public class UIGamePlayController : MonoBehaviour
         Signals.Get<OpenUISoundSetting>().RemoveListener(ShowUISoundSetting);
         Signals.Get<CloseUISoundSetting>().RemoveListener(HideUISoundSetting);
         //
-        Signals.Get<OpenTest>().RemoveListener(ShowStartGameScene);
+        Signals.Get<OpenTest>().RemoveListener(ClosePanel);
         Signals.Get<OpenLosePanel>().RemoveListener(OpenLosePanels);
         Signals.Get<OpenWinPanel>().RemoveListener(OpenWinPanels);
         Signals.Get<CloseLosePanel>().RemoveListener(ClosePanels);
@@ -94,9 +94,10 @@ public class UIGamePlayController : MonoBehaviour
     {
         _uIFrameGamePlay.HidePanel(ScreenIds.UISoundSetting);
     }
-    private void ShowStartGameScene()
+    private void ClosePanel()
     {
-        SceneManager.LoadScene(ScreenIds.StartGameScene);
+        _uIFrameGamePlay.HidePanel(ScreenIds.UILosePanel);
+        _uIFrameGamePlay.HidePanel(ScreenIds.UIWinPanel);
     }
     private void ClosePanels()
     {

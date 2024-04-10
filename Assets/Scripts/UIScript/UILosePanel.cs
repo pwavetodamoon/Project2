@@ -13,24 +13,27 @@ public class UILosePanel : APanelController
     protected override void AddListeners()
     {
         base.AddListeners();
-        restart.onClick.AddListener(OnbuttonBackToMenuClick);
-        selectStage.onClick.AddListener(OnButtonRestart);
+        restart.onClick.AddListener(OnButtonRestart);
+        selectStage.onClick.AddListener(OnbuttonBackToMenuClick);
 
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        restart.onClick.RemoveListener(OnbuttonBackToMenuClick);
-        selectStage.onClick.RemoveListener(OnButtonRestart);
+        restart.onClick.RemoveListener(OnButtonRestart);
+        selectStage.onClick.RemoveListener(OnbuttonBackToMenuClick);
     }
 
     public void OnbuttonBackToMenuClick()
     {
-        UIAnim.ZoomOutScale(this.transform, Signals.Get<OpenSceneSelectStage>().Dispatch) ;
+        Time.timeScale = 1.0f;
+        Signals.Get<OpenSceneSelectStage>().Dispatch() ;
     }
     public void OnButtonRestart() 
     {
-        UIAnim.ZoomOutScale(this.transform, Signals.Get<CloseLosePanel>().Dispatch);
+        GameLevelControl.Instance.CheckOnLoose();
+        Time.timeScale = 1f ;
+        Signals.Get<CloseLosePanel>().Dispatch();
     } 
    
 

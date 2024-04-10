@@ -7,6 +7,7 @@ using HHP.Ults.UIAnim;
 using deVoid.Utils;
 public class UIWinPanel : APanelController
 {
+    
     [SerializeField] private Button selectStage;
     [SerializeField] private Button restart;
     protected override void AddListeners()
@@ -25,10 +26,13 @@ public class UIWinPanel : APanelController
 
     public void OnbuttonBackToMenuClick()
     {
+        Time.timeScale = 1.0f;
         UIAnim.ZoomOutScale(this.transform, Signals.Get<OpenSceneSelectStage>().Dispatch);
+        
     }
     public void OnButtonRestart()
     {
+        Time.timeScale = 1f;
         UIAnim.ZoomOutScale(this.transform, Signals.Get<CloseLosePanel>().Dispatch);
     }
 }

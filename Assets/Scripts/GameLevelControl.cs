@@ -13,6 +13,7 @@ using deVoid.UIFramework;
 using deVoid.Utils;
 using CombatSystem.Attack.Near;
 using UnityEditor.Experimental.GraphView;
+using HHP.Ults.UIAnim;
 
 
 public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
@@ -67,21 +68,28 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
     public void CheckOnWin()
     {
         enemySpawnerControl.ClearAndStopSpawn();
-        
+        OnWin();
     }
     public void OnWin()
     {
-        
+        LossTransitionHandler.UseRunner();
+        stageInformation.ResetStage();
     }
     public void CheckOnLoose()
     {
         Debug.Log("Checklose");
-        if (CombatEntitiesManager.Instance.GetHeroList().Count > 1) return;
-        OnLoose();
+        if (CombatEntitiesManager.Instance.GetHeroList().Count <= 1)
+            OnLoose();
     }
-    public void OnLoose()
+
+    public void test()
     {
-        Signals.Get<OpenLosePanel>().Dispatch();
+        enemySpawnerControl.ClearAndStopSpawn();
+    }
+    private void OnLoose()
+    {
+        Debug.Log("You lose");
+        //Signals.Get<OpenLosePanel>().Dispatch();
         LossTransitionHandler.UseRunner();
         stageInformation.ResetStage();
     }
