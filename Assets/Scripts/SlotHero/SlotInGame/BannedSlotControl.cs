@@ -29,10 +29,11 @@ public class SlotInGameBase : MonoBehaviour
 {
     [SerializeField] public float radius;
     public readonly int SlotIndex = -1;
+    public float a, b, c;
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawCube(transform.position, new Vector3(a,b,0));
     }
     public virtual void SetHeroIntoStandPosition(HeroCharacter hero)
     {

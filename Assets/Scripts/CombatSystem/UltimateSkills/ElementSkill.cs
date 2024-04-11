@@ -1,4 +1,5 @@
 using CombatSystem.Attack.Utilities;
+using CombatSystem.Entity;
 using DG.Tweening;
 using Helper;
 using UnityEngine;

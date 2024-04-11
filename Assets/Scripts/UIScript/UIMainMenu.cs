@@ -27,8 +27,8 @@ public class UIMainMenu : APanelController
     {
         base.AddListeners();
         ButtonHideUIMainMenu.onClick.AddListener(HideUIMainMenu);
-
         ButtonShowUISoundSetting.onClick.AddListener(ShowUISoundSetting);
+        ButtonActiveNewGame.onClick.AddListener(NewGame);
         ButtonActiveQuitAndSave.onClick.AddListener(ShowStartGameScene);
     }
 
@@ -36,8 +36,8 @@ public class UIMainMenu : APanelController
     {
         base.RemoveListeners();
         ButtonHideUIMainMenu.onClick.RemoveListener(HideUIMainMenu);
-
         ButtonShowUISoundSetting.onClick.RemoveListener(ShowUISoundSetting);
+        ButtonActiveNewGame.onClick.RemoveListener(NewGame);
         ButtonActiveQuitAndSave.onClick.RemoveListener(ShowStartGameScene);
 
 
@@ -45,6 +45,7 @@ public class UIMainMenu : APanelController
     private void HideUIMainMenu()
     {
         UIAnim.ZoomOutScale(this.transform, Signals.Get<HideUIMainMenu>().Dispatch);
+        PlayFabManager.Instance.SaveDataPlayer();
     } 
     private void ShowUISoundSetting()
     {
@@ -53,7 +54,8 @@ public class UIMainMenu : APanelController
     private void NewGame()
     {
         
-        Signals.Get<OpenStartGameScene>().Dispatch();
+        Signals.Get<OpenTest>().Dispatch();
+        GameLevelControl.Instance.OnLoose();
         
     }
     private void ShowStartGameScene() 

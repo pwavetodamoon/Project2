@@ -84,14 +84,14 @@ public class GameLevelControl : Singleton<GameLevelControl>, ICoroutineRunner
         {
             Signals.Get<OpenLosePanel>().Dispatch();
             //OnLoose()
+            enemySpawnerControl.ClearAndStopSpawn();
         }
     }
     public void OnLoose()
     {
         Debug.Log("You lose");
         LossTransitionHandler.UseRunner();
-        enemySpawnerControl.ClearAndStopSpawn();
-
+        stageInformation.ResetStage();
     }
 
     public void OnGoNextMap()

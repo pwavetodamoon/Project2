@@ -11,7 +11,10 @@ namespace SlotHero
     public class SlotManager : Singleton<SlotManager>
     {
         public List<HeroSlotInGame> Slots = new();
+       
         public BannedSlotControl bannedSlotControl;
+
+        //public BasePos _base;
 
         [SerializeField] private CustomGrid combatGrid;
 
@@ -58,6 +61,8 @@ namespace SlotHero
 
             var minSqrMagnitude = (Slots[0].transform.position - position).sqrMagnitude;
             var minSlot = Slots[0];
+            
+            //var minSlot2 = bannedSlotControl;
             foreach (var slot in Slots)
             {
                 var newSqrMagnitude = (slot.transform.position - position).sqrMagnitude;
@@ -70,6 +75,7 @@ namespace SlotHero
             }
 
             var isInRange = minSqrMagnitude < minSlot.radius * minSlot.radius;
+            //var isInRange2 = minSqrMagnitude <  basePos.a * basePos.b;
             var canSwap = isInRange && minSlot.AllowSwap();
 
             if (heroIndex == -1 && minSlot.SlotIndex == -1) canSwap = false;

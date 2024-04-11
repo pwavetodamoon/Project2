@@ -12,6 +12,7 @@ namespace SlotHero.SlotInGame
         [SerializeField] private Transform enemyStand;
         [SerializeField] private HealthBarStatic healthBar;
         [SerializeField] private ShadowColor ShadowColor;
+        
         public Transform EnemyStand => enemyStand;
         public float radius;
 
@@ -29,6 +30,7 @@ namespace SlotHero.SlotInGame
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(characterStand.position, radius);
+            
         }
 
         public void SetHeroIntoStandPosition(HeroCharacter hero)

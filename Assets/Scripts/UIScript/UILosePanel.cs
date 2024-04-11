@@ -5,12 +5,14 @@ using deVoid.UIFramework;
 using UnityEngine.UI;
 using HHP.Ults.UIAnim;
 using deVoid.Utils;
+using PlayFab_System;
 
 public class UILosePanel : APanelController
 {
-    private LossTransitionHandler lossTransitionHandler;
+    LossTransitionHandler ls;
     [SerializeField] private Button selectStage;
     [SerializeField] private Button restart;
+    
 
     protected override void AddListeners()
     {
@@ -29,15 +31,19 @@ public class UILosePanel : APanelController
     public void OnbuttonBackToMenuClick()
     {
         Time.timeScale = 1.0f;
-
+        
         //Signals.Get<OpenSceneSelectStage>().Dispatch() ;
         Signals.Get<OpenStartGameScene>().Dispatch();
+        PlayFabManager.Instance.SaveDataPlayer();
+        ls.OnStartTransition();
+        
+        //GameLevelControl.Instance.OnLoose();
+        
     }
     public void OnButtonRestart() 
     {
         Time.timeScale = 1f ;
         Signals.Get<CloseLosePanel>().Dispatch();
-        
         GameLevelControl.Instance.OnLoose();
     } 
    
