@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using CombatSystem;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using System.Linq;
 using UnityEngine;
-using System;
 using CombatSystem.Entity;
 using CombatSystem.HeroDataManager;
 using Model.Hero;
 using SlotHero;
-using UnityEditor.SceneManagement;
 
 public class Testfunc : MonoBehaviour
 {
