@@ -70,5 +70,6 @@ namespace LevelAndStats
         public void SetDamage(int value) => structStats.baseDamage += value;
 
         public void SetLevel(int value) => structStats.level = value;
+        public int GetLevel() => structStats.level;
     }
 }

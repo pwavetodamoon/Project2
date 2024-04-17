@@ -6,6 +6,9 @@ using TMPro;
 using CombatSystem.Entity;
 using Core.Currency;
 using SlotHero;
+using System;
+using CombatSystem.Entity.Utilities;
+using LevelAndStats;
 
 
 public class UIAvatarController : APanelController
@@ -63,9 +66,17 @@ public class UIAvatarController : APanelController
         //if button interact
         if (_buttonLevelUp.interactable == true)
         {
+            RefreshUpdate();
             _gameManager.UpgradeHeroLevel(_heroCharacter,_coinText);
         }return;
         
+    }
+
+    private void RefreshUpdate()
+    {
+        if (_heroCharacter == null) return;
+        var level = _heroCharacter.GetRef<EntityStats>().GetLevel();
+        _textLevel.text = level.ToString();
     }
 
     private void SetMoneyLevelRequired(int value )
@@ -83,6 +94,7 @@ public class UIAvatarController : APanelController
         _heroCharacter = heroCharacter;
         _heroSlotUI.SetHero(heroCharacter);
         _coinText.text = _gameManager.GetMoneyLevelRequired(_heroCharacter).ToString();
+        RefreshUpdate();
     }
     
 
